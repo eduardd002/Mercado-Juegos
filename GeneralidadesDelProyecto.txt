@@ -1,0 +1,42 @@
+Requerimientos del proyecto:
+
+Ventanas:
+
+Login
+Catálogo y buscador
+Registro de usuario
+Registro de videojuegos
+Actualización datos de usuario
+Actualización de videojuegos
+Detalle del videojuego
+Datos de envío
+Datos de pago
+Gestión de pedidos
+Página no existe
+Carrito
+
+Funcionalidades:
+
+Registro de usuarios
+Login de usuarios
+Actualización de datos personales
+
+Registro de videojuegos
+Actualización de videojuegos
+Eliminación de videojuegos
+Buscador de videojuegos
+Ver todos los videojuegos
+
+Carrito de compras
+Compra de videojuegos
+Gestión de pedidos
+
+Control de acceso
+
+Extras
+
+Eliminación de la cuenta
+Encriptación de la contraseña
+Comentarios de las publicaciones
+Reportes en pdf
+Favoritos
