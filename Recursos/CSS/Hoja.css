@@ -1,0 +1,899 @@
+/*
+Estilos de la cabecera
+*/
+
+#contenedor{
+    /*Anchor*/
+    width: 90%;
+    /*Margen centrado*/
+    margin: 0px auto;
+    /*Sombra*/
+    box-shadow: 0px 0px 10px gray;
+    /*Color de fondo*/
+    background: white;
+}
+
+/*
+Estilos generales
+*/
+
+*{
+    /*Margen interior*/
+    padding: 0px;
+    /*Margen exterior*/
+    margin: 0px;
+    /*Tipo de letra*/
+    font-family: sans-serif, Arial, Helvetica;
+}
+
+/*
+Estilos del body
+*/
+
+body{
+    /*Color de fondo*/
+    background: #01b1ea;
+}
+
+/*
+Enlaces de toda la web
+*/
+
+a{
+    /*Color del texto*/
+    color: #01b1ea;
+}
+
+/*
+Enlaces visitados de toda la web
+*/
+
+a:visited{
+    /*Color del texto*/
+    color: #01b1ea;
+}
+
+/*
+Al posicionarse encima de un enlace de la web
+*/
+
+a:hover{
+    /*Color del texto*/
+    color: #555;
+}
+
+/*
+Estilo del titulo de la tienda
+*/
+
+#titulo{
+    /*Margen interior*/
+    padding: 20px;
+    /*Margen izquierdo*/
+    margin-left: 40px;
+    /*Flotar hacia la izquierda*/
+    float: left;
+}
+
+/*
+Estilo del logotipo principal de la tienda
+*/
+
+#titulo img{
+    /*Altura*/
+    height: 125px;
+    /*Flotar hacia la izquierda*/
+    float: left;
+}
+
+/*
+Estilo del titulo principal de la tienda
+*/
+
+#titulo h1{
+    /*Flotar hacia la izquierda*/
+    float: left;
+    /*Tamaño de la fuente del texto*/
+    font-size: 35px;
+    /*Espacio entre cada letra*/
+    letter-spacing: 3px;
+    /*Tipo de letra*/
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+    /*Convertir letra a mayusculas*/
+    text-transform: uppercase;
+    /*Color de letra*/
+    color: #01b1ea;
+    /*Texto en negrita*/
+    font-weight: bold;
+    /*Margen superior*/
+    margin-top: 22px;
+    /*Margen izquierdo*/
+    margin-left: 40px;
+    /*Sombra del texto*/
+    text-shadow: 0px 2px 1px #222222;
+    /*Transicion*/
+    transition: all 300ms;
+}
+
+/*
+Estilo del buscador
+*/
+
+#buscador{
+    /*Flotar hacia la izquierda*/
+    float: left;
+    /*Margen superior*/
+    margin-top: 33px;
+    /*Margen izquierdo*/
+    margin-left: 20px;
+}
+
+/*
+Estilo del campo del buscador
+*/
+
+#buscador input{
+    /*Anchor*/
+   width: 150px;
+}
+
+/*
+Estilo del logo de la lupa del buscador
+*/
+
+#buscador img{
+    /*Altura*/
+    height: 20px;
+}
+
+/*
+Estilo al posicionarse en el titulo principal
+*/
+
+#titulo h1:hover{
+    /*Sombra del texto*/
+    text-shadow: 0px 2px 1px #222222, 0px 0px 4px #01b1ea;
+}
+
+/*
+Estilo de las opciones del menu principal
+*/
+
+#menuPrincipal{
+    /*Flotar hacia la izquierda*/
+    float: left;
+    /*Color de letra*/
+    color: #01b1ea;
+    /*Altura*/
+    height: 70px;
+    /*Margen superior*/
+    margin-top: 45px;
+}
+
+/*
+Estilos de la foto de usuario en el menu principal
+*/
+
+#menuPrincipal img{
+    /*Margen derecho*/
+    margin-right: 5px;
+    /*Altura*/
+    height: 20px;
+}
+
+/*
+Estilos de los enlaces del menu principal
+*/
+
+#menuPrincipal a{
+    /*Dar comportamiento de bloque*/
+    display: block;
+    /*Sin decoracion de texto*/
+    text-decoration: none;
+    /*Margen interior izquierdo*/
+    padding-left: 11px;
+    /*Margen interior derecho*/
+    padding-right: 11px;
+}
+
+#menuPrincipal ul li ul li{
+    /*Color de fondo*/
+    background: #c2eaed;
+}
+
+/*
+Estilos para aplicar color al pasar por un enlace del submenu
+*/
+
+#menuPrincipal ul li ul li a:hover{
+    /*Color de fondo*/
+    background: #daeced;
+}
+
+/*
+Estilos de la lista de opciones del menu principal
+*/
+
+#menuPrincipal ul{
+    /*Desaparecer puntos de listas*/
+    list-style: none;
+}
+
+/*
+Estilos de los enlances directos del menu principal
+*/
+
+#menuPrincipal > li{
+    /*Flotar hacia la izquierda*/
+    float: left;
+}
+
+/*
+Estilos para ocultar el submenu
+*/
+
+#menuPrincipal li ul{
+    /*No dar comportamiento de bloque*/
+    display: none;
+    /*Dar posicion fija a las listas*/
+    position: absolute;
+}
+
+/*
+Estilos para aparecer el submenu al pasar por encima
+*/
+
+#menuPrincipal li:hover > ul{
+    /*Dar comportamiento de bloque*/
+    display: block;
+}
+
+/*
+Estilos de cada elemento del menu principal
+*/
+
+#menuPrincipal ul li{
+    /*Altura de linea*/
+    line-height: 35px;
+    /*Flotar hacia la izquierda*/
+    float: left;
+}
+
+/*Estilo del la ultima seccion de submenus*/
+
+#menuPrincipal ul li ul li{
+    /*Flotar hacia la izquierda*/
+    float: none;
+}
+
+/*
+Estilos de la cabecera
+*/
+
+#cabecera{
+    /*Altura*/
+    height: auto;
+    /*Color de fondo*/
+    background: #f0f0f0;
+}
+
+/*
+Estilos de la barra de categorias
+*/
+
+#categorias{
+    /*limpiar flotados*/
+    clear: both;
+    /*Color de fondo*/
+    background: #222;
+    /*Color de letra*/
+    color: #01b1ea;
+    /*Altura*/
+    height: 55px;
+    /*Borde inferior*/
+    border-bottom: 4px solid #01b1ea;
+}
+
+/*
+Estilos de los enlaces la barra de categorias
+*/
+
+#categorias a{
+    /*Dar comportamiento de bloque*/
+    display: block;
+    /*Color de letra*/
+    color: white;
+    /*Sin decoracion de texto*/
+    text-decoration: none;
+    /*Margen interior izquierdo*/
+    padding-left: 11px;
+    /*Margen interior derecho*/
+    padding-right: 11px;
+    /*Transicion*/
+    transition: all 300ms;
+}
+
+/*
+Estilos de los enlaces la barra de categorias, primer elemento (inicio)
+*/
+
+#categorias a:first-child{
+    /*Borde derecho*/
+    border-left: 1px solid #363636;
+}
+
+/*
+Estilo al posicionarse en alguna categoria
+*/
+
+#categorias a:hover{
+    /*Color de fondo*/
+    background: #01b1ea;
+}
+
+/*
+Estilos de la lista de enlaces la barra de categorias
+*/
+
+#categorias ul{
+    /*No tenga los puntos de la lista*/
+    list-style: none;
+    /*Margen centrado*/
+    margin: 0px auto;
+    /*Margen izquierdo*/
+    margin-left: 25px;
+}
+
+/*
+Estilos de cada elemento de la barra de categorias
+*/
+
+#categorias ul li{
+    /*Altura de linea*/
+    line-height: 55px;
+    /*Flotar hacia la izquierda*/
+    float: left;
+    /*Borde derecho*/
+    border-right: 1px solid #363636;
+}
+
+/*
+Estilos del contenido central
+*/
+
+#contenidoCentral{
+    /*Color de fondo*/
+    background: #f0f0f0;
+    /*Anchor*/
+    width: 96.4%;
+    /*Flotar hacia la derecha*/
+    float: right;
+    /*Margen interior*/
+    padding: 20px;
+}
+
+/*
+Estilos del titulo de contenido central
+*/
+
+#contenidoCentral h1{
+    /*Tamaña de la fuente del texto*/
+    font-size: 24px;
+    /*Texto normal*/
+    font-weight: normal;
+    /*Espacio entre cada letra*/
+    letter-spacing: 1px;
+    /*Texto alineado al centro*/
+    text-align: center;
+    /*Borde inferior*/
+    border-bottom: 1px solid #ccc;
+    /*Margen inferior*/
+    margin-bottom: 20px;
+    /*Margen interior*/
+    padding: 20px;
+}
+
+/*
+Estilo de cada videojuego
+*/
+
+.videojuego{
+    /*Color de fondo*/
+    background: white;
+    /*Anchor*/
+    width: 25%;
+    /*Borde*/
+    border: 1px solid #ccc;
+    /*Flotar hacia la izquierda*/
+    float: left;
+    /*Margen izquierdo*/
+    margin-left: 44px;
+    /*Margen derecho*/
+    margin-right: 44px;
+    /*Margen inferior*/
+    margin-bottom: 22px;
+    /*Margen superior*/
+    margin-top: 22px;
+    /*Texto alineado al centro*/
+    text-align: center;
+}
+
+/*
+Estilo de la imagen del videojuego que se presenta en el catalogo, al inicio
+*/
+
+.videojuego img{
+    /*Altura*/
+    height: 125px;
+    /*Anchor*/
+    width: 115px;
+    /*Margen inferior*/
+    margin-bottom: 10px;
+    /*Margen superior*/
+    margin-top: 10px;
+}
+
+/*
+Estilo del titulo del videojuego
+*/
+
+.videojuego h2{
+    /*Tamaña de la fuente del texto*/
+    font-size: 18px;
+    /*Margen inferior*/
+    margin-bottom: 10px;
+}
+
+/*
+Estilo del precio del videoujuego
+*/
+
+.videojuego p{
+    /*Margen inferior*/
+    margin-bottom: 10px;
+    /*Color del texto*/
+    color: #555;
+    /*Texto en negrita*/
+    font-weight: bold;
+}
+
+.videojuego a{
+    /*Sin decoracion de texto*/
+    text-decoration: none;
+    /*Color del texto*/
+    color: white;
+}
+
+/*
+Estilos del pie de pagina
+*/
+
+#pieDePagina{
+    /*limpiar flotados*/
+    clear: both;
+    /*Texto alineado al centro*/
+    text-align: center;
+    /*Margen interior izquierdo*/
+    padding-top: 10px;
+    /*Margen interior izquierdo*/
+    padding-bottom: 10px;
+    /*Color del texto*/
+    color: white;
+    /*Color de fondo*/
+    background: #222222;
+    /*Borde superior*/
+    border-top: 4px solid #01b1ea;
+}
+
+/*
+Estilos de los botones
+*/
+
+input[type="button"],
+input[type="submit"],
+button, .button{
+    /*Dar comportamiento de bloque*/
+    display: block;
+    /*Borde redondo*/
+    border-radius: 2px;
+    /*Anchor*/
+    width: auto;
+    /*Margen interior*/
+    padding: 5px;
+    /*Color del texto*/
+    color: white;
+    /*Color de fondo*/
+    background: #2979cd;
+    /*Borde*/
+    border: 1px solid #11608e;
+    /*Cambiar apariencia del cursor*/
+    cursor:pointer;
+}
+
+/*
+Estilos del boton ver detalle
+*/
+
+.button-comprarCatalogo{
+    /*Color del letra*/
+    color: white;
+    /*Color de fondo*/
+    background: #33ae3d;
+    /*Borde*/
+    border: 1px solid green;
+}
+
+/*
+Estilos del boton ver todos los videojuegos
+*/
+
+#verTodos a{
+    /*Dar comportamiento de bloque*/
+    display: block;
+    /*Borde redondo*/
+    border-radius: 2px;
+    /*Margen interior*/
+    padding: 15px;
+    /*Color de letra*/
+    color: white;
+    /*Color de fondo*/
+    background: #007EE5;
+    /*Borde*/
+    border: 1px solid #156785;
+    /*Cambiar apariencia del cursor*/
+    cursor: pointer;
+    /*Anchor*/
+    width: 183px;
+    /*Margen*/
+    margin: 0px auto;
+    /*Margen superior*/
+    margin-top: 610px;
+    /*Sin decoracion de texto*/
+    text-decoration: none;
+    /*Margen inferior*/
+    margin-bottom: 22px;
+}
+
+/*
+Estilos del formulario de registro de usuario
+*/
+
+#loginYRegistro h1{
+    /*Texto alineado al centro*/
+    text-align: center;
+    /*Margen superior*/
+    margin-top: 20px;
+    /*Margen inferior*/
+    margin-bottom: 20px;
+}
+
+/*
+Estilos de la imagen del registro de usuario
+*/
+
+#loginYRegistro img{
+    /*Altura*/
+    height: 250px;
+    /*Flotar hacia la derecha*/
+    float: right;
+    /*Margen derecho*/
+    margin-right: 125px;
+}
+
+/*
+Estilos del boton de login y registro de usuario
+*/
+
+#loginYRegistro input[type="submit"]{
+    /*Altura*/
+    width: 150px;
+    /*Margen centrado*/
+    margin: 0px auto;
+    /*Margen inferior*/
+    margin-bottom: 20px;
+}
+
+/*
+Estilo particular del boton de login
+*/
+
+.btnLogin{
+    /*Margen superior*/
+    margin-top: 105px !important;
+}
+
+/*
+Estilo particular del boton de registro de usuario
+*/
+
+.btnRegistro{
+    /*Margen superior*/
+    margin-top: 30px;
+}
+
+/*
+Estilo particular de la imagen del login
+*/
+
+.loginImage{
+    /*Margen superior*/
+    margin-top: 0px;
+    /*Margen inferior*/
+    margin-bottom: 20px;
+}
+
+/*
+Estilo particular de la imagen del registro de usuario
+*/
+
+.registerImage{
+    /*Margen superior*/
+    margin-top: 140px;
+}
+
+/*
+Estilo particular de la imagen del registro de usuario
+*/
+
+.perfilImage{
+    /*Margen superior*/
+    margin-top: 50px;
+}
+
+/*
+Estilos del formulario de registro de usuario
+*/
+
+#bloqueTextoLogin{
+    /*Margen superior*/
+    margin-top: 40px;
+    /*Margen inferior*/
+    margin-bottom: 40px;
+    /*Margen izquierdo*/
+    margin-left: 140px;
+}
+
+/*
+Estilos del formulario de login
+*/
+
+
+#bloqueTextoRegistro{
+    /*Margen superior*/
+    margin-top: 20px;
+    /*Margen inferior*/
+    margin-bottom: 20px;
+    /*Margen izquierdo*/
+    margin-left: 125px;
+}
+
+/*
+Estilos de los labels del formulario de registro de usuario
+*/
+
+#bloqueTextoRegistro label{
+    /*Dar comportamiento de bloque*/
+    display: block;
+    /*Margen inferior*/
+    margin-bottom: 5px;
+    /*Tamaño de la fuente del texto*/
+    font-size: 25px;
+}
+
+/*
+Estilos de los labels del formulario de login
+*/
+
+#bloqueTextoLogin label{
+    /*Dar comportamiento de bloque*/
+    display: block;
+    /*Margen inferior*/
+    margin-bottom: 5px;
+    /*Tamaño de la fuente del texto*/
+    font-size: 25px;
+}
+
+/*
+Estilos de los inputs del formulario de login
+*/
+
+#bloqueTextoLogin input[type="text"], input[type="password"], input[type="email"], input[type="date"]{
+    /*Altura*/
+    height: 25px;
+    /*Anchor*/
+    width: 400px;
+}
+
+/*
+Estilos de los inputs del formulario de registro de usuario
+*/
+
+#bloqueTextoRegistro input[type="text"], input[type="password"], input[type="email"], input[type="date"], input[type="number"]{
+    /*Altura*/
+    height: 25px;
+    /*Anchor*/
+    width: 400px;
+}
+
+/*
+Estilos pagina no existe
+*/
+
+#paginaNoEncontrada{
+    /*Margen superior*/
+    margin-top: 40px;
+    /*Margen inferior*/
+    margin-bottom: 40px;
+    /*Margen izquierdo*/
+    margin-left: 140px;
+}
+
+/*
+Estilo titulo pagina no existe
+*/
+
+#paginaNoEncontrada h1{
+    /*Texto alineado al centro*/
+    text-align: center;
+    /*Margen superior*/
+    margin-top: 20px;
+    /*Margen inferior*/
+    margin-bottom: 20px;
+}
+
+/*
+Estilo imagen pagina no existe
+*/
+
+#paginaNoEncontrada img{
+    /*Altura*/
+    height: 450px;
+    /*Margen derecho*/
+    margin-right: 250px;
+    /*Flotar hacia la derecha*/
+    float: right;
+}
+
+.detalleVideojuego{
+    width: 95%;
+    margin-top: 30px;
+}
+
+.detalleVideojuego img{
+    margin-top: 15px;
+    margin-left: 75px;
+    margin-right: 75px;
+    margin-bottom: 20px;
+    display: block;
+    float: left;
+    width: 35%;
+}
+
+.detalleVideojuego #tituloVideojuego{
+    margin-bottom: 30px;
+}
+
+.detalleVideojuego #precioVideojuego{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: green;
+}
+
+.detalleVideojuego #consolaVideojuego{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.detalleVideojuego #categoriaVideojuego{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.detalleVideojuego #unidadesDisponiblesVideojuego{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.detalleVideojuego #descripcionVideojuegoTitulo{
+    margin-bottom: 30px;
+}
+
+.detalleVideojuego #descripcionVideojuegoTexto{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.detalleVideojuego input{
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+.detalleVideojuego #vendedorVideojuego{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.botonesDetalleVideojuego{
+    margin-bottom: 60px;
+}
+
+.botonesDetalleVideojuego a{
+    margin-right: 20px;
+    /*Borde redondo*/
+    border-radius: 2px;
+    /*Anchor*/
+    width: auto;
+    /*Margen interior*/
+    padding: 8px;
+    /*Color del texto*/
+    color: white;
+    /*Color de fondo*/
+    background: #2979cd;
+    /*Borde*/
+    border: 1px solid #11608e;
+    /*Cambiar apariencia del cursor*/
+    cursor:pointer;
+    text-decoration: none;
+}
+
+.descripcionVideojuego{
+    margin-left: 75px;
+}
+
+.imgCarrito{
+    height: 80px;
+    display: block;
+    margin: 10px auto; 
+}
+
+table{
+    text-align: center;
+    width: 100%;
+    border-bottom: 1px solid #CCC;
+}
+
+td{
+    border-top: 1px solid #CCC;
+    padding: 2px;
+}
+
+#carrito{
+    margin: 40px;
+}
+
+#carrito h1{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#estadisticasCarrito{
+    margin-top: 30px;
+}
+
+#estadisticasCarrito a{
+    float: right;
+    margin-bottom: 40px;
+    margin-right: 20px;
+    margin-right: 20px;
+    /*Borde redondo*/
+    border-radius: 2px;
+    /*Anchor*/
+    width: auto;
+    /*Margen interior*/
+    padding: 8px;
+    /*Color del texto*/
+    color: white;
+    /*Color de fondo*/
+    background: #2979cd;
+    /*Borde*/
+    border: 1px solid #11608e;
+    /*Cambiar apariencia del cursor*/
+    cursor:pointer;
+    text-decoration: none;
+}
+
+#estadisticasCarrito h3{
+    float: right;
+    margin-left: 10px;
+    margin-right: 40px;
+}

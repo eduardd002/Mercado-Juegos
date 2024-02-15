@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado Juegos</title>
+    <link rel="stylesheet" href="Recursos/CSS/Hoja.css">
+</head>
+<body>
+
+    <div id="contenedor">
+
+        <!-- SECCION CABECERA -->
+
+        <header id="cabecera">
+            <div id="titulo">
+                <img src="Recursos/Logotipos/Logo.png" alt="Logo tienda">
+                <h1>MERCADO JUEGOS</h1>
+            <div id="buscador">
+                <input type="text" placeholder="Busca un videojuego">
+                <img src="Recursos/Logotipos/lupa.png" alt="Logo tienda">
+            </div>
+            </div>
+            <div id="menuPrincipal">
+                <ul>
+                    <li><a href="http://localhost/Mercado-Juegos/?controller=UsuarioController&action=login">Login</a></li>
+                    <li><a href="http://localhost/Mercado-Juegos/?controller=UsuarioController&action=registro">Registro</a></li>
+                    <li><a href="http://localhost/Mercado-Juegos/?controller=CarritoController&action=ver">Carrito</a></li>
+                    <li><img src="Recursos/Logotipos/usuario.png" alt="Logo tienda">User</a>
+                        <ul>
+                            <li><a href="http://localhost/Mercado-Juegos/?controller=UsuarioController&action=perfil">Mi perfil</a></li>
+                            <li><a href="http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=crear">Vender</a></li>
+                            <li><a href="http://localhost/Mercado-Juegos/?controller=UsuarioController&action=compras">Mis videojuegos</a></li>
+                            <li><a href="http://localhost/Mercado-Juegos/?controller=UsuarioController&action=compras">Mis Compras</a></li>
+                            <li><a href="http://localhost/Mercado-Juegos/?controller=UsuarioController&action=ventas">Mis Ventas</a></li>
+                            <li><a href="">Cerrar sesion</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <!-- SECCION MENU DE CATEGORIAS -->
+
+        <nav id="categorias">
+            <ul>
+                <li>
+                    <a href="http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio">Inicio</a>
+                </li>
+                <li>
+                    <a href="">Accion</a>
+                </li>
+                <li>
+                    <a href="">Arcade</a>
+                </li>
+                <li>
+                    <a href="">Aventura</a>
+                </li>
+                <li>
+                    <a href="">Carreras</a>
+                </li>
+                <li>
+                    <a href="">Combate</a>
+                </li>
+                <li>
+                    <a href="">Deportes</a>
+                </li>
+                <li>
+                    <a href="">Disparos</a>
+                </li>
+                <li>
+                    <a href="">Estrategia</a>
+                </li>
+                <li>
+                    <a href="">Mesa</a>
+                </li>
+                <li>
+                    <a href="">Musicales</a>
+                </li>
+                <li>
+                    <a href="">Puzzle</a>
+                </li>
+                <li>
+                    <a href="">Rol</a>
+                </li>
+                <li>
+                    <a href="">Terror</a>
+                </li>
+            </ul>
+        </nav>

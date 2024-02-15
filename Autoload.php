@@ -1,0 +1,18 @@
+<?php
+
+function autocarga($clase){
+    
+    // Ruta del directorio donde se encuentran los controladores
+    $ruta = 'Controladores/';
+
+    // Nombre del archivo del controlador
+    $nombreArchivo = $ruta . $clase . '.php';
+
+    // Verificar si el archivo existe
+    if (file_exists($nombreArchivo)) {
+        // Incluir el archivo del controlador si existe
+        include_once($nombreArchivo);
+    }
+}
+
+spl_autoload_register('autocarga');
