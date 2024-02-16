@@ -196,6 +196,10 @@ Estilos de los enlaces del menu principal
     padding-right: 11px;
 }
 
+/*
+Estilos de los enlaces de el menu desplegable
+*/
+
 #menuPrincipal ul li ul li{
     /*Color de fondo*/
     background: #c2eaed;
@@ -418,6 +422,10 @@ Estilo de cada videojuego
     text-align: center;
 }
 
+/*
+Estilo de cada videojuego del buscador
+*/
+
 .videojuegoBusqueda{
     /*Color de fondo*/
     background: white;
@@ -430,9 +438,9 @@ Estilo de cada videojuego
     /*Margen izquierdo*/
     margin-left: 140px;
     /*Margen inferior*/
-    margin-bottom: 20px;
+    margin-bottom: 35px;
     /*Margen superior*/
-    margin-top: 20px;
+    margin-top: 5px;
     /*Texto alineado al centro*/
     text-align: center;
 }
@@ -452,7 +460,12 @@ Estilo de la imagen del videojuego que se presenta en el catalogo, al inicio
     margin-top: 10px;
 }
 
+/*
+Estilo de la imagen del videojuego que se presenta en el catalogo, al inicio dek buscadir
+*/
+
 .videojuegoBusqueda img{
+    /*Flotar a la izquierda*/
     float: left;
     /*Altura*/
     height: 145px;
@@ -462,11 +475,12 @@ Estilo de la imagen del videojuego que se presenta en el catalogo, al inicio
     margin-bottom: 10px;
     /*Margen superior*/
     margin-top: 10px;
+    /*Margen izquierdo*/
     margin-left: 40px;
 }
 
 /*
-Estilo del titulo del videojuego
+Estilo del titulo del videojuego dek catalogo
 */
 
 .videojuego h2{
@@ -476,7 +490,12 @@ Estilo del titulo del videojuego
     margin-bottom: 10px;
 }
 
+/*
+Estilo del titulo del videojuego del buscador
+*/
+
 .videojuegoBusqueda h2{
+    /*Margen superior*/
     margin-top: 20px;
     /*Tamaña de la fuente del texto*/
     font-size: 18px;
@@ -485,7 +504,7 @@ Estilo del titulo del videojuego
 }
 
 /*
-Estilo del precio del videoujuego
+Estilo del precio del videojuego del catalogo
 */
 
 .videojuego p{
@@ -497,7 +516,12 @@ Estilo del precio del videoujuego
     font-weight: bold;
 }
 
+/*
+Estilo del precio del videojuego del buscador
+*/
+
 .videojuegoBusqueda p{
+    /*Margen superior*/
     margin-top: 20px;
     /*Margen inferior*/
     margin-bottom: 20px;
@@ -507,6 +531,10 @@ Estilo del precio del videoujuego
     font-weight: bold;
 }
 
+/*
+Estilo del boton de videojuego del catalogo
+*/
+
 .videojuego a{
     /*Sin decoracion de texto*/
     text-decoration: none;
@@ -514,14 +542,27 @@ Estilo del precio del videoujuego
     color: white;
 }
 
+/*
+Estilo del boton de videojuego de buscador
+*/
+
 .videojuegoBusqueda a{
+    /*Magin superior*/
     margin-top: 20px;
+    /*Anchor*/
     width: 240px;
 }
 
+/*
+Estilo del titulo del buscador
+*/
+
 #busqueda h1{
+    /*Magin superior*/
     margin-top: 30px;
+    /*Magin inferior*/
     margin-bottom: 30px;
+    /*Texto alineado*/
     text-align: center;
 }
 
@@ -605,7 +646,7 @@ Estilos del boton ver todos los videojuegos
     cursor: pointer;
     /*Anchor*/
     width: 183px;
-    /*Margen*/
+    /*Margen centrado*/
     margin: 0px auto;
     /*Margen superior*/
     margin-top: 610px;
@@ -624,6 +665,15 @@ Estilos del formulario de registro de usuario
     text-align: center;
     /*Margen superior*/
     margin-top: 20px;
+    /*Margen inferior*/
+    margin-bottom: 20px;
+}
+
+#loginYRegistro h2{
+    /*Texto alineado al centro*/
+    text-align: center;
+    /*Margen superior*/
+    margin-top: 30px;
     /*Margen inferior*/
     margin-bottom: 20px;
 }
@@ -651,7 +701,7 @@ Estilos del boton de login y registro de usuario
     /*Margen centrado*/
     margin: 0px auto;
     /*Margen inferior*/
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 /*
@@ -722,7 +772,6 @@ Estilos del formulario de registro de usuario
 /*
 Estilos del formulario de login
 */
-
 
 #bloqueTextoRegistro{
     /*Margen superior*/
@@ -820,68 +869,147 @@ Estilo imagen pagina no existe
     float: right;
 }
 
+/*
+Estilo del detalle del videojuego
+*/
+
 .detalleVideojuego{
+    /*Anchor*/
     width: 95%;
+    /*Margen superior*/
     margin-top: 30px;
 }
 
+/*
+Estilo de la imagen del detalle del videojuego
+*/
+
 .detalleVideojuego img{
+    /*Margen superior*/
     margin-top: 15px;
+    /*Margen izquierdo*/
     margin-left: 75px;
+    /*Margen derecho*/
     margin-right: 75px;
+    /*Margen inferior*/
     margin-bottom: 20px;
+    /*Dar comportamiento de bloque*/
     display: block;
+    /*Flotar hacia la izquierda*/
     float: left;
+    /*Anchor*/
     width: 35%;
 }
 
+/*
+Estilo del titulo del videojuego del detalle del videojuego
+*/
+
 .detalleVideojuego #tituloVideojuego{
+    /*Margen inferior*/
     margin-bottom: 30px;
 }
 
+/*
+Estilo del precio del videojuego del detalle del videojuego
+*/
+
 .detalleVideojuego #precioVideojuego{
+    /*Margen superior*/
     margin-top: 30px;
+    /*Margen inferior*/
     margin-bottom: 30px;
+    /*Color de letra*/
     color: green;
 }
 
+/*
+Estilo del tipo de consola del videojuego del detalle del videojuego
+*/
+
 .detalleVideojuego #consolaVideojuego{
+    /*Margen superior*/
     margin-top: 30px;
+    /*Margen inferior*/
     margin-bottom: 30px;
 }
+
+/*
+Estilo del tipo de categoria del videojuego del detalle del videojuego
+*/
 
 .detalleVideojuego #categoriaVideojuego{
+    /*Margen superior*/
     margin-top: 30px;
+    /*Margen inferior*/
     margin-bottom: 30px;
 }
+
+/*
+Estilo de las unidades del videojuego del detalle del videojuego
+*/
 
 .detalleVideojuego #unidadesDisponiblesVideojuego{
+    /*Margen superior*/
     margin-top: 30px;
+    /*Margen inferior*/
     margin-bottom: 30px;
 }
+
+/*
+Estilo del titulo de la descripcion del videojuego del detalle del videojuego
+*/
 
 .detalleVideojuego #descripcionVideojuegoTitulo{
+    /*Margen inferior*/
     margin-bottom: 30px;
 }
+
+/*
+Estilo del contenido de la descripcion del videojuego del detalle del videojuego
+*/
 
 .detalleVideojuego #descripcionVideojuegoTexto{
+    /*Margen superior*/
     margin-top: 30px;
+    /*Margen inferior*/
     margin-bottom: 30px;
 }
 
+/*
+Estilo de los campos de texto del detalle del videojuego
+*/
+
 .detalleVideojuego input{
+    /*Margen superior*/
     margin-top: 10px;
+    /*Margen inferior*/
     margin-bottom: 50px;
 }
+
+/*
+Estilo del vendedor del videojuego del detalle del videojuego
+*/
 
 .detalleVideojuego #vendedorVideojuego{
+    /*Margen superior*/
     margin-top: 50px;
+    /*Margen inferior*/
     margin-bottom: 50px;
 }
 
+/*
+Estilo de los botonos del detalle del videojuego
+*/
+
 .botonesDetalleVideojuego{
+    /*Margen inferior*/
     margin-bottom: 60px;
 }
+
+/*
+Estilo de los enlaces de los botonos del detalle del videojuego
+*/
 
 .botonesDetalleVideojuego a{
     margin-right: 20px;
@@ -902,44 +1030,91 @@ Estilo imagen pagina no existe
     text-decoration: none;
 }
 
+/*
+Estilo de la descripcion del videojuego
+*/
+
 .descripcionVideojuego{
+    /*Margen izquierdo*/
     margin-left: 75px;
 }
 
+/*
+Estilo de la imagen del carrito
+*/
+
 .imgCarrito{
+    /*Altura*/
     height: 80px;
+    /*Dar comportamiento de bloque*/
     display: block;
+    /*Margen*/
     margin: 10px auto; 
 }
 
+/*
+Estilo de la tabla
+*/
+
 table{
+    /*Texto centrado*/
     text-align: center;
+    /*Anchor*/
     width: 100%;
+    /*Borde inferior*/
     border-bottom: 1px solid #CCC;
 }
 
+/*
+Estilo de los elementos de la tabla
+*/
+
 td{
+    /*Border superior*/
     border-top: 1px solid #CCC;
+    /*Margen interior*/
     padding: 2px;
 }
 
+/*
+Estilo del carrito
+*/
+
 #carrito{
+    /*Margen*/
     margin: 40px;
 }
 
+/*
+Estilo del titulo del carrito
+*/
+
 #carrito h1{
+    /*Titulo alineado al centro*/
     text-align: center;
+    /*Margen inferior*/
     margin-bottom: 30px;
 }
 
+/*
+Estilo de la estadistica del carrito
+*/
+
 #estadisticasCarrito{
+    /*Margen superior*/
     margin-top: 30px;
 }
 
+/*
+Estilo de los enlaces de la estadistica del carrito
+*/
+
 #estadisticasCarrito a{
+    /*Flotar hacia la derecha*/
     float: right;
+    /*Margen inferior*/
     margin-bottom: 40px;
-    margin-right: 20px;
+    /*Margen derecho*/
     margin-right: 20px;
     /*Borde redondo*/
     border-radius: 2px;
@@ -955,21 +1130,41 @@ td{
     border: 1px solid #11608e;
     /*Cambiar apariencia del cursor*/
     cursor:pointer;
+    /*Quitar decoracion del texto*/
     text-decoration: none;
 }
 
+/*
+Estilo del titulo de la estadistica del carrito
+*/
+
 #estadisticasCarrito h3{
+    /*Flotar hacia la derecha*/
     float: right;
+    /*Margen izquierdo*/
     margin-left: 10px;
+    /*Margen derecho*/
     margin-right: 40px;
 }
 
+/*
+Estilo del select de registro
+*/
+
 #bloqueTextoRegistro select{
+    /*Anchor*/
     width: 403px;
+    /*Altura*/
     height: 30px;
 }
 
+/*
+Estilo del text area de registro
+*/
+
 #bloqueTextoRegistro textarea{
+    /*Anchor*/
     width: 400px;
+    /*Altura*/
     height: 200px;
 }
