@@ -6,6 +6,8 @@
 
     require_once 'Vistas/Layout/Cabecera.html';
 
+    require_once 'Vistas/Layout/Categorias.html';
+
     //Mostrar error
 
     function showError(){
