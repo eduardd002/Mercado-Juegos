@@ -1,0 +1,41 @@
+<div id="loginYRegistro">
+    <h1>Crear videojuego</h1>
+    <form action="">
+        <img src="Recursos/Logotipos/videojuego.png" class="ventaImage" alt="Logo videojuego">
+        <div id="bloqueTextoRegistro">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" required>
+        </div>
+        <div id="bloqueTextoRegistro">
+            <label for="categoria">Categoria</label>
+            <select name="categoria" id="categoria">
+                <option value="accion">Accion</option>
+                <option value="arcade">Aventura</option>
+            </select>
+        </div>
+        <div id="bloqueTextoRegistro">
+            <label for="consola">Consola</label>
+            <select name="consola" id="consola">
+                <option value="playstation">Play Station</option>
+                <option value="xbox">Xbox</option>
+            </select>
+        </div>
+        <div id="bloqueTextoRegistro">
+            <label for="clasificacion">Clasificacion de edad</label>
+            <select name="clasificacion" id="clasificacion">
+                <option value="+15">+15</option>
+                <option value="+16">+16</option>
+                <option value="+18">+18</option>
+            </select>
+        </div>
+        <div id="bloqueTextoRegistro">
+            <label for="precio">Precio</label>
+            <input type="number" name="precio" required>
+        </div>
+        <div id="bloqueTextoRegistro">
+            <label for="descripcion">Descripcion</label>
+            <textarea name="descripcion" id="descripcion"></textarea>
+        </div>
+        <input type="submit" class="btnRegistro" value="Publicar">
+    </form>
+</div>

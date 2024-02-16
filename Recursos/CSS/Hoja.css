@@ -418,6 +418,25 @@ Estilo de cada videojuego
     text-align: center;
 }
 
+.videojuegoBusqueda{
+    /*Color de fondo*/
+    background: white;
+    /*Anchor*/
+    width: 75%;
+    /*Borde*/
+    border: 1px solid #ccc;
+    /*Flotar hacia la izquierda*/
+    float: left;
+    /*Margen izquierdo*/
+    margin-left: 140px;
+    /*Margen inferior*/
+    margin-bottom: 20px;
+    /*Margen superior*/
+    margin-top: 20px;
+    /*Texto alineado al centro*/
+    text-align: center;
+}
+
 /*
 Estilo de la imagen del videojuego que se presenta en el catalogo, al inicio
 */
@@ -433,6 +452,19 @@ Estilo de la imagen del videojuego que se presenta en el catalogo, al inicio
     margin-top: 10px;
 }
 
+.videojuegoBusqueda img{
+    float: left;
+    /*Altura*/
+    height: 145px;
+    /*Anchor*/
+    width: 135px;
+    /*Margen inferior*/
+    margin-bottom: 10px;
+    /*Margen superior*/
+    margin-top: 10px;
+    margin-left: 40px;
+}
+
 /*
 Estilo del titulo del videojuego
 */
@@ -444,13 +476,31 @@ Estilo del titulo del videojuego
     margin-bottom: 10px;
 }
 
+.videojuegoBusqueda h2{
+    margin-top: 20px;
+    /*Tamaña de la fuente del texto*/
+    font-size: 18px;
+    /*Margen inferior*/
+    margin-bottom: 20px;
+}
+
 /*
 Estilo del precio del videoujuego
 */
 
 .videojuego p{
     /*Margen inferior*/
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    /*Color del texto*/
+    color: #555;
+    /*Texto en negrita*/
+    font-weight: bold;
+}
+
+.videojuegoBusqueda p{
+    margin-top: 20px;
+    /*Margen inferior*/
+    margin-bottom: 20px;
     /*Color del texto*/
     color: #555;
     /*Texto en negrita*/
@@ -462,6 +512,17 @@ Estilo del precio del videoujuego
     text-decoration: none;
     /*Color del texto*/
     color: white;
+}
+
+.videojuegoBusqueda a{
+    margin-top: 20px;
+    width: 240px;
+}
+
+#busqueda h1{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
 /*
@@ -629,6 +690,11 @@ Estilo particular de la imagen del registro de usuario
 .registerImage{
     /*Margen superior*/
     margin-top: 140px;
+}
+
+.ventaImage{
+    /*Margen superior*/
+    margin-top: 200px;
 }
 
 /*
@@ -896,4 +962,14 @@ td{
     float: right;
     margin-left: 10px;
     margin-right: 40px;
+}
+
+#bloqueTextoRegistro select{
+    width: 403px;
+    height: 30px;
+}
+
+#bloqueTextoRegistro textarea{
+    width: 400px;
+    height: 200px;
 }

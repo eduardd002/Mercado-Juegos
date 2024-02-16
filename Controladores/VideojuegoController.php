@@ -20,6 +20,18 @@
             require_once 'Vistas/Videojuego/Detalle.html';
         }
 
+        public function crear(){
+            //Renderizar la vista
+
+            require_once 'Vistas/Videojuego/Crear.html';
+        }
+
+        public function buscar(){
+            //Renderizar la vista
+
+            require_once 'Vistas/Videojuego/Buscar.html';
+        }
+
     }
 
 ?>
