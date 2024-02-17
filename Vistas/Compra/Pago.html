@@ -1,0 +1,30 @@
+<div id="loginYRegistro">
+    <h1>Datos del pago</h1>
+    <form action="<?=rutaInicio?>/?controller=CompraController&action=exito" method="post">
+        <img src="Recursos/Logotipos/pago.png" class="pagoImage" alt="Logo pago">
+        <div id="bloqueTextoRegistro">
+            <label for="tipoTarjeta">Tipo De Tarjeta</label>
+            <select name="tipoTarjeta" id="tipoTarjeta">
+                <option value="credito">Credito</option>
+                <option value="debito">Debito</option>
+            </select>
+        </div>
+        <div id="bloqueTextoRegistro">
+            <label for="numeroTarjeta">Numero De Tarjeta</label>
+            <input type="number" name="numeroTarjeta" required>
+        </div>
+        <div id="bloqueTextoRegistro">
+            <label for="titular">Titular</label>
+            <input type="text" name="titular" required>
+        </div>
+        <div id="bloqueTextoRegistro">
+            <label for="codigoSeguridad">Codigo Seguridad</label>
+            <input type="number" name="codigoSeguridad" required>
+        </div>
+        <div id="bloqueTextoRegistro">
+            <label for="fechaExpedicion">Fecha De expedicion</label>
+            <input type="date" name="fechaExpedicion">
+        </div>
+        <input type="submit" class="btnRegistro" value="Pagar">
+    </form>
+</div>

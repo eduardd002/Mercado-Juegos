@@ -742,6 +742,28 @@ Estilo particular de la imagen del registro de usuario
     margin-top: 140px;
 }
 
+/*
+Estilo particular de la imagen al vender un videojuego
+*/
+
+.envioImage{
+    /*Margen superior*/
+    margin-top: 100px;
+}
+
+/*
+Estilo particular de la imagen de direccion al comprar un videojuego
+*/
+
+.pagoImage{
+    /*Margen superior*/
+    margin-top: 90px;
+}
+
+/*
+Estilo particular de la imagen de pago al comprar un videojuego
+*/
+
 .ventaImage{
     /*Margen superior*/
     margin-top: 200px;
@@ -1166,5 +1188,5 @@ Estilo del text area de registro
     /*Anchor*/
     width: 400px;
     /*Altura*/
-    height: 200px;
+    height: 100px;
 }
