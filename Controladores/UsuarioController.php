@@ -35,6 +35,28 @@
             require_once "Vistas/Usuario/Perfil.html";
         }
 
+                /*
+        Funcion para ver el perfil
+        */
+
+        public function compras(){
+
+            //Cargar la vista
+
+            require_once "Vistas/Usuario/Compras.html";
+        }
+
+                /*
+        Funcion para ver el perfil
+        */
+
+        public function ventas(){
+
+            //Cargar la vista
+
+            require_once "Vistas/Usuario/Ventas.html";
+        }
+
     }
 
 ?>

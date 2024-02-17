@@ -20,6 +20,12 @@
             require_once "Vistas/Compra/Exito.html";
         }
 
+        public function ver(){
+            //Cargar la vista
+
+            require_once "Vistas/Compra/Detalle.html";
+        }
+
     }
 
 ?>

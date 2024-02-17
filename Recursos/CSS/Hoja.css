@@ -1190,3 +1190,69 @@ Estilo del text area de registro
     /*Altura*/
     height: 100px;
 }
+
+/*
+Estilos de la compra cuando se ha relizado de forma exitosa
+*/
+
+#compraExitosa{
+    /*Margen izquierdo*/
+    margin-left: 300px;
+}
+
+/*
+Estilos del titulo de la compra cuando se ha relizado de forma exitosa
+*/
+
+#compraExitosa h1{
+    /*Flotar hacia la izquierda*/
+    float: left;
+    /*Margen superior*/
+    margin-top: 20px;
+    /*Margen inferior*/
+    margin-bottom: 20px;
+}
+
+/*
+Estilos de la imagen de ir a inicio de la compra cuando se ha relizado de forma exitosa
+*/
+
+.imagenCasaInicio{
+    /*Altura*/
+    height: 50px;
+}
+
+/*
+Estilos del titulo de la imagen cuando se ha relizado de forma exitosa
+*/
+
+#compraExitosa img{
+    /*Flotar hacia la izquierda*/
+    float: left;
+}
+
+/*
+Estilos del enlace de ir al inicio cuando se ha relizado de forma exitosa
+*/
+
+#compraExitosa a{
+    /*Margen superior*/
+    margin-top: 30px;
+    /*Sin decoracion de texto*/
+    text-decoration: none;
+    /*FLotar hacia la derecha*/
+    float: right;
+    /*Margen derecho*/
+    margin-right: 50px;
+}
+
+/*
+Estilos del texto de ir a inicio de la compra cuando se ha relizado de forma exitosa
+*/
+
+#compraExitosa p{
+    /*Tamaño de letra*/
+    font-size: 20px;
+    /*Espacio entre cada letra*/
+    letter-spacing: 1px;
+}
