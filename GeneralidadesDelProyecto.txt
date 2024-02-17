@@ -2,41 +2,138 @@ Requerimientos del proyecto:
 
 Ventanas:
 
-Login
-Catálogo y buscador
-Registro de usuario
-Registro de videojuegos
+Catálogo y buscado: 
+
+    Hace referencia a una colección de recursos o elementos que están disponibles para su consulta, en este caso
+    hallar y filtrar un videojuego según sea su tipo.
+
+Registro de usuario:
+
+    Permite crear una cuenta para acceder a los servicios y funcionalidades ofrecidos por MERCADO-JUEGOS.
+
+Registro de videojuegos:
+
+    Hace referencia a los videojuegos que se crean dentro de MERCADO-JUEGOS.
+
 Actualización datos de usuario
-Actualización de videojuegos
-Detalle del videojuego
-Datos de envío
-Datos de pago
-Gestión de pedidos
-Página no existe
-Carrito
+
+    Cuando un usuario así lo desee en el instante que lo requiera puede actualizar sus datos personales, un usuario
+    tipo administrador también puede realizar esta función.
+
+Actualización de videojuegos:
+
+    Cuando haya una actualización de un videojuego a una nueva versión, este se podrá modificar para posteriormente
+    ser consultado en el momento que así se requiera.
+
+Detalle del videojuego:
+
+    Es la información específica y detallada sobre un videojuego que se muestra dentro de MERCADO-JUEGOS a continuación
+    se relaciona la descripción: Nombre del juego, género, descripción, clasificación por edades, plataformas, desarrollador
+    fecha de lanzamiento, puntuación o valoración, capturas de pantalla, videos promocionales, requisitos del sistema.
+
+Datos de envío:
+
+    Cuando un usuario finalmente haya tomado la decisión de realizar la compra de un videojuego, este pasará por una
+    pasarela de pagos para posteriormente diligenciar un formato para el envío del producto a su dirección de domicilio.
+
+Datos de pago:
+
+    El usuario diligencia información requerida para realizar el pago del videojuego.
+
+Gestión de pedidos:
+
+    El usuario dentro de su perfil puede validar el procesamiento del pedido, si fue exitoso al momento de 
+    realizar la compra.
+
+Página no existe:
+
+    Esto podría ocurrir por varias razones, entre ellas; videojuego eliminado o no creado, permiso denegado, 
+    problemas técnicos del servidor
+
+Carrito:
+
+    Esta característica permite a los usuarios agregar videojuegos a una lista temporal mientras navegan por un 
+    sitio web de compras, en este caso hay varias funcionalidades como: Agregar videojuegos, visualizar el carrito,
+    modificar el carrito, calcular el total del valor, proceso de pago, guardar para más tarde.
 
 Funcionalidades:
 
-Registro de usuarios
-Login de usuarios
-Actualización de datos personales
+Registro de usuarios:
 
-Registro de videojuegos
-Actualización de videojuegos
-Eliminación de videojuegos
-Buscador de videojuegos
-Ver todos los videojuegos
+    Datos requeridos para esto, nombre, apellidos, fecha de nacimiento, número telefónico, email, contraseña.
 
-Carrito de compras
-Compra de videojuegos
-Gestión de pedidos
+Login de usuarios:
 
-Control de acceso
+    Datos requeridos para esto email y contraseña.
+
+Actualización de datos personales:
+
+    Permite a los usuarios actualizar la información que ya está registrada en la base de datos.
+
+Registro de videojuegos:
+
+    Acá se crean los videojuegos con sus detalles entre ellos el tipo de juego, nombre, fecha de lanzamiento, entre
+    otros.
+
+Actualización de videojuegos:
+
+    Cuando haya una actualización de un videojuego el usuario administrador puede proceder a generar cambios en los
+    detalles del videojuego.
+
+Eliminación de videojuegos:
+
+    Cuando MERCADO-JUEGOS ya no tenga convenio con alguno de los videojuegos se puede proceder a eliminar de 
+    la plataforma.
+
+Buscador de videojuegos:
+
+    Habrá una parte específica para hacer la búsqueda de los videojuegos al momento de hacerlo por nombre o inclusive
+    con un filtro especial por tipo de videojuego.
+
+Ver todos los videojuegos:
+
+    En el inicio de la aplicación habrá una pestaña para ver todos los videojuegos.
+
+Carrito de compras:
+
+    Tendrá funcionalidades como agregar videojuegos, visualizar el carrito, modificar el carrito,
+    calcular el total del valor, proceso de pago, guardar para más tarde.
+
+Compra de videojuegos:
+
+    Al momento de seleccionar el videojuego se puede proceder con la compra del videojuego donde habrá una pasarela
+    de pagos.
+
+Gestión de pedidos:
+
+    El usuario dentro de su perfil puede validar el procesamiento del pedido, si fue exitoso al momento de 
+    realizar la compra.
+
+Control de acceso:
+
+    Esto es un validador que permite garantizar un login correcto.
 
 Extras
 
-Eliminación de la cuenta
-Encriptación de la contraseña
+Eliminación de la cuenta:
+
+    Cuando un usuario desee borrar su cuenta de MERCADO-JUEGOS lo podrá hacer sin inconveniente alguno, asímismo un
+    usuario administrador podrá borrar una cuenta de un usuario normal.
+
+Encriptación de la contraseña:
+
+    Con el fin de generar una plataforma segura se podrá encriptar la contraseña a fin de que los usuarios tengan
+    la garantía de confiar en MERCADO-JUEGOS.
+
 Comentarios de las publicaciones
+
+    Los usuarios podrán realizar comentarios en un apartado donde pueden realizar opiniones de los videojuegos.
+
 Reportes en pdf
+
+    Cuando se realice la compra de un videojuego podrá salir la fecha de compra, detalles de envío e información 
+    detallada.
+
 Favoritos
+
+    Un usuario puede marcar un videojuego como favorito y así visualizarlo en su perfil.
