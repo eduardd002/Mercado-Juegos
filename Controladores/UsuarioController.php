@@ -53,6 +53,8 @@
             require_once "Vistas/Usuario/Compras.html";
         }
 
+
+
                 /*
         Funcion para ver el perfil
         */

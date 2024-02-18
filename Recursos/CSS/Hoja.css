@@ -630,10 +630,12 @@ Estilos del boton ver detalle
 */
 
 .button-actualizarVideojuego{
+    width: 70px;
     margin-top: 10px;
+    text-decoration: none;
     margin-bottom: 10px;
     /*Color del letra*/
-    color: white;
+    color: white !important;
     /*Color de fondo*/
     background: orange;
     /*Borde*/
@@ -645,10 +647,14 @@ Estilos del boton ver detalle
 */
 
 .button-eliminarVideojuego{
+    float: unset;
+    text-align: center;
+    width: 70px;
     /*Color del letra*/
-    color: white;
+    color: white !important;
     /*Color de fondo*/
     background: red;
+    text-decoration: none;
     /*Borde*/
     border: 1px solid rgb(91, 22, 4);
 }
@@ -719,7 +725,7 @@ Estilos de la imagen del registro de usuario
 */
 
 #loginYRegistro img{
-    margin-top: 200px;
+    margin-top: 140px;
     /*Altura*/
     height: 250px;
     /*Flotar hacia la derecha*/

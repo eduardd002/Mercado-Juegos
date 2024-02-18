@@ -9,6 +9,7 @@
     define("miPerfil", "&action=miPerfil");
     define("compras", "&action=compras");
     define("ventas", "&action=ventas");
+    define("videojuegos", "&action=videojuegos");
 
     define("videojuego", "/?controller=VideojuegoController");
     define("inicio", "&action=inicio");
