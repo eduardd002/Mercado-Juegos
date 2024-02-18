@@ -35,6 +35,13 @@
             require_once "Vistas/Usuario/Perfil.html";
         }
 
+        public function miPerfil(){
+
+            //Cargar la vista
+
+            require_once "Vistas/Usuario/miPerfil.html";
+        }
+
                 /*
         Funcion para ver el perfil
         */
@@ -55,6 +62,17 @@
             //Cargar la vista
 
             require_once "Vistas/Usuario/Ventas.html";
+        }
+
+                        /*
+        Funcion para ver el perfil
+        */
+
+        public function videojuegos(){
+
+            //Cargar la vista
+
+            require_once "Vistas/Usuario/Videojuegos.html";
         }
 
     }

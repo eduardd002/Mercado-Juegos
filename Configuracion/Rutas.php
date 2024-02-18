@@ -6,6 +6,7 @@
     define("login", "&action=login");
     define("registro", "&action=registro");
     define("perfil", "&action=perfil");
+    define("miPerfil", "&action=miPerfil");
     define("compras", "&action=compras");
     define("ventas", "&action=ventas");
 
@@ -14,6 +15,8 @@
     define("detalle", "&action=detalle");
     define("buscar", "&action=buscar");
     define("crear", "&action=crear");
+    define("actualizarVideojuego", "&action=actualizar");
+    define("eliminarVideojuego", "&action=eliminar");
 
     define("carrito", "/?controller=CarritoController");
     define("ver", "&action=ver");

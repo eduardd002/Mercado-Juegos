@@ -496,11 +496,11 @@ Estilo del titulo del videojuego del buscador
 
 .videojuegoBusqueda h2{
     /*Margen superior*/
-    margin-top: 20px;
+    margin-top: 25px;
     /*Tamaña de la fuente del texto*/
     font-size: 18px;
     /*Margen inferior*/
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 /*
@@ -509,7 +509,7 @@ Estilo del precio del videojuego del catalogo
 
 .videojuego p{
     /*Margen inferior*/
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     /*Color del texto*/
     color: #555;
     /*Texto en negrita*/
@@ -522,9 +522,9 @@ Estilo del precio del videojuego del buscador
 
 .videojuegoBusqueda p{
     /*Margen superior*/
-    margin-top: 20px;
+    margin-top: 25px;
     /*Margen inferior*/
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     /*Color del texto*/
     color: #555;
     /*Texto en negrita*/
@@ -626,6 +626,34 @@ Estilos del boton ver detalle
 }
 
 /*
+Estilos del boton ver detalle
+*/
+
+.button-actualizarVideojuego{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /*Color del letra*/
+    color: white;
+    /*Color de fondo*/
+    background: orange;
+    /*Borde*/
+    border: 1px solid rgb(101, 85, 4);
+}
+
+/*
+Estilos del boton ver detalle
+*/
+
+.button-eliminarVideojuego{
+    /*Color del letra*/
+    color: white;
+    /*Color de fondo*/
+    background: red;
+    /*Borde*/
+    border: 1px solid rgb(91, 22, 4);
+}
+
+/*
 Estilos del boton ver todos los videojuegos
 */
 
@@ -649,7 +677,7 @@ Estilos del boton ver todos los videojuegos
     /*Margen centrado*/
     margin: 0px auto;
     /*Margen superior*/
-    margin-top: 610px;
+    margin-top: 650px;
     /*Sin decoracion de texto*/
     text-decoration: none;
     /*Margen inferior*/
@@ -678,11 +706,20 @@ Estilos del formulario de registro de usuario
     margin-bottom: 20px;
 }
 
+#loginYRegistro h3{
+    margin-left: 50px;
+    /*Margen superior*/
+    margin-top: 30px;
+    /*Margen inferior*/
+    margin-bottom: 20px;
+}
+
 /*
 Estilos de la imagen del registro de usuario
 */
 
 #loginYRegistro img{
+    margin-top: 200px;
     /*Altura*/
     height: 250px;
     /*Flotar hacia la derecha*/
@@ -857,12 +894,8 @@ Estilos pagina no existe
 */
 
 #paginaNoEncontrada{
-    /*Margen superior*/
-    margin-top: 40px;
-    /*Margen inferior*/
-    margin-bottom: 40px;
     /*Margen izquierdo*/
-    margin-left: 140px;
+    margin-left: 300px;
 }
 
 /*
@@ -870,8 +903,8 @@ Estilo titulo pagina no existe
 */
 
 #paginaNoEncontrada h1{
-    /*Texto alineado al centro*/
-    text-align: center;
+    /*Flotar hacia la izquierda*/
+    float: left;
     /*Margen superior*/
     margin-top: 20px;
     /*Margen inferior*/
@@ -883,12 +916,18 @@ Estilo imagen pagina no existe
 */
 
 #paginaNoEncontrada img{
-    /*Altura*/
-    height: 450px;
-    /*Margen derecho*/
-    margin-right: 250px;
-    /*Flotar hacia la derecha*/
+    float: left;
+}
+
+#paginaNoEncontrada a{
+    /*Margen superior*/
+    margin-top: 30px;
+    /*Sin decoracion de texto*/
+    text-decoration: none;
+    /*FLotar hacia la derecha*/
     float: right;
+    /*Margen derecho*/
+    margin-right: 50px;
 }
 
 /*
@@ -907,8 +946,6 @@ Estilo de la imagen del detalle del videojuego
 */
 
 .detalleVideojuego img{
-    /*Margen superior*/
-    margin-top: 15px;
     /*Margen izquierdo*/
     margin-left: 75px;
     /*Margen derecho*/
@@ -929,7 +966,7 @@ Estilo del titulo del videojuego del detalle del videojuego
 
 .detalleVideojuego #tituloVideojuego{
     /*Margen inferior*/
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 /*
@@ -938,9 +975,9 @@ Estilo del precio del videojuego del detalle del videojuego
 
 .detalleVideojuego #precioVideojuego{
     /*Margen superior*/
-    margin-top: 30px;
+    margin-top: 40px;
     /*Margen inferior*/
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     /*Color de letra*/
     color: green;
 }
@@ -951,9 +988,9 @@ Estilo del tipo de consola del videojuego del detalle del videojuego
 
 .detalleVideojuego #consolaVideojuego{
     /*Margen superior*/
-    margin-top: 30px;
+    margin-top: 40px;
     /*Margen inferior*/
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 /*
@@ -962,9 +999,9 @@ Estilo del tipo de categoria del videojuego del detalle del videojuego
 
 .detalleVideojuego #categoriaVideojuego{
     /*Margen superior*/
-    margin-top: 30px;
+    margin-top: 40px;
     /*Margen inferior*/
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 /*
@@ -973,9 +1010,9 @@ Estilo de las unidades del videojuego del detalle del videojuego
 
 .detalleVideojuego #unidadesDisponiblesVideojuego{
     /*Margen superior*/
-    margin-top: 30px;
+    margin-top: 40px;
     /*Margen inferior*/
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 /*
@@ -984,7 +1021,7 @@ Estilo del titulo de la descripcion del videojuego del detalle del videojuego
 
 .detalleVideojuego #descripcionVideojuegoTitulo{
     /*Margen inferior*/
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 /*
@@ -993,9 +1030,9 @@ Estilo del contenido de la descripcion del videojuego del detalle del videojuego
 
 .detalleVideojuego #descripcionVideojuegoTexto{
     /*Margen superior*/
-    margin-top: 30px;
+    margin-top: 40px;
     /*Margen inferior*/
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 /*
@@ -1006,7 +1043,7 @@ Estilo de los campos de texto del detalle del videojuego
     /*Margen superior*/
     margin-top: 10px;
     /*Margen inferior*/
-    margin-bottom: 50px;
+    margin-bottom: 47px;
 }
 
 /*
@@ -1026,7 +1063,7 @@ Estilo de los botonos del detalle del videojuego
 
 .botonesDetalleVideojuego{
     /*Margen inferior*/
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
 /*
@@ -1034,6 +1071,7 @@ Estilo de los enlaces de los botonos del detalle del videojuego
 */
 
 .botonesDetalleVideojuego a{
+    /*Margen derecho*/
     margin-right: 20px;
     /*Borde redondo*/
     border-radius: 2px;
@@ -1049,6 +1087,7 @@ Estilo de los enlaces de los botonos del detalle del videojuego
     border: 1px solid #11608e;
     /*Cambiar apariencia del cursor*/
     cursor:pointer;
+    /*Sin decoracion en el texto*/
     text-decoration: none;
 }
 
@@ -1255,4 +1294,126 @@ Estilos del texto de ir a inicio de la compra cuando se ha relizado de forma exi
     font-size: 20px;
     /*Espacio entre cada letra*/
     letter-spacing: 1px;
+}
+
+/*
+Estilo de la tabla de compras y ventas
+*/
+
+comprasYVentas table{
+    /*Texto centrado*/
+    text-align: center;
+    /*Anchor*/
+    width: 100%;
+    /*Borde inferior*/
+    border-bottom: 1px solid #CCC;
+}
+
+/*
+Estilo de los elementos de compras y ventas
+*/
+
+comprasYVentas td{
+    /*Border superior*/
+    border-top: 1px solid #CCC;
+    /*Margen interior*/
+    padding: 12px;
+}
+
+/*
+Estilo de las listas de compras y ventas
+*/
+
+#comprasYVentas{
+    /*Margen*/
+    margin: 40px;
+}
+
+/*
+Estilo del titulo de compras y ventas
+*/
+
+#comprasYVentas h1{
+    /*Titulo alineado al centro*/
+    text-align: center;
+    /*Margen inferior*/
+    margin-bottom: 30px;
+}
+
+#detalleCompraYVenta{
+    margin-top: 50px;
+    margin-left: 75px;
+}
+
+#detalleCompraYVenta h1{
+    margin-bottom: 55px;
+    text-align: center;
+}
+
+#detalleCompraYVenta a{
+    font-size: 14px;
+    margin-top: 20px;
+    color: white;
+    text-decoration: none;
+    width: 105px;
+    padding: 2px;
+}
+
+#detalleCompraYVenta h3{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#detalleCompraYVenta h5{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#detalleCompraYVenta h4{
+    margin-top: 15px;
+    margin-bottom: 35px;
+}
+
+#detalleCompraYVenta p{
+    float: left;
+}
+
+/*
+Estilo de cada videojuego del buscador
+*/
+
+.videojuegoCompraYVenta{
+    /*Color de fondo*/
+    background: white;
+    /*Anchor*/
+    width: 16%;
+    /*Borde*/
+    border: 1px solid #ccc;
+    /*Flotar hacia la izquierda*/
+    float: left;
+    /*Margen inferior*/
+    margin-bottom: 35px;
+    /*Margen superior*/
+    margin-right: 30px;
+    /*Texto alineado al centro*/
+    text-align: center;
+}
+
+/*
+Estilo de la imagen del videojuego que se presenta en el catalogo, al inicio dek buscadir
+*/
+
+.videojuegoCompraYVenta img{
+    /*Flotar a la izquierda*/
+    float: left;
+    /*Altura*/
+    height: 145px;
+    /*Anchor*/
+    width: 135px;
+    /*Margen inferior*/
+    margin-bottom: 5px;
+    /*Margen superior*/
+    margin-top: 5px;
+    /*Margen izquierdo*/
+    margin-left: 17px;
 }
