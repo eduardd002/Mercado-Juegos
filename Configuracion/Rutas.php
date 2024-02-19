@@ -29,6 +29,7 @@
     define("direccion", "&action=direccion");
     define("pago", "&action=pago");
     define("realizar", "&action=exito");
+    define("generarPdf", "&action=generarPdf");
 
     define("venta", "/?controller=VentaController");
     define("verVenta", "&action=ver");
