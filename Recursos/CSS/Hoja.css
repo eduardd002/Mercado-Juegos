@@ -263,7 +263,9 @@ Estilos de cada elemento del menu principal
     float: left;
 }
 
-/*Estilo del la ultima seccion de submenus*/
+/*
+Estilo del la ultima seccion de submenus
+*/
 
 #menuPrincipal ul li ul li{
     /*Flotar hacia la izquierda*/
@@ -547,6 +549,7 @@ Estilo del boton de videojuego de buscador
     margin-top: 20px;
     /*Anchor*/
     width: 240px;
+    /*Sin decoracion de texto*/
     text-decoration: none;
 }
 
@@ -627,9 +630,13 @@ Estilos del boton ver detalle
 */
 
 .button-actualizarVideojuego{
+    /*Anchor*/
     width: 70px;
+    /*Margen superior*/
     margin-top: 10px;
+    /*Sin decoracion de texto*/
     text-decoration: none;
+    /*Margen inferior*/
     margin-bottom: 10px;
     /*Color del letra*/
     color: white !important;
@@ -639,10 +646,18 @@ Estilos del boton ver detalle
     border: 1px solid rgb(101, 85, 4);
 }
 
+/*
+Estilo del boton para generar el pdf
+*/
+
 .button-generarPdf{
+    /*Anchor*/
     width: 70px;
+    /*Margen superior*/
     margin-top: 10px;
+    /*Sin decoracion de texto*/
     text-decoration: none;
+    /*Margen inferior*/
     margin-bottom: 30px;
     /*Color del letra*/
     color: white !important;
@@ -657,13 +672,17 @@ Estilos del boton ver detalle
 */
 
 .button-eliminarVideojuego{
+    /*Sin flotado*/
     float: unset;
+    /*Texto alineado al centro*/
     text-align: center;
+    /*Anchor*/
     width: 70px;
     /*Color del letra*/
     color: white !important;
     /*Color de fondo*/
     background: red;
+    /*Sin texto de decoracion*/
     text-decoration: none;
     /*Borde*/
     border: 1px solid rgb(91, 22, 4);
@@ -689,7 +708,7 @@ Estilos del boton ver todos los videojuegos
     /*Cambiar apariencia del cursor*/
     cursor: pointer;
     /*Anchor*/
-    width: 183px;
+    width: 182.4px;
     /*Margen centrado*/
     margin: 0px auto;
     /*Margen superior*/
@@ -713,6 +732,10 @@ Estilos del formulario de registro de usuario
     margin-bottom: 20px;
 }
 
+/*
+Estilos de titulo de un videojuego de un perfil que se visita
+*/
+
 #loginYRegistro h2{
     /*Texto alineado al centro*/
     text-align: center;
@@ -722,7 +745,12 @@ Estilos del formulario de registro de usuario
     margin-bottom: 20px;
 }
 
+/*
+Estilos de subtitulos de un perfil que se visita
+*/
+
 #loginYRegistro h3{
+    /*Margen izquierdo*/
     margin-left: 50px;
     /*Margen superior*/
     margin-top: 30px;
@@ -924,25 +952,6 @@ Estilo titulo pagina no existe
     margin-top: 20px;
     /*Margen inferior*/
     margin-bottom: 20px;
-}
-
-/*
-Estilo imagen pagina no existe
-*/
-
-#paginaNoEncontrada img{
-    float: left;
-}
-
-#paginaNoEncontrada a{
-    /*Margen superior*/
-    margin-top: 30px;
-    /*Sin decoracion de texto*/
-    text-decoration: none;
-    /*FLotar hacia la derecha*/
-    float: right;
-    /*Margen derecho*/
-    margin-right: 50px;
 }
 
 /*
@@ -1355,55 +1364,82 @@ Estilo del titulo de compras y ventas
     margin-bottom: 30px;
 }
 
+/*
+Estilo de titulos de total en mis compras y ventas
+*/
+
 #detalleCompraYVenta{
+    /*Margen superior*/
     margin-top: 50px;
+    /*Margen izquierdo*/
     margin-left: 75px;
 }
 
+/*
+Estilo de titulos de total en mis compras y ventas
+*/
+
 #detalleCompraYVenta h1{
+    /*Margen inferior*/
     margin-bottom: 55px;
+    /*Texto alineado al centro*/
     text-align: center;
 }
 
+/*
+Estilo de los enlaces de total en mis compras y ventas
+*/
+
 #detalleCompraYVenta a{
+    /*Tamaño de letra*/
     font-size: 14px;
+    /*Margen superior*/
     margin-top: 20px;
+    /*Color de letra*/
     color: white;
+    /*Decoracion de texto*/
     text-decoration: none;
+    /*Anchor*/
     width: 105px;
+    /*Margen interior*/
     padding: 2px;
-}
-
-.generarPdf{
-    font-size: 14px;
-    margin-top: 20px;
-    color: black !important;
-    text-decoration: none;
-    width: 105px;
-    padding: 2px;
-}
-
-#detalleCompraYVenta h3{
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-
-#detalleCompraYVenta h5{
-    margin-top: 15px;
-    margin-bottom: 15px;
-}
-
-#detalleCompraYVenta h4{
-    margin-top: 15px;
-    margin-bottom: 35px;
-}
-
-#detalleCompraYVenta p{
-    float: left;
 }
 
 /*
-Estilo de cada videojuego del buscador
+Estilo de subtitulos de total en mis compras y ventas
+*/
+
+#detalleCompraYVenta h3{
+    /*Margen superior*/
+    margin-top: 50px;
+    /*Margen inferior*/
+    margin-bottom: 50px;
+}
+
+/*
+Estilo de campos de total en mis compras y ventas
+*/
+
+#detalleCompraYVenta h5{
+    /*Margen superior*/
+    margin-top: 15px;
+    /*Margen inferior*/
+    margin-bottom: 15px;
+}
+
+/*
+Estilo del campo de total en mis compras y ventas
+*/
+
+#detalleCompraYVenta h4{
+    /*Margen superior*/
+    margin-top: 15px;
+    /*Margen inferior*/
+    margin-bottom: 35px;
+}
+
+/*
+Estilo de mis compras y ventas
 */
 
 .videojuegoCompraYVenta{
@@ -1424,7 +1460,7 @@ Estilo de cada videojuego del buscador
 }
 
 /*
-Estilo de la imagen del videojuego que se presenta en el catalogo, al inicio dek buscadir
+Estilo de la imagen del videojuego en compras y ventas
 */
 
 .videojuegoCompraYVenta img{
@@ -1442,42 +1478,87 @@ Estilo de la imagen del videojuego que se presenta en el catalogo, al inicio dek
     margin-left: 17px;
 }
 
+/*
+Estilo del boton para eliminar el carrito
+*/
+
 .buttoneliminarCarrito{
+    /*Sin decoracion de texto*/
     text-decoration: none;
+    /*Color de letra*/
     color: white !important;
+    /*Borde*/
     border: 1px solid #222;
+    /*Color de fondo*/
     background: red !important;
+    /*Margen derecho*/
     margin-right: 85px !important;
 }
 
+/*
+Estilo del boton para aumentar las unidades del carrito
+*/
+
 .buttonAumentarCarrito{
+    /*Margen interior*/
     padding: 7px;
+    /*Tamaño de letra*/
     font-size: 20px;
+    /*Decoracion del texto*/
     text-decoration: none;
+    /*Color de letra*/
     color: white !important;
+    /*Borde*/
     border: 1px solid black;
+    /*Color de fondo*/
     background: #5d5e5c;
+    /*Margen izquierdo*/
     margin-left: 20px;
 }
 
+/*
+Estilo del boton para disminuir las unidades del carrito
+*/
+
 .buttonDisminuirCarrito{
+    /*Margen interior*/
     padding: 7px;
+    /*Margen interior izquierdo*/
     padding-left: 10px;
+    /*Margen interior derecho*/
     padding-right: 10px;
+    /*Tamaño de letra*/
     font-size: 20px;
+    /*Decoracion del texto*/
     text-decoration: none;
+    /*Color de letra*/
     color: white !important;
+    /*Borde*/
     border: 1px solid black;
+    /*Color de fondo*/
     background: #5d5e5c;
+    /*Margen derecho*/
     margin-right: 20px;
 }
 
+/*
+Estilo del campo para subir la foto
+*/
+
 #loginYRegistro input[type="file"]{
+    /*Flotar hacia la derecha*/
     float: right;
+    /*Margen derecho*/
     margin-right: 70px;
+    /*Margen izquierdo*/
     margin-left: 10px;
 }
 
+/*
+Estilo del texto para subir la foto
+*/
+
 .subirFotoPerfil{
+    /*Flotar hacia la derecha*/
     float: right;
 }
