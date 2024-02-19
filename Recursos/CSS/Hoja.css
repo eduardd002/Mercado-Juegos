@@ -1562,3 +1562,49 @@ Estilo del texto para subir la foto
     /*Flotar hacia la derecha*/
     float: right;
 }
+
+/*
+Estilo de la tabla de la factura
+*/
+
+#factura table {
+    /*Anchor*/
+    width: 92%;
+    /*Desaparecer borde entre filas*/
+    border-collapse: collapse;
+}
+
+/*
+Estilo de las filas de titulo y cuerpo de la factura
+*/
+
+#factura th, #factura td {
+    /*Borde*/
+    border: 1px solid #ddd;
+    /*Margen inferior*/
+    padding: 8px;
+    /*Texto alineado al centro*/
+    text-align: left;
+}
+
+/*
+Estilo de las filas de titulo de la factura
+*/
+
+#factura th {
+    /*Color de fondo*/
+    background-color: #f2f2f2;
+}
+
+/*
+Estilo del total y precio en la factura
+*/
+
+.total{
+    /*Texto en negrita*/
+    font-weight: bold;
+    /*Color de letra*/
+    color: green;
+    /*Tamaño de la letra*/
+    font-size: 17px;
+}
