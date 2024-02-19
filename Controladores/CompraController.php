@@ -31,10 +31,16 @@
             require_once "Vistas/Compra/Detalle.html";
         }
 
+        public function generarFactura(){
+            //Cargar la vista
+
+            require_once "Vistas/Compra/Factura.html";
+        }
+
         public function generarPdf(){
 
             //Traer la vista de la compra
-            require_once('Vistas/Compra/Detalle.html');
+            require_once('Vistas/Compra/Factura.html');
 
             //Llamar la funcion que genera el PDF
             GenerarPdf::pdf();

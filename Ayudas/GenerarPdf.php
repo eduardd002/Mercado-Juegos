@@ -20,7 +20,7 @@ class GenerarPdf{
         //Conseguir todo el codigo html que hay dentro de un archivo de PHP
         ob_start();
         ob_end_clean();
-        require_once 'Vistas/Compra/Detalle.html';
+        require_once 'Vistas/Compra/Factura.html';
         $html = ob_get_clean();
 
         //Escribir el HTML
