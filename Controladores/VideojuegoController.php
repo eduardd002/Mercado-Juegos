@@ -3,55 +3,72 @@
     class VideojuegoController{
 
         /*
-        En esta funcion de listaran algunos de los videojuegos
+        Funcion para listar algunos videojuegos en la pantalla de inicio
         */
 
         public function inicio(){
             
-            //Renderizar la vista
-
+            //Cargar la vista
             require_once 'Vistas/Layout/Catalogo.html';
 
         }
 
-        public function detalle(){
-            //Renderizar la vista
+        /*
+        Funcion para ver el detalle del videojuego
+        */
 
+        public function detalle(){
+
+            //Cargar la vista
             require_once 'Vistas/Videojuego/Detalle.html';
         }
 
-        public function crear(){
-            //Renderizar la vista
+        /*
+        Funcion para crear un videojuego
+        */
 
+        public function crear(){
+
+            //Cargar la vista
             require_once 'Vistas/Videojuego/Crear.html';
         }
 
-        public function buscar(){
-            //Renderizar la vista
+        /*
+        Funcion para buscar un videojuego en concreto
+        */
 
+        public function buscar(){
+
+            //Cargar la vista
             require_once 'Vistas/Videojuego/Buscar.html';
         }
 
-        public function actualizar(){
-            //Renderizar la vista
+        /*
+        Funcion para actualizar un videojuego
+        */
 
+        public function actualizar(){
+
+            //Cargar la vista
             require_once 'Vistas/Videojuego/Actualizar.html';
         }
+
+        /*
+        Funcion para eliminar un videojuego
+        */
 
         public function eliminar(){
             
         }
 
+        /*
+        Funcion para listar todos los videojuegos en la pantalla de inicio
+        */
+
         public function todos(){
-            //Renderizar la vista
 
+            //Cargar la vista
             require_once 'Vistas/Videojuego/Todos.html';
-        }
-
-        public function menos(){
-            //Renderizar la vista
-
-            require_once 'Vistas/Layout/Catalogo.html';
         }
 
     }

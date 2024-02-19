@@ -1,16 +1,15 @@
 <?php
 
+    //OB_START(); para
     ob_start();
-    require_once 'Configuracion/Rutas.php';
-    
-    require_once 'autoload.php';
 
+    //Incluir los archivos de las vistas
+    require_once 'Configuracion/Rutas.php';
+    require_once 'autoload.php';
     require_once 'Vistas/Layout/Cabecera.html';
-    
     require_once 'Vistas/Layout/Categorias.html';
     
-    //Mostrar error
-
+    //Funcion para mostrar un error
     function showError(){
         $error = new ErrorController();
         $error -> index();
@@ -18,7 +17,6 @@
     }
 
     //Compruebo si me llega el controlador por la URL 
-
     if(isset($_GET['controller'])){
         $nombre = $_GET['controller'];
     }elseif(!isset($_GET['controller']) && !isset($_GET['action'])){
@@ -28,8 +26,7 @@
         exit();
     }
 
-    //Compruebo si existe el controlador
-    
+    //Compruebo si existe el controladorS
     if(class_exists($nombre)){
         
         //Si existe la clase se crea el objeto
@@ -54,6 +51,7 @@
         showError();
     }
 
+    //Incluir los archivos de las vistas
     require_once 'Vistas/Layout/PieDePagina.html';
 
 ?>

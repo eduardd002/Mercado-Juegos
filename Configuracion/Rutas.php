@@ -19,7 +19,6 @@
     define("actualizarVideojuego", "&action=actualizar");
     define("eliminarVideojuego", "&action=eliminar");
     define("todos", "&action=todos");
-    define("menos", "&action=menos");
 
     define("carrito", "/?controller=CarritoController");
     define("ver", "&action=ver");
