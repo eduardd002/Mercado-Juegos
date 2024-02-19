@@ -42,6 +42,18 @@
             
         }
 
+        public function todos(){
+            //Renderizar la vista
+
+            require_once 'Vistas/Videojuego/Todos.html';
+        }
+
+        public function menos(){
+            //Renderizar la vista
+
+            require_once 'Vistas/Layout/Catalogo.html';
+        }
+
     }
 
 ?>

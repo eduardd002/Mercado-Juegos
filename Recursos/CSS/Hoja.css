@@ -791,7 +791,7 @@ Estilo particular de la imagen del registro de usuario
 
 .registerImage{
     /*Margen superior*/
-    margin-top: 220px;
+    margin-top: 140px;
 }
 
 /*
@@ -818,7 +818,7 @@ Estilo particular de la imagen de pago al comprar un videojuego
 
 .ventaImage{
     /*Margen superior*/
-    margin-top: 200px;
+    margin-top: 140px;
 }
 
 /*
@@ -1472,15 +1472,12 @@ Estilo de la imagen del videojuego que se presenta en el catalogo, al inicio dek
     margin-right: 20px;
 }
 
-#subirFotoPerfil{
+#loginYRegistro input[type="file"]{
     float: right;
-    margin-right: 90px;
+    margin-right: 70px;
+    margin-left: 10px;
 }
 
-#subirFotoPerfil input[type="file"]{
-    display: none;
-}
-
-#subirFotoPerfil img:hover > input[type="file"]{
-    display: block;
+.subirFotoPerfil{
+    float: right;
 }

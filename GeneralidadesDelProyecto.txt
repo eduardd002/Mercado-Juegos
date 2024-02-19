@@ -113,6 +113,11 @@ Control de acceso:
 
     Esto es un validador que permite garantizar un login correcto.
 
+Reportes en pdf
+
+    Cuando se realice la compra de un videojuego podrá salir la fecha de compra, detalles de envío e información 
+    detallada.
+
 Extras
 
 Eliminación de la cuenta:
@@ -128,11 +133,6 @@ Encriptación de la contraseña:
 Comentarios de las publicaciones
 
     Los usuarios podrán realizar comentarios en un apartado donde pueden realizar opiniones de los videojuegos.
-
-Reportes en pdf
-
-    Cuando se realice la compra de un videojuego podrá salir la fecha de compra, detalles de envío e información 
-    detallada.
 
 Favoritos
 
