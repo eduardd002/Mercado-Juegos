@@ -47,16 +47,6 @@
         public function ver(){
 
             //Cargar la vista
-            require_once "Vistas/Compra/Detalle.html";
-        }
-
-        /*
-        Funcion para ver la factura de la compra realizada
-        */
-
-        public function generarFactura(){
-
-            //Cargar la vista
             require_once "Vistas/Compra/Factura.html";
         }
 
