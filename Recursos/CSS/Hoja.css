@@ -486,6 +486,14 @@ Estilo del titulo del videojuego dek catalogo
     font-size: 18px;
     /*Margen inferior*/
     margin-bottom: 10px;
+    /*Evitar el salto de línea*/
+    white-space: nowrap;
+    /*Oculta el contenido que desborda*/
+    overflow: hidden;
+    /*Muestra puntos suspensivos (...) para indicar que hay más texto*/
+    text-overflow: ellipsis;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 /*
@@ -848,7 +856,7 @@ Estilo particular de la imagen de pago al comprar un videojuego
 
 .ventaImage{
     /*Margen superior*/
-    margin-top: 140px;
+    margin-top: 80px;
 }
 
 /*

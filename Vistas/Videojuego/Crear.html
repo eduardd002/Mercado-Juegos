@@ -7,22 +7,10 @@
             <input type="text" name="nombre" required>
         </div>
         <div id="bloqueTextoRegistro">
-            <label for="categoria">Categoria</label>
-            <select name="categoria" id="categoria">
-                <option value="accion">Accion</option>
-                <option value="arcade">Arcade</option>
-                <option value="aventura">Aventura</option>
-                <option value="carreras">Carreras</option>
-                <option value="combate">Combate</option>
-                <option value="deportes">Deportes</option>
-                <option value="disparos">Disparos</option>
-                <option value="estrategia">Estrategia</option>
-                <option value="mesa">Mesa</option>
-                <option value="musicales">Musicales</option>
-                <option value="puzzle">Puzzle</option>
-                <option value="rol">Rol</option>
-                <option value="terror">Terror</option>
-            </select>
+            <label for="categoria">Categoria/as</label>
+            <input type="checkbox" name="categorias[]" value="deportes">Deportes<br>
+            <input type="checkbox" name="categorias[]" value="accion">Accion<br>
+            <input type="checkbox" name="categorias[]" value="batallas" required>Batallas<br>
         </div>
         <div id="bloqueTextoRegistro">
             <label for="consola">Consola</label>
@@ -37,17 +25,6 @@
                 <option value="xboxseriess">Xbox Series S</option>
                 <option value="xboxseriesx">Xbox Series X</option>
                 <option value="windows">Windows</option>
-            </select>
-        </div>
-        <div id="bloqueTextoRegistro">
-            <label for="clasificacion">Clasificacion de edad</label>
-            <select name="clasificacion" id="clasificacion">
-                <option value="ec">EC</option>
-                <option value="e">E</option>
-                <option value="e10+">E10+</option>
-                <option value="t">T</option>
-                <option value="m">M</option>
-                <option value="ao">AO</option>
             </select>
         </div>
         <div id="bloqueTextoRegistro">
