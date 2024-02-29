@@ -127,12 +127,12 @@ CREATE TABLE transaccionvideojuego (
 /*Crea tabla intermedia de videojuego y categoria*/
 CREATE TABLE videojuegocategoria (
     id             INTEGER auto_increment NOT NULL,
-    videojuegos_id INTEGER NOT NULL,
-    categorias_id  INTEGER NOT NULL,
+    idVideojuego INTEGER NOT NULL,
+    idCategoria  INTEGER NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT videojuegouso_pk PRIMARY KEY ( id ),
-    CONSTRAINT videojuegocategoria_categorias_fk FOREIGN KEY ( categorias_id ) REFERENCES categorias ( id ),
-    CONSTRAINT videojuegocategoria_videojuegos_fk FOREIGN KEY ( videojuegos_id ) REFERENCES videojuegos ( id )
+    CONSTRAINT videojuegocategoria_categorias_fk FOREIGN KEY ( idCategoria ) REFERENCES categorias ( id ),
+    CONSTRAINT videojuegocategoria_videojuegos_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
 );
 
 /*Crea tabla de tipo de consolas de videojuego*/
