@@ -1573,24 +1573,48 @@ Estilo del texto para subir la foto
     float: right;
 }
 
+/*
+Estilo de las alertas de las sesiones flash
+*/
+
 .alerta{
+    /*Margen interior*/
     padding: 5px;
+    /*Tamaño de letra*/
     font-size: 14px;
+    /*Color de letra*/
     color: white;
-    background: green;
+    /*Sombra*/
     box-shadow: 0px 1px 3px #CCC;
+    /*Margen inferior*/
     margin-bottom: 15px;
+    /*Borde redondo*/
     border-radius: 2px;
 }
 
+/*
+Estilo de las alertas de error
+*/
+
 .alerta-error{
+    /*Color de fondo*/
     background: red;
 }
 
+/*
+Estilo de las alertas de exito
+*/
+
 .alerta-acierto{
+    /*Color de fondo*/
     background: green;
 }
 
+/*
+Estilo de las alertas de sugerencia
+*/
+
 .alerta-sugerencia{
+    /*Color de fondo*/
     background: orange;
 }

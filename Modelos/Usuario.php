@@ -128,10 +128,14 @@
             return $this;
         }
 
+        /*
+        Funcion para realizar el registro del usuario en la base de datos
+        */
+
         public function guardar(){
 
             //Construir la consulta
-            $consulta = "INSERT INTO usuarios VALUES(NULL, '{$this -> getRol()}', 
+            $consulta = "INSERT IGNORE INTO usuarios VALUES(NULL, '{$this -> getRol()}', 
                 '{$this -> getNombre()}', '{$this -> getApellido()}', 
                 '{$this -> getFechaNacimiento()}', {$this -> getNumeroTelefono()}, 
                 '{$this -> getCorreo()}', '{$this -> getClave()}', 
@@ -139,10 +143,14 @@
                 '{$this -> getFoto()}', '{$this -> getFechaRegistro()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
+            //Establecer una variable bandera
             $resultado = false;
-            if($registro){
+            //Comporbar el registro fue exitoso y el total de columnas afectadas se altero
+            if($registro && mysqli_affected_rows($this -> db) > 0){
+                //Cambiar el estado de la variable bandera
                 $resultado = true;
             }
+            //Retornar el resultado
             return $resultado;
         }
     }

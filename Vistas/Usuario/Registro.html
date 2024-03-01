@@ -1,4 +1,22 @@
 <div id="loginYRegistro">
+    <?php if(isset($_SESSION['RegistroUsuario']) && $_SESSION['RegistroUsuario'] == 'El formato debe ser de una imagen') : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['RegistroUsuario']; ?>
+        </div>
+    <?php endif; ?> 
+
+    <?php if(isset($_SESSION['RegistroUsuario']) && $_SESSION['RegistroUsuario'] == 'Ya hay una ruta de correo en uso') : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['RegistroUsuario']; ?>
+        </div>
+    <?php endif; ?> 
+
+    <?php if(isset($_SESSION['RegistroUsuario']) && $_SESSION['RegistroUsuario'] == 'Ha ocurrido un error al realizar el registro') : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['RegistroUsuario']; ?>
+        </div>
+    <?php endif; ?>
+    <?php unset($_SESSION['RegistroUsuario']); ?> 
     <h1>Registrarse</h1>
     <form action="<?=rutaInicio?><?=usuario?><?=guardarUsuario?>" method="post" enctype="multipart/form-data">
         <img src="Recursos/Logotipos/registro.png" class="registerImage" alt="Logo registro">

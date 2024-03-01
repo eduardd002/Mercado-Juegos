@@ -25,6 +25,10 @@
             require_once "Vistas/Usuario/Registro.html";
         }
 
+        /*
+        Funcion para guardar el usuario en la base de datos
+        */
+
         public function guardar(){
 
             //Comprobar si los datos están llegando
@@ -79,25 +83,48 @@
                         $usuario -> setFoto($nombreArchivo);
                         //Mover la foto subida a la ruta temporal del servidor y luego a la de la carpeta de las imagenes
                         move_uploaded_file($archivo['tmp_name'], 'Recursos/ImagenesUsuarios/'.$nombreArchivo);
-                    }else{
-                        $_SESSION['RegistroUsuario'] = "El formato debe ser de una imagen";
-                        header("Location:"."<?=rutaInicio?><?=usuario?><?=crear?>");
-                    }
+
                         //Guardar en la base de datos
                         $guardado = $usuario -> guardar();
 
+                        //Comprobar se ejecutó con exito la consulta
                         if($guardado){
+                            //Crear sesion de inicio de sesion
                             $_SESSION['LoginUsuario'] = 'Exito';
+                            //Redirigir al menu principal
                             header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
                         }else{
+                            //Crear sesion que indique que la ruta de correo ya esta en uso
                             $_SESSION['RegistroUsuario'] = "Ya hay una ruta de correo en uso";
-                            header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                            //Redirigir al registro de usuario
+                            header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=registro");
                         }
+                    }else{
+                        //Crear sesion que indique que la imagen debe ser de formato imagen
+                        $_SESSION['RegistroUsuario'] = "El formato debe ser de una imagen";
+                        //Redirigir al registro de usuario
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=registro");
+                    }
                 }else{
+                    //Crear sesion que indique que ha ocurrido un error inesperado al hacer el registro
                     $_SESSION['RegistroUsuario'] = "Ha ocurrido un error al realizar el registro";
-                    header("Location:"."<?=rutaInicio?><?=usuario?><?=crear?>");
+                    //Redirigir al registro de usuario
+                    header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=registro");
                 }
+            }
+        }
 
+        /*
+        Funcion para cerrar la sesión
+        */
+
+        public function cerrarSesion(){
+            //Comprobar si existe la sesion y si esta sesion contiene la informacion adecuada
+            if(isset($_SESSION['LoginUsuario']) && $_SESSION['LoginUsuario'] == 'Exito'){
+                //Eliminar la sesion
+                unset($_SESSION['LoginUsuario']);
+                //Redirigir al menu principal
+                header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
             }
         }
 

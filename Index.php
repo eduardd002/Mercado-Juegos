@@ -6,6 +6,10 @@
     //Tener la sesion iniciado en todo el proyecto
     session_start();
 
+    //session_destroy();
+
+    //echo $_SESSION["RegistroUsuario"];
+
     //Incluir los archivo de configuracion de rutas
     require_once 'Configuracion/Rutas.php';
     //Incluir archivo de configuracion de base de datos
