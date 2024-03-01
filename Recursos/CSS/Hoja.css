@@ -1572,3 +1572,25 @@ Estilo del texto para subir la foto
     /*Flotar hacia la derecha*/
     float: right;
 }
+
+.alerta{
+    padding: 5px;
+    font-size: 14px;
+    color: white;
+    background: green;
+    box-shadow: 0px 1px 3px #CCC;
+    margin-bottom: 15px;
+    border-radius: 2px;
+}
+
+.alerta-error{
+    background: red;
+}
+
+.alerta-acierto{
+    background: green;
+}
+
+.alerta-sugerencia{
+    background: orange;
+}

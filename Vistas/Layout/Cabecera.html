@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="Recursos/CSS/Hoja.css">
 </head>
 <body>
-
     <div id="contenedor">
 
         <!-- SECCION CABECERA -->
@@ -23,21 +22,24 @@
             </div>
             <div id="menuPrincipal">
                 <ul>
-                    <li><a href="<?=rutaInicio?><?=usuario?><?=login?>">Login</a></li>
-                    <li><a href="<?=rutaInicio?><?=usuario?><?=registro?>">Registro</a></li>
-                    <li><a href="<?=rutaInicio?><?=carrito?><?=ver?>">
-                        <img src="Recursos/Logotipos/Carrito.png" alt="Logo tienda">
-                    </a></li>
-                    <li><img src="Recursos/Logotipos/usuario.png" alt="Logo tienda">User</a>
-                        <ul>
-                            <li><a href="<?=rutaInicio?><?=usuario?><?=miPerfil?>">Mi perfil</a></li>
-                            <li><a href="<?=rutaInicio?><?=videojuego?><?=crear?>">Vender</a></li>
-                            <li><a href="<?=rutaInicio?><?=usuario?><?=videojuegos?>">Mis Videojuegos</a></li>
-                            <li><a href="<?=rutaInicio?><?=usuario?><?=compras?>">Mis Compras</a></li>
-                            <li><a href="<?=rutaInicio?><?=usuario?><?=ventas?>">Mis Ventas</a></li>
-                            <li><a href="">Cerrar sesion</a></li>
-                        </ul>
-                    </li>
+                    <?php if(isset($_SESSION['LoginUsuario']) && $_SESSION['LoginUsuario'] == 'Exito') : ?>
+                        <li><a href="<?=rutaInicio?><?=carrito?><?=ver?>">
+                            <img src="Recursos/Logotipos/Carrito.png" alt="Logo carrito">
+                        </a></li>
+                        <li><img src="Recursos/Logotipos/usuario.png" alt="Logo usuario">User</a>
+                            <ul>
+                                <li><a href="<?=rutaInicio?><?=usuario?><?=miPerfil?>">Mi perfil</a></li>
+                                <li><a href="<?=rutaInicio?><?=videojuego?><?=crear?>">Vender</a></li>
+                                <li><a href="<?=rutaInicio?><?=usuario?><?=videojuegos?>">Mis Videojuegos</a></li>
+                                <li><a href="<?=rutaInicio?><?=usuario?><?=compras?>">Mis Compras</a></li>
+                                <li><a href="<?=rutaInicio?><?=usuario?><?=ventas?>">Mis Ventas</a></li>
+                                <li><a href="">Cerrar sesion</a></li>
+                            </ul>
+                        </li>
+                    <?php else : ?>
+                        <li><a href="<?=rutaInicio?><?=usuario?><?=login?>">Login</a></li>
+                        <li><a href="<?=rutaInicio?><?=usuario?><?=registro?>">Registro</a></li>
+                    <?php endif; ?> 
                 </ul>
             </div>
         </header>

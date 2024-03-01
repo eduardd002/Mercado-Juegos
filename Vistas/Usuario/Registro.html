@@ -1,6 +1,6 @@
 <div id="loginYRegistro">
     <h1>Registrarse</h1>
-    <form action="">
+    <form action="<?=rutaInicio?><?=usuario?><?=guardarUsuario?>" method="post" enctype="multipart/form-data">
         <img src="Recursos/Logotipos/registro.png" class="registerImage" alt="Logo registro">
         <div id="bloqueTextoRegistro">
             <label for="nombre">Nombre</label>
@@ -12,17 +12,17 @@
         </div>
         <div id="bloqueTextoRegistro">
             <label for="fechaNacimiento">Fecha de nacimiento</label>
-            <input type="date" name="fechaNacimiento">
+            <input type="date" name="fechaNacimiento" required>
         </div>
         <div id="bloqueTextoRegistro">
             <label for="telefono">Numero telefonico</label>
-            <input type="number" name="telefono">
+            <input type="number" name="telefono" required>
         </div>
         <div id="bloqueTextoRegistro">
             <label for="email">Email</label>
             <input type="email" name="email" required>
         </div>
-        <input type="file">
+        <input type="file" name="foto" required>
         <label class="subirFotoPerfil">*Subir foto*</label>
         <div id="bloqueTextoRegistro">
             <label for="password">Contraseña</label>

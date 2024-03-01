@@ -3,9 +3,16 @@
     //OB_START(); para
     ob_start();
 
-    //Incluir los archivos de las vistas
+    //Tener la sesion iniciado en todo el proyecto
+    session_start();
+
+    //Incluir los archivo de configuracion de rutas
     require_once 'Configuracion/Rutas.php';
+    //Incluir archivo de configuracion de base de datos
+    require_once 'Configuracion/BaseDeDatos.php';
+    //Incluir los archivo de autocarga de controladores
     require_once 'autoload.php';
+    //Incluir los archivos de las vistas
     require_once 'Vistas/Layout/Cabecera.html';
     require_once 'Vistas/Layout/Categorias.html';
     

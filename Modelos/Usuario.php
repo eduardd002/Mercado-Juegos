@@ -14,9 +14,10 @@
         private $municipio;
         private $foto;
         private $fecharegistro;
+        private $db;
 
         public function __construct(){
-            BaseDeDatos::connect();
+            $this -> db = BaseDeDatos::connect();
         }
 
         public function getId(){
@@ -125,6 +126,24 @@
         public function setFecharegistro($fecharegistro){
             $this->fecharegistro = $fecharegistro;
             return $this;
+        }
+
+        public function guardar(){
+
+            //Construir la consulta
+            $consulta = "INSERT INTO usuarios VALUES(NULL, '{$this -> getRol()}', 
+                '{$this -> getNombre()}', '{$this -> getApellido()}', 
+                '{$this -> getFechaNacimiento()}', {$this -> getNumeroTelefono()}, 
+                '{$this -> getCorreo()}', '{$this -> getClave()}', 
+                '{$this -> getDepartamento()}', '{$this -> getMunicipio()}', 
+                '{$this -> getFoto()}', '{$this -> getFechaRegistro()}')";
+            //Ejecutar la consulta
+            $registro = $this -> db -> query($consulta);
+            $resultado = false;
+            if($registro){
+                $resultado = true;
+            }
+            return $resultado;
         }
     }
 

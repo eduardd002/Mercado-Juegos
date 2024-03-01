@@ -5,6 +5,7 @@
     define("usuario", "/?controller=UsuarioController");
     define("login", "&action=login");
     define("registro", "&action=registro");
+    define("guardarUsuario", "&action=guardar");
     define("perfil", "&action=perfil");
     define("miPerfil", "&action=miPerfil");
     define("compras", "&action=compras");
