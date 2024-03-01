@@ -1,6 +1,6 @@
 <?php
 
-    //Cargar el autoload y tener acceso a los objetos
+    //Incluir el autoload y tener acceso a los objetos
     require 'vendor/autoload.php';
 
     //Utilzar la libreria para importar los archivos en formato PDF

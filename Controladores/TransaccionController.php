@@ -3,10 +3,13 @@
     /*OBS_START(); para */
     ob_start();
 
-    //Importar archivo de ayuda para generar el PDF
+    //Incluir archivo de ayuda para generar el PDF
     require_once 'Ayudas/GenerarPdf.php';
 
-    class CompraController{
+    //Incluir el objeto de transaccion
+    require_once 'Modelos/Transaccion.php';
+
+    class TransaccionController{
 
         /*
         Funcion para ver el formulario de direccion al comprar un videojuego
@@ -14,7 +17,7 @@
 
         public function direccion(){
 
-            //Cargar la vista
+            //Incluir la vista
             require_once "Vistas/Compra/Envio.html";
 
         }
@@ -25,7 +28,7 @@
 
         public function pago(){
 
-            //Cargar la vista
+            //Incluir la vista
             require_once "Vistas/Compra/Pago.html";
 
         }
@@ -36,7 +39,7 @@
 
         public function exito(){
 
-            //Cargar la vista
+            //Incluir la vista
             require_once "Vistas/Compra/Exito.html";
         }
 
@@ -44,17 +47,27 @@
         Funcion para ver el detalle de la compra realizada
         */
 
-        public function ver(){
+        public function verCompras(){
 
-            //Cargar la vista
+            //Incluir la vista
             require_once "Vistas/Compra/Factura.html";
+        }
+
+        /*
+        Funcion para ver el detalle de la venta realizada
+        */
+
+        public function verVentas(){
+
+            //Incluir la vista
+            require_once "Vistas/Venta/Detalle.html";
         }
 
         /*Funcion para generar reporte de factura en formato PDF*/
 
         public function generarPdf(){
 
-            //Traer la vista de la compra
+            //Incluir la vista de la compra
             require_once('Vistas/Compra/Factura.html');
 
             //Llamar la funcion de ayuda que genera el archivo PDF

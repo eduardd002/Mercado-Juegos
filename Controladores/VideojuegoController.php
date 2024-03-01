@@ -1,5 +1,8 @@
 <?php
 
+    //Incluir el objeto de videojuego
+    require_once 'Modelos/Videojuego.php';
+
     class VideojuegoController{
 
         /*
@@ -8,7 +11,7 @@
 
         public function inicio(){
             
-            //Cargar la vista
+            //Incluir la vista
             require_once 'Vistas/Layout/Catalogo.html';
 
         }
@@ -19,7 +22,7 @@
 
         public function detalle(){
 
-            //Cargar la vista
+            //Incluir la vista
             require_once 'Vistas/Videojuego/Detalle.html';
         }
 
@@ -29,7 +32,7 @@
 
         public function crear(){
 
-            //Cargar la vista
+            //Incluir la vista
             require_once 'Vistas/Videojuego/Crear.html';
         }
 
@@ -39,7 +42,7 @@
 
         public function buscar(){
 
-            //Cargar la vista
+            //Incluir la vista
             require_once 'Vistas/Videojuego/Buscar.html';
         }
 
@@ -49,7 +52,7 @@
 
         public function actualizar(){
 
-            //Cargar la vista
+            //Incluir la vista
             require_once 'Vistas/Videojuego/Actualizar.html';
         }
 
@@ -67,7 +70,7 @@
 
         public function todos(){
 
-            //Cargar la vista
+            //Incluir la vista
             require_once 'Vistas/Videojuego/Todos.html';
         }
 

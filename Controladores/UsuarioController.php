@@ -1,5 +1,8 @@
 <?php
 
+    //Incluir el objeto de usuario
+    require_once 'Modelos/Usuario.php';
+
     class UsuarioController{
 
         /*
@@ -8,7 +11,7 @@
 
         public function login(){
 
-            //Cargar la vista
+            //Incluir la vista
             require_once "Vistas/Usuario/Login.html";
         }
 
@@ -18,7 +21,7 @@
 
         public function registro(){
 
-            //Cargar la vista
+            //Incluir la vista
             require_once "Vistas/Usuario/Registro.html";
         }
 
@@ -28,7 +31,7 @@
 
         public function perfil(){
 
-            //Cargar la vista
+            //Incluir la vista
             require_once "Vistas/Usuario/Perfil.html";
         }
 
@@ -38,7 +41,7 @@
 
         public function miPerfil(){
 
-            //Cargar la vista
+            //Incluir la vista
             require_once "Vistas/Usuario/miPerfil.html";
         }
 
@@ -48,7 +51,7 @@
 
         public function compras(){
 
-            //Cargar la vista
+            //Incluir la vista
             require_once "Vistas/Usuario/Compras.html";
         }
 
@@ -58,7 +61,7 @@
 
         public function ventas(){
 
-            //Cargar la vista
+            //Incluir la vista
             require_once "Vistas/Usuario/Ventas.html";
         }
 
@@ -68,7 +71,7 @@
 
         public function videojuegos(){
 
-            //Cargar la vista
+            //Incluir la vista
             require_once "Vistas/Usuario/Videojuegos.html";
         }
 

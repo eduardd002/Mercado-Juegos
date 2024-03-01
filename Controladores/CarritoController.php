@@ -8,7 +8,7 @@
 
         public function ver(){
 
-            //Cargar la vista
+            //Incluir la vista
             require_once "Vistas/Carrito/Carrito.html";
         }
 

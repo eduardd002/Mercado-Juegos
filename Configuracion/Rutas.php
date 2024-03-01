@@ -23,14 +23,12 @@
     define("carrito", "/?controller=CarritoController");
     define("ver", "&action=ver");
 
-    define("compra", "/?controller=CompraController");
-    define("verCompra", "&action=ver");
+    define("transaccion", "/?controller=TransaccionController");
+    define("verCompras", "&action=verCompras");
+    define("verVentas", "&action=verVentas");
     define("direccion", "&action=direccion");
     define("pago", "&action=pago");
     define("realizar", "&action=exito");
     define("generarPdf", "&action=generarPdf");
-
-    define("venta", "/?controller=VentaController");
-    define("verVenta", "&action=ver");
 
 ?>

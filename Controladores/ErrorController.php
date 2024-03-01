@@ -8,7 +8,7 @@
 
         public function index(){
 
-            //Cargar la vista
+            //Incluir la vista
             require_once "Vistas/Error/Error.html";
         }
 
