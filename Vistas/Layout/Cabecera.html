@@ -22,11 +22,11 @@
             </div>
             <div id="menuPrincipal">
                 <ul>
-                    <?php if(isset($_SESSION['LoginUsuario']) && $_SESSION['LoginUsuario'] == 'Exito') : ?>
+                    <?php if(isset($_SESSION['login_exitoso'])) : ?>
                         <li><a href="<?=rutaInicio?><?=carrito?><?=ver?>">
                             <img src="Recursos/Logotipos/Carrito.png" alt="Logo carrito">
                         </a></li>
-                        <li><img src="Recursos/Logotipos/usuario.png" alt="Logo usuario">User</a>
+                        <li><img src="Recursos/ImagenesUsuarios/<?=$_SESSION['login_exitoso'] -> foto?>" alt="Logo usuario">Hola!, <?=$_SESSION['login_exitoso'] -> nombre?></a>
                             <ul>
                                 <li><a href="<?=rutaInicio?><?=usuario?><?=miPerfil?>">Mi perfil</a></li>
                                 <li><a href="<?=rutaInicio?><?=videojuego?><?=crear?>">Vender</a></li>

@@ -8,8 +8,6 @@
 
     //session_destroy();
 
-    //echo $_SESSION["RegistroUsuario"];
-
     //Incluir los archivo de configuracion de rutas
     require_once 'Configuracion/Rutas.php';
     //Incluir archivo de configuracion de base de datos
@@ -41,15 +39,12 @@
     if(class_exists($nombre)){
         
         //Si existe la clase se crea el objeto
-        
         $controlador = new $nombre();
 
         //Compruebo si me llega la acción y si el metodo existe dentro del controlador
-        
         if(isset($_GET['action']) && method_exists($controlador, $_GET['action'])){
 
             //Si existe invocar o llamar a ese metodo
-           
             $action = $_GET['action'];
             $controlador -> $action();
         }elseif(!isset($_GET['controller']) && !isset($_GET['action'])){

@@ -108,7 +108,9 @@ Estilo del titulo principal de la tienda
     /*Margen superior*/
     margin-top: 22px;
     /*Margen izquierdo*/
-    margin-left: 40px;
+    margin-left: 50px;
+    /*Margen derecho*/
+    margin-right: 40px;
     /*Sombra del texto*/
     text-shadow: 0px 2px 1px #222222;
     /*Transicion*/
@@ -135,6 +137,8 @@ Estilo del campo del buscador
 #buscador input{
     /*Anchor*/
    width: 150px;
+   /*Margen derecho*/
+   margin-right: 40px;
 }
 
 /*
@@ -191,9 +195,9 @@ Estilos de los enlaces del menu principal
     /*Sin decoracion de texto*/
     text-decoration: none;
     /*Margen interior izquierdo*/
-    padding-left: 11px;
+    padding-left: 25px;
     /*Margen interior derecho*/
-    padding-right: 11px;
+    padding-right: 25px;
 }
 
 /*

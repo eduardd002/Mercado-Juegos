@@ -1,6 +1,12 @@
 <div id="loginYRegistro">
+    <?php if(isset($_SESSION['error_login']) && $_SESSION['error_login'] == 'Este usuario no se encuentra registrado') : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['error_login']; ?>
+        </div>
+    <?php endif; ?> 
+    <?php unset($_SESSION['error_login']); ?>
     <h1>Login</h1>
-    <form action="">
+    <form action="<?=rutaInicio?><?=usuario?><?=loginUsuario?>" method="post">
         <img src="Recursos/Logotipos/login.png" class="loginImage" alt="Logo login">
         <div id="bloqueTextoLogin">
             <label for="email">Email</label>

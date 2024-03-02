@@ -40,11 +40,12 @@
                 $fechaNacimiento = isset($_POST['fechaNacimiento']) ? $_POST['fechaNacimiento'] : false;
                 $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : false;
                 $email = isset($_POST['email']) ? $_POST['email'] : false;
+                $clave = isset($_POST['password']) ? $_POST['password'] : false;
                 $departamento = isset($_POST['departamento']) ? $_POST['departamento'] : false;
                 $municipio = isset($_POST['municipio']) ? $_POST['municipio'] : false;
 
                 //Comprobar si todos los datos exsiten
-                if($nombre && $apellidos && $fechaNacimiento && $telefono && $email && $departamento && $municipio){
+                if($nombre && $apellidos && $fechaNacimiento && $telefono && $clave && $email && $departamento && $municipio){
 
                     //Instanciar el objeto
                     $usuario = new Usuario();
@@ -56,6 +57,7 @@
                     $usuario -> setFechanacimiento($fechaNacimiento);
                     $usuario -> setNumerotelefono($telefono);
                     $usuario -> setCorreo($email);
+                    $usuario -> setClave($clave);
                     $usuario -> setDepartamento($departamento);
                     $usuario -> setMunicipio($municipio);
                     $usuario -> setFecharegistro(date('d-m-y'));
@@ -89,8 +91,9 @@
 
                         //Comprobar se ejecutó con exito la consulta
                         if($guardado){
+                            $ingreso = $usuario->login();
                             //Crear sesion de inicio de sesion
-                            $_SESSION['LoginUsuario'] = 'Exito';
+                            $_SESSION['login_exitoso'] = $ingreso;
                             //Redirigir al menu principal
                             header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
                         }else{
@@ -115,14 +118,56 @@
         }
 
         /*
+        Funcion para realizar el inicio de sesion
+        */
+
+        public function inicioDeSesion(){
+
+            //Comprobar si los datos están llegando
+            if(isset($_POST)){
+
+                //Comprobar si cada dato existe
+                $email = isset($_POST['email']) ? $_POST['email'] : false;
+                $clave = isset($_POST['password']) ? $_POST['password'] : false;
+
+                //Comprobar si todos los datos exsiten
+                if($email && $clave){
+
+                    //Instanciar el objeto
+                    $usuario = new Usuario();
+
+                    //Crear el objeto
+                    $usuario -> setCorreo($email);
+                    $usuario -> setClave($clave);
+
+                    //Obtener objeto de la base de datos
+                    $ingreso = $usuario->login();
+
+                    //Comprobar se ejecutó con exito la consulta
+                    if($ingreso && is_object($ingreso)){
+                        //Crear la sesion con el objeto completo del usuario
+                        $_SESSION['login_exitoso'] = $ingreso;
+                        //Redirigir al inicio
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                    }else{
+                        //Crear la sesion de error al realizar el login
+                        $_SESSION['error_login'] = 'Este usuario no se encuentra registrado';
+                        //Redirigir al login
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=login");
+                    }
+                }
+            }
+        }
+
+        /*
         Funcion para cerrar la sesión
         */
 
         public function cerrarSesion(){
             //Comprobar si existe la sesion y si esta sesion contiene la informacion adecuada
-            if(isset($_SESSION['LoginUsuario']) && $_SESSION['LoginUsuario'] == 'Exito'){
-                //Eliminar la sesion
-                unset($_SESSION['LoginUsuario']);
+            if(isset($_SESSION['login_exitoso'])){
+                //Eliminar la sesión
+                unset($_SESSION['login_exitoso']);
                 //Redirigir al menu principal
                 header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
             }

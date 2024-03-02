@@ -7,6 +7,7 @@
     define("registro", "&action=registro");
     define("logout", "&action=cerrarSesion");
     define("guardarUsuario", "&action=guardar");
+    define("loginUsuario", "&action=inicioDeSesion");
     define("perfil", "&action=perfil");
     define("miPerfil", "&action=miPerfil");
     define("compras", "&action=compras");

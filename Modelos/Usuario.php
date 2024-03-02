@@ -153,6 +153,28 @@
             //Retornar el resultado
             return $resultado;
         }
+
+        /*
+        Funcion para realizar el inicio de sesion
+        */
+
+        public function login(){
+
+            //Construir la consulta
+            $consulta = "SELECT * FROM usuarios WHERE correo = '{$this -> getCorreo()}' AND clave = 
+            '{$this -> getClave()}'";
+            //Ejecutar la consulta
+            $login = $this -> db -> query($consulta);
+            //Obtener el resultado del objeto
+            $usuario = $login -> fetch_object();
+            //Comprobar si el objeto llegó
+            if($login){
+                //Establecer una variable bandera con el valor del objeto
+                $resultado = $usuario;
+            }
+            //Retornar el resultado
+            return $resultado;
+        }
     }
 
 ?>
