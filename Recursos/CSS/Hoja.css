@@ -1634,8 +1634,10 @@ Estilo de panel del administrador
 */
 
 #administradorpanel{
-    /*Margen superior*/
-    margin-top: 75px;
+    /*limpiar flotados*/
+    clear: both;
+    /*Dar comportamiento de bloque*/
+    display: block;
     /*Margen inferior*/
     margin-bottom: 75px;
     /*Margen*/
@@ -1647,7 +1649,6 @@ Estilo de panel de los enlaces del panel de administrador
 */
 
 #administradorpanel a{
-    float: left;
     /*Espacio entre cada letra*/
     letter-spacing: 2px;
     /*Tamaño de letra*/
@@ -1675,7 +1676,7 @@ Estilo de la imagen del panel de administrador
 
 #administradorpanel img{
     /*Margen superior*/
-    margin-top: 50px;
+    margin-top: 80px;
     /*Margen derecho*/
     margin-right: 150px;
     /*Anchor*/
@@ -1691,8 +1692,10 @@ Estilo de gestiones
 */
 
 #gestiones{
-    /*Margen*/
-    margin: 50px;
+    /*limpiar flotados*/
+    clear: both;
+    /*Dar comportamiento de bloque*/
+    display: block;
 }
 
 /*

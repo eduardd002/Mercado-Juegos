@@ -41,6 +41,7 @@
     define("categoria", "&action=crearCategoria");
     define("guardarCategoria", "&action=guardarCategoria");
     define("gestionarCategoria", "&action=gestionarCategoria");
+    define("gestionarUsuario", "&action=gestionarUsuario");
     define("consola", "&action=crearConsola");
     define("guardarConsola", "&action=guardarConsola");
     define("gestionarConsola", "&action=gestionarConsola");

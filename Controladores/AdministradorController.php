@@ -18,7 +18,17 @@
     class AdministradorController{
 
         /*
-        Funcion para crear una categoria
+        Funcion para gestionar los usuarios
+        */
+
+        public function gestionarUsuario(){
+
+            //Incluir la vista
+            require_once "Vistas/Administrador/GestionUsuarios.html";
+        }
+
+        /*
+        Funcion para gestionar las categorias
         */
 
         public function gestionarCategoria(){
@@ -28,7 +38,7 @@
         }
 
         /*
-        Funcion para crear una tarjeta
+        Funcion para gestionar las tarjetas
         */
 
         public function gestionarTarjeta(){
@@ -38,7 +48,7 @@
         }
 
         /*
-        Funcion para crear un uso
+        Funcion para gestionar los usos
         */
 
         public function gestionarUso(){
@@ -48,7 +58,7 @@
         }
 
         /*
-        Funcion para crear una consola
+        Funcion para gestionar las consolas
         */
 
         public function gestionarConsola(){
