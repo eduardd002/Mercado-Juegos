@@ -6,6 +6,16 @@
     class UsuarioController{
 
         /*
+        Funcion para entrar a las funciones de administrador
+        */
+
+        public function administar(){
+
+            //Incluir la vista
+            require_once "Vistas/Usuario/Administrador.html";
+        }
+
+        /*
         Funcion para realizar el inicio de sesion del usuario
         */
 
@@ -145,10 +155,17 @@
 
                     //Comprobar se ejecutó con exito la consulta
                     if($ingreso && is_object($ingreso)){
-                        //Crear la sesion con el objeto completo del usuario
-                        $_SESSION['login_exitoso'] = $ingreso;
-                        //Redirigir al inicio
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                        if($ingreso -> rol == 'Administrador'){
+                            //Crear la sesion con el objeto completo del usuario
+                            $_SESSION['administar'] = true;
+                            //Redirigir al inicio
+                            header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administar");
+                        }else{
+                            //Crear la sesion con el objeto completo del usuario
+                            $_SESSION['login_exitoso'] = $ingreso;
+                            //Redirigir al inicio
+                            header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                        }
                     }else{
                         //Crear la sesion de error al realizar el login
                         $_SESSION['error_login'] = 'Este usuario no se encuentra registrado';
@@ -168,9 +185,15 @@
             if(isset($_SESSION['login_exitoso'])){
                 //Eliminar la sesión
                 unset($_SESSION['login_exitoso']);
-                //Redirigir al menu principal
-                header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
             }
+
+            if(isset($_SESSION['administar'])){
+                //Eliminar la sesión
+                unset($_SESSION['administar']);
+            }
+            
+            //Redirigir al menu principal
+            header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
         }
 
         /*

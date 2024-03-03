@@ -5,16 +5,16 @@
         private $id;
         private $idConsola;
         private $idUso;
-        private $idClasificacion;
         private $nombre;
         private $precio;
         private $descripcion;
         private $foto;
         private $fechaCreacion;
         private $stock;
+        private $db;
 
         public function __construct(){
-            BaseDeDatos::connect();
+            $this -> db = BaseDeDatos::connect();
         }
 
         public function getId(){
@@ -41,15 +41,6 @@
 
         public function setIdUso($idUso){
             $this->idUso = $idUso;
-            return $this;
-        }
-
-        public function getIdClasificacion(){
-            return $this->idClasificacion;
-        }
-
-        public function setIdClasificacion($idClasificacion){
-            $this->idClasificacion = $idClasificacion;
             return $this;
         }
 

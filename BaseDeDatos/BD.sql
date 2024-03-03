@@ -28,7 +28,6 @@ CREATE TABLE videojuegos (
     id              INTEGER auto_increment NOT NULL,
     idconsola       INTEGER NOT NULL,
     iduso           INTEGER NOT NULL,
-    idclasificacion INTEGER NOT NULL,
     nombre          VARCHAR(200) NOT NULL,
     precio          INTEGER NOT NULL,
     descripcion     TEXT NOT NULL,

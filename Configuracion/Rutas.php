@@ -34,4 +34,21 @@
     define("realizar", "&action=exito");
     define("generarPdf", "&action=generarPdf");
 
+    define("administrador", "/?controller=AdministradorController");
+    define("uso", "&action=crearUso");
+    define("guardarUso", "&action=guardarUso");
+    define("gestionarUso", "&action=gestionarUso");
+    define("categoria", "&action=crearCategoria");
+    define("guardarCategoria", "&action=guardarCategoria");
+    define("gestionarCategoria", "&action=gestionarCategoria");
+    define("consola", "&action=crearConsola");
+    define("guardarConsola", "&action=guardarConsola");
+    define("gestionarConsola", "&action=gestionarConsola");
+    define("estado", "&action=crearEstado");
+    define("guardarEstado", "&action=guardarEstado");
+    define("gestionarEstado", "&action=gestionarEstado");
+    define("tarjeta", "&action=crearTarjeta");
+    define("guardarTarjeta", "&action=guardarTarjeta");
+    define("gestionarTarjeta", "&action=gestionarTarjeta");
+
 ?>

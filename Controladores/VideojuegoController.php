@@ -74,6 +74,22 @@
             require_once 'Vistas/Videojuego/Todos.html';
         }
 
+        /*
+        Funcion para guardar el videojuego en la base de datos
+        */
+
+        public function guardar(){
+
+            //Comprobar si los datos están llegando
+            if(isset($_POST)){
+
+                foreach($_POST['categorias'] as $lista){
+                    echo $lista;
+                }
+
+            }
+        }
+
     }
 
 ?>

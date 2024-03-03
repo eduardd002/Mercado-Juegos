@@ -1622,3 +1622,126 @@ Estilo de las alertas de sugerencia
     /*Color de fondo*/
     background: orange;
 }
+
+/*
+Estilo de panel del administrador
+*/
+
+#administradorpanel{
+    /*Margen superior*/
+    margin-top: 75px;
+    /*Margen inferior*/
+    margin-bottom: 75px;
+    /*Margen*/
+    margin-left: 150px;
+}
+
+/*
+Estilo de panel de los enlaces del panel de administrador
+*/
+
+#administradorpanel a{
+    /*Espacio entre cada letra*/
+    letter-spacing: 2px;
+    /*Tamaño de letra*/
+    font-size: 20px;
+    /*Margen superior*/
+    margin-top: 50px;
+    /*Margen inferior*/
+    margin-bottom: 50px;
+    /*Dar comportamiento de bloque*/
+    display: block;
+}
+
+/*
+Estilo de las listas de panel de administrador
+*/
+
+#administradorpanel li{
+    /*Sin estilo de lista*/
+    list-style: none;
+}
+
+/*
+Estilo de la imagen del panel de administrador
+*/
+
+#administradorpanel img{
+    /*Margen superior*/
+    margin-top: 50px;
+    /*Margen derecho*/
+    margin-right: 150px;
+    /*Anchor*/
+    width: 225px;
+    /*Altura*/
+    height: 225px;
+    /*Flotar hacia la derecha*/
+    float: right;
+}
+
+/*
+Estilo de gestiones
+*/
+
+#gestiones{
+    /*Margen*/
+    margin: 50px;
+}
+
+/*
+Estilo del titulo de gestiones
+*/
+
+#gestiones h1{
+    /*Margen inferior*/
+    margin-bottom: 50px;
+    /*Texto alineado al centro*/
+    text-align: center;
+}
+
+/*
+Estilo de columnas de gestiones
+*/
+
+#gestiones td{
+    /*Anchor*/
+    width: 125px !important;
+    /*Altura*/
+    height: 0px !important;
+}
+
+/*
+Estilo de enlaces de gestiones
+*/
+
+#gestiones a{
+    /*Flotar hacia la derecha*/
+    float: right;
+    /*Margen derecho*/
+    margin-right: 50px;
+}
+
+/*
+Estilo del boton para crear una gestion
+*/
+
+.button-crearGestion{
+    /*Texto centrado*/
+    text-align: center;
+   /*Margen derecho*/
+    margin-right: 450px !important;
+    /*Anchor*/
+    width: 80px;
+    /*Margen superior*/
+    margin-top: 30px !important;
+    /*Sin decoracion de texto*/
+    text-decoration: none;
+    /*Margen inferior*/
+    margin-bottom: 30px !important;
+    /*Color del letra*/
+    color: white !important;
+    /*Color de fondo*/
+    background: blue;
+    /*Borde*/
+    border: 1px solid rgb(101, 85, 4);
+}
