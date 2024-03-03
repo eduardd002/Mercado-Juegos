@@ -15,7 +15,7 @@
             <div id="titulo">
                 <img src="Recursos/Logotipos/Logo.png" alt="Logo tienda">
                 <h1>MERCADO JUEGOS</h1>
-                <?php if(!isset($_SESSION['administar'])) : ?>
+                <?php if(!isset($_SESSION['administrar'])) : ?>
                     <div id="buscador">
                         <input type="text" placeholder="Busca un videojuego">
                         <a href="<?=rutaInicio?><?=videojuego?><?=buscar?>"><img src="Recursos/Logotipos/lupa.png" alt="Logo tienda"></a>
@@ -24,10 +24,10 @@
             </div>
             <div id="menuPrincipal">
                 <ul>
-                    <?php if(isset($_SESSION['login_exitoso']) || isset($_SESSION['administar'])) : ?>
-                        <?php if(isset($_SESSION['administar']) && !(isset($_SESSION['login_exitoso']))) : ?>
+                    <?php if(isset($_SESSION['login_exitoso']) || isset($_SESSION['administrar'])) : ?>
+                        <?php if(isset($_SESSION['administrar']) && !(isset($_SESSION['login_exitoso']))) : ?>
                             <li><img src="Recursos/ImagenesUsuarios/profe.png" alt="Logo usuario">Hola!, Alexandra</a>
-                        <?php elseif(isset($_SESSION['login_exitoso']) && !(isset($_SESSION['administar']))) : ?>
+                        <?php elseif(isset($_SESSION['login_exitoso']) && !(isset($_SESSION['administrar']))) : ?>
                             <li>
                                 <a href="<?=rutaInicio?><?=carrito?><?=ver?>">
                                     <img src="Recursos/Logotipos/Carrito.png" alt="Logo carrito">

@@ -155,7 +155,7 @@
                         //Crear sesion de categoria creada
                         $_SESSION['categoriacreada'] = 'La categoria ha sido creada con exito';
                         //Redirigir al menu principal
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administar");
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administrar");
                     }else{
                         //Crear sesion que indique que ha habido un error al guardar la categoria
                         $_SESSION['categorianocreada'] = 'La categoria no ha sido creada con exito';
@@ -194,7 +194,7 @@
                         //Crear sesion de uso creado
                         $_SESSION['usocreado'] = 'El uso ha sido creado con exito';
                         //Redirigir al menu principal
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administar");
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administrar");
                     }else{
                         //Crear sesion que indique que ha habido un error al guardar el uso
                         $_SESSION['usonocreado'] = 'El uso no ha sido creado con exito';
@@ -233,7 +233,7 @@
                         //Crear sesion de consola creada
                         $_SESSION['consolacreada'] = 'La consola ha sido creada con exito';
                         //Redirigir al menu principal
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administar");
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administrar");
                     }else{
                         //Crear sesion que indique que ha habido un error al guardar la consola
                         $_SESSION['consolanocreada'] = 'La consola no ha sido creada con exito';
@@ -272,7 +272,7 @@
                         //Crear sesion de estado creado
                         $_SESSION['estadocreado'] = 'El estado ha sido creado con exito';
                         //Redirigir al menu principal
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administar");
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administrar");
                     }else{
                         //Crear sesion que indique que ha habido un error al guardar el estado
                         $_SESSION['categorianocreada'] = 'El estado no ha sido creado con exito';
@@ -311,7 +311,7 @@
                         //Crear sesion de tarjeta creada
                         $_SESSION['tarjetacreada'] = 'La tarjeta ha sido creada con exito';
                         //Redirigir al menu principal
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administar");
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administrar");
                     }else{
                         //Crear sesion que indique que ha habido un error al guardar la tarjeta
                         $_SESSION['tarjetanocreada'] = 'La tarjeta no ha sido creada con exito';

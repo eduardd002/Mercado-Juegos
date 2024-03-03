@@ -9,7 +9,7 @@
         Funcion para entrar a las funciones de administrador
         */
 
-        public function administar(){
+        public function administrar(){
 
             //Incluir la vista
             require_once "Vistas/Usuario/Administrador.html";
@@ -157,9 +157,9 @@
                     if($ingreso && is_object($ingreso)){
                         if($ingreso -> rol == 'Administrador'){
                             //Crear la sesion con el objeto completo del usuario
-                            $_SESSION['administar'] = true;
+                            $_SESSION['administrar'] = true;
                             //Redirigir al inicio
-                            header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administar");
+                            header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administrar");
                         }else{
                             //Crear la sesion con el objeto completo del usuario
                             $_SESSION['login_exitoso'] = $ingreso;
@@ -187,9 +187,9 @@
                 unset($_SESSION['login_exitoso']);
             }
 
-            if(isset($_SESSION['administar'])){
+            if(isset($_SESSION['administrar'])){
                 //Eliminar la sesión
-                unset($_SESSION['administar']);
+                unset($_SESSION['administrar']);
             }
             
             //Redirigir al menu principal
