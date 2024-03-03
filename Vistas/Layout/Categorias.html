@@ -1,48 +1,51 @@
-<!-- SECCION MENU DE CATEGORIAS -->
+<?php if(isset($_SESSION['login_exitoso']) || !isset($_SESSION['login_exitoso']) && !isset($_SESSION['administar'])) : ?>
+    <!-- SECCION MENU DE CATEGORIAS -->
 
-<nav id="categorias">
-    <ul>
-        <li>
-            <a href="<?=rutaInicio?><?=videojuego?><?=inicio?>">Inicio</a>
-        </li>
-        <li>
-            <a href="">Accion</a>
-        </li>
-        <li>
-            <a href="">Arcade</a>
-        </li>
-        <li>
-            <a href="">Aventura</a>
-        </li>
-        <li>
-            <a href="">Carreras</a>
-        </li>
-        <li>
-            <a href="">Combate</a>
-        </li>
-        <li>
-            <a href="">Deportes</a>
-        </li>
-        <li>
-            <a href="">Disparos</a>
-        </li>
-        <li>
-            <a href="">Estrategia</a>
-        </li>
-        <li>
-            <a href="">Mesa</a>
-        </li>
-        <li>
-            <a href="">Musicales</a>
-        </li>
-        <li>
-            <a href="">Puzzle</a>
-        </li>
-        <li>
-            <a href="">Rol</a>
-        </li>
-        <li>
-            <a href="">Terror</a>
-        </li>
-    </ul>
-</nav>
+    <nav id="categorias">
+        <ul>
+            <li>
+                <a href="<?=rutaInicio?><?=videojuego?><?=inicio?>">Inicio</a>
+            </li>
+            <li>
+                <a href="">Accion</a>
+            </li>
+            <li>
+                <a href="">Arcade</a>
+            </li>
+            <li>
+                <a href="">Aventura</a>
+            </li>
+            <li>
+                <a href="">Carreras</a>
+            </li>
+            <li>
+                <a href="">Combate</a>
+            </li>
+            <li>
+                <a href="">Deportes</a>
+            </li>
+            <li>
+                <a href="">Disparos</a>
+            </li>
+            <li>
+                <a href="">Estrategia</a>
+            </li>
+            <li>
+                <a href="">Mesa</a>
+            </li>
+            <li>
+                <a href="">Musicales</a>
+            </li>
+            <li>
+                <a href="">Puzzle</a>
+            </li>
+            <li>
+                <a href="">Rol</a>
+            </li>
+            <li>
+                <a href="">Terror</a>
+            </li>
+        </ul>
+    </nav>
+<?php else : ?>
+<?php endif; ?>

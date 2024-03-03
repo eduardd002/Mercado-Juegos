@@ -179,10 +179,13 @@ Estilos de la foto de usuario en el menu principal
 */
 
 #menuPrincipal img{
+    border-radius: 50%;
     /*Margen derecho*/
     margin-right: 5px;
     /*Altura*/
     height: 20px;
+    /*Anchor*/
+    width: 20px;
 }
 
 /*
@@ -777,8 +780,11 @@ Estilos de la imagen del registro de usuario
 */
 
 #loginYRegistro img{
+    border-radius: 50%;
     /*Altura*/
     height: 250px;
+    /*Anchor*/
+    width: 250px;
     /*Flotar hacia la derecha*/
     float: right;
     /*Margen derecho*/
@@ -1641,12 +1647,13 @@ Estilo de panel de los enlaces del panel de administrador
 */
 
 #administradorpanel a{
+    float: left;
     /*Espacio entre cada letra*/
     letter-spacing: 2px;
     /*Tamaño de letra*/
     font-size: 20px;
     /*Margen superior*/
-    margin-top: 50px;
+    margin-top: 50px !important;
     /*Margen inferior*/
     margin-bottom: 50px;
     /*Dar comportamiento de bloque*/
