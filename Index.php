@@ -1,9 +1,27 @@
 <?php
 
-    //OB_START(); para
-    ob_start();
+    // Configura el tiempo de vida de la sesión en segundos
+    $tiempo_vida = 3600; // Por ejemplo, 1 hora
 
-    //Tener la sesion iniciado en todo el proyecto
+    // Configura el tiempo de vida de la cookie de sesión
+    session_set_cookie_params($tiempo_vida);
+
+    // Establece la duración máxima de la sesión
+    ini_set('session.gc_maxlifetime', $tiempo_vida);
+
+    // Define el dominio para la cookie de sesión
+    $dominio = $_SERVER['HTTP_HOST'];
+
+    // Establece la bandera 'secure' para la cookie de sesión si estás utilizando HTTPS
+    $secure = isset($_SERVER['HTTPS']);
+
+    // Establece la bandera 'httponly' para la cookie de sesión
+    $httpOnly = true;
+
+    // Configura la cookie de sesión con los parámetros anteriores
+    session_set_cookie_params($tiempo_vida, '/', $dominio, $secure, $httpOnly);
+
+    // Activa la sesión
     session_start();
 
     //session_destroy();
