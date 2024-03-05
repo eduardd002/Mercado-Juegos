@@ -70,7 +70,7 @@
                     $usuario -> setClave($clave);
                     $usuario -> setDepartamento($departamento);
                     $usuario -> setMunicipio($municipio);
-                    $usuario -> setFecharegistro(date('d-m-y'));
+                    $usuario -> setFecharegistro(date('y-m-d'));
 
                     //Guardar la imagen
 
@@ -104,6 +104,7 @@
                             $ingreso = $usuario->login();
                             //Crear sesion de inicio de sesion
                             $_SESSION['login_exitoso'] = $ingreso;
+                            $_SESSION['login_exitosoinfo'] = "Bienvenido";
                             //Redirigir al menu principal
                             header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
                         }else{
@@ -166,6 +167,8 @@
                             //Redirigir al inicio
                             header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
                         }
+                        //Crear la sesion con la informacion de login exitoso
+                        $_SESSION['login_exitosoinfo'] = "Bienvenido";
                     }else{
                         //Crear la sesion de error al realizar el login
                         $_SESSION['error_login'] = 'Este usuario no se encuentra registrado';
@@ -187,11 +190,14 @@
                 unset($_SESSION['login_exitoso']);
             }
 
+            //Comprobar si existe la sesion y si esta sesion contiene la informacion adecuada
             if(isset($_SESSION['administrar'])){
                 //Eliminar la sesión
                 unset($_SESSION['administrar']);
             }
-            
+            //Crear sesion de sesion creada con exito
+            $_SESSION['logincerrado'] = "Sesion cerrada con exito";
+
             //Redirigir al menu principal
             header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
         }

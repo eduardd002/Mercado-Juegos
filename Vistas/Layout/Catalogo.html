@@ -1,3 +1,16 @@
+<?php if(isset($_SESSION['login_exitosoinfo']) && $_SESSION['login_exitosoinfo'] == 'Bienvenido') : ?>
+    <div class="alerta alerta-acierto">
+        <?=$_SESSION['login_exitosoinfo']; ?>
+    </div>
+<?php endif; ?>
+<?php unset($_SESSION['login_exitosoinfo']); ?> 
+
+<?php if(isset($_SESSION['logincerrado']) && $_SESSION['logincerrado'] == 'Sesion cerrada con exito') : ?>
+    <div class="alerta alerta-acierto">
+        <?=$_SESSION['logincerrado']; ?>
+    </div>
+<?php endif; ?>
+<?php unset($_SESSION['logincerrado']); ?> 
 <div id="contenidoCentral">
     <h1>Algunos Videojuegos</h1>
 <hr>

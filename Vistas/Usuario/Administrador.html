@@ -1,3 +1,9 @@
+<?php if(isset($_SESSION['login_exitosoinfo']) && $_SESSION['login_exitosoinfo'] == 'Bienvenido') : ?>
+    <div class="alerta alerta-admin">
+        <?=$_SESSION['login_exitosoinfo']; ?>
+    </div>
+<?php endif; ?>
+<?php unset($_SESSION['login_exitosoinfo']); ?> 
 <div id="administradorpanel">
     <img src="Recursos/Logotipos/administrar.png" alt="Logo administrar">
     <ul>

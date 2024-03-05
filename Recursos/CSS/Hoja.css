@@ -1588,6 +1588,8 @@ Estilo de las alertas de las sesiones flash
 */
 
 .alerta{
+    /*Margen superior*/
+    margin-top: 20px;
     /*Margen interior*/
     padding: 5px;
     /*Tamaño de letra*/
@@ -1596,10 +1598,25 @@ Estilo de las alertas de las sesiones flash
     color: white;
     /*Sombra*/
     box-shadow: 0px 1px 3px #CCC;
-    /*Margen inferior*/
-    margin-bottom: 15px;
     /*Borde redondo*/
     border-radius: 2px;
+    /*Texto alineado al centro*/
+    text-align: center;
+}
+
+.alerta-admin{
+    /*Flotar hacia la izquierda*/
+    float: left;
+    /*Color de fondo*/
+    background: green;
+    /*Limpiar flotados*/
+    clear: both;
+    /*Comportamiento de bloque*/
+    display: block;
+    /*Anchor*/
+    width: 99.1%;
+    /*Margen inferior*/
+    margin-bottom: 50px;
 }
 
 /*
