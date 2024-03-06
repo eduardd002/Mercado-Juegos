@@ -49,6 +49,19 @@
             return $resultado;
         }
 
+        /*
+        Funcion para listar todas las consolas
+        */
+
+        public function listar(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM consolas";
+            //Ejecutar la consulta
+            $lista = $this -> db -> query($consulta);
+            //Retornar el resultado
+            return $lista;
+        }
+
     }
 
 ?>

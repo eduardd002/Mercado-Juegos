@@ -3,6 +3,15 @@
     //Incluir el objeto de videojuego
     require_once 'Modelos/Videojuego.php';
 
+    //Incluir el objeto de categoria
+    require_once 'Modelos/Categoria.php';
+
+    //Incluir el objeto de consola
+    require_once 'Modelos/Consola.php';
+
+    //Incluir el objeto de uso
+    require_once 'Modelos/Uso.php';
+
     class VideojuegoController{
 
         /*
@@ -31,6 +40,21 @@
         */
 
         public function crear(){
+
+            //Instanciar el objeto
+            $categoria = new Categoria();
+            //Listar todos los usuarios desde la base de datos
+            $listadoCategorias = $categoria -> listar();
+
+            //Instanciar el objeto
+            $uso = new Uso();
+            //Listar todos los usuarios desde la base de datos
+            $listadoUsos = $uso -> listar();
+
+            //Instanciar el objeto
+            $consola = new Consola();
+            //Listar todos los usuarios desde la base de datos
+            $listadoConsolas = $consola -> listar();
 
             //Incluir la vista
             require_once 'Vistas/Videojuego/Crear.html';

@@ -15,6 +15,9 @@
     //Incluir el objeto de tarjeta
     require_once 'Modelos/Tarjeta.php';
 
+    //Incluir el objeto de usuario
+    require_once 'Modelos/Usuario.php';
+
     class AdministradorController{
 
         /*
@@ -22,7 +25,10 @@
         */
 
         public function gestionarUsuario(){
-
+            //Instanciar el objeto
+            $usuario = new Usuario();
+            //Listar todos los usuarios desde la base de datos
+            $listadoUsuarios = $usuario -> listar();
             //Incluir la vista
             require_once "Vistas/Administrador/GestionUsuarios.html";
         }
@@ -322,5 +328,4 @@
             }
         }
     }
-
 ?>

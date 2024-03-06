@@ -8,31 +8,32 @@
         </div>
         <div id="bloqueTextoRegistro">
             <label for="categoria">Categoria/as</label>
-            <input type="checkbox" name="categorias[]" value="deportes">Deportes<br>
-            <input type="checkbox" name="categorias[]" value="accion">Accion<br>
-            <input type="checkbox" name="categorias[]" value="batallas" required>Batallas<br>
+            <?php while($categorias = $listadoCategorias -> fetch_object()) : ?>
+                <input type="checkbox" name="categorias[]" value="<?=$categorias -> nombre?>"><?=$categorias -> nombre?><br>
+            <?php endwhile; ?>
         </div>
         <div id="bloqueTextoRegistro">
             <label for="consola">Consola</label>
             <select name="consola" id="consola">
-                <option value="nintendoswitch">Nintendo Switch</option>
-                <option value="playstation3">Play Station 3</option>
-                <option value="playstation4">Play Station 4</option>
-                <option value="playstation5">Play Station 5</option>
-                <option value="xbox360">Xbox 360</option>
-                <option value="xboxone">Xbox One</option>
-                <option value="xboxones">Xbox One S</option>
-                <option value="xboxseriess">Xbox Series S</option>
-                <option value="xboxseriesx">Xbox Series X</option>
-                <option value="windows">Windows</option>
+                <?php while($consolas = $listadoConsolas -> fetch_object()) : ?>
+                    <option value="<?=$consolas -> nombre?>"><?=$consolas -> nombre?></option>
+                <?php endwhile; ?>
             </select>
         </div>
+        <div id="bloqueTextoRegistro">
+            <label for="uso">Uso</label>
+            <select name="uso" id="uso">
+                <?php while($usos = $listadoUsos -> fetch_object()) : ?>
+                    <option value="<?=$usos -> nombre?>"><?=$usos -> nombre?></option>
+                <?php endwhile; ?>
+            </select>
+        </div>
+        <input type="file">
+        <label class="subirFotoPerfil">*Subir foto*</label>
         <div id="bloqueTextoRegistro">
             <label for="precio">Precio</label>
             <input type="number" name="precio" required>
         </div>
-        <input type="file">
-        <label class="subirFotoPerfil">*Subir foto*</label>
         <div id="bloqueTextoRegistro">
             <label for="descripcion">Descripcion</label>
             <textarea name="descripcion" id="descripcion"></textarea>

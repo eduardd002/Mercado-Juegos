@@ -49,6 +49,19 @@
             return $resultado;
         }
 
+        /*
+        Funcion para listar todos los estados
+        */
+
+        public function listar(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM estados";
+            //Ejecutar la consulta
+            $lista = $this -> db -> query($consulta);
+            //Retornar el resultado
+            return $lista;
+        }
+
     }
 
 ?>

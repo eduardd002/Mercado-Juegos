@@ -49,6 +49,19 @@
             return $resultado;
         }
 
+        /*
+        Funcion para listar todas las tarjetas
+        */
+
+        public function listar(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM tarjetas";
+            //Ejecutar la consulta
+            $lista = $this -> db -> query($consulta);
+            //Retornar el resultado
+            return $lista;
+        }
+
     }
 
 ?>

@@ -9,6 +9,12 @@
     //Incluir el objeto de transaccion
     require_once 'Modelos/Transaccion.php';
 
+    //Incluir el objeto de tarjeta
+    require_once 'Modelos/Tarjeta.php';
+
+    //Incluir el objeto de estado
+    require_once 'Modelos/Estado.php';
+
     class TransaccionController{
 
         /*
@@ -28,6 +34,10 @@
 
         public function pago(){
 
+            //Instanciar el objeto
+            $tarjeta = new Tarjeta();
+            //Listar todos los usuarios desde la base de datos
+            $listadoTarjetas = $tarjeta -> listar();
             //Incluir la vista
             require_once "Vistas/Compra/Pago.html";
 
@@ -59,6 +69,10 @@
 
         public function verVentas(){
 
+            //Instanciar el objeto
+            $estado = new Estado();
+            //Listar todos los usuarios desde la base de datos
+            $listadoEstados = $estado -> listar();
             //Incluir la vista
             require_once "Vistas/Venta/Detalle.html";
         }

@@ -1422,7 +1422,7 @@ Estilo de los enlaces de total en mis compras y ventas
     /*Anchor*/
     width: 105px;
     /*Margen interior*/
-    padding: 2px;
+    padding: 5px;
 }
 
 /*
@@ -1769,6 +1769,108 @@ Estilo del boton para crear una gestion
     color: white !important;
     /*Color de fondo*/
     background: blue;
+    /*Borde*/
+    border: 1px solid rgb(101, 85, 4);
+}
+
+/*
+Estilo de perfil de la cuenta de usuario en gestion de usuarios
+*/
+
+.gestionUsuariosLista{
+    /*Flotar hacia la izquierda*/
+    float: left;
+    /*Anchor*/
+    width: 70%;
+    /*Limpiar flotados*/
+    clear: both;
+    /*Dar comportamiento de bloque*/
+    display: block;
+    /*Borde*/
+    border: 0.5px solid #333;
+    /*Margen izquierdo*/
+    margin-left: 175px;
+    /*Margen inferior*/
+    margin-bottom: 50px;
+}
+
+/*
+Estilo de la foto de perfil de la cuenta de usuario en gestion de usuarios
+*/
+
+.gestionUsuariosLista img{
+    /*Margen centrado*/
+    margin: 20px;
+    /*Flotar hacia la izquierda*/
+    float: left;
+    /*Borde redondo*/
+    border-radius: 50%;
+    /*Anchor*/
+    width: 150px;
+    /*Altura*/
+    height: 160px;    
+}
+
+/*
+Estilo del texto de la cuenta de usuario en gestion de usuarios
+*/
+
+.gestionUsuariosLista h3{
+    /*Texto alineado al centro*/
+    text-align: center;
+    /*Margen superior*/
+    margin-top: 20px;
+    /*Margen inferior*/
+    margin-bottom: 20px;
+}
+
+/*
+Estilo del texto de la cuenta de usuario en gestion de usuarios
+*/
+
+.gestionUsuariosLista h4{
+    /*Texto alineado al centro*/
+    text-align: center;
+    /*Margen superior*/
+    margin-top: 20px;
+    /*Margen inferior*/
+    margin-bottom: 20px;
+}
+
+/*
+Estilo del enlace de eliminar cuenta de usuario en gestion de usuarios
+*/
+
+.gestionUsuariosLista a{
+    /*Flotar hacia la izquierda*/
+    float: left !important;
+    /*Texto alineado al centro*/
+    text-align: center;
+    /*Margen superior*/
+    margin-top: 5px;
+    /*Margen inferior*/
+    margin-bottom: 20px;
+    /*Margen izquierdo*/
+    margin-left: 275px;
+}
+
+/*
+Estilo del boton para crear una gestion
+*/
+
+.button-gestionUsuario{
+    /*Margen izquierdo*/
+    margin-left: 220px !important;
+    /*Texto centrado*/
+    text-align: center;
+    /*Anchor*/
+    width: 160px;
+    /*Sin decoracion de texto*/
+    text-decoration: none;
+    /*Color del letra*/
+    color: white !important;
+    /*Color de fondo*/
+    background: red;
     /*Borde*/
     border: 1px solid rgb(101, 85, 4);
 }

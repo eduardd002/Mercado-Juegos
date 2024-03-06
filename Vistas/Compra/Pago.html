@@ -1,12 +1,13 @@
 <div id="loginYRegistro">
     <h1>Datos del pago</h1>
-    <form action="<?=rutaInicio?><?=compra?><?=realizar?>" method="post">
+    <form action="<?=rutaInicio?><?=transaccion?><?=realizar?>" method="post">
         <img src="Recursos/Logotipos/pago.png" class="pagoImage" alt="Logo pago">
         <div id="bloqueTextoRegistro">
             <label for="tipoTarjeta">Tipo De Tarjeta</label>
             <select name="tipoTarjeta" id="tipoTarjeta">
-                <option value="credito">Credito</option>
-                <option value="debito">Debito</option>
+                <?php while($tarjetas = $listadoTarjetas -> fetch_object()) : ?>
+                    <option value="<?=$tarjetas -> nombre?>"><?=$tarjetas -> nombre?></option>
+                <?php endwhile; ?>
             </select>
         </div>
         <div id="bloqueTextoRegistro">

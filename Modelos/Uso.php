@@ -49,6 +49,19 @@
             return $resultado;
         }
 
+        /*
+        Funcion para listar todos los usos
+        */
+
+        public function listar(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM usos";
+            //Ejecutar la consulta
+            $lista = $this -> db -> query($consulta);
+            //Retornar el resultado
+            return $lista;
+        }
+
     }
 
 ?>

@@ -49,6 +49,19 @@
             return $resultado;
         }
 
+        /*
+        Funcion para listar todas las categorias
+        */
+
+        public function listar(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM categorias";
+            //Ejecutar la consulta
+            $lista = $this -> db -> query($consulta);
+            //Retornar el resultado
+            return $lista;
+        }
+
     }
 
 ?>

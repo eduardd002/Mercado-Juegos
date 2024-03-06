@@ -175,6 +175,19 @@
             //Retornar el resultado
             return $resultado;
         }
+
+        /*
+        Funcion para listar todos los usuarios
+        */
+
+        public function listar(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM usuarios WHERE rol = 'Usuario'";
+            //Ejecutar la consulta
+            $lista = $this -> db -> query($consulta);
+            //Retornar el resultado
+            return $lista;
+        }
     }
 
 ?>

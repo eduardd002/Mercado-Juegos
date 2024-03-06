@@ -14,10 +14,11 @@
     <h5>Tipo de tarjeta: Credito</h5>
     <h5>Numero de tarjeta: 12345</h5>
     <h3>Detalles del estado</h3>
+    <label for="estado">Estado</label>
     <select name="estado" id="estado">
-        <option value="pendiente">Pendiente</option>
-        <option value="enviado">Enviado</option>
-        <option value="recibido">Recibido</option>
+        <?php while($estados = $listadoEstados -> fetch_object()) : ?>
+            <option value="<?=$estados -> nombre?>"><?=$estados -> nombre?></option>
+        <?php endwhile; ?>
     </select>
     <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-cambiarEstado">Cambiar Estado</a>
     <h3>Videojuegos</h3>
