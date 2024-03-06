@@ -184,17 +184,11 @@
         */
 
         public function cerrarSesion(){
-            //Comprobar si existe la sesion y si esta sesion contiene la informacion adecuada
-            if(isset($_SESSION['login_exitoso'])){
-                //Eliminar la sesión
-                unset($_SESSION['login_exitoso']);
-            }
 
-            //Comprobar si existe la sesion y si esta sesion contiene la informacion adecuada
-            if(isset($_SESSION['administrar'])){
-                //Eliminar la sesión
-                unset($_SESSION['administrar']);
-            }
+            //Lamar funciones para eliminar las sesiones
+            Ayudas::eliminarSesion('login_exitoso');
+            Ayudas::eliminarSesion('administrar');
+            
             //Crear sesion de sesion creada con exito
             $_SESSION['logincerrado'] = "Sesion cerrada con exito";
 

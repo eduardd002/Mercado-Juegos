@@ -3,14 +3,22 @@
         <?=$_SESSION['login_exitosoinfo']; ?>
     </div>
 <?php endif; ?>
-<?php unset($_SESSION['login_exitosoinfo']); ?> 
+<?php Ayudas::eliminarSesion('login_exitosoinfo'); ?>
 
 <?php if(isset($_SESSION['logincerrado']) && $_SESSION['logincerrado'] == 'Sesion cerrada con exito') : ?>
     <div class="alerta alerta-acierto">
         <?=$_SESSION['logincerrado']; ?>
     </div>
 <?php endif; ?>
-<?php unset($_SESSION['logincerrado']); ?> 
+<?php Ayudas::eliminarSesion('logincerrado'); ?>
+
+<?php if(isset($_SESSION['caducidad']) && $_SESSION['caducidad'] == 'La sesion ha expirado') : ?>
+    <div class="alerta alerta-sugerencia">
+        <?=$_SESSION['caducidad']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('caducidad'); ?>
+
 <div id="contenidoCentral">
     <h1>Algunos Videojuegos</h1>
 <hr>

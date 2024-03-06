@@ -4,7 +4,7 @@
             <?=$_SESSION['error_login']; ?>
         </div>
     <?php endif; ?> 
-    <?php unset($_SESSION['error_login']); ?>
+    <?php Ayudas::eliminarSesion('error_login'); ?>
     <h1>Login</h1>
     <form action="<?=rutaInicio?><?=usuario?><?=loginUsuario?>" method="post">
         <img src="Recursos/Logotipos/login.png" class="loginImage" alt="Logo login">

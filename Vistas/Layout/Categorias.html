@@ -6,45 +6,12 @@
             <li>
                 <a href="<?=rutaInicio?><?=videojuego?><?=inicio?>">Inicio</a>
             </li>
-            <li>
-                <a href="">Accion</a>
-            </li>
-            <li>
-                <a href="">Arcade</a>
-            </li>
-            <li>
-                <a href="">Aventura</a>
-            </li>
-            <li>
-                <a href="">Carreras</a>
-            </li>
-            <li>
-                <a href="">Combate</a>
-            </li>
-            <li>
-                <a href="">Deportes</a>
-            </li>
-            <li>
-                <a href="">Disparos</a>
-            </li>
-            <li>
-                <a href="">Estrategia</a>
-            </li>
-            <li>
-                <a href="">Mesa</a>
-            </li>
-            <li>
-                <a href="">Musicales</a>
-            </li>
-            <li>
-                <a href="">Puzzle</a>
-            </li>
-            <li>
-                <a href="">Rol</a>
-            </li>
-            <li>
-                <a href="">Terror</a>
-            </li>
+            <?php $listadoCategorias = Ayudas::mostrarCategorias(); ?>
+            <?php while($categorias = $listadoCategorias -> fetch_object()) : ?>
+                <li>
+                    <a href=""><?=$categorias -> nombre?></a>
+                </li>
+            <?php endwhile; ?>
         </ul>
     </nav>
 <?php else : ?>

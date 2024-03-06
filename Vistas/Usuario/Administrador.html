@@ -3,7 +3,7 @@
         <?=$_SESSION['login_exitosoinfo']; ?>
     </div>
 <?php endif; ?>
-<?php unset($_SESSION['login_exitosoinfo']); ?> 
+<?php Ayudas::eliminarSesion('login_exitosoinfo'); ?>
 <div id="administradorpanel">
     <img src="Recursos/Logotipos/administrar.png" alt="Logo administrar">
     <ul>

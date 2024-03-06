@@ -85,7 +85,7 @@
             require_once('Vistas/Compra/Factura.html');
 
             //Llamar la funcion de ayuda que genera el archivo PDF
-            GenerarPdf::pdf();
+            Ayudas::pdf();
         }
 
     }

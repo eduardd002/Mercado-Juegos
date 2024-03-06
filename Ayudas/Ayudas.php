@@ -6,7 +6,7 @@
     //Utilzar la libreria para importar los archivos en formato PDF
     use Spipu\Html2Pdf\Html2Pdf;
 
-    class GenerarPdf{
+    class Ayudas{
 
         /*
         Funcion para generar archivo en formato PDF
@@ -34,6 +34,31 @@
             //Exportar el HTML a un PDF, OUTPUT('nombre que se quiere sacar.pdf');
             $html2pdf->output('Compra.pdf');
         }
-    }
 
+        /*
+        Funcion para listar todas las categorias en la pantalla principal de inicio
+        */
+
+        public static function mostrarCategorias(){
+
+            //Incluir el objeto de categoria
+            require_once 'Modelos/Categoria.php';
+            //Instanciar el objeto
+            $categoria = new Categoria();
+            //Listar todos los usuarios desde la base de datos
+            $listadoCategorias = $categoria -> listar();
+            //Retornar el resultado
+            return $listadoCategorias;
+        }
+
+        /*
+        Funcion para eliminar sesiones
+        */
+
+        public static function eliminarSesion($nombreSesion){
+            if(isset($_SESSION[$nombreSesion])){
+                unset($_SESSION[$nombreSesion]);
+            }
+        }
+    }
 ?>

@@ -7,7 +7,7 @@
     // permanezca por ese tiempo incluso si se cierra una instancia del navegador, todas las instancias del navegador 
     //o se apaga el pc
 
-    $tiempo_vida = 3600;
+    $tiempo_vida = 10;
 
     // Configurar el tiempo de vida de la cookie de sesión
     session_set_cookie_params($tiempo_vida);
@@ -30,14 +30,26 @@
     // Activar la sesión
     session_start();
 
-    //session_destroy();
+    // Verificar si la sesión está activa
+    if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $tiempo_vida)) {
+        // Si ha pasado más tiempo del tiempo de vida, destruir la sesión y mostrar el mensaje
+        session_unset();
+        session_destroy();
+        session_start();
+        $_SESSION['caducidad'] = 'La sesion ha expirado';
+    } else {
+        // Si no ha pasado más tiempo, actualizar la marca de tiempo de última actividad
+        $_SESSION['last_activity'] = time();
+    }
 
+    //Incluir los archivo de autocarga de controladores
+    require_once 'Autoload.php';
+    //Incluir los archivo de ayudas
+    require_once 'Ayudas/Ayudas.php';
     //Incluir los archivo de configuracion de rutas
     require_once 'Configuracion/Rutas.php';
     //Incluir archivo de configuracion de base de datos
     require_once 'Configuracion/BaseDeDatos.php';
-    //Incluir los archivo de autocarga de controladores
-    require_once 'autoload.php';
     //Incluir los archivos de las vistas
     require_once 'Vistas/Layout/Cabecera.html';
     require_once 'Vistas/Layout/Categorias.html';

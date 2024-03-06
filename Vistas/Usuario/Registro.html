@@ -16,7 +16,7 @@
             <?=$_SESSION['RegistroUsuario']; ?>
         </div>
     <?php endif; ?>
-    <?php unset($_SESSION['RegistroUsuario']); ?> 
+    <?php Ayudas::eliminarSesion('RegistroUsuario'); ?>
     <h1>Registrarse</h1>
     <form action="<?=rutaInicio?><?=usuario?><?=guardarUsuario?>" method="post" enctype="multipart/form-data">
         <img src="Recursos/Logotipos/registro.png" class="registerImage" alt="Logo registro">
