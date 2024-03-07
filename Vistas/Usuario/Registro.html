@@ -17,6 +17,14 @@
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('RegistroUsuario'); ?>
+
+    <?php if(isset($_SESSION['ClavePocoSegura']) && $_SESSION['ClavePocoSegura'] == 'La clave debe contener una minuscula, una mayuscula, un caracterer especial, un numero y minimo 8 caracteres de longitud') : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['ClavePocoSegura']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('ClavePocoSegura'); ?>
+    
     <h1>Registrarse</h1>
     <form action="<?=rutaInicio?><?=usuario?><?=guardarUsuario?>" method="post" enctype="multipart/form-data">
         <img src="Recursos/Logotipos/registro.png" class="registerImage" alt="Logo registro">

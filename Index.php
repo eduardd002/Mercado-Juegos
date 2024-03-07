@@ -7,7 +7,7 @@
     // permanezca por ese tiempo incluso si se cierra una instancia del navegador, todas las instancias del navegador 
     //o se apaga el pc
 
-    $tiempo_vida = 10;
+    $tiempo_vida = 10800;
 
     // Configurar el tiempo de vida de la cookie de sesión
     session_set_cookie_params($tiempo_vida);
@@ -37,6 +37,7 @@
         session_destroy();
         session_start();
         $_SESSION['caducidad'] = 'La sesion ha expirado';
+        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
     } else {
         // Si no ha pasado más tiempo, actualizar la marca de tiempo de última actividad
         $_SESSION['last_activity'] = time();

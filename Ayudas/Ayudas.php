@@ -60,5 +60,19 @@
                 unset($_SESSION[$nombreSesion]);
             }
         }
+        
+        /*
+        Funcion para comprobar que la contraseña sea segura, cumpliendo ciertos parametros establecidos
+        */
+
+        public static function comprobarContrasenia($clave){
+
+            // Verificar que se cumplan todas las funciones
+            if (strlen($clave) >= 8 && preg_match("/[a-z]/", $clave) && preg_match("/[A-Z]/", $clave) && preg_match("/[0-9]/", $clave)) {
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 ?>

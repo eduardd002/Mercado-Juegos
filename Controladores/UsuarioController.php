@@ -72,53 +72,63 @@
                     $usuario -> setMunicipio($municipio);
                     $usuario -> setFecharegistro(date('y-m-d'));
 
-                    //Guardar la imagen
+                    $claveSegura = Ayudas::comprobarContrasenia($clave);
+                    
+                    //Comprobar si la clave cumple con las condiciones para que sea segura
+                    if($claveSegura){
+                        //Guardar la imagen
 
-                    //Guardar toda la informacion referente a la imagen
-                    $archivo = $_FILES['foto'];
-                    //Extraer nombre del archivo de imagen
-                    $nombreArchivo = $archivo['name'];
-                    //Extraer el tipo de archivo de la imagen
-                    $tipoArchivo = $archivo['type'];
+                        //Guardar toda la informacion referente a la imagen
+                        $archivo = $_FILES['foto'];
+                        //Extraer nombre del archivo de imagen
+                        $nombreArchivo = $archivo['name'];
+                        //Extraer el tipo de archivo de la imagen
+                        $tipoArchivo = $archivo['type'];
 
-                    //Comprobar si el archivo tiene la extensión de una imagen
-                    if($tipoArchivo == "image/jpg" || $tipoArchivo == "image/jpeg" || $tipoArchivo == "image/png" || $tipoArchivo == "image/gif"){
+                        //Comprobar si el archivo tiene la extensión de una imagen
+                        if($tipoArchivo == "image/jpg" || $tipoArchivo == "image/jpeg" || $tipoArchivo == "image/png" || $tipoArchivo == "image/gif"){
 
-                        //Comprobar si no existe un directorio para las imagenes a subir
-                        if(!is_dir('Recursos/ImagenesUsuarios')){
+                            //Comprobar si no existe un directorio para las imagenes a subir
+                            if(!is_dir('Recursos/ImagenesUsuarios')){
 
-                            //Crear el directorio
-                            mkdir('Recursos/ImagenesUsuarios', 0777, true);
-                        }
+                                //Crear el directorio
+                                mkdir('Recursos/ImagenesUsuarios', 0777, true);
+                            }
 
-                        //Crear el objeto
-                        $usuario -> setFoto($nombreArchivo);
-                        //Mover la foto subida a la ruta temporal del servidor y luego a la de la carpeta de las imagenes
-                        move_uploaded_file($archivo['tmp_name'], 'Recursos/ImagenesUsuarios/'.$nombreArchivo);
+                            //Crear el objeto
+                            $usuario -> setFoto($nombreArchivo);
+                            //Mover la foto subida a la ruta temporal del servidor y luego a la de la carpeta de las imagenes
+                            move_uploaded_file($archivo['tmp_name'], 'Recursos/ImagenesUsuarios/'.$nombreArchivo);
 
-                        //Guardar en la base de datos
-                        $guardado = $usuario -> guardar();
+                            //Guardar en la base de datos
+                            $guardado = $usuario -> guardar();
 
-                        //Comprobar se ejecutó con exito la consulta
-                        if($guardado){
-                            $ingreso = $usuario->login();
-                            //Crear sesion de inicio de sesion
-                            $_SESSION['login_exitoso'] = $ingreso;
-                            $_SESSION['login_exitosoinfo'] = "Bienvenido";
-                            //Redirigir al menu principal
-                            header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                            //Comprobar se ejecutó con exito la consulta
+                            if($guardado){
+                                $ingreso = $usuario->login();
+                                //Crear sesion de inicio de sesion
+                                $_SESSION['login_exitoso'] = $ingreso;
+                                $_SESSION['login_exitosoinfo'] = "Bienvenido";
+                                //Redirigir al menu principal
+                                header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                            }else{
+                                //Crear sesion que indique que la ruta de correo ya esta en uso
+                                $_SESSION['RegistroUsuario'] = "Ya hay una ruta de correo en uso";
+                                //Redirigir al registro de usuario
+                                header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=registro");
+                            }
                         }else{
-                            //Crear sesion que indique que la ruta de correo ya esta en uso
-                            $_SESSION['RegistroUsuario'] = "Ya hay una ruta de correo en uso";
+                            //Crear sesion que indique que la imagen debe ser de formato imagen
+                            $_SESSION['RegistroUsuario'] = "El formato debe ser de una imagen";
                             //Redirigir al registro de usuario
                             header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=registro");
                         }
                     }else{
-                        //Crear sesion que indique que la imagen debe ser de formato imagen
-                        $_SESSION['RegistroUsuario'] = "El formato debe ser de una imagen";
-                        //Redirigir al registro de usuario
+                        //Crear Sesion que indique la seguridad y el tamaño que debe tener la contraseña que registra el usuario
+                        $_SESSION['ClavePocoSegura'] = "La clave debe contener una minuscula, una mayuscula, un caracterer especial, un numero y minimo 8 caracteres de longitud";
+                        //Redirigir al formulario de registro
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=registro");
-                    }
+                    }   
                 }else{
                     //Crear sesion que indique que ha ocurrido un error inesperado al hacer el registro
                     $_SESSION['RegistroUsuario'] = "Ha ocurrido un error al realizar el registro";
