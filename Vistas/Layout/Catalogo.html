@@ -19,6 +19,13 @@
 <?php endif; ?>
 <?php Ayudas::eliminarSesion('caducidad'); ?>
 
+<?php if(isset($_SESSION['RegistroVideojuego']) && $_SESSION['RegistroVideojuego'] == 'Videojuego creado con exito') : ?>
+    <div class="alerta alerta-acierto">
+        <?=$_SESSION['RegistroVideojuego']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('RegistroVideojuego'); ?>
+
 <div id="contenidoCentral">
     <h1>Algunos Videojuegos</h1>
 <hr>

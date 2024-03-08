@@ -97,6 +97,39 @@
             $this->stock = $stock;
             return $this;
         }
+
+        public function buscar(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM videojuegos WHERE nombre LIKE '%{$this -> getNombre()}%'";
+            //Ejecutar la consulta
+            $lista = $this -> db -> query($consulta);
+            //Retornar el resultado
+            return $lista;
+        }
+
+        /*
+        Funcion para realizar el registro del usuario en la base de datos
+        */
+
+        public function guardar(){
+            //Construir la consulta
+            $consulta = "INSERT INTO videojuegos VALUES(NULL, {$this -> getIdConsola()}, 
+                {$this -> getIdUso()}, '{$this -> getNombre()}', 
+                {$this -> getPrecio()}, '{$this -> getDescripcion()}', 
+                '{$this -> getFoto()}', '{$this -> getFechaCreacion()}', 
+                {$this -> getStock()})";
+            //Ejecutar la consulta
+            $registro = $this -> db -> query($consulta);
+            //Establecer una variable bandera
+            $resultado = false;
+            //Comprobar el registro fue exitoso y el total de columnas afectadas se altero
+            if($registro){
+                //Cambiar el estado de la variable bandera
+                $resultado = true;
+            }
+            //Retornar el resultado
+            return $resultado;
+        }
     }
 
 ?>

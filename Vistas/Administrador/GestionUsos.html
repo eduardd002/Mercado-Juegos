@@ -5,24 +5,14 @@
             <th>Id</th>
             <th>Nombre</th>
         </tr>
-        <tr>
-            <td>7</td>
-            <td>Nombre 1</td>
-            <td><a href="<?=rutaInicio?><?=videojuego?><?=actualizarVideojuego?>" class="button button-actualizarVideojuego">Actualizar</a></td>
-            <td><a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-eliminarVideojuego">Eliminar</a></td>
-        </tr>
-        <tr>
-            <td>8</td>
-            <td>Nombre 1</td>
-            <td><a href="<?=rutaInicio?><?=videojuego?><?=actualizarVideojuego?>" class="button button-actualizarVideojuego">Actualizar</a></td>
-            <td><a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-eliminarVideojuego">Eliminar</a></td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td>Nombre 1</td>
-            <td><a href="<?=rutaInicio?><?=videojuego?><?=actualizarVideojuego?>" class="button button-actualizarVideojuego">Actualizar</a></td>
-            <td><a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-eliminarVideojuego">Eliminar</a></td>
-        </tr>
+        <?php while($usos = $listadoUsos -> fetch_object()) : ?>
+            <tr>
+                <td><?=$usos -> id?></td>
+                <td><?=$usos -> nombre?></td>
+                <td><a href="<?=rutaInicio?><?=videojuego?><?=actualizarVideojuego?>" class="button button-actualizarVideojuego">Actualizar</a></td>
+                <td><a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-eliminarVideojuego">Eliminar</a></td>
+            </tr>
+        <?php endwhile;?>
     </table>
     <a href="<?=rutaInicio?><?=administrador?><?=uso?>" class="button button-crearGestion">Crear</a>
 </div>

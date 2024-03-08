@@ -66,8 +66,114 @@
 
         public function buscar(){
 
-            //Incluir la vista
-            require_once 'Vistas/Videojuego/Buscar.html';
+            //Comprobar si el dato está llegando
+            if(isset($_POST)){
+
+                //Comprobar si el dato existe
+                $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
+
+                //Comprobar el dato exsiten
+                if($nombre){
+
+                    //Instanciar el objeto
+                    $videojuego = new Videojuego();
+                    //Crear el objeto
+                    $videojuego -> setNombre($nombre);
+
+                    //Obtener videojuegos de la base de datos
+                    $listaVideojuegos = $videojuego -> buscar();
+
+                    //Comprobar si llegan videojuegos
+                    if(mysqli_num_rows($listaVideojuegos) > 0){
+                        //Incluir la vista de buscador
+                        require_once 'Vistas/Videojuego/Buscar.html';
+                    }else{
+                        //Incluir la vista
+                        require_once 'Vistas/Videojuego/NoEncontrado.html';
+                    }
+                }
+            }
+        }
+
+        /*
+        Funcion para guardar el videojuego en la base de datos
+        */
+
+        public function guardar(){
+
+            //Comprobar si los datos están llegando
+            if(isset($_POST)){
+
+                //Comprobar si cada dato existe
+                $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
+                $consola = isset($_POST['consola']) ? $_POST['consola'] : false;
+                $uso = isset($_POST['uso']) ? $_POST['uso'] : false;
+                $precio = isset($_POST['precio']) ? $_POST['precio'] : false;
+                $stock = isset($_POST['stock']) ? $_POST['stock'] : false;
+                $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : false;
+
+                //Comprobar si todos los datos exsiten
+                if($nombre && $consola && $uso && $precio && $descripcion && $stock){
+
+                    //Instanciar el objeto
+                    $videojuego = new Videojuego();
+
+                    //Crear el objeto
+                    $videojuego -> setNombre($nombre);
+                    $videojuego -> setIdConsola(1);
+                    $videojuego -> setIdUso(1);
+                    $videojuego -> setPrecio($precio);
+                    $videojuego -> setDescripcion($descripcion);
+                    $videojuego -> setStock($stock);
+                    $videojuego -> setFechaCreacion(date('y-m-d'));
+                    
+                    //Guardar la imagen
+
+                    //Guardar toda la informacion referente a la imagen
+                    $archivo = $_FILES['foto'];
+                    //Extraer nombre del archivo de imagen
+                    $nombreArchivo = $archivo['name'];
+                    //Extraer el tipo de archivo de la imagen
+                    $tipoArchivo = $archivo['type'];
+
+                    //Comprobar si el archivo tiene la extensión de una imagen
+                    if($tipoArchivo == "image/jpg" || $tipoArchivo == "image/jpeg" || $tipoArchivo == "image/png" || $tipoArchivo == "image/gif"){
+
+                        //Comprobar si no existe un directorio para las imagenes a subir
+                        if(!is_dir('Recursos/ImagenesVideojuegos')){
+
+                            //Crear el directorio
+                            mkdir('Recursos/ImagenesVideojuegos', 0777, true);
+                        }
+
+                        //Crear el objeto
+                        $videojuego -> setFoto($nombreArchivo);
+                        //Mover la foto subida a la ruta temporal del servidor y luego a la de la carpeta de las imagenes
+                        move_uploaded_file($archivo['tmp_name'], 'Recursos/ImagenesVideojuegos/'.$nombreArchivo);
+
+                        //Guardar en la base de datos
+                        $guardado = $videojuego -> guardar();
+
+                        //Comprobar se ejecutó con exito la consulta
+                        if($guardado){
+                                //Crear sesion de videojuego creado con exito
+                                $_SESSION['RegistroVideojuego'] = "Videojuego creado con exito";
+                                //Redirigir al menu principal
+                                header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                        }
+                    }else{
+                        //Crear sesion que indique que la imagen debe ser de formato imagen
+                        $_SESSION['RegistroVideojuego'] = "El formato debe ser de una imagen";
+                        //Redirigir al registro de usuario
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=crear");
+                    }
+                }else{
+                    //Crear sesion que indique que ha ocurrido un error inesperado al hacer el registro
+                    $_SESSION['RegistroVideojuego'] = "Ha ocurrido un error al realizar el registro";
+                    //Redirigir al registro de usuario
+                    header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=crear");
+                }
+            }
         }
 
         /*
@@ -97,23 +203,6 @@
             //Incluir la vista
             require_once 'Vistas/Videojuego/Todos.html';
         }
-
-        /*
-        Funcion para guardar el videojuego en la base de datos
-        */
-
-        public function guardar(){
-
-            //Comprobar si los datos están llegando
-            if(isset($_POST)){
-
-                foreach($_POST['categorias'] as $lista){
-                    echo $lista;
-                }
-
-            }
-        }
-
     }
 
 ?>

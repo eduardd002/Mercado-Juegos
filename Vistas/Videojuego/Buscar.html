@@ -1,23 +1,11 @@
 <div id="busqueda">
-    <h1>Videojuegos que contienen "a"</h1>
+    <h1>Videojuegos que contienen "<?=$nombre?>"</h1>
    <div class="videojuegoBusqueda">
-        <img src="Recursos/ImagenesVideojuegos/ff22.jpg" alt="Videojuego">
-        <h2>Fifa 22</h2>
-        <p>$ 230000</p>
-        <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>">Ver ahora</a>
-    </div>
-
-    <div class="videojuegoBusqueda">
-        <img src="Recursos/ImagenesVideojuegos/gtaV.jpg" alt="Videojuego">
-        <h2>GTA V</h2>
-        <p>$ 140000</p>
-        <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>">Ver ahora</a>
-    </div>
-
-    <div class="videojuegoBusqueda">
-        <img src="Recursos/ImagenesVideojuegos/rdrII.jpg" alt="Videojuego">
-        <h2>Red Dead Redemption 2</h2>
-        <p>$ 77000</p>
-        <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>">Ver ahora</a>
+        <?php while($listadoVidejuegosBuscados = $listaVideojuegos -> fetch_object()) : ?>
+            <img src="Recursos/ImagenesVideojuegos/<?=$listadoVidejuegosBuscados -> foto?>" alt="Videojuego">
+            <h2><?=$listadoVidejuegosBuscados -> nombre?></h2>
+            <p><?=$listadoVidejuegosBuscados -> precio?></p>
+            <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>">Ver ahora</a>
+        <?php endwhile;?>
     </div>
 </div>

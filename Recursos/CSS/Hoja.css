@@ -131,14 +131,27 @@ Estilo del buscador
 }
 
 /*
-Estilo del campo del buscador
+Estilo del campo de imagen de la barra del buscador
 */
 
-#buscador input{
+#buscador input[type="image"]{
+    /*Altura*/
+    height: 13px;
     /*Anchor*/
-   width: 150px;
-   /*Margen derecho*/
-   margin-right: 40px;
+    width: 15px;
+    /*Margen derecho*/
+    margin-right: 40px;
+}
+
+/*
+Estilo del campo de texto de la barra del buscador
+*/
+
+#buscador input[type="text"]{
+    /*Altura*/
+    height: 20px;
+    /*Anchor*/
+    width: 130px;
 }
 
 /*
@@ -553,19 +566,6 @@ Estilo del boton de videojuego del catalogo
     text-decoration: none;
     /*Color del texto*/
     color: white;
-}
-
-/*
-Estilo del boton de videojuego de buscador
-*/
-
-.videojuegoBusqueda a{
-    /*Magin superior*/
-    margin-top: 20px;
-    /*Anchor*/
-    width: 240px;
-    /*Sin decoracion de texto*/
-    text-decoration: none;
 }
 
 /*
@@ -1279,8 +1279,8 @@ Estilos de la compra cuando se ha relizado de forma exitosa
 */
 
 #compraExitosa{
-    /*Margen izquierdo*/
-    margin-left: 300px;
+    /*Margen*/
+    margin: 10px;
 }
 
 /*
@@ -1288,12 +1288,12 @@ Estilos del titulo de la compra cuando se ha relizado de forma exitosa
 */
 
 #compraExitosa h1{
-    /*Flotar hacia la izquierda*/
-    float: left;
     /*Margen superior*/
-    margin-top: 20px;
+    margin-top: 30px;
     /*Margen inferior*/
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    /*Texto alineado al centro*/
+    text-align: center;
 }
 
 /*
@@ -1309,9 +1309,19 @@ Estilos de la imagen de ir a inicio de la compra cuando se ha relizado de forma 
 Estilos del titulo de la imagen cuando se ha relizado de forma exitosa
 */
 
-#compraExitosa img{
+.imgPrincipal{
+    /*Margen izquierdo*/
+    margin-left: 300px;
+    /*Margen superior*/
+    margin-top: 20px;
+    /*Margen inferior*/
+    margin-bottom: 20px;
     /*Flotar hacia la izquierda*/
     float: left;
+    /*Anchor*/
+    width: 500px;
+    /*Altura*/
+    height: 500px;
 }
 
 /*

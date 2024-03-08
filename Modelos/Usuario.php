@@ -168,7 +168,7 @@
             //Obtener el resultado del objeto
             $usuario = $login -> fetch_object();
             //Comprobar si el objeto llegó
-            if($login){
+            if($usuario){
                 //Establecer una variable bandera con el valor del objeto
                 $resultado = $usuario;
             }

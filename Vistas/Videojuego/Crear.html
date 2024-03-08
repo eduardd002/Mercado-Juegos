@@ -1,6 +1,19 @@
 <div id="loginYRegistro">
+    <?php if(isset($_SESSION['RegistroVideojuego']) && $_SESSION['RegistroVideojuego'] == 'El formato debe ser de una imagen') : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['RegistroVideojuego']; ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if(isset($_SESSION['RegistroVideojuego']) && $_SESSION['RegistroVideojuego'] == 'Ha ocurrido un error al realizar el registro') : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['RegistroVideojuego']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('RegistroVideojuego'); ?>
+    
     <h1>Crear videojuego</h1>
-    <form action="<?=rutaInicio?><?=videojuego?><?=guardarUsuario?>" method="post" enctype="multipart/form-data">
+    <form action="<?=rutaInicio?><?=videojuego?><?=guardar?>" method="post" enctype="multipart/form-data">
         <img src="Recursos/Logotipos/videojuego.png" class="ventaImage" alt="Logo videojuego">
         <div id="bloqueTextoRegistro">
             <label for="nombre">Nombre</label>
@@ -28,11 +41,15 @@
                 <?php endwhile; ?>
             </select>
         </div>
-        <input type="file">
+        <input type="file" name="foto">
         <label class="subirFotoPerfil">*Subir foto*</label>
         <div id="bloqueTextoRegistro">
             <label for="precio">Precio</label>
             <input type="number" name="precio" required>
+        </div>
+        <div id="bloqueTextoRegistro">
+            <label for="stock">Stock</label>
+            <input type="number" name="stock" required>
         </div>
         <div id="bloqueTextoRegistro">
             <label for="descripcion">Descripcion</label>

@@ -17,8 +17,10 @@
                 <h1>MERCADO JUEGOS</h1>
                 <?php if(!isset($_SESSION['administrar'])) : ?>
                     <div id="buscador">
-                        <input type="text" placeholder="Busca un videojuego">
-                        <a href="<?=rutaInicio?><?=videojuego?><?=buscar?>"><img src="Recursos/Logotipos/lupa.png" alt="Logo tienda"></a>
+                        <form action="<?=rutaInicio?><?=videojuego?><?=buscar?>" method="post">
+                            <input type="text" placeholder="Busca un videojuego" name="nombre" required>
+                            <input type="image" src="Recursos/Logotipos/lupa.png" alt="Logo tienda">
+                        </form>
                     </div>
                 <?php endif; ?> 
             </div>
@@ -36,12 +38,12 @@
                             <li>
                                 <img src="Recursos/ImagenesUsuarios/<?=$_SESSION['login_exitoso'] -> foto?>" alt="Logo usuario">Hola!, <?=$_SESSION['login_exitoso'] -> nombre?></a>
                             <ul>
-                                <li><a href="<?=rutaInicio?><?=usuario?><?=miPerfil?>">Mi perfil</a></li>
                                 <li><a href="<?=rutaInicio?><?=videojuego?><?=crear?>">Vender</a></li>
                                 <li><a href="<?=rutaInicio?><?=usuario?><?=videojuegos?>">Mis Videojuegos</a></li>
                                 <li><a href="<?=rutaInicio?><?=usuario?><?=compras?>">Mis Compras</a></li>
                                 <li><a href="<?=rutaInicio?><?=usuario?><?=ventas?>">Mis Ventas</a></li>
                         <?php endif; ?> 
+                                <li><a href="<?=rutaInicio?><?=usuario?><?=miPerfil?>">Mi perfil</a></li>
                                 <li><a href="<?=rutaInicio?><?=usuario?><?=logout?>">Cerrar sesion</a></li>
                             </ul>
                         </li>

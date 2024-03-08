@@ -38,7 +38,10 @@
         */
 
         public function gestionarCategoria(){
-
+            //Instanciar el objeto
+            $categoria = new Categoria();
+            //Listar todas las categorias desde la base de datos
+            $listadoCategorias = $categoria -> listar();
             //Incluir la vista
             require_once "Vistas/Administrador/GestionCategorias.html";
         }
@@ -48,7 +51,10 @@
         */
 
         public function gestionarTarjeta(){
-
+            //Instanciar el objeto
+            $tarjeta = new Tarjeta();
+            //Listar todas las tarjetas desde la base de datos
+            $listadoTarjetas = $tarjeta -> listar();
             //Incluir la vista
             require_once "Vistas/Administrador/GestionTarjetas.html";
         }
@@ -58,7 +64,10 @@
         */
 
         public function gestionarUso(){
-
+            //Instanciar el objeto
+            $uso = new Uso();
+            //Listar todos los usos desde la base de datos
+            $listadoUsos = $uso -> listar();
             //Incluir la vista
             require_once "Vistas/Administrador/GestionUsos.html";
         }
@@ -68,7 +77,10 @@
         */
 
         public function gestionarConsola(){
-
+            //Instanciar el objeto
+            $consola = new Consola();
+            //Listar todas las consolas desde la base de datos
+            $listadoConsolas = $consola -> listar();
             //Incluir la vista
             require_once "Vistas/Administrador/GestionConsolas.html";
         }
@@ -78,7 +90,10 @@
         */
 
         public function gestionarEstado(){
-
+            //Instanciar el objeto
+            $estado = new Estado();
+            //Listar todos los estados desde la base de datos
+            $listadoEstados = $estado -> listar();
             //Incluir la vista
             require_once "Vistas/Administrador/GestionEstados.html";
         }
