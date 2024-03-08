@@ -142,9 +142,6 @@
                     //Registrar id de videojuego futuro o proximo a registrar
                     $videojuegoCategoria -> setIdVideojuego(($total -> id)+1);
                     $videojuegoCategoria -> setCategoriaId($categorias);
-                    
-                    //Guardar en la base de datos
-                    $guardadoVideojuegoCategoria = $videojuegoCategoria -> guardar();
 
                     //Guardar la imagen
 
@@ -172,6 +169,9 @@
 
                         //Guardar en la base de datos
                         $guardado = $videojuego -> guardar();
+
+                        //Guardar en la base de datos
+                        $guardadoVideojuegoCategoria = $videojuegoCategoria -> guardar();
 
                         //Comprobar se ejecutó con exito la consulta
                         if($guardado && $guardadoVideojuegoCategoria){
