@@ -5,9 +5,10 @@
         private $id;
         private $idVideojuego;
         private $categoriaId;
+        private $db;
 
         public function __construct(){
-            BaseDeDatos::connect();
+            $this -> db = BaseDeDatos::connect();
         }
 
         public function getId(){
@@ -35,6 +36,24 @@
         public function setCategoriaId($categoriaId){
             $this->categoriaId = $categoriaId;
             return $this;
+        }
+
+        public function guardar(){
+            //Construir la consulta
+            foreach($this -> getCategoriaId() as $categorias){
+                $consulta = "INSERT INTO videojuegocategoria VALUES(NULL, {$this -> getIdVideojuego()}, {$categorias})";
+                //Ejecutar la consulta
+                $registro = $this -> db -> query($consulta);
+            }
+            //Establecer una variable bandera
+            $resultado = false;
+            //Comprobar el registro fue exitoso y el total de columnas afectadas se altero
+            if($registro){
+                //Cambiar el estado de la variable bandera
+                $resultado = true;
+            }
+            //Retornar el resultado
+            return $resultado;
         }
     }
 

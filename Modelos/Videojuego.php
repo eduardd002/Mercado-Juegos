@@ -98,6 +98,10 @@
             return $this;
         }
 
+        /*
+        Funcion para obtener el videojuego buscado, si existe
+        */
+
         public function buscar(){
             //Construir la consulta
             $consulta = "SELECT * FROM videojuegos WHERE nombre LIKE '%{$this -> getNombre()}%'";
@@ -108,7 +112,7 @@
         }
 
         /*
-        Funcion para realizar el registro del usuario en la base de datos
+        Funcion para realizar el registro del videojuego en la base de datos
         */
 
         public function guardar(){
@@ -129,6 +133,21 @@
             }
             //Retornar el resultado
             return $resultado;
+        }
+
+        /*
+        Funcion para obtener el id del ultimo videojuego registrado
+        */
+
+        public function proximoVideojuego(){
+            //Construir la consulta
+            $consulta = "SELECT id FROM videojuegos ORDER BY id DESC LIMIT 1";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Obtener el resultado del objeto
+            $identificadorFuturo = $resultado -> fetch_object();
+            //Retornar el resultado
+            return $identificadorFuturo;
         }
     }
 

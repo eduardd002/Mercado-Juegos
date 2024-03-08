@@ -22,14 +22,14 @@
         <div id="bloqueTextoRegistro">
             <label for="categoria">Categoria/as</label>
             <?php while($categorias = $listadoCategorias -> fetch_object()) : ?>
-                <input type="checkbox" name="categorias[]" value="<?=$categorias -> nombre?>"><?=$categorias -> nombre?><br>
+                <input type="checkbox" name="categorias[]" value="<?=$categorias -> id?>"><?=$categorias -> nombre?><br>
             <?php endwhile; ?>
         </div>
         <div id="bloqueTextoRegistro">
             <label for="consola">Consola</label>
             <select name="consola" id="consola">
                 <?php while($consolas = $listadoConsolas -> fetch_object()) : ?>
-                    <option value="<?=$consolas -> nombre?>"><?=$consolas -> nombre?></option>
+                    <option value="<?=$consolas -> id?>"><?=$consolas -> nombre?></option>
                 <?php endwhile; ?>
             </select>
         </div>
@@ -37,7 +37,7 @@
             <label for="uso">Uso</label>
             <select name="uso" id="uso">
                 <?php while($usos = $listadoUsos -> fetch_object()) : ?>
-                    <option value="<?=$usos -> nombre?>"><?=$usos -> nombre?></option>
+                    <option value="<?=$usos -> id?>"><?=$usos -> nombre?></option>
                 <?php endwhile; ?>
             </select>
         </div>

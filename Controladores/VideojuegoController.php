@@ -12,6 +12,9 @@
     //Incluir el objeto de uso
     require_once 'Modelos/Uso.php';
 
+    //Incluir el objeto de videojuegocategoria
+    require_once 'Modelos/VideojuegoCategoria.php';
+
     class VideojuegoController{
 
         /*
@@ -111,6 +114,7 @@
                 $precio = isset($_POST['precio']) ? $_POST['precio'] : false;
                 $stock = isset($_POST['stock']) ? $_POST['stock'] : false;
                 $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : false;
+                $categorias = isset($_POST['categorias']) ? $_POST['categorias'] : false;
 
                 //Comprobar si todos los datos exsiten
                 if($nombre && $consola && $uso && $precio && $descripcion && $stock){
@@ -120,13 +124,28 @@
 
                     //Crear el objeto
                     $videojuego -> setNombre($nombre);
-                    $videojuego -> setIdConsola(1);
-                    $videojuego -> setIdUso(1);
+                    $videojuego -> setIdConsola($consola);
+                    $videojuego -> setIdUso($uso);
                     $videojuego -> setPrecio($precio);
                     $videojuego -> setDescripcion($descripcion);
                     $videojuego -> setStock($stock);
                     $videojuego -> setFechaCreacion(date('y-m-d'));
+
+                    //Obtener id del ultimo videojuego registrado
+                    $total = $videojuego -> proximoVideojuego();
+
+                    //Instanciar el objeto
+                    $videojuegoCategoria = new VideojuegoCategoria();
+
+                    //Crear el objeto
+
+                    //Registrar id de videojuego futuro o proximo a registrar
+                    $videojuegoCategoria -> setIdVideojuego(($total -> id)+1);
+                    $videojuegoCategoria -> setCategoriaId($categorias);
                     
+                    //Guardar en la base de datos
+                    $guardadoVideojuegoCategoria = $videojuegoCategoria -> guardar();
+
                     //Guardar la imagen
 
                     //Guardar toda la informacion referente a la imagen
@@ -155,7 +174,7 @@
                         $guardado = $videojuego -> guardar();
 
                         //Comprobar se ejecutó con exito la consulta
-                        if($guardado){
+                        if($guardado && $guardadoVideojuegoCategoria){
                                 //Crear sesion de videojuego creado con exito
                                 $_SESSION['RegistroVideojuego'] = "Videojuego creado con exito";
                                 //Redirigir al menu principal
