@@ -4,7 +4,8 @@
     ob_start();
 
     //Incluir archivo de ayuda para generar el PDF
-    require_once 'Ayudas/GenerarPdf.php';
+    require_once 'Ayudas/Ayudas.php';
+    // antes ayudas/generarpdf
 
     //Incluir el objeto de transaccion
     require_once 'Modelos/Transaccion.php';

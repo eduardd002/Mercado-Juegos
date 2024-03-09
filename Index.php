@@ -3,11 +3,11 @@
     //OB_START(); para
     ob_start();
 
-    // Configurar el tiempo de vida de la sesión en segundos, en este caso 3600 segundos(1 hora) para que la sesion
+    // Configurar el tiempo de vida de la sesión en segundos, en este caso 1800 segundos(1/2 hora) para que la sesion
     // permanezca por ese tiempo incluso si se cierra una instancia del navegador, todas las instancias del navegador 
     //o se apaga el pc
 
-    $tiempo_vida = 10800;
+    $tiempo_vida = 1800;
 
     // Configurar el tiempo de vida de la cookie de sesión
     session_set_cookie_params($tiempo_vida);
