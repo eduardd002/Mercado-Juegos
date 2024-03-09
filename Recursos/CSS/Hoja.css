@@ -118,6 +118,15 @@ Estilo del titulo principal de la tienda
 }
 
 /*
+Estilo del catalogo
+*/
+
+#catalogo{
+    /*Margen inferior*/
+    margin-bottom: 530px
+}
+
+/*
 Estilo del buscador
 */
 
@@ -706,16 +715,23 @@ Estilos del boton ver detalle
 }
 
 /*
-Estilos del boton ver todos los videojuegos
+Estilos del boton para ver todos los videojuegos
+*/
+
+#verTodos{
+    /*Margen inferior*/
+    margin-bottom: 30px;
+}
+
+/*
+Estilos del enlace del boton para ver todos los videojuegos
 */
 
 #verTodos a{
-    /*Dar comportamiento de bloque*/
-    display: block;
     /*Borde redondo*/
     border-radius: 2px;
     /*Margen interior*/
-    padding: 15px;
+    padding: 10px;
     /*Color de letra*/
     color: white;
     /*Color de fondo*/
@@ -724,16 +740,10 @@ Estilos del boton ver todos los videojuegos
     border: 1px solid #156785;
     /*Cambiar apariencia del cursor*/
     cursor: pointer;
-    /*Anchor*/
-    width: 182.4px;
-    /*Margen centrado*/
-    margin: 0px auto;
-    /*Margen superior*/
-    margin-top: 640px;
     /*Sin decoracion de texto*/
     text-decoration: none;
-    /*Margen inferior*/
-    margin-bottom: 22px;
+    /*Margen izquierdo*/
+    margin-left: 445px;
 }
 
 /*
