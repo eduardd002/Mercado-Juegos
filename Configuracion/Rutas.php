@@ -36,6 +36,9 @@
     define("generarPdf", "&action=generarPdf");
 
     define("administrador", "/?controller=AdministradorController");
+    define("administrar", "&action=administrar");
+    define("registroAdmin", "&action=registro");
+    define("guardarAdmin", "&action=guardar");
     define("uso", "&action=crearUso");
     define("guardarUso", "&action=guardarUso");
     define("gestionarUso", "&action=gestionarUso");

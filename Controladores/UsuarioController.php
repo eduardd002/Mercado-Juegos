@@ -3,17 +3,10 @@
     //Incluir el objeto de usuario
     require_once 'Modelos/Usuario.php';
 
+    //Incluir el objeto de administrador
+    require_once 'Modelos/Administrador.php';
+
     class UsuarioController{
-
-        /*
-        Funcion para entrar a las funciones de administrador
-        */
-
-        public function administrar(){
-
-            //Incluir la vista
-            require_once "Vistas/Usuario/Administrador.html";
-        }
 
         /*
         Funcion para realizar el inicio de sesion del usuario
@@ -62,7 +55,6 @@
 
                     //Crear el objeto
                     $usuario -> setNombre($nombre);
-                    $usuario -> setRol('Usuario');
                     $usuario -> setApellido($apellidos);
                     $usuario -> setFechanacimiento($fechaNacimiento);
                     $usuario -> setNumerotelefono($telefono);
@@ -164,21 +156,27 @@
                     //Obtener objeto de la base de datos
                     $ingreso = $usuario->login();
 
+                    //Instanciar el objeto
+                    $administrador = new Administrador();
+
+                    //Crear el objeto
+                    $administrador -> setCorreo($email);
+                    $administrador -> setClave($clave);
+                    
+                    //Obtener objeto de la base de datos
+                    $ingresoa = $administrador->login();
+
                     //Comprobar se ejecutó con exito la consulta
                     if($ingreso && is_object($ingreso)){
-                        if($ingreso -> rol == 'Administrador'){
-                            //Crear la sesion con el objeto completo del usuario
-                            $_SESSION['administrar'] = true;
-                            //Redirigir al inicio
-                            header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administrar");
-                        }else{
-                            //Crear la sesion con el objeto completo del usuario
-                            $_SESSION['login_exitoso'] = $ingreso;
-                            //Redirigir al inicio
-                            header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
-                        }
-                        //Crear la sesion con la informacion de login exitoso
-                        $_SESSION['login_exitosoinfo'] = "Bienvenido";
+                        //Crear la sesion con el objeto completo del usuario
+                        $_SESSION['login_exitoso'] = $ingreso;
+                        //Redirigir al inicio
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                    }else if($ingresoa && is_object($ingresoa)){
+                        //Crear la sesion con el objeto completo del administrador
+                        $_SESSION['login_exitosoa'] = $ingresoa;
+                        //Redirigir al inicio
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
                     }else{
                         //Crear la sesion de error al realizar el login
                         $_SESSION['error_login'] = 'Este usuario no se encuentra registrado';
@@ -197,7 +195,7 @@
 
             //Lamar funciones para eliminar las sesiones
             Ayudas::eliminarSesion('login_exitoso');
-            Ayudas::eliminarSesion('administrar');
+            Ayudas::eliminarSesion('login_exitosoa');
             
             //Crear sesion de sesion creada con exito
             $_SESSION['logincerrado'] = "Sesion cerrada con exito";
@@ -221,6 +219,9 @@
         */
 
         public function miPerfil(){
+
+            //Llamar la funcion auxiliar para redirigir en caso de que no haya inicio de sesion
+            Ayudas::restringirAUsuario();
 
             //Incluir la vista
             require_once "Vistas/Usuario/miPerfil.html";

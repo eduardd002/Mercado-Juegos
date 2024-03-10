@@ -1,18 +1,22 @@
 <div id="gestiones">
     <h1>Gestion de usos</h1>
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-        </tr>
-        <?php while($usos = $listadoUsos -> fetch_object()) : ?>
+    <?php if(mysqli_num_rows($listadoUsos) == 0) : ?>
+        <h1>No hay categorias usos</h1>
+    <?php else : ?>
+        <table>
             <tr>
-                <td><?=$usos -> id?></td>
-                <td><?=$usos -> nombre?></td>
-                <td><a href="<?=rutaInicio?><?=videojuego?><?=actualizarVideojuego?>" class="button button-actualizarVideojuego">Actualizar</a></td>
-                <td><a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-eliminarVideojuego">Eliminar</a></td>
+                <th>Id</th>
+                <th>Nombre</th>
             </tr>
-        <?php endwhile;?>
-    </table>
+            <?php while($usos = $listadoUsos -> fetch_object()) : ?>
+                <tr>
+                    <td><?=$usos -> id?></td>
+                    <td><?=$usos -> nombre?></td>
+                    <td><a href="<?=rutaInicio?><?=videojuego?><?=actualizarVideojuego?>" class="button button-actualizarVideojuego">Actualizar</a></td>
+                    <td><a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-eliminarVideojuego">Eliminar</a></td>
+                </tr>
+            <?php endwhile;?>
+        </table>
+    <?php endif; ?>
     <a href="<?=rutaInicio?><?=administrador?><?=uso?>" class="button button-crearGestion">Crear</a>
 </div>

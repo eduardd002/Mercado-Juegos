@@ -1,6 +1,6 @@
 <?php
 
-    class Usuario{
+    class Administrador{
 
         private $id;
         private $nombre;
@@ -9,8 +9,6 @@
         private $numerotelefono;
         private $correo;
         private $clave;
-        private $departamento;
-        private $municipio;
         private $foto;
         private $fecharegistro;
         private $db;
@@ -82,24 +80,6 @@
             return $this;
         }
 
-        public function getDepartamento(){
-                return $this->departamento;
-        }
-
-        public function setDepartamento($departamento){
-            $this->departamento = $departamento;
-            return $this;
-        }
-
-        public function getMunicipio(){
-            return $this->municipio;
-        }
-
-        public function setMunicipio($municipio){
-            $this->municipio = $municipio;
-            return $this;
-        }
-
         public function getFoto(){
             return $this->foto;
         }
@@ -119,17 +99,16 @@
         }
 
         /*
-        Funcion para realizar el registro del usuario en la base de datos
+        Funcion para realizar el registro del administrador en la base de datos
         */
 
         public function guardar(){
 
             //Construir la consulta
-            $consulta = "INSERT IGNORE INTO usuarios VALUES(NULL, 
+            $consulta = "INSERT IGNORE INTO administradores VALUES(NULL, 
                 '{$this -> getNombre()}', '{$this -> getApellido()}', 
                 '{$this -> getFechaNacimiento()}', {$this -> getNumeroTelefono()}, 
                 '{$this -> getCorreo()}', '{$this -> getClave()}', 
-                '{$this -> getDepartamento()}', '{$this -> getMunicipio()}', 
                 '{$this -> getFoto()}', '{$this -> getFechaRegistro()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
@@ -151,7 +130,7 @@
         public function login(){
 
             //Construir la consulta
-            $consulta = "SELECT * FROM usuarios WHERE correo = '{$this -> getCorreo()}' AND clave = 
+            $consulta = "SELECT * FROM administradores WHERE correo = '{$this -> getCorreo()}' AND clave = 
             '{$this -> getClave()}'";
             //Ejecutar la consulta
             $login = $this -> db -> query($consulta);
@@ -164,19 +143,6 @@
             }
             //Retornar el resultado
             return $resultado;
-        }
-
-        /*
-        Funcion para listar todos los usuarios
-        */
-
-        public function listar(){
-            //Construir la consulta
-            $consulta = "SELECT * FROM usuarios";
-            //Ejecutar la consulta
-            $lista = $this -> db -> query($consulta);
-            //Retornar el resultado
-            return $lista;
         }
     }
 

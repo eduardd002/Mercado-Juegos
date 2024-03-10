@@ -7,7 +7,6 @@ USE mercadoJuegos;
 /*Crear tabla usuarios*/
 CREATE TABLE usuarios (
     id              INTEGER auto_increment NOT NULL,
-    rol             VARCHAR(100) NOT NULL,
     nombre          VARCHAR(200) NOT NULL,
     apellido        VARCHAR(250) NOT NULL,
     fechanacimiento DATE NOT NULL,
@@ -21,6 +20,22 @@ CREATE TABLE usuarios (
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT uq_correo UNIQUE(correo),
     CONSTRAINT usuarios_pk PRIMARY KEY ( id )
+);
+
+/*Crear tabla administradores*/
+CREATE TABLE administradores (
+    id              INTEGER auto_increment NOT NULL,
+    nombre          VARCHAR(200) NOT NULL,
+    apellido        VARCHAR(250) NOT NULL,
+    fechanacimiento DATE NOT NULL,
+    numerotelefono  INTEGER NOT NULL,
+    correo          VARCHAR(200) NOT NULL,
+    clave           VARCHAR(150) NOT NULL,
+    foto            VARCHAR(250),
+    fecharegistro   DATE NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT uq_correo UNIQUE(correo),
+    CONSTRAINT admins_pk PRIMARY KEY ( id )
 );
 
 /*Crear tabla videoujuegos*/

@@ -15,6 +15,9 @@
     //Incluir el objeto de videojuegocategoria
     require_once 'Modelos/VideojuegoCategoria.php';
 
+    //Incluir el objeto de usuariovideojuego
+    require_once 'Modelos/UsuarioVideojuego.php';
+
     class VideojuegoController{
 
         /*
@@ -22,10 +25,12 @@
         */
 
         public function inicio(){
+
+            $videojuego = new Videojuego();
+            $listadoAlgunos = $videojuego -> listarAlgunos();
             
             //Incluir la vista
             require_once 'Vistas/Layout/Catalogo.html';
-
         }
 
         /*
@@ -34,8 +39,32 @@
 
         public function detalle(){
 
-            //Incluir la vista
-            require_once 'Vistas/Videojuego/Detalle.html';
+            //Comprobar si el dato está llegando
+            if(isset($_GET)){
+                //Comprobar si el dato existe
+                $id = isset($_GET['id']) ? $_GET['id'] : false;
+
+                //Comprobar el dato exsiten
+                if($id){
+                
+                    //Instanciar el objeto
+                    $videojuego = new Videojuego();
+
+                    //Construir el objeto
+                    $videojuego -> setId($id);
+
+                    //Traer videojuego en concreto
+                    $videojuegoEspecifico = $videojuego -> traerUno();
+
+                    if($videojuegoEspecifico){
+                        //Incluir la vista
+                        require_once 'Vistas/Videojuego/Detalle.html';
+                    }else{
+                        //Redirigir al catalogo
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                    }
+                }
+            }
         }
 
         /*
@@ -115,6 +144,7 @@
                 $stock = isset($_POST['stock']) ? $_POST['stock'] : false;
                 $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : false;
                 $categorias = isset($_POST['categorias']) ? $_POST['categorias'] : false;
+                $usuarioId = isset($_SESSION['login_exitoso']) ? $_SESSION['login_exitoso'] -> id : false;
 
                 //Comprobar si todos los datos exsiten
                 if($nombre && $consola && $uso && $precio && $descripcion && $stock){
@@ -142,6 +172,15 @@
                     //Registrar id de videojuego futuro o proximo a registrar
                     $videojuegoCategoria -> setIdVideojuego(($total -> id)+1);
                     $videojuegoCategoria -> setCategoriaId($categorias);
+
+                    //Instanciar el objeto
+                    $usuarioVideojuego = new UsuarioVideojuego();
+
+                    //Crear el objeto
+                    
+                    //Registrar id de videojuego futuro o proximo a registrar
+                    $usuarioVideojuego -> setIdVideojuego(($total -> id)+1);
+                    $usuarioVideojuego -> setIdUsuario($usuarioId);
 
                     //Guardar la imagen
 
@@ -173,8 +212,11 @@
                         //Guardar en la base de datos
                         $guardadoVideojuegoCategoria = $videojuegoCategoria -> guardar();
 
-                        //Comprobar se ejecutó con exito la consulta
-                        if($guardado && $guardadoVideojuegoCategoria){
+                        //Guardar en la base de datos
+                        $guardadoUsuarioVideojuego = $usuarioVideojuego -> guardar();
+
+                        //Comprobar se ejecutaron con exito las consultas
+                        if($guardado && $guardadoVideojuegoCategoria && $guardadoUsuarioVideojuego ){
                                 //Crear sesion de videojuego creado con exito
                                 $_SESSION['RegistroVideojuego'] = "Videojuego creado con exito";
                                 //Redirigir al menu principal
@@ -218,6 +260,11 @@
         */
 
         public function todos(){
+
+            //Instaciar el objeto
+            $videojuego = new Videojuego();
+            //Traer los datos de la consulta
+            $listadoTodos = $videojuego -> listarTodos();
 
             //Incluir la vista
             require_once 'Vistas/Videojuego/Todos.html';

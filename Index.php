@@ -43,6 +43,8 @@
         $_SESSION['last_activity'] = time();
     }
 
+    //session_destroy();
+
     //Incluir los archivo de autocarga de controladores
     require_once 'Autoload.php';
     //Incluir los archivo de ayudas
@@ -66,8 +68,8 @@
     if(isset($_GET['controller'])){
         $nombre = $_GET['controller'];
     }elseif(!isset($_GET['controller']) && !isset($_GET['action'])){
-        if(isset($_SESSION['administrar'])){
-            $nombre = "UsuarioController";
+        if(isset($_SESSION['login_exitosoa'])){
+            $nombre = "AdministradorController";
         }else{
             $nombre = "VideojuegoController";
         }
@@ -89,7 +91,7 @@
             $action = $_GET['action'];
             $controlador -> $action();
         }elseif(!isset($_GET['controller']) && !isset($_GET['action'])){
-            if(isset($_SESSION['administrar'])){
+            if(isset($_SESSION['login_exitosoa'])){
                 $actionDefault = "Administrar";
             }else{
                 $actionDefault = "Inicio";

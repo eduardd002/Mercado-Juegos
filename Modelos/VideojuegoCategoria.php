@@ -38,6 +38,10 @@
             return $this;
         }
 
+        /*
+        Funcion para guardar la relacion entre videojuego y categoria en la base de datos
+        */
+
         public function guardar(){
             //Construir la consulta
             foreach($this -> getCategoriaId() as $categorias){

@@ -792,9 +792,9 @@ Estilos de la imagen del registro de usuario
 #loginYRegistro img{
     border-radius: 50%;
     /*Altura*/
-    height: 250px;
+    height: 240px;
     /*Anchor*/
-    width: 240px;
+    width: 230px;
     /*Flotar hacia la derecha*/
     float: right;
     /*Margen derecho*/
@@ -1893,4 +1893,37 @@ Estilo del boton para crear una gestion
     background: red;
     /*Borde*/
     border: 1px solid rgb(101, 85, 4);
+}
+
+/*
+Estilo del titulo de mi perfil para administrador
+*/
+
+.miPerfilA{
+    /*Limpiar flotados*/
+    clear: both;
+    /*Dar comportamiento de bloque*/
+    display: block;
+}
+
+/*
+Estilo del enlace para registrarse como administrador
+*/
+
+.regisAdmin{
+    /*Flotar hacia la derecha*/
+    float: right !important;
+    /*Margen derecho*/
+    margin-right: 140px;
+}
+
+/*
+Estilo particular de la imagen del registro de usuario tanto como admin como usuario
+*/
+
+.registerImageUsuario{
+    /*Anchor*/
+    width: 240px !important;
+    /*Altura*/
+    height: 230px !important;
 }

@@ -1,12 +1,16 @@
 <div id="gestiones">
     <h1>Gestion de usuarios</h1>
-    <?php while($usuarios = $listadoUsuarios -> fetch_object()) : ?>
-        <div class="gestionUsuariosLista">
-            <img src="Recursos/ImagenesUsuarios/<?=$usuarios -> foto?>">
-            <h3><?=$usuarios -> nombre?></h3>
-            <h3><?=$usuarios -> apellido?></h3>
-            <h4><?=$usuarios -> fecharegistro?></h4>
-            <a href="" class="button button-gestionUsuario">Eliminar cuenta</a>
-        </div>
-    <?php endwhile; ?>
+    <?php if(mysqli_num_rows($listadoUsuarios) == 0) : ?>
+        <h1>No hay usuarios creadas</h1>
+    <?php else : ?>
+        <?php while($usuarios = $listadoUsuarios -> fetch_object()) : ?>
+            <div class="gestionUsuariosLista">
+                <img src="Recursos/ImagenesUsuarios/<?=$usuarios -> foto?>">
+                <h3><?=$usuarios -> nombre?></h3>
+                <h3><?=$usuarios -> apellido?></h3>
+                <h4><?=$usuarios -> fecharegistro?></h4>
+                <a href="" class="button button-gestionUsuario">Eliminar cuenta</a>
+            </div>
+        <?php endwhile; ?>
+    <?php endif; ?>
 </div>

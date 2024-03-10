@@ -15,7 +15,7 @@
             <div id="titulo">
                 <img src="Recursos/Logotipos/Logo.png" alt="Logo tienda">
                 <h1>MERCADO JUEGOS</h1>
-                <?php if(!isset($_SESSION['administrar'])) : ?>
+                <?php if(!isset($_SESSION['login_exitosoa'])) : ?>
                     <div id="buscador">
                         <form action="<?=rutaInicio?><?=videojuego?><?=buscar?>" method="post">
                             <input type="text" placeholder="Busca un videojuego" name="nombre" required>
@@ -26,10 +26,11 @@
             </div>
             <div id="menuPrincipal">
                 <ul>
-                    <?php if(isset($_SESSION['login_exitoso']) || isset($_SESSION['administrar'])) : ?>
-                        <?php if(isset($_SESSION['administrar']) && !(isset($_SESSION['login_exitoso']))) : ?>
-                            <li><img src="Recursos/ImagenesUsuarios/profe.png" alt="Logo usuario">Hola!, Alexandra</a>
-                        <?php elseif(isset($_SESSION['login_exitoso']) && !(isset($_SESSION['administrar']))) : ?>
+                    <?php if(isset($_SESSION['login_exitoso']) || isset($_SESSION['login_exitosoa'])) : ?>
+                        <?php if(isset($_SESSION['login_exitosoa']) && !(isset($_SESSION['login_exitoso']))) : ?>
+                            <li><img src="Recursos/ImagenesAdministradores/<?=$_SESSION['login_exitosoa'] -> foto?>" alt="Logo usuario">Hola!, Alexandra</a>
+                            <li><a href="<?=rutaInicio?><?=administrador?><?=miPerfil?>">Mi perfil</a></li>
+                        <?php elseif(isset($_SESSION['login_exitoso']) && !(isset($_SESSION['login_exitosoa']))) : ?>
                             <li>
                                 <a href="<?=rutaInicio?><?=carrito?><?=ver?>">
                                     <img src="Recursos/Logotipos/Carrito.png" alt="Logo carrito">
@@ -38,12 +39,12 @@
                             <li>
                                 <img src="Recursos/ImagenesUsuarios/<?=$_SESSION['login_exitoso'] -> foto?>" alt="Logo usuario">Hola!, <?=$_SESSION['login_exitoso'] -> nombre?></a>
                             <ul>
+                                <li><a href="<?=rutaInicio?><?=usuario?><?=miPerfil?>">Mi perfil</a></li>
                                 <li><a href="<?=rutaInicio?><?=videojuego?><?=crear?>">Vender</a></li>
                                 <li><a href="<?=rutaInicio?><?=usuario?><?=videojuegos?>">Mis Videojuegos</a></li>
                                 <li><a href="<?=rutaInicio?><?=usuario?><?=compras?>">Mis Compras</a></li>
                                 <li><a href="<?=rutaInicio?><?=usuario?><?=ventas?>">Mis Ventas</a></li>
-                        <?php endif; ?> 
-                                <li><a href="<?=rutaInicio?><?=usuario?><?=miPerfil?>">Mi perfil</a></li>
+                        <?php endif; ?>
                                 <li><a href="<?=rutaInicio?><?=usuario?><?=logout?>">Cerrar sesion</a></li>
                             </ul>
                         </li>

@@ -27,52 +27,23 @@
 <?php Ayudas::eliminarSesion('RegistroVideojuego'); ?>
 
 <div id="contenidoCentral">
-    <h1>Algunos Videojuegos</h1>
+    <?php if(mysqli_num_rows($listadoAlgunos) > 0) : ?>
+        <h1>Algunos Videojuegos</h1>
+    <?php else : ?>
+        <h1>No hay Videojuegos</h1>
+    <?php endif; ?>
 <hr>
     <!-- SECCION VIDEOJUEGOS -->
 
     <div id="catalogo">
-        <div class="videojuego">
-            <img src="Recursos/ImagenesVideojuegos/mk11.jpg" alt="Videojuego">
-            <h2>Mortal Kombat 11</h2>
-            <p>$ 340000</p>
-            <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-comprarCatalogo">Ver ahora</a>
-        </div>
-
-        <div class="videojuego">
-            <img src="Recursos/ImagenesVideojuegos/fte.jpg" alt="Videojuego">
-            <h2>Fortnite</h2>
-            <p>$ 540000</p>
-            <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-comprarCatalogo">Ver ahora</a>
-        </div>
-
-        <div class="videojuego">
-            <img src="Recursos/ImagenesVideojuegos/fcry6.jpg" alt="Videojuego">
-            <h2>FarCry 6</h2>
-            <p>$ 200000</p>
-            <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-comprarCatalogo">Ver ahora</a>
-        </div>
-
-        <div class="videojuego">
-            <img src="Recursos/ImagenesVideojuegos/codcw.jpg" alt="Videojuego">
-            <h2>Call Of Duty Black Ops Cold War</h2>
-            <p>$ 230000</p>
-            <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-comprarCatalogo">Ver ahora</a>
-        </div>
-
-        <div class="videojuego">
-            <img src="Recursos/ImagenesVideojuegos/aot.jpg" alt="Videojuego">
-            <h2>Adventure Time Finn And Jake Investigations</h2>
-            <p>$ 140000</p>
-            <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-comprarCatalogo">Ver ahora</a>
-        </div>
-
-        <div class="videojuego">
-            <img src="Recursos/ImagenesVideojuegos/sp.jpg" alt="Videojuego">
-            <h2>Spider Man Miles Morales</h2>
-            <p>$ 77000</p>
-            <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-comprarCatalogo">Ver ahora</a>
-        </div>
+        <?php while($listado = $listadoAlgunos -> fetch_object()) : ?>
+            <div class="videojuego">
+                <img src="Recursos/ImagenesVideojuegos/<?=$listado -> foto?>" alt="Videojuego">
+                <h2><?=$listado -> nombre?></h2>
+                <p>$ <?=$listado -> precio?></p>
+                <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>&id=<?=$listado -> id?>" class="button button-comprarCatalogo">Ver ahora</a>
+            </div>
+        <?php endwhile; ?>
     </div>
     <div id="verTodos">
         <a href="<?=rutaInicio?><?=videojuego?><?=todos?>">Ver todos los videojuegos</a>

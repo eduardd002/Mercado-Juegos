@@ -67,11 +67,37 @@
 
         public static function comprobarContrasenia($clave){
 
-            // Verificar que se cumplan todas las funciones
+            //Verificar que se cumplan todas las funciones
             if (strlen($clave) >= 8 && preg_match("/[a-z]/", $clave) && preg_match("/[A-Z]/", $clave) && preg_match("/[0-9]/", $clave)) {
                 return true;
             }else{
                 return false;
+            }
+        }
+
+        /*
+        Funcion para redirigir a inicio cuando no se este logueado y se quieran acceder a funciones
+        de usuario logueado
+        */
+
+        public static function restringirAUsuario(){
+            //Verificar que el inicio de sesion no exista
+            if(!isset($_SESSION['login_exitoso'])){
+                //Redirigir al inicio
+                header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=login");
+            }
+        }
+
+        /*
+        Funcion para redirigir a inicio cuando no se este logueado y se quieran acceder a funciones
+        de usuario logueado
+        */
+
+        public static function restringirAAdministrador(){
+            //Verificar que el inicio de sesion no exista
+            if(!isset($_SESSION['login_exitosoa'])){
+                //Redirigir al inicio
+                header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=login");
             }
         }
     }
