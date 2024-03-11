@@ -1,4 +1,4 @@
-<?php if(isset($_SESSION['login_exitosoinfo']) && $_SESSION['login_exitosoinfo'] == 'Bienvenido') : ?>
+<?php if(isset($_SESSION['login_exitosoinfo']) && $_SESSION['login_exitosoinfo'] == 'Bienvenido Usuario') : ?>
     <div class="alerta alerta-acierto">
         <?=$_SESSION['login_exitosoinfo']; ?>
     </div>
@@ -46,6 +46,8 @@
         <?php endwhile; ?>
     </div>
     <div id="verTodos">
-        <a href="<?=rutaInicio?><?=videojuego?><?=todos?>">Ver todos los videojuegos</a>
+        <?php if(mysqli_num_rows($listadoAlgunos) > 6) : ?>
+            <a href="<?=rutaInicio?><?=videojuego?><?=todos?>">Ver todos los videojuegos</a>
+        <?php endif; ?>
     </div>
 </div>

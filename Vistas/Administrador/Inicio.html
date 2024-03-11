@@ -1,9 +1,9 @@
-<?php if(isset($_SESSION['login_exitosoinfo']) && $_SESSION['login_exitosoinfo'] == 'Bienvenido') : ?>
+<?php if(isset($_SESSION['login_exitosoinfoa']) && $_SESSION['login_exitosoinfoa'] == 'Bienvenido administrador') : ?>
     <div class="alerta alerta-admin">
-        <?=$_SESSION['login_exitosoinfo']; ?>
+        <?=$_SESSION['login_exitosoinfoa']; ?>
     </div>
 <?php endif; ?>
-<?php Ayudas::eliminarSesion('login_exitosoinfo'); ?>
+<?php Ayudas::eliminarSesion('login_exitosoinfoa'); ?>
 <div id="administradorpanel">
     <img src="Recursos/Logotipos/administrar.png" alt="Logo administrar">
     <ul>

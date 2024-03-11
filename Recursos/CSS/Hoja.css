@@ -116,17 +116,6 @@ Estilo del titulo principal de la tienda
     /*Transicion*/
     transition: all 300ms;
 }
-
-/*
-Estilo del catalogo
-*/
-
-#catalogo{
-    /*Margen inferior*/
-    margin-bottom: 530px
-}
-
-/*
 Estilo del buscador
 */
 

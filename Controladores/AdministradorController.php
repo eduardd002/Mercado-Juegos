@@ -124,9 +124,9 @@
                                 $ingreso = $administrador->login();
                                 //Crear sesion de inicio de sesion
                                 $_SESSION['login_exitosoa'] = $ingreso;
-                                $_SESSION['login_exitosoinfo'] = "Bienvenido";
+                                $_SESSION['login_exitosoinfoa'] = "Bienvenido administrador";
                                 //Redirigir al menu principal
-                                header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=inicio");
+                                header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
                             }else{
                                 //Crear sesion que indique que la ruta de correo ya esta en uso
                                 $_SESSION['RegistroAdministrador'] = "Ya hay una ruta de correo en uso";

@@ -100,7 +100,7 @@
                                 $ingreso = $usuario->login();
                                 //Crear sesion de inicio de sesion
                                 $_SESSION['login_exitoso'] = $ingreso;
-                                $_SESSION['login_exitosoinfo'] = "Bienvenido";
+                                $_SESSION['login_exitosoinfo'] = "Bienvenido Usuario";
                                 //Redirigir al menu principal
                                 header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
                             }else{
@@ -170,11 +170,13 @@
                     if($ingreso && is_object($ingreso)){
                         //Crear la sesion con el objeto completo del usuario
                         $_SESSION['login_exitoso'] = $ingreso;
+                        $_SESSION['login_exitosoinfo'] = "Bienvenido Usuario";
                         //Redirigir al inicio
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
                     }else if($ingresoa && is_object($ingresoa)){
                         //Crear la sesion con el objeto completo del administrador
                         $_SESSION['login_exitosoa'] = $ingresoa;
+                        $_SESSION['login_exitosoinfoa'] = "Bienvenido administrador";
                         //Redirigir al inicio
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
                     }else{

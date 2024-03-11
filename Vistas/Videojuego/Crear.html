@@ -14,7 +14,7 @@
     
     <h1>Crear videojuego</h1>
     <form action="<?=rutaInicio?><?=videojuego?><?=guardar?>" method="post" enctype="multipart/form-data">
-        <img src="Recursos/Logotipos/videojuego.png" class="ventaImage" alt="Logo videojuego">
+        <img src="Recursos/Logotipos/videojuego.png" class="registerImage" alt="Logo videojuego">
         <div id="bloqueTextoRegistro">
             <label for="nombre">Nombre</label>
             <input type="text" name="nombre" required>
@@ -41,12 +41,12 @@
                 <?php endwhile; ?>
             </select>
         </div>
-        <input type="file" name="foto">
-        <label class="subirFotoPerfil">*Subir foto*</label>
         <div id="bloqueTextoRegistro">
             <label for="precio">Precio</label>
             <input type="number" name="precio" required>
         </div>
+        <input type="file" name="foto">
+        <label class="subirFotoPerfil">*Subir foto*</label>
         <div id="bloqueTextoRegistro">
             <label for="stock">Stock</label>
             <input type="number" name="stock" required>
