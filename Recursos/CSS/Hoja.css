@@ -1976,3 +1976,14 @@ Estilo del boton de eliminar cuenta propio de perfil de usuario
     /*Sin decoracion de texto*/
     text-decoration: none;
 }
+
+/*
+Estilo de los titulos de creacion de las gestiones
+*/
+
+.tituloCreacionGestiones{
+    /*Limpiar flotados*/
+    clear: both;
+    /*Comportamiento de bloque*/
+    display: block;
+}
