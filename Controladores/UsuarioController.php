@@ -38,14 +38,14 @@
             if(isset($_POST)){
 
                 //Comprobar si cada dato existe
-                $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
-                $apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : false;
-                $fechaNacimiento = isset($_POST['fechaNacimiento']) ? $_POST['fechaNacimiento'] : false;
-                $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : false;
-                $email = isset($_POST['email']) ? $_POST['email'] : false;
-                $clave = isset($_POST['password']) ? $_POST['password'] : false;
-                $departamento = isset($_POST['departamento']) ? $_POST['departamento'] : false;
-                $municipio = isset($_POST['municipio']) ? $_POST['municipio'] : false;
+                $nombre = isset($_POST['nombreusu']) ? $_POST['nombreusu'] : false;
+                $apellidos = isset($_POST['apellidosusu']) ? $_POST['apellidosusu'] : false;
+                $fechaNacimiento = isset($_POST['fechaNacimientousu']) ? $_POST['fechaNacimientousu'] : false;
+                $telefono = isset($_POST['telefonousu']) ? $_POST['telefonousu'] : false;
+                $email = isset($_POST['emailusu']) ? $_POST['emailusu'] : false;
+                $clave = isset($_POST['passwordusu']) ? $_POST['passwordusu'] : false;
+                $departamento = isset($_POST['departamentousu']) ? $_POST['departamentousu'] : false;
+                $municipio = isset($_POST['municipiousu']) ? $_POST['municipiousu'] : false;
 
                 //Comprobar si todos los datos exsiten
                 if($nombre && $apellidos && $fechaNacimiento && $telefono && $clave && $email && $departamento && $municipio){

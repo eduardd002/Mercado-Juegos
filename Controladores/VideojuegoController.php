@@ -102,7 +102,7 @@
             if(isset($_POST)){
 
                 //Comprobar si el dato existe
-                $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
+                $nombre = isset($_POST['nombrebus']) ? $_POST['nombrebus'] : false;
 
                 //Comprobar el dato exsiten
                 if($nombre){
@@ -133,19 +133,21 @@
 
         public function guardar(){
 
+            //Comprobar si existe la sesion de usuario logueado
+            $usuarioId = isset($_SESSION['login_exitoso']) ? $_SESSION['login_exitoso'] -> id : false;
+
             //Comprobar si los datos están llegando
             if(isset($_POST)){
 
                 //Comprobar si cada dato existe
-                $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
-                $consola = isset($_POST['consola']) ? $_POST['consola'] : false;
-                $uso = isset($_POST['uso']) ? $_POST['uso'] : false;
-                $precio = isset($_POST['precio']) ? $_POST['precio'] : false;
-                $stock = isset($_POST['stock']) ? $_POST['stock'] : false;
-                $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : false;
-                $categorias = isset($_POST['categorias']) ? $_POST['categorias'] : false;
-                $usuarioId = isset($_SESSION['login_exitoso']) ? $_SESSION['login_exitoso'] -> id : false;
-
+                $nombre = isset($_POST['nombrevid']) ? $_POST['nombrevid'] : false;
+                $consola = isset($_POST['consolavid']) ? $_POST['consolavid'] : false;
+                $uso = isset($_POST['usovid']) ? $_POST['usovid'] : false;
+                $precio = isset($_POST['preciovid']) ? $_POST['preciovid'] : false;
+                $stock = isset($_POST['stockvid']) ? $_POST['stockvid'] : false;
+                $descripcion = isset($_POST['descripcionvid']) ? $_POST['descripcionvid'] : false;
+                $categorias = isset($_POST['categoriasvid']) ? $_POST['categoriasvid'] : false;
+            
                 //Comprobar si todos los datos exsiten
                 if($nombre && $consola && $uso && $precio && $descripcion && $stock){
 
