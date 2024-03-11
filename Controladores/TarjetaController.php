@@ -12,7 +12,7 @@
         public function crear(){
 
             //Incluir la vista
-            require_once "Vistas/Administrador/CrearTarjetas.html";
+            require_once "Vistas/Tarjeta/Crear.html";
         }
 
         /*

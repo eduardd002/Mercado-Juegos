@@ -12,7 +12,7 @@
         public function crear(){
 
             //Incluir la vista
-            require_once "Vistas/Administrador/CrearUsos.html";
+            require_once "Vistas/Uso/Crear.html";
         }
 
         /*

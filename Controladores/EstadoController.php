@@ -13,7 +13,7 @@
         public function crear(){
 
             //Incluir la vista
-            require_once "Vistas/Administrador/CrearEstados.html";
+            require_once "Vistas/Estado/Crear.html";
         }
 
         /*

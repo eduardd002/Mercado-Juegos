@@ -15,15 +15,15 @@
             <div id="titulo">
                 <img src="Recursos/Logotipos/Logo.png" alt="Logo tienda">
                 <h1>MERCADO JUEGOS</h1>
-                <?php if(!isset($_SESSION['login_exitosoa'])) : ?>
-                    <div id="buscador">
-                        <form action="<?=rutaInicio?><?=videojuego?><?=buscar?>" method="post">
-                            <input type="text" placeholder="Busca un videojuego" name="nombrebus" required>
-                            <input type="image" src="Recursos/Logotipos/lupa.png" alt="Logo tienda">
-                        </form>
-                    </div>
-                <?php endif; ?> 
             </div>
+            <?php if(!isset($_SESSION['login_exitosoa'])) : ?>
+                <form action="<?=rutaInicio?><?=videojuego?><?=buscar?>" method="post">
+                    <div id="buscador">
+                        <input type="text" placeholder="Busca un videojuego" name="nombrebus" required>
+                        <input type="image" src="Recursos/Logotipos/lupa.png" alt="Logo tienda">
+                    </div>
+                </form>
+            <?php endif; ?> 
             <div id="menuPrincipal">
                 <ul>
                     <?php if(isset($_SESSION['login_exitoso']) || isset($_SESSION['login_exitosoa'])) : ?>

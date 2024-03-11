@@ -27,7 +27,9 @@
 <?php Ayudas::eliminarSesion('RegistroVideojuego'); ?>
 
 <div id="contenidoCentral">
-    <?php if(mysqli_num_rows($listadoAlgunos) > 0) : ?>
+    <?php if(mysqli_num_rows($listadoAlgunos) <= 5) : ?>
+        <h1>Todos los Videojuegos</h1>
+    <?php elseif(mysqli_num_rows($listadoAlgunos) > 6) : ?>
         <h1>Algunos Videojuegos</h1>
     <?php else : ?>
         <h1>No hay Videojuegos</h1>

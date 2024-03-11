@@ -39,21 +39,31 @@
     define("administrar", "&action=administrar");
     define("registroAdmin", "&action=registro");
     define("guardarAdmin", "&action=guardar");
-    define("uso", "&action=crearUso");
-    define("guardarUso", "&action=guardarUso");
     define("gestionarUso", "&action=gestionarUso");
-    define("categoria", "&action=crearCategoria");
-    define("guardarCategoria", "&action=guardarCategoria");
     define("gestionarCategoria", "&action=gestionarCategoria");
     define("gestionarUsuario", "&action=gestionarUsuario");
-    define("consola", "&action=crearConsola");
-    define("guardarConsola", "&action=guardarConsola");
     define("gestionarConsola", "&action=gestionarConsola");
-    define("estado", "&action=crearEstado");
-    define("guardarEstado", "&action=guardarEstado");
     define("gestionarEstado", "&action=gestionarEstado");
-    define("tarjeta", "&action=crearTarjeta");
-    define("guardarTarjeta", "&action=guardarTarjeta");
     define("gestionarTarjeta", "&action=gestionarTarjeta");
+
+    define("uso", "/?controller=UsoController");
+    define("crearUso", "&action=crear");
+    define("guardarUso", "&action=guardar");
+
+    define("estado", "/?controller=EstadoController");
+    define("crearEstado", "&action=crear");
+    define("guardarEstado", "&action=guardar");
+
+    define("tarjeta", "/?controller=TarjetaController");
+    define("crearTarjeta", "&action=crear");
+    define("guardarTarjeta", "&action=guardar");
+
+    define("consola", "/?controller=ConsolaController");
+    define("crearConsola", "&action=crear");
+    define("guardarConsola", "&action=guardar");
+
+    define("categoria", "/?controller=CategoriaController");
+    define("crearCategoria", "&action=crear");
+    define("guardarCategoria", "&action=guardar");
 
 ?>

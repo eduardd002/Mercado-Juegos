@@ -116,6 +116,8 @@ Estilo del titulo principal de la tienda
     /*Transicion*/
     transition: all 300ms;
 }
+
+/*
 Estilo del buscador
 */
 
@@ -123,9 +125,7 @@ Estilo del buscador
     /*Flotar hacia la izquierda*/
     float: left;
     /*Margen superior*/
-    margin-top: 33px;
-    /*Margen izquierdo*/
-    margin-left: 20px;
+    margin-top: 50px;
 }
 
 /*
@@ -150,6 +150,10 @@ Estilo del campo de texto de la barra del buscador
     height: 20px;
     /*Anchor*/
     width: 130px;
+    /*Flotar hacia la izquierda*/
+    float: left !important;
+    /*Margen derecho*/
+    margin-right: 10px;
 }
 
 /*
@@ -286,7 +290,7 @@ Estilo del la ultima seccion de submenus
 */
 
 #menuPrincipal ul li ul li{
-    /*Flotar hacia la izquierda*/
+    /*No flotar*/
     float: none;
 }
 
@@ -1915,4 +1919,60 @@ Estilo particular de la imagen del registro de usuario tanto como admin como usu
     width: 240px !important;
     /*Altura*/
     height: 230px !important;
+}
+
+/*
+Estilo de seccion de botones en mi perfil
+*/
+
+#botonesMiPerfil{
+    /*Margen izquierdo*/
+    margin-left: 300px;
+    /*Margen superior*/
+    margin-top: 30px;
+}
+
+/*
+Estilo de cada uno de los de botones en mi perfil
+*/
+
+#botonesMiPerfil li{
+    /*Margen izquierdo*/
+    margin-left: 60px;
+    /*Margen derecho*/
+    margin-right: 60px;
+    /*Flotar hacia la izquierda*/
+    float: left;
+    /*Sin estilo de lista*/
+    list-style: none;
+}
+
+/*
+Estilo del boton de eliminar cuenta propio de perfil de usuario
+*/
+
+.eliminarCuentaMiPerfil{
+    font-size: 13px;
+    /*Margen centrado*/
+    margin: 0px auto;
+    /*Borde redondo*/
+    border-radius: 2px;
+    /*Margen interior derecho*/
+    padding-right: 30px;
+    /*Margen interior izquierdo*/
+    padding-left: 30px;
+    /*Margen interior superior*/
+    padding-top: 5px;
+    /*Margen interior inferior*/
+    padding-bottom: 5px;
+    /*Color de letra*/
+    color: white !important;
+    /*Color de fondo*/
+    background: red;
+    /*Borde*/
+    border: 1px solid #861a02;
+    /*Cambiar apariencia del cursor*/
+    cursor: pointer;
+    /*Sin decoracion de texto*/
+    text-decoration: none;
 }

@@ -12,7 +12,7 @@
         public function crear(){
 
             //Incluir la vista
-            require_once "Vistas/Administrador/CrearCategorias.html";
+            require_once "Vistas/Categoria/Crear.html";
         }
 
         /*

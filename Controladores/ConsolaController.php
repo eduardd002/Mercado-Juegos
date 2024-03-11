@@ -12,7 +12,7 @@
         public function crear(){
 
             //Incluir la vista
-            require_once "Vistas/Administrador/CrearConsolas.html";
+            require_once "Vistas/Consola/Crear.html";
         }
 
         /*
