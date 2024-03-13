@@ -64,6 +64,16 @@
             //Retornar el resultado
             return $resultado;
         }
+
+        public function listar(){
+
+            //Construir la consulta
+            $consulta = "SELECT * FROM chats WHERE idComprador = {$this -> getIdComprador()} AND idVendedor = {$this -> getIdVendedor()}";
+            //Ejecutar la consulta
+            $listaMensajes = $this -> db -> query($consulta);
+            //Retornar el resultado
+            return $listaMensajes;
+        }
     }
 
 ?>

@@ -1,5 +1,8 @@
 <div id="loginYRegistro">
     <h1 class="tituloCreacionGestiones">Chat</h1>
+    <?php while($listado = $listadoMensajes -> fetch_object()) : ?>
+        <p><?=$listado -> mensaje?></p>
+    <?php endwhile; ?>
     <form action="<?=rutaInicio?><?=chat?><?=guardarMensaje?>" method="post">
         <div id="bloqueTextoRegistro">
             <input type="text" name="mensajec" required>

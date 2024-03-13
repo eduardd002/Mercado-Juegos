@@ -6,6 +6,14 @@
     class ChatController{
 
         public function enviar(){
+
+            //Instaciar el objeto
+            $chat = new Chat();
+            //Traer los datos de la consulta
+            $chat -> setIdComprador($_SESSION['login_exitoso'] -> id);
+            $chat -> setIdVendedor(1);
+            $listadoMensajes = $chat -> listar();
+
             //Incluir la vista
             require_once "Vistas/Chat/Comprador.html";
         }
@@ -24,7 +32,7 @@
 
                     //Crear el objeto
                     $chat -> setMensaje($mensaje);
-                    $chat -> setIdComprador(1);
+                    $chat -> setIdComprador($_SESSION['login_exitoso'] -> id);
                     $chat -> setIdVendedor(1);
 
                     //Guardar en la base de datos
