@@ -43,7 +43,7 @@
                         //Crear sesion de uso creado
                         $_SESSION['usocreado'] = 'El uso ha sido creado con exito';
                         //Redirigir al menu principal
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administrar");
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
                     }else{
                         //Crear sesion que indique que ha habido un error al guardar el uso
                         $_SESSION['usonocreado'] = 'El uso no ha sido creado con exito';

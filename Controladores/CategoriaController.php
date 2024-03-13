@@ -43,7 +43,7 @@
                         //Crear sesion de categoria creada
                         $_SESSION['categoriacreada'] = 'La categoria ha sido creada con exito';
                         //Redirigir al menu principal
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administrar");
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
                     }else{
                         //Crear sesion que indique que ha habido un error al guardar la categoria
                         $_SESSION['categoriacreada'] = 'La categoria no ha sido creada con exito';

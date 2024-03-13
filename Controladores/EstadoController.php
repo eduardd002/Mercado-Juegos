@@ -44,7 +44,7 @@
                         //Crear sesion de estado creado
                         $_SESSION['estadocreado'] = 'El estado ha sido creado con exito';
                         //Redirigir al menu principal
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administrar");
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
                     }else{
                         //Crear sesion que indique que ha habido un error al guardar el estado
                         $_SESSION['categorianocreada'] = 'El estado no ha sido creado con exito';

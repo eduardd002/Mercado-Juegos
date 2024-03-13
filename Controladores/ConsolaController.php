@@ -43,7 +43,7 @@
                         //Crear sesion de consola creada
                         $_SESSION['consolacreada'] = 'La consola ha sido creada con exito';
                         //Redirigir al menu principal
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administrar");
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
                     }else{
                         //Crear sesion que indique que ha habido un error al guardar la consola
                         $_SESSION['consolanocreada'] = 'La consola no ha sido creada con exito';

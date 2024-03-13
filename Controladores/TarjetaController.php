@@ -43,7 +43,7 @@
                         //Crear sesion de tarjeta creada
                         $_SESSION['tarjetacreada'] = 'La tarjeta ha sido creada con exito';
                         //Redirigir al menu principal
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=administrar");
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
                     }else{
                         //Crear sesion que indique que ha habido un error al guardar la tarjeta
                         $_SESSION['tarjetanocreada'] = 'La tarjeta no ha sido creada con exito';
