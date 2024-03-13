@@ -172,3 +172,15 @@ CREATE TABLE categorias (
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT categorias_pk PRIMARY KEY ( id )
 );
+
+/*Crea tabla de chats*/
+CREATE TABLE chats (
+    id     INTEGER auto_increment NOT NULL,
+    mensaje VARCHAR(200) NOT NULL,
+    idComprador INTEGER NOT NULL,
+    idVendedor INTEGER NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT categorias_pk PRIMARY KEY ( id ),
+    CONSTRAINT chat_vendedor_fk FOREIGN KEY ( idVendedor ) REFERENCES usuarios ( id ),
+    CONSTRAINT chat_comprador_fk FOREIGN KEY ( idComprador ) REFERENCES usuarios ( id )
+);

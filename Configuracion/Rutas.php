@@ -70,4 +70,7 @@
     define("guardarCategoria", "&action=guardar");
     define("eliminarCateogoria", "&action=eliminar");
 
+    define("chat", "/?controller=ChatController");
+    define("enviarMensaje", "&action=enviar");
+    define("guardarMensaje", "&action=guardar");
 ?>
