@@ -173,14 +173,23 @@ CREATE TABLE categorias (
     CONSTRAINT categorias_pk PRIMARY KEY ( id )
 );
 
+/*Crea tabla de mensajes*/
+CREATE TABLE mensajes(
+    id     INTEGER auto_increment NOT NULL,
+    idRemitente INTEGER NOT NULL,
+    contenido TEXT NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT mensajes_pk PRIMARY KEY ( id ),
+    CONSTRAINT mensaje_remitente_fk FOREIGN KEY ( idRemitente ) REFERENCES usuarios ( id )
+);
+
 /*Crea tabla de chats*/
 CREATE TABLE chats (
     id     INTEGER auto_increment NOT NULL,
-    mensaje VARCHAR(200) NOT NULL,
-    idComprador INTEGER NOT NULL,
-    idVendedor INTEGER NOT NULL,
+    idMensaje INTEGER NOT NULL,
+    idDestinatario INTEGER NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT categorias_pk PRIMARY KEY ( id ),
-    CONSTRAINT chat_vendedor_fk FOREIGN KEY ( idVendedor ) REFERENCES usuarios ( id ),
-    CONSTRAINT chat_comprador_fk FOREIGN KEY ( idComprador ) REFERENCES usuarios ( id )
+    CONSTRAINT chats_pk PRIMARY KEY ( id ),
+    CONSTRAINT chat_mensaje_fk FOREIGN KEY ( idMensaje ) REFERENCES mensajes ( id ),
+    CONSTRAINT chats_destinatario_fk FOREIGN KEY ( idDestinatario ) REFERENCES usuarios ( id )
 );

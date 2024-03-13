@@ -1,10 +1,10 @@
 <?php
 
-    class Chat{
+    class Mensaje{
 
         private $id;
-        private $idMensaje;
-        private $idDestinatario;
+        private $idRemitente;
+        private $contenido;
         private $db;
 
         public function __construct(){
@@ -20,28 +20,28 @@
             return $this;
         }
 
-        public function getIdMensaje(){
-            return $this->idMensaje;
+        public function getIdRemitente(){
+            return $this->idRemitente;
         }
 
-        public function setIdMensaje($idMensaje){
-            $this->idMensaje = $idMensaje;
+        public function setIdRemitente($idRemitente){
+            $this->idRemitente = $idRemitente;
             return $this;
         }
 
-        public function getIdDestinatario(){
-            return $this->idDestinatario;
+        public function getContenido(){
+            return $this->contenido;
         }
 
-        public function setIdDestinatario($idDestinatario){
-            $this->idDestinatario = $idDestinatario;
+        public function setContenido($contenido){
+            $this->contenido = $contenido;
             return $this;
         }
 
         public function guardar(){
 
             //Construir la consulta
-            $consulta = "INSERT INTO chats VALUES(NULL, {$this -> getIdMensaje()}, {$this -> getIdDestinatario()})";
+            $consulta = "INSERT INTO mensajes VALUES(NULL, {$this -> getIdRemitente()}, '{$this -> getContenido()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera
@@ -53,6 +53,17 @@
             }
             //Retornar el resultado
             return $resultado;
+        }
+
+        public function ultimoMensaje(){
+            //Construir la consulta
+            $consulta = "SELECT id FROM mensajes ORDER BY id DESC LIMIT 1";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Obtener el resultado del objeto
+            $ultimo = $resultado -> fetch_object();
+            //Retornar el resultado
+            return $ultimo;
         }
     }
 
