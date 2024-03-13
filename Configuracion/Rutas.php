@@ -13,6 +13,7 @@
     define("compras", "&action=compras");
     define("ventas", "&action=ventas");
     define("videojuegos", "&action=videojuegos");
+    define("eliminarUsuario", "&action=eliminar");
 
     define("videojuego", "/?controller=VideojuegoController");
     define("inicio", "&action=inicio");
@@ -40,6 +41,7 @@
     define("registroAdmin", "&action=registro");
     define("guardarAdmin", "&action=guardar");
     define("gestionarUso", "&action=gestionarUso");
+    define("eliminarUsuarioAdministrador", "&action=eliminarUsuario");
     define("gestionarCategoria", "&action=gestionarCategoria");
     define("gestionarUsuario", "&action=gestionarUsuario");
     define("gestionarConsola", "&action=gestionarConsola");
@@ -61,9 +63,11 @@
     define("consola", "/?controller=ConsolaController");
     define("crearConsola", "&action=crear");
     define("guardarConsola", "&action=guardar");
+    define("eliminarConsola", "&action=eliminar");
 
     define("categoria", "/?controller=CategoriaController");
     define("crearCategoria", "&action=crear");
     define("guardarCategoria", "&action=guardar");
+    define("eliminarCateogoria", "&action=eliminar");
 
 ?>

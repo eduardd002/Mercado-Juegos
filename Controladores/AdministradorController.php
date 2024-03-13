@@ -231,5 +231,44 @@
             //Incluir la vista
             require_once "Vistas/Administrador/GestionEstados.html";
         }
+
+        /*
+        Funcion para eliminar un usuario desde el administrador
+        */
+
+        public function eliminarUsuario(){
+            
+            //Comprobar si los datos están llegando
+            if(isset($_GET)){
+
+                //Comprobar si el dato existe
+                $idUsuario = isset($_GET['id']) ? $_GET['id'] : false;
+
+                //Si el dato existe
+                if($idUsuario){
+
+                    //Instanciar el objeto
+                    $usuario = new Usuario();
+
+                    //Crear objeto
+                    $usuario -> setId($idUsuario);
+
+                    //Ejecutar la consulta
+                    $eliminado = $usuario -> eliminar();
+
+                    if($eliminado){
+                        //Crear Sesion que indique que el usuario se ha eliminado con exito
+                        $_SESSION['usuarioeliminado'] = "El usuario ha sido eliminado exitosamente";
+                        //Redirigir al formulario de registro
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+                    }else{
+                        //Crear Sesion que indique que el usuario se ha eliminado con exito
+                        $_SESSION['usuarioeliminado'] = "El usuario no ha sido eliminado exitosamente";
+                        //Redirigir al formulario de registro
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=gestionarUsuario");
+                    }
+                }  
+            }
+        }
     }
 ?>

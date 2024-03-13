@@ -13,7 +13,7 @@
                     <td><?=$categorias -> id?></td>
                     <td><?=$categorias -> nombre?></td>
                     <td><a href="<?=rutaInicio?><?=videojuego?><?=actualizarVideojuego?>" class="button button-actualizarVideojuego">Actualizar</a></td>
-                    <td><a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-eliminarVideojuego">Eliminar</a></td>
+                    <td><a href="<?=rutaInicio?><?=categoria?><?=eliminarCateogoria?>&id=<?=$categorias -> id?>" class="button button-eliminarVideojuego">Eliminar</a></td>
                 </tr>
             <?php endwhile;?>
         </table>

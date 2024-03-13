@@ -4,6 +4,28 @@
     </div>
 <?php endif; ?>
 <?php Ayudas::eliminarSesion('login_exitosoinfoa'); ?>
+
+<?php if(isset($_SESSION['usuarioeliminado']) && $_SESSION['usuarioeliminado'] == 'El usuario ha sido eliminado exitosamente') : ?>
+    <div class="alerta alerta-acierto">
+        <?=$_SESSION['usuarioeliminado']; ?>
+    </div>
+<?php endif; ?> 
+<?php Ayudas::eliminarSesion('usuarioeliminado'); ?>
+
+<?php if(isset($_SESSION['categoriaeliminada']) && $_SESSION['categoriaeliminada'] == 'La categoria ha sido eliminada exitosamente') : ?>
+    <div class="alerta alerta-acierto">
+        <?=$_SESSION['categoriaeliminada']; ?>
+    </div>
+<?php endif; ?> 
+<?php Ayudas::eliminarSesion('categoriaeliminada'); ?>
+
+<?php if(isset($_SESSION['consolaeliminada']) && $_SESSION['consolaeliminada'] == 'La consola ha sido eliminada exitosamente') : ?>
+    <div class="alerta alerta-acierto">
+        <?=$_SESSION['consolaeliminada']; ?>
+    </div>
+<?php endif; ?> 
+<?php Ayudas::eliminarSesion('consolaeliminada'); ?>
+
 <div id="administradorpanel">
     <img src="Recursos/Logotipos/administrar.png" alt="Logo administrar">
     <ul>

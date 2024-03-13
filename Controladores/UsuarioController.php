@@ -190,6 +190,47 @@
         }
 
         /*
+        Funcion para eliminar la cuenta del usuario de la base de datos
+        */
+
+        public function eliminar(){
+            
+            //Comprobar si los datos están llegando
+            if(isset($_GET)){
+
+                //Comprobar si el dato existe
+                $idUsuario = isset($_GET['id']) ? $_GET['id'] : false;
+
+                //Si el dato existe
+                if($idUsuario){
+
+                    //Instanciar el objeto
+                    $usuario = new Usuario();
+
+                    //Crear objeto
+                    $usuario -> setId($idUsuario);
+
+                    //Ejecutar la consulta
+                    $eliminado = $usuario -> eliminar();
+
+                    if($eliminado){
+                        //Crear Sesion que indique que el usuario se ha eliminado con exito
+                        $_SESSION['usuarioeliminado'] = "El usuario ha sido eliminado exitosamente";
+                        //Redirigir al formulario de registro
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                        //Eliminar el inicio de sesion
+                        Ayudas::eliminarSesion('login_exitoso');
+                    }else{
+                        //Crear Sesion que indique que el usuario se ha eliminado con exito
+                        $_SESSION['usuarioeliminado'] = "El usuario no ha sido eliminado exitosamente";
+                        //Redirigir al formulario de registro
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=miPerfil");
+                    }
+                }  
+            }
+        }
+
+        /*
         Funcion para cerrar la sesión
         */
 

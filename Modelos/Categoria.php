@@ -62,6 +62,24 @@
             return $lista;
         }
 
+        /*
+        Funcion para eliminar la categoria
+        */
+
+        public function eliminar(){
+            //Construir la consulta
+            $consulta = "DELETE FROM categorias WHERE id = {$this -> id}";
+            //Ejecutar la consulta
+            $eliminado = $this -> db -> query($consulta);
+            //Crear bandera
+            $bandera = false;
+            //Comprobar si la consulta se realizo exitosamente
+            if($eliminado){
+                $bandera = true;
+            }
+            //Retorno el resultado
+            return $bandera;
+        }
     }
 
 ?>

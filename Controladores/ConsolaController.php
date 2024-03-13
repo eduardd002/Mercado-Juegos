@@ -54,6 +54,45 @@
             }
         }
 
+        /*
+        Funcion para eliminar una consola
+        */
+
+        public function eliminar(){
+            
+            //Comprobar si los datos están llegando
+            if(isset($_GET)){
+
+                //Comprobar si el dato existe
+                $idConsola = isset($_GET['id']) ? $_GET['id'] : false;
+
+                //Si el dato existe
+                if($idConsola){
+
+                    //Instanciar el objeto
+                    $consola = new Consola();
+
+                    //Crear objeto
+                    $consola -> setId($idConsola);
+
+                    //Ejecutar la consulta
+                    $eliminado = $consola -> eliminar();
+
+                    if($eliminado){
+                        //Crear Sesion que indique que el consola se ha eliminado con exito
+                        $_SESSION['consolaeliminada'] = "La consola ha sido eliminada exitosamente";
+                        //Redirigir al formulario de registro
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+                    }else{
+                        //Crear Sesion que indique que la consola se ha eliminado con exito
+                        $_SESSION['consolaeliminada'] = "La consola no ha sido eliminada exitosamente";
+                        //Redirigir al formulario de registro
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=gestionarConsola");
+                    }
+                }  
+            }
+        }
+
     }
 
 ?>

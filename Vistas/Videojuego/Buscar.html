@@ -5,7 +5,7 @@
             <img src="Recursos/ImagenesVideojuegos/<?=$listadoVidejuegosBuscados -> foto?>" alt="Videojuego">
             <h2><?=$listadoVidejuegosBuscados -> nombre?></h2>
             <p><?=$listadoVidejuegosBuscados -> precio?></p>
-            <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>">Ver ahora</a>
+            <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>&id=<?=$listadoVidejuegosBuscados -> id?>">Ver ahora</a>
         </div>
     <?php endwhile;?>
 </div>
