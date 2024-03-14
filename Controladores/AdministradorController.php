@@ -155,6 +155,47 @@
         }
 
         /*
+        Funcion para eliminar la cuenta del administrador de la base de datos
+        */
+
+        public function eliminar(){
+            
+            //Comprobar si los datos están llegando
+            if(isset($_GET)){
+
+                //Comprobar si el dato existe
+                $idUsuario = isset($_GET['id']) ? $_GET['id'] : false;
+
+                //Si el dato existe
+                if($idUsuario){
+
+                    //Instanciar el objeto
+                    $administrador = new Administrador();
+
+                    //Crear objeto
+                    $administrador -> setId($idUsuario);
+
+                    //Ejecutar la consulta
+                    $eliminado = $administrador -> eliminar();
+
+                    if($eliminado){
+                        //Crear Sesion que indique que el usuario se ha eliminado con exito
+                        $_SESSION['admineliminado'] = "El administrador ha sido eliminado exitosamente";
+                        //Redirigir al formulario de registro
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                        //Eliminar el inicio de sesion
+                        Ayudas::eliminarSesion('login_exitosoa');
+                    }else{
+                        //Crear Sesion que indique que el usuario se ha eliminado con exito
+                        $_SESSION['admineliminado'] = "El administrador no ha sido eliminado exitosamente";
+                        //Redirigir al formulario de registro
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=miPerfil");
+                    }
+                }  
+            }
+        }
+
+        /*
         Funcion para gestionar los usuarios
         */
 

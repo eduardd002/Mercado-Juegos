@@ -28,7 +28,7 @@
                 <ul>
                     <?php if(isset($_SESSION['login_exitoso']) || isset($_SESSION['login_exitosoa'])) : ?>
                         <?php if(isset($_SESSION['login_exitosoa']) && !(isset($_SESSION['login_exitoso']))) : ?>
-                            <li><img src="Recursos/ImagenesAdministradores/<?=$_SESSION['login_exitosoa'] -> foto?>" alt="Logo usuario">Hola!, Alexandra</a>
+                            <li><img src="Recursos/ImagenesAdministradores/<?=$_SESSION['login_exitosoa'] -> foto?>" alt="Logo usuario">Hola!, <?=$_SESSION['login_exitosoa'] -> nombre?></a>
                             <li><a href="<?=rutaInicio?><?=administrador?><?=miPerfil?>">Mi perfil</a></li>
                         <?php elseif(isset($_SESSION['login_exitoso']) && !(isset($_SESSION['login_exitosoa']))) : ?>
                             <li>

@@ -195,3 +195,17 @@ CREATE TABLE chats (
     CONSTRAINT chat_mensaje_fk FOREIGN KEY ( idMensaje ) REFERENCES mensajes ( id ),
     CONSTRAINT chats_destinatario_fk FOREIGN KEY ( idDestinatario ) REFERENCES usuarios ( id )
 );
+
+/*Crea tabla de comentarios*/
+CREATE TABLE comentarios (
+    id     INTEGER auto_increment NOT NULL,
+    idUsuario INTEGER NOT NULL,
+    idVideojuego INTEGER NOT NULL,
+    contenido TEXT NOT NULL,
+    fechacreacion DATE NOT NULL,
+    horacreacion TIME NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT comentarios_pk PRIMARY KEY ( id ),
+    CONSTRAINT usuario_mensaje_fk FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id ),
+    CONSTRAINT videojuego_comentario_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
+);

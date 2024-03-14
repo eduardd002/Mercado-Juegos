@@ -20,6 +20,9 @@
         </div>
         <input type="file">
         <label class="subirFotoPerfil">*Subir nueva*</label>
-        <input type="submit" class="btnRegistro" value="Actualizar datos">
+        <div id="botonesadmin">
+            <input type="submit" class="btnRegistro-adminPerfil" value="Actualizar datos">
+            <a href="<?=rutaInicio?><?=administrador?><?=eliminarAdministrador?>&id=<?=$_SESSION['login_exitosoa'] -> id?>" class="eliminarCuentaMiPerfil" class="eliminarCuentaMiPerfil">Eliminar cuenta</a>
+        </div>
     </form>
 </div>

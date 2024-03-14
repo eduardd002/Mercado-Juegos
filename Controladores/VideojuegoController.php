@@ -6,6 +6,8 @@
     //Incluir el objeto de categoria
     require_once 'Modelos/Categoria.php';
 
+    require_once 'Modelos/Comentario.php';
+
     //Incluir el objeto de consola
     require_once 'Modelos/Consola.php';
 
@@ -57,6 +59,13 @@
                     $videojuegoEspecifico = $videojuego -> traerUno();
 
                     if($videojuegoEspecifico){
+
+                        //Instaciar el objeto
+                        $comentario = new Comentario();
+                        $comentario -> setIdVideojuego($id);
+                        //Traer los datos de la consulta
+                        $listadoTodos = $comentario -> listar();
+
                         //Incluir la vista
                         require_once 'Vistas/Videojuego/Detalle.html';
                     }else{

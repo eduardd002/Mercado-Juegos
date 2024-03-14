@@ -1975,6 +1975,7 @@ Estilo del boton de eliminar cuenta propio de perfil de usuario
     cursor: pointer;
     /*Sin decoracion de texto*/
     text-decoration: none;
+    margin-top: 410px !important;
 }
 
 /*
@@ -2130,5 +2131,86 @@ Estilo de el apartado de chat de comprador
 
 #usuarioChat p{
     float: none;
+    margin-bottom: 10px;
+}
+
+.btnRegistro-adminPerfil{
+    float: left;
+    margin: 0px !important;
+    margin-left: 300px !important;
+    margin-right: 300px !important;
+}
+
+#botonesadmin{
+    margin-top: 100px !important;
+    margin-bottom: 40px;
+}
+
+#botonesusuario{
+    margin-top: 40px !important;
+    margin-bottom: 40px;
+}
+
+#botonesadmin a{
+    color: #007EE5;
+}
+
+#bloquecomentario{
+    margin-left: 75px;
+}
+
+#bloquecomentario input[type="text"]{
+    height: 20px;
+    width: 500px;
+    float: left;
+    margin-left: 200px;
+    margin-right: 10px;
+}
+
+#bloquecomentario input[type="submit"]{
+    float: left;
+    width: 150px;
+}
+
+#bloquecomentario h2{
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.detalleVideojuego h6{
+    clear: both;
+    display: block;
+    margin-left: 75px;
+    margin-bottom: 20px;
+}
+
+#comentario{
+    clear: both;
+    display: block;
+    float: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 1000px;
+}
+
+#comentario img{
+    border-radius: 50%;
+    height: 90px;
+    width: 80px;
+    float: left;
+}
+
+#comentario h3{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#comentario h4{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#comentario h5{
+    margin-top: 10px;
     margin-bottom: 10px;
 }

@@ -47,6 +47,7 @@
     define("gestionarConsola", "&action=gestionarConsola");
     define("gestionarEstado", "&action=gestionarEstado");
     define("gestionarTarjeta", "&action=gestionarTarjeta");
+    define("eliminarAdministrador", "&action=eliminar");
 
     define("uso", "/?controller=UsoController");
     define("crearUso", "&action=crear");
@@ -77,4 +78,7 @@
     define("enviarMensaje", "&action=enviar");
     define("guardarMensaje", "&action=guardar");
     define("chats", "&action=chats");
+
+    define("comentario", "/?controller=ComentarioController");
+    define("guardarComentario", "&action=guardar");
 ?>
