@@ -62,6 +62,25 @@
             return $lista;
         }
 
+        /*
+        Funcion para eliminar la tarjeta
+        */
+
+        public function eliminar(){
+            //Construir la consulta
+            $consulta = "DELETE FROM tarjetas WHERE id = {$this -> id}";
+            //Ejecutar la consulta
+            $eliminado = $this -> db -> query($consulta);
+            //Crear bandera
+            $bandera = false;
+            //Comprobar si la consulta se realizo exitosamente
+            if($eliminado){
+                $bandera = true;
+            }
+            //Retorno el resultado
+            return $bandera;
+        }
+
     }
 
 ?>

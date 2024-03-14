@@ -61,6 +61,27 @@
 <?php endif; ?> 
 <?php Ayudas::eliminarSesion('consolaeliminada'); ?>
 
+<?php if(isset($_SESSION['usoeliminado']) && $_SESSION['usoeliminado'] == 'El uso ha sido eliminado exitosamente') : ?>
+    <div class="alerta alerta-acierto">
+        <?=$_SESSION['usoeliminado']; ?>
+    </div>
+<?php endif; ?> 
+<?php Ayudas::eliminarSesion('usoeliminado'); ?>
+
+<?php if(isset($_SESSION['estadoeliminado']) && $_SESSION['estadoeliminado'] == 'El estado ha sido eliminado exitosamente') : ?>
+    <div class="alerta alerta-acierto">
+        <?=$_SESSION['estadoeliminado']; ?>
+    </div>
+<?php endif; ?> 
+<?php Ayudas::eliminarSesion('estadoeliminado'); ?>}
+
+<?php if(isset($_SESSION['tarjetaeliminada']) && $_SESSION['tarjetaeliminada'] == 'La tarjeta ha sido eliminada exitosamente') : ?>
+    <div class="alerta alerta-acierto">
+        <?=$_SESSION['tarjetaeliminada']; ?>
+    </div>
+<?php endif; ?> 
+<?php Ayudas::eliminarSesion('tarjetaeliminada'); ?>
+
 <div id="administradorpanel">
     <img src="Recursos/Logotipos/administrar.png" alt="Logo administrar">
     <ul>

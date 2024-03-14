@@ -54,6 +54,45 @@
             }
         }
 
+        /*
+        Funcion para eliminar una tarjeta
+        */
+
+        public function eliminar(){
+            
+            //Comprobar si los datos están llegando
+            if(isset($_GET)){
+
+                //Comprobar si el dato existe
+                $idTarjeta = isset($_GET['id']) ? $_GET['id'] : false;
+
+                //Si el dato existe
+                if($idTarjeta){
+
+                    //Instanciar el objeto
+                    $tarjeta = new Tarjeta();
+
+                    //Crear objeto
+                    $tarjeta -> setId($idTarjeta);
+
+                    //Ejecutar la consulta
+                    $eliminado = $tarjeta -> eliminar();
+
+                    if($eliminado){
+                        //Crear Sesion que indique que la tarjeta se ha eliminado con exito
+                        $_SESSION['tarjetaeliminada'] = "La tarjeta ha sido eliminada exitosamente";
+                        //Redirigir al formulario de registro
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+                    }else{
+                        //Crear Sesion que indique que la tarjeta se ha eliminado con exito
+                        $_SESSION['tarjetaeliminada'] = "La tarjeta no ha sido eliminado exitosamente";
+                        //Redirigir al formulario de registro
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=gestionarTarjeta");
+                    }
+                }  
+            }
+        }
+
     }
 
 ?>

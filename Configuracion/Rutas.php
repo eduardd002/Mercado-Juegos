@@ -51,14 +51,17 @@
     define("uso", "/?controller=UsoController");
     define("crearUso", "&action=crear");
     define("guardarUso", "&action=guardar");
+    define("eliminarUso", "&action=eliminar");
 
     define("estado", "/?controller=EstadoController");
     define("crearEstado", "&action=crear");
     define("guardarEstado", "&action=guardar");
+    define("eliminarEstado", "&action=eliminar");
 
     define("tarjeta", "/?controller=TarjetaController");
     define("crearTarjeta", "&action=crear");
     define("guardarTarjeta", "&action=guardar");
+    define("eliminarTarjeta", "&action=eliminar");
 
     define("consola", "/?controller=ConsolaController");
     define("crearConsola", "&action=crear");

@@ -53,5 +53,44 @@
                 }
             }
         }
+
+        /*
+        Funcion para eliminar un uso
+        */
+
+        public function eliminar(){
+            
+            //Comprobar si los datos están llegando
+            if(isset($_GET)){
+
+                //Comprobar si el dato existe
+                $idUso = isset($_GET['id']) ? $_GET['id'] : false;
+
+                //Si el dato existe
+                if($idUso){
+
+                    //Instanciar el objeto
+                    $uso = new Uso();
+
+                    //Crear objeto
+                    $uso -> setId($idUso);
+
+                    //Ejecutar la consulta
+                    $eliminado = $uso -> eliminar();
+
+                    if($eliminado){
+                        //Crear Sesion que indique que el uso se ha eliminado con exito
+                        $_SESSION['usoeliminado'] = "El uso ha sido eliminado exitosamente";
+                        //Redirigir al formulario de registro
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+                    }else{
+                        //Crear Sesion que indique que el uso se ha eliminado con exito
+                        $_SESSION['usoeliminado'] = "El uso no ha sido eliminado exitosamente";
+                        //Redirigir al formulario de registro
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=gestionarUso");
+                    }
+                }  
+            }
+        }
     }
 ?>
