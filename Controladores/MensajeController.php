@@ -28,6 +28,8 @@
                     //Crear el objeto
                     $mensaje -> setIdRemitente($_SESSION['login_exitoso'] -> id);
                     $mensaje -> setContenido($contenido);
+                    $mensaje -> setFechaEnvio(date("d-m-y"));
+                    $mensaje -> setHoraEnvio(date("H:i:s"));
 
                     //Guardar en la base de datos
                     $guardado = $mensaje -> guardar();

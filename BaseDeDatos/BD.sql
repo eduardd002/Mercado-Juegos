@@ -178,6 +178,8 @@ CREATE TABLE mensajes(
     id     INTEGER auto_increment NOT NULL,
     idRemitente INTEGER NOT NULL,
     contenido TEXT NOT NULL,
+    fechaenvio   DATE NOT NULL,
+    horaenvio   TIME NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT mensajes_pk PRIMARY KEY ( id ),
     CONSTRAINT mensaje_remitente_fk FOREIGN KEY ( idRemitente ) REFERENCES usuarios ( id )

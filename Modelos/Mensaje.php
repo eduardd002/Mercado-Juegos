@@ -5,6 +5,8 @@
         private $id;
         private $idRemitente;
         private $contenido;
+        private $fechaEnvio;
+        private $horaEnvio;
         private $db;
 
         public function __construct(){
@@ -38,10 +40,30 @@
             return $this;
         }
 
+        public function getFechaEnvio(){
+            return $this->fechaEnvio;
+        }
+
+        public function setFechaEnvio($fechaEnvio){
+            $this->fechaEnvio = $fechaEnvio;
+            return $this;
+        }
+
+        public function getHoraEnvio(){
+            return $this->horaEnvio;
+        }
+
+        public function setHoraEnvio($horaEnvio){
+            $this->horaEnvio = $horaEnvio;
+            return $this;
+        }
+
         public function guardar(){
 
             //Construir la consulta
-            $consulta = "INSERT INTO mensajes VALUES(NULL, {$this -> getIdRemitente()}, '{$this -> getContenido()}')";
+            $consulta = "INSERT INTO mensajes VALUES(NULL, {$this -> getIdRemitente()}, 
+                '{$this -> getContenido()}', '{$this -> getFechaEnvio()}', 
+                '{$this -> getHoraEnvio()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera
