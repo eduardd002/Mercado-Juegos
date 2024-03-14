@@ -1102,7 +1102,7 @@ Estilo del vendedor del videojuego del detalle del videojuego
     /*Margen superior*/
     margin-top: 50px;
     /*Margen inferior*/
-    margin-bottom: 50px;
+    margin-bottom: 80px;
 }
 
 /*
@@ -2158,6 +2158,8 @@ Estilo de el apartado de chat de comprador
 
 #bloquecomentario{
     margin-left: 75px;
+    margin-top: 30px;
+    float: left;
 }
 
 #bloquecomentario input[type="text"]{
@@ -2173,7 +2175,6 @@ Estilo de el apartado de chat de comprador
 }
 
 #bloquecomentario h2{
-    margin-top: 80px;
     margin-bottom: 30px;
 }
 
@@ -2183,8 +2184,7 @@ Estilo de el apartado de chat de comprador
     clear: both;
     display: block;
     text-align: center;
-    margin-top: 130px;
-    margin-bottom: 25px;
+    margin-bottom: 50px;
     letter-spacing: 1px;
 }
 
@@ -2192,8 +2192,7 @@ Estilo de el apartado de chat de comprador
     clear: both;
     display: block;
     float: left;
-    margin-top: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     width: 1000px;
 }
 

@@ -29,14 +29,7 @@
         <p id="descripcionVideojuegoTexto"><?=$videojuegoEspecifico -> descripcion?></p>
         <h3 id="vendedorVideojuego">Vendido por: <a href="<?=rutaInicio?><?=usuario?><?=perfil?>">Marshall Mathers</a></h3>
     </div>
-    <form action="<?=rutaInicio?><?=comentario?><?=guardarComentario?>&id=<?=$videojuegoEspecifico -> id?>" method="post">
-        <div id="bloquecomentario">
-            <h2>¿Quieres agregar un comentario?</h2>
-            <input type="text" name="comentario" required>
-            <input type="submit" class="btnRegistro" value="Comentar">
-        </div>
-    </form>
-    <h6>Otros Comentarios</h6>
+    <h6>Comentarios</h6>
     <?php while($comentarios = $listadoTodos -> fetch_object()) : ?>
         <div id="comentario">
             <img src="Recursos/ImagenesVideojuegos/<?=$videojuegoEspecifico -> foto?>" alt="Logo videojuego">
@@ -53,4 +46,11 @@
             <?php endif; ?>
         </div>
     <?php endwhile; ?>
+    <div id="bloquecomentario">
+        <form action="<?=rutaInicio?><?=comentario?><?=guardarComentario?>&id=<?=$videojuegoEspecifico -> id?>" method="post">
+            <h2>¿Quieres agregar un comentario?</h2>
+            <input type="text" name="comentario" required>
+            <input type="submit" class="btnRegistro" value="Comentar">
+        </form>
+    </div>
 </div>
