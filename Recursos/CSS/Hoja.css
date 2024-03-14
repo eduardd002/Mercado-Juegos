@@ -1996,7 +1996,16 @@ Estilo de el apartado de chat de comprador
     margin: 50px;
 }
 
+#chatVendedor{
+    margin: 50px;
+}
+
 #chatComprador h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#chatVendedor h1{
     text-align: center;
     margin-bottom: 20px;
 }
@@ -2014,6 +2023,7 @@ Estilo de el apartado de chat de comprador
     border: 1px solid #144064;
     margin-bottom: 50px;
     height: 400px;
+    width: 500px;
     overflow-y: auto;
 }
 
@@ -2030,6 +2040,21 @@ Estilo de el apartado de chat de comprador
     margin-bottom: 50px;
     margin-right: 50px;
     margin-left: 60px;
+}
+
+#chatVendedor input[type="Submit"]{
+    float: left;
+    width: 70px;
+    height: 30px;
+}
+
+#chatVendedor input[type="Text"]{
+    float: left;
+    height: 26px;
+    width: 300px;
+    margin-bottom: 50px;
+    margin-right: 50px;
+    margin-left: 35px;
 }
 
 #campoEnviarMensaje{
@@ -2063,4 +2088,47 @@ Estilo de el apartado de chat de comprador
 
 #mensajerecibido p{
     color: #11608e;
+}
+
+#seccionUsuarios{
+    float: left;
+    margin-top: 30px;
+    overflow-y: auto;
+    height: 480px;
+    width: 450px;
+    border: 1px solid #333;
+}
+
+#seccionUsuarios a{
+    text-decoration: none;
+}
+
+#seccionChat{
+    float: right;
+    margin-top: 30px;
+}
+
+#usuarioChat{
+    border-bottom: 1px solid black;
+    margin: 20px;
+    clear: both;
+    display: block;
+}
+
+#usuarioChat img{
+    float: left;
+    width: 60px;
+    height: 65px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+#usuarioChat h2{
+    float: none;
+    margin-bottom: 20px;
+}
+
+#usuarioChat p{
+    float: none;
+    margin-bottom: 10px;
 }

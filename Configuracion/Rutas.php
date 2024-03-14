@@ -73,4 +73,5 @@
     define("mensaje", "/?controller=MensajeController");
     define("enviarMensaje", "&action=enviar");
     define("guardarMensaje", "&action=guardar");
+    define("chats", "&action=chats");
 ?>

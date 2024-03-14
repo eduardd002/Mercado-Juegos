@@ -13,6 +13,12 @@
             require_once "Vistas/Chat/Comprador.html";
         }
 
+        public function chats(){
+            
+            //Incluir la vista
+            require_once "Vistas/Chat/Vendedor.html";
+        }
+
         public function guardar(){
             //Comprobar si los datos están llegando
             if(isset($_POST)){
