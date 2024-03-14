@@ -164,29 +164,29 @@
             if(isset($_GET)){
 
                 //Comprobar si el dato existe
-                $idUsuario = isset($_GET['id']) ? $_GET['id'] : false;
+                $idAdmin = isset($_GET['id']) ? $_GET['id'] : false;
 
                 //Si el dato existe
-                if($idUsuario){
+                if($idAdmin){
 
                     //Instanciar el objeto
                     $administrador = new Administrador();
 
                     //Crear objeto
-                    $administrador -> setId($idUsuario);
+                    $administrador -> setId($idAdmin);
 
                     //Ejecutar la consulta
                     $eliminado = $administrador -> eliminar();
 
                     if($eliminado){
-                        //Crear Sesion que indique que el usuario se ha eliminado con exito
+                        //Crear Sesion que indique que el administrador se ha eliminado con exito
                         $_SESSION['admineliminado'] = "El administrador ha sido eliminado exitosamente";
                         //Redirigir al formulario de registro
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
                         //Eliminar el inicio de sesion
                         Ayudas::eliminarSesion('login_exitosoa');
                     }else{
-                        //Crear Sesion que indique que el usuario se ha eliminado con exito
+                        //Crear Sesion que indique que el administrador no se ha eliminado con exito
                         $_SESSION['admineliminado'] = "El administrador no ha sido eliminado exitosamente";
                         //Redirigir al formulario de registro
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=miPerfil");
@@ -300,12 +300,12 @@
                     if($eliminado){
                         //Crear Sesion que indique que el usuario se ha eliminado con exito
                         $_SESSION['usuarioeliminado'] = "El usuario ha sido eliminado exitosamente";
-                        //Redirigir al formulario de registro
+                        //Redirigir al inicio
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
                     }else{
-                        //Crear Sesion que indique que el usuario se ha eliminado con exito
+                        //Crear Sesion que indique que el usuario no se ha eliminado con exito
                         $_SESSION['usuarioeliminado'] = "El usuario no ha sido eliminado exitosamente";
-                        //Redirigir al formulario de registro
+                        //Redirigir a la gestion de usuarios
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=gestionarUsuario");
                     }
                 }  

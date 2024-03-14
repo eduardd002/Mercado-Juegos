@@ -1,15 +1,20 @@
 <?php
 
+    //Incluir el objeto de comentario
     require_once 'Modelos/Comentario.php';
 
     class ComentarioController{
+
+        /*
+        Funcion para guardar un comentario en la base de datos
+        */
 
         public function guardar(){
 
             //Comprobar si los datos están llegando
             if(isset($_POST) && (isset($_GET))){
 
-                //Comprobar si el dato existe
+                //Comprobar si los datos existen
                 $contenido = isset($_POST['comentario']) ? $_POST['comentario'] : false;
                 $videojuego = isset($_GET['id']) ? $_GET['id'] : false;
 
@@ -30,35 +35,17 @@
                     $guardado = $comentario -> guardar();
 
                     if($guardado){
-                        //Redirigir al registro de usuario
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=detalle&id=$videojuego");
+                        //Crear sesion que indique que el comentario se ha hecho exitosamente
+                        $_SESSION['comentariocreado'] = "El comentario se ha hecho con exito";
+                    }else{
+                        //Crear sesion que indique que el comentario no se ha hecho exitosamente
+                        $_SESSION['comentariocreado'] = "El comentario no se ha hecho con exito";
                     }
-
+                    //Redirigir al detalle del videojuego
+                    header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=detalle&id=$videojuego");
                 }
-
             }
-
         }
-        
-        public function listar(){
-
-            //Comprobar si los datos están llegando
-            if(isset($_GET)){
-
-                $videojuego = isset($_GET['id']) ? $_GET['id'] : false;
-
-
-
-       
-
-                //Incluir la vista
-                require_once 'Vistas/Videojuego/Detalle.html';
-
-            }
-
-            
-        }
-
     }
 
 ?>

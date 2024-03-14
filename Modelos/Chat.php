@@ -38,6 +38,10 @@
             return $this;
         }
 
+        /*
+        Funcion para guardar el chat en la base de datos
+        */
+
         public function guardar(){
 
             //Construir la consulta

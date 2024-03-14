@@ -6,6 +6,7 @@
     //Incluir el objeto de categoria
     require_once 'Modelos/Categoria.php';
 
+    //Incluir el objeto de comentario
     require_once 'Modelos/Comentario.php';
 
     //Incluir el objeto de consola
@@ -63,6 +64,7 @@
                         //Instaciar el objeto
                         $comentario = new Comentario();
                         $comentario -> setIdVideojuego($id);
+
                         //Traer los datos de la consulta
                         $listadoTodos = $comentario -> listar();
 
@@ -236,13 +238,13 @@
                     }else{
                         //Crear sesion que indique que la imagen debe ser de formato imagen
                         $_SESSION['RegistroVideojuego'] = "El formato debe ser de una imagen";
-                        //Redirigir al registro de usuario
+                        //Redirigir al registro de videojuego
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=crear");
                     }
                 }else{
                     //Crear sesion que indique que ha ocurrido un error inesperado al hacer el registro
                     $_SESSION['RegistroVideojuego'] = "Ha ocurrido un error al realizar el registro";
-                    //Redirigir al registro de usuario
+                    //Redirigir al registro de videojuego
                     header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=crear");
                 }
             }

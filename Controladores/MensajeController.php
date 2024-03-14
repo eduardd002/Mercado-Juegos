@@ -8,16 +8,28 @@
 
     class MensajeController{
 
+        /*
+        Funcion para cargar la vista de enviar mensaje
+        */
+
         public function enviar(){
             //Incluir la vista
             require_once "Vistas/Chat/Comprador.html";
         }
+
+        /*
+        Funcion para cargar los chats
+        */
 
         public function chats(){
             
             //Incluir la vista
             require_once "Vistas/Chat/Vendedor.html";
         }
+
+        /*
+        Funcion para guardar el chat en la base de datos
+        */
 
         public function guardar(){
             //Comprobar si los datos están llegando
@@ -56,13 +68,13 @@
                     //Guardar en la base de datos
                     $guardado2 = $chat -> guardar();
 
-                    //Comprobar se ejecutó con exito la consulta
-                    if($guardado){
-                        //Redirigir al registro de Administrador
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=MensajeController&action=enviar");
-                    }else{
-                        
+                    //Comprobar se ejecutó con exito las consultas
+                    if(!$guardado || !$guardado2){
+                        //Crear Sesion que indique que no se ha podido enviar el mensaje con exito
+                        $_SESSION['mensajenoenviado'] = "El mensaje no se ha podido enviar con exito";
                     }
+                    //Redirigir al chat
+                    header("Location:"."http://localhost/Mercado-Juegos/?controller=MensajeController&action=enviar");
                 }
             }
         }

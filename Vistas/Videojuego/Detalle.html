@@ -1,3 +1,16 @@
+<?php if(isset($_SESSION['comentariocreado']) && $_SESSION['comentariocreado'] == 'El comentario se ha hecho con exito') : ?>
+    <div class="alerta alerta-acierto">
+        <?=$_SESSION['comentariocreado']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('comentariocreado'); ?>
+
+<?php if(isset($_SESSION['comentariocreado']) && $_SESSION['comentariocreado'] == 'El comentario no se ha hecho con exito') : ?>
+    <div class="alerta alerta-error">
+        <?=$_SESSION['comentariocreado']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('comentariocreado'); ?>
 <div class="detalleVideojuego">
     <img src="Recursos/ImagenesVideojuegos/<?=$videojuegoEspecifico -> foto?>" alt="Logo videojuego">
     <h1 id="tituloVideojuego"><?=$videojuegoEspecifico -> nombre?></h1>
@@ -18,7 +31,7 @@
     </div>
     <form action="<?=rutaInicio?><?=comentario?><?=guardarComentario?>&id=<?=$videojuegoEspecifico -> id?>" method="post">
         <div id="bloquecomentario">
-            <h2>¿Quieres agregar un comentario??</h2>
+            <h2>¿Quieres agregar un comentario?</h2>
             <input type="text" name="comentario" required>
             <input type="submit" class="btnRegistro" value="Comentar">
         </div>
@@ -30,6 +43,14 @@
             <h3><?=$comentarios -> idUsuario?></h3>
             <h4><?=$comentarios -> contenido?></h4>
             <h5><?=$comentarios -> fechacreacion?> - <?=$comentarios -> horacreacion?></h5>
+            <?php if(isset($_SESSION['login_exitoso'])) : ?>
+                <?php if($comentarios -> idUsuario == $_SESSION['login_exitoso'] -> id) : ?>
+                    <form action="">
+                        <a href="">Actualizar</a>
+                    </form>
+                    <a href="">Eliminar</a>
+                <?php endif; ?>
+            <?php endif; ?>
         </div>
     <?php endwhile; ?>
 </div>

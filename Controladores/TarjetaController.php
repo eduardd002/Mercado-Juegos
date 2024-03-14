@@ -81,12 +81,12 @@
                     if($eliminado){
                         //Crear Sesion que indique que la tarjeta se ha eliminado con exito
                         $_SESSION['tarjetaeliminada'] = "La tarjeta ha sido eliminada exitosamente";
-                        //Redirigir al formulario de registro
+                        //Redirigir al inicio
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
                     }else{
                         //Crear Sesion que indique que la tarjeta se ha eliminado con exito
                         $_SESSION['tarjetaeliminada'] = "La tarjeta no ha sido eliminado exitosamente";
-                        //Redirigir al formulario de registro
+                        //Redirigir a la gestion de tarjetas
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=gestionarTarjeta");
                     }
                 }  

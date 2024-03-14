@@ -1069,6 +1069,7 @@ Estilo del titulo de la descripcion del videojuego del detalle del videojuego
 .detalleVideojuego #descripcionVideojuegoTitulo{
     /*Margen inferior*/
     margin-bottom: 40px;
+    margin-top: 80px;
 }
 
 /*
@@ -2163,7 +2164,6 @@ Estilo de el apartado de chat de comprador
     height: 20px;
     width: 500px;
     float: left;
-    margin-left: 200px;
     margin-right: 10px;
 }
 
@@ -2173,15 +2173,19 @@ Estilo de el apartado de chat de comprador
 }
 
 #bloquecomentario h2{
-    text-align: center;
-    margin-bottom: 25px;
+    margin-top: 80px;
+    margin-bottom: 30px;
 }
 
 .detalleVideojuego h6{
+    color: #01b1ea;
+    font-size: 30px;
     clear: both;
     display: block;
-    margin-left: 75px;
-    margin-bottom: 20px;
+    text-align: center;
+    margin-top: 130px;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
 }
 
 #comentario{
@@ -2189,11 +2193,12 @@ Estilo de el apartado de chat de comprador
     display: block;
     float: left;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     width: 1000px;
 }
 
 #comentario img{
+    margin-top: 10px;
     border-radius: 50%;
     height: 90px;
     width: 80px;
@@ -2213,4 +2218,22 @@ Estilo de el apartado de chat de comprador
 #comentario h5{
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+#comentario a{
+    margin-right: 20px;
+    float: left;
+}
+
+.chatear{
+    margin-top: 70px;
+    margin-bottom: 30px;
+    margin-left: 50px;
+}
+
+.chatear a{
+    color: #1486dc !important;
+    text-decoration: none;
+    font-size: 20px;
+    letter-spacing: 1px;
 }

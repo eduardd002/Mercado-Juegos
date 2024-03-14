@@ -28,8 +28,8 @@
             return $this;
         }
 
-                /*
-        Funcion para realizar el registro del usuario en la base de datos
+        /*
+        Funcion para realizar el registro de la consola en la base de datos
         */
 
         public function guardar(){
@@ -80,7 +80,6 @@
             //Retorno el resultado
             return $bandera;
         }
-
     }
 
 ?>

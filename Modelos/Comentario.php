@@ -14,128 +14,63 @@
             $this -> db = BaseDeDatos::connect();
         }
 
-        
-
-
-        /**
-         * Get the value of id
-         */ 
-        public function getId()
-        {
-                return $this->id;
+        public function getId(){
+            return $this->id;
         }
 
-        /**
-         * Set the value of id
-         *
-         * @return  self
-         */ 
-        public function setId($id)
-        {
-                $this->id = $id;
-
-                return $this;
+        public function setId($id){
+             $this->id = $id;
+             return $this;
         }
 
-        /**
-         * Get the value of idUsuario
-         */ 
-        public function getIdUsuario()
-        {
-                return $this->idUsuario;
+        public function getIdUsuario(){
+             return $this->idUsuario;
         }
 
-        /**
-         * Set the value of idUsuario
-         *
-         * @return  self
-         */ 
-        public function setIdUsuario($idUsuario)
-        {
-                $this->idUsuario = $idUsuario;
-
-                return $this;
+        public function setIdUsuario($idUsuario){
+             $this->idUsuario = $idUsuario;
+             return $this;
         }
 
-        /**
-         * Get the value of idVideojuego
-         */ 
-        public function getIdVideojuego()
-        {
-                return $this->idVideojuego;
+        public function getIdVideojuego(){
+             return $this->idVideojuego;
         }
 
-        /**
-         * Set the value of idVideojuego
-         *
-         * @return  self
-         */ 
-        public function setIdVideojuego($idVideojuego)
-        {
-                $this->idVideojuego = $idVideojuego;
-
-                return $this;
+        public function setIdVideojuego($idVideojuego){
+             $this->idVideojuego = $idVideojuego;
+             return $this;
         }
 
-        /**
-         * Get the value of contenido
-         */ 
-        public function getContenido()
-        {
-                return $this->contenido;
+        public function getContenido(){
+             return $this->contenido;
         }
 
-        /**
-         * Set the value of contenido
-         *
-         * @return  self
-         */ 
-        public function setContenido($contenido)
-        {
-                $this->contenido = $contenido;
-
-                return $this;
+        public function setContenido($contenido){
+             $this->contenido = $contenido;
+             return $this;
         }
 
-        /**
-         * Get the value of fechaCreacion
-         */ 
-        public function getFechaCreacion()
-        {
-                return $this->fechaCreacion;
+        public function getFechaCreacion(){
+             return $this->fechaCreacion;
         }
 
-        /**
-         * Set the value of fechaCreacion
-         *
-         * @return  self
-         */ 
-        public function setFechaCreacion($fechaCreacion)
-        {
-                $this->fechaCreacion = $fechaCreacion;
-
-                return $this;
+        public function setFechaCreacion($fechaCreacion){
+            $this->fechaCreacion = $fechaCreacion;
+            return $this;
         }
 
-        /**
-         * Get the value of horaCreacion
-         */ 
-        public function getHoraCreacion()
-        {
-                return $this->horaCreacion;
+        public function getHoraCreacion(){
+             return $this->horaCreacion;
         }
 
-        /**
-         * Set the value of horaCreacion
-         *
-         * @return  self
-         */ 
-        public function setHoraCreacion($horaCreacion)
-        {
-                $this->horaCreacion = $horaCreacion;
-
-                return $this;
+        public function setHoraCreacion($horaCreacion){
+             $this->horaCreacion = $horaCreacion;
+             return $this;
         }
+
+        /*
+        Funcion para guardar el comentario en la base de datos
+        */
 
         public function guardar(){
             //Construir la consulta
@@ -154,6 +89,10 @@
             //Retornar el resultado
             return $resultado;
         }
+
+        /*
+        Funcion para listar los comentarios
+        */
 
         public function listar(){
             //Construir consultas

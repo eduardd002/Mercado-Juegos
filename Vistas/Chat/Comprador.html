@@ -1,3 +1,10 @@
+<?php if(isset($_SESSION['mensajenoenviado']) && $_SESSION['mensajenoenviado'] == 'El mensaje no se ha podido enviar con exito') : ?>
+    <div class="alerta alerta-error">
+        <?=$_SESSION['mensajenoenviado']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('mensajenoenviado'); ?>
+
 <div id="chatComprador">
     <h1 class="tituloCreacionGestiones">Chat</h1>
     <form action="<?=rutaInicio?><?=mensaje?><?=guardarMensaje?>" method="post">

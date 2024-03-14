@@ -82,12 +82,12 @@
                     if($eliminado){
                         //Crear Sesion que indique que el estado se ha eliminado con exito
                         $_SESSION['estadoeliminado'] = "El estado ha sido eliminado exitosamente";
-                        //Redirigir al formulario de registro
+                        //Redirigir al menu principal
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
                     }else{
                         //Crear Sesion que indique que el estado se ha eliminado con exito
                         $_SESSION['estadoeliminado'] = "El estado no ha sido eliminado exitosamente";
-                        //Redirigir al formulario de registro
+                        //Redirigir a la gestion de estado
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=gestionarEstado");
                     }
                 }  

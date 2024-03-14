@@ -81,12 +81,12 @@
                     if($eliminado){
                         //Crear Sesion que indique que el categoria se ha eliminado con exito
                         $_SESSION['categoriaeliminada'] = "La categoria ha sido eliminada exitosamente";
-                        //Redirigir al formulario de registro
+                        //Redirigir al inicio
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
                     }else{
                         //Crear Sesion que indique que la cateogoria se ha eliminado con exito
                         $_SESSION['categoriaeliminada'] = "La categoria no ha sido eliminada exitosamente";
-                        //Redirigir al formulario de registro
+                        //Redirigir a la gestion de categorias
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=gestionarCateogoria");
                     }
                 }  

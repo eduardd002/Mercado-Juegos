@@ -58,6 +58,10 @@
             return $this;
         }
 
+        /*
+        Funcion para guardar el mensaje en la base de datos
+        */
+
         public function guardar(){
 
             //Construir la consulta
@@ -76,6 +80,8 @@
             //Retornar el resultado
             return $resultado;
         }
+
+        /*Funcion para obtener el id del ultimo mensaje enviado*/
 
         public function ultimoMensaje(){
             //Construir la consulta

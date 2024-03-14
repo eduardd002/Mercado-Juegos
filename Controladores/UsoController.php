@@ -81,12 +81,12 @@
                     if($eliminado){
                         //Crear Sesion que indique que el uso se ha eliminado con exito
                         $_SESSION['usoeliminado'] = "El uso ha sido eliminado exitosamente";
-                        //Redirigir al formulario de registro
+                        //Redirigir al inicio
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
                     }else{
                         //Crear Sesion que indique que el uso se ha eliminado con exito
                         $_SESSION['usoeliminado'] = "El uso no ha sido eliminado exitosamente";
-                        //Redirigir al formulario de registro
+                        //Redirigir a la gestión de uso
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=gestionarUso");
                     }
                 }  
