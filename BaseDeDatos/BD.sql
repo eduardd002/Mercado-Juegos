@@ -9,14 +9,14 @@ CREATE TABLE usuarios (
     id              INTEGER auto_increment NOT NULL,
     nombre          VARCHAR(200) NOT NULL,
     apellido        VARCHAR(250) NOT NULL,
-    fechanacimiento DATE NOT NULL,
-    numerotelefono  INTEGER NOT NULL,
+    fechaNacimiento DATE NOT NULL,
+    numeroTelefono  INTEGER NOT NULL,
     correo          VARCHAR(200) NOT NULL,
     clave           VARCHAR(150) NOT NULL,
     departamento    VARCHAR(100) NOT NULL,
     municipio       VARCHAR(100) NOT NULL,
     foto            VARCHAR(250),
-    fecharegistro   DATE NOT NULL,
+    fechaRegistro   DATE NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT uq_correo UNIQUE(correo),
     CONSTRAINT usuarios_pk PRIMARY KEY ( id )
@@ -27,56 +27,56 @@ CREATE TABLE administradores (
     id              INTEGER auto_increment NOT NULL,
     nombre          VARCHAR(200) NOT NULL,
     apellido        VARCHAR(250) NOT NULL,
-    fechanacimiento DATE NOT NULL,
-    numerotelefono  INTEGER NOT NULL,
+    fechaNacimiento DATE NOT NULL,
+    numeroTelefono  INTEGER NOT NULL,
     correo          VARCHAR(200) NOT NULL,
     clave           VARCHAR(150) NOT NULL,
     foto            VARCHAR(250),
-    fecharegistro   DATE NOT NULL,
+    fechaRegistro   DATE NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT uq_correo UNIQUE(correo),
-    CONSTRAINT admins_pk PRIMARY KEY ( id )
+    CONSTRAINT administradores_pk PRIMARY KEY ( id )
 );
 
 /*Crear tabla videoujuegos*/
 CREATE TABLE videojuegos (
     id              INTEGER auto_increment NOT NULL,
-    idconsola       INTEGER NOT NULL,
-    iduso           INTEGER NOT NULL,
+    idConsola       INTEGER NOT NULL,
+    idUso           INTEGER NOT NULL,
     nombre          VARCHAR(200) NOT NULL,
     precio          INTEGER NOT NULL,
     descripcion     TEXT NOT NULL,
     foto            VARCHAR(150) NOT NULL,
-    fechacreacion   DATE NOT NULL,
+    fechaCreacion   DATE NOT NULL,
     stock           INTEGER NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT videojuegos_pk PRIMARY KEY ( id ),
-    CONSTRAINT videojuegos_consolas_fk FOREIGN KEY ( idconsola ) REFERENCES consolas ( id ),
-    CONSTRAINT videojuegos_usos_fk FOREIGN KEY ( iduso ) REFERENCES usos ( id )
+    CONSTRAINT videojuegos_consola_fk FOREIGN KEY ( idconsola ) REFERENCES consolas ( id ),
+    CONSTRAINT videojuegos_uso_fk FOREIGN KEY ( iduso ) REFERENCES usos ( id )
 );
 
 /*Crea tabla intermedia de usuario y videojuego*/
 CREATE TABLE usuariovideojuego (
     id           INTEGER auto_increment NOT NULL,
-    idusuario    INTEGER NOT NULL,
-    idvideojuego INTEGER NOT NULL,
+    idUsuario    INTEGER NOT NULL,
+    idVideojuego INTEGER NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT usuariovideojuego_pk PRIMARY KEY ( id ),
-    CONSTRAINT usuariovideojuego_usuarios_fk FOREIGN KEY ( idusuario ) REFERENCES usuarios ( id ),
-    CONSTRAINT usuariovideojuego_videojuegos_fk FOREIGN KEY ( idvideojuego ) REFERENCES videojuegos ( id )
+    CONSTRAINT usuariovideojuego_usuario_fk FOREIGN KEY ( idusuario ) REFERENCES usuarios ( id ),
+    CONSTRAINT usuariovideojuego_videojuego_fk FOREIGN KEY ( idvideojuego ) REFERENCES videojuegos ( id )
 );
 
 /*Crear tabla de pagos*/
 CREATE TABLE pagos (
     id              INTEGER auto_increment NOT NULL,
-    idtarjeta       INTEGER NOT NULL,
-    numerotarjeta   INTEGER NOT NULL,
+    idTarjeta       INTEGER NOT NULL,
+    numeroTarjeta   INTEGER NOT NULL,
     titular         VARCHAR(250) NOT NULL,
-    codigoseguridad INTEGER NOT NULL,
-    fechaexpedicion DATE NOT NULL,
+    codigoSeguridad INTEGER NOT NULL,
+    fechaExpedicion DATE NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT pagos_pk PRIMARY KEY ( id ),
-    CONSTRAINT pagos_tarjetas_fk FOREIGN KEY ( idtarjeta ) REFERENCES tarjetas ( id )
+    CONSTRAINT pagos_tarjeta_fk FOREIGN KEY ( idtarjeta ) REFERENCES tarjetas ( id )
 );
 
 /*Crear tabla para tipo de tarjetas*/
@@ -98,44 +98,44 @@ CREATE TABLE estados (
 /*Crear tabla para las transacciones*/
 CREATE TABLE transacciones (
     id                INTEGER auto_increment NOT NULL,
-    idcomprador       INTEGER NOT NULL,
-    idvendedor        INTEGER NOT NULL,
-    idpago            INTEGER NOT NULL,
-    idestado          INTEGER NOT NULL,
+    idComprador       INTEGER NOT NULL,
+    idVendedor        INTEGER NOT NULL,
+    idPago            INTEGER NOT NULL,
+    idEstado          INTEGER NOT NULL,
     departamento      VARCHAR(250) NOT NULL,
     municipio         VARCHAR(200) NOT NULL,
-    codigopostal      INTEGER NOT NULL,
+    codigoPostal      INTEGER NOT NULL,
     barrio            VARCHAR(250) NOT NULL,
     direccion         TEXT NOT NULL,
-    nombrecomprador   VARCHAR(200) NOT NULL,
-    apellidocomprador VARCHAR(200) NOT NULL,
-    correocomprador   VARCHAR(200) NOT NULL,
-    telefonocomprador INTEGER NOT NULL,
+    nombreComprador   VARCHAR(200) NOT NULL,
+    apellidoComprador VARCHAR(200) NOT NULL,
+    correoComprador   VARCHAR(200) NOT NULL,
+    telefonoComprador INTEGER NOT NULL,
     total             INTEGER NOT NULL,
-    fecharealizacion  DATE NOT NULL,
-    horarealizacion   DATE NOT NULL,
+    fechaRealizacion  DATE NOT NULL,
+    horaRealizacion   DATE NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT compras_pk PRIMARY KEY ( id ),
-    CONSTRAINT compras_compradores_fk FOREIGN KEY ( idcomprador ) REFERENCES usuarios ( id ),
-    CONSTRAINT compras_pagos_fk FOREIGN KEY ( idpago ) REFERENCES pagos ( id ),
-    CONSTRAINT compras_vendedores_fk FOREIGN KEY ( idvendedor ) REFERENCES usuarios ( id ),
-    CONSTRAINT transacciones_estados_fk FOREIGN KEY ( idestado ) REFERENCES estados ( id )
+    CONSTRAINT transacciones_comprador_fk FOREIGN KEY ( idComprador ) REFERENCES usuarios ( id ),
+    CONSTRAINT transacciones_vendedor_fk FOREIGN KEY ( idVendedor ) REFERENCES usuarios ( id ),
+    CONSTRAINT transacciones_pago_fk FOREIGN KEY ( idPago ) REFERENCES pagos ( id ),
+    CONSTRAINT transacciones_estado_fk FOREIGN KEY ( idEstado ) REFERENCES estados ( id )
 );
 
 /*Crea tabla intermedia de usuario y videojuego*/
 CREATE TABLE transaccionvideojuego (
     id                  INTEGER auto_increment NOT NULL,
-    idcompra            INTEGER NOT NULL,
-    idvideojuego        INTEGER NOT NULL,
+    idTransaccion       INTEGER NOT NULL,
+    idVideojuego        INTEGER NOT NULL,
     unidades            INTEGER NOT NULL,
-    nombrevideojuego    VARCHAR(200) NOT NULL,
-    preciovideojuego    INTEGER NOT NULL,
-    categoriavideojuego VARCHAR(250) NOT NULL,
-    consolavideojuego   VARCHAR(200) NOT NULL,
+    nombreVideojuego    VARCHAR(200) NOT NULL,
+    precioVideojuego    INTEGER NOT NULL,
+    categoriaVideojuego VARCHAR(250) NOT NULL,
+    consolaVideojuego   VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT transaccionvideojuego_pk PRIMARY KEY ( id ),
-    CONSTRAINT transaccionvideojuego_transacciones_fk FOREIGN KEY ( idcompra ) REFERENCES transacciones ( id ),
-    CONSTRAINT transaccionvideojuego_videojuegos_fk FOREIGN KEY ( idvideojuego ) REFERENCES videojuegos ( id )
+    CONSTRAINT transaccionvideojuego_transaccion_fk FOREIGN KEY ( idTransaccion ) REFERENCES transacciones ( id ),
+    CONSTRAINT transaccionvideojuego_videojuego_fk FOREIGN KEY ( idvideojuego ) REFERENCES videojuegos ( id )
 );
 
 /*Crea tabla intermedia de videojuego y categoria*/
@@ -144,9 +144,9 @@ CREATE TABLE videojuegocategoria (
     idVideojuego INTEGER NOT NULL,
     idCategoria  INTEGER NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT videojuegouso_pk PRIMARY KEY ( id ),
-    CONSTRAINT videojuegocategoria_categorias_fk FOREIGN KEY ( idCategoria ) REFERENCES categorias ( id ),
-    CONSTRAINT videojuegocategoria_videojuegos_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
+    CONSTRAINT videojuegocategoria_pk PRIMARY KEY ( id ),
+    CONSTRAINT videojuegocategoria_categoria_fk FOREIGN KEY ( idCategoria ) REFERENCES categorias ( id ),
+    CONSTRAINT videojuegocategoria_videojuego_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
 );
 
 /*Crea tabla de tipo de consolas de videojuego*/
@@ -162,7 +162,7 @@ CREATE TABLE usos (
     id     INTEGER auto_increment NOT NULL,
     nombre VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT estados_pkv1 PRIMARY KEY ( id )
+    CONSTRAINT usos_pk PRIMARY KEY ( id )
 );
 
 /*Crea tabla de categorias*/
@@ -178,8 +178,8 @@ CREATE TABLE mensajes(
     id     INTEGER auto_increment NOT NULL,
     idRemitente INTEGER NOT NULL,
     contenido TEXT NOT NULL,
-    fechaenvio   DATE NOT NULL,
-    horaenvio   TIME NOT NULL,
+    fechaEnvio   DATE NOT NULL,
+    horaEnvio   TIME NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT mensajes_pk PRIMARY KEY ( id ),
     CONSTRAINT mensaje_remitente_fk FOREIGN KEY ( idRemitente ) REFERENCES usuarios ( id )
@@ -192,7 +192,7 @@ CREATE TABLE chats (
     idDestinatario INTEGER NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT chats_pk PRIMARY KEY ( id ),
-    CONSTRAINT chat_mensaje_fk FOREIGN KEY ( idMensaje ) REFERENCES mensajes ( id ),
+    CONSTRAINT chats_mensaje_fk FOREIGN KEY ( idMensaje ) REFERENCES mensajes ( id ),
     CONSTRAINT chats_destinatario_fk FOREIGN KEY ( idDestinatario ) REFERENCES usuarios ( id )
 );
 
@@ -200,12 +200,21 @@ CREATE TABLE chats (
 CREATE TABLE comentarios (
     id     INTEGER auto_increment NOT NULL,
     idUsuario INTEGER NOT NULL,
-    idVideojuego INTEGER NOT NULL,
     contenido TEXT NOT NULL,
-    fechacreacion DATE NOT NULL,
-    horacreacion TIME NOT NULL,
+    fechaCreacion DATE NOT NULL,
+    horaCreacion TIME NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT comentarios_pk PRIMARY KEY ( id ),
-    CONSTRAINT usuario_mensaje_fk FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id ),
-    CONSTRAINT videojuego_comentario_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
+    CONSTRAINT comentarios_usuario_fk FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id )
 );
+
+/*Crea tabla de comentariovideojuego*/
+CREATE TABLE comentariovideojuego (
+    id     INTEGER auto_increment NOT NULL,
+    idComentario INTEGER NOT NULL,
+    idVideojuego INTEGER NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT comentariovideojuego_pk PRIMARY KEY ( id ),
+    CONSTRAINT comentariovideojuego_comentario_fk FOREIGN KEY ( idComentario ) REFERENCES comentarios ( id ),
+    CONSTRAINT comentariovideojuego_videojuego_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
+)
