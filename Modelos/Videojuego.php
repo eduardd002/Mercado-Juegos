@@ -136,21 +136,6 @@
         }
 
         /*
-        Funcion para obtener el id del ultimo videojuego registrado
-        */
-
-        public function proximoVideojuego(){
-            //Construir la consulta
-            $consulta = "SELECT id FROM videojuegos ORDER BY id DESC LIMIT 1";
-            //Ejecutar la consulta
-            $resultado = $this -> db -> query($consulta);
-            //Obtener el resultado del objeto
-            $identificadorFuturo = $resultado -> fetch_object();
-            //Retornar el resultado
-            return $identificadorFuturo;
-        }
-
-        /*
         Funcion para listar algunos de los videojuegos, en concreto 6
         */
 
@@ -190,6 +175,24 @@
             //Retornar resultado
             return $videojuego;
         }
+
+        /*
+        Funcion para obtener el ultimo videojuego registrado
+        */
+
+        public function ultimo(){
+            //Construir la consulta
+            $consulta = "SELECT id FROM videojuegos ORDER BY id DESC LIMIT 1";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Obtener el resultado del objeto
+            $ultimo = $resultado -> fetch_object();
+            //Devolver resultado
+            $ultimoVideojuego = $ultimo -> id;
+            //Retornar el resultado
+            return $ultimoVideojuego;
+        }
+
     }
 
 ?>

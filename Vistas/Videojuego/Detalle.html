@@ -29,23 +29,6 @@
         <p id="descripcionVideojuegoTexto"><?=$videojuegoEspecifico -> descripcion?></p>
         <h3 id="vendedorVideojuego">Vendido por: <a href="<?=rutaInicio?><?=usuario?><?=perfil?>">Marshall Mathers</a></h3>
     </div>
-    <h6>Comentarios</h6>
-    <?php while($comentarios = $listadoTodos -> fetch_object()) : ?>
-        <div id="comentario">
-            <img src="Recursos/ImagenesVideojuegos/<?=$videojuegoEspecifico -> foto?>" alt="Logo videojuego">
-            <h3><?=$comentarios -> idUsuario?></h3>
-            <h4><?=$comentarios -> contenido?></h4>
-            <h5><?=$comentarios -> fechacreacion?> - <?=$comentarios -> horacreacion?></h5>
-            <?php if(isset($_SESSION['login_exitoso'])) : ?>
-                <?php if($comentarios -> idUsuario == $_SESSION['login_exitoso'] -> id) : ?>
-                    <form action="">
-                        <a href="">Actualizar</a>
-                    </form>
-                    <a href="">Eliminar</a>
-                <?php endif; ?>
-            <?php endif; ?>
-        </div>
-    <?php endwhile; ?>
     <div id="bloquecomentario">
         <form action="<?=rutaInicio?><?=comentario?><?=guardarComentario?>&id=<?=$videojuegoEspecifico -> id?>" method="post">
             <h2>¿Quieres agregar un comentario?</h2>

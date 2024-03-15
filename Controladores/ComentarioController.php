@@ -3,6 +3,9 @@
     //Incluir el objeto de comentario
     require_once 'Modelos/Comentario.php';
 
+    //Incluir el objeto de videojuegocomentario
+    require_once 'Modelos/ComentarioVideojuego.php';
+
     class ComentarioController{
 
         /*
@@ -26,7 +29,6 @@
 
                     //Crear el objeto
                     $comentario -> setIdUsuario($_SESSION['login_exitoso'] -> id);
-                    $comentario -> setIdVideojuego($videojuego);
                     $comentario -> setContenido($contenido);
                     $comentario -> setFechaCreacion(date('y-m-d'));
                     $comentario -> setHoraCreacion(date("H:i:s"));
@@ -35,8 +37,26 @@
                     $guardado = $comentario -> guardar();
 
                     if($guardado){
-                        //Crear sesion que indique que el comentario se ha hecho exitosamente
-                        $_SESSION['comentariocreado'] = "El comentario se ha hecho con exito";
+
+                        //Obtener id del ultimo videojuego registrado
+                        $id = $comentario -> ultimo();
+
+                        //Instanciar el objeto
+                        $comentarioVideojuego = new ComentarioVideojuego();
+
+                        //Crear el objeto
+
+                        //Registrar id de videojuego futuro o proximo a registrar
+                        $comentarioVideojuego -> setIdVideojuego($videojuego);
+                        $comentarioVideojuego -> setIdComentario($id);
+
+                        //Guardar en la base de datos
+                        $guardadoComentarioVideojuego = $comentarioVideojuego -> guardar();
+
+                        if($guardadoComentarioVideojuego){
+                            //Crear sesion que indique que el comentario se ha hecho exitosamente
+                            $_SESSION['comentariocreado'] = "El comentario se ha hecho con exito";
+                        }
                     }else{
                         //Crear sesion que indique que el comentario no se ha hecho exitosamente
                         $_SESSION['comentariocreado'] = "El comentario no se ha hecho con exito";

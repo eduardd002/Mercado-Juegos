@@ -60,14 +60,6 @@
                     $videojuegoEspecifico = $videojuego -> traerUno();
 
                     if($videojuegoEspecifico){
-
-                        //Instaciar el objeto
-                        $comentario = new Comentario();
-                        $comentario -> setIdVideojuego($id);
-
-                        //Traer los datos de la consulta
-                        $listadoTodos = $comentario -> listar();
-
                         //Incluir la vista
                         require_once 'Vistas/Videojuego/Detalle.html';
                     }else{
@@ -174,27 +166,6 @@
                     $videojuego -> setStock($stock);
                     $videojuego -> setFechaCreacion(date('y-m-d'));
 
-                    //Obtener id del ultimo videojuego registrado
-                    $total = $videojuego -> proximoVideojuego();
-
-                    //Instanciar el objeto
-                    $videojuegoCategoria = new VideojuegoCategoria();
-
-                    //Crear el objeto
-
-                    //Registrar id de videojuego futuro o proximo a registrar
-                    $videojuegoCategoria -> setIdVideojuego(($total -> id)+1);
-                    $videojuegoCategoria -> setCategoriaId($categorias);
-
-                    //Instanciar el objeto
-                    $usuarioVideojuego = new UsuarioVideojuego();
-
-                    //Crear el objeto
-                    
-                    //Registrar id de videojuego futuro o proximo a registrar
-                    $usuarioVideojuego -> setIdVideojuego(($total -> id)+1);
-                    $usuarioVideojuego -> setIdUsuario($usuarioId);
-
                     //Guardar la imagen
 
                     //Guardar toda la informacion referente a la imagen
@@ -222,18 +193,42 @@
                         //Guardar en la base de datos
                         $guardado = $videojuego -> guardar();
 
-                        //Guardar en la base de datos
-                        $guardadoVideojuegoCategoria = $videojuegoCategoria -> guardar();
-
-                        //Guardar en la base de datos
-                        $guardadoUsuarioVideojuego = $usuarioVideojuego -> guardar();
-
                         //Comprobar se ejecutaron con exito las consultas
-                        if($guardado && $guardadoVideojuegoCategoria && $guardadoUsuarioVideojuego ){
+                        if($guardado){
+
+                            //Obtener id del ultimo videojuego registrado
+                            $id = $videojuego -> ultimo();
+
+                            //Instanciar el objeto
+                            $videojuegoCategoria = new VideojuegoCategoria();
+
+                            //Crear el objeto
+
+                            //Registrar id de videojuego futuro o proximo a registrar
+                            $videojuegoCategoria -> setIdVideojuego($id);
+                            $videojuegoCategoria -> setCategoriaId($categorias);
+
+                            //Instanciar el objeto
+                            $usuarioVideojuego = new UsuarioVideojuego();
+
+                            //Crear el objeto
+                                
+                            //Registrar id de videojuego futuro o proximo a registrar
+                            $usuarioVideojuego -> setIdVideojuego($id);
+                            $usuarioVideojuego -> setIdUsuario($usuarioId);
+
+                            //Guardar en la base de datos
+                            $guardadoVideojuegoCategoria = $videojuegoCategoria -> guardar();
+
+                            //Guardar en la base de datos
+                            $guardadoUsuarioVideojuego = $usuarioVideojuego -> guardar();
+
+                            if($guardadoUsuarioVideojuego && $guardadoVideojuegoCategoria){
                                 //Crear sesion de videojuego creado con exito
                                 $_SESSION['RegistroVideojuego'] = "Videojuego creado con exito";
                                 //Redirigir al menu principal
                                 header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                            }
                         }
                     }else{
                         //Crear sesion que indique que la imagen debe ser de formato imagen

@@ -171,7 +171,7 @@
         public function actualizar(){
             //Construir la consulta
             $consulta = "UPDATE administradores SET nombre = '{$this -> getNombre()}', apellido = '{$this -> getApellido()}',
-                numerotelefono = {$this -> getNumeroTelefono()}, correo = '{$this -> getCorreo()}', 
+                numeroTelefono = '{$this -> getNumeroTelefono()}', correo = '{$this -> getCorreo()}', 
                 clave = '{$this -> getClave()}' WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $actualizado = $this -> db -> query($consulta);

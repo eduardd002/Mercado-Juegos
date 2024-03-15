@@ -53,8 +53,7 @@
                     $guardado = $mensaje -> guardar();
 
                     //Obtener id del ultimo mensaje registrado
-                    $resultado = $mensaje -> ultimoMensaje();
-                    $ultimo = $resultado -> id;
+                    $ultimo = $mensaje -> ultimo();
 
                     //Instanciar el objeto
                     $chat = new Chat();

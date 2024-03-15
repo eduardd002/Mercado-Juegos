@@ -220,7 +220,7 @@
         public function actualizar(){
             //Construir la consulta
             $consulta = "UPDATE usuarios SET nombre = '{$this -> getNombre()}', apellido = '{$this -> getApellido()}',
-                numerotelefono = {$this -> getNumeroTelefono()}, correo = '{$this -> getCorreo()}', 
+                numeroTelefono = '{$this -> getNumeroTelefono()}', correo = '{$this -> getCorreo()}', 
                 clave = '{$this -> getClave()}', departamento = '{$this -> getDepartamento()}', 
                 municipio = '{$this -> getMunicipio()}' WHERE id = {$this -> getId()}";
             //Ejecutar la consulta

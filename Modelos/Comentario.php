@@ -4,7 +4,6 @@
 
         private $id;
         private $idUsuario;
-        private $idVideojuego;
         private $contenido;
         private $fechaCreacion;
         private $horaCreacion;
@@ -29,15 +28,6 @@
 
         public function setIdUsuario($idUsuario){
              $this->idUsuario = $idUsuario;
-             return $this;
-        }
-
-        public function getIdVideojuego(){
-             return $this->idVideojuego;
-        }
-
-        public function setIdVideojuego($idVideojuego){
-             $this->idVideojuego = $idVideojuego;
              return $this;
         }
 
@@ -75,8 +65,8 @@
         public function guardar(){
             //Construir la consulta
             $consulta = "INSERT IGNORE INTO comentarios VALUES(NULL, {$this -> getIdUsuario()}, 
-                {$this -> getIdVideojuego()}, '{$this -> getContenido()}', 
-                '{$this -> getFechaCreacion()}', '{$this -> getHoraCreacion()}')";
+               '{$this -> getContenido()}', '{$this -> getFechaCreacion()}', 
+               '{$this -> getHoraCreacion()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera
@@ -90,18 +80,22 @@
             return $resultado;
         }
 
-        /*
-        Funcion para listar los comentarios
+     /*
+        Funcion para obtener el ultimo comentario registrado
         */
 
-        public function listar(){
-            //Construir consultas
-            $consulta = "SELECT * FROM comentarios WHERE idVideojuego = {$this -> getIdVideojuego()}";
-            //Ejecutar la consulta
-            $resultado = $this -> db -> query($consulta);
-            //Retornar resultado
-            return $resultado;
-        }
+        public function ultimo(){
+          //Construir la consulta
+          $consulta = "SELECT id FROM comentarios ORDER BY id DESC LIMIT 1";
+          //Ejecutar la consulta
+          $resultado = $this -> db -> query($consulta);
+          //Obtener el resultado del objeto
+          $ultimo = $resultado -> fetch_object();
+          //Devolver resultado
+          $ultimoVideojuego = $ultimo -> id;
+          //Retornar el resultado
+          return $ultimoVideojuego;
+      }
     }
 
 ?>
