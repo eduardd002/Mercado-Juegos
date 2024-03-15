@@ -1618,11 +1618,26 @@ Estilo de las alertas de las sesiones flash
     text-align: center;
 }
 
-.alerta-admin{
+.alerta-adminAcierto{
     /*Flotar hacia la izquierda*/
     float: left;
     /*Color de fondo*/
     background: green;
+    /*Limpiar flotados*/
+    clear: both;
+    /*Comportamiento de bloque*/
+    display: block;
+    /*Anchor*/
+    width: 99.1%;
+    /*Margen inferior*/
+    margin-bottom: 50px;
+}
+
+.alerta-adminError{
+    /*Flotar hacia la izquierda*/
+    float: left;
+    /*Color de fondo*/
+    background: red;
     /*Limpiar flotados*/
     clear: both;
     /*Comportamiento de bloque*/

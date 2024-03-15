@@ -231,6 +231,64 @@
         }
 
         /*
+        Funcion para actualizar un usuario
+        */
+
+        public function actualizar(){
+            
+            //Comprobar si los datos están llegando
+            if(isset($_GET) && isset($_POST)){
+
+                //Comprobar si los datos existe
+                $id = isset($_GET['id']) ? $_GET['id'] : false;
+                $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
+                $apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : false;
+                $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : false;
+                $email = isset($_POST['email']) ? $_POST['email'] : false;
+                $clave = isset($_POST['password']) ? $_POST['password'] : false;
+                $departamento = isset($_POST['departamento']) ? $_POST['departamento'] : false;
+                $municipio = isset($_POST['municipio']) ? $_POST['municipio'] : false;
+
+                //Si el dato existe
+                if($id && $nombre && $apellidos && $telefono && $email && $clave && $departamento && $municipio){
+
+                    //Instanciar el objeto
+                    $usuario = new Usuario();
+
+                    //Crear objeto
+                    $usuario -> setId($id);
+                    $usuario -> setNombre($nombre);
+                    $usuario -> setApellido($apellidos);
+                    $usuario -> setNumerotelefono($telefono);
+                    $usuario -> setCorreo($email);
+                    $usuario -> setClave($clave);
+                    $usuario -> setDepartamento($departamento);
+                    $usuario -> setMunicipio($municipio);
+
+                    //Ejecutar la consulta
+                    $actualizado = $usuario -> actualizar();
+
+                    if($actualizado){
+                        //Crear Sesion que indique que el usuario se ha actualizado con exito
+                        $_SESSION['usuarioactualizado'] = "El usuario ha sido actualizado exitosamente";
+                        //Redirigir al inicio
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                    }else{
+                        //Crear Sesion que indique que el usuario no se ha actualizado con exito
+                        $_SESSION['usuarioactualizado'] = "Proporciona nuevos datos";
+                        //Redirigir a la gestion de categorias
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=miPerfil");
+                    }
+                }else{
+                    //Crear Sesion que indique que el usuario no se ha actualizado con exito
+                    $_SESSION['usuarioactualizado'] = "Ha ocurrido un error al actualizar el usuario";
+                    //Redirigir a la gestion de categorias
+                    header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=miPerfil");
+                } 
+            }
+        }
+
+        /*
         Funcion para cerrar la sesión
         */
 
@@ -266,8 +324,28 @@
             //Llamar la funcion auxiliar para redirigir en caso de que no haya inicio de sesion
             Ayudas::restringirAUsuario();
 
-            //Incluir la vista
-            require_once "Vistas/Usuario/miPerfil.html";
+            //Comprobar si el dato está llegando
+            if(isset($_GET)){
+
+                //Comprobar si la sesion de inicio de sesion existe
+                $id = isset($_SESSION['login_exitoso']) ? $_SESSION['login_exitoso'] -> id : false;
+
+                //Si el dato existe
+                if($id){
+
+                    //Instanciar el objeto
+                    $usuario = new Usuario();
+
+                    //Creo el objeto
+                    $usuario -> setId($id);
+
+                    //Obtener categoria
+                    $usuarioUnico = $usuario -> obtenerUno();
+
+                    //Incluir la vista
+                    require_once "Vistas/Usuario/miPerfil.html";
+                }
+            }
         }
 
         /*

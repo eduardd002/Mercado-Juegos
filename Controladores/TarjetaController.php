@@ -46,7 +46,7 @@
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
                     }else{
                         //Crear sesion que indique que ha habido un error al guardar la tarjeta
-                        $_SESSION['tarjetanocreada'] = 'La tarjeta no ha sido creada con exito';
+                        $_SESSION['tarjetacreada'] = 'La tarjeta no ha sido creada con exito';
                         //Redirigir al registro de tarjeta
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=crearTarjeta");
                     }

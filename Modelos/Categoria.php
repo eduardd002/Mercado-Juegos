@@ -63,6 +63,21 @@
         }
 
         /*
+        Funcion para obtener una categoria
+        */
+
+        public function obtenerUna(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM categorias WHERE id = {$this -> getId()}";
+            //Ejecutar la consulta
+            $categoria = $this -> db -> query($consulta);
+            //Obtener resultado
+            $resultado = $categoria -> fetch_object();
+            //Retornar el resultado
+            return $resultado;
+        }
+
+        /*
         Funcion para eliminar la categoria
         */
 
@@ -75,6 +90,26 @@
             $bandera = false;
             //Comprobar si la consulta se realizo exitosamente
             if($eliminado){
+                $bandera = true;
+            }
+            //Retorno el resultado
+            return $bandera;
+        }
+
+        /*
+        Funcion para actualizar la categoria
+        */
+
+        public function actualizar(){
+            //Construir la consulta
+            $consulta = "UPDATE categorias SET nombre = '{$this -> getNombre()}' 
+                WHERE id = {$this -> getId()}";
+            //Ejecutar la consulta
+            $actualizado = $this -> db -> query($consulta);
+            //Crear bandera
+            $bandera = false;
+            //Comprobar si la consulta se realizo exitosamente
+            if($actualizado){
                 $bandera = true;
             }
             //Retorno el resultado

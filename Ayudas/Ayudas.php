@@ -52,6 +52,44 @@
         }
 
         /*
+        Funcion para listar los datos del usuario
+        */
+
+        public static function mostrarDatosUsuario(){
+            if(isset($_SESSION['login_exitoso'])){
+                //Incluir el objeto de categoria
+                require_once 'Modelos/Usuario.php';
+                //Instanciar el objeto
+                $usuario = new Usuario();
+                //Crear objeto
+                $usuario -> setId($_SESSION['login_exitoso'] -> id);
+                //Listar todos los usuarios desde la base de datos
+                $datos = $usuario -> obtenerUno();
+                //Retornar el resultado
+                return $datos;
+            }
+        }
+
+        /*
+        Funcion para listar los datos del administrador
+        */
+
+        public static function mostrarDatosAdministrador(){
+            if(isset($_SESSION['login_exitosoa'])){
+                //Incluir el objeto de categoria
+                require_once 'Modelos/Administrador.php';
+                //Instanciar el objeto
+                $administrador = new Administrador();
+                //Crear objeto
+                $administrador -> setId($_SESSION['login_exitosoa'] -> id);
+                //Listar todos los usuarios desde la base de datos
+                $datos = $administrador -> obtenerUno();
+                //Retornar el resultado
+                return $datos;
+            }
+        }
+
+        /*
         Funcion para eliminar sesiones
         */
 

@@ -52,8 +52,28 @@
             //Llamar la funcion auxiliar para redirigir en caso de que no haya inicio de sesion
             Ayudas::restringirAAdministrador();
 
-            //Incluir la vista
-            require_once "Vistas/Administrador/miPerfil.html";
+            //Comprobar si el dato está llegando
+            if(isset($_GET)){
+
+                //Comprobar si la sesion de inicio de sesion existe
+                $id = isset($_SESSION['login_exitosoa']) ? $_SESSION['login_exitosoa'] -> id : false;
+
+                //Si el dato existe
+                if($id){
+
+                    //Instanciar el objeto
+                    $administrador = new Administrador();
+
+                    //Creo el objeto
+                    $administrador -> setId($id);
+
+                    //Obtener categoria
+                    $adminUnico = $administrador -> obtenerUno();
+
+                    //Incluir la vista
+                    require_once "Vistas/Administrador/miPerfil.html";
+                }
+            }
         }
 
         /*
@@ -311,5 +331,60 @@
                 }  
             }
         }
+
+        /*
+        Funcion para actualizar un administrador
+        */
+
+        public function actualizar(){
+            
+            //Comprobar si los datos están llegando
+            if(isset($_GET) && isset($_POST)){
+
+                //Comprobar si los datos existe
+                $id = isset($_GET['id']) ? $_GET['id'] : false;
+                $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
+                $apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : false;
+                $email = isset($_POST['email']) ? $_POST['email'] : false;
+                $clave = isset($_POST['password']) ? $_POST['password'] : false;
+                $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : false;
+
+                //Si el dato existe
+                if($id && $nombre && $apellidos && $email && $clave && $telefono){
+
+                    //Instanciar el objeto
+                    $administrador = new Administrador();
+
+                    //Crear objeto
+                    $administrador -> setId($id);
+                    $administrador -> setNombre($nombre);
+                    $administrador -> setApellido($apellidos);
+                    $administrador -> setCorreo($email);
+                    $administrador -> setClave($clave);
+                    $administrador -> setNumerotelefono($telefono);
+
+                    //Ejecutar la consulta
+                    $actualizado = $administrador -> actualizar();
+
+                    if($actualizado){
+                        //Crear Sesion que indique que el administrador se ha actualizado con exito
+                        $_SESSION['adminactualizado'] = "El administrador ha sido actualizado exitosamente";
+                        //Redirigir al inicio
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+                    }else{
+                        //Crear Sesion que indique que el administrador no se ha actualizado con exito
+                        $_SESSION['adminactualizado'] = "Proporciona nuevos datos";
+                        //Redirigir a la gestion de categorias
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=miPerfil");
+                    }
+                }else{
+                    //Crear Sesion que indique que el administrador no se ha actualizado con exito
+                    $_SESSION['adminactualizado'] = "Ha ocurrido un error al actualizar el administrador";
+                    //Redirigir a la gestion de categorias
+                    header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=miPerfil");
+                } 
+            }
+        }
+
     }
 ?>

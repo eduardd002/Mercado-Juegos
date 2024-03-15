@@ -197,6 +197,44 @@
             //Retorno el resultado
             return $bandera;
         }
+
+        /*
+        Funcion para obtener un usuario
+        */
+
+        public function obtenerUno(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM usuarios WHERE id = {$this -> getId()}";
+            //Ejecutar la consulta
+            $categoria = $this -> db -> query($consulta);
+            //Obtener resultado
+            $resultado = $categoria -> fetch_object();
+            //Retornar el resultado
+            return $resultado;
+        }
+
+        /*
+        Funcion para actualizar el usuario
+        */
+
+        public function actualizar(){
+            //Construir la consulta
+            $consulta = "UPDATE usuarios SET nombre = '{$this -> getNombre()}', apellido = '{$this -> getApellido()}',
+                numerotelefono = {$this -> getNumeroTelefono()}, correo = '{$this -> getCorreo()}', 
+                clave = '{$this -> getClave()}', departamento = '{$this -> getDepartamento()}', 
+                municipio = '{$this -> getMunicipio()}' WHERE id = {$this -> getId()}";
+            //Ejecutar la consulta
+            $actualizado = $this -> db -> query($consulta);
+            //Crear bandera
+            $bandera = false;
+            //Comprobar si la consulta se realizo exitosamente
+            if($actualizado && mysqli_affected_rows($this -> db) > 0){
+                $bandera = true;
+            }
+            //Retorno el resultado
+            return $bandera;
+        }
+
     }
 
 ?>

@@ -14,6 +14,7 @@
     define("ventas", "&action=ventas");
     define("videojuegos", "&action=videojuegos");
     define("eliminarUsuario", "&action=eliminar");
+    define("actualizarUsuario", "&action=actualizar");
 
     define("videojuego", "/?controller=VideojuegoController");
     define("inicio", "&action=inicio");
@@ -48,6 +49,7 @@
     define("gestionarEstado", "&action=gestionarEstado");
     define("gestionarTarjeta", "&action=gestionarTarjeta");
     define("eliminarAdministrador", "&action=eliminar");
+    define("actualizarAdministrador", "&action=actualizar");
 
     define("uso", "/?controller=UsoController");
     define("crearUso", "&action=crear");
@@ -73,6 +75,8 @@
     define("crearCategoria", "&action=crear");
     define("guardarCategoria", "&action=guardar");
     define("eliminarCateogoria", "&action=eliminar");
+    define("editarCategoria", "&action=editar");
+    define("actualizarCategoria", "&action=actualizar");
 
     define("mensaje", "/?controller=MensajeController");
     define("enviarMensaje", "&action=enviar");

@@ -1,82 +1,96 @@
 <?php if(isset($_SESSION['login_exitosoinfoa']) && $_SESSION['login_exitosoinfoa'] == 'Bienvenido administrador') : ?>
-    <div class="alerta alerta-admin">
+    <div class="alerta alerta-adminAcierto">
         <?=$_SESSION['login_exitosoinfoa']; ?>
     </div>
 <?php endif; ?>
 <?php Ayudas::eliminarSesion('login_exitosoinfoa'); ?>
 
+<?php if(isset($_SESSION['adminactualizado']) && $_SESSION['adminactualizado'] == 'El administrador ha sido actualizado exitosamente') : ?>
+    <div class="alerta alerta-adminAcierto">
+        <?=$_SESSION['adminactualizado']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('adminactualizado'); ?>
+
 <?php if(isset($_SESSION['categoriacreada']) && $_SESSION['categoriacreada'] == 'La categoria ha sido creada con exito') : ?>
-    <div class="alerta alerta-acierto">
+    <div class="alerta alerta-adminAcierto">
         <?=$_SESSION['categoriacreada']; ?>
     </div>
 <?php endif; ?> 
 <?php Ayudas::eliminarSesion('categoriacreada'); ?>
 
 <?php if(isset($_SESSION['consolacreada']) && $_SESSION['consolacreada'] == 'La consola ha sido creada con exito') : ?>
-    <div class="alerta alerta-acierto">
+    <div class="alerta alerta-adminAcierto">
         <?=$_SESSION['consolacreada']; ?>
     </div>
 <?php endif; ?> 
 <?php Ayudas::eliminarSesion('consolacreada'); ?>
 
 <?php if(isset($_SESSION['estadocreado']) && $_SESSION['estadocreado'] == 'El estado ha sido creado con exito') : ?>
-    <div class="alerta alerta-acierto">
+    <div class="alerta alerta-adminAcierto">
         <?=$_SESSION['estadocreado']; ?>
     </div>
 <?php endif; ?> 
 <?php Ayudas::eliminarSesion('estadocreado'); ?>
 
-<?php if(isset($_SESSION['tarjetacreada']) && $_SESSION['tarjetacreada'] == 'El uso ha sido creado con exito') : ?>
-    <div class="alerta alerta-acierto">
+<?php if(isset($_SESSION['tarjetacreada']) && $_SESSION['tarjetacreada'] == 'La tarjeta ha sido creado con exito') : ?>
+    <div class="alerta alerta-adminAcierto">
         <?=$_SESSION['tarjetacreada']; ?>
     </div>
 <?php endif; ?> 
 <?php Ayudas::eliminarSesion('tarjetacreada'); ?>
 
-<?php if(isset($_SESSION['usocreado']) && $_SESSION['usocreado'] == 'La categoria ha sido eliminada exitosamente') : ?>
-    <div class="alerta alerta-acierto">
+<?php if(isset($_SESSION['usocreado']) && $_SESSION['usocreado'] == 'El uso ha sido eliminado exitosamente') : ?>
+    <div class="alerta alerta-adminAcierto">
         <?=$_SESSION['usocreado']; ?>
     </div>
 <?php endif; ?> 
 <?php Ayudas::eliminarSesion('usocreado'); ?>
 
 <?php if(isset($_SESSION['usuarioeliminado']) && $_SESSION['usuarioeliminado'] == 'El usuario ha sido eliminado exitosamente') : ?>
-    <div class="alerta alerta-acierto">
+    <div class="alerta alerta-adminAcierto">
         <?=$_SESSION['usuarioeliminado']; ?>
     </div>
 <?php endif; ?> 
 <?php Ayudas::eliminarSesion('usuarioeliminado'); ?>
 
 <?php if(isset($_SESSION['categoriaeliminada']) && $_SESSION['categoriaeliminada'] == 'La categoria ha sido eliminada exitosamente') : ?>
-    <div class="alerta alerta-acierto">
+    <div class="alerta alerta-adminAcierto">
         <?=$_SESSION['categoriaeliminada']; ?>
     </div>
 <?php endif; ?> 
 <?php Ayudas::eliminarSesion('categoriaeliminada'); ?>
 
+<?php if(isset($_SESSION['categoriaactualizada']) && $_SESSION['categoriaactualizada'] == 'La categoria ha sido actualizada exitosamente') : ?>
+    <div class="alerta alerta-adminAcierto">
+        <?=$_SESSION['categoriaactualizada']; ?>
+    </div>
+<?php endif; ?> 
+<?php Ayudas::eliminarSesion('categoriaactualizada'); ?>
+
 <?php if(isset($_SESSION['consolaeliminada']) && $_SESSION['consolaeliminada'] == 'La consola ha sido eliminada exitosamente') : ?>
-    <div class="alerta alerta-acierto">
+    <div class="alerta alerta-adminAcierto">
         <?=$_SESSION['consolaeliminada']; ?>
     </div>
 <?php endif; ?> 
 <?php Ayudas::eliminarSesion('consolaeliminada'); ?>
 
 <?php if(isset($_SESSION['usoeliminado']) && $_SESSION['usoeliminado'] == 'El uso ha sido eliminado exitosamente') : ?>
-    <div class="alerta alerta-acierto">
+    <div class="alerta alerta-adminAcierto">
         <?=$_SESSION['usoeliminado']; ?>
     </div>
 <?php endif; ?> 
 <?php Ayudas::eliminarSesion('usoeliminado'); ?>
 
 <?php if(isset($_SESSION['estadoeliminado']) && $_SESSION['estadoeliminado'] == 'El estado ha sido eliminado exitosamente') : ?>
-    <div class="alerta alerta-acierto">
+    <div class="alerta alerta-adminAcierto">
         <?=$_SESSION['estadoeliminado']; ?>
     </div>
 <?php endif; ?> 
-<?php Ayudas::eliminarSesion('estadoeliminado'); ?>}
+<?php Ayudas::eliminarSesion('estadoeliminado'); ?>
 
 <?php if(isset($_SESSION['tarjetaeliminada']) && $_SESSION['tarjetaeliminada'] == 'La tarjeta ha sido eliminada exitosamente') : ?>
-    <div class="alerta alerta-acierto">
+    <div class="alerta alerta-adminAcierto">
         <?=$_SESSION['tarjetaeliminada']; ?>
     </div>
 <?php endif; ?> 

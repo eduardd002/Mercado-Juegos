@@ -47,7 +47,7 @@
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
                     }else{
                         //Crear sesion que indique que ha habido un error al guardar el estado
-                        $_SESSION['categorianocreada'] = 'El estado no ha sido creado con exito';
+                        $_SESSION['estadocreado'] = 'El estado no ha sido creado con exito';
                         //Redirigir al registro de estado
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=crearEstado");
                     }
