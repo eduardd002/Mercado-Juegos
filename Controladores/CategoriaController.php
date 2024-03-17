@@ -125,7 +125,7 @@
         }
 
         /*
-        Funcion para eliminar una categoria
+        Funcion para actualizar una categoria
         */
 
         public function actualizar(){

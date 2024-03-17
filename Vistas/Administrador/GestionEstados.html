@@ -12,7 +12,7 @@
                 <tr>
                     <td><?=$estados -> id?></td>
                     <td><?=$estados -> nombre?></td>
-                    <td><a href="<?=rutaInicio?><?=videojuego?><?=actualizarVideojuego?>" class="button button-actualizarVideojuego">Actualizar</a></td>
+                    <td><a href="<?=rutaInicio?><?=estado?><?=editarEstado?>&id=<?=$estados -> id?>" class="button button-actualizarVideojuego">Actualizar</a></td>
                     <td><a href="<?=rutaInicio?><?=estado?><?=eliminarEstado?>&id=<?=$estados -> id?>" class="button button-eliminarVideojuego">Eliminar</a></td>
                 </tr>
             <?php endwhile;?>

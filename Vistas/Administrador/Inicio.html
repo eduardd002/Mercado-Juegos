@@ -75,12 +75,26 @@
 <?php endif; ?> 
 <?php Ayudas::eliminarSesion('consolaeliminada'); ?>
 
+<?php if(isset($_SESSION['consolaactualizada']) && $_SESSION['consolaactualizada'] == 'La consola ha sido actualizada exitosamente') : ?>
+    <div class="alerta alerta-adminAcierto">
+        <?=$_SESSION['consolaactualizada']; ?>
+    </div>
+<?php endif; ?> 
+<?php Ayudas::eliminarSesion('consolaactualizada'); ?>
+
 <?php if(isset($_SESSION['usoeliminado']) && $_SESSION['usoeliminado'] == 'El uso ha sido eliminado exitosamente') : ?>
     <div class="alerta alerta-adminAcierto">
         <?=$_SESSION['usoeliminado']; ?>
     </div>
 <?php endif; ?> 
 <?php Ayudas::eliminarSesion('usoeliminado'); ?>
+
+<?php if(isset($_SESSION['usoactualizado']) && $_SESSION['usoactualizado'] == 'El uso ha sido actualizado exitosamente') : ?>
+    <div class="alerta alerta-adminAcierto">
+        <?=$_SESSION['usoactualizado']; ?>
+    </div>
+<?php endif; ?> 
+<?php Ayudas::eliminarSesion('usoactualizado'); ?>
 
 <?php if(isset($_SESSION['estadoeliminado']) && $_SESSION['estadoeliminado'] == 'El estado ha sido eliminado exitosamente') : ?>
     <div class="alerta alerta-adminAcierto">
@@ -89,12 +103,26 @@
 <?php endif; ?> 
 <?php Ayudas::eliminarSesion('estadoeliminado'); ?>
 
+<?php if(isset($_SESSION['estadoactualizado']) && $_SESSION['estadoactualizado'] == 'El estado ha sido actualizado exitosamente') : ?>
+    <div class="alerta alerta-adminAcierto">
+        <?=$_SESSION['estadoactualizado']; ?>
+    </div>
+<?php endif; ?> 
+<?php Ayudas::eliminarSesion('estadoactualizado'); ?>
+
 <?php if(isset($_SESSION['tarjetaeliminada']) && $_SESSION['tarjetaeliminada'] == 'La tarjeta ha sido eliminada exitosamente') : ?>
     <div class="alerta alerta-adminAcierto">
         <?=$_SESSION['tarjetaeliminada']; ?>
     </div>
 <?php endif; ?> 
 <?php Ayudas::eliminarSesion('tarjetaeliminada'); ?>
+
+<?php if(isset($_SESSION['tarjetaactualizada']) && $_SESSION['tarjetaactualizada'] == 'La tarjeta ha sido actualizado exitosamente') : ?>
+    <div class="alerta alerta-adminAcierto">
+        <?=$_SESSION['tarjetaactualizada']; ?>
+    </div>
+<?php endif; ?> 
+<?php Ayudas::eliminarSesion('tarjetaactualizada'); ?>
 
 <div id="administradorpanel">
     <img src="Recursos/Logotipos/administrar.png" alt="Logo administrar">

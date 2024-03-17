@@ -94,6 +94,78 @@
             }
         }
 
+        /*
+        Funcion para editar un estado
+        */
+
+        public function editar(){
+
+            //Comprobar si los datos están llegando
+            if(isset($_GET)){
+
+                //Comprobar si el dato existe
+                $idEstado = isset($_GET['id']) ? $_GET['id'] : false;
+
+                //Si el dato existe
+                if($idEstado){
+
+                    //Instanciar el objeto
+                    $estado = new Estado();
+
+                    //Creo el objeto
+                    $estado -> setId($idEstado);
+
+                    //Obtener estado
+                    $estadoUnico = $estado -> obtenerUno();
+
+                    //Incluir la vista
+                    require_once "Vistas/Estado/Actualizar.html";
+
+                }
+            }
+        }
+
+        /*
+        Funcion para actualizar un estado
+        */
+
+        public function actualizar(){
+            
+            //Comprobar si los datos están llegando
+            if(isset($_GET) && isset($_POST)){
+
+                //Comprobar si los datos existe
+                $idEstado = isset($_GET['id']) ? $_GET['id'] : false;
+                $nombre = isset($_POST['nombreestact']) ? $_POST['nombreestact'] : false;
+
+                //Si el dato existe
+                if($idEstado){
+
+                    //Instanciar el objeto
+                    $estado = new Estado();
+
+                    //Crear objeto
+                    $estado -> setId($idEstado);
+                    $estado -> setNombre($nombre);
+
+                    //Ejecutar la consulta
+                    $actualizado = $estado -> actualizar();
+
+                    if($actualizado){
+                        //Crear Sesion que indique que el estado se ha actualizado con exito
+                        $_SESSION['estadoactualizado'] = "El estado ha sido actualizado exitosamente";
+                        //Redirigir al inicio
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+                    }else{
+                        //Crear Sesion que indique que el estado se ha actualizado con exito
+                        $_SESSION['estadoactualizado'] = "El estado no ha sido actualizada exitosamente";
+                        //Redirigir a la gestion de estados
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=gestionarEstado");
+                    }
+                }  
+            }
+        }
+
     }
 
 ?>

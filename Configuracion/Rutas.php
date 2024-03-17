@@ -55,21 +55,29 @@
     define("crearUso", "&action=crear");
     define("guardarUso", "&action=guardar");
     define("eliminarUso", "&action=eliminar");
+    define("editarUso", "&action=editar");
+    define("actualizarUso", "&action=actualizar");
 
     define("estado", "/?controller=EstadoController");
     define("crearEstado", "&action=crear");
     define("guardarEstado", "&action=guardar");
     define("eliminarEstado", "&action=eliminar");
+    define("editarEstado", "&action=editar");
+    define("actualizarEstado", "&action=actualizar");
 
     define("tarjeta", "/?controller=TarjetaController");
     define("crearTarjeta", "&action=crear");
     define("guardarTarjeta", "&action=guardar");
     define("eliminarTarjeta", "&action=eliminar");
+    define("editarTarjeta", "&action=editar");
+    define("actualizarTarjeta", "&action=actualizar");
 
     define("consola", "/?controller=ConsolaController");
     define("crearConsola", "&action=crear");
     define("guardarConsola", "&action=guardar");
     define("eliminarConsola", "&action=eliminar");
+    define("editarConsola", "&action=editar");
+    define("actualizarConsola", "&action=actualizar");
 
     define("categoria", "/?controller=CategoriaController");
     define("crearCategoria", "&action=crear");

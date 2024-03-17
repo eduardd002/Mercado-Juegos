@@ -92,6 +92,78 @@
                 }  
             }
         }
+
+        /*
+        Funcion para editar una consola
+        */
+
+        public function editar(){
+
+            //Comprobar si los datos están llegando
+            if(isset($_GET)){
+
+                //Comprobar si el dato existe
+                $idConsola = isset($_GET['id']) ? $_GET['id'] : false;
+
+                //Si el dato existe
+                if($idConsola){
+
+                    //Instanciar el objeto
+                    $consola = new Consola();
+
+                    //Creo el objeto
+                    $consola -> setId($idConsola);
+
+                    //Obtener consola
+                    $consolaUnica = $consola -> obtenerUna();
+
+                    //Incluir la vista
+                    require_once "Vistas/Consola/Actualizar.html";
+
+                }
+            }
+        }
+
+        /*
+        Funcion para actualizar una consola
+        */
+
+        public function actualizar(){
+            
+            //Comprobar si los datos están llegando
+            if(isset($_GET) && isset($_POST)){
+
+                //Comprobar si los datos existe
+                $idConsola = isset($_GET['id']) ? $_GET['id'] : false;
+                $nombre = isset($_POST['nombreconsact']) ? $_POST['nombreconsact'] : false;
+
+                //Si el dato existe
+                if($idConsola){
+
+                    //Instanciar el objeto
+                    $consola = new Consola();
+
+                    //Crear objeto
+                    $consola -> setId($idConsola);
+                    $consola -> setNombre($nombre);
+
+                    //Ejecutar la consulta
+                    $actualizado = $consola -> actualizar();
+
+                    if($actualizado){
+                        //Crear Sesion que indique que la consola se ha actualizado con exito
+                        $_SESSION['consolaactualizada'] = "La consola ha sido actualizada exitosamente";
+                        //Redirigir al inicio
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+                    }else{
+                        //Crear Sesion que indique que la consola se ha actualizado con exito
+                        $_SESSION['consolaactualizada'] = "La consola no ha sido actualizada exitosamente";
+                        //Redirigir a la gestion de consolas
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=gestionarConsola");
+                    }
+                }  
+            }
+        }
     }
 
 ?>

@@ -63,6 +63,21 @@
         }
 
         /*
+        Funcion para obtener un uso
+        */
+
+        public function obtenerUno(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM usos WHERE id = {$this -> getId()}";
+            //Ejecutar la consulta
+            $uso = $this -> db -> query($consulta);
+            //Obtener resultado
+            $resultado = $uso -> fetch_object();
+            //Retornar el resultado
+            return $resultado;
+        }
+
+        /*
         Funcion para eliminar el uso
         */
 
@@ -75,6 +90,26 @@
             $bandera = false;
             //Comprobar si la consulta se realizo exitosamente
             if($eliminado){
+                $bandera = true;
+            }
+            //Retorno el resultado
+            return $bandera;
+        }
+
+        /*
+        Funcion para actualizar el uso
+        */
+
+        public function actualizar(){
+            //Construir la consulta
+            $consulta = "UPDATE usos SET nombre = '{$this -> getNombre()}' 
+                WHERE id = {$this -> getId()}";
+            //Ejecutar la consulta
+            $actualizado = $this -> db -> query($consulta);
+            //Crear bandera
+            $bandera = false;
+            //Comprobar si la consulta se realizo exitosamente
+            if($actualizado){
                 $bandera = true;
             }
             //Retorno el resultado

@@ -93,6 +93,78 @@
             }
         }
 
+        /*
+        Funcion para editar una tarjeta
+        */
+
+        public function editar(){
+
+            //Comprobar si los datos están llegando
+            if(isset($_GET)){
+
+                //Comprobar si el dato existe
+                $idTarjeta = isset($_GET['id']) ? $_GET['id'] : false;
+
+                //Si el dato existe
+                if($idTarjeta){
+
+                    //Instanciar el objeto
+                    $tarjeta = new Tarjeta();
+
+                    //Creo el objeto
+                    $tarjeta -> setId($idTarjeta);
+
+                    //Obtener tarjeta
+                    $tarjetaUnica = $tarjeta -> obtenerUna();
+
+                    //Incluir la vista
+                    require_once "Vistas/Tarjeta/Actualizar.html";
+
+                }
+            }
+        }
+
+        /*
+        Funcion para actualizar una tarjeta
+        */
+
+        public function actualizar(){
+            
+            //Comprobar si los datos están llegando
+            if(isset($_GET) && isset($_POST)){
+
+                //Comprobar si los datos existe
+                $idTarjeta = isset($_GET['id']) ? $_GET['id'] : false;
+                $nombre = isset($_POST['nombretaract']) ? $_POST['nombretaract'] : false;
+
+                //Si el dato existe
+                if($idTarjeta){
+
+                    //Instanciar el objeto
+                    $tarjeta= new Tarjeta();
+
+                    //Crear objeto
+                    $tarjeta -> setId($idTarjeta);
+                    $tarjeta -> setNombre($nombre);
+
+                    //Ejecutar la consulta
+                    $actualizado = $tarjeta -> actualizar();
+
+                    if($actualizado){
+                        //Crear Sesion que indique que la tarjeta se ha actualizado con exito
+                        $_SESSION['tarjetaactualizada'] = "La tarjeta ha sido actualizada exitosamente";
+                        //Redirigir al inicio
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+                    }else{
+                        //Crear Sesion que indique que la tarjeta no se ha actualizado con exito
+                        $_SESSION['tarjetaactualizada'] = "La tarjeta no ha sido actualizada exitosamente";
+                        //Redirigir a la gestion de tarjetas
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=gestionarTarjeta");
+                    }
+                }  
+            }
+        }
+
     }
 
 ?>

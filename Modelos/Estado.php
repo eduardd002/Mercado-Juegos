@@ -63,6 +63,21 @@
         }
 
         /*
+        Funcion para obtener un estado
+        */
+
+        public function obtenerUno(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM estados WHERE id = {$this -> getId()}";
+            //Ejecutar la consulta
+            $estado = $this -> db -> query($consulta);
+            //Obtener resultado
+            $resultado = $estado -> fetch_object();
+            //Retornar el resultado
+            return $resultado;
+        }
+
+        /*
         Funcion para eliminar el estado
         */
 
@@ -75,6 +90,26 @@
             $bandera = false;
             //Comprobar si la consulta se realizo exitosamente
             if($eliminado){
+                $bandera = true;
+            }
+            //Retorno el resultado
+            return $bandera;
+        }
+
+        /*
+        Funcion para actualizar el estado
+        */
+
+        public function actualizar(){
+            //Construir la consulta
+            $consulta = "UPDATE estados SET nombre = '{$this -> getNombre()}' 
+                WHERE id = {$this -> getId()}";
+            //Ejecutar la consulta
+            $actualizado = $this -> db -> query($consulta);
+            //Crear bandera
+            $bandera = false;
+            //Comprobar si la consulta se realizo exitosamente
+            if($actualizado){
                 $bandera = true;
             }
             //Retorno el resultado

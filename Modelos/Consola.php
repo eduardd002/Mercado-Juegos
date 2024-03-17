@@ -63,6 +63,21 @@
         }
 
         /*
+        Funcion para obtener una consola
+        */
+
+        public function obtenerUna(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM consolas WHERE id = {$this -> getId()}";
+            //Ejecutar la consulta
+            $consola = $this -> db -> query($consulta);
+            //Obtener resultado
+            $resultado = $consola -> fetch_object();
+            //Retornar el resultado
+            return $resultado;
+        }
+
+        /*
         Funcion para eliminar la consola
         */
 
@@ -75,6 +90,26 @@
             $bandera = false;
             //Comprobar si la consulta se realizo exitosamente
             if($eliminado){
+                $bandera = true;
+            }
+            //Retorno el resultado
+            return $bandera;
+        }
+
+        /*
+        Funcion para actualizar la consola
+        */
+
+        public function actualizar(){
+            //Construir la consulta
+            $consulta = "UPDATE consolas SET nombre = '{$this -> getNombre()}' 
+                WHERE id = {$this -> getId()}";
+            //Ejecutar la consulta
+            $actualizado = $this -> db -> query($consulta);
+            //Crear bandera
+            $bandera = false;
+            //Comprobar si la consulta se realizo exitosamente
+            if($actualizado){
                 $bandera = true;
             }
             //Retorno el resultado
