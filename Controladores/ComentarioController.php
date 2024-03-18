@@ -39,6 +39,7 @@
                     //Guardar en la base de datos
                     $guardado = $comentario -> guardar();
 
+                    //Comprobar si el comentario ha sido guardado
                     if($guardado){
 
                         //Obtener id del ultimo videojuego registrado
@@ -48,14 +49,13 @@
                         $comentarioVideojuego = new ComentarioVideojuego();
 
                         //Crear el objeto
-
-                        //Registrar id de videojuego futuro o proximo a registrar
                         $comentarioVideojuego -> setIdVideojuego($videojuego);
                         $comentarioVideojuego -> setIdComentario($id);
 
                         //Guardar en la base de datos
                         $guardadoComentarioVideojuego = $comentarioVideojuego -> guardar();
 
+                        //Comprobar si el comentario relacionado al videojuego se ha guardado
                         if($guardadoComentarioVideojuego){
                             //Crear sesion que indique que el comentario se ha hecho exitosamente
                             $_SESSION['comentariocreado'] = "El comentario se ha hecho con exito";

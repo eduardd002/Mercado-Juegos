@@ -1242,6 +1242,8 @@ Estilo del text area de registro
     width: 400px;
     /*Altura*/
     height: 100px;
+    /*Margen ingerior*/
+    margin-bottom: 15px;
 }
 
 /*
@@ -1979,254 +1981,529 @@ Estilo de el apartado de chat de comprador
     margin: 50px;
 }
 
+/*
+Estilo de el apartado de chat de vendedor
+*/
+
 #chatVendedor{
+    /*Margen exterior*/
     margin: 50px;
 }
 
+/*
+Estilo de titulo en el chat de comprador
+*/
+
 #chatComprador h1{
+    /*Texto alineado al centro*/
     text-align: center;
+    /*Magen inferior*/
     margin-bottom: 20px;
 }
+
+/*
+Estilo de titulo en el chat de vendedor
+*/
 
 #chatVendedor h1{
+    /*Texto alineado al centro*/
     text-align: center;
+    /*Magen inferior*/
     margin-bottom: 20px;
 }
 
+/*
+Estilo de panel del chat de comprador
+*/
+
 #panelChatComprador{
+    /*Color de fondo*/
     background: #a0def2;
+    /*Borde*/
     border: 1px solid #144064;
+    /*Margen inferior*/
     margin-bottom: 50px;
+    /*Altura*/
     height: 400px;
+    /*Aplicar scroll en chat*/
     overflow-y: auto;
 }
+
+/*
+Estilo de panel del chat de vendedor
+*/
 
 #panelChatVendedor{
+    /*Color de fondo*/
     background: #a0def2;
+    /*Borde*/
     border: 1px solid #144064;
+    /*Margen inferior*/
     margin-bottom: 50px;
+    /*Altura*/
     height: 400px;
+    /*Anchor*/
     width: 500px;
+    /*Aplicar scroll en chat*/
     overflow-y: auto;
 }
 
+/*
+Estilo de boton de enviar mensaje
+*/
+
 #chatComprador input[type="Submit"]{
+    /*Flotar hacia la izquierda*/
     float: left;
+    /*Anchor*/
     width: 150px;
+    /*Altura*/
     height: 30px;
 }
 
+/*
+Estilo de titulo para enviar el mensaje en el chat
+*/
+
 #chatComprador input[type="Text"]{
+    /*Flotar hacia la izquierda*/
     float: left;
+    /*Altura*/
     height: 26px;
+    /*Anchor*/
     width: 700px;
+    /*Margen inferior*/
     margin-bottom: 50px;
+    /*Margen derecho*/
     margin-right: 50px;
+    /*Margen izquierdo*/
     margin-left: 60px;
 }
 
+/*
+Estilo del boton de enviar mensaje en el apartado de vendedor
+*/
+
 #chatVendedor input[type="Submit"]{
+    /*Flotar hacia la izquierda*/
     float: left;
+    /*Anchor*/
     width: 70px;
+    /*Altura*/
     height: 30px;
 }
 
+/*
+Estilo del campo para enviar el mensaje en chat del vendedor
+*/
+
 #chatVendedor input[type="Text"]{
+    /*Flotar hacia la izquierda*/
     float: left;
+    /*Altura*/
     height: 26px;
+    /*Anchor*/
     width: 300px;
+    /*Margen inferior*/
     margin-bottom: 50px;
+    /*Margen derecho*/
     margin-right: 50px;
+    /*Margen izquierdo*/
     margin-left: 35px;
 }
 
+/*
+Estilo de la seccion de enviar mensaje
+*/
+
 #campoEnviarMensaje{
+    /*Flotar hacia la izquierda*/
     float: left;
 }
 
+/*
+Estilo del mensaje enviado
+*/
+
 #mensajeenviado{
+    /*Margen superior*/
     margin-top: 15px;
+    /*Margen izquierdo*/
     margin-left: 25px;
+    /*Margen interior*/
     padding: 20px;
+    /*Color de fondo*/
     background: white;
+    /*Flotar hacia la izquierda*/
     float: left;
+    /*Borde semi redondo*/
     border-radius: 40%;
 }
 
+/*
+Estilo del mensaje enviado
+*/
+
 #mensajeenviado p{
+    /*Color de letra*/
     color: red;
 }
 
+/*
+Estilo del mensaje recibido
+*/
+
 #mensajerecibido{
+    /*Flotar hacia la dere*/
     float: right;
+    /*Limpiar flotados*/
     clear: both;
+    /*Dar comportamiento del bloque*/
     display: block;
+    /*Margen superior*/
     margin-top: 15px;
+    /*Margen derecho*/
     margin-right: 25px;
+    /*Margen interior*/
     padding: 20px;
+    /*Color de fondo*/
     background: white;
+    /*Flotar hacia la derecha*/
     float: right;
+    /*Borden semi-redondo*/
     border-radius: 40%;
 }
 
+/*
+Estilo de contenido del mensaje
+*/
+
 #mensajerecibido p{
+    /*Color de letra*/
     color: #11608e;
 }
 
+/*
+Estilo de la seccion de usuarios en el chat
+*/
+
 #seccionUsuarios{
+    /*Flotar hacia la izquierda*/
     float: left;
+    /*Margen superior*/
     margin-top: 30px;
+    /*Aplicar scroll*/
     overflow-y: auto;
+    /*Altura*/
     height: 480px;
+    /*Anchor*/
     width: 450px;
+    /*Borde*/
     border: 1px solid #333;
 }
 
+/*
+Estilo del titulo de la gestion de usuarios en el chat de vendedor
+*/
+
 #seccionUsuarios a{
+    /*Sin decoracion de texto*/
     text-decoration: none;
 }
 
+/*
+Estilo de la seccion del chat
+*/
+
 #seccionChat{
+    /*Flotar hacia la derecha*/
     float: right;
+    /*Margen superior*/
     margin-top: 30px;
 }
 
+/*
+Estilo del los usuarios del chat
+*/
+
 #usuarioChat{
+    /*Borde*/
     border-bottom: 1px solid black;
+    /*Margen exterior*/
     margin: 20px;
+    /*Limpiar flotados*/
     clear: both;
+    /*Dar comportamiento del bloque*/
     display: block;
 }
 
+/*
+Estilo de la foto de perfil en el chat de vendedor
+*/
+
 #usuarioChat img{
+    /*Flotar hacia la izquierda*/
     float: left;
+    /*Anchor*/
     width: 60px;
+    /*Altura*/
     height: 65px;
+    /*Borde redondo*/
     border-radius: 50%;
+    /*Margen derecho*/
     margin-right: 20px;
 }
 
+/*
+Estilo del subtitulo del chat
+*/
+
 #usuarioChat h2{
+    /*Sin flotado*/
     float: none;
+    /*Margen inferior*/
     margin-bottom: 20px;
 }
 
+/*
+Estilo del texto del chat
+*/
+
 #usuarioChat p{
+    /*Sin flotado*/
     float: none;
+    /*Margen inferior*/
     margin-bottom: 10px;
 }
 
+/*
+Estilo del boton de registro en administrador
+*/
+
 .btnRegistro-adminPerfil{
+    /*Flotar hacia la izquierda*/
     float: left;
+    /*Margen*/
     margin: 0px !important;
+    /*Margen izquierdo*/
     margin-left: 300px !important;
+    /*Margen derecho*/
     margin-right: 300px !important;
 }
 
+/*
+Estilos de los botones en el apartado de mi perfil en administrador
+*/
+
 #botonesadmin{
+    /*Margen superior*/
     margin-top: 100px !important;
+    /*Margen inferior*/
     margin-bottom: 40px;
 }
+
+/*
+Estilos de los botones en el apartado de mi perfil en usuario
+*/
 
 #botonesusuario{
+    /*Margen superior*/
     margin-top: 40px !important;
+    /*Margen inferior*/
     margin-bottom: 40px;
 }
 
+/*Estilo de los botones en la seccion de perfil de adminsitrador*/
+
 #botonesadmin a{
+    /*Color de letra*/
     color: #007EE5;
 }
 
+/*
+Estilo de la seccion de comentario
+*/
+
 #bloquecomentario{
+    /*Margen izquierdo*/
     margin-left: 75px;
+    /*Margen superior*/
     margin-top: 30px;
+    /*Flotar hacia la izquierda*/
     float: left;
 }
 
+/*
+Estilo del boton para enviar el comentario
+*/
+
 #bloquecomentario input[type="text"]{
+    /*Altura*/
     height: 20px;
+    /*Anchor*/
     width: 500px;
+    /*Flotar hacia la izquierda*/
     float: left;
+    /*Margen derecho*/
     margin-right: 10px;
 }
 
+/*
+Estilo del campo para enviar el comentario
+*/
+
 #bloquecomentario input[type="submit"]{
+    /*Flotar hacia la izquierda*/
     float: left;
+    /*Anchor*/
     width: 150px;
 }
 
+/*
+Estilo de la seccion de comentario en el apartado de titulo
+*/
+
 #bloquecomentario h2{
+    /*Margen inferior*/
     margin-bottom: 30px;
 }
 
+/*
+Estilo del titulo de comentarios
+*/
+
 .detalleVideojuego h6{
+    /*Color de letra*/
     color: #01b1ea;
+    /*Tamaño de letra*/
     font-size: 30px;
+    /*Limpiar flotados*/
     clear: both;
+    /*Dar comportamiento de bloque*/
     display: block;
+    /*Texto alineado*/
     text-align: center;
+    /*Margen inferior*/
     margin-bottom: 50px;
+    /*Espacio entre cada letra*/
     letter-spacing: 1px;
 }
 
+/*
+Estilo de la seccion de comentarios en el detalle del videojuego
+*/
+
 #comentario{
+    /*Limpiar flotados*/
     clear: both;
+    /*Dar comportamiento de bloque*/
     display: block;
+    /*Flotar hacia la izquierda*/
     float: left;
+    /*Margen inferior*/
     margin-bottom: 50px;
+    /*Anchor*/
     width: 1000px;
 }
 
+/*
+Estilo de la imagen de perfil del usuario en los comentarios
+*/
+
 #comentario img{
+    /*Margen superior*/
     margin-top: 10px;
+    /*Borde redondo*/
     border-radius: 50%;
+    /*Altura*/
     height: 90px;
+    /*Anchor*/
     width: 80px;
+    /*Flotar hacia la izquierda*/
     float: left;
 }
+
+/*
+Estilo del texto de la seccion superior de los comentarios
+*/
 
 #comentario h3{
+    /*Margen superior*/
     margin-top: 10px;
+    /*Margen ingerior*/
     margin-bottom: 10px;
 }
+
+/*
+Estilo del texto de la seccion intermedia de los comentarios
+*/
 
 #comentario h4{
+    /*Margen superior*/
     margin-top: 10px;
+    /*Margen ingerior*/
     margin-bottom: 10px;
 }
+
+/*
+Estilo del texto de la seccion inferior de los comentarios
+*/
 
 #comentario h5{
+    /*Margen superior*/
     margin-top: 10px;
+    /*Margen ingerior*/
     margin-bottom: 10px;
 }
 
+/*
+Estilo del enlace del comentario
+*/
+
 #comentario a{
+    /*Margen derecho*/
     margin-right: 20px;
+    /*Flotar hacia la izquierda*/
     float: left;
 }
 
+/*
+Estilos del chat
+*/
+
 .chatear{
+    /*Margen superior*/
     margin-top: 70px;
+    /*Margen inferior*/
     margin-bottom: 30px;
+    /*Margen izquierdo*/
     margin-left: 50px;
 }
 
+/*
+Estilo de los enlaces del chat
+*/
+
 .chatear a{
+    /*Color de letra*/
     color: #1486dc !important;
+    /*Sin decoracion del texto*/
     text-decoration: none;
+    /*Tamaño de letra*/
     font-size: 20px;
+    /*Espaciado de letra*/
     letter-spacing: 1px;
 }
 
-#seccionProcesoTransccion img{
-    width: 50px !important;
-    height: 50px !important;
-}
+/*
+Estilo del boton de confirmar pedido al dilegenciar envio y pago
+*/
 
-#seccionPagoTransaccion{
-    height: 100px;
-}
-
-#seccionEnvioTransaccion{
-
+#botonEnvioYPago{
+    /*Margen superior*/
+    margin-top: 10px;
+    /*Limpiar flotados*/
+    clear: both;
+    /*Dar comportamiento de bloque*/
+    display: block;
 }

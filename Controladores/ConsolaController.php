@@ -78,6 +78,7 @@
                     //Ejecutar la consulta
                     $eliminado = $consola -> eliminar();
 
+                    //Comprobar si la consola ha sido eliminada con exito
                     if($eliminado){
                         //Crear Sesion que indique que el consola se ha eliminado con exito
                         $_SESSION['consolaeliminada'] = "La consola ha sido eliminada exitosamente";
@@ -150,6 +151,7 @@
                     //Ejecutar la consulta
                     $actualizado = $consola -> actualizar();
 
+                    //Comprobar si la consola ha sido actualizada
                     if($actualizado){
                         //Crear Sesion que indique que la consola se ha actualizado con exito
                         $_SESSION['consolaactualizada'] = "La consola ha sido actualizada exitosamente";

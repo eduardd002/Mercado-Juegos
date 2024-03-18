@@ -112,6 +112,7 @@
                     
                     //Comprobar si la clave cumple con las condiciones para que sea segura
                     if($claveSegura){
+
                         //Guardar la imagen
 
                         //Guardar toda la informacion referente a la imagen
@@ -198,6 +199,7 @@
                     //Ejecutar la consulta
                     $eliminado = $administrador -> eliminar();
 
+                    //Comprobar si el administrador ha sido eliminado exitosamente
                     if($eliminado){
                         //Crear Sesion que indique que el administrador se ha eliminado con exito
                         $_SESSION['admineliminado'] = "El administrador ha sido eliminado exitosamente";
@@ -366,6 +368,7 @@
                     //Ejecutar la consulta
                     $actualizado = $administrador -> actualizar();
 
+                    //Comprobar si el administrador ha sido actualizado
                     if($actualizado){
                         //Crear Sesion que indique que el administrador se ha actualizado con exito
                         $_SESSION['adminactualizado'] = "El administrador ha sido actualizado exitosamente";
@@ -385,6 +388,5 @@
                 } 
             }
         }
-
     }
 ?>

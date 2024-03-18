@@ -33,7 +33,7 @@
     define("guardarCompra", "&action=guardar");
     define("verCompras", "&action=verCompras");
     define("verVentas", "&action=verVentas");
-    define("direccion", "&action=direccion");
+    define("direccionYPago", "&action=direccionYPago");
     define("pago", "&action=pago");
     define("realizar", "&action=exito");
     define("generarPdf", "&action=generarPdf");

@@ -78,6 +78,7 @@
                     //Ejecutar la consulta
                     $eliminado = $uso -> eliminar();
 
+                    //Comprobar si el uso fue eliminado con exito
                     if($eliminado){
                         //Crear Sesion que indique que el uso se ha eliminado con exito
                         $_SESSION['usoeliminado'] = "El uso ha sido eliminado exitosamente";
@@ -150,6 +151,7 @@
                     //Ejecutar la consulta
                     $actualizado = $uso -> actualizar();
 
+                    //Comprobar si el uso fue actualizado con exito
                     if($actualizado){
                         //Crear Sesion que indique que el uso se ha actualizado con exito
                         $_SESSION['usoactualizado'] = "El uso ha sido actualizado exitosamente";

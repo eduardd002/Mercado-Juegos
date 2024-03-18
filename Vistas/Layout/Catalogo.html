@@ -55,9 +55,9 @@
 <?php Ayudas::eliminarSesion('admineliminado'); ?>
 
 <div id="contenidoCentral">
-    <?php if(mysqli_num_rows($listadoAlgunos) <= 5) : ?>
+    <?php if(mysqli_num_rows($listadoTodos) <= 6) : ?>
         <h1>Todos los Videojuegos</h1>
-    <?php elseif(mysqli_num_rows($listadoAlgunos) > 6) : ?>
+    <?php elseif(mysqli_num_rows($listadoTodos) > 6) : ?>
         <h1>Algunos Videojuegos</h1>
     <?php else : ?>
         <h1>No hay Videojuegos</h1>
@@ -76,7 +76,7 @@
         <?php endwhile; ?>
     </div>
     <div id="verTodos">
-        <?php if(mysqli_num_rows($listadoAlgunos) > 6) : ?>
+        <?php if(mysqli_num_rows($listadoTodos) > 6) : ?>
             <a href="<?=rutaInicio?><?=videojuego?><?=todos?>">Ver todos los videojuegos</a>
         <?php endif; ?>
     </div>

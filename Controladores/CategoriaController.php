@@ -78,6 +78,7 @@
                     //Ejecutar la consulta
                     $eliminado = $categoria -> eliminar();
 
+                    //Comprobar si la categoria ha sido actualizada con exito
                     if($eliminado){
                         //Crear Sesion que indique que el categoria se ha eliminado con exito
                         $_SESSION['categoriaeliminada'] = "La categoria ha sido eliminada exitosamente";
@@ -150,6 +151,7 @@
                     //Ejecutar la consulta
                     $actualizado = $categoria -> actualizar();
 
+                    //Comprobar si la categoria ha sido actualizada
                     if($actualizado){
                         //Crear Sesion que indique que el categoria se ha actualizado con exito
                         $_SESSION['categoriaactualizada'] = "La categoria ha sido actualizada exitosamente";

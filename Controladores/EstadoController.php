@@ -79,6 +79,7 @@
                     //Ejecutar la consulta
                     $eliminado = $estado -> eliminar();
 
+                    //Comprobar si el estado se elimina el estado exitosamente
                     if($eliminado){
                         //Crear Sesion que indique que el estado se ha eliminado con exito
                         $_SESSION['estadoeliminado'] = "El estado ha sido eliminado exitosamente";
@@ -151,6 +152,7 @@
                     //Ejecutar la consulta
                     $actualizado = $estado -> actualizar();
 
+                    //Comprobar si el estado se actualiza con exito
                     if($actualizado){
                         //Crear Sesion que indique que el estado se ha actualizado con exito
                         $_SESSION['estadoactualizado'] = "El estado ha sido actualizado exitosamente";
@@ -165,7 +167,6 @@
                 }  
             }
         }
-
     }
 
 ?>

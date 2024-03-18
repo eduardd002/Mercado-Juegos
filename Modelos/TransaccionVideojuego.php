@@ -3,16 +3,17 @@
     class TransaccionVideojuego{
 
         private $id;
-        private $idCompra;
+        private $idTransaccion;
         private $idVideojuego;
         private $unidades;
         private $nombreVideojuego;
         private $precioVideojuego;
         private $categoriaVideojuego;
         private $consolaVideojuego;
+        private $db;
 
         public function __construct(){
-            BaseDeDatos::connect();
+            $this -> db = BaseDeDatos::connect();
         }
 
         public function getId(){
@@ -24,12 +25,12 @@
             return $this;
         }
  
-        public function getIdCompra(){
-            return $this->idCompra;
+        public function getIdTransaccion(){
+            return $this->idTransaccion;
         }
 
-        public function setIdCompra($idCompra){
-            $this->idCompra = $idCompra;
+        public function setIdTransaccion($idTransaccion){
+            $this->idTransaccion = $idTransaccion;
             return $this;
         }
 
@@ -85,6 +86,29 @@
         public function setConsolaVideojuego($consolaVideojuego){
             $this->consolaVideojuego = $consolaVideojuego;
             return $this;
+        }
+
+        /*
+        Funcion para realizar el registro de la transaccion en la base de datos
+        */
+
+        public function guardar(){
+            //Construir la consulta
+            $consulta = "INSERT INTO transaccionvideojuego VALUES(NULL, {$this -> getIdTransaccion()}, 
+                {$this -> getIdVideojuego()}, {$this -> getUnidades()}, '{$this -> getNombreVideojuego()}', 
+                {$this -> getPrecioVideojuego()}, '{$this -> getCategoriaVideojuego()}', 
+                '{$this -> getConsolaVideojuego()}')";
+            //Ejecutar la consulta
+            $registro = $this -> db -> query($consulta);
+            //Establecer una variable bandera
+            $resultado = false;
+            //Comprobar el registro fue exitoso y el total de columnas afectadas se altero
+            if($registro){
+                //Cambiar el estado de la variable bandera
+                $resultado = true;
+            }
+            //Retornar el resultado
+            return $resultado;
         }
     }
 

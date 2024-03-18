@@ -78,6 +78,7 @@
                     //Ejecutar la consulta
                     $eliminado = $tarjeta -> eliminar();
 
+                    //Comprobar si la tarjeta ha sido eliminada con exito
                     if($eliminado){
                         //Crear Sesion que indique que la tarjeta se ha eliminado con exito
                         $_SESSION['tarjetaeliminada'] = "La tarjeta ha sido eliminada exitosamente";
@@ -150,6 +151,7 @@
                     //Ejecutar la consulta
                     $actualizado = $tarjeta -> actualizar();
 
+                    //Comprobar si la tarjeta ha sido actualizada con exito
                     if($actualizado){
                         //Crear Sesion que indique que la tarjeta se ha actualizado con exito
                         $_SESSION['tarjetaactualizada'] = "La tarjeta ha sido actualizada exitosamente";
@@ -164,7 +166,6 @@
                 }  
             }
         }
-
     }
 
 ?>

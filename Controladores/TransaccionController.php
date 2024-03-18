@@ -7,6 +7,9 @@
     require_once 'Ayudas/Ayudas.php';
     // antes ayudas/generarpdf
 
+    //Incluir el objeto de transaccionvideojuego
+    require_once 'Modelos/TransaccionVideojuego.php';
+
     //Incluir el objeto de transaccion
     require_once 'Modelos/Transaccion.php';
 
@@ -22,10 +25,10 @@
     class TransaccionController{
 
         /*
-        Funcion para ver el formulario de direccion al comprar un videojuego
+        Funcion para ver el formulario de direccion y compra al comprar un videojuego
         */
 
-        public function direccion(){
+        public function direccionYPago(){
 
             //Instanciar el objeto
             $tarjeta = new Tarjeta();
@@ -47,7 +50,7 @@
         }
 
         /*
-        Funcion para guardar el usuario en la base de datos
+        Funcion para guardar la transaccion en la base de datos
         */
 
         public function guardar(){
@@ -56,6 +59,7 @@
             if(isset($_POST)){
                 
                 //Comprobar si cada dato existe
+                $idVideojuego = isset($_GET['idVideojuego']) ? $_GET['idVideojuego'] : false;
                 $departamento = isset($_POST['departamento']) ? $_POST['departamento'] : false;
                 $municipio = isset($_POST['municipio']) ? $_POST['municipio'] : false;
                 $codigoPostal = isset($_POST['codigoPostal']) ? $_POST['codigoPostal'] : false;
@@ -95,6 +99,20 @@
                     $guardadoTransaccion = $transaccion -> guardar();
 
                     //Instanciar el objeto
+                    $transaccionVideojuego = new TransaccionVideojuego();
+
+                    $transaccionVideojuego -> setIdTransaccion(4);
+                    $transaccionVideojuego -> setIdVideojuego(1);
+                    $transaccionVideojuego -> setUnidades(1);
+                    $transaccionVideojuego -> setNombreVideojuego(1);
+                    $transaccionVideojuego -> setPrecioVideojuego(459999);
+                    $transaccionVideojuego -> setCategoriaVideojuego("Hola");
+                    $transaccionVideojuego -> setConsolaVideojuego("Hola");
+
+                    //Guardar en la base de datos
+                    $guardadoTransaccionVideojuego = $transaccionVideojuego -> guardar();
+
+                    //Instanciar el objeto
                     $pago = new Pago();
 
                     $pago -> setIdTarjeta($idTarjeta);
@@ -106,14 +124,14 @@
                     //Guardar en la base de datos
                     $guardadoPago = $pago -> guardar();
 
-                    if($guardadoPago && $guardadoTransaccion){
-                        $this -> exito();
+                    //Comprobar si los datos se guardaron con exito en la base de datos
+                    if($guardadoPago && $guardadoTransaccion && $guardadoTransaccionVideojuego){
+                        //Redirigir a ventana de compra exitosa
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=TransaccionController&action=exito");
                     }else{
-                        var_dump('mal');
-                        die();
+                        //Redirigir al menu de direccion y pago
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=TransaccionController&action=direccionYPago&idVideojuego=$idVideojuego");
                     }
-                    
-
                 }
             }
         }
@@ -162,7 +180,6 @@
             //Llamar la funcion de ayuda que genera el archivo PDF
             Ayudas::pdf();
         }
-
     }
 
 ?>
