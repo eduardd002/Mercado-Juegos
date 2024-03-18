@@ -19,9 +19,10 @@
         private $total;
         private $fechaRelizacion;
         private $horaRealizacion;
+        private $db;
 
         public function __construct(){
-            BaseDeDatos::connect();
+            $this -> db = BaseDeDatos::connect();
         }        
 
         public function getId(){
@@ -176,6 +177,33 @@
             $this->horaRealizacion = $horaRealizacion;
             return $this;
         }
+
+        /*
+        Funcion para realizar el registro de la transaccion en la base de datos
+        */
+
+        public function guardar(){
+            //Construir la consulta
+            $consulta = "INSERT INTO transacciones VALUES(NULL, {$this -> getIdComprador()}, 
+                {$this -> getIdVendedor()}, {$this -> getIdPago()}, {$this -> getIdEstado()}, 
+                '{$this -> getDepartamento()}', '{$this -> getMunicipio()}', '{$this -> getCodigoPostal()}', 
+                '{$this -> getBarrio()}', '{$this -> getDireccion()}', '{$this -> getNombreComprador()}', 
+                '{$this -> getApellidoComprador()}', '{$this -> getCorreoComprador()}', '{$this -> getTelefonoComprador()}', 
+                {$this -> getTotal()}, '{$this -> getFechaRelizacion()}', 
+                '{$this -> getHoraRealizacion()}')";
+            //Ejecutar la consulta
+            $registro = $this -> db -> query($consulta);
+            //Establecer una variable bandera
+            $resultado = false;
+            //Comprobar el registro fue exitoso y el total de columnas afectadas se altero
+            if($registro){
+                //Cambiar el estado de la variable bandera
+                $resultado = true;
+            }
+            //Retornar el resultado
+            return $resultado;
+        }
+
     }
 
 ?>

@@ -30,6 +30,7 @@
     define("ver", "&action=ver");
 
     define("transaccion", "/?controller=TransaccionController");
+    define("guardarCompra", "&action=guardar");
     define("verCompras", "&action=verCompras");
     define("verVentas", "&action=verVentas");
     define("direccion", "&action=direccion");

@@ -1,3 +1,10 @@
+<?php if(isset($_SESSION['login_exitosoinfo']) && $_SESSION['login_exitosoinfo'] == 'Bienvenido Usuario') : ?>
+    <div class="alerta alerta-acierto">
+        <?=$_SESSION['login_exitosoinfo']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('login_exitosoinfo'); ?>
+
 <?php if(isset($_SESSION['comentariocreado']) && $_SESSION['comentariocreado'] == 'El comentario se ha hecho con exito') : ?>
     <div class="alerta alerta-acierto">
         <?=$_SESSION['comentariocreado']; ?>
@@ -18,12 +25,11 @@
     <h3 id="consolaVideojuego">Consola: 1</h3>
     <h3 id="categoriaVideojuego">Categoria: Disparos</h3>
     <h3 id="unidadesDisponiblesVideojuego">Unidades disponibles: <?=$videojuegoEspecifico -> stock?></h3>
-    <label for="">Unidades a comprar</label>
-    <input type="number">
-    <div class="botonesDetalleVideojuego">
-        <a href="<?=rutaInicio?><?=transaccion?><?=direccion?>">Comprar</a>
-        <a href="<?=rutaInicio?><?=transaccion?><?=pago?>">Agregar al carrito</a>
-    </div>
+    <form action="<?=rutaInicio?><?=transaccion?><?=direccion?>&idVideojuego=<?=$videojuegoEspecifico -> id?>" method="post">
+        <label for="cantidadAComprar">Unidades a comprar</label>
+        <input type="number" name="cantidadAComprar" required>
+        <input type="submit" value="Comprar">
+    </form>
     <div class="descripcionVideojuego">
         <h3 id="descripcionVideojuegoTitulo">Descripcion</h3>
         <p id="descripcionVideojuegoTexto"><?=$videojuegoEspecifico -> descripcion?></p>

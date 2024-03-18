@@ -118,11 +118,30 @@
         de usuario logueado
         */
 
-        public static function restringirAUsuario(){
+        public static function restringirAUsuario($seccion){
             //Verificar que el inicio de sesion no exista
             if(!isset($_SESSION['login_exitoso'])){
-                //Redirigir al inicio
-                header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=login");
+                //Redirigir
+                header("Location:"."http://localhost/Mercado-Juegos/".$seccion);
+                //Crear sesion con contenido informativo al usuario
+                $_SESSION['iniciodesesion'] = "Debes iniciar sesion primero";
+            }
+        }
+
+        /*
+        Funcion para redirigir a inicio cuando no se este logueado y se quieran comentar un
+        videojuego en particular
+        */
+
+        public static function restringirAUsuarioAlComentar($seccion, $idVideojuego){
+            //Verificar que el inicio de sesion no exista
+            if(!isset($_SESSION['login_exitoso'])){
+                //Redirigir
+                header("Location:"."http://localhost/Mercado-Juegos/".$seccion);
+                //Crear sesion con contenido informativo al usuario
+                $_SESSION['comentariopendiente'] = "Por favor inicia sesion antes de comentar";
+                //Crear sesion con id de videojuego que se quiere comentar
+                $_SESSION['idvideojuegopendientecomentario'] = $idVideojuego;
             }
         }
 

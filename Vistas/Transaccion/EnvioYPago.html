@@ -1,0 +1,50 @@
+<div id="loginYRegistro">
+    <form action="<?=rutaInicio?><?=transaccion?><?=guardarCompra?>&idVideojuego=<?=$id?>" method="post">
+        <div id="seccionEnvioTransaccion">
+            <h1>Datos del envio</h1>
+            <img src="Recursos/Logotipos/direccion.png" class="envioImage" alt="Logo direccion">
+            <div id="bloqueTextoRegistro">
+                <label for="departamento">Departamento</label>
+                <input type="text" name="departamento" required>
+            </div>
+            <div id="bloqueTextoRegistro">
+                <label for="municipio">Municipio</label>
+                <input type="text" name="municipio" required>
+            </div>
+            <div id="bloqueTextoRegistro">
+                <label for="codigoPostal">Codigo Postal</label>
+                <input type="number" name="codigoPostal" required>
+            </div>
+            <div id="bloqueTextoRegistro">
+                <label for="barrio">Barrio</label>
+                <input type="text" name="barrio" required>
+            </div>
+            <div id="bloqueTextoRegistro">
+                <label for="direccion">Direccion</label>
+                <textarea name="direccion" id="direccion"></textarea>
+            </div>
+        </div>
+        <hr>
+        <div id="seccionPagoTransaccion">
+            <h1>Datos del pago</h1>
+            <img src="Recursos/Logotipos/pago.png" class="pagoImage" alt="Logo pago">
+            <div id="bloqueTextoRegistro">
+                <label for="numeroTarjeta">Numero De Tarjeta</label>
+                <input type="number" name="numeroTarjeta" required>
+            </div>
+            <div id="bloqueTextoRegistro">
+                <label for="titular">Titular</label>
+                <input type="text" name="titular" required>
+            </div>
+            <div id="bloqueTextoRegistro">
+                <label for="codigoSeguridad">Codigo Seguridad</label>
+                <input type="number" name="codigoSeguridad" required>
+            </div>
+            <div id="bloqueTextoRegistro">
+                <label for="fechaExpedicion">Fecha De expedicion</label>
+                <input type="date" name="fechaExpedicion">
+            </div>
+        </div>
+        <input type="submit" class="btnRegistro" value="Confirmar Pago">
+    </form>
+</div>

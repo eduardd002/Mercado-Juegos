@@ -1106,40 +1106,6 @@ Estilo del vendedor del videojuego del detalle del videojuego
 }
 
 /*
-Estilo de los botonos del detalle del videojuego
-*/
-
-.botonesDetalleVideojuego{
-    /*Margen inferior*/
-    margin-bottom: 40px;
-}
-
-/*
-Estilo de los enlaces de los botonos del detalle del videojuego
-*/
-
-.botonesDetalleVideojuego a{
-    /*Margen derecho*/
-    margin-right: 20px;
-    /*Borde redondo*/
-    border-radius: 2px;
-    /*Anchor*/
-    width: auto;
-    /*Margen interior*/
-    padding: 8px;
-    /*Color del texto*/
-    color: white;
-    /*Color de fondo*/
-    background: #2979cd;
-    /*Borde*/
-    border: 1px solid #11608e;
-    /*Cambiar apariencia del cursor*/
-    cursor:pointer;
-    /*Sin decoracion en el texto*/
-    text-decoration: none;
-}
-
-/*
 Estilo de la descripcion del videojuego
 */
 
@@ -2250,4 +2216,17 @@ Estilo de el apartado de chat de comprador
     text-decoration: none;
     font-size: 20px;
     letter-spacing: 1px;
+}
+
+#seccionProcesoTransccion img{
+    width: 50px !important;
+    height: 50px !important;
+}
+
+#seccionPagoTransaccion{
+    height: 100px;
+}
+
+#seccionEnvioTransaccion{
+
 }

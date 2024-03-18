@@ -24,6 +24,9 @@
                 //Comprobar si todos los datos exsiten
                 if($contenido && $videojuego){
 
+                    //Llamar la funcion de restringir al usuario en caso de que no este logueado y quiera comentar
+                    Ayudas::restringirAUsuarioAlComentar('?controller=UsuarioController&action=login', $videojuego);
+
                     //Instanciar el objeto
                     $comentario = new Comentario();
 

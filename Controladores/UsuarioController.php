@@ -171,8 +171,18 @@
                         //Crear la sesion con el objeto completo del usuario
                         $_SESSION['login_exitoso'] = $ingreso;
                         $_SESSION['login_exitosoinfo'] = "Bienvenido Usuario";
-                        //Redirigir al inicio
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+
+                        //Comprobar si se quiere hacer un comentario sin estar previemente logueado
+                        if(isset($_SESSION['comentariopendiente']) && $_SESSION['comentariopendiente'] = "Por favor inicia sesion antes de comentar"){
+                           //Redirigir al comentario pendiente
+                           header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=detalle&id=".$_SESSION['idvideojuegopendientecomentario']);
+                           //Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes
+                           Ayudas::eliminarSesion('comentariopendiente');
+                           Ayudas::eliminarSesion('idvideojuegopendientecomentario');
+                        }else{
+                            //Redirigir al inicio
+                            header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                        }
                     }else if($ingresoa && is_object($ingresoa)){
                         //Crear la sesion con el objeto completo del administrador
                         $_SESSION['login_exitosoa'] = $ingresoa;
@@ -322,7 +332,7 @@
         public function miPerfil(){
 
             //Llamar la funcion auxiliar para redirigir en caso de que no haya inicio de sesion
-            Ayudas::restringirAUsuario();
+            Ayudas::restringirAUsuario('?controller=UsuarioController&action=login');
 
             //Comprobar si el dato está llegando
             if(isset($_GET)){

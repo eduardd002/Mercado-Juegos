@@ -1,3 +1,16 @@
+<?php if(isset($_SESSION['comentariopendiente']) && $_SESSION['comentariopendiente'] == 'Por favor inicia sesion antes de comentar') : ?>
+    <div class="alerta alerta-sugerencia">
+        <?=$_SESSION['comentariopendiente']; ?>
+    </div>
+<?php endif; ?>
+
+<?php if(isset($_SESSION['iniciodesesion']) && $_SESSION['iniciodesesion'] == 'Debes iniciar sesion primero') : ?>
+    <div class="alerta alerta-sugerencia">
+        <?=$_SESSION['iniciodesesion']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('iniciodesesion'); ?>
+
 <div id="loginYRegistro">
     <?php if(isset($_SESSION['error_login']) && $_SESSION['error_login'] == 'Este usuario no se encuentra registrado') : ?>
         <div class="alerta alerta-error">

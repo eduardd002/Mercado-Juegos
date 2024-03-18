@@ -217,4 +217,4 @@ CREATE TABLE comentariovideojuego (
     CONSTRAINT comentariovideojuego_pk PRIMARY KEY ( id ),
     CONSTRAINT comentariovideojuego_comentario_fk FOREIGN KEY ( idComentario ) REFERENCES comentarios ( id ),
     CONSTRAINT comentariovideojuego_videojuego_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
-)
+);

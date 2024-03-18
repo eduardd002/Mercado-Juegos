@@ -8,9 +8,10 @@
         private $titular;
         private $codigoSeguridad;
         private $fechaExpedicion;
+        private $db;
 
         public function __construct(){
-            BaseDeDatos::connect();
+            $this -> db = BaseDeDatos::connect();
         }
 
         public function getId(){
@@ -65,6 +66,28 @@
         public function setFechaExpedicion($fechaExpedicion){
             $this->fechaExpedicion = $fechaExpedicion;
             return $this;
+        }
+
+                /*
+        Funcion para realizar el registro de la transaccion en la base de datos
+        */
+
+        public function guardar(){
+            //Construir la consulta
+            $consulta = "INSERT INTO pagos VALUES(NULL, {$this -> getIdTarjeta()}, 
+                '{$this -> getNumeroTarjeta()}', '{$this -> getTitular()}', 
+                '{$this -> getCodigoSeguridad()}', '{$this -> getFechaExpedicion()}')";
+            //Ejecutar la consulta
+            $registro = $this -> db -> query($consulta);
+            //Establecer una variable bandera
+            $resultado = false;
+            //Comprobar el registro fue exitoso y el total de columnas afectadas se altero
+            if($registro){
+                //Cambiar el estado de la variable bandera
+                $resultado = true;
+            }
+            //Retornar el resultado
+            return $resultado;
         }
     }
 
