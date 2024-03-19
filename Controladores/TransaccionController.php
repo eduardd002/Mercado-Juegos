@@ -78,7 +78,12 @@
                     //Instanciar el objeto
                     $transaccion = new Transaccion();
 
-                    $transaccion -> setIdComprador(4);
+                    //Traer el ultimo id de transaccion
+                    $ultimoId = $transaccion -> traerUltimoIdTransaccion();
+                    $factura = $ultimoId -> id;
+
+                    $transaccion -> setNumeroFactura($factura + 1000);
+                    $transaccion -> setIdComprador($_SESSION['login_exitoso'] -> id);
                     $transaccion -> setIdVendedor(1);
                     $transaccion -> setIdPago(1);
                     $transaccion -> setIdEstado(1);

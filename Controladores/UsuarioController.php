@@ -6,6 +6,9 @@
     //Incluir el objeto de administrador
     require_once 'Modelos/Administrador.php';
 
+    //Incluir el objeto de transaccion
+    require_once 'Modelos/Transaccion.php';
+
     class UsuarioController{
 
         /*
@@ -364,6 +367,13 @@
 
         public function compras(){
 
+            //Instanciar el objeto
+            $transaccion = new Transaccion();
+            //Construir el objeto
+            $transaccion -> setIdComprador($_SESSION['login_exitoso'] -> id);
+            //Listar todos los usuarios desde la base de datos
+            $listadoCompras = $transaccion -> obtenerCompras();
+
             //Incluir la vista
             require_once "Vistas/Usuario/Compras.html";
         }
@@ -373,6 +383,13 @@
         */
 
         public function ventas(){
+
+            //Instanciar el objeto
+            $transaccion = new Transaccion();
+            //Construir el objeto
+            $transaccion -> setIdVendedor($_SESSION['login_exitoso'] -> id);
+            //Listar todos los usuarios desde la base de datos
+            $listadoVentas = $transaccion -> obtenerVentas();
 
             //Incluir la vista
             require_once "Vistas/Usuario/Ventas.html";

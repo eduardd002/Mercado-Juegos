@@ -98,6 +98,7 @@ CREATE TABLE estados (
 /*Crear tabla para las transacciones*/
 CREATE TABLE transacciones (
     id                INTEGER auto_increment NOT NULL,
+    numeroFactura     INTEGER NOT NULL,
     idComprador       INTEGER NOT NULL,
     idVendedor        INTEGER NOT NULL,
     idPago            INTEGER NOT NULL,
@@ -115,6 +116,7 @@ CREATE TABLE transacciones (
     fechaRealizacion  DATE NOT NULL,
     horaRealizacion   DATE NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT uq_nf UNIQUE(numeroFactura),
     CONSTRAINT compras_pk PRIMARY KEY ( id ),
     CONSTRAINT transacciones_comprador_fk FOREIGN KEY ( idComprador ) REFERENCES usuarios ( id ),
     CONSTRAINT transacciones_vendedor_fk FOREIGN KEY ( idVendedor ) REFERENCES usuarios ( id ),

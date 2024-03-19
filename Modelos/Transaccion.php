@@ -3,6 +3,7 @@
     class Transaccion{
 
         private $id;
+        private $numeroFactura;
         private $idComprador;
         private $idVendedor;
         private $idPago;
@@ -31,6 +32,15 @@
 
         public function setId($id){
             $this->id = $id;
+            return $this;
+        }
+
+        public function getNumeroFactura(){
+            return $this->numeroFactura;
+        }
+
+        public function setNumeroFactura($numeroFactura){
+            $this->numeroFactura = $numeroFactura;
             return $this;
         }
 
@@ -184,7 +194,7 @@
 
         public function guardar(){
             //Construir la consulta
-            $consulta = "INSERT INTO transacciones VALUES(NULL, {$this -> getIdComprador()}, 
+            $consulta = "INSERT INTO transacciones VALUES(NULL, {$this -> getNumeroFactura()}, {$this -> getIdComprador()}, 
                 {$this -> getIdVendedor()}, {$this -> getIdPago()}, {$this -> getIdEstado()}, 
                 '{$this -> getDepartamento()}', '{$this -> getMunicipio()}', '{$this -> getCodigoPostal()}', 
                 '{$this -> getBarrio()}', '{$this -> getDireccion()}', '{$this -> getNombreComprador()}', 
@@ -202,6 +212,51 @@
             }
             //Retornar el resultado
             return $resultado;
+        }
+
+        /*
+        Funcion para obtener todas las ventas realizadas por un usuario
+        */
+
+        public function obtenerVentas(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM transacciones WHERE idVendedor = {$this -> getIdVendedor()}";
+            //Ejecutar la consulta
+            $lista = $this -> db -> query($consulta);
+            //Retornar resultado
+            return $lista;
+        }
+
+        /*
+        Funcion para obtener todas las compras realizadas por un usuario
+        */
+
+        public function obtenerCompras(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM transacciones WHERE idComprador = {$this -> getIdComprador()}";
+            //Ejecutar la consulta
+            $lista = $this -> db -> query($consulta);
+            //Retornar resultado
+            return $lista;
+        }
+
+        /*
+        Funcion para obtener el ultimo id de la transaccion
+        */
+
+        public function traerUltimoIdTransaccion(){
+            //Construir la consulta
+            $consulta = "SELECT id FROM transacciones ORDER BY id DESC LIMIT 1";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Obtener resultado
+            $id = $resultado -> fetch_object();
+            //Comprobar si existe un id
+            if($id == null){
+                $id = 0;
+            }
+            //Retornar resultado
+            return $id;
         }
     }
 
