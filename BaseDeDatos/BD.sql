@@ -220,3 +220,25 @@ CREATE TABLE comentariovideojuego (
     CONSTRAINT comentariovideojuego_comentario_fk FOREIGN KEY ( idComentario ) REFERENCES comentarios ( id ),
     CONSTRAINT comentariovideojuego_videojuego_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
 );
+
+/*Crear tabla de carritos*/
+CREATE TABLE carritos (
+    id   INTEGER auto_increment NOT NULL,
+    idUsuario    INTEGER NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT carritos_id PRIMARY KEY ( id ),
+    CONSTRAINT usuario_carrito FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id )
+);
+
+/*Crear tabla de carritovideojuego*/
+CREATE TABLE carritovideojuego (
+    id   INTEGER auto_increment NOT NULL,
+    idVideojuego INTEGER NOT NULL,
+    idCarrito INTEGER NOT NULL,
+    unidades   INTEGER NOT NULL,
+    precio    INTEGER NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT carritovideojuego_id PRIMARY KEY ( id ),
+    CONSTRAINT carritovideojuego_carrito FOREIGN KEY ( idCarrito ) REFERENCES carritos ( id ),
+    CONSTRAINT carritovideojuego_videojuego FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
+);

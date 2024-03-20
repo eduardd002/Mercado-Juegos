@@ -19,6 +19,9 @@
 <?php endif; ?>
 <?php Ayudas::eliminarSesion('comentariocreado'); ?>
 <div class="detalleVideojuego">
+    <div id="favoritoDetalle">
+        <a href=""><img src="Recursos/Logotipos/estrella.png" alt="Logo favorito"></a>
+    </div>
     <img src="Recursos/ImagenesVideojuegos/<?=$videojuegoEspecifico -> foto?>" alt="Logo videojuego">
     <h1 id="tituloVideojuego"><?=$videojuegoEspecifico -> nombre?></h1>
     <h2 id="precioVideojuego">$ <?=$videojuegoEspecifico -> precio?></h2>

@@ -478,6 +478,12 @@ Estilo de la imagen del videojuego que se presenta en el catalogo, al inicio
     margin-bottom: 10px;
     /*Margen superior*/
     margin-top: 10px;
+    /*Limpiar flotados*/
+    clear: both;
+    /*Dar comportamiento de bloque*/
+    display: block;
+    /*Margen izquierdo*/
+    margin-left: 80px;
 }
 
 /*
@@ -2506,4 +2512,26 @@ Estilo del boton de confirmar pedido al dilegenciar envio y pago
     clear: both;
     /*Dar comportamiento de bloque*/
     display: block;
+}
+
+#favoritoCatalogo{
+    clear: both;
+    display: block;
+    float: left;
+}
+
+#favoritoCatalogo img{
+    width: 17px;
+    height: 17px;
+    margin: 7px !important;
+}
+
+#favoritoDetalle{
+    float: right;
+}
+
+#favoritoDetalle img{
+    width: 26px;
+    height: 26px;
+    margin: 5px !important;
 }
