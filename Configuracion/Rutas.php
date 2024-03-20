@@ -27,7 +27,12 @@
     define("todos", "&action=todos");
 
     define("carrito", "/?controller=CarritoController");
-    define("ver", "&action=ver");
+    define("verCarrito", "&action=ver");
+    define("guardarCarrito", "&action=guardar");
+
+    define("favorito", "/?controller=FavoritoController");
+    define("verFavorito", "&action=ver");
+    define("guardarFavorito", "&action=guardar");
 
     define("transaccion", "/?controller=TransaccionController");
     define("guardarCompra", "&action=guardar");
@@ -87,10 +92,10 @@
     define("editarCategoria", "&action=editar");
     define("actualizarCategoria", "&action=actualizar");
 
-    define("mensaje", "/?controller=MensajeController");
-    define("enviarMensaje", "&action=enviar");
-    define("guardarMensaje", "&action=guardar");
-    define("chats", "&action=chats");
+    define("chat", "/?controller=ChatController");
+    define("chatsVendedor", "&action=chatsVendedor");
+    define("chatsComprador", "&action=chatsComprador");
+    define("guardarChat", "&action=guardar");
 
     define("comentario", "/?controller=ComentarioController");
     define("guardarComentario", "&action=guardar");

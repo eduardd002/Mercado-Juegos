@@ -3,8 +3,11 @@
     class Chat{
 
         private $id;
-        private $idMensaje;
+        private $idRemitente;
         private $idDestinatario;
+        private $contenido;
+        private $fechaEnvio;
+        private $horaEnvio;
         private $db;
 
         public function __construct(){
@@ -20,12 +23,39 @@
             return $this;
         }
 
-        public function getIdMensaje(){
-            return $this->idMensaje;
+        public function getIdRemitente(){
+            return $this->idRemitente;
         }
 
-        public function setIdMensaje($idMensaje){
-            $this->idMensaje = $idMensaje;
+        public function setIdRemitente($idRemitente){
+            $this->idRemitente = $idRemitente;
+            return $this;
+        }
+
+        public function getContenido(){
+            return $this->contenido;
+        }
+
+        public function setContenido($contenido){
+            $this->contenido = $contenido;
+            return $this;
+        }
+
+        public function getFechaEnvio(){
+            return $this->fechaEnvio;
+        }
+
+        public function setFechaEnvio($fechaEnvio){
+            $this->fechaEnvio = $fechaEnvio;
+            return $this;
+        }
+
+        public function getHoraEnvio(){
+            return $this->horaEnvio;
+        }
+
+        public function setHoraEnvio($horaEnvio){
+            $this->horaEnvio = $horaEnvio;
             return $this;
         }
 
@@ -39,13 +69,15 @@
         }
 
         /*
-        Funcion para guardar el chat en la base de datos
+        Funcion para guardar el mensaje en la base de datos
         */
 
         public function guardar(){
 
             //Construir la consulta
-            $consulta = "INSERT INTO chats VALUES(NULL, {$this -> getIdMensaje()}, {$this -> getIdDestinatario()})";
+            $consulta = "INSERT INTO chats VALUES(NULL, {$this -> getIdRemitente()}, 
+                {$this -> getIdDestinatario()}, '{$this -> getContenido()}', 
+                '{$this -> getFechaEnvio()}', '{$this -> getHoraEnvio()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera
@@ -56,6 +88,32 @@
                 $resultado = true;
             }
             //Retornar el resultado
+            return $resultado;
+        }
+
+        /*
+        Funcion para listar todos los mensajes enviados
+        */
+
+        public function listarMensajesEnviados(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM chats WHERE idRemitente = {$this -> getIdRemitente()}";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Retornar resultado
+            return $resultado;
+        }
+
+        /*
+        Funcion para listar todos los mensajes recibidos
+        */
+
+        public function listarMensajesRecibidos(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM chats WHERE idDestinatario = {$this -> getIdRemitente()}";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Retornar resultado
             return $resultado;
         }
     }

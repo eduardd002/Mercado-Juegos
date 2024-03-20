@@ -1,10 +1,11 @@
 <?php
 
-    class VideojuegoCategoria{
+    class FavoritoVideojuego{
 
         private $id;
         private $idVideojuego;
-        private $idCategoria;
+        private $idFavorito;
+        private $precio;
         private $db;
 
         public function __construct(){
@@ -29,30 +30,40 @@
             return $this;
         }
 
-        public function getCategoriaId(){
-            return $this->categoriaId;
+        public function getIdFavorito(){
+            return $this->idFavorito;
         }
 
-        public function setCategoriaId($categoriaId){
-            $this->categoriaId = $categoriaId;
+        public function setIdFavorito($idFavorito){
+            $this->idFavorito = $idFavorito;
+            return $this;
+        }
+
+        public function getPrecio(){
+            return $this->precio;
+        }
+
+        public function setPrecio($precio){
+            $this->precio = $precio;
             return $this;
         }
 
         /*
-        Funcion para guardar la relacion entre videojuego y categoria en la base de datos
+        Funcion para guardar la relacion entre videojuego y favorito en la base de datos
         */
 
         public function guardar(){
+
             //Construir la consulta
-            foreach($this -> getCategoriaId() as $categorias){
-                $consulta = "INSERT INTO videojuegocategoria VALUES(NULL, {$this -> getIdVideojuego()}, {$categorias})";
-                //Ejecutar la consulta
-                $registro = $this -> db -> query($consulta);
-            }
+            $consulta = "INSERT IGNORE INTO videojuegofavorito VALUES(NULL, 
+                {$this -> getIdVideojuego()}, {$this -> getIdFavorito()}, 
+                {$this -> getPrecio()})";
+            //Ejecutar la consulta
+            $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera
             $resultado = false;
-            //Comprobar el registro fue exitoso y el total de columnas afectadas se altero
-            if($registro){
+            //Comporbar el registro fue exitoso y el total de columnas afectadas se altero
+            if($registro && mysqli_affected_rows($this -> db) > 0){
                 //Cambiar el estado de la variable bandera
                 $resultado = true;
             }

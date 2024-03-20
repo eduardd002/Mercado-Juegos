@@ -38,80 +38,18 @@
         </a>
     </div>
     <div id="seccionChat">
-        <form action="<?=rutaInicio?><?=mensaje?><?=guardarMensaje?>" method="post">
+        <form action="<?=rutaInicio?><?=chat?><?=guardarChat?>" method="post">
             <div id="panelChatVendedor">
-                <div id="mensajeenviado">
-                    <p>hola</p>
-                </div>
-                <div id="mensajerecibido">
-                    <p>que pasa</p>
-                </div>
-                <div id="mensajeenviado">
-                    <p>hola</p>
-                </div>
-                <div id="mensajerecibido">
-                    <p>que pasa</p>
-                </div>
-                <div id="mensajeenviado">
-                    <p>hola</p>
-                </div>
-                <div id="mensajerecibido">
-                    <p>que pasa</p>
-                </div>
-                <div id="mensajeenviado">
-                    <p>hola</p>
-                </div>
-                <div id="mensajerecibido">
-                    <p>que pasa</p>
-                </div>
-                <div id="mensajeenviado">
-                    <p>hola</p>
-                </div>
-                <div id="mensajerecibido">
-                    <p>que pasa</p>
-                </div>
-                <div id="mensajeenviado">
-                    <p>hola</p>
-                </div>
-                <div id="mensajerecibido">
-                    <p>que pasa</p>
-                </div>
-                <div id="mensajeenviado">
-                    <p>hola</p>
-                </div>
-                <div id="mensajerecibido">
-                    <p>que pasa</p>
-                </div>
-                <div id="mensajeenviado">
-                    <p>hola</p>
-                </div>
-                <div id="mensajerecibido">
-                    <p>que pasa</p>
-                </div>
-                <div id="mensajeenviado">
-                    <p>hola</p>
-                </div>
-                <div id="mensajerecibido">
-                    <p>que pasa</p>
-                </div>
-                <div id="mensajeenviado">
-                    <p>hola</p>
-                </div>
-                <div id="mensajerecibido">
-                    <p>que pasa</p>
-                </div>
-                <div id="mensajeenviado">
-                    <p>hola</p>
-                </div>
-                <div id="mensajerecibido">
-                    <p>que pasa</p>
-                </div>
-                <div id="mensajeenviado">
-                    <p>hola</p>
-                </div>
-                <div id="mensajerecibido">
-                    <p>que pasa</p>
-                </div>
+                <?php while($mensajes = $listadoChatsComprador -> fetch_object()) : ?>
+                    <div id="mensajeenviado">
+                        <p><?=$mensajes -> contenido?></p>
+                    </div>
+                <?php endwhile; ?>
+                <?php while($mensajes = $listadoChatsVendedor -> fetch_object()) : ?>
+                    <div id="mensajerecibido">
+                        <p><?=$mensajes -> contenido?></p>
+                    </div>
+                <?php endwhile; ?>
             </div>
             <div id="campoEnviarMensajeVendedor">
                 <input type="text" name="mensajec" required>

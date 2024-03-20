@@ -175,27 +175,18 @@ CREATE TABLE categorias (
     CONSTRAINT categorias_pk PRIMARY KEY ( id )
 );
 
-/*Crea tabla de mensajes*/
-CREATE TABLE mensajes(
+/*Crea tabla de chats*/
+CREATE TABLE chats (
     id     INTEGER auto_increment NOT NULL,
     idRemitente INTEGER NOT NULL,
+    idDestinatario INTEGER NOT NULL,
     contenido TEXT NOT NULL,
     fechaEnvio   DATE NOT NULL,
     horaEnvio   TIME NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT mensajes_pk PRIMARY KEY ( id ),
-    CONSTRAINT mensaje_remitente_fk FOREIGN KEY ( idRemitente ) REFERENCES usuarios ( id )
-);
-
-/*Crea tabla de chats*/
-CREATE TABLE chats (
-    id     INTEGER auto_increment NOT NULL,
-    idMensaje INTEGER NOT NULL,
-    idDestinatario INTEGER NOT NULL,
-    CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT chats_pk PRIMARY KEY ( id ),
-    CONSTRAINT chats_mensaje_fk FOREIGN KEY ( idMensaje ) REFERENCES mensajes ( id ),
-    CONSTRAINT chats_destinatario_fk FOREIGN KEY ( idDestinatario ) REFERENCES usuarios ( id )
+    CONSTRAINT chats_destinatario_fk FOREIGN KEY ( idDestinatario ) REFERENCES usuarios ( id ),
+    CONSTRAINT chats_remitente_fk FOREIGN KEY ( idRemitente ) REFERENCES usuarios ( id )
 );
 
 /*Crea tabla de comentarios*/
@@ -241,4 +232,25 @@ CREATE TABLE carritovideojuego (
     CONSTRAINT carritovideojuego_id PRIMARY KEY ( id ),
     CONSTRAINT carritovideojuego_carrito FOREIGN KEY ( idCarrito ) REFERENCES carritos ( id ),
     CONSTRAINT carritovideojuego_videojuego FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
+);
+
+/*Crear tabla de favoritos*/
+CREATE TABLE favoritos (
+    id   INTEGER auto_increment NOT NULL,
+    idUsuario    INTEGER NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT favoritos_id PRIMARY KEY ( id ),
+    CONSTRAINT usuario_favorito FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id )
+);
+
+/*Crear tabla de favoritovideojuego*/
+CREATE TABLE videojuegofavorito (
+    id   INTEGER auto_increment NOT NULL,
+    idVideojuego INTEGER NOT NULL,
+    idFavorito INTEGER NOT NULL,
+    precio    INTEGER NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT favoritovideojuego_id PRIMARY KEY ( id ),
+    CONSTRAINT favoritovideojuego_favorito FOREIGN KEY ( idFavorito ) REFERENCES favoritos ( id ),
+    CONSTRAINT favoritovideojuego_videojuego FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
 );

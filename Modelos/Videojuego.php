@@ -192,7 +192,6 @@
             //Retornar el resultado
             return $ultimoVideojuego;
         }
-
     }
 
 ?>
