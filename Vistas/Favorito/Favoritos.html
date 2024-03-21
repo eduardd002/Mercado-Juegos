@@ -1,1 +1,34 @@
-<h1>Favs</h1>
+<?php if(isset($_SESSION['videojuegofavorito']) && $_SESSION['videojuegofavorito'] == 'Videojuego agregado a la lista de favoritos') : ?>
+    <div class="alerta alerta-acierto">
+        <?=$_SESSION['videojuegofavorito']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('videojuegofavorito'); ?>
+
+<?php if(isset($_SESSION['login_exitosoinfo']) && $_SESSION['login_exitosoinfo'] == 'Bienvenido Usuario') : ?>
+    <div class="alerta alerta-acierto">
+        <?=$_SESSION['login_exitosoinfo']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('login_exitosoinfo'); ?>
+
+<div id="carrito">
+    <h1>Favoritos</h1>
+    <table>
+        <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+        </tr>
+        <tr>
+            <td><img src="Recursos/ImagenesVideojuegos/sp.jpg" alt="Logo tienda" class="imgCarrito"></td>
+            <td>Spider Man Miles Morales</td>
+            <td>$ 200000</td>
+        </tr>
+        <tr>
+            <td><img src="Recursos/ImagenesVideojuegos/fte.jpg" alt="Logo tienda" class="imgCarrito"></td>
+            <td>Fortnite</td>
+            <td>$ 180000</td>
+        </tr>
+    </table>
+</div>

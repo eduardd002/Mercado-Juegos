@@ -76,7 +76,7 @@
         <?php while($listado = $listadoAlgunos -> fetch_object()) : ?>
             <div class="videojuego">
                 <div id="favoritoCatalogo">
-                    <a href=""><img src="Recursos/Logotipos/estrella.png" alt="Imagen favorito"></a>
+                    <a href="<?=rutaInicio?><?=favorito?><?=guardarFavorito?>&idVideojuego=<?=$listado -> id?>&cat=true"><img src="Recursos/Logotipos/estrella.png" alt="Imagen favorito"></a>
                 </div>
                 <img src="Recursos/ImagenesVideojuegos/<?=$listado -> foto?>" alt="Videojuego">
                 <h2><?=$listado -> nombre?></h2>

@@ -4,6 +4,12 @@
     </div>
 <?php endif; ?>
 
+<?php if(isset($_SESSION['favoritopendiente']) && $_SESSION['favoritopendiente'] == 'Por favor inicia sesion antes de agregar a favoritos') : ?>
+    <div class="alerta alerta-sugerencia">
+        <?=$_SESSION['favoritopendiente']; ?>
+    </div>
+<?php endif; ?>
+
 <?php if(isset($_SESSION['iniciodesesion']) && $_SESSION['iniciodesesion'] == 'Debes iniciar sesion primero') : ?>
     <div class="alerta alerta-sugerencia">
         <?=$_SESSION['iniciodesesion']; ?>

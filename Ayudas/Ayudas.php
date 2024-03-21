@@ -146,6 +146,23 @@
         }
 
         /*
+        Funcion para redirigir a inicio cuando no se este logueado y se quieran comentar un
+        videojuego en particular
+        */
+
+        public static function restringirAUsuarioAlAgregarFavorito($seccion, $idVideojuego){
+            //Verificar que el inicio de sesion no exista
+            if(!isset($_SESSION['login_exitoso'])){
+                //Redirigir
+                header("Location:"."http://localhost/Mercado-Juegos/".$seccion);
+                //Crear sesion con contenido informativo al usuario
+                $_SESSION['favoritopendiente'] = "Por favor inicia sesion antes de agregar a favoritos";
+                //Crear sesion con id de videojuego que se quiere comentar
+                $_SESSION['idvideojuegopendientefavorito'] = $idVideojuego;
+            }
+        }
+
+        /*
         Funcion para redirigir a inicio cuando no se este logueado y se quieran acceder a funciones
         de usuario logueado
         */
@@ -156,6 +173,13 @@
                 //Redirigir al inicio
                 header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=login");
             }
+        }
+
+        public static function crearSesionYRedirigir($nombreSesion, $contenidoSesion, $ruta){
+            //Crear sesion de videojuego creado con exito
+            $_SESSION[$nombreSesion] = $contenidoSesion;
+            //Redirigir al menu principal
+            header("Location:".$ruta);
         }
     }
 ?>

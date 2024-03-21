@@ -182,6 +182,16 @@
                            //Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes
                            Ayudas::eliminarSesion('comentariopendiente');
                            Ayudas::eliminarSesion('idvideojuegopendientecomentario');
+                        }else if(isset($_SESSION['favoritopendiente']) && $_SESSION['favoritopendiente'] = "Por favor inicia sesion antes de agregar a favoritos"){
+                            if(isset($_SESSION['catalogofavorito'])){    
+                                header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio"); 
+                                Ayudas::eliminarSesion('catalogofavorito');                     //Redirigir al comentario pendiente
+                            }else{
+                                header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=detalle&id=".$_SESSION['idvideojuegopendientefavorito']);
+                            }
+                           //Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes
+                           Ayudas::eliminarSesion('favoritopendiente');
+                           Ayudas::eliminarSesion('idvideojuegopendientecomentario');
                         }else{
                             //Redirigir al inicio
                             header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");

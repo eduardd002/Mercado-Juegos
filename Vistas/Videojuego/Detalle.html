@@ -19,13 +19,6 @@
 <?php endif; ?>
 <?php Ayudas::eliminarSesion('comentariocreado'); ?>
 
-<?php if(isset($_SESSION['videojuegofavorito']) && $_SESSION['videojuegofavorito'] == 'Videojuego agregado a la lista de favoritos') : ?>
-    <div class="alerta alerta-acierto">
-        <?=$_SESSION['videojuegofavorito']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('videojuegofavorito'); ?>
-
 <div class="detalleVideojuego">
     <div id="favoritoDetalle">
         <a href="<?=rutaInicio?><?=favorito?><?=guardarFavorito?>&idVideojuego=<?=$videojuegoEspecifico -> id?>"><img src="Recursos/Logotipos/estrella.png" alt="Logo favorito"></a>
