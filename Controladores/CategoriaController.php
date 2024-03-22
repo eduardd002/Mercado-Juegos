@@ -19,6 +19,22 @@
         Funcion para guardar una categoria en la base de datos
         */
 
+        public function guardarCategoria($nombre){
+
+            //Instanciar el objeto
+            $categoria = new Categoria();
+            //Crear el objeto
+            $categoria -> setNombre($nombre);
+            //Guardar en la base de datos
+            $guardado = $categoria -> guardar();
+            //Retornar resultado
+            return $guardado;
+        }
+
+        /*
+        Funcion para guardar una categoria en la base de datos
+        */
+
         public function guardar(){
 
             //Comprobar si los datos están llegando
@@ -29,29 +45,36 @@
 
                 //Comprobar si todos los datos exsiten
                 if($nombre){
-                    //Instanciar el objeto
-                    $categoria = new Categoria();
-
-                    //Crear el objeto
-                    $categoria -> setNombre($nombre);
-
-                    //Guardar en la base de datos
-                    $guardado = $categoria -> guardar();
-
+                    
+                    //Obtener el resultado
+                    $guardado = $this -> guardarCategoria($nombre);
                     //Comprobar se ejecutó con exito la consulta
                     if($guardado){
-                        //Crear sesion de categoria creada
-                        $_SESSION['categoriacreada'] = 'La categoria ha sido creada con exito';
-                        //Redirigir al menu principal
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('guardarcategoriaacierto', "La categoria ha sido creada con exito", '?controller=AdministradorController&action=administrar');
                     }else{
-                        //Crear sesion que indique que ha habido un error al guardar la categoria
-                        $_SESSION['categoriacreada'] = 'La categoria no ha sido creada con exito';
-                        //Redirigir al registro de categoria
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=crearCategoria");
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('guardarcategoriaerror', "La categoria no ha sido creada con exito", '?controller=AdministradorController&action=crearCategoria');
                     }
                 }
             }
+        }
+
+        /*
+        Funcion para eliminar una categoria en la base de datos
+        */
+
+        public function eliminarCategoria($idCategoria){
+
+            //Instanciar el objeto
+            $categoria = new Categoria();
+            //Crear objeto
+            $categoria -> setId($idCategoria);
+            //Ejecutar la consulta
+            $eliminado = $categoria -> eliminar();
+            //Retornar resultado
+            return $eliminado;
         }
 
         /*
@@ -69,29 +92,32 @@
                 //Si el dato existe
                 if($idCategoria){
 
-                    //Instanciar el objeto
-                    $categoria = new Categoria();
-
-                    //Crear objeto
-                    $categoria -> setId($idCategoria);
-
-                    //Ejecutar la consulta
-                    $eliminado = $categoria -> eliminar();
+                    //Obtener el resultado
+                    $eliminado = $this -> eliminarCategoria($idCategoria);
 
                     //Comprobar si la categoria ha sido actualizada con exito
                     if($eliminado){
-                        //Crear Sesion que indique que el categoria se ha eliminado con exito
-                        $_SESSION['categoriaeliminada'] = "La categoria ha sido eliminada exitosamente";
-                        //Redirigir al inicio
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('eliminarcategoriaacierto', "La categoria ha sido eliminada exitosamente", '?controller=AdministradorController&action=administrar');
                     }else{
-                        //Crear Sesion que indique que la cateogoria se ha eliminado con exito
-                        $_SESSION['categoriaeliminada'] = "La categoria no ha sido eliminada exitosamente";
-                        //Redirigir a la gestion de categorias
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=gestionarCateogoria");
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('eliminarcategoriaerror', "La categoria no ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarCategoria');
                     }
                 }  
             }
+        }
+
+        /*
+        Funcion para editar una categoria
+        */
+
+        public function editarCategoria($idCategoria){
+
+            //Instanciar el objeto
+            $categoria = new Categoria();
+            //Creo el objeto y retornar el resultado
+            return $categoria -> setId($idCategoria);
         }
 
         /*
@@ -109,11 +135,8 @@
                 //Si el dato existe
                 if($idCategoria){
 
-                    //Instanciar el objeto
-                    $categoria = new Categoria();
-
-                    //Creo el objeto
-                    $categoria -> setId($idCategoria);
+                    //Obtener el resultado
+                    $categoria = $this -> editarCategoria($idCategoria);
 
                     //Obtener categoria
                     $categoriaUnica = $categoria -> obtenerUna();
@@ -123,6 +146,23 @@
 
                 }
             }
+        }
+
+        /*
+        Funcion para actualizar una categoria en la base de datos
+        */
+
+        public function actualizarCategoria($idCategoria, $nombre){
+
+            //Instanciar el objeto
+            $categoria = new Categoria();
+            //Crear objeto
+            $categoria -> setId($idCategoria);
+            $categoria -> setNombre($nombre);
+            //Ejecutar la consulta
+            $actualizado = $categoria -> actualizar();
+            //Retornar el resultado
+            return $actualizado;
         }
 
         /*
@@ -141,27 +181,17 @@
                 //Si el dato existe
                 if($idCategoria){
 
-                    //Instanciar el objeto
-                    $categoria = new Categoria();
-
-                    //Crear objeto
-                    $categoria -> setId($idCategoria);
-                    $categoria -> setNombre($nombre);
-
-                    //Ejecutar la consulta
-                    $actualizado = $categoria -> actualizar();
+                    //Obtener el resultado
+                    $actualizado = $this -> actualizarCategoria($idCategoria, $nombre);
 
                     //Comprobar si la categoria ha sido actualizada
                     if($actualizado){
-                        //Crear Sesion que indique que el categoria se ha actualizado con exito
-                        $_SESSION['categoriaactualizada'] = "La categoria ha sido actualizada exitosamente";
-                        //Redirigir al inicio
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('actualizarcategoriaacierto', "La categoria ha sido actualizada exitosamente", '?controller=AdministradorController&action=administrar');
                     }else{
-                        //Crear Sesion que indique que la cateogoria se ha actualizado con exito
-                        $_SESSION['categoriaactualizada'] = "La categoria no ha sido actualizada exitosamente";
-                        //Redirigir a la gestion de categorias
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=gestionarCateogoria");
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('actualizarcategoriaerror', "La categoria no ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarCategoria');
                     }
                 }  
             }

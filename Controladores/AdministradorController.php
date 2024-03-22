@@ -155,7 +155,7 @@
                     //Comprobar si la contraseña es valida
                     $claveSegura = Ayudas::comprobarContrasenia($clave);
                     //Comprobar si la foto es valida
-                    $fotoGuardada = Ayudas::guardarImagen($archivo, "ImagenesAdministrador");
+                    $fotoGuardada = Ayudas::guardarImagen($archivo, "ImagenesAdministradores");
                     
                     //Comprobar si todo esta correcto para guardar el administrador
                     if($claveSegura){
@@ -424,7 +424,7 @@
 
                             if($actualizado){
                                 //Crear la sesion y redirigir a la ruta pertinente
-                                Ayudas::crearSesionYRedirigir('actualizaradministradoracierto', "Administrador actualizado con exito", '?controller=AdministradorController&action=administrar');
+                                Ayudas::crearSesionYRedirigir('actualizaradministradoracierto', "Administrador actualizado con exito", '?controller=AdministradorController&action=miPerfil');
                             }else{
                                 //Crear la sesion y redirigir a la ruta pertinente
                                 Ayudas::crearSesionYRedirigir('actualizaradministradorsugerencia', "Agrega nuevos datos", '?controller=AdministradorController&action=miPerfil');
