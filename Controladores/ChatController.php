@@ -13,7 +13,7 @@
 
             //Instanciar el objeto
             $chat = new Chat();
-            $chat -> setIdRemitente($_SESSION['login_exitoso'] -> id);
+            $chat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
             //Listar todas las categorias desde la base de datos
             $listadoChatsComprador = $chat -> listarMensajesEnviados();
             $listadoChatsVendedor = $chat -> listarMensajesRecibidos();
@@ -30,7 +30,7 @@
             
             //Instanciar el objeto
             $chat = new Chat();
-            $chat -> setIdRemitente($_SESSION['login_exitoso'] -> id);
+            $chat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
             //Listar todas las categorias desde la base de datos
             $listadoChatsComprador = $chat -> listarMensajesEnviados();
             $listadoChatsVendedor = $chat -> listarMensajesRecibidos();
@@ -57,7 +57,7 @@
 
                     //Crear el objeto
                     $chat -> setIdDestinatario(1);
-                    $chat -> setIdRemitente($_SESSION['login_exitoso'] -> id);
+                    $chat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
                     $chat -> setContenido($contenido);
                     $chat -> setFechaEnvio(date("d-m-y"));
                     $chat -> setHoraEnvio(date("H:i:s"));

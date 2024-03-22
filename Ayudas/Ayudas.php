@@ -56,13 +56,13 @@
         */
 
         public static function mostrarDatosUsuario(){
-            if(isset($_SESSION['login_exitoso'])){
+            if(isset($_SESSION['loginexitoso'])){
                 //Incluir el objeto de categoria
                 require_once 'Modelos/Usuario.php';
                 //Instanciar el objeto
                 $usuario = new Usuario();
                 //Crear objeto
-                $usuario -> setId($_SESSION['login_exitoso'] -> id);
+                $usuario -> setId($_SESSION['loginexitoso'] -> id);
                 //Listar todos los usuarios desde la base de datos
                 $datos = $usuario -> obtenerUno();
                 //Retornar el resultado
@@ -75,13 +75,13 @@
         */
 
         public static function mostrarDatosAdministrador(){
-            if(isset($_SESSION['login_exitosoa'])){
+            if(isset($_SESSION['loginexitosoa'])){
                 //Incluir el objeto de categoria
                 require_once 'Modelos/Administrador.php';
                 //Instanciar el objeto
                 $administrador = new Administrador();
                 //Crear objeto
-                $administrador -> setId($_SESSION['login_exitosoa'] -> id);
+                $administrador -> setId($_SESSION['loginexitosoa'] -> id);
                 //Listar todos los usuarios desde la base de datos
                 $datos = $administrador -> obtenerUno();
                 //Retornar el resultado
@@ -94,7 +94,9 @@
         */
 
         public static function eliminarSesion($nombreSesion){
+            //Comprobar si la sesion existe
             if(isset($_SESSION[$nombreSesion])){
+                //Eliminar sesion
                 unset($_SESSION[$nombreSesion]);
             }
         }
@@ -120,7 +122,7 @@
 
         public static function restringirAUsuario($seccion){
             //Verificar que el inicio de sesion no exista
-            if(!isset($_SESSION['login_exitoso'])){
+            if(!isset($_SESSION['loginexitoso'])){
                 //Redirigir
                 header("Location:"."http://localhost/Mercado-Juegos/".$seccion);
                 //Crear sesion con contenido informativo al usuario
@@ -135,7 +137,7 @@
 
         public static function restringirAUsuarioAlComentar($seccion, $idVideojuego){
             //Verificar que el inicio de sesion no exista
-            if(!isset($_SESSION['login_exitoso'])){
+            if(!isset($_SESSION['loginexitoso'])){
                 //Redirigir
                 header("Location:"."http://localhost/Mercado-Juegos/".$seccion);
                 //Crear sesion con contenido informativo al usuario
@@ -146,13 +148,13 @@
         }
 
         /*
-        Funcion para redirigir a inicio cuando no se este logueado y se quieran comentar un
-        videojuego en particular
+        Funcion para redirigir a inicio cuando no se este logueado y se quieran agregar un
+        videojuego a favoritos
         */
 
         public static function restringirAUsuarioAlAgregarFavorito($seccion, $idVideojuego){
             //Verificar que el inicio de sesion no exista
-            if(!isset($_SESSION['login_exitoso'])){
+            if(!isset($_SESSION['loginexitoso'])){
                 //Redirigir
                 header("Location:"."http://localhost/Mercado-Juegos/".$seccion);
                 //Crear sesion con contenido informativo al usuario
@@ -164,22 +166,72 @@
 
         /*
         Funcion para redirigir a inicio cuando no se este logueado y se quieran acceder a funciones
-        de usuario logueado
+        de adminstrador logueado
         */
 
         public static function restringirAAdministrador(){
             //Verificar que el inicio de sesion no exista
-            if(!isset($_SESSION['login_exitosoa'])){
+            if(!isset($_SESSION['loginexitosoa'])){
                 //Redirigir al inicio
                 header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=login");
             }
         }
 
+        /*
+        Funcion para crear sesiones y redigirir a paginas
+        */
+
         public static function crearSesionYRedirigir($nombreSesion, $contenidoSesion, $ruta){
-            //Crear sesion de videojuego creado con exito
+            //Crear sesion
             $_SESSION[$nombreSesion] = $contenidoSesion;
-            //Redirigir al menu principal
-            header("Location:".$ruta);
+            //Redirigir
+            header("Location:"."http://localhost/Mercado-Juegos/".$ruta);
+        }
+
+        /*
+        Funcion para comprobar el tipo de un archivo
+        */
+
+        public static function comprobarImagen($archivo){
+            if($archivo == "image/jpg" || $archivo == "image/jpeg" || $archivo == "image/png" || $archivo == "image/gif"){
+                return 1;
+            }else if($archivo == ''){
+                return 2;
+            }else{
+                return 3;
+            }
+        }
+
+        /*
+        Funcion para guardar la imagen del administrador en los archivos
+        */
+
+        public static function guardarImagen($archivo, $carpetaGuardada){
+
+            $nombreArchivo = null;
+
+            if(isset($archivo)){
+
+                //Extraer el tipo de archivo de la imagen
+                $tipoArchivo = $archivo['type'];
+
+                //Comprobar si el archivo tiene la extensión de una imagen
+                if(Ayudas::comprobarImagen($tipoArchivo) == 1){
+                    //Extraer nombre del archivo de imagen
+                    $nombreArchivo = $archivo['name'];
+
+                    //Comprobar si no existe un directorio para las imagenes a subir
+                    if(!is_dir('Recursos/'.$carpetaGuardada)){
+
+                        //Crear el directorio
+                        mkdir('Recursos/'.$carpetaGuardada, 0777, true);
+                    }
+
+                    //Mover la foto subida a la ruta temporal del servidor y luego a la de la carpeta de las imagenes
+                    move_uploaded_file($archivo['tmp_name'], 'Recursos/'.$carpetaGuardada.'/'.$nombreArchivo);
+                }
+            }
+            return $nombreArchivo;
         }
     }
 ?>

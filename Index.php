@@ -68,7 +68,7 @@
     if(isset($_GET['controller'])){
         $nombre = $_GET['controller'];
     }elseif(!isset($_GET['controller']) && !isset($_GET['action'])){
-        if(isset($_SESSION['login_exitosoa'])){
+        if(isset($_SESSION['loginexitosoa'])){
             $nombre = "AdministradorController";
         }else{
             $nombre = "VideojuegoController";
@@ -91,7 +91,7 @@
             $action = $_GET['action'];
             $controlador -> $action();
         }elseif(!isset($_GET['controller']) && !isset($_GET['action'])){
-            if(isset($_SESSION['login_exitosoa'])){
+            if(isset($_SESSION['loginexitosoa'])){
                 $actionDefault = "Administrar";
             }else{
                 $actionDefault = "Inicio";

@@ -1,9 +1,9 @@
-<?php if(isset($_SESSION['login_exitosoinfo']) && $_SESSION['login_exitosoinfo'] == 'Bienvenido Usuario') : ?>
+<?php if(isset($_SESSION['loginexitosoinfo']) && $_SESSION['loginexitosoinfo'] == 'Bienvenido Usuario') : ?>
     <div class="alerta alerta-acierto">
-        <?=$_SESSION['login_exitosoinfo']; ?>
+        <?=$_SESSION['loginexitosoinfo']; ?>
     </div>
 <?php endif; ?>
-<?php Ayudas::eliminarSesion('login_exitosoinfo'); ?>
+<?php Ayudas::eliminarSesion('loginexitosoinfo'); ?>
 
 <?php if(isset($_SESSION['comentariocreado']) && $_SESSION['comentariocreado'] == 'El comentario se ha hecho con exito') : ?>
     <div class="alerta alerta-acierto">

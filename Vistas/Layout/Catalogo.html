@@ -1,9 +1,9 @@
-<?php if(isset($_SESSION['login_exitosoinfo']) && $_SESSION['login_exitosoinfo'] == 'Bienvenido Usuario') : ?>
+<?php if(isset($_SESSION['loginexitosoinfo']) && $_SESSION['loginexitosoinfo'] == 'Bienvenido Usuario') : ?>
     <div class="alerta alerta-acierto">
-        <?=$_SESSION['login_exitosoinfo']; ?>
+        <?=$_SESSION['loginexitosoinfo']; ?>
     </div>
 <?php endif; ?>
-<?php Ayudas::eliminarSesion('login_exitosoinfo'); ?>
+<?php Ayudas::eliminarSesion('loginexitosoinfo'); ?>
 
 <?php if(isset($_SESSION['usuarioactualizado']) && $_SESSION['usuarioactualizado'] == 'El usuario ha sido actualizado exitosamente') : ?>
     <div class="alerta alerta-acierto">
@@ -47,12 +47,12 @@
 <?php endif; ?>
 <?php Ayudas::eliminarSesion('usuarioeliminado'); ?>
 
-<?php if(isset($_SESSION['admineliminado']) && $_SESSION['admineliminado'] == 'El administrador ha sido eliminado exitosamente') : ?>
+<?php if(isset($_SESSION['eliminaradministradoracierto'])) : ?>
     <div class="alerta alerta-acierto">
-        <?=$_SESSION['admineliminado']; ?>
+        <?=$_SESSION['eliminaradministradoracierto']; ?>
     </div>
 <?php endif; ?>
-<?php Ayudas::eliminarSesion('admineliminado'); ?>
+<?php Ayudas::eliminarSesion('eliminaradministradoracierto'); ?>
 
 <?php if(isset($_SESSION['videojuegofavorito']) && $_SESSION['videojuegofavorito'] == 'El ideojuego no ha sido agregado a la lista de favoritos') : ?>
     <div class="alerta alerta-error">
@@ -62,8 +62,10 @@
 <?php Ayudas::eliminarSesion('videojuegofavorito'); ?>
 
 <div id="contenidoCentral">
-    <?php if(mysqli_num_rows($listadoTodos) <= 6) : ?>
-        <h1>Todos los Videojuegos</h1>
+    <?php if(mysqli_num_rows($listadoTodos) == 0) : ?>
+        <h1>No Hay Ningun Videojuego</h1>
+    <?php elseif(mysqli_num_rows($listadoTodos) > 6) : ?>
+        <h1>Algunos Videojuegos</h1>
     <?php elseif(mysqli_num_rows($listadoTodos) > 6) : ?>
         <h1>Algunos Videojuegos</h1>
     <?php else : ?>

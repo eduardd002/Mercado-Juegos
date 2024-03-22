@@ -1,16 +1,23 @@
-<?php if(isset($_SESSION['login_exitosoinfoa']) && $_SESSION['login_exitosoinfoa'] == 'Bienvenido administrador') : ?>
+<?php if(isset($_SESSION['loginexitosoainfo'])) : ?>
     <div class="alerta alerta-adminAcierto">
-        <?=$_SESSION['login_exitosoinfoa']; ?>
+        <?=$_SESSION['loginexitosoainfo']; ?>
     </div>
 <?php endif; ?>
-<?php Ayudas::eliminarSesion('login_exitosoinfoa'); ?>
+<?php Ayudas::eliminarSesion('loginexitosoainfo'); ?>
 
-<?php if(isset($_SESSION['adminactualizado']) && $_SESSION['adminactualizado'] == 'El administrador ha sido actualizado exitosamente') : ?>
+<?php if(isset($_SESSION['actualizaradministradoracierto'])) : ?>
     <div class="alerta alerta-adminAcierto">
-        <?=$_SESSION['adminactualizado']; ?>
+        <?=$_SESSION['actualizaradministradoracierto']; ?>
     </div>
 <?php endif; ?>
-<?php Ayudas::eliminarSesion('adminactualizado'); ?>
+<?php Ayudas::eliminarSesion('actualizaradministradoracierto'); ?>
+
+<?php if(isset($_SESSION['eliminaradministradorusuarioacierto'])) : ?>
+    <div class="alerta alerta-adminAcierto">
+        <?=$_SESSION['eliminaradministradorusuarioacierto']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('eliminaradministradorusuarioacierto'); ?>
 
 <?php if(isset($_SESSION['categoriacreada']) && $_SESSION['categoriacreada'] == 'La categoria ha sido creada con exito') : ?>
     <div class="alerta alerta-adminAcierto">

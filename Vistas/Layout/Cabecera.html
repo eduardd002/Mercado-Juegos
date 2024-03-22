@@ -19,7 +19,7 @@
                 <img src="Recursos/Logotipos/Logo.png" alt="Logo tienda">
                 <h1>MERCADO JUEGOS</h1>
             </div>
-            <?php if(!isset($_SESSION['login_exitosoa'])) : ?>
+            <?php if(!isset($_SESSION['loginexitosoa'])) : ?>
                 <form action="<?=rutaInicio?><?=videojuego?><?=buscar?>" method="post">
                     <div id="buscador">
                         <input type="text" placeholder="Busca un videojuego" name="nombrebus" required>
@@ -29,18 +29,18 @@
             <?php endif; ?> 
             <div id="menuPrincipal">
                 <ul>
-                    <?php if(isset($_SESSION['login_exitoso']) || isset($_SESSION['login_exitosoa'])) : ?>
-                        <?php if(isset($_SESSION['login_exitosoa']) && !(isset($_SESSION['login_exitoso']))) : ?>
-                            <li><img src="Recursos/ImagenesAdministradores/<?=$_SESSION['login_exitosoa'] -> foto?>" alt="Logo usuario">Hola!, <?=$datosAdmin -> nombre?></a>
+                    <?php if(isset($_SESSION['loginexitoso']) || isset($_SESSION['loginexitosoa'])) : ?>
+                        <?php if(isset($_SESSION['loginexitosoa']) && !(isset($_SESSION['loginexitoso']))) : ?>
+                            <li><img src="Recursos/ImagenesAdministradores/<?=$datosAdmin -> foto?>" alt="Logo usuario">Hola!, <?=$datosAdmin -> nombre?></a>
                             <li><a href="<?=rutaInicio?><?=administrador?><?=miPerfil?>">Mi perfil</a></li>
-                        <?php elseif(isset($_SESSION['login_exitoso']) && !(isset($_SESSION['login_exitosoa']))) : ?>
+                        <?php elseif(isset($_SESSION['loginexitoso']) && !(isset($_SESSION['loginexitosoa']))) : ?>
                             <li>
                                 <a href="<?=rutaInicio?><?=carrito?><?=verCarrito?>">
                                     <img src="Recursos/Logotipos/Carrito.png" alt="Logo carrito">
                                 </a>
                             </li>
                             <li>
-                                <img src="Recursos/ImagenesUsuarios/<?=$_SESSION['login_exitoso'] -> foto?>" alt="Logo usuario">Hola!, <?=$datosUsuario -> nombre?></a>
+                                <img src="Recursos/ImagenesUsuarios/<?=$_SESSION['loginexitoso'] -> foto?>" alt="Logo usuario">Hola!, <?=$datosUsuario -> nombre?></a>
                             <ul>
                                 <li><a href="<?=rutaInicio?><?=usuario?><?=miPerfil?>">Mi perfil</a></li>
                                 <li><a href="<?=rutaInicio?><?=chat?><?=chatsVendedor?>">Mis Chats</a></li>

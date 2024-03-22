@@ -1592,6 +1592,10 @@ Estilo de las alertas de las sesiones flash
     text-align: center;
 }
 
+/*
+Estilo de las alertas de las sesion acierto en administrador
+*/
+
 .alerta-adminAcierto{
     /*Flotar hacia la izquierda*/
     float: left;
@@ -1607,11 +1611,34 @@ Estilo de las alertas de las sesiones flash
     margin-bottom: 50px;
 }
 
+/*
+Estilo de las alertas de las sesion error en administrador
+*/
+
 .alerta-adminError{
     /*Flotar hacia la izquierda*/
     float: left;
     /*Color de fondo*/
     background: red;
+    /*Limpiar flotados*/
+    clear: both;
+    /*Comportamiento de bloque*/
+    display: block;
+    /*Anchor*/
+    width: 99.1%;
+    /*Margen inferior*/
+    margin-bottom: 50px;
+}
+
+/*
+Estilo de las alertas de las sesion sugerencia en administrador
+*/
+
+.alerta-adminSugerencia{
+    /*Flotar hacia la izquierda*/
+    float: left;
+    /*Color de fondo*/
+    background: orange;
     /*Limpiar flotados*/
     clear: both;
     /*Comportamiento de bloque*/

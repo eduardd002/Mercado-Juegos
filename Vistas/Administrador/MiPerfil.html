@@ -1,14 +1,21 @@
-<?php if(isset($_SESSION['adminactualizado']) && $_SESSION['adminactualizado'] == 'Proporciona nuevos datos') : ?>
-    <div class="alerta alerta-adminError">
-        <?=$_SESSION['adminactualizado']; ?>
+<?php if(isset($_SESSION['actualizaradministradorsugerencia'])) : ?>
+    <div class="alerta alerta-adminSugerencia">
+        <?=$_SESSION['actualizaradministradorsugerencia']; ?>
     </div>
 <?php endif; ?>
-<?php Ayudas::eliminarSesion('adminactualizado'); ?>
+<?php Ayudas::eliminarSesion('actualizaradministradorsugerencia'); ?>
+
+<?php if(isset($_SESSION['eliminaradministradorerror'])) : ?>
+    <div class="alerta alerta-adminError">
+        <?=$_SESSION['eliminaradministradorerror']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('eliminaradministradorerror'); ?>
 
 <div id="loginYRegistro">
     <h1 class="miPerfilA">Mi Perfil</h1>
-    <form action="<?=rutaInicio?><?=administrador?><?=actualizarAdministrador?>&id=<?=$_SESSION['login_exitosoa'] -> id?>" method="post" enctype="multipart/form-data">
-        <img src="Recursos/ImagenesAdministradores/<?=$_SESSION['login_exitosoa'] -> foto?>" class="perfilImage" alt="usuario registro">
+    <form action="<?=rutaInicio?><?=administrador?><?=actualizarAdministrador?>&id=<?=$_SESSION['loginexitosoa'] -> id?>" method="post" enctype="multipart/form-data">
+        <img src="Recursos/ImagenesAdministradores/<?=$adminUnico -> foto?>" class="perfilImage" alt="usuario registro">
         <div id="bloqueTextoRegistro">
             <label for="nombre">Nombre</label>
             <input type="text" name="nombre" value="<?=$adminUnico -> nombre?>" required>
@@ -29,11 +36,11 @@
             <label for="password">Contraseña</label>
             <input type="password" name="password" value="<?=$adminUnico -> clave?>" required>
         </div>
-        <input type="file">
+        <input type="file" name="foto" accept="image/*">
         <label class="subirFotoPerfil">*Subir nueva*</label>
         <div id="botonesadmin">
             <input type="submit" class="btnRegistro-adminPerfil" value="Actualizar datos">
-            <a href="<?=rutaInicio?><?=administrador?><?=eliminarAdministrador?>&id=<?=$_SESSION['login_exitosoa'] -> id?>" class="eliminarCuentaMiPerfil" class="eliminarCuentaMiPerfil">Eliminar cuenta</a>
+            <a href="<?=rutaInicio?><?=administrador?><?=eliminarAdministrador?>&id=<?=$_SESSION['loginexitosoa'] -> id?>" class="eliminarCuentaMiPerfil" class="eliminarCuentaMiPerfil">Eliminar cuenta</a>
         </div>
     </form>
 </div>

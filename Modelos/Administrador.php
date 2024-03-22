@@ -172,7 +172,11 @@
             //Construir la consulta
             $consulta = "UPDATE administradores SET nombre = '{$this -> getNombre()}', apellido = '{$this -> getApellido()}',
                 numeroTelefono = '{$this -> getNumeroTelefono()}', correo = '{$this -> getCorreo()}', 
-                clave = '{$this -> getClave()}' WHERE id = {$this -> getId()}";
+                clave = '{$this -> getClave()}'"; 
+                if($this -> getFoto() != null){
+                    $consulta .= ", foto = '{$this -> getFoto()} '";
+                }
+                $consulta .= "WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $actualizado = $this -> db -> query($consulta);
             //Crear bandera

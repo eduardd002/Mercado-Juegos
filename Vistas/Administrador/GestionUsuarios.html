@@ -1,3 +1,10 @@
+<?php if(isset($_SESSION['eliminaradministradorusuarioerror'])) : ?>
+    <div class="alerta alerta-adminError">
+        <?=$_SESSION['eliminaradministradorusuarioerror']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('eliminaradministradorusuarioerror'); ?>
+
 <div id="gestiones">
     <h1>Gestion de usuarios</h1>
     <?php if(mysqli_num_rows($listadoUsuarios) == 0) : ?>

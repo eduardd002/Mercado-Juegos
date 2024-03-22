@@ -31,7 +31,7 @@
                     $comentario = new Comentario();
 
                     //Crear el objeto
-                    $comentario -> setIdUsuario($_SESSION['login_exitoso'] -> id);
+                    $comentario -> setIdUsuario($_SESSION['loginexitoso'] -> id);
                     $comentario -> setContenido($contenido);
                     $comentario -> setFechaCreacion(date('y-m-d'));
                     $comentario -> setHoraCreacion(date("H:i:s"));

@@ -102,8 +102,8 @@
                             if($guardado){
                                 $ingreso = $usuario->login();
                                 //Crear sesion de inicio de sesion
-                                $_SESSION['login_exitoso'] = $ingreso;
-                                $_SESSION['login_exitosoinfo'] = "Bienvenido Usuario";
+                                $_SESSION['loginexitoso'] = $ingreso;
+                                $_SESSION['loginexitosoinfo'] = "Bienvenido Usuario";
                                 //Redirigir al menu principal
                                 header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
                             }else{
@@ -172,8 +172,8 @@
                     //Comprobar se ejecutó con exito la consulta
                     if($ingreso && is_object($ingreso)){
                         //Crear la sesion con el objeto completo del usuario
-                        $_SESSION['login_exitoso'] = $ingreso;
-                        $_SESSION['login_exitosoinfo'] = "Bienvenido Usuario";
+                        $_SESSION['loginexitoso'] = $ingreso;
+                        $_SESSION['loginexitosoinfo'] = "Bienvenido Usuario";
 
                         //Comprobar si se quiere hacer un comentario sin estar previemente logueado
                         if(isset($_SESSION['comentariopendiente']) && $_SESSION['comentariopendiente'] = "Por favor inicia sesion antes de comentar"){
@@ -198,8 +198,8 @@
                         }
                     }else if($ingresoa && is_object($ingresoa)){
                         //Crear la sesion con el objeto completo del administrador
-                        $_SESSION['login_exitosoa'] = $ingresoa;
-                        $_SESSION['login_exitosoinfoa'] = "Bienvenido administrador";
+                        $_SESSION['loginexitosoa'] = $ingresoa;
+                        $_SESSION['loginexitosoinfoa'] = "Bienvenido administrador";
                         //Redirigir al inicio
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
                     }else{
@@ -242,7 +242,7 @@
                         //Redirigir al formulario de registro
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
                         //Eliminar el inicio de sesion
-                        Ayudas::eliminarSesion('login_exitoso');
+                        Ayudas::eliminarSesion('loginexitoso');
                     }else{
                         //Crear Sesion que indique que el usuario se ha eliminado con exito
                         $_SESSION['usuarioeliminado'] = "El usuario no ha sido eliminado exitosamente";
@@ -318,8 +318,8 @@
         public function cerrarSesion(){
 
             //Lamar funciones para eliminar las sesiones
-            Ayudas::eliminarSesion('login_exitoso');
-            Ayudas::eliminarSesion('login_exitosoa');
+            Ayudas::eliminarSesion('loginexitosoa');
+            Ayudas::eliminarSesion('loginexitoso');
             
             //Crear sesion de sesion creada con exito
             $_SESSION['logincerrado'] = "Sesion cerrada con exito";
@@ -351,7 +351,7 @@
             if(isset($_GET)){
 
                 //Comprobar si la sesion de inicio de sesion existe
-                $id = isset($_SESSION['login_exitoso']) ? $_SESSION['login_exitoso'] -> id : false;
+                $id = isset($_SESSION['loginexitoso']) ? $_SESSION['loginexitoso'] -> id : false;
 
                 //Si el dato existe
                 if($id){
@@ -380,7 +380,7 @@
             //Instanciar el objeto
             $transaccion = new Transaccion();
             //Construir el objeto
-            $transaccion -> setIdComprador($_SESSION['login_exitoso'] -> id);
+            $transaccion -> setIdComprador($_SESSION['loginexitoso'] -> id);
             //Listar todos los usuarios desde la base de datos
             $listadoCompras = $transaccion -> obtenerCompras();
 
@@ -397,7 +397,7 @@
             //Instanciar el objeto
             $transaccion = new Transaccion();
             //Construir el objeto
-            $transaccion -> setIdVendedor($_SESSION['login_exitoso'] -> id);
+            $transaccion -> setIdVendedor($_SESSION['loginexitoso'] -> id);
             //Listar todos los usuarios desde la base de datos
             $listadoVentas = $transaccion -> obtenerVentas();
 

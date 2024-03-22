@@ -83,7 +83,7 @@
                     $factura = $ultimoId -> id;
 
                     $transaccion -> setNumeroFactura($factura + 1000);
-                    $transaccion -> setIdComprador($_SESSION['login_exitoso'] -> id);
+                    $transaccion -> setIdComprador($_SESSION['loginexitoso'] -> id);
                     $transaccion -> setIdVendedor(1);
                     $transaccion -> setIdPago(1);
                     $transaccion -> setIdEstado(1);

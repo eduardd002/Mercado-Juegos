@@ -143,7 +143,7 @@
         public function guardar(){
 
             //Comprobar si existe la sesion de usuario logueado
-            $usuarioId = isset($_SESSION['login_exitoso']) ? $_SESSION['login_exitoso'] -> id : false;
+            $usuarioId = isset($_SESSION['loginexitoso']) ? $_SESSION['loginexitoso'] -> id : false;
 
             //Comprobar si los datos están llegando
             if(isset($_POST)){

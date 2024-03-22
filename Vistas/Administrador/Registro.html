@@ -1,29 +1,18 @@
 <div id="loginYRegistro">
-    <?php if(isset($_SESSION['RegistroAdministrador']) && $_SESSION['RegistroAdministrador'] == 'El formato debe ser de una imagen') : ?>
+    <?php if(isset($_SESSION['guardaradministrador'])) : ?>
         <div class="alerta alerta-error">
-            <?=$_SESSION['RegistroAdministrador']; ?>
+            <?=$_SESSION['guardaradministrador']; ?>
         </div>
     <?php endif; ?> 
+    <?php Ayudas::eliminarSesion('guardaradministrador'); ?>
 
-    <?php if(isset($_SESSION['RegistroAdministrador']) && $_SESSION['RegistroAdministrador'] == 'Ya hay una ruta de correo en uso') : ?>
-        <div class="alerta alerta-error">
-            <?=$_SESSION['RegistroAdministrador']; ?>
-        </div>
-    <?php endif; ?> 
-
-    <?php if(isset($_SESSION['RegistroAdministrador']) && $_SESSION['RegistroAdministrador'] == 'Ha ocurrido un error al realizar el registro') : ?>
-        <div class="alerta alerta-error">
-            <?=$_SESSION['RegistroAdministrador']; ?>
-        </div>
-    <?php endif; ?>
-    <?php Ayudas::eliminarSesion('RegistroAdministrador'); ?>
-
-    <?php if(isset($_SESSION['ClavePocoSegura']) && $_SESSION['ClavePocoSegura'] == 'La clave debe contener una minuscula, una mayuscula, un caracterer especial, un numero y minimo 8 caracteres de longitud') : ?>
-        <div class="alerta alerta-error">
-            <?=$_SESSION['ClavePocoSegura']; ?>
-        </div>
-    <?php endif; ?>
-    <?php Ayudas::eliminarSesion('ClavePocoSegura'); ?>
+    <div id="loginYRegistro">
+        <?php if(isset($_SESSION['guardaradministradorerror'])) : ?>
+            <div class="alerta alerta-error">
+                <?=$_SESSION['guardaradministradorerror']; ?>
+            </div>
+        <?php endif; ?> 
+        <?php Ayudas::eliminarSesion('guardaradministradorerror'); ?>
     
     <h1>Registrarse</h1>
     <form action="<?=rutaInicio?><?=administrador?><?=guardarAdmin?>" method="post" enctype="multipart/form-data">
