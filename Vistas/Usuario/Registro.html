@@ -1,30 +1,11 @@
+<?php if(isset($_SESSION['guardarusuarioerror'])) : ?>
+    <div class="alerta alerta-error">
+        <?=$_SESSION['guardarusuarioerror']; ?>
+    </div>
+<?php endif; ?> 
+<?php Ayudas::eliminarSesion('guardarusuarioerror'); ?>
+
 <div id="loginYRegistro">
-    <?php if(isset($_SESSION['RegistroUsuario']) && $_SESSION['RegistroUsuario'] == 'El formato debe ser de una imagen') : ?>
-        <div class="alerta alerta-error">
-            <?=$_SESSION['RegistroUsuario']; ?>
-        </div>
-    <?php endif; ?> 
-
-    <?php if(isset($_SESSION['RegistroUsuario']) && $_SESSION['RegistroUsuario'] == 'Ya hay una ruta de correo en uso') : ?>
-        <div class="alerta alerta-error">
-            <?=$_SESSION['RegistroUsuario']; ?>
-        </div>
-    <?php endif; ?> 
-
-    <?php if(isset($_SESSION['RegistroUsuario']) && $_SESSION['RegistroUsuario'] == 'Ha ocurrido un error al realizar el registro') : ?>
-        <div class="alerta alerta-error">
-            <?=$_SESSION['RegistroUsuario']; ?>
-        </div>
-    <?php endif; ?>
-    <?php Ayudas::eliminarSesion('RegistroUsuario'); ?>
-
-    <?php if(isset($_SESSION['ClavePocoSegura']) && $_SESSION['ClavePocoSegura'] == 'La clave debe contener una minuscula, una mayuscula, un caracterer especial, un numero y minimo 8 caracteres de longitud') : ?>
-        <div class="alerta alerta-error">
-            <?=$_SESSION['ClavePocoSegura']; ?>
-        </div>
-    <?php endif; ?>
-    <?php Ayudas::eliminarSesion('ClavePocoSegura'); ?>
-    
     <h1>Registrarse</h1>
     <form action="<?=rutaInicio?><?=usuario?><?=guardarUsuario?>" method="post" enctype="multipart/form-data">
         <div class="regisAdmin" >

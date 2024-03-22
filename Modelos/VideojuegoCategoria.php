@@ -29,12 +29,12 @@
             return $this;
         }
 
-        public function getCategoriaId(){
-            return $this->categoriaId;
+        public function getIdCategoria(){
+            return $this->idCategoria;
         }
 
-        public function setCategoriaId($categoriaId){
-            $this->categoriaId = $categoriaId;
+        public function setIdCategoria($idCategoria){
+            $this->idCategoria = $idCategoria;
             return $this;
         }
 
@@ -44,7 +44,7 @@
 
         public function guardar(){
             //Construir la consulta
-            foreach($this -> getCategoriaId() as $categorias){
+            foreach($this -> getIdCategoria() as $categorias){
                 $consulta = "INSERT INTO videojuegocategoria VALUES(NULL, {$this -> getIdVideojuego()}, {$categorias})";
                 //Ejecutar la consulta
                 $registro = $this -> db -> query($consulta);

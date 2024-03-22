@@ -8,11 +8,11 @@
 <div id="loginYRegistro">
     <h1>Mi Perfil</h1>
     <form action="<?=rutaInicio?><?=usuario?><?=actualizarUsuario?>&id=<?=$_SESSION['loginexitoso'] -> id?>" method="post" enctype="multipart/form-data">
-        <img src="Recursos/ImagenesUsuarios/<?=$_SESSION['loginexitoso'] -> foto?>" class="perfilImage" alt="usuario registro">
         <div id="bloqueTextoRegistro">
             <label for="nombre">Nombre</label>
             <input type="text" name="nombre" value="<?=$usuarioUnico -> nombre?>" required>
         </div>
+        <img src="Recursos/ImagenesUsuarios/<?=$_SESSION['loginexitoso'] -> foto?>" class="perfilImage" alt="usuario registro">
         <div id="bloqueTextoRegistro">
             <label for="apellidos">Apellidos</label>
             <input type="text" name="apellidos" value="<?=$usuarioUnico -> apellido?>" required>

@@ -233,5 +233,113 @@
             }
             return $nombreArchivo;
         }
+
+        public static function loginUsuario($correo, $clave){
+            //Instanciar el objeto
+            $usuario = new Usuario();
+            //Crear el objeto
+            $usuario -> setCorreo($correo);
+            $usuario -> setClave($clave);
+            //Obtener inicio de sesion
+            $ingreso = $usuario->login();
+            //Retornar el resultado
+            return $ingreso;
+        }
+
+        public static function loginAdministrador($correo, $clave){
+            //Instanciar el objeto
+            $administrador = new Administrador();
+            //Crear el objeto
+            $administrador -> setCorreo($correo);
+            $administrador -> setClave($clave);
+            //Obtener inicio de sesion
+            $ingreso = $administrador->login();
+            //Retornar el resultado
+            return $ingreso;
+        }
+
+        /*
+        Funcion para iniciar sesion con el usuario guardado
+        */
+
+        public static function iniciarSesionUsuario($correo, $clave){
+
+            $ingreso = Ayudas::loginUsuario($correo, $clave);
+
+            //Comprobar si el ingreso es exitos
+            if($ingreso){
+
+                //Crear la sesion con el perfil del usuario
+                $_SESSION['loginexitoso'] = $ingreso;
+                Ayudas::crearSesionYRedirigir('loginexitosoinfo', "Bienvenido usuario", "?controller=VideojuegoController&action=inicio");
+            }
+        }
+
+        /*
+        Funcion para iniciar sesion con el administrador guardado
+        */
+
+        public static function iniciarSesionAdmnistrador($correo, $clave){
+
+            $ingreso = Ayudas::loginAdministrador($correo, $clave);
+
+            //Comprobar si el ingreso es exitos
+            if($ingreso){
+
+                //Crear la sesion con el perfil del administrador
+                $_SESSION['loginexitosoa'] = $ingreso;
+                Ayudas::crearSesionYRedirigir('loginexitosoainfo', "Bienvenido administrador", "?controller=AdministradorController&action=administrar");
+            }
+        }
+
+        /*
+        Funcion para iniciar sesion
+        */
+
+        public static function iniciarSesion($email, $clave){
+            
+            $ingresoa = Ayudas::loginAdministrador($email, $clave);
+            $ingreso = Ayudas::loginUsuario($email, $clave);
+
+            //Comprobar se ejecutó con exito la consulta
+            if($ingreso && is_object($ingreso)){
+                //Crear la sesion con el objeto completo del usuario
+                $_SESSION['loginexitoso'] = $ingreso;
+                $_SESSION['loginexitosoinfo'] = "Bienvenido Usuario";
+
+                //Comprobar si se quiere hacer un comentario sin estar previemente logueado
+                if(isset($_SESSION['comentariopendiente']) && $_SESSION['comentariopendiente'] = "Por favor inicia sesion antes de comentar"){
+                   //Redirigir al comentario pendiente
+                   header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=detalle&id=".$_SESSION['idvideojuegopendientecomentario']);
+                   //Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes
+                   Ayudas::eliminarSesion('comentariopendiente');
+                   Ayudas::eliminarSesion('idvideojuegopendientecomentario');
+                }else if(isset($_SESSION['favoritopendiente']) && $_SESSION['favoritopendiente'] = "Por favor inicia sesion antes de agregar a favoritos"){
+                    if(isset($_SESSION['catalogofavorito'])){    
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio"); 
+                        Ayudas::eliminarSesion('catalogofavorito');                     //Redirigir al comentario pendiente
+                    }else{
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=detalle&id=".$_SESSION['idvideojuegopendientefavorito']);
+                    }
+                   //Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes
+                   Ayudas::eliminarSesion('favoritopendiente');
+                   Ayudas::eliminarSesion('idvideojuegopendientecomentario');
+                }else{
+                    //Redirigir al inicio
+                    header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                }
+            }else if($ingresoa && is_object($ingresoa)){
+                //Crear la sesion con el objeto completo del administrador
+                $_SESSION['loginexitosoa'] = $ingresoa;
+                $_SESSION['loginexitosoinfoa'] = "Bienvenido administrador";
+                //Redirigir al inicio
+                header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+            }else{
+                //Crear la sesion de error al realizar el login
+                $_SESSION['error_login'] = 'Este usuario no se encuentra registrado';
+                //Redirigir al login
+                header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=login");
+            }
+        }
     }
 ?>

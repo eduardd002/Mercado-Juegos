@@ -109,28 +109,6 @@
         }
 
         /*
-        Funcion para iniciar sesion con el administrador guardado
-        */
-
-        public function iniciarSesion($correo, $clave){
-            //Instanciar el objeto
-            $administrador = new Administrador();
-            //Crear el objeto
-            $administrador -> setCorreo($correo);
-            $administrador -> setClave($clave);
-            //Obtener inicio de sesion
-            $ingreso = $administrador->login();
-
-            //Comprobar si el ingreso es exitos
-            if($ingreso){
-
-                //Crear la sesion con el perfil del administrador
-                $_SESSION['loginexitosoa'] = $ingreso;
-                Ayudas::crearSesionYRedirigir('loginexitosoainfo', "Bienvenido administrador", "?controller=AdministradorController&action=administrar");
-            }
-        }
-
-        /*
         Funcion para guardar el administrador en la base de datos
         */
 
@@ -169,7 +147,7 @@
                             //Comprobar si el administrador ha sido guardado
                             if($guardado){
 
-                               $this -> iniciarSesion($email, $clave);
+                               Ayudas::iniciarSesionAdmnistrador($email, $clave);
                             }else{
                                 //Crear la sesion y redirigir a la ruta pertinente
                                 Ayudas::crearSesionYRedirigir("guardaradministradorerror", "Ya existe una direccion de correo asociada", "?controller=AdministradorController&action=registro");
@@ -238,9 +216,12 @@
                         Ayudas::eliminarSesion('loginexitosoa');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('eliminaradministradorerror', "El administrador no ha sido eliminado exitosamente", '?controller=UsuarioController&action=miPerfil');
+                        Ayudas::crearSesionYRedirigir('eliminaradministradorerror', "El administrador no ha sido eliminado exitosamente", '?controller=AdminsitradorController&action=miPerfil');
                     }
-                }  
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('eliminaradministradorerror', "Ha ocurrido un error al eliminar el adminsitrador", '?controller=Adminsitrador&action=miPerfil');
+                }
             }
         }
 
@@ -364,7 +345,10 @@
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('eliminaradministradorusuarioerror', "El usuario no ha sido eliminado exitosamente", '?controller=AdministradorController&action=gestionarUsuario');
                     }
-                }  
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('eliminaradministradorusuarioerror', "Ha ocurrido un error al eliminar el usuario", '?controller=AdministradorController&action=gestionarUsuario');
+                }
             }
         }
 

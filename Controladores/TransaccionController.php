@@ -50,13 +50,126 @@
         }
 
         /*
+        Funcion para obtener la factura
+        */
+
+        public function obtenerFactura(){
+
+            //Instanciar el objeto
+            $transaccion = new Transaccion();
+            //Traer el ultimo id de transaccion
+            $ultimoId = $transaccion -> traerUltimoIdTransaccion();
+            //Retornar el resultado
+            return $ultimoId -> id;
+        }
+
+        /*
+        Funcion para obtener la ultima transaccion guardada
+        */
+
+        public function obtenerUltimaTransaccion(){
+
+            //Instanciar el objeto
+            $transaccion = new Transaccion();
+            //Obtener id del ultimo videojuego registrado
+            $id = $transaccion -> ultima();
+            //Retornar resultado
+            return $id;
+        }
+
+        /*
+        Funcion para obtener el ultimo pago
+        */
+
+        public function obtenerUltimoPago(){
+
+            //Instanciar el objeto
+            $pago = new Pago();
+            //Obtener id del ultimo videojuego registrado
+            $id = $pago -> ultimo();
+            //Retornar resultado
+            return $id;
+        }
+
+        /*
+        Funcion para guardar la transaccion en la base de datos
+        */
+
+        public function guardarTransaccion($factura, $departamento, $municipio, $codigoPostal, $barrio, $direccion, $idPago){
+
+            //Instanciar el objeto
+            $transaccion = new Transaccion();
+            $transaccion -> setNumeroFactura($factura + 1000);
+            $transaccion -> setIdComprador($_SESSION['loginexitoso'] -> id);
+            $transaccion -> setIdVendedor(1);
+            $transaccion -> setIdPago($idPago);
+            $transaccion -> setIdEstado(1);
+            $transaccion -> setDepartamento($departamento);
+            $transaccion -> setMunicipio($municipio);
+            $transaccion -> setCodigoPostal($codigoPostal);
+            $transaccion -> setBarrio($barrio);
+            $transaccion -> setDireccion($direccion);
+            $transaccion -> setNombreComprador("Edu");
+            $transaccion -> setApellidoComprador("Edu");
+            $transaccion -> setCorreoComprador("Edu");
+            $transaccion -> setTelefonoComprador("Edu");
+            $transaccion -> setTotal(400);
+            $transaccion -> setFechaRelizacion(date('Y-m-d'));
+            $transaccion -> setHoraRealizacion(date("H:i:s"));
+            //Guardar en la base de datos
+            $guardadoTransaccion = $transaccion -> guardar();
+            //Retornar el resultado
+            return $guardadoTransaccion;
+        }
+
+        /*
+        Funcion para guardar la transaccion videojuego en la base de datos
+        */
+
+        public function guardarTransaccionVideojuego($id){
+
+            //Instanciar el objeto
+            $transaccionVideojuego = new TransaccionVideojuego();
+            $transaccionVideojuego -> setIdTransaccion($id);
+            $transaccionVideojuego -> setIdVideojuego(1);
+            $transaccionVideojuego -> setUnidades(1);
+            $transaccionVideojuego -> setNombreVideojuego(1);
+            $transaccionVideojuego -> setPrecioVideojuego(459999);
+            $transaccionVideojuego -> setCategoriaVideojuego("Hola");
+            $transaccionVideojuego -> setConsolaVideojuego("Hola");
+            //Guardar en la base de datos
+            $guardadoTransaccionVideojuego = $transaccionVideojuego -> guardar();
+            //Retornar el resultado
+            return $guardadoTransaccionVideojuego;
+        }
+
+        /*
+        Funcion para guardar el pago en la base de datos
+        */
+
+        public function guardarPago($idTarjeta, $numeroTarjeta, $titular, $codigoDeSeguridad, $fechaExpedicion){
+
+            //Instanciar el objeto
+            $pago = new Pago();
+            $pago -> setIdTarjeta($idTarjeta);
+            $pago -> setNumeroTarjeta($numeroTarjeta);
+            $pago -> setTitular($titular);
+            $pago -> setCodigoSeguridad($codigoDeSeguridad);
+            $pago -> setFechaExpedicion($fechaExpedicion);
+            //Guardar en la base de datos
+            $guardadoPago = $pago -> guardar();
+            //Retornar el resultado
+            return $guardadoPago;
+        }
+
+        /*
         Funcion para guardar la transaccion en la base de datos
         */
 
         public function guardar(){
 
             //Comprobar si los datos están llegando
-            if(isset($_POST)){
+            if(isset($_POST) && isset($_GET)){
                 
                 //Comprobar si cada dato existe
                 $idVideojuego = isset($_GET['idVideojuego']) ? $_GET['idVideojuego'] : false;
@@ -75,69 +188,42 @@
                 if($departamento && $municipio && $codigoPostal && $barrio && $direccion && 
                     $idTarjeta && $numeroTarjeta && $titular && $codigoDeSeguridad && $fechaExpedicion){
 
-                    //Instanciar el objeto
-                    $transaccion = new Transaccion();
+                    //Traer ultimo pago
+                    $pago = $this -> obtenerUltimoPago();
 
-                    //Traer el ultimo id de transaccion
-                    $ultimoId = $transaccion -> traerUltimoIdTransaccion();
-                    $factura = $ultimoId -> id;
-
-                    $transaccion -> setNumeroFactura($factura + 1000);
-                    $transaccion -> setIdComprador($_SESSION['loginexitoso'] -> id);
-                    $transaccion -> setIdVendedor(1);
-                    $transaccion -> setIdPago(1);
-                    $transaccion -> setIdEstado(1);
-                    $transaccion -> setDepartamento($departamento);
-                    $transaccion -> setMunicipio($municipio);
-                    $transaccion -> setCodigoPostal($codigoPostal);
-                    $transaccion -> setBarrio($barrio);
-                    $transaccion -> setDireccion($direccion);
-                    $transaccion -> setNombreComprador("Edu");
-                    $transaccion -> setApellidoComprador("Edu");
-                    $transaccion -> setCorreoComprador("Edu");
-                    $transaccion -> setTelefonoComprador("Edu");
-                    $transaccion -> setTotal(400);
-                    $transaccion -> setFechaRelizacion(date('Y-m-d'));
-                    $transaccion -> setHoraRealizacion(date("H:i:s"));
-
-                    //Guardar en la base de datos
-                    $guardadoTransaccion = $transaccion -> guardar();
-
-                    //Instanciar el objeto
-                    $transaccionVideojuego = new TransaccionVideojuego();
-
-                    $transaccionVideojuego -> setIdTransaccion(4);
-                    $transaccionVideojuego -> setIdVideojuego(1);
-                    $transaccionVideojuego -> setUnidades(1);
-                    $transaccionVideojuego -> setNombreVideojuego(1);
-                    $transaccionVideojuego -> setPrecioVideojuego(459999);
-                    $transaccionVideojuego -> setCategoriaVideojuego("Hola");
-                    $transaccionVideojuego -> setConsolaVideojuego("Hola");
-
-                    //Guardar en la base de datos
-                    $guardadoTransaccionVideojuego = $transaccionVideojuego -> guardar();
-
-                    //Instanciar el objeto
-                    $pago = new Pago();
-
-                    $pago -> setIdTarjeta($idTarjeta);
-                    $pago -> setNumeroTarjeta($numeroTarjeta);
-                    $pago -> setTitular($titular);
-                    $pago -> setCodigoSeguridad($codigoDeSeguridad);
-                    $pago -> setFechaExpedicion($fechaExpedicion);
-
-                    //Guardar en la base de datos
-                    $guardadoPago = $pago -> guardar();
+                    //Obtener los resultados
+                    $factura = $this -> obtenerFactura();
+                    $guardadoTransaccion = $this -> guardarTransaccion($factura, $departamento, $municipio, $codigoPostal, $barrio, $direccion, $pago);
+                    $guardadoPago = $this -> guardarPago($idTarjeta, $numeroTarjeta, $titular, $codigoDeSeguridad, $fechaExpedicion);
 
                     //Comprobar si los datos se guardaron con exito en la base de datos
-                    if($guardadoPago && $guardadoTransaccion && $guardadoTransaccionVideojuego){
-                        //Redirigir a ventana de compra exitosa
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=TransaccionController&action=exito");
+                    if($guardadoTransaccion && $guardadoPago){
+
+                        //Obtener id de la ultima transaccion
+                        $idTransaccion = $this -> obtenerUltimaTransaccion();
+
+                        //Obtener el resultado
+                        $guardadoTransaccionVideojuego = $this -> guardarTransaccionVideojuego($idTransaccion);
+
+                        //Comprobar si la transaccion videojueo se guardo con exito
+                        if($guardadoTransaccionVideojuego){
+                            //Redirigir al menu de direccion y pago
+                            header("Location:"."http://localhost/Mercado-Juegos/?controller=TransaccionController&action=exito");
+                        }else{
+                            //Crear la sesion y redirigir a la ruta pertinente
+                            Ayudas::crearSesionYRedirigir("comprarvideojuegoerror", "Ha ocurrido un error al comprar el videojuego", "?controller=TransaccionController&action=direccionYPago&idVideojuego=$idVideojuego");
+                        }
                     }else{
-                        //Redirigir al menu de direccion y pago
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=TransaccionController&action=direccionYPago&idVideojuego=$idVideojuego");
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir("comprarvideojuegoerror", "Ha ocurrido un error al comprar el videojuego", "?controller=TransaccionController&action=direccionYPago&idVideojuego=$idVideojuego");
                     }
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir("comprarvideojuegoerror", "Ha ocurrido un error al comprar el videojuego", "?controller=TransaccionController&action=direccionYPago&idVideojuego=$idVideojuego");
                 }
+            }else{
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir("comprarvideojuegoerror", "Ha ocurrido un error al comprar el videojuego", "?controller=VideojuegoController&action=inicio");
             }
         }
 

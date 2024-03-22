@@ -1,19 +1,11 @@
-<div id="loginYRegistro">
-    <?php if(isset($_SESSION['guardaradministrador'])) : ?>
-        <div class="alerta alerta-error">
-            <?=$_SESSION['guardaradministrador']; ?>
-        </div>
-    <?php endif; ?> 
-    <?php Ayudas::eliminarSesion('guardaradministrador'); ?>
+<?php if(isset($_SESSION['guardaradministradorerror'])) : ?>
+    <div class="alerta alerta-error">
+        <?=$_SESSION['guardaradministradorerror']; ?>
+    </div>
+<?php endif; ?> 
+<?php Ayudas::eliminarSesion('guardaradministradorerror'); ?>
 
-    <div id="loginYRegistro">
-        <?php if(isset($_SESSION['guardaradministradorerror'])) : ?>
-            <div class="alerta alerta-error">
-                <?=$_SESSION['guardaradministradorerror']; ?>
-            </div>
-        <?php endif; ?> 
-        <?php Ayudas::eliminarSesion('guardaradministradorerror'); ?>
-    
+<div id="loginYRegistro">
     <h1>Registrarse</h1>
     <form action="<?=rutaInicio?><?=administrador?><?=guardarAdmin?>" method="post" enctype="multipart/form-data">
         <div id="bloqueTextoRegistro">

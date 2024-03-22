@@ -5,19 +5,19 @@
 <?php endif; ?>
 <?php Ayudas::eliminarSesion('loginexitosoinfo'); ?>
 
-<?php if(isset($_SESSION['comentariocreado']) && $_SESSION['comentariocreado'] == 'El comentario se ha hecho con exito') : ?>
-    <div class="alerta alerta-acierto">
-        <?=$_SESSION['comentariocreado']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('comentariocreado'); ?>
-
-<?php if(isset($_SESSION['comentariocreado']) && $_SESSION['comentariocreado'] == 'El comentario no se ha hecho con exito') : ?>
+<?php if(isset($_SESSION['guardarcomentarioerror'])) : ?>
     <div class="alerta alerta-error">
-        <?=$_SESSION['comentariocreado']; ?>
+        <?=$_SESSION['guardarcomentarioerror']; ?>
     </div>
 <?php endif; ?>
-<?php Ayudas::eliminarSesion('comentariocreado'); ?>
+<?php Ayudas::eliminarSesion('guardarcomentarioerror'); ?>
+
+<?php if(isset($_SESSION['guardarcomentarioacierto'])) : ?>
+    <div class="alerta alerta-acierto">
+        <?=$_SESSION['guardarcomentarioacierto']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('guardarcomentarioacierto'); ?>
 
 <div class="detalleVideojuego">
     <div id="favoritoDetalle">

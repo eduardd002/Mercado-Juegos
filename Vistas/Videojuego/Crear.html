@@ -1,16 +1,11 @@
 <div id="loginYRegistro">
-    <?php if(isset($_SESSION['RegistroVideojuego']) && $_SESSION['RegistroVideojuego'] == 'El formato debe ser de una imagen') : ?>
-        <div class="alerta alerta-error">
-            <?=$_SESSION['RegistroVideojuego']; ?>
-        </div>
-    <?php endif; ?>
 
-    <?php if(isset($_SESSION['RegistroVideojuego']) && $_SESSION['RegistroVideojuego'] == 'Ha ocurrido un error al realizar el registro') : ?>
+    <?php if(isset($_SESSION['guardarvideojuegoerror'])) : ?>
         <div class="alerta alerta-error">
-            <?=$_SESSION['RegistroVideojuego']; ?>
+            <?=$_SESSION['guardarvideojuegoerror']; ?>
         </div>
     <?php endif; ?>
-    <?php Ayudas::eliminarSesion('RegistroVideojuego'); ?>
+    <?php Ayudas::eliminarSesion('guardarvideojuegoerror'); ?>
     
     <h1>Crear videojuego</h1>
     <form action="<?=rutaInicio?><?=videojuego?><?=guardar?>" method="post" enctype="multipart/form-data">

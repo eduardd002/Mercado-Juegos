@@ -33,12 +33,12 @@
 <?php endif; ?>
 <?php Ayudas::eliminarSesion('caducidad'); ?>
 
-<?php if(isset($_SESSION['RegistroVideojuego']) && $_SESSION['RegistroVideojuego'] == 'Videojuego creado con exito') : ?>
+<?php if(isset($_SESSION['guardarvideojuegoacierto'])) : ?>
     <div class="alerta alerta-acierto">
-        <?=$_SESSION['RegistroVideojuego']; ?>
+        <?=$_SESSION['guardarvideojuegoacierto']; ?>
     </div>
 <?php endif; ?>
-<?php Ayudas::eliminarSesion('RegistroVideojuego'); ?>
+<?php Ayudas::eliminarSesion('guardarvideojuegoacierto'); ?>
 
 <?php if(isset($_SESSION['usuarioeliminado']) && $_SESSION['usuarioeliminado'] == 'El usuario ha sido eliminado exitosamente') : ?>
     <div class="alerta alerta-acierto">

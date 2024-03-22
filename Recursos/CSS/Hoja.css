@@ -194,6 +194,7 @@ Estilos de la foto de usuario en el menu principal
 */
 
 #menuPrincipal img{
+    /*Borde redondo*/
     border-radius: 50%;
     /*Margen derecho*/
     margin-right: 5px;
@@ -520,7 +521,9 @@ Estilo del titulo del videojuego dek catalogo
     overflow: hidden;
     /*Muestra puntos suspensivos (...) para indicar que hay más texto*/
     text-overflow: ellipsis;
+    /*Margen izquierdo*/
     margin-left: 30px;
+    /*Margen derecho*/
     margin-right: 30px;
 }
 
@@ -1075,6 +1078,7 @@ Estilo del titulo de la descripcion del videojuego del detalle del videojuego
 .detalleVideojuego #descripcionVideojuegoTitulo{
     /*Margen inferior*/
     margin-bottom: 40px;
+    /*Margen superior*/
     margin-top: 80px;
 }
 
@@ -1992,6 +1996,7 @@ Estilo del boton de eliminar cuenta propio de perfil de usuario
     cursor: pointer;
     /*Sin decoracion de texto*/
     text-decoration: none;
+    /*Margen superior*/
     margin-top: 410px !important;
 }
 
@@ -2541,24 +2546,50 @@ Estilo del boton de confirmar pedido al dilegenciar envio y pago
     display: block;
 }
 
+/*
+Estilo agregar a favorito en catalogo
+*/
+
 #favoritoCatalogo{
+    /*Limpiar flotados*/
     clear: both;
+    /*Dar comportamiento de bloque*/
     display: block;
+    /*Flotar hacia la izquierda*/
     float: left;
 }
 
+/*
+Estilo de la imagen de agregar a favorito en catalogo
+*/
+
 #favoritoCatalogo img{
+    /*Anchor*/
     width: 17px;
+    /*Altura*/
     height: 17px;
+    /*Margen exterior*/
     margin: 7px !important;
 }
 
+/*
+Estilo de agregar a favorito en detalle
+*/
+
 #favoritoDetalle{
+    /*Flotar hacia la derecha*/
     float: right;
 }
 
+/*
+Estilo de la imagen de agregar a favorito en detalle
+*/
+
 #favoritoDetalle img{
+    /*Anchor*/
     width: 26px;
+    /*Altura*/
     height: 26px;
+    /*Margen exterior*/
     margin: 5px !important;
 }

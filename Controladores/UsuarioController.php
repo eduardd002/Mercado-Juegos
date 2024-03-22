@@ -32,6 +32,31 @@
         }
 
         /*
+        Funcion para guardar el usuario
+        */
+
+        public function guardarUsuario($nombre, $apellidos, $fechaNacimiento, $telefono, $email, $clave, $departamento, $municipio, $nombreArchivo){
+
+            //Instanciar el objeto
+            $usuario = new Usuario();
+            //Crear el objeto
+            $usuario -> setNombre($nombre);
+            $usuario -> setApellido($apellidos);
+            $usuario -> setFechanacimiento($fechaNacimiento);
+            $usuario -> setNumerotelefono($telefono);
+            $usuario -> setCorreo($email);
+            $usuario -> setClave($clave);
+            $usuario -> setDepartamento($departamento);
+            $usuario -> setMunicipio($municipio);
+            $usuario -> setFecharegistro(date('y-m-d'));
+            $usuario -> setFoto($nombreArchivo);
+            //Guardar en la base de datos
+            $guardado = $usuario -> guardar();
+            //Retornar el resultado
+            return $guardado;
+        }
+
+        /*
         Funcion para guardar el usuario en la base de datos
         */
 
@@ -49,87 +74,53 @@
                 $clave = isset($_POST['passwordusu']) ? $_POST['passwordusu'] : false;
                 $departamento = isset($_POST['departamentousu']) ? $_POST['departamentousu'] : false;
                 $municipio = isset($_POST['municipiousu']) ? $_POST['municipiousu'] : false;
+                $archivo = $_FILES['foto'];
+                $foto = $archivo['name'];
 
                 //Comprobar si todos los datos exsiten
                 if($nombre && $apellidos && $fechaNacimiento && $telefono && $clave && $email && $departamento && $municipio){
 
-                    //Instanciar el objeto
-                    $usuario = new Usuario();
-
-                    //Crear el objeto
-                    $usuario -> setNombre($nombre);
-                    $usuario -> setApellido($apellidos);
-                    $usuario -> setFechanacimiento($fechaNacimiento);
-                    $usuario -> setNumerotelefono($telefono);
-                    $usuario -> setCorreo($email);
-                    $usuario -> setClave($clave);
-                    $usuario -> setDepartamento($departamento);
-                    $usuario -> setMunicipio($municipio);
-                    $usuario -> setFecharegistro(date('y-m-d'));
-
+                    //Comprobar si la contraseña es valida
                     $claveSegura = Ayudas::comprobarContrasenia($clave);
+                    //Comprobar si la foto es valida
+                    $fotoGuardada = Ayudas::guardarImagen($archivo, "ImagenesUsuarios");
                     
-                    //Comprobar si la clave cumple con las condiciones para que sea segura
+                    //Comprobar si todo esta correcto para guardar el usuario
                     if($claveSegura){
-                        //Guardar la imagen
 
-                        //Guardar toda la informacion referente a la imagen
-                        $archivo = $_FILES['foto'];
-                        //Extraer nombre del archivo de imagen
-                        $nombreArchivo = $archivo['name'];
-                        //Extraer el tipo de archivo de la imagen
-                        $tipoArchivo = $archivo['type'];
+                        //Comprobar si la foto ha sido guardada
+                        if($fotoGuardada){
 
-                        //Comprobar si el archivo tiene la extensión de una imagen
-                        if($tipoArchivo == "image/jpg" || $tipoArchivo == "image/jpeg" || $tipoArchivo == "image/png" || $tipoArchivo == "image/gif"){
+                            //Comprobar si se ha guardado con exito
+                            $guardado = $this -> guardarUsuario($nombre, $apellidos, $fechaNacimiento, $telefono, $email, $clave, $departamento, $municipio, $foto);
 
-                            //Comprobar si no existe un directorio para las imagenes a subir
-                            if(!is_dir('Recursos/ImagenesUsuarios')){
-
-                                //Crear el directorio
-                                mkdir('Recursos/ImagenesUsuarios', 0777, true);
-                            }
-
-                            //Crear el objeto
-                            $usuario -> setFoto($nombreArchivo);
-                            //Mover la foto subida a la ruta temporal del servidor y luego a la de la carpeta de las imagenes
-                            move_uploaded_file($archivo['tmp_name'], 'Recursos/ImagenesUsuarios/'.$nombreArchivo);
-
-                            //Guardar en la base de datos
-                            $guardado = $usuario -> guardar();
-
-                            //Comprobar se ejecutó con exito la consulta
+                            //Comprobar si el administrador ha sido guardado
                             if($guardado){
-                                $ingreso = $usuario->login();
-                                //Crear sesion de inicio de sesion
-                                $_SESSION['loginexitoso'] = $ingreso;
-                                $_SESSION['loginexitosoinfo'] = "Bienvenido Usuario";
-                                //Redirigir al menu principal
-                                header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                                //Iniciar la sesion
+                               Ayudas::iniciarSesionUsuario($email, $clave);
                             }else{
-                                //Crear sesion que indique que la ruta de correo ya esta en uso
-                                $_SESSION['RegistroUsuario'] = "Ya hay una ruta de correo en uso";
-                                //Redirigir al registro de usuario
-                                header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=registro");
+                                //Crear la sesion y redirigir a la ruta pertinente
+                                Ayudas::crearSesionYRedirigir("guardarusuarioerror", "Ya existe una direccion de correo asociada", "?controller=UsuarioController&action=registro");
                             }
                         }else{
-                            //Crear sesion que indique que la imagen debe ser de formato imagen
-                            $_SESSION['RegistroUsuario'] = "El formato debe ser de una imagen";
-                            //Redirigir al registro de usuario
-                            header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=registro");
+
+                            //Crear la sesion y redirigir a la ruta pertinente
+                            Ayudas::crearSesionYRedirigir("guardarusuarioerror", "La imagen debe ser de tipo imagen", "?controller=UsuarioController&action=registro");
                         }
                     }else{
-                        //Crear Sesion que indique la seguridad y el tamaño que debe tener la contraseña que registra el usuario
-                        $_SESSION['ClavePocoSegura'] = "La clave debe contener una minuscula, una mayuscula, un caracterer especial, un numero y minimo 8 caracteres de longitud";
-                        //Redirigir al formulario de registro
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=registro");
-                    }   
+
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir("guardarusuarioerror", "La clave debe contener un mayuscula, miniscula, numero, caracter especial y minimo 8 caracteres de longitud", "?controller=UsuarioController&action=registro");
+                    }       
                 }else{
-                    //Crear sesion que indique que ha ocurrido un error inesperado al hacer el registro
-                    $_SESSION['RegistroUsuario'] = "Ha ocurrido un error al realizar el registro";
-                    //Redirigir al registro de usuario
-                    header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=registro");
+
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir("guardarusuarioerror", "Ha ocurrido un error al guardar el usuario", "?controller=UsuarioController&action=registro");
                 }
+            }else{
+
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir("guardarusuarioerror", "Ha ocurrido un error al guardar el usuario", "?controller=UsuarioController&action=registro");
             }
         }
 
@@ -148,68 +139,29 @@
 
                 //Comprobar si todos los datos exsiten
                 if($email && $clave){
-
-                    //Instanciar el objeto
-                    $usuario = new Usuario();
-
-                    //Crear el objeto
-                    $usuario -> setCorreo($email);
-                    $usuario -> setClave($clave);
-
-                    //Obtener objeto de la base de datos
-                    $ingreso = $usuario->login();
-
-                    //Instanciar el objeto
-                    $administrador = new Administrador();
-
-                    //Crear el objeto
-                    $administrador -> setCorreo($email);
-                    $administrador -> setClave($clave);
-                    
-                    //Obtener objeto de la base de datos
-                    $ingresoa = $administrador->login();
-
-                    //Comprobar se ejecutó con exito la consulta
-                    if($ingreso && is_object($ingreso)){
-                        //Crear la sesion con el objeto completo del usuario
-                        $_SESSION['loginexitoso'] = $ingreso;
-                        $_SESSION['loginexitosoinfo'] = "Bienvenido Usuario";
-
-                        //Comprobar si se quiere hacer un comentario sin estar previemente logueado
-                        if(isset($_SESSION['comentariopendiente']) && $_SESSION['comentariopendiente'] = "Por favor inicia sesion antes de comentar"){
-                           //Redirigir al comentario pendiente
-                           header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=detalle&id=".$_SESSION['idvideojuegopendientecomentario']);
-                           //Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes
-                           Ayudas::eliminarSesion('comentariopendiente');
-                           Ayudas::eliminarSesion('idvideojuegopendientecomentario');
-                        }else if(isset($_SESSION['favoritopendiente']) && $_SESSION['favoritopendiente'] = "Por favor inicia sesion antes de agregar a favoritos"){
-                            if(isset($_SESSION['catalogofavorito'])){    
-                                header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio"); 
-                                Ayudas::eliminarSesion('catalogofavorito');                     //Redirigir al comentario pendiente
-                            }else{
-                                header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=detalle&id=".$_SESSION['idvideojuegopendientefavorito']);
-                            }
-                           //Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes
-                           Ayudas::eliminarSesion('favoritopendiente');
-                           Ayudas::eliminarSesion('idvideojuegopendientecomentario');
-                        }else{
-                            //Redirigir al inicio
-                            header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
-                        }
-                    }else if($ingresoa && is_object($ingresoa)){
-                        //Crear la sesion con el objeto completo del administrador
-                        $_SESSION['loginexitosoa'] = $ingresoa;
-                        $_SESSION['loginexitosoinfoa'] = "Bienvenido administrador";
-                        //Redirigir al inicio
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
-                    }else{
-                        //Crear la sesion de error al realizar el login
-                        $_SESSION['error_login'] = 'Este usuario no se encuentra registrado';
-                        //Redirigir al login
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=login");
-                    }
+                    //Iniciar la sesion
+                    Ayudas::iniciarSesion($email, $clave);
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir("iniciarsesionerror", "Ha ocurrido un error al iniciar sesion", "?controller=UsuarioController&action=login");
                 }
             }
+        }
+
+        /*
+        Funcion para eliminar un usuario de la base de datos
+        */
+
+        public function eliminarUsuario($idUsuario){
+
+            //Instanciar el objeto
+            $usuario = new Usuario();
+            //Crear objeto
+            $usuario -> setId($idUsuario);
+            //Ejecutar la consulta
+            $eliminado = $usuario -> eliminar();
+            //Retornar el resultado
+            return $eliminado;
         }
 
         /*
@@ -227,30 +179,42 @@
                 //Si el dato existe
                 if($idUsuario){
 
-                    //Instanciar el objeto
-                    $usuario = new Usuario();
+                    //Obtener el resultado
+                    $eliminado = $this -> eliminarUsuario($idUsuario);
 
-                    //Crear objeto
-                    $usuario -> setId($idUsuario);
-
-                    //Ejecutar la consulta
-                    $eliminado = $usuario -> eliminar();
-
+                    //Comprobar si se ha elimininado el usuario con exito
                     if($eliminado){
-                        //Crear Sesion que indique que el usuario se ha eliminado con exito
-                        $_SESSION['usuarioeliminado'] = "El usuario ha sido eliminado exitosamente";
-                        //Redirigir al formulario de registro
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
-                        //Eliminar el inicio de sesion
+
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir("eliminarusuarioacierto", "El usuario ha sido eliminado con exito", "?controller=UsuarioController&action=inicio");
+                        //Eliminar la sesion de login
                         Ayudas::eliminarSesion('loginexitoso');
                     }else{
-                        //Crear Sesion que indique que el usuario se ha eliminado con exito
-                        $_SESSION['usuarioeliminado'] = "El usuario no ha sido eliminado exitosamente";
-                        //Redirigir al formulario de registro
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=miPerfil");
+
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir("eliminarusuarioerror", "El usuario no ha sido eliminado con exito", "?controller=UsuarioController&action=perfil");
                     }
                 }  
             }
+        }
+
+        public function actualizarUsuario($id, $nombre, $apellidos, $telefono, $email, $clave, $departamento, $municipio, $foto){
+
+            //Instanciar el objeto
+            $usuario = new Usuario();
+            //Crear objeto
+            $usuario -> setId($id);
+            $usuario -> setNombre($nombre);
+            $usuario -> setApellido($apellidos);
+            $usuario -> setNumerotelefono($telefono);
+            $usuario -> setCorreo($email);
+            $usuario -> setClave($clave);
+            $usuario -> setDepartamento($departamento);
+            $usuario -> setMunicipio($municipio);
+            $usuario -> setFoto($foto);
+            //Ejecutar la consulta
+            $actualizado = $usuario -> actualizar();
+            return $actualizado;
         }
 
         /*
@@ -271,43 +235,39 @@
                 $clave = isset($_POST['password']) ? $_POST['password'] : false;
                 $departamento = isset($_POST['departamento']) ? $_POST['departamento'] : false;
                 $municipio = isset($_POST['municipio']) ? $_POST['municipio'] : false;
+                //Añadir archivo de foto
+                $archivo = $_FILES['foto'];
 
                 //Si el dato existe
                 if($id && $nombre && $apellidos && $telefono && $email && $clave && $departamento && $municipio){
 
-                    //Instanciar el objeto
-                    $usuario = new Usuario();
+                    //Comprobar si el formato de la foto es imagen
+                    if(Ayudas::comprobarImagen($archivo['type']) == 2){
+                        //Comprobar si la contraseña es valida
+                        $claveSegura = Ayudas::comprobarContrasenia($clave);
+                        //Comprobar la foto
+                        $foto = Ayudas::guardarImagen($archivo, "ImagenesUsuarios");
+                        //Llamar la funcion de actualizar
+                        $actualizado = $this -> actualizarUsuario($id, $nombre, $apellidos, $telefono, $email, $clave, $departamento, $municipio, $foto);
 
-                    //Crear objeto
-                    $usuario -> setId($id);
-                    $usuario -> setNombre($nombre);
-                    $usuario -> setApellido($apellidos);
-                    $usuario -> setNumerotelefono($telefono);
-                    $usuario -> setCorreo($email);
-                    $usuario -> setClave($clave);
-                    $usuario -> setDepartamento($departamento);
-                    $usuario -> setMunicipio($municipio);
+                        if($claveSegura){
 
-                    //Ejecutar la consulta
-                    $actualizado = $usuario -> actualizar();
-
-                    if($actualizado){
-                        //Crear Sesion que indique que el usuario se ha actualizado con exito
-                        $_SESSION['usuarioactualizado'] = "El usuario ha sido actualizado exitosamente";
-                        //Redirigir al inicio
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                            if($actualizado){
+                                //Crear la sesion y redirigir a la ruta pertinente
+                                Ayudas::crearSesionYRedirigir('actualizarusuarioacierto', "Usuario actualizado con exito", '?controller=UsuarioController&action=miPerfil');
+                            }else{
+                                //Crear la sesion y redirigir a la ruta pertinente
+                                Ayudas::crearSesionYRedirigir('actualizarusuariosugerencia', "Agrega nuevos datos", '?controller=UsuarioController&action=miPerfil');
+                            }
+                        }else{
+                            //Crear la sesion y redirigir a la ruta pertinente
+                            Ayudas::crearSesionYRedirigir('actualizarusuariosugerencia', "Clave poco segura", '?controller=UsuarioController&action=miPerfil');
+                        }
                     }else{
-                        //Crear Sesion que indique que el usuario no se ha actualizado con exito
-                        $_SESSION['usuarioactualizado'] = "Proporciona nuevos datos";
-                        //Redirigir a la gestion de categorias
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=miPerfil");
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('actualizarusuariosugerencia', "El formato de la foto debe ser una imagen", '?controller=UsuarioController&action=miPerfil');
                     }
-                }else{
-                    //Crear Sesion que indique que el usuario no se ha actualizado con exito
-                    $_SESSION['usuarioactualizado'] = "Ha ocurrido un error al actualizar el usuario";
-                    //Redirigir a la gestion de categorias
-                    header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=miPerfil");
-                } 
+                }
             }
         }
 
@@ -338,6 +298,18 @@
             require_once "Vistas/Usuario/Perfil.html";
         }
 
+        public function obtenerPerfil($id){
+
+            //Instanciar el objeto
+            $usuario = new Usuario();
+            //Creo el objeto
+            $usuario -> setId($id);
+            //Obtener categoria
+            $usuarioUnico = $usuario -> obtenerUno();
+            //Retornar el resultado
+            return $usuarioUnico;
+        }
+
         /*
         Funcion para ver el perfil del usuario indentificado
         */
@@ -356,14 +328,7 @@
                 //Si el dato existe
                 if($id){
 
-                    //Instanciar el objeto
-                    $usuario = new Usuario();
-
-                    //Creo el objeto
-                    $usuario -> setId($id);
-
-                    //Obtener categoria
-                    $usuarioUnico = $usuario -> obtenerUno();
+                    $usuarioUnico = $this -> obtenerPerfil($id);
 
                     //Incluir la vista
                     require_once "Vistas/Usuario/miPerfil.html";

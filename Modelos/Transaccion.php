@@ -258,6 +258,23 @@
             //Retornar resultado
             return $id;
         }
+
+        /*
+        Funcion para obtener la ultima transaccion registrada
+        */
+
+        public function ultima(){
+            //Construir la consulta
+            $consulta = "SELECT id FROM transacciones ORDER BY id DESC LIMIT 1";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Obtener el resultado del objeto
+            $ultimo = $resultado -> fetch_object();
+            //Devolver resultado
+            $ultimaTransaccion = $ultimo -> id;
+            //Retornar el resultado
+            return $ultimaTransaccion;
+        }
     }
 
 ?>

@@ -43,6 +43,22 @@
         }
 
         /*
+        Funcion para traer un videojuego en concreto
+        */
+
+        public function traerVideojuegoEspecifico($id){
+
+            //Instanciar el objeto
+            $videojuego = new Videojuego();
+            //Construir el objeto
+            $videojuego -> setId($id);
+            //Traer videojuego en concreto
+            $videojuegoEspecifico = $videojuego -> traerUno();
+            //Retornar resultado
+            return $videojuegoEspecifico;
+        }
+
+        /*
         Funcion para ver el detalle del videojuego
         */
 
@@ -56,15 +72,10 @@
                 //Comprobar el dato exsiten
                 if($id){
                 
-                    //Instanciar el objeto
-                    $videojuego = new Videojuego();
+                    //Obtener resultado
+                    $videojuegoEspecifico = $this -> traerVideojuegoEspecifico($id);
 
-                    //Construir el objeto
-                    $videojuego -> setId($id);
-
-                    //Traer videojuego en concreto
-                    $videojuegoEspecifico = $videojuego -> traerUno();
-
+                    //Comprobar si el resultado ha llegado
                     if($videojuegoEspecifico){
                         //Incluir la vista
                         require_once 'Vistas/Videojuego/Detalle.html';
@@ -102,6 +113,22 @@
         }
 
         /*
+        Funcion para buscar un videojuego
+        */
+
+        public function buscarVideojuego($nombre){
+
+            //Instanciar el objeto
+            $videojuego = new Videojuego();
+            //Crear el objeto
+            $videojuego -> setNombre($nombre);
+            //Obtener videojuegos de la base de datos
+            $listaVideojuegos = $videojuego -> buscar();
+            //Retornar el resultado
+            return $listaVideojuegos;
+        }
+
+        /*
         Funcion para buscar un videojuego en concreto
         */
 
@@ -116,13 +143,8 @@
                 //Comprobar el dato exsiten
                 if($nombre){
 
-                    //Instanciar el objeto
-                    $videojuego = new Videojuego();
-                    //Crear el objeto
-                    $videojuego -> setNombre($nombre);
-
-                    //Obtener videojuegos de la base de datos
-                    $listaVideojuegos = $videojuego -> buscar();
+                    //Obtener el resultado
+                    $listaVideojuegos = $this -> buscarVideojuego($nombre);
 
                     //Comprobar si llegan videojuegos
                     if(mysqli_num_rows($listaVideojuegos) > 0){
@@ -134,6 +156,77 @@
                     }
                 }
             }
+        }
+
+        /*
+        Funcion para guardar el videojuego en la base de datos
+        */
+
+        public function guardarVideojuego($nombre, $consola, $uso, $precio, $descripcion, $stock, $nombreArchivo){
+
+            //Instanciar el objeto
+            $videojuego = new Videojuego();
+            //Crear el objeto
+            $videojuego -> setNombre($nombre);
+            $videojuego -> setIdConsola($consola);
+            $videojuego -> setIdUso($uso);
+            $videojuego -> setPrecio($precio);
+            $videojuego -> setDescripcion($descripcion);
+            $videojuego -> setStock($stock);
+            $videojuego -> setFechaCreacion(date('y-m-d'));
+            $videojuego -> setFoto($nombreArchivo);
+            //Guardar el videojuego en la base de datos
+            $guardado = $videojuego -> guardar();
+            //Retornar el resultado
+            return $guardado;
+        }
+
+        /*
+        Funcion para obtener el ultimo videojuego guardado
+        */
+
+        public function obtenerUltimoVideojuego(){
+
+            //Instanciar el objeto
+            $videojuego = new Videojuego();
+            //Obtener id del ultimo videojuego registrado
+            $id = $videojuego -> ultimo();
+            //Retornar resultado
+            return $id;
+        }
+
+        /*
+        Funcion para guardar el videojuego categoria en la base de datos
+        */
+
+        public function guardarVideojuegoCategoria($id, $categorias){
+
+            //Instanciar el objeto
+            $videojuegoCategoria = new VideojuegoCategoria();
+            //Crear el objeto
+            $videojuegoCategoria -> setIdVideojuego($id);
+            $videojuegoCategoria -> setIdCategoria($categorias);
+            //Guardar en la base de datos
+            $guardadoVideojuegoCategoria = $videojuegoCategoria -> guardar();
+            //Retornar el resultado
+            return $guardadoVideojuegoCategoria;
+        }
+
+        /*
+        Funcion para guardar el videojuego usuario en la base de datos
+        */
+
+        public function guardarVideojuegoUsuario($id, $usuarioId){
+
+            //Instanciar el objeto
+            $usuarioVideojuego = new UsuarioVideojuego();
+            //Crear el objeto          
+            $usuarioVideojuego -> setIdVideojuego($id);
+            $usuarioVideojuego -> setIdUsuario($usuarioId);
+            //Guardar en la base de datos
+            $guardadoUsuarioVideojuego = $usuarioVideojuego -> guardar();
+            //Retornar el resultado
+            return $guardadoUsuarioVideojuego;
         }
 
         /*
@@ -156,101 +249,54 @@
                 $stock = isset($_POST['stockvid']) ? $_POST['stockvid'] : false;
                 $descripcion = isset($_POST['descripcionvid']) ? $_POST['descripcionvid'] : false;
                 $categorias = isset($_POST['categoriasvid']) ? $_POST['categoriasvid'] : false;
+                $archivo = $_FILES['foto'];
+                $foto = $archivo['name'];
             
                 //Comprobar si todos los datos exsiten
                 if($nombre && $consola && $uso && $precio && $descripcion && $stock){
 
-                    //Instanciar el objeto
-                    $videojuego = new Videojuego();
+                    //Comprobar si la foto es valida
+                    $fotoGuardada = Ayudas::guardarImagen($archivo, "ImagenesVideojuegos");
 
-                    //Crear el objeto
-                    $videojuego -> setNombre($nombre);
-                    $videojuego -> setIdConsola($consola);
-                    $videojuego -> setIdUso($uso);
-                    $videojuego -> setPrecio($precio);
-                    $videojuego -> setDescripcion($descripcion);
-                    $videojuego -> setStock($stock);
-                    $videojuego -> setFechaCreacion(date('y-m-d'));
+                    //Obtener ultimo videojuego registrado
+                    $idUltimoVideojuego = $this -> obtenerUltimoVideojuego();
 
-                    //Guardar la imagen
-
-                    //Guardar toda la informacion referente a la imagen
-                    $archivo = $_FILES['foto'];
-                    //Extraer nombre del archivo de imagen
-                    $nombreArchivo = $archivo['name'];
-                    //Extraer el tipo de archivo de la imagen
-                    $tipoArchivo = $archivo['type'];
-
-                    //Comprobar si el archivo tiene la extensión de una imagen
-                    if($tipoArchivo == "image/jpg" || $tipoArchivo == "image/jpeg" || $tipoArchivo == "image/png" || $tipoArchivo == "image/gif"){
-
-                        //Comprobar si no existe un directorio para las imagenes a subir
-                        if(!is_dir('Recursos/ImagenesVideojuegos')){
-
-                            //Crear el directorio
-                            mkdir('Recursos/ImagenesVideojuegos', 0777, true);
-                        }
-
-                        //Crear el objeto
-                        $videojuego -> setFoto($nombreArchivo);
-                        //Mover la foto subida a la ruta temporal del servidor y luego a la de la carpeta de las imagenes
-                        move_uploaded_file($archivo['tmp_name'], 'Recursos/ImagenesVideojuegos/'.$nombreArchivo);
+                    //Comprobar si la foto ha sido guardada
+                    if($fotoGuardada){
 
                         //Guardar en la base de datos
-                        $guardado = $videojuego -> guardar();
+                        $guardado = $this -> guardarVideojuego($nombre, $consola, $uso, $precio, $stock, $descripcion, $foto);
 
-                        //Comprobar se ejecutaron con exito las consultas
+                        //Comprobar si ha sido guardado el videojuego con exito
                         if($guardado){
 
-                            //Obtener id del ultimo videojuego registrado
-                            $id = $videojuego -> ultimo();
+                            //Guardar el videojuego cateogoria y videojuego usuario
+                            $guardadoCategoriaVideojuego = $this -> guardarVideojuegoCategoria($idUltimoVideojuego, $categorias);
+                            $guardadoUsuarioVideojuego = $this -> guardarVideojuegoUsuario($idUltimoVideojuego, $usuarioId);
 
-                            //Instanciar el objeto
-                            $videojuegoCategoria = new VideojuegoCategoria();
-
-                            //Crear el objeto
-
-                            //Registrar id de videojuego futuro o proximo a registrar
-                            $videojuegoCategoria -> setIdVideojuego($id);
-                            $videojuegoCategoria -> setCategoriaId($categorias);
-
-                            //Instanciar el objeto
-                            $usuarioVideojuego = new UsuarioVideojuego();
-
-                            //Crear el objeto
-                                
-                            //Registrar id de videojuego futuro o proximo a registrar
-                            $usuarioVideojuego -> setIdVideojuego($id);
-                            $usuarioVideojuego -> setIdUsuario($usuarioId);
-
-                            //Guardar en la base de datos
-                            $guardadoVideojuegoCategoria = $videojuegoCategoria -> guardar();
-
-                            //Guardar en la base de datos
-                            $guardadoUsuarioVideojuego = $usuarioVideojuego -> guardar();
-
-                            if($guardadoUsuarioVideojuego && $guardadoVideojuegoCategoria){
-                                //Crear sesion de videojuego creado con exito
-                                $_SESSION['RegistroVideojuego'] = "Videojuego creado con exito";
-                                //Redirigir al menu principal
-                                header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                            //Comprobar si el videojuego cateogoria y videojuego usuario han sido guardados exitosamente
+                            if($guardadoUsuarioVideojuego && $guardadoCategoriaVideojuego){
+                                //Crear la sesion y redirigir a la ruta pertinente
+                                Ayudas::crearSesionYRedirigir("guardarvideojuegoacierto", "El videojuego ha sido guardado con exito", "?controller=VideojuegoController&action=inicio");
+                            }else{
+                                //Crear la sesion y redirigir a la ruta pertinente
+                                Ayudas::crearSesionYRedirigir("guardarvideojuegoerror", "Ha ocurrido un error al guardar el videojuego", "?controller=VideojuegoController&action=crear");
                             }
+                        }else{
+                            //Crear la sesion y redirigir a la ruta pertinente
+                            Ayudas::crearSesionYRedirigir("guardarvideojuegoerror", "Ha ocurrido un error al guardar el videojuego", "?controller=VideojuegoController&action=crear");
                         }
                     }else{
-                        //Crear sesion que indique que la imagen debe ser de formato imagen
-                        $_SESSION['RegistroVideojuego'] = "El formato debe ser de una imagen";
-                        //Redirigir al registro de videojuego
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=crear");
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir("guardarvideojuegoerror", "La imagen debe ser formato imagen", "?controller=VideojuegoController&action=crear");
                     }
                 }else{
-                    //Crear sesion que indique que ha ocurrido un error inesperado al hacer el registro
-                    $_SESSION['RegistroVideojuego'] = "Ha ocurrido un error al realizar el registro";
-                    //Redirigir al registro de videojuego
-                    header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=crear");
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir("guardarvideojuegoerror", "Ha ocurrido un error al guardar el videojuego", "?controller=VideojuegoController&action=crear");
                 }
             }
         }
-
+            
         /*
         Funcion para actualizar un videojuego
         */
