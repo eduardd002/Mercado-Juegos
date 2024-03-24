@@ -258,17 +258,17 @@
                     //Comprobar si la foto es valida
                     $fotoGuardada = Ayudas::guardarImagen($archivo, "ImagenesVideojuegos");
 
-                    //Obtener ultimo videojuego registrado
-                    $idUltimoVideojuego = $this -> obtenerUltimoVideojuego();
-
                     //Comprobar si la foto ha sido guardada
                     if($fotoGuardada){
 
                         //Guardar en la base de datos
-                        $guardado = $this -> guardarVideojuego($nombre, $consola, $uso, $precio, $stock, $descripcion, $foto);
+                        $guardado = $this -> guardarVideojuego($nombre, $consola, $uso, $precio, $descripcion, $stock, $foto);
 
                         //Comprobar si ha sido guardado el videojuego con exito
                         if($guardado){
+
+                            //Obtener ultimo videojuego registrado
+                            $idUltimoVideojuego = $this -> obtenerUltimoVideojuego();
 
                             //Guardar el videojuego cateogoria y videojuego usuario
                             $guardadoCategoriaVideojuego = $this -> guardarVideojuegoCategoria($idUltimoVideojuego, $categorias);

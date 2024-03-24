@@ -175,20 +175,6 @@ CREATE TABLE categorias (
     CONSTRAINT categorias_pk PRIMARY KEY ( id )
 );
 
-/*Crea tabla de chats*/
-CREATE TABLE chats (
-    id     INTEGER auto_increment NOT NULL,
-    idRemitente INTEGER NOT NULL,
-    idDestinatario INTEGER NOT NULL,
-    contenido TEXT NOT NULL,
-    fechaEnvio   DATE NOT NULL,
-    horaEnvio   TIME NOT NULL,
-    CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT chats_pk PRIMARY KEY ( id ),
-    CONSTRAINT chats_destinatario_fk FOREIGN KEY ( idDestinatario ) REFERENCES usuarios ( id ),
-    CONSTRAINT chats_remitente_fk FOREIGN KEY ( idRemitente ) REFERENCES usuarios ( id )
-);
-
 /*Crea tabla de comentarios*/
 CREATE TABLE comentarios (
     id     INTEGER auto_increment NOT NULL,
@@ -253,4 +239,41 @@ CREATE TABLE videojuegofavorito (
     CONSTRAINT favoritovideojuego_id PRIMARY KEY ( id ),
     CONSTRAINT favoritovideojuego_favorito FOREIGN KEY ( idFavorito ) REFERENCES favoritos ( id ),
     CONSTRAINT favoritovideojuego_videojuego FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
+);
+
+/*Crear tabla de chats*/
+CREATE TABLE chats (
+    id   INTEGER auto_increment NOT NULL,
+    fechaCreacion DATE NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT chats_id PRIMARY KEY ( id )
+);
+
+/*Crear tabla de mensajes*/
+CREATE TABLE mensajes (
+    id   INTEGER auto_increment NOT NULL,
+    idUsuario  INTEGER NOT NULL,
+    idChat  INTEGER NOT NULL,
+    contenido VARCHAR(200) NOT NULL,
+    fechaEnvio DATE NOT NULL,
+    horaEnvio DATE NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT mensajes_id PRIMARY KEY ( id ),
+    CONSTRAINT mensajes_usuario FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id ),
+    CONSTRAINT mensajes_chat FOREIGN KEY ( idChat ) REFERENCES chats ( id )
+);
+
+/*Crear tabla de usuario mensaje chat*/
+CREATE TABLE usuariomensajechat (
+    id   INTEGER auto_increment NOT NULL,
+    idRemitente  INTEGER NOT NULL,
+    idDestinatario  INTEGER NOT NULL,
+    idMensaje  INTEGER NOT NULL,
+    idChat  INTEGER NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT usuariomensajechat_id PRIMARY KEY ( id ),
+    CONSTRAINT usuariomensajechat_remitente FOREIGN KEY ( idRemitente ) REFERENCES usuarios ( id ),
+    CONSTRAINT usuariomensajechat_destinatario FOREIGN KEY ( idDestinatario ) REFERENCES usuarios ( id ),
+    CONSTRAINT usuariomensajechat_mensaje FOREIGN KEY ( idMensaje ) REFERENCES mensajes ( id ),
+    CONSTRAINT usuariomensajechat_chat FOREIGN KEY ( idChat ) REFERENCES chats ( id )
 );
