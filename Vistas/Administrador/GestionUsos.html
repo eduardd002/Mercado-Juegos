@@ -1,3 +1,24 @@
+<?php if(isset($_SESSION['guardarusoerror'])) : ?>
+    <div class="alerta alerta-adminError">
+        <?=$_SESSION['guardarusoerror']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('guardarusoerror'); ?>
+
+<?php if(isset($_SESSION['eliminarusoerror'])) : ?>
+    <div class="alerta alerta-adminError">
+        <?=$_SESSION['eliminarusoerror']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('eliminarusoerror'); ?>
+
+<?php if(isset($_SESSION['actualizarusoerror'])) : ?>
+    <div class="alerta alerta-adminError">
+        <?=$_SESSION['actualizarusoerror']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('actualizarusoerror'); ?>
+
 <div id="gestiones">
     <h1>Gestion de usos</h1>
     <?php if(mysqli_num_rows($listadoUsos) == 0) : ?>

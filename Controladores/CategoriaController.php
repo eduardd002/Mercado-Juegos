@@ -32,7 +32,7 @@
         }
 
         /*
-        Funcion para guardar una categoria en la base de datos
+        Funcion para guardar una categoria
         */
 
         public function guardar(){
@@ -95,7 +95,7 @@
                     //Obtener el resultado
                     $eliminado = $this -> eliminarCategoria($idCategoria);
 
-                    //Comprobar si la categoria ha sido actualizada con exito
+                    //Comprobar si la categoria ha sido eliminada con exito
                     if($eliminado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
@@ -109,7 +109,7 @@
         }
 
         /*
-        Funcion para editar una categoria
+        Funcion para editar una categoria en la base de datos
         */
 
         public function editarCategoria($idCategoria){

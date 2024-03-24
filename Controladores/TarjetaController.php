@@ -19,6 +19,22 @@
         Funcion para guardar una tarjeta en la base de datos
         */
 
+        public function guardarTarjeta($nombre){
+
+            //Instanciar el objeto
+            $tarjeta = new Tarjeta();
+            //Crear el objeto
+            $tarjeta -> setNombre($nombre);
+            //Guardar en la base de datos
+            $guardado = $tarjeta -> guardar();
+            //Retornar resultado
+            return $guardado;
+        }
+
+        /*
+        Funcion para guardar una tarjeta
+        */
+
         public function guardar(){
 
             //Comprobar si los datos están llegando
@@ -29,29 +45,36 @@
 
                 //Comprobar si todos los datos exsiten
                 if($nombre){
-                    //Instanciar el objeto
-                    $tarjeta = new Tarjeta();
-
-                    //Crear el objeto
-                    $tarjeta -> setNombre($nombre);
-
-                    //Guardar en la base de datos
-                    $guardado = $tarjeta -> guardar();
-
+                    
+                    //Obtener el resultado
+                    $guardado = $this -> guardarTarjeta($nombre);
                     //Comprobar se ejecutó con exito la consulta
                     if($guardado){
-                        //Crear sesion de tarjeta creada
-                        $_SESSION['tarjetacreada'] = 'La tarjeta ha sido creada con exito';
-                        //Redirigir al menu principal
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('guardartarjetaacierto', "La tarjeta ha sido creada con exito", '?controller=AdministradorController&action=administrar');
                     }else{
-                        //Crear sesion que indique que ha habido un error al guardar la tarjeta
-                        $_SESSION['tarjetacreada'] = 'La tarjeta no ha sido creada con exito';
-                        //Redirigir al registro de tarjeta
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=crearTarjeta");
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('guardartarjetaerror', "La tarjeta no ha sido creada con exito", '?controller=AdministradorController&action=crearTarjeta');
                     }
                 }
             }
+        }
+
+        /*
+        Funcion para eliminar una tarjeta en la base de datos
+        */
+
+        public function eliminarTarjeta($idTarjeta){
+
+            //Instanciar el objeto
+            $tarjeta = new Tarjeta();
+            //Crear objeto
+            $tarjeta -> setId($idTarjeta);
+            //Ejecutar la consulta
+            $eliminado = $tarjeta -> eliminar();
+            //Retornar resultado
+            return $eliminado;
         }
 
         /*
@@ -69,29 +92,32 @@
                 //Si el dato existe
                 if($idTarjeta){
 
-                    //Instanciar el objeto
-                    $tarjeta = new Tarjeta();
-
-                    //Crear objeto
-                    $tarjeta -> setId($idTarjeta);
-
-                    //Ejecutar la consulta
-                    $eliminado = $tarjeta -> eliminar();
+                    //Obtener el resultado
+                    $eliminado = $this -> eliminarTarjeta($idTarjeta);
 
                     //Comprobar si la tarjeta ha sido eliminada con exito
                     if($eliminado){
-                        //Crear Sesion que indique que la tarjeta se ha eliminado con exito
-                        $_SESSION['tarjetaeliminada'] = "La tarjeta ha sido eliminada exitosamente";
-                        //Redirigir al inicio
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('eliminartarjetaacierto', "La tarjeta ha sido eliminada exitosamente", '?controller=AdministradorController&action=administrar');
                     }else{
-                        //Crear Sesion que indique que la tarjeta se ha eliminado con exito
-                        $_SESSION['tarjetaeliminada'] = "La tarjeta no ha sido eliminado exitosamente";
-                        //Redirigir a la gestion de tarjetas
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=gestionarTarjeta");
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('eliminartarjetaerror', "La tarjeta no ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarTarjeta');
                     }
                 }  
             }
+        }
+
+        /*
+        Funcion para editar una tarjeta en la base de datos
+        */
+
+        public function editarTarjeta($idTarjeta){
+
+            //Instanciar el objeto
+            $tarjeta = new Tarjeta();
+            //Creo el objeto y retornar el resultado
+            return $tarjeta -> setId($idTarjeta);
         }
 
         /*
@@ -109,11 +135,8 @@
                 //Si el dato existe
                 if($idTarjeta){
 
-                    //Instanciar el objeto
-                    $tarjeta = new Tarjeta();
-
-                    //Creo el objeto
-                    $tarjeta -> setId($idTarjeta);
+                    //Obtener el resultado
+                    $tarjeta = $this -> editarTarjeta($idTarjeta);
 
                     //Obtener tarjeta
                     $tarjetaUnica = $tarjeta -> obtenerUna();
@@ -126,6 +149,23 @@
         }
 
         /*
+        Funcion para actualizar una tarjeta en la base de datos
+        */
+
+        public function actualizarTarjeta($idTarjeta, $nombre){
+
+            //Instanciar el objeto
+            $tarjeta = new Tarjeta();
+            //Crear objeto
+            $tarjeta -> setId($idTarjeta);
+            $tarjeta -> setNombre($nombre);
+            //Ejecutar la consulta
+            $actualizado = $tarjeta -> actualizar();
+            //Retornar el resultado
+            return $actualizado;
+        }
+
+                /*
         Funcion para actualizar una tarjeta
         */
 
@@ -141,27 +181,17 @@
                 //Si el dato existe
                 if($idTarjeta){
 
-                    //Instanciar el objeto
-                    $tarjeta= new Tarjeta();
+                    //Obtener el resultado
+                    $actualizado = $this -> actualizarTarjeta($idTarjeta, $nombre);
 
-                    //Crear objeto
-                    $tarjeta -> setId($idTarjeta);
-                    $tarjeta -> setNombre($nombre);
-
-                    //Ejecutar la consulta
-                    $actualizado = $tarjeta -> actualizar();
-
-                    //Comprobar si la tarjeta ha sido actualizada con exito
+                    //Comprobar si la tarjeta ha sido actualizada
                     if($actualizado){
-                        //Crear Sesion que indique que la tarjeta se ha actualizado con exito
-                        $_SESSION['tarjetaactualizada'] = "La tarjeta ha sido actualizada exitosamente";
-                        //Redirigir al inicio
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('actualizartarjetaacierto', "La tarjeta ha sido actualizada exitosamente", '?controller=AdministradorController&action=administrar');
                     }else{
-                        //Crear Sesion que indique que la tarjeta no se ha actualizado con exito
-                        $_SESSION['tarjetaactualizada'] = "La tarjeta no ha sido actualizada exitosamente";
-                        //Redirigir a la gestion de tarjetas
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=gestionarTarjeta");
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('actualizartarjetaerror', "La tarjeta no ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarTarjeta');
                     }
                 }  
             }

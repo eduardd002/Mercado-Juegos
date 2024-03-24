@@ -19,6 +19,22 @@
         Funcion para guardar una consola en la base de datos
         */
 
+        public function guardarConsola($nombre){
+
+            //Instanciar el objeto
+            $consola = new Consola();
+            //Crear el objeto
+            $consola -> setNombre($nombre);
+            //Guardar en la base de datos
+            $guardado = $consola -> guardar();
+            //Retornar resultado
+            return $guardado;
+        }
+
+        /*
+        Funcion para guardar una consola
+        */
+
         public function guardar(){
 
             //Comprobar si los datos están llegando
@@ -29,29 +45,36 @@
 
                 //Comprobar si todos los datos exsiten
                 if($nombre){
-                    //Instanciar el objeto
-                    $consola = new Consola();
-
-                    //Crear el objeto
-                    $consola -> setNombre($nombre);
-
-                    //Guardar en la base de datos
-                    $guardado = $consola -> guardar();
-
+                    
+                    //Obtener el resultado
+                    $guardado = $this -> guardarConsola($nombre);
                     //Comprobar se ejecutó con exito la consulta
                     if($guardado){
-                        //Crear sesion de consola creada
-                        $_SESSION['consolacreada'] = 'La consola ha sido creada con exito';
-                        //Redirigir al menu principal
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('guardarconsolaacierto', "La consola ha sido creada con exito", '?controller=AdministradorController&action=administrar');
                     }else{
-                        //Crear sesion que indique que ha habido un error al guardar la consola
-                        $_SESSION['consolanocreada'] = 'La consola no ha sido creada con exito';
-                        //Redirigir al registro de consola
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=crearConsola");
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('guardarconsolaerror', "La consola no ha sido creada con exito", '?controller=AdministradorController&action=crearConsola');
                     }
                 }
             }
+        }
+
+        /*
+        Funcion para eliminar una consola en la base de datos
+        */
+
+        public function eliminarConsola($idConsola){
+
+            //Instanciar el objeto
+            $consola = new Consola();
+            //Crear objeto
+            $consola -> setId($idConsola);
+            //Ejecutar la consulta
+            $eliminado = $consola -> eliminar();
+            //Retornar resultado
+            return $eliminado;
         }
 
         /*
@@ -69,29 +92,32 @@
                 //Si el dato existe
                 if($idConsola){
 
-                    //Instanciar el objeto
-                    $consola = new Consola();
-
-                    //Crear objeto
-                    $consola -> setId($idConsola);
-
-                    //Ejecutar la consulta
-                    $eliminado = $consola -> eliminar();
+                    //Obtener el resultado
+                    $eliminado = $this -> eliminarConsola($idConsola);
 
                     //Comprobar si la consola ha sido eliminada con exito
                     if($eliminado){
-                        //Crear Sesion que indique que el consola se ha eliminado con exito
-                        $_SESSION['consolaeliminada'] = "La consola ha sido eliminada exitosamente";
-                        //Redirigir al inicio
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('eliminarconsolaacierto', "La consola ha sido eliminada exitosamente", '?controller=AdministradorController&action=administrar');
                     }else{
-                        //Crear Sesion que indique que la consola se ha eliminado con exito
-                        $_SESSION['consolaeliminada'] = "La consola no ha sido eliminada exitosamente";
-                        //Redirigir a la gestion de la consola
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=gestionarConsola");
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('eliminarconsolaerror', "La consola no ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarConsola');
                     }
                 }  
             }
+        }
+
+        /*
+        Funcion para editar una consola en la base de datos
+        */
+
+        public function editarConsola($idConsola){
+
+            //Instanciar el objeto
+            $consola = new Consola();
+            //Creo el objeto y retornar el resultado
+            return $consola -> setId($idConsola);
         }
 
         /*
@@ -109,11 +135,8 @@
                 //Si el dato existe
                 if($idConsola){
 
-                    //Instanciar el objeto
-                    $consola = new Consola();
-
-                    //Creo el objeto
-                    $consola -> setId($idConsola);
+                    //Obtener el resultado
+                    $consola = $this -> editarConsola($idConsola);
 
                     //Obtener consola
                     $consolaUnica = $consola -> obtenerUna();
@@ -123,6 +146,23 @@
 
                 }
             }
+        }
+
+        /*
+        Funcion para actualizar una consola en la base de datos
+        */
+
+        public function actualizarConsola($idConsola, $nombre){
+
+            //Instanciar el objeto
+            $consola = new Consola();
+            //Crear objeto
+            $consola -> setId($idConsola);
+            $consola -> setNombre($nombre);
+            //Ejecutar la consulta
+            $actualizado = $consola -> actualizar();
+            //Retornar el resultado
+            return $actualizado;
         }
 
         /*
@@ -141,27 +181,17 @@
                 //Si el dato existe
                 if($idConsola){
 
-                    //Instanciar el objeto
-                    $consola = new Consola();
-
-                    //Crear objeto
-                    $consola -> setId($idConsola);
-                    $consola -> setNombre($nombre);
-
-                    //Ejecutar la consulta
-                    $actualizado = $consola -> actualizar();
+                    //Obtener el resultado
+                    $actualizado = $this -> actualizarConsola($idConsola, $nombre);
 
                     //Comprobar si la consola ha sido actualizada
                     if($actualizado){
-                        //Crear Sesion que indique que la consola se ha actualizado con exito
-                        $_SESSION['consolaactualizada'] = "La consola ha sido actualizada exitosamente";
-                        //Redirigir al inicio
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('actualizarconsolaacierto', "La consola ha sido actualizada exitosamente", '?controller=AdministradorController&action=administrar');
                     }else{
-                        //Crear Sesion que indique que la consola se ha actualizado con exito
-                        $_SESSION['consolaactualizada'] = "La consola no ha sido actualizada exitosamente";
-                        //Redirigir a la gestion de consolas
-                        header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=gestionarConsola");
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('actualizarconsolaerror', "La consola no ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarConsola');
                     }
                 }  
             }

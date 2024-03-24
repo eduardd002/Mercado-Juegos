@@ -1,3 +1,24 @@
+<?php if(isset($_SESSION['guardartarjetaerror'])) : ?>
+    <div class="alerta alerta-adminError">
+        <?=$_SESSION['guardartarjetaerror']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('guardartarjetaerror'); ?>
+
+<?php if(isset($_SESSION['eliminartarjetaerror'])) : ?>
+    <div class="alerta alerta-adminError">
+        <?=$_SESSION['eliminartarjetaerror']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('eliminartarjetaerror'); ?>
+
+<?php if(isset($_SESSION['actualizartarjetaerror'])) : ?>
+    <div class="alerta alerta-adminError">
+        <?=$_SESSION['actualizartarjetaerror']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('actualizartarjetaerror'); ?>
+
 <div id="gestiones">
     <h1>Gestion de tarjetas</h1>
     <?php if(mysqli_num_rows($listadoTarjetas) == 0) : ?>

@@ -1,3 +1,24 @@
+<?php if(isset($_SESSION['guardarestadoerror'])) : ?>
+    <div class="alerta alerta-adminError">
+        <?=$_SESSION['guardarestadoerror']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('guardarestadoerror'); ?>
+
+<?php if(isset($_SESSION['eliminarestadoerror'])) : ?>
+    <div class="alerta alerta-adminError">
+        <?=$_SESSION['eliminarestadoerror']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('eliminarestadoerror'); ?>
+
+<?php if(isset($_SESSION['actualizarestadoerror'])) : ?>
+    <div class="alerta alerta-adminError">
+        <?=$_SESSION['actualizarestadoerror']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('actualizarestadoerror'); ?>
+
 <div id="gestiones">
     <h1>Gestion de estados</h1>
     <?php if(mysqli_num_rows($listadoEstados) == 0) : ?>

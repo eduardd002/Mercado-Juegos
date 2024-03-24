@@ -1,3 +1,24 @@
+<?php if(isset($_SESSION['guardarconsolaerror'])) : ?>
+    <div class="alerta alerta-adminError">
+        <?=$_SESSION['guardarconsolaerror']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('guardarconsolaerror'); ?>
+
+<?php if(isset($_SESSION['eliminarconsolaerror'])) : ?>
+    <div class="alerta alerta-adminError">
+        <?=$_SESSION['eliminarconsolaerror']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('eliminarconsolaerror'); ?>
+
+<?php if(isset($_SESSION['actualizarconsolaerror'])) : ?>
+    <div class="alerta alerta-adminError">
+        <?=$_SESSION['actualizarconsolaerror']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('actualizarconsolaerror'); ?>
+
 <div id="gestiones">
     <h1>Gestion de consolas</h1>
     <?php if(mysqli_num_rows($listadoConsolas) == 0) : ?>
