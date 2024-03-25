@@ -22,6 +22,9 @@
     //Incluir el objeto de pago
     require_once 'Modelos/Pago.php';
 
+    //Incluir el objeto de chat
+    require_once 'Modelos/Chat.php';
+
     class TransaccionController{
 
         /*
@@ -163,6 +166,23 @@
         }
 
         /*
+        Funcion para guardar el chat con el vendedor
+        */
+
+        public function guardarChat(){
+
+            //Instanciar el objeto
+            $chat = new Chat;
+            //Crear el objeto
+            $chat -> setIdUsuario($_SESSION['loginexitoso'] -> id);
+            $chat -> setIdContacto(2);
+            $chat -> setFechaCreacion(date('Y-m-d'));
+            //Guardar en la base de datos
+            $guardado = $chat -> guardar();
+            return $guardado;
+        }
+
+        /*
         Funcion para guardar la transaccion en la base de datos
         */
 
@@ -207,6 +227,9 @@
 
                         //Comprobar si la transaccion videojueo se guardo con exito
                         if($guardadoTransaccionVideojuego){
+
+                            //Guardar el chat
+                            $this -> guardarChat();
                             //Redirigir al menu de direccion y pago
                             header("Location:"."http://localhost/Mercado-Juegos/?controller=TransaccionController&action=exito");
                         }else{
@@ -244,7 +267,7 @@
         public function verCompras(){
 
             //Incluir la vista
-            require_once "Vistas/Compra/Factura.html";
+            require_once "Vistas/Compra/Detalle.html";
         }
 
         /*

@@ -2012,31 +2012,12 @@ Estilo de los titulos de creacion de las gestiones
 }
 
 /*
-Estilo de el apartado de chat de comprador
-*/
-
-#chatComprador{
-    margin: 50px;
-}
-
-/*
 Estilo de el apartado de chat de vendedor
 */
 
 #chatVendedor{
     /*Margen exterior*/
     margin: 50px;
-}
-
-/*
-Estilo de titulo en el chat de comprador
-*/
-
-#chatComprador h1{
-    /*Texto alineado al centro*/
-    text-align: center;
-    /*Magen inferior*/
-    margin-bottom: 20px;
 }
 
 /*
@@ -2048,23 +2029,6 @@ Estilo de titulo en el chat de vendedor
     text-align: center;
     /*Magen inferior*/
     margin-bottom: 20px;
-}
-
-/*
-Estilo de panel del chat de comprador
-*/
-
-#panelChatComprador{
-    /*Color de fondo*/
-    background: #a0def2;
-    /*Borde*/
-    border: 1px solid #144064;
-    /*Margen inferior*/
-    margin-bottom: 50px;
-    /*Altura*/
-    height: 400px;
-    /*Aplicar scroll en chat*/
-    overflow-y: auto;
 }
 
 /*
@@ -2084,38 +2048,6 @@ Estilo de panel del chat de vendedor
     width: 500px;
     /*Aplicar scroll en chat*/
     overflow-y: auto;
-}
-
-/*
-Estilo de boton de enviar mensaje
-*/
-
-#chatComprador input[type="Submit"]{
-    /*Flotar hacia la izquierda*/
-    float: left;
-    /*Anchor*/
-    width: 150px;
-    /*Altura*/
-    height: 30px;
-}
-
-/*
-Estilo de titulo para enviar el mensaje en el chat
-*/
-
-#chatComprador input[type="Text"]{
-    /*Flotar hacia la izquierda*/
-    float: left;
-    /*Altura*/
-    height: 26px;
-    /*Anchor*/
-    width: 700px;
-    /*Margen inferior*/
-    margin-bottom: 50px;
-    /*Margen derecho*/
-    margin-right: 50px;
-    /*Margen izquierdo*/
-    margin-left: 60px;
 }
 
 /*
@@ -2514,8 +2446,6 @@ Estilos del chat
     margin-top: 70px;
     /*Margen inferior*/
     margin-bottom: 30px;
-    /*Margen izquierdo*/
-    margin-left: 50px;
 }
 
 /*
@@ -2528,9 +2458,9 @@ Estilo de los enlaces del chat
     /*Sin decoracion del texto*/
     text-decoration: none;
     /*Tamaño de letra*/
-    font-size: 20px;
+    font-size: 20px !important;
     /*Espaciado de letra*/
-    letter-spacing: 1px;
+    letter-spacing: 2px;
 }
 
 /*

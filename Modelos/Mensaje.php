@@ -1,11 +1,13 @@
 <?php
 
-    class Chat{
+    class Mensaje{
 
         private $id;
         private $idUsuario;
-        private $idContacto;
-        private $fechaCreacion;
+        private $idChat;
+        private $contenido;
+        private $fechaEnvio;
+        private $horaEnvio;
         private $db;
 
         public function __construct(){
@@ -30,31 +32,47 @@
             return $this;
         }
 
-        public function getIdContacto(){
-            return $this->idContacto;
+        public function getIdChat(){
+            return $this->idChat;
         }
 
-        public function setIdContacto($idContacto){
-            $this->idContacto = $idContacto;
+        public function setIdChat($idChat){
+            $this->idChat = $idChat;
             return $this;
         }
 
-        public function getFechaCreacion(){
-            return $this->fechaCreacion;
+        public function getContenido(){
+            return $this->contenido;
         }
 
-        public function setFechaCreacion($fechaCreacion){
-            $this->fechaCreacion = $fechaCreacion;
+        public function setContenido($contenido){
+            $this->contenido = $contenido;
             return $this;
         }
 
-        /*
-        Funcion para guardar el chat en la base de datos
-        */
+        public function getFechaEnvio(){
+            return $this->fechaEnvio;
+        }
+
+        public function setFechaEnvio($fechaEnvio){
+            $this->fechaEnvio = $fechaEnvio;
+            return $this;
+        }
+
+        public function getHoraEnvio(){
+            return $this->horaEnvio;
+        }
+
+        public function setHoraEnvio($horaEnvio){
+            $this->horaEnvio = $horaEnvio;
+            return $this;
+        }
 
         public function guardar(){
+
             //Construir la consulta
-            $consulta = "INSERT INTO chats VALUES (NULL, {$this -> getIdUsuario()}, {$this -> getIdContacto()}, {$this -> fechaCreacion})";
+            $consulta = "INSERT IGNORE INTO mensajes VALUES(NULL, '{$this -> getContenido()}', 
+                '{$this -> getFechaEnvio()}', '{$this -> getHoraEnvio()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera
@@ -68,13 +86,9 @@
             return $resultado;
         }
 
-        /*
-        Funcion para traer el listado de chats que tiene un usuario en particular
-        */
-
-        public function obtenerChats(){
+        public function obtenerMensajes(){
             //Construir la consulta
-            $consulta = "SELECT * FROM chats WHERE idUsuario = {$this -> getIdUsuario()}";
+            $consulta = "SELECT * FROM mensajes";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Retornar el resultado

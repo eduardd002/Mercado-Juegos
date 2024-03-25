@@ -32,7 +32,7 @@
 
     //session_destroy();
 
-    var_dump($_SESSION);
+    //var_dump($_SESSION);
 
     // Verificar si la sesión está activa
     if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $tiempo_vida)) {

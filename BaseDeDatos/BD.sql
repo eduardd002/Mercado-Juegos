@@ -316,9 +316,13 @@ Crear tabla de chats
 
 CREATE TABLE chats (
     id   INTEGER auto_increment NOT NULL,
+    idUsuario   INTEGER NOT NULL,
+    idContacto   INTEGER NOT NULL,
     fechaCreacion DATE NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT chats_id PRIMARY KEY ( id )
+    CONSTRAINT chats_id PRIMARY KEY ( id ),
+    CONSTRAINT chat_usuario FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id ),
+    CONSTRAINT chat_contacto FOREIGN KEY ( idContacto ) REFERENCES usuarios ( id )
 );
 
 /*
@@ -327,8 +331,6 @@ Crear tabla de mensajes
 
 CREATE TABLE mensajes (
     id   INTEGER auto_increment NOT NULL,
-    idUsuario  INTEGER NOT NULL,
-    idChat  INTEGER NOT NULL,
     contenido VARCHAR(200) NOT NULL,
     fechaEnvio DATE NOT NULL,
     horaEnvio DATE NOT NULL,

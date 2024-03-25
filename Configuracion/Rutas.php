@@ -94,9 +94,9 @@
     define("actualizarCategoria", "&action=actualizar");
 
     define("chat", "/?controller=ChatController");
-    define("chatsVendedor", "&action=chatsVendedor");
-    define("chatsComprador", "&action=chatsComprador");
-    define("guardarChat", "&action=guardar");
+    define("chatear", "&action=chatear");
+    define("verMensajes", "&action=verMensajes");
+    define("enviarMensaje", "&action=enviarMensaje");
 
     define("comentario", "/?controller=ComentarioController");
     define("guardarComentario", "&action=guardar");
