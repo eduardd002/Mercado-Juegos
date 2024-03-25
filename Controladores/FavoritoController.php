@@ -99,7 +99,13 @@
                 //Comprobar si el usuario ya esta logueado
                 if(!Ayudas::comprobarInicioDeSesionUsuario()){
                     //Crear sesion en caso de que la solicitud de videojuego favorito sea desde el catalogo y no desde el detalle del videojuego
-                    isset($_GET['cat']) ? $_SESSION['catalogofavorito'] = true : $_SESSION['idvideojuegopendientefavorito'] = $videojuegoId;
+                    if(isset($_GET['cat'])){
+                        $_SESSION['catalogofavorito'] = true;
+                    }else if(isset($_GET['catt'])){
+                        $_SESSION['catalogofavoritot'] = true;
+                    }else{
+                        $_SESSION['idvideojuegopendientefavorito'] = $videojuegoId;
+                    }
                 }
 
                 //Llamar la funcion de ayuda en caso de que el usuario no este logueado

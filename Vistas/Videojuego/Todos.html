@@ -1,3 +1,10 @@
+<?php if(isset($_SESSION['loginexitosoinfo'])) : ?>
+    <div class="alerta alerta-acierto">
+        <?=$_SESSION['loginexitosoinfo']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('loginexitosoinfo'); ?>
+
 <div id="contenidoCentral">
     <?php if(mysqli_num_rows($listadoTodos) > 0) : ?>
         <h1>Todos los Videojuegos</h1>
@@ -10,11 +17,19 @@
     <div id="catalogo">
         <?php while($listado = $listadoTodos -> fetch_object()) : ?>
             <div class="videojuego">
+                <div id="favoritoCatalogo">
+                    <a href="<?=rutaInicio?><?=favorito?><?=guardarFavorito?>&idVideojuego=<?=$listado -> id?>&catt=true"><img src="Recursos/Logotipos/estrella.png" alt="Imagen favorito"></a>
+                </div>
                 <img src="Recursos/ImagenesVideojuegos/<?=$listado -> foto?>" alt="Videojuego">
                 <h2><?=$listado -> nombre?></h2>
                 <p>$ <?=$listado -> precio?></p>
                 <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>&id=<?=$listado -> id?>" class="button button-comprarCatalogo">Ver ahora</a>
             </div>
         <?php endwhile; ?>
+    </div>
+    <div id="verTodos">
+        <?php if(mysqli_num_rows($listadoTodos) > 6) : ?>
+            <a href="<?=rutaInicio?><?=videojuego?><?=algunos?>">Ver algunos videojuegos</a>
+        <?php endif; ?>
     </div>
 </div>

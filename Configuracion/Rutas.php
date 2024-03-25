@@ -25,6 +25,7 @@
     define("actualizarVideojuego", "&action=actualizar");
     define("eliminarVideojuego", "&action=eliminar");
     define("todos", "&action=todos");
+    define("algunos", "&action=inicio");
 
     define("carrito", "/?controller=CarritoController");
     define("verCarrito", "&action=ver");

@@ -341,9 +341,15 @@
                         //Redirigir al lugar requerido
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio"); 
                         //Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes
-                        Ayudas::eliminarSesion('catalogofavorito');  
+                        Ayudas::eliminarSesion('catalogofavorito');
+                    }else if(isset($_SESSION['catalogofavoritot'])){
+                        //Redirigir al lugar requerido
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=todos"); 
+                        //Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes
+                        Ayudas::eliminarSesion('catalogofavoritot');
+                    }
                     //Comprobar si la solicitud viene desde el detalle del videojuego
-                    }else{
+                    else{
                         //Redirigir al lugar requerido
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=detalle&id=".$_SESSION['idvideojuegopendientefavorito']);
                         //Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes
