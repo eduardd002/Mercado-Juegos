@@ -1,16 +1,9 @@
-<?php if(isset($_SESSION['videojuegofavorito']) && $_SESSION['videojuegofavorito'] == 'Videojuego agregado a la lista de favoritos') : ?>
+<?php if(isset($_SESSION['guardarfavoritoacierto'])) : ?>
     <div class="alerta alerta-acierto">
-        <?=$_SESSION['videojuegofavorito']; ?>
+        <?=$_SESSION['guardarfavoritoacierto']; ?>
     </div>
 <?php endif; ?>
-<?php Ayudas::eliminarSesion('videojuegofavorito'); ?>
-
-<?php if(isset($_SESSION['loginexitosoinfo']) && $_SESSION['loginexitosoinfo'] == 'Bienvenido Usuario') : ?>
-    <div class="alerta alerta-acierto">
-        <?=$_SESSION['loginexitosoinfo']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('loginexitosoinfo'); ?>
+<?php Ayudas::eliminarSesion('guardarfavoritoacierto'); ?>
 
 <div id="carrito">
     <h1>Favoritos</h1>

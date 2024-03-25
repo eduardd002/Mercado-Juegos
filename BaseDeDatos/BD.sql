@@ -132,7 +132,7 @@ CREATE TABLE transaccionvideojuego (
     unidades            INTEGER NOT NULL,
     nombreVideojuego    VARCHAR(200) NOT NULL,
     precioVideojuego    INTEGER NOT NULL,
-    categoriaVideojuego VARCHAR(250) NOT NULL,
+    usoVideojuego VARCHAR(250) NOT NULL,
     consolaVideojuego   VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT transaccionvideojuego_pk PRIMARY KEY ( id ),

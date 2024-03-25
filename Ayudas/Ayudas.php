@@ -36,6 +36,16 @@
         }
 
         /*
+        Funcion para comprobar si existe un inicio de sesion de usuario
+        */
+
+        public static function comprobarInicioDeSesionUsuario(){
+            if(isset($_SESSION['loginexitoso'])){
+                return true;
+            }
+        }
+
+        /*
         Funcion para listar todas las categorias en la pantalla principal de inicio
         */
 
@@ -152,15 +162,13 @@
         videojuego a favoritos
         */
 
-        public static function restringirAUsuarioAlAgregarFavorito($seccion, $idVideojuego){
+        public static function restringirAUsuarioAlAgregarFavorito($seccion){
             //Verificar que el inicio de sesion no exista
             if(!isset($_SESSION['loginexitoso'])){
                 //Redirigir
                 header("Location:"."http://localhost/Mercado-Juegos/".$seccion);
                 //Crear sesion con contenido informativo al usuario
                 $_SESSION['favoritopendiente'] = "Por favor inicia sesion antes de agregar a favoritos";
-                //Crear sesion con id de videojuego que se quiere comentar
-                $_SESSION['idvideojuegopendientefavorito'] = $idVideojuego;
             }
         }
 
@@ -210,6 +218,7 @@
 
             $nombreArchivo = null;
 
+            //Comprobar si existe el archivo o este llega
             if(isset($archivo)){
 
                 //Extraer el tipo de archivo de la imagen
@@ -234,6 +243,10 @@
             return $nombreArchivo;
         }
 
+        /*
+        Funcion para establecer el login de usuario
+        */
+
         public static function loginUsuario($correo, $clave){
             //Instanciar el objeto
             $usuario = new Usuario();
@@ -245,6 +258,10 @@
             //Retornar el resultado
             return $ingreso;
         }
+
+        /*
+        Funcion para establecer el login de administrador
+        */
 
         public static function loginAdministrador($correo, $clave){
             //Instanciar el objeto
@@ -264,6 +281,7 @@
 
         public static function iniciarSesionUsuario($correo, $clave){
 
+            //Lamar la funcion que contiene la informacion del login del usuario
             $ingreso = Ayudas::loginUsuario($correo, $clave);
 
             //Comprobar si el ingreso es exitos
@@ -281,6 +299,7 @@
 
         public static function iniciarSesionAdmnistrador($correo, $clave){
 
+            //Lamar la funcion que contiene la informacion del login del administrador
             $ingreso = Ayudas::loginAdministrador($correo, $clave);
 
             //Comprobar si el ingreso es exitos
@@ -298,6 +317,7 @@
 
         public static function iniciarSesion($email, $clave){
             
+            //Lamar la funcion que contiene la informacion del login del usuario y administrador
             $ingresoa = Ayudas::loginAdministrador($email, $clave);
             $ingreso = Ayudas::loginUsuario($email, $clave);
 
@@ -308,22 +328,29 @@
                 $_SESSION['loginexitosoinfo'] = "Bienvenido Usuario";
 
                 //Comprobar si se quiere hacer un comentario sin estar previemente logueado
-                if(isset($_SESSION['comentariopendiente']) && $_SESSION['comentariopendiente'] = "Por favor inicia sesion antes de comentar"){
+                if(isset($_SESSION['comentariopendiente'])){
                    //Redirigir al comentario pendiente
                    header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=detalle&id=".$_SESSION['idvideojuegopendientecomentario']);
                    //Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes
                    Ayudas::eliminarSesion('comentariopendiente');
                    Ayudas::eliminarSesion('idvideojuegopendientecomentario');
-                }else if(isset($_SESSION['favoritopendiente']) && $_SESSION['favoritopendiente'] = "Por favor inicia sesion antes de agregar a favoritos"){
+                //Comprobar si se quiere agregar un videojuego a favoritos sin estar previemente logueado
+                }else if(isset($_SESSION['favoritopendiente'])){
+                    //Comprobar si la solicitud viene desde el catalogo
                     if(isset($_SESSION['catalogofavorito'])){    
+                        //Redirigir al lugar requerido
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio"); 
-                        Ayudas::eliminarSesion('catalogofavorito');                     //Redirigir al comentario pendiente
+                        //Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes
+                        Ayudas::eliminarSesion('catalogofavorito');  
+                    //Comprobar si la solicitud viene desde el detalle del videojuego
                     }else{
+                        //Redirigir al lugar requerido
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=detalle&id=".$_SESSION['idvideojuegopendientefavorito']);
+                        //Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes
+                        Ayudas::eliminarSesion('idvideojuegopendientefavorito');
                     }
-                   //Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes
-                   Ayudas::eliminarSesion('favoritopendiente');
-                   Ayudas::eliminarSesion('idvideojuegopendientecomentario');
+                    //Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes
+                    Ayudas::eliminarSesion('favoritopendiente');
                 }else{
                     //Redirigir al inicio
                     header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
