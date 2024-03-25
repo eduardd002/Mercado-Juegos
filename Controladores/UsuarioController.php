@@ -186,7 +186,7 @@
                     if($eliminado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir("eliminarusuarioacierto", "El usuario ha sido eliminado con exito", "?controller=UsuarioController&action=inicio");
+                        Ayudas::crearSesionYRedirigir("eliminarusuarioacierto", "El usuario ha sido eliminado con exito", "?controller=VideojuegoController&action=inicio");
                         //Eliminar la sesion de login
                         Ayudas::eliminarSesion('loginexitoso');
                     }else{

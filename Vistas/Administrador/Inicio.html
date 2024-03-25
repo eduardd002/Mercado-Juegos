@@ -1,16 +1,9 @@
-<?php if(isset($_SESSION['loginexitosoainfo'])) : ?>
+<?php if(isset($_SESSION['loginexitosoinfoa'])) : ?>
     <div class="alerta alerta-adminAcierto">
-        <?=$_SESSION['loginexitosoainfo']; ?>
+        <?=$_SESSION['loginexitosoinfoa']; ?>
     </div>
 <?php endif; ?>
-<?php Ayudas::eliminarSesion('loginexitosoainfo'); ?>
-
-<?php if(isset($_SESSION['actualizaradministradoracierto'])) : ?>
-    <div class="alerta alerta-adminAcierto">
-        <?=$_SESSION['actualizaradministradoracierto']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('actualizaradministradoracierto'); ?>
+<?php Ayudas::eliminarSesion('loginexitosoinfoa'); ?>
 
 <?php if(isset($_SESSION['eliminaradministradorusuarioacierto'])) : ?>
     <div class="alerta alerta-adminAcierto">

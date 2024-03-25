@@ -1,4 +1,4 @@
-<?php if(isset($_SESSION['loginexitosoinfo']) && $_SESSION['loginexitosoinfo'] == 'Bienvenido Usuario') : ?>
+<?php if(isset($_SESSION['loginexitosoinfo'])) : ?>
     <div class="alerta alerta-acierto">
         <?=$_SESSION['loginexitosoinfo']; ?>
     </div>
@@ -40,12 +40,12 @@
 <?php endif; ?>
 <?php Ayudas::eliminarSesion('guardarvideojuegoacierto'); ?>
 
-<?php if(isset($_SESSION['usuarioeliminado']) && $_SESSION['usuarioeliminado'] == 'El usuario ha sido eliminado exitosamente') : ?>
+<?php if(isset($_SESSION['eliminarusuarioacierto'])) : ?>
     <div class="alerta alerta-acierto">
-        <?=$_SESSION['usuarioeliminado']; ?>
+        <?=$_SESSION['eliminarusuarioacierto']; ?>
     </div>
 <?php endif; ?>
-<?php Ayudas::eliminarSesion('usuarioeliminado'); ?>
+<?php Ayudas::eliminarSesion('eliminarusuarioacierto'); ?>
 
 <?php if(isset($_SESSION['eliminaradministradoracierto'])) : ?>
     <div class="alerta alerta-acierto">
@@ -64,12 +64,10 @@
 <div id="contenidoCentral">
     <?php if(mysqli_num_rows($listadoTodos) == 0) : ?>
         <h1>No Hay Ningun Videojuego</h1>
+    <?php elseif(mysqli_num_rows($listadoTodos) > 0 && mysqli_num_rows($listadoTodos) <= 6) : ?>
+        <h1>Todos Los Videojuegos</h1>
     <?php elseif(mysqli_num_rows($listadoTodos) > 6) : ?>
         <h1>Algunos Videojuegos</h1>
-    <?php elseif(mysqli_num_rows($listadoTodos) > 6) : ?>
-        <h1>Algunos Videojuegos</h1>
-    <?php else : ?>
-        <h1>No hay Videojuegos</h1>
     <?php endif; ?>
 <hr>
     <!-- SECCION VIDEOJUEGOS -->

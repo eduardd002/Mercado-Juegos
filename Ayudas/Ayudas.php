@@ -307,7 +307,7 @@
 
                 //Crear la sesion con el perfil del administrador
                 $_SESSION['loginexitosoa'] = $ingreso;
-                Ayudas::crearSesionYRedirigir('loginexitosoainfo', "Bienvenido administrador", "?controller=AdministradorController&action=administrar");
+                Ayudas::crearSesionYRedirigir('loginexitosoinfoa', "Bienvenido administrador", "?controller=AdministradorController&action=administrar");
             }
         }
 

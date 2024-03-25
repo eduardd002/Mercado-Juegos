@@ -1,3 +1,10 @@
+<?php if(isset($_SESSION['actualizaradministradoracierto'])) : ?>
+    <div class="alerta alerta-adminAcierto">
+        <?=$_SESSION['actualizaradministradoracierto']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('actualizaradministradoracierto'); ?>
+
 <?php if(isset($_SESSION['actualizaradministradorsugerencia'])) : ?>
     <div class="alerta alerta-adminSugerencia">
         <?=$_SESSION['actualizaradministradorsugerencia']; ?>
