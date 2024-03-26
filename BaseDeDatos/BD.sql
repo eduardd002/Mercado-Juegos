@@ -316,45 +316,24 @@ Crear tabla de chats
 
 CREATE TABLE chats (
     id   INTEGER auto_increment NOT NULL,
-    idUsuario   INTEGER NOT NULL,
-    idContacto   INTEGER NOT NULL,
     fechaCreacion DATE NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT chats_id PRIMARY KEY ( id ),
-    CONSTRAINT chat_usuario FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id ),
-    CONSTRAINT chat_contacto FOREIGN KEY ( idContacto ) REFERENCES usuarios ( id )
-);
-
-/*
-Crear tabla de mensajes
-*/
-
-CREATE TABLE mensajes (
-    id   INTEGER auto_increment NOT NULL,
-    contenido VARCHAR(200) NOT NULL,
-    fechaEnvio DATE NOT NULL,
-    horaEnvio DATE NOT NULL,
-    CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT mensajes_id PRIMARY KEY ( id ),
-    CONSTRAINT mensajes_usuario FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id ),
-    CONSTRAINT mensajes_chat FOREIGN KEY ( idChat ) REFERENCES chats ( id )
+    CONSTRAINT chats_id PRIMARY KEY ( id )
 );
 
 /*
 Crear tabla de usuario mensaje chat
 */
 
-CREATE TABLE usuariomensajechat (
+CREATE TABLE usuariochat (
     id   INTEGER auto_increment NOT NULL,
     idRemitente  INTEGER NOT NULL,
     idDestinatario  INTEGER NOT NULL,
-    idMensaje  INTEGER NOT NULL,
     idChat  INTEGER NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT usuariomensajechat_id PRIMARY KEY ( id ),
     CONSTRAINT usuariomensajechat_remitente FOREIGN KEY ( idRemitente ) REFERENCES usuarios ( id ),
     CONSTRAINT usuariomensajechat_destinatario FOREIGN KEY ( idDestinatario ) REFERENCES usuarios ( id ),
-    CONSTRAINT usuariomensajechat_mensaje FOREIGN KEY ( idMensaje ) REFERENCES mensajes ( id ),
     CONSTRAINT usuariomensajechat_chat FOREIGN KEY ( idChat ) REFERENCES chats ( id )
 );
 
@@ -548,27 +527,3 @@ INSERT INTO videojuegofavorito VALUES (NULL, 6, 7, 129000);
 INSERT INTO videojuegofavorito VALUES (NULL, 10, 8, 130000);
 INSERT INTO videojuegofavorito VALUES (NULL, 3, 9, 246000);
 INSERT INTO videojuegofavorito VALUES (NULL, 4, 10, 90000);
-
-/*
-Crear pagos
-*/
-
-INSERT INTO pagos VALUES (NULL, 1, "654987", "Eduardo Cortes Pineda", "654", "2029-08-21");
-INSERT INTO pagos VALUES (NULL, 1, "654987", "Eduardo Cortes Pineda", "654", "2029-08-21");
-INSERT INTO pagos VALUES (NULL, 2, "963258", "Juan David Giraldo Barrero", "111", "2028-07-11");
-
-/*
-Crear transacciones
-*/
-
-INSERT INTO transacciones VALUES (NULL, "1000", 1, 2, 1, 1, "Quindio", "Armenia", "630003", "San Jose", "Carrera 28", "Eduardo", "Cortes Pineda", "eduar@gmail.com", "3157566407", 650000, "2024-03-21", "15:21:21");
-INSERT INTO transacciones VALUES (NULL, "1001", 1, 3, 2, 1, "Cundinamarca", "Bogota", "123987", "16 de agosto", "Carrera 12", "Eduardo", "Cortes Pineda", "eduar@gmail.com", "3157566407", 105000, "2024-02-21", "20:23:08");
-INSERT INTO transacciones VALUES (NULL, "1002", 2, 1, 3, 1, "Risaralda", "Pereira", "987654", "San Juan", "Carrera 11", "Juan David", "Giraldo Barrero", "juanda@gmail.com", "3216549878", 950000, "2024-01-21", "17:54:15");
-
-/*
-Crear videojuegos de la transaccion
-*/
-
-INSERT INTO transaccionvideojuego VALUES (NULL, 1, 4, 5, "Call Of Duty Vanguard", 500000, "Nuevo", "Play Station 4");
-INSERT INTO transaccionvideojuego VALUES (NULL, 2, 5, 1, "Need For Speed", 150000, "Nuevo", "Play Station 4");
-INSERT INTO transaccionvideojuego VALUES (NULL, 3, 6, 4, "Fifa 23", 90000, "Usado", "Play Station 4");

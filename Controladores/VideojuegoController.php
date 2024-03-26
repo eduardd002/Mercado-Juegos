@@ -199,12 +199,12 @@
         Funcion para guardar el videojuego categoria en la base de datos
         */
 
-        public function guardarVideojuegoCategoria($id, $categorias){
+        public function guardarVideojuegoCategoria($categorias){
 
             //Instanciar el objeto
             $videojuegoCategoria = new VideojuegoCategoria();
             //Crear el objeto
-            $videojuegoCategoria -> setIdVideojuego($id);
+            $videojuegoCategoria -> setIdVideojuego($this -> obtenerUltimoVideojuego());
             $videojuegoCategoria -> setIdCategoria($categorias);
             //Guardar en la base de datos
             $guardadoVideojuegoCategoria = $videojuegoCategoria -> guardar();
@@ -216,12 +216,12 @@
         Funcion para guardar el videojuego usuario en la base de datos
         */
 
-        public function guardarVideojuegoUsuario($id, $usuarioId){
+        public function guardarVideojuegoUsuario($usuarioId){
 
             //Instanciar el objeto
             $usuarioVideojuego = new UsuarioVideojuego();
             //Crear el objeto          
-            $usuarioVideojuego -> setIdVideojuego($id);
+            $usuarioVideojuego -> setIdVideojuego($this -> obtenerUltimoVideojuego());
             $usuarioVideojuego -> setIdUsuario($usuarioId);
             //Guardar en la base de datos
             $guardadoUsuarioVideojuego = $usuarioVideojuego -> guardar();
@@ -267,12 +267,9 @@
                         //Comprobar si ha sido guardado el videojuego con exito
                         if($guardado){
 
-                            //Obtener ultimo videojuego registrado
-                            $idUltimoVideojuego = $this -> obtenerUltimoVideojuego();
-
                             //Guardar el videojuego cateogoria y videojuego usuario
-                            $guardadoCategoriaVideojuego = $this -> guardarVideojuegoCategoria($idUltimoVideojuego, $categorias);
-                            $guardadoUsuarioVideojuego = $this -> guardarVideojuegoUsuario($idUltimoVideojuego, $usuarioId);
+                            $guardadoCategoriaVideojuego = $this -> guardarVideojuegoCategoria($categorias);
+                            $guardadoUsuarioVideojuego = $this -> guardarVideojuegoUsuario($usuarioId);
 
                             //Comprobar si el videojuego cateogoria y videojuego usuario han sido guardados exitosamente
                             if($guardadoUsuarioVideojuego && $guardadoCategoriaVideojuego){

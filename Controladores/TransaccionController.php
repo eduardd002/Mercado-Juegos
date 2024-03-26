@@ -25,6 +25,9 @@
     //Incluir el objeto de chat
     require_once 'Modelos/Chat.php';
 
+    //Incluir el objeto de usuario chat
+    require_once 'Modelos/UsuarioChat.php';
+
     class TransaccionController{
 
         /*
@@ -166,7 +169,7 @@
         }
 
         /*
-        Funcion para guardar el chat con el vendedor
+        Funcion para guardar el chat en la base de datos
         */
 
         public function guardarChat(){
@@ -174,11 +177,50 @@
             //Instanciar el objeto
             $chat = new Chat;
             //Crear el objeto
-            $chat -> setIdUsuario($_SESSION['loginexitoso'] -> id);
-            $chat -> setIdContacto(2);
             $chat -> setFechaCreacion(date('Y-m-d'));
             //Guardar en la base de datos
             $guardado = $chat -> guardar();
+            return $guardado;
+        }
+
+        /*
+        Funcion para obtener el ultimo chat guardado
+        */
+
+        public function obtenerUltimoChat(){
+
+            //Instanciar el objeto
+            $chat = new Chat();
+            //Obtener id del ultimo videojuego registrado
+            $id = $chat -> ultimo();
+            //Retornar resultado
+            return $id;
+        }
+
+        /*
+        Funcion para guardar el usuario chat en la base de datos
+        */
+
+        public function guardarUsuarioChat(){
+
+            //Instanciar el primer objeto
+            $usuarioChat = new UsuarioChat;
+            //Crear el primer objeto
+            $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
+            $usuarioChat -> setIdDestinatario(2);
+            $usuarioChat -> setIdChat($this -> obtenerUltimoChat());
+            //Guardar en la base de datos el primer objeto
+            $guardado = $usuarioChat -> guardar();
+
+            //Instanciar el segundo objeto
+            $usuarioChat2 = new UsuarioChat;
+            //Crear el segundo objeto
+            $usuarioChat2 -> setIdRemitente(2);
+            $usuarioChat2 -> setIdDestinatario($_SESSION['loginexitoso'] -> id);
+            $usuarioChat2 -> setIdChat($this -> obtenerUltimoChat());
+            //Guardar en la base de datos el segundo objeto
+            $usuarioChat2 -> guardar();
+
             return $guardado;
         }
 
@@ -229,9 +271,21 @@
                         if($guardadoTransaccionVideojuego){
 
                             //Guardar el chat
-                            $this -> guardarChat();
-                            //Redirigir al menu de direccion y pago
-                            header("Location:"."http://localhost/Mercado-Juegos/?controller=TransaccionController&action=exito");
+                            $guardadoChat = $this -> guardarChat();
+
+                            //Comprobar si el chat ha sido guardado con exito
+                            if($guardadoChat){
+
+                                //Guardar usuario chat
+                                $guardadoUsuarioChat = $this -> guardarUsuarioChat();
+
+                                //Comprobar si el usuario chat ha sido guardado con exito
+                                if($guardadoUsuarioChat){
+                                    //Redirigir al menu de direccion y pago
+                                    header("Location:"."http://localhost/Mercado-Juegos/?controller=TransaccionController&action=exito");
+                                }
+                            }
+
                         }else{
                             //Crear la sesion y redirigir a la ruta pertinente
                             Ayudas::crearSesionYRedirigir("comprarvideojuegoerror", "Ha ocurrido un error al comprar el videojuego", "?controller=TransaccionController&action=direccionYPago&idVideojuego=$idVideojuego");

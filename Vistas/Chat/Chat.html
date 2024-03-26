@@ -2,11 +2,11 @@
     <h1 class="tituloCreacionGestiones">Chat</h1>
     <div id="seccionUsuarios">
         <?php while($chats = $listadoChats -> fetch_object()) : ?>
-            <a href="<?=rutaInicio?><?=chat?><?=verMensajes?>&idContacto=<?=$chats -> idContacto?>">
+            <a href="">
                 <div id="usuarioChat">
-                    <img src="Recursos/ImagenesUsuarios/aot.jpg" alt="Usuario">
-                    <h2><?=$chats -> idContacto?></h2>
-                    <p>Cor</p>
+                    <img src="Recursos/ImagenesUsuarios/<?=$chats -> fotoChat?>" alt="Usuario">
+                    <h2><?=$chats -> nombreChat?></h2>
+                    <p><?=$chats -> apellidoChat?></p>
                 </div>
             </a>
         <?php endwhile; ?>

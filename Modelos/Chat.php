@@ -1,10 +1,7 @@
 <?php
-
     class Chat{
 
         private $id;
-        private $idUsuario;
-        private $idContacto;
         private $fechaCreacion;
         private $db;
 
@@ -18,24 +15,6 @@
 
         public function setId($id){
             $this->id = $id;
-            return $this;
-        }
-
-        public function getIdUsuario(){
-            return $this->idUsuario;
-        }
-
-        public function setIdUsuario($idUsuario){
-            $this->idUsuario = $idUsuario;
-            return $this;
-        }
-
-        public function getIdContacto(){
-            return $this->idContacto;
-        }
-
-        public function setIdContacto($idContacto){
-            $this->idContacto = $idContacto;
             return $this;
         }
 
@@ -54,7 +33,7 @@
 
         public function guardar(){
             //Construir la consulta
-            $consulta = "INSERT INTO chats VALUES (NULL, {$this -> getIdUsuario()}, {$this -> getIdContacto()}, {$this -> fechaCreacion})";
+            $consulta = "INSERT INTO chats VALUES (NULL, '{$this -> fechaCreacion}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera
@@ -69,16 +48,20 @@
         }
 
         /*
-        Funcion para traer el listado de chats que tiene un usuario en particular
+        Funcion para obtener el ultimo chat registrado
         */
 
-        public function obtenerChats(){
+        public function ultimo(){
             //Construir la consulta
-            $consulta = "SELECT * FROM chats WHERE idUsuario = {$this -> getIdUsuario()}";
+            $consulta = "SELECT id FROM chats ORDER BY id DESC LIMIT 1";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
+            //Obtener el resultado del objeto
+            $ultimo = $resultado -> fetch_object();
+            //Devolver resultado
+            $ultimoChat = $ultimo -> id;
             //Retornar el resultado
-            return $resultado;
+            return $ultimoChat;
         }
     }
 
