@@ -2096,6 +2096,10 @@ Estilo del mensaje enviado
 */
 
 #mensajeenviado{
+    /*Limpiar flotados*/
+    clear: both;
+    /*Dar comportamiento del bloque*/
+    display: block;
     /*Margen superior*/
     margin-top: 15px;
     /*Margen izquierdo*/

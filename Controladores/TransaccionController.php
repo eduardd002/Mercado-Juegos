@@ -28,6 +28,9 @@
     //Incluir el objeto de usuario chat
     require_once 'Modelos/UsuarioChat.php';
 
+    //Incluir el objeto de usuario videojuego
+    require_once 'Modelos/UsuarioVideojuego.php';
+
     class TransaccionController{
 
         /*
@@ -66,7 +69,7 @@
             //Traer el ultimo id de transaccion
             $ultimoId = $transaccion -> traerUltimoIdTransaccion();
             //Retornar el resultado
-            return $ultimoId -> id;
+            return $ultimoId;
         }
 
         /*
@@ -98,16 +101,33 @@
         }
 
         /*
+        Funcion para traer el dueño del videojuego
+        */
+
+        public function traerDuenioDeVideojuego($idVideojuego){
+            //Instanciar el objeto
+            $usuarioVideojuego = new UsuarioVideojuego();
+            //Crear el objeto
+            $usuarioVideojuego -> setIdVideojuego($idVideojuego);
+            //Obtener el usuario
+            $idUsuario = $usuarioVideojuego -> obtenerUsuarioVideojuego();
+            //Obtener el id del usuario
+            $id = $idUsuario -> idUsuario;
+            //Retornar el id
+            return $id;
+        }
+
+        /*
         Funcion para guardar la transaccion en la base de datos
         */
 
-        public function guardarTransaccion($factura, $departamento, $municipio, $codigoPostal, $barrio, $direccion, $idPago){
+        public function guardarTransaccion($factura, $departamento, $municipio, $codigoPostal, $barrio, $direccion, $idPago, $idVideojuego){
 
             //Instanciar el objeto
             $transaccion = new Transaccion();
             $transaccion -> setNumeroFactura($factura + 1000);
             $transaccion -> setIdComprador($_SESSION['loginexitoso'] -> id);
-            $transaccion -> setIdVendedor(1);
+            $transaccion -> setIdVendedor($this -> traerDuenioDeVideojuego($idVideojuego));
             $transaccion -> setIdPago($idPago);
             $transaccion -> setIdEstado(1);
             $transaccion -> setDepartamento($departamento);
@@ -250,13 +270,15 @@
                 if($departamento && $municipio && $codigoPostal && $barrio && $direccion && 
                     $idTarjeta && $numeroTarjeta && $titular && $codigoDeSeguridad && $fechaExpedicion){
 
+                    //Obtener los resultados
+                    $guardadoPago = $this -> guardarPago($idTarjeta, $numeroTarjeta, $titular, $codigoDeSeguridad, $fechaExpedicion);
+
                     //Traer ultimo pago
                     $pago = $this -> obtenerUltimoPago();
-
-                    //Obtener los resultados
+                    //Traer ultima factura
                     $factura = $this -> obtenerFactura();
-                    $guardadoTransaccion = $this -> guardarTransaccion($factura, $departamento, $municipio, $codigoPostal, $barrio, $direccion, $pago);
-                    $guardadoPago = $this -> guardarPago($idTarjeta, $numeroTarjeta, $titular, $codigoDeSeguridad, $fechaExpedicion);
+                    //Guardar la transaccion
+                    $guardadoTransaccion = $this -> guardarTransaccion($factura, $departamento, $municipio, $codigoPostal, $barrio, $direccion, $pago, $idVideojuego);
 
                     //Comprobar si los datos se guardaron con exito en la base de datos
                     if($guardadoTransaccion && $guardadoPago){

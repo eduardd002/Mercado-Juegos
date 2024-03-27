@@ -1,8 +1,15 @@
+<?php if(isset($_SESSION['mensajeenviadoerror'])) : ?>
+    <div class="alerta alerta-error">
+        <?=$_SESSION['mensajeenviadoerror']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('mensajeenviadoerror'); ?>
+
 <div id="chatVendedor">
     <h1 class="tituloCreacionGestiones">Chat</h1>
     <div id="seccionUsuarios">
         <?php while($chats = $listadoChats -> fetch_object()) : ?>
-            <a href="">
+            <a href="<?=rutaInicio?><?=chat?><?=verMensajes?>&idContacto=<?=$chats -> idUsuarioChat?>">
                 <div id="usuarioChat">
                     <img src="Recursos/ImagenesUsuarios/<?=$chats -> fotoChat?>" alt="Usuario">
                     <h2><?=$chats -> nombreChat?></h2>
@@ -14,16 +21,27 @@
     <div id="seccionChat">
         <form action="<?=rutaInicio?><?=chat?><?=enviarMensaje?>" method="post">
             <div id="panelChatVendedor">
-                <?php if(!isset($listadoMensajes)) : ?>
-                    <h3>Presiona un chat para comenzar a conversar</h3>
+                <?php if(!isset($listadoMensajesEnviados) || !isset($listadoMensajesRecibidos)) : ?>
+                    <h2>Presiona un chat para comenzar una conversacion</h2>
                 <?php else : ?>
-                    <?php while($mensajes = $listadoMensajes -> fetch_object()) : ?>
-                        <div id="mensajeenviado">
-                            <p><?=$mensajes -> fechaEnvio?></p>
-                            <p><?=$mensajes -> horaEnvio?></p>
-                            <h2><?=$mensajes -> contenido?></h2>
-                        </div>
-                    <?php endwhile; ?>
+                    <?php if(isset($listadoMensajesRecibidos)) : ?>
+                        <?php while($mensajes = $listadoMensajesRecibidos -> fetch_object()) : ?>
+                            <div id="mensajerecibido">
+                                <p><?=$mensajes -> fechaEnvio?></p>
+                                <p><?=$mensajes -> horaEnvio?></p>
+                                <h2><?=$mensajes -> contenido?></h2>
+                            </div>    
+                        <?php endwhile; ?>
+                    <?php endif; ?>
+                    <?php if(isset($listadoMensajesEnviados)) : ?>
+                        <?php while($mensajes = $listadoMensajesEnviados -> fetch_object()) : ?>
+                            <div id="mensajeenviado">
+                                <p><?=$mensajes -> fechaEnvio?></p>
+                                <p><?=$mensajes -> horaEnvio?></p>
+                                <h2><?=$mensajes -> contenido?></h2>
+                            </div>    
+                        <?php endwhile; ?>
+                    <?php endif; ?>
                 <?php endif; ?>
             </div>
             <div id="campoEnviarMensajeVendedor">

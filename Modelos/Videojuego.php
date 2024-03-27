@@ -136,32 +136,6 @@
         }
 
         /*
-        Funcion para listar algunos de los videojuegos, en concreto 6
-        */
-
-        public function listarAlgunos(){
-            //Construir la consulta
-            $consulta = "SELECT * FROM videojuegos ORDER BY RAND() LIMIT 6";
-            //Ejecutar la consulta
-            $resultado = $this -> db -> query($consulta);
-            //Retornar resultado
-            return $resultado;
-        }
-
-        /*
-        Funcion para listar todos los videojuegos
-        */
-
-        public function listarTodos(){
-            //Construir la consulta
-            $consulta = "SELECT * FROM videojuegos ORDER BY id DESC";
-            //Ejecutar la consulta
-            $resultado = $this -> db -> query($consulta);
-            //Retornar resultado
-            return $resultado;
-        }
-
-        /*
         Funcion para traer un videojuego
         */
 

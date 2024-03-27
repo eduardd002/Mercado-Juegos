@@ -30,13 +30,18 @@
         public function inicio(){
 
             //Instanciar el objeto
-            $videojuego = new Videojuego();
+            $usuarioVideojuego = new UsuarioVideojuego();
+
+            if(Ayudas::comprobarInicioDeSesionUsuario()){
+                $usuarioVideojuego = new UsuarioVideojuego();
+                $usuarioVideojuego -> setIdUsuario($_SESSION['loginexitoso'] -> id);
+            }
 
             //Traer el listado de algunos videojuegos
-            $listadoAlgunos = $videojuego -> listarAlgunos();
+            $listadoAlgunos = $usuarioVideojuego -> listarAlgunos();
 
             //Traer el listado de todos los videojuegos
-            $listadoTodos = $videojuego -> listarTodos();
+            $listadoTodos = $usuarioVideojuego -> listarTodos();
             
             //Incluir la vista
             require_once 'Vistas/Layout/Catalogo.html';
@@ -319,9 +324,13 @@
         public function todos(){
 
             //Instaciar el objeto
-            $videojuego = new Videojuego();
+            $usuarioVideojuego = new UsuarioVideojuego();
+            if(Ayudas::comprobarInicioDeSesionUsuario()){
+                $usuarioVideojuego = new UsuarioVideojuego();
+                $usuarioVideojuego -> setIdUsuario($_SESSION['loginexitoso'] -> id);
+            }
             //Traer los datos de la consulta
-            $listadoTodos = $videojuego -> listarTodos();
+            $listadoTodos = $usuarioVideojuego -> listarTodos();
 
             //Incluir la vista
             require_once 'Vistas/Videojuego/Todos.html';

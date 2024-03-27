@@ -249,11 +249,14 @@
             $consulta = "SELECT id FROM transacciones ORDER BY id DESC LIMIT 1";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
-            //Obtener resultado
-            $id = $resultado -> fetch_object();
-            //Comprobar si existe un id
-            if($id == null){
+            //Obtener ultimo id
+            $ultimo = $resultado -> fetch_object();
+            //Comprobar si existe un id, si es asi asignarle el valor, de lo contrario asignar un 0
+            if($ultimo == null){
                 $id = 0;
+            }else{
+                //Obtener ultimo resultado
+                $id = $ultimo -> id;
             }
             //Retornar resultado
             return $id;

@@ -57,6 +57,55 @@
             //Retornar el resultado
             return $resultado;
         }
+
+        /*
+        Funcion para obtener el usuario dueño del videojuego creado
+        */
+
+        public function obtenerUsuarioVideojuego(){
+            //Construir la consulta
+            $consulta = "SELECT idUsuario FROM usuariovideojuego WHERE idVideojuego = {$this -> getIdVideojuego()}";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Obtener resultado
+            $usuario = $resultado -> fetch_object();
+            //Retornar el id del usuario
+            return $usuario;
+        }
+
+        /*
+        Funcion para listar todos los videojuegos
+        */
+
+        public function listarTodos(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM videojuegos";
+            if($this -> getIdUsuario() != null){
+                $consulta .= " WHERE id NOT IN (SELECT idVideojuego FROM usuariovideojuego WHERE idUsuario = {$this -> getIdUsuario()})"; 
+            }
+            $consulta .= " ORDER BY id DESC";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Retornar resultado
+            return $resultado;
+        }
+
+        /*
+        Funcion para listar algunos de los videojuegos, en concreto 6
+        */
+
+        public function listarAlgunos(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM videojuegos";
+            if($this -> getIdUsuario() != null){
+                $consulta .= " WHERE id NOT IN (SELECT idVideojuego FROM usuariovideojuego WHERE idUsuario = {$this -> getIdUsuario()})"; 
+            }
+            $consulta .= " ORDER BY RAND() LIMIT 6";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Retornar resultado
+            return $resultado;
+        }
     }
 
 ?>

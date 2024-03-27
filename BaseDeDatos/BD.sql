@@ -338,6 +338,22 @@ CREATE TABLE usuariochat (
 );
 
 /*
+Crear tabla de mensajes
+*/
+
+CREATE TABLE mensajes (
+    id   INTEGER auto_increment NOT NULL,
+    idRemitente  INTEGER NOT NULL,
+    idDestinatario  INTEGER NOT NULL,
+    contenido   TEXT NOT NULL,
+    fechaEnvio    DATE NOT NULL,
+    horaEnvio   DATE NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT mensaje_remitente FOREIGN KEY ( idRemitente ) REFERENCES usuarios ( id ),
+    CONSTRAINT mensaje_destinatario FOREIGN KEY ( idDestinatario ) REFERENCES usuarios ( id )
+);
+
+/*
 Crear usuarios
 */
 

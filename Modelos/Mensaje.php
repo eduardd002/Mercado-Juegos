@@ -3,8 +3,8 @@
     class Mensaje{
 
         private $id;
-        private $idUsuario;
-        private $idChat;
+        private $idRemitente;
+        private $idDestinatario;
         private $contenido;
         private $fechaEnvio;
         private $horaEnvio;
@@ -23,22 +23,44 @@
             return $this;
         }
 
-        public function getIdUsuario(){
-            return $this->idUsuario;
+                /**
+         * Get the value of idRemitente
+         */ 
+        public function getIdRemitente()
+        {
+                return $this->idRemitente;
         }
 
-        public function setIdUsuario($idUsuario){
-            $this->idUsuario = $idUsuario;
-            return $this;
+        /**
+         * Set the value of idRemitente
+         *
+         * @return  self
+         */ 
+        public function setIdRemitente($idRemitente)
+        {
+                $this->idRemitente = $idRemitente;
+
+                return $this;
         }
 
-        public function getIdChat(){
-            return $this->idChat;
+        /**
+         * Get the value of idDestinatario
+         */ 
+        public function getIdDestinatario()
+        {
+                return $this->idDestinatario;
         }
 
-        public function setIdChat($idChat){
-            $this->idChat = $idChat;
-            return $this;
+        /**
+         * Set the value of idDestinatario
+         *
+         * @return  self
+         */ 
+        public function setIdDestinatario($idDestinatario)
+        {
+                $this->idDestinatario = $idDestinatario;
+
+                return $this;
         }
 
         public function getContenido(){
@@ -68,11 +90,14 @@
             return $this;
         }
 
+        /*Funcion para guardar un mensaje en la base de datos*/
+
         public function guardar(){
 
             //Construir la consulta
-            $consulta = "INSERT IGNORE INTO mensajes VALUES(NULL, '{$this -> getContenido()}', 
-                '{$this -> getFechaEnvio()}', '{$this -> getHoraEnvio()}')";
+            $consulta = "INSERT IGNORE INTO mensajes VALUES(NULL, {$this -> getIdRemitente()}, 
+            {$this -> getIdDestinatario()}, '{$this -> getContenido()}', '{$this -> getFechaEnvio()}', 
+            '{$this -> getHoraEnvio()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera
@@ -86,9 +111,14 @@
             return $resultado;
         }
 
+        /*
+        Funcion para obtener todos los mensajes
+        */
+
         public function obtenerMensajes(){
             //Construir la consulta
-            $consulta = "SELECT * FROM mensajes";
+            $consulta = "SELECT * FROM mensajes WHERE idRemitente = {$this -> getIdRemitente()} 
+                AND idDestinatario = {$this -> getIdDestinatario()} ORDER BY id ASC";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Retornar el resultado

@@ -75,7 +75,7 @@
 
         public function obtenerChats(){
             //Construir la consulta
-            $consulta = "SELECT nombre AS 'nombreChat', foto AS 'fotoChat', apellido AS 'apellidoChat' 
+            $consulta = "SELECT id AS 'idUsuarioChat', nombre AS 'nombreChat', foto AS 'fotoChat', apellido AS 'apellidoChat' 
                 FROM usuarios WHERE id IN 
                 (SELECT idDestinatario FROM usuarioChat WHERE idRemitente = {$this -> getIdRemitente()})";
             //Ejecutar la consulta
