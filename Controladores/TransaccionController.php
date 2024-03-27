@@ -231,16 +231,6 @@
             $usuarioChat -> setIdChat($this -> obtenerUltimoChat());
             //Guardar en la base de datos el primer objeto
             $guardado = $usuarioChat -> guardar();
-
-            //Instanciar el segundo objeto
-            $usuarioChat2 = new UsuarioChat;
-            //Crear el segundo objeto
-            $usuarioChat2 -> setIdRemitente(2);
-            $usuarioChat2 -> setIdDestinatario($_SESSION['loginexitoso'] -> id);
-            $usuarioChat2 -> setIdChat($this -> obtenerUltimoChat());
-            //Guardar en la base de datos el segundo objeto
-            $usuarioChat2 -> guardar();
-
             return $guardado;
         }
 

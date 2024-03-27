@@ -76,12 +76,15 @@
         public function obtenerChats(){
             //Construir la consulta
             $consulta = "SELECT id AS 'idUsuarioChat', nombre AS 'nombreChat', foto AS 'fotoChat', apellido AS 'apellidoChat' 
-                FROM usuarios WHERE id IN 
-                (SELECT idDestinatario FROM usuarioChat WHERE idRemitente = {$this -> getIdRemitente()})";
+            FROM usuarios WHERE id IN 
+            (SELECT idDestinatario FROM usuarioChat WHERE idRemitente = {$this->getIdRemitente()} 
+            UNION 
+            SELECT idRemitente FROM usuarioChat WHERE idDestinatario = {$this->getIdDestinatario()})";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Retornar el resultado
             return $resultado;
+            
         }
     }
 

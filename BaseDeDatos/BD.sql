@@ -150,7 +150,7 @@ CREATE TABLE transacciones (
     telefonoComprador VARCHAR(200) NOT NULL,
     total             INTEGER NOT NULL,
     fechaRealizacion  DATE NOT NULL,
-    horaRealizacion   DATE NOT NULL,
+    horaRealizacion   TIME NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT uq_nf UNIQUE(numeroFactura),
     CONSTRAINT compras_pk PRIMARY KEY ( id ),
@@ -347,7 +347,7 @@ CREATE TABLE mensajes (
     idDestinatario  INTEGER NOT NULL,
     contenido   TEXT NOT NULL,
     fechaEnvio    DATE NOT NULL,
-    horaEnvio   DATE NOT NULL,
+    horaEnvio   TIME NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT mensaje_remitente FOREIGN KEY ( idRemitente ) REFERENCES usuarios ( id ),
     CONSTRAINT mensaje_destinatario FOREIGN KEY ( idDestinatario ) REFERENCES usuarios ( id )

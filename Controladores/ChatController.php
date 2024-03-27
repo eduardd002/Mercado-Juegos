@@ -18,6 +18,7 @@
             $usuarioChat = new UsuarioChat();
             //Crear objeto
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
+            $usuarioChat -> setIdDestinatario($_SESSION['loginexitoso'] -> id);
             //Traer lista de chats
             $listadoChats = $usuarioChat -> obtenerChats();
             //Retornar lista
@@ -28,28 +29,10 @@
         Funcion para listar todos los mensajes recibidos
         */
 
-        public function mensajesEnviados(){
+        public function mensajes(){
 
             //Instanciar mensaje
             $mensaje = new Mensaje();
-            $mensaje -> setIdRemitente($_SESSION['loginexitoso'] -> id);
-            $mensaje -> setIdDestinatario($_SESSION['mensajito']);
-            //Traer lista de mensajes
-            $listadoMensajes = $mensaje -> obtenerMensajes();
-            //Retornar lista
-            return $listadoMensajes;
-        }
-
-        /*
-        Funcion para listar todos los mensajes recibidos
-        */
-
-        public function mensajesRecibidos(){
-
-            //Instanciar mensaje
-            $mensaje = new Mensaje();
-            $mensaje -> setIdRemitente($_SESSION['mensajito']);
-            $mensaje -> setIdDestinatario($_SESSION['loginexitoso'] -> id);
             //Traer lista de mensajes
             $listadoMensajes = $mensaje -> obtenerMensajes();
             //Retornar lista
@@ -79,9 +62,7 @@
             //Traer la lista de chats
             $listadoChats = $this -> chats();
             //Traer la lista de mensajes enviados
-            $listadoMensajesEnviados = $this -> mensajesEnviados();
-            //Traer la lista de mensajes recibidos
-            $listadoMensajesRecibidos = $this -> mensajesRecibidos();
+            $listadoMensajes = $this -> mensajes();
             //Incluir la vista
             require_once "Vistas/Chat/Chat.html";
         }
@@ -115,9 +96,7 @@
             $chat = $_SESSION['mensajito'];
 
             //Traer la lista de mensajes enviados
-            $listadoMensajesEnviados = $this -> mensajesEnviados();
-            //Traer la lista de mensajes recibidos
-            $listadoMensajesRecibidos = $this -> mensajesRecibidos();
+            $listadoMensajesEnviados = $this -> mensajes();
             //Traer lista de chats
             $listadoChats = $this -> chats();
             //Guardar el mensaje en la base de datos

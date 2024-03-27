@@ -117,8 +117,7 @@
 
         public function obtenerMensajes(){
             //Construir la consulta
-            $consulta = "SELECT * FROM mensajes WHERE idRemitente = {$this -> getIdRemitente()} 
-                AND idDestinatario = {$this -> getIdDestinatario()} ORDER BY id ASC";
+            $consulta = "SELECT * FROM mensajes ORDER BY id ASC";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Retornar el resultado

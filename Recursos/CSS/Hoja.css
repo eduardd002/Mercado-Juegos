@@ -2074,8 +2074,6 @@ Estilo del campo para enviar el mensaje en chat del vendedor
     height: 26px;
     /*Anchor*/
     width: 300px;
-    /*Margen inferior*/
-    margin-bottom: 50px;
     /*Margen derecho*/
     margin-right: 50px;
     /*Margen izquierdo*/
@@ -2112,6 +2110,10 @@ Estilo del mensaje enviado
     float: left;
     /*Borde semi redondo*/
     border-radius: 40%;
+    /*Anchor*/
+    width: 130px;
+    /*Permitir que el texto se rompa*/
+    word-wrap: break-word;
 }
 
 /*
@@ -2120,7 +2122,18 @@ Estilo del mensaje enviado
 
 #mensajeenviado p{
     /*Color de letra*/
-    color: red;
+    color: rgb(43, 40, 40);
+    font-size: 15px;
+}
+
+/*
+Estilo del mensaje enviado
+*/
+
+#mensajeenviado h3{
+    /*Color de letra*/
+    color: rgb(186, 182, 182);
+    font-size: 10px;
 }
 
 /*
@@ -2146,6 +2159,10 @@ Estilo del mensaje recibido
     float: right;
     /*Borden semi-redondo*/
     border-radius: 40%;
+    /*Anchor*/
+    width: 130px;
+    /*Permitir que el texto se rompa*/
+    word-wrap: break-word;
 }
 
 /*
@@ -2154,7 +2171,20 @@ Estilo de contenido del mensaje
 
 #mensajerecibido p{
     /*Color de letra*/
-    color: #11608e;
+    color: rgb(43, 40, 40);
+    /*Tamaño de letra*/
+    font-size: 15px;
+}
+
+/*
+Estilo del mensaje enviado
+*/
+
+#mensajerecibido h3{
+    /*Color de letra*/
+    color: rgb(186, 182, 182);
+    /*Tamaño de letra*/
+    font-size: 10px;
 }
 
 /*
@@ -2174,6 +2204,8 @@ Estilo de la seccion de usuarios en el chat
     width: 450px;
     /*Borde*/
     border: 1px solid #333;
+    /*Margen inferior*/
+    margin-bottom: 50px;
 }
 
 /*
