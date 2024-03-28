@@ -57,6 +57,18 @@
             //Retornar el resultado
             return $resultado;
         }
+
+        public function obtenerComentariosDeVideojuego(){
+            $consulta = "SELECT c.contenido AS 'contenidoComentario', u.nombre AS 'nombreComentador', u.foto AS 'fotoComentador', c.fechaCreacion AS 'fechaCreacionComentario', c.horaCreacion AS 'horaCreacionComentario'
+            FROM Comentarios c
+            INNER JOIN Usuarios u ON u.id = c.idUsuario
+            INNER JOIN ComentarioVideojuego cv ON cv.idComentario = c.id
+            WHERE cv.idVideojuego = {$this -> getIdVideojuego()}";
+            //Ejecutar la consulta
+            $lista = $this -> db -> query($consulta);
+            //Retornar el resultado
+            return $lista;
+        }
     }
 
 ?>

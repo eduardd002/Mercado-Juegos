@@ -106,6 +106,56 @@
             //Retornar resultado
             return $resultado;
         }
+
+        /*
+        Funcion para obtener el nombre del usuario que creo el videojuego
+        */
+
+        public function obtenerUsuarioVendedor(){
+            //Construir la consulta
+            $consulta = "SELECT id AS 'idVendedor', nombre AS 'nombreVendedor' FROM usuarios WHERE id IN (SELECT idUsuario FROM usuariovideojuego WHERE idVideojuego = {$this -> getIdVideojuego()})";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Obtener el nombre
+            $nombre = $resultado -> fetch_object();
+            //Retornar el resultado
+            return $nombre;
+        }
+
+        public function obtenerVideojuegosCreadosPorUsuario(){
+            $consulta = "SELECT v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', c.nombre AS 'nombreConsola', v.stock AS 'stockVideojuego'
+            FROM Videojuegos v
+            INNER JOIN Consolas c ON c.id = v.idUso
+            INNER JOIN UsuarioVideojuego uv ON uv.idVideojuego = v.id
+            WHERE uv.idUsuario = {$this -> getIdUsuario()}";
+            //Ejecutar la consulta
+            $lista = $this -> db -> query($consulta);
+            //Retornar el resultado
+            return $lista;
+        }
+
+        public function obtenerInformacionUsuario(){
+            $consulta = "SELECT u.nombre AS 'nombreUsuario', u.fechaRegistro AS 'fechaUsuario', u.departamento AS 'departamentoUsuario', u.municipio AS 'municipioUsuario'
+            FROM UsuarioVideojuego uv
+            INNER JOIN Usuarios u ON u.id = uv.idUsuario
+            WHERE uv.idUsuario = {$this -> getIdUsuario()}";
+            //Ejecutar la consulta
+            $informacion = $this -> db -> query($consulta);
+            $resultado = $informacion -> fetch_object();
+            //Retornar el resultado
+            return $resultado;
+        }
+
+        public function obtenerInformacionUsuarioVideojuegos(){
+            $consulta = "SELECT v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.foto AS 'fotoVideojuego'
+            FROM UsuarioVideojuego uv
+            INNER JOIN Videojuegos v ON v.id = uv.idVideojuego
+            WHERE uv.idUsuario = {$this -> getIdUsuario()}";
+            //Ejecutar la consulta
+            $lista = $this -> db -> query($consulta);
+            //Retornar el resultado
+            return $lista;
+        }
     }
 
 ?>

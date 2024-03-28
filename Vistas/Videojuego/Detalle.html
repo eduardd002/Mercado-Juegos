@@ -37,8 +37,18 @@
     <div class="descripcionVideojuego">
         <h3 id="descripcionVideojuegoTitulo">Descripcion</h3>
         <p id="descripcionVideojuegoTexto"><?=$videojuegoEspecifico -> descripcion?></p>
-        <h3 id="vendedorVideojuego">Vendido por: <a href="<?=rutaInicio?><?=usuario?><?=perfil?>">Marshall Mathers</a></h3>
+        <h3 id="vendedorVideojuego">Vendido por: <a href="<?=rutaInicio?><?=usuario?><?=perfil?>&idVendedor=<?=$datosVendedor -> idVendedor?>"><?=$datosVendedor -> nombreVendedor?></a></h3>
     </div>
+    <?php while($comentarios = $listaComentarios -> fetch_object()) : ?>
+        <div id="comentario">
+            <div id="comentario">
+                <img src="Recursos/ImagenesUsuarios/<?=$comentarios -> fotoComentador?>" alt="Logo videojuego">
+                <h3><?=$comentarios -> nombreComentador?></h3>
+                <h4><?=$comentarios -> contenidoComentario?></h4>
+                <h5><?=$comentarios -> fechaCreacionComentario?> - <?=$comentarios -> horaCreacionComentario?></h5>
+            </div>
+        </div>
+    <?php endwhile; ?>
     <div id="bloquecomentario">
         <form action="<?=rutaInicio?><?=comentario?><?=guardarComentario?>&id=<?=$videojuegoEspecifico -> id?>" method="post">
             <h2>¿Quieres agregar un comentario?</h2>

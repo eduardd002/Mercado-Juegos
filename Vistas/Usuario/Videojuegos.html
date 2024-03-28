@@ -2,29 +2,20 @@
     <h1>Mis Videojuegos</h1>
     <table>
         <tr>
-            <th>Id</th>
             <th>Nombre</th>
             <th>Precio</th>
             <th>Consola</th>
             <th>Stock</th>
         </tr>
-        <tr>
-            <td>1</td>
-            <td>Call Of Duty Black Ops Cold War</td>
-            <td>120000</td>
-            <td>Xbox One</td>
-            <td>23</td>
-            <td><a href="<?=rutaInicio?><?=videojuego?><?=actualizarVideojuego?>" class="button button-actualizarVideojuego">Actualizar</a></td>
-            <td><a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-eliminarVideojuego">Eliminar</a></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Spider Man Miles Morales</td>
-            <td>120000</td>
-            <td>Play Station 4</td>
-            <td>3</td>
-            <td><a href="<?=rutaInicio?><?=videojuego?><?=actualizarVideojuego?>" class="button button-actualizarVideojuego">Actualizar</a></td>
-            <td><a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-eliminarVideojuego">Eliminar</a></td>
-        </tr>
+        <?php while($videojuegos = $listaVideojuegos -> fetch_object()) : ?>
+            <tr>
+                <td><?=$videojuegos -> nombreVideojuego?></td>
+                <td><?=$videojuegos -> precioVideojuego?></td>
+                <td><?=$videojuegos -> nombreConsola?></td>
+                <td><?=$videojuegos -> stockVideojuego?></td>
+                <td><a href="<?=rutaInicio?><?=videojuego?><?=actualizarVideojuego?>" class="button button-actualizarVideojuego">Actualizar</a></td>
+                <td><a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-eliminarVideojuego">Eliminar</a></td>
+            </tr>
+        <?php endwhile; ?>
     </table>
 </div>

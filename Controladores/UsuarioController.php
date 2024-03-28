@@ -9,6 +9,9 @@
     //Incluir el objeto de transaccion
     require_once 'Modelos/Transaccion.php';
 
+    //Incluir el objeto de videojuego
+    require_once 'Modelos/UsuarioVideojuego.php';
+
     class UsuarioController{
 
         /*
@@ -294,6 +297,18 @@
 
         public function perfil(){
 
+            $idVendedor = $_GET['idVendedor'];
+
+            //Instanciar el objeto
+            $usuarioVideojuego = new UsuarioVideojuego();
+            $usuarioVideojuego -> setIdUsuario($idVendedor);
+            $listaDatosUsuario = $usuarioVideojuego -> obtenerInformacionUsuario();
+
+            //Instanciar el objeto
+            $usuarioVideojuego2 = new UsuarioVideojuego();
+            $usuarioVideojuego2 -> setIdUsuario($idVendedor);
+            $listaDatosUsuarioVideojuego = $usuarioVideojuego -> obtenerInformacionUsuarioVideojuegos();
+
             //Incluir la vista
             require_once "Vistas/Usuario/Perfil.html";
         }
@@ -376,6 +391,10 @@
 
         public function videojuegos(){
 
+            //Instanciar el objeto
+            $usuarioVideojuego = new UsuarioVideojuego();
+            $usuarioVideojuego -> setIdUsuario($_SESSION['loginexitoso'] -> id);
+            $listaVideojuegos = $usuarioVideojuego -> obtenerVideojuegosCreadosPorUsuario();
             //Incluir la vista
             require_once "Vistas/Usuario/Videojuegos.html";
         }

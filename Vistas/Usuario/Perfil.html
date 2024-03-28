@@ -1,22 +1,19 @@
-<div id="loginYRegistro">
-    <h1>Perfil de Marshall Mathers</h1>
-    <h3>Fecha de union: 12/02/2024</h3>
-    <h3>Departamento: Quindio</h3>
-    <h3>Municipio: Armenia</h3>
-    <h3>Videojuegos publicados: (2)</h3>
-    <h3>Videojuegos vendidos: (1)</h3>
-</div>
-<div id="catalogo">
-    <div class="videojuego">
-        <img src="Recursos/ImagenesVideojuegos/nba2k.jpg" alt="Videojuego">
-        <h2>NBA 2K 2020</h2>
-        <p>$COP 340000</p>
-        <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-comprarCatalogo">Ver ahora</a>
+
+    <div id="loginYRegistro">
+        <h1>Perfil de <?=$listaDatosUsuario -> nombreUsuario?></h1>
+        <h3>Fecha de union: <?=$listaDatosUsuario -> fechaUsuario?></h3>
+        <h3>Departamento: <?=$listaDatosUsuario -> departamentoUsuario?></h3>
+        <h3>Municipio: <?=$listaDatosUsuario -> municipioUsuario?></h3>
+        <h3>Videojuegos publicados: (2)</h3>
+        <h3>Videojuegos vendidos: (1)</h3>
     </div>
-    <div class="videojuego">
-        <img src="Recursos/ImagenesVideojuegos/codmwII.jpg" alt="Videojuego">
-        <h2>Call Of Duty Modern Warfare 2</h2>
-        <p>$COP 540000</p>
-        <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-comprarCatalogo">Ver ahora</a>
+    <div id="catalogo">
+        <?php while($datosVideojuegos = $listaDatosUsuarioVideojuego -> fetch_object()) : ?>
+            <div class="videojuego">
+                <img src="Recursos/ImagenesVideojuegos/<?=$datosVideojuegos -> fotoVideojuego?>" alt="Videojuego">
+                <h2><?=$datosVideojuegos -> nombreVideojuego?></h2>
+                <p>$COP <?=$datosVideojuegos -> precioVideojuego?></p>
+                <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-comprarCatalogo">Ver ahora</a>
+            </div>
+        <?php endwhile; ?>
     </div>
-</div>

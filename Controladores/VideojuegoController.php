@@ -21,6 +21,8 @@
     //Incluir el objeto de usuariovideojuego
     require_once 'Modelos/UsuarioVideojuego.php';
 
+    require_once 'Modelos/ComentarioVideojuego.php';
+
     class VideojuegoController{
 
         /*
@@ -82,6 +84,16 @@
 
                     //Comprobar si el resultado ha llegado
                     if($videojuegoEspecifico){
+
+                        //Instanciar el objeto
+                        $usuarioVideojuego = new UsuarioVideojuego();
+                        $usuarioVideojuego -> setIdVideojuego($id);
+                        $datosVendedor = $usuarioVideojuego -> obtenerUsuarioVendedor();
+
+                        $comentarioVideojuego = new ComentarioVideojuego();
+                        $comentarioVideojuego -> setIdVideojuego($id);
+                        $listaComentarios = $comentarioVideojuego -> obtenerComentariosDeVideojuego();
+
                         //Incluir la vista
                         require_once 'Vistas/Videojuego/Detalle.html';
                     }else{
