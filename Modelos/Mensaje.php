@@ -94,9 +94,13 @@
 
         public function guardar(){
 
+            // Mensaje para encriptar
+            $mensaje = $this -> getContenido();
+            //Obtener mensaje encriptado
+            $mensajeEncriptado = Ayudas::encriptarContenido($mensaje);
             //Construir la consulta
             $consulta = "INSERT IGNORE INTO mensajes VALUES(NULL, {$this -> getIdRemitente()}, 
-            {$this -> getIdDestinatario()}, '{$this -> getContenido()}', '{$this -> getFechaEnvio()}', 
+            {$this -> getIdDestinatario()}, '{$mensajeEncriptado}', '{$this -> getFechaEnvio()}', 
             '{$this -> getHoraEnvio()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);

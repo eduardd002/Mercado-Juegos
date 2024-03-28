@@ -483,38 +483,6 @@ INSERT INTO usuariovideojuego VALUES (NULL, 3, 14);
 INSERT INTO usuariovideojuego VALUES (NULL, 1, 15);
 
 /*
-Crear comentarios
-*/
-
-INSERT INTO comentarios VALUES (NULL, 1, "Muy buen juego", "2024-03-24", "15:33:12");
-INSERT INTO comentarios VALUES (NULL, 2, "Casi no me gusto", "2024-03-24", "07:32:21");
-INSERT INTO comentarios VALUES (NULL, 3, "¿Esta disponible?", "2024-03-24", "12:51:31");
-INSERT INTO comentarios VALUES (NULL, 1, "¿Es bueno?", "2024-03-24", "02:13:13");
-INSERT INTO comentarios VALUES (NULL, 2, "¿Es malo?", "2024-03-24", "06:06:25");
-INSERT INTO comentarios VALUES (NULL, 3, "Excelente juego", "2024-03-24", "08:10:12");
-INSERT INTO comentarios VALUES (NULL, 1, "Muy regular", "2024-03-24", "10:40:34");
-INSERT INTO comentarios VALUES (NULL, 2, "Está pasable", "2024-03-24", "11:10:43");
-INSERT INTO comentarios VALUES (NULL, 3, "Me gustó solo un poco", "2024-03-24", "19:43:51");
-INSERT INTO comentarios VALUES (NULL, 1, "Casi no lo jugué", "2024-03-24", "20:26:15");
-INSERT INTO comentarios VALUES (NULL, 2, "Lo jugué un montón", "2024-03-24", "21:06:01");
-
-/*
-Crear comentarios de videojuegos
-*/
-
-INSERT INTO comentariovideojuego VALUES (NULL, 1, 1);
-INSERT INTO comentariovideojuego VALUES (NULL, 2, 2);
-INSERT INTO comentariovideojuego VALUES (NULL, 3, 3);
-INSERT INTO comentariovideojuego VALUES (NULL, 4, 1);
-INSERT INTO comentariovideojuego VALUES (NULL, 5, 2);
-INSERT INTO comentariovideojuego VALUES (NULL, 6, 3);
-INSERT INTO comentariovideojuego VALUES (NULL, 7, 1);
-INSERT INTO comentariovideojuego VALUES (NULL, 8, 2);
-INSERT INTO comentariovideojuego VALUES (NULL, 9, 3);
-INSERT INTO comentariovideojuego VALUES (NULL, 10, 1);
-INSERT INTO comentariovideojuego VALUES (NULL, 11, 2);
-
-/*
 Crear favoritos
 */
 

@@ -33,13 +33,13 @@
                                     <div id="mensajeenviado">
                                         <h3><?=$mensajes -> fechaEnvio?></h3>
                                         <h3><?=$mensajes -> horaEnvio?></h3>
-                                        <p><?=$mensajes -> contenido?></p>
+                                        <p><?=Ayudas::desencriptarContenido($mensajes -> contenido)?></p>
                                     </div>
                                 <?php else : ?>
                                     <div id="mensajerecibido">
                                         <h3><?=$mensajes -> fechaEnvio?></h3>
                                         <h3><?=$mensajes -> horaEnvio?></h3>
-                                        <p><?=$mensajes -> contenido?></p>
+                                        <p><?=Ayudas::desencriptarContenido($mensajes -> contenido)?></p>
                                     </div>
                                 <?php endif; ?>
                             <?php endif; ?>

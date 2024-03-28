@@ -9,6 +9,28 @@
     class Ayudas{
 
         /*
+        Funcion para encriptar datos
+        */
+
+        public static function encriptarContenido($contenido){
+
+            // Encriptar el mensaje
+            $mensajeEncriptado = openssl_encrypt($contenido, 'aes-256-cbc', claveEncriptacion, 0, '1234567890123456');
+            return $mensajeEncriptado;
+        }
+
+        /*
+        Funcion para desencriptar datos
+        */
+
+        public static function desencriptarContenido($contenido){
+
+            // Encriptar el mensaje
+            $mensajeDesencriptado = openssl_decrypt($contenido, 'aes-256-cbc', claveEncriptacion, 0, '1234567890123456');;
+            return $mensajeDesencriptado;
+        }
+
+        /*
         Funcion para generar archivo en formato PDF
         */
 

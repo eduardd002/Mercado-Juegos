@@ -55,6 +55,8 @@
     require_once 'Ayudas/Ayudas.php';
     //Incluir los archivo de configuracion de rutas
     require_once 'Configuracion/Rutas.php';
+    //Incluir la clave de encriptacion
+    Require_once 'Configuracion/Clave.php';
     //Incluir archivo de configuracion de base de datos
     require_once 'Configuracion/BaseDeDatos.php';
     //Incluir los archivos de las vistas

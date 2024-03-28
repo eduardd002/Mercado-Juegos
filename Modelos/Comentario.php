@@ -63,21 +63,25 @@
         */
 
         public function guardar(){
-            //Construir la consulta
-            $consulta = "INSERT IGNORE INTO comentarios VALUES(NULL, {$this -> getIdUsuario()}, 
-               '{$this -> getContenido()}', '{$this -> getFechaCreacion()}', 
+          // Mensaje para encriptar
+          $comentario = $this -> getContenido();
+          //Obtener mensaje encriptado
+          $comentarioEncriptado = Ayudas::encriptarContenido($comentario);
+          //Construir la consulta
+          $consulta = "INSERT IGNORE INTO comentarios VALUES(NULL, {$this -> getIdUsuario()}, 
+               '{$comentarioEncriptado}', '{$this -> getFechaCreacion()}', 
                '{$this -> getHoraCreacion()}')";
-            //Ejecutar la consulta
-            $registro = $this -> db -> query($consulta);
-            //Establecer una variable bandera
-            $resultado = false;
-            //Comporbar el registro fue exitoso y el total de columnas afectadas se altero
-            if($registro && mysqli_affected_rows($this -> db) > 0){
-                //Cambiar el estado de la variable bandera
-                $resultado = true;
-            }
-            //Retornar el resultado
-            return $resultado;
+          //Ejecutar la consulta
+          $registro = $this -> db -> query($consulta);
+          //Establecer una variable bandera
+          $resultado = false;
+          //Comporbar el registro fue exitoso y el total de columnas afectadas se altero
+          if($registro && mysqli_affected_rows($this -> db) > 0){
+               //Cambiar el estado de la variable bandera
+               $resultado = true;
+          }
+          //Retornar el resultado
+          return $resultado;
         }
 
      /*
