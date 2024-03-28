@@ -1,0 +1,22 @@
+<div id="carrito">
+    <h1>Mis Bloqueos</h1>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Motivo</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+        </tr>
+        <?php while($bloqueos = $listadoBloqueos -> fetch_object()) : ?>
+            <tr>
+                <td><?=$bloqueos -> nombreBloqueado?></td>
+                <td><?=$bloqueos -> apellidoBloqueado?></td>
+                <td><?=$bloqueos -> motivoBloqueo?></td>
+                <td><?=$bloqueos -> fechaBloqueo?></td>
+                <td><?=$bloqueos -> horaBloqueo?></td>
+                <td><a href="" class="button button-eliminarBloqueo">Desbloquear</a></td>
+            </tr>
+        <?php endwhile; ?>
+    </table>
+</div>

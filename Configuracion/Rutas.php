@@ -11,6 +11,7 @@
     define("perfil", "&action=perfil");
     define("miPerfil", "&action=miPerfil");
     define("compras", "&action=compras");
+    define("bloqueos", "&action=bloqueos");
     define("ventas", "&action=ventas");
     define("videojuegos", "&action=videojuegos");
     define("eliminarUsuario", "&action=eliminar");
@@ -100,4 +101,8 @@
 
     define("comentario", "/?controller=ComentarioController");
     define("guardarComentario", "&action=guardar");
+
+    define("bloqueo", "/?controller=BloqueoController");
+    define("bloquear", "&action=bloquear");
+    define("desbloquear", "&action=desbloquear");
 ?>

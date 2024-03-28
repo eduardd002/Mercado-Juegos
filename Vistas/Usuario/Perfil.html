@@ -6,6 +6,7 @@
         <h3>Municipio: <?=$listaDatosUsuario -> municipioUsuario?></h3>
         <h3>Videojuegos publicados: (2)</h3>
         <h3>Videojuegos vendidos: (1)</h3>
+        <a href="<?=rutaInicio?><?=bloqueo?><?=bloquear?>&aBloquear=<?=$listaDatosUsuario -> idUsuario?>">Bloquear</a>
     </div>
     <div id="catalogo">
         <?php while($datosVideojuegos = $listaDatosUsuarioVideojuego -> fetch_object()) : ?>

@@ -34,11 +34,6 @@
             //Instanciar el objeto
             $usuarioVideojuego = new UsuarioVideojuego();
 
-            if(Ayudas::comprobarInicioDeSesionUsuario()){
-                $usuarioVideojuego = new UsuarioVideojuego();
-                $usuarioVideojuego -> setIdUsuario($_SESSION['loginexitoso'] -> id);
-            }
-
             //Traer el listado de algunos videojuegos
             $listadoAlgunos = $usuarioVideojuego -> listarAlgunos();
 

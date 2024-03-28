@@ -141,7 +141,11 @@
 
         public function traerUno(){
             //Construir la consulta
-            $consulta = "SELECT * FROM videojuegos WHERE id = {$this -> getId()}";
+            $consulta = "SELECT v.*, v.id AS 'idVideojuego', u.id AS 'idVendedor'
+                FROM UsuarioVideojuego uv
+                INNER JOIN Videojuegos v ON v.id = uv.idVideojuego 
+                INNER JOIN Usuarios u ON u.id = uv.idUsuario 
+                WHERE idVideojuego = {$this -> getId()}";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Obtener el resultado del objeto

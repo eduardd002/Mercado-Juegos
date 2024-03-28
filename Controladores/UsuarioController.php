@@ -9,8 +9,11 @@
     //Incluir el objeto de transaccion
     require_once 'Modelos/Transaccion.php';
 
-    //Incluir el objeto de videojuego
+    
     require_once 'Modelos/UsuarioVideojuego.php';
+
+    
+    require_once 'Modelos/UsuarioBloqueo.php';
 
     class UsuarioController{
 
@@ -366,6 +369,19 @@
 
             //Incluir la vista
             require_once "Vistas/Usuario/Compras.html";
+        }
+
+        public function bloqueos(){
+
+            //Instanciar el objeto
+            $usuarioBloqueo = new UsuarioBloqueo();
+            //Construir el objeto
+            $usuarioBloqueo -> setIdBloqueador($_SESSION['loginexitoso'] -> id);
+            //Listar todos los usuarios desde la base de datos
+            $listadoBloqueos = $usuarioBloqueo -> obtenerBloqueosPorUsuario();
+
+            //Incluir la vista
+            require_once "Vistas/Usuario/Bloqueos.html";
         }
 
         /*

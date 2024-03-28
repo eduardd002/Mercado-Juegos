@@ -351,9 +351,39 @@ CREATE TABLE mensajes (
     fechaEnvio    DATE NOT NULL,
     horaEnvio   TIME NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT mensaje_id PRIMARY KEY ( id ),
     CONSTRAINT mensaje_remitente FOREIGN KEY ( idRemitente ) REFERENCES usuarios ( id ),
     CONSTRAINT mensaje_destinatario FOREIGN KEY ( idDestinatario ) REFERENCES usuarios ( id ),
     CONSTRAINT mensaje_chat FOREIGN KEY ( idChat ) REFERENCES chats ( id )
+);
+
+/*
+Crear tabla de usuariosbloqueados
+*/
+
+CREATE TABLE usuariobloqueo (
+    id   INTEGER auto_increment NOT NULL,
+    idBloqueador  INTEGER NOT NULL,
+    idBloqueado  INTEGER NOT NULL,
+    idBloqueo  INTEGER NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT usuariobloqueo_id PRIMARY KEY ( id ),
+    CONSTRAINT usuariobloqueo_bloqueador FOREIGN KEY ( idBloqueador ) REFERENCES usuarios ( id ),
+    CONSTRAINT usuariobloqueo_bloqueado FOREIGN KEY ( idBloqueado ) REFERENCES usuarios ( id ),
+    CONSTRAINT usuariobloqueo_bloqueo FOREIGN KEY ( idBloqueo ) REFERENCES bloqueos ( id )
+);
+
+/*
+Crear tabla de bloqueos
+*/
+
+CREATE TABLE bloqueos (
+    id   INTEGER auto_increment NOT NULL,
+    motivo  TEXT NOT NULL,
+    fechaBloqueo    DATE NOT NULL,
+    horaBloqueo   TIME NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT bloqueos_id PRIMARY KEY ( id )
 );
 
 /*

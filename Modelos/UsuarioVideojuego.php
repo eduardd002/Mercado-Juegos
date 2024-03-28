@@ -79,11 +79,7 @@
 
         public function listarTodos(){
             //Construir la consulta
-            $consulta = "SELECT * FROM videojuegos";
-            if($this -> getIdUsuario() != null){
-                $consulta .= " WHERE id NOT IN (SELECT idVideojuego FROM usuariovideojuego WHERE idUsuario = {$this -> getIdUsuario()})"; 
-            }
-            $consulta .= " ORDER BY id DESC";
+            $consulta = "SELECT * FROM videojuegos ORDER BY id DESC";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Retornar resultado
@@ -96,11 +92,7 @@
 
         public function listarAlgunos(){
             //Construir la consulta
-            $consulta = "SELECT * FROM videojuegos";
-            if($this -> getIdUsuario() != null){
-                $consulta .= " WHERE id NOT IN (SELECT idVideojuego FROM usuariovideojuego WHERE idUsuario = {$this -> getIdUsuario()})"; 
-            }
-            $consulta .= " ORDER BY RAND() LIMIT 6";
+            $consulta = "SELECT * FROM videojuegos ORDER BY RAND() LIMIT 6";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Retornar resultado
@@ -135,7 +127,7 @@
         }
 
         public function obtenerInformacionUsuario(){
-            $consulta = "SELECT u.nombre AS 'nombreUsuario', u.fechaRegistro AS 'fechaUsuario', u.departamento AS 'departamentoUsuario', u.municipio AS 'municipioUsuario'
+            $consulta = "SELECT u.id AS 'idUsuario', u.nombre AS 'nombreUsuario', u.fechaRegistro AS 'fechaUsuario', u.departamento AS 'departamentoUsuario', u.municipio AS 'municipioUsuario'
             FROM UsuarioVideojuego uv
             INNER JOIN Usuarios u ON u.id = uv.idUsuario
             WHERE uv.idUsuario = {$this -> getIdUsuario()}";
