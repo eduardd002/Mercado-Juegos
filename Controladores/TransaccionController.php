@@ -42,7 +42,7 @@
             //Instanciar el objeto
             $tarjeta = new Tarjeta();
             //Listar todas las categorias desde la base de datos
-            $listadoTarjeas = $tarjeta -> listar();
+            $listadoTarjetas = $tarjeta -> listar();
 
             //Comprobar si el dato está llegando
             if(isset($_GET)){
@@ -152,12 +152,12 @@
         Funcion para guardar la transaccion videojuego en la base de datos
         */
 
-        public function guardarTransaccionVideojuego($id){
+        public function guardarTransaccionVideojuego($id, $idVideojuego){
 
             //Instanciar el objeto
             $transaccionVideojuego = new TransaccionVideojuego();
             $transaccionVideojuego -> setIdTransaccion($id);
-            $transaccionVideojuego -> setIdVideojuego(1);
+            $transaccionVideojuego -> setIdVideojuego($idVideojuego);
             $transaccionVideojuego -> setUnidades(1);
             $transaccionVideojuego -> setNombreVideojuego(1);
             $transaccionVideojuego -> setPrecioVideojuego(459999);
@@ -221,13 +221,13 @@
         Funcion para guardar el usuario chat en la base de datos
         */
 
-        public function guardarUsuarioChat(){
+        public function guardarUsuarioChat($destinatario){
 
             //Instanciar el primer objeto
             $usuarioChat = new UsuarioChat;
             //Crear el primer objeto
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
-            $usuarioChat -> setIdDestinatario(2);
+            $usuarioChat -> setIdDestinatario($destinatario);
             $usuarioChat -> setIdChat($this -> obtenerUltimoChat());
             //Guardar en la base de datos el primer objeto
             $guardado = $usuarioChat -> guardar();
@@ -250,7 +250,7 @@
                 $codigoPostal = isset($_POST['codigoPostal']) ? $_POST['codigoPostal'] : false;
                 $barrio = isset($_POST['barrio']) ? $_POST['barrio'] : false;
                 $direccion = isset($_POST['direccion']) ? $_POST['direccion'] : false;
-                $idTarjeta = 4;
+                $idTarjeta = isset($_POST['idTarjeta']) ? $_POST['idTarjeta'] : false;
                 $numeroTarjeta = isset($_POST['numeroTarjeta']) ? $_POST['numeroTarjeta'] : false;
                 $titular = isset($_POST['titular']) ? $_POST['titular'] : false;
                 $codigoDeSeguridad = isset($_POST['codigoSeguridad']) ? $_POST['codigoSeguridad'] : false;
@@ -277,7 +277,7 @@
                         $idTransaccion = $this -> obtenerUltimaTransaccion();
 
                         //Obtener el resultado
-                        $guardadoTransaccionVideojuego = $this -> guardarTransaccionVideojuego($idTransaccion);
+                        $guardadoTransaccionVideojuego = $this -> guardarTransaccionVideojuego($idTransaccion, $idVideojuego);
 
                         //Comprobar si la transaccion videojueo se guardo con exito
                         if($guardadoTransaccionVideojuego){
@@ -289,7 +289,7 @@
                             if($guardadoChat){
 
                                 //Guardar usuario chat
-                                $guardadoUsuarioChat = $this -> guardarUsuarioChat();
+                                $guardadoUsuarioChat = $this -> guardarUsuarioChat($this -> traerDuenioDeVideojuego($idVideojuego));
 
                                 //Comprobar si el usuario chat ha sido guardado con exito
                                 if($guardadoUsuarioChat){

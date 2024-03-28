@@ -89,7 +89,8 @@
 
         public function obtenerIdentificadorPropioDeChat(){
             //Construir la consulta
-            $consulta = "SELECT idChat from usuariochat WHERE idRemitente = {$this -> getIdRemitente()} AND idDestinatario = {$this -> getIdDestinatario()}"; 
+            $consulta = "SELECT idChat from usuariochat WHERE idRemitente = {$this -> getIdRemitente()} AND idDestinatario = {$this -> getIdDestinatario()} OR
+                idRemitente = {$this -> getIdDestinatario()} AND idDestinatario = {$this -> getIdRemitente()}"; 
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             $idenficador = $resultado -> fetch_object();
