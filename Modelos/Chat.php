@@ -33,7 +33,7 @@
 
         public function guardar(){
             //Construir la consulta
-            $consulta = "INSERT INTO chats VALUES (NULL, '{$this -> fechaCreacion}')";
+            $consulta = "INSERT IGNORE INTO chats VALUES (NULL, '{$this -> fechaCreacion}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera

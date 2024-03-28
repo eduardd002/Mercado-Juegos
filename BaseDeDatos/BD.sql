@@ -331,6 +331,7 @@ CREATE TABLE usuariochat (
     idDestinatario  INTEGER NOT NULL,
     idChat  INTEGER NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT uq_rd UNIQUE(idRemitente, idDestinatario),
     CONSTRAINT usuariomensajechat_id PRIMARY KEY ( id ),
     CONSTRAINT usuariomensajechat_remitente FOREIGN KEY ( idRemitente ) REFERENCES usuarios ( id ),
     CONSTRAINT usuariomensajechat_destinatario FOREIGN KEY ( idDestinatario ) REFERENCES usuarios ( id ),
@@ -345,12 +346,14 @@ CREATE TABLE mensajes (
     id   INTEGER auto_increment NOT NULL,
     idRemitente  INTEGER NOT NULL,
     idDestinatario  INTEGER NOT NULL,
+    idChat  INTEGER NOT NULL,
     contenido   TEXT NOT NULL,
     fechaEnvio    DATE NOT NULL,
     horaEnvio   TIME NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT mensaje_remitente FOREIGN KEY ( idRemitente ) REFERENCES usuarios ( id ),
-    CONSTRAINT mensaje_destinatario FOREIGN KEY ( idDestinatario ) REFERENCES usuarios ( id )
+    CONSTRAINT mensaje_destinatario FOREIGN KEY ( idDestinatario ) REFERENCES usuarios ( id ),
+    CONSTRAINT mensaje_chat FOREIGN KEY ( idChat ) REFERENCES chats ( id )
 );
 
 /*

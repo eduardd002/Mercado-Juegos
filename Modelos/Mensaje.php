@@ -5,6 +5,7 @@
         private $id;
         private $idRemitente;
         private $idDestinatario;
+        private $idChat;
         private $contenido;
         private $fechaEnvio;
         private $horaEnvio;
@@ -90,6 +91,26 @@
             return $this;
         }
 
+                /**
+         * Get the value of idChat
+         */ 
+        public function getIdChat()
+        {
+                return $this->idChat;
+        }
+
+        /**
+         * Set the value of idChat
+         *
+         * @return  self
+         */ 
+        public function setIdChat($idChat)
+        {
+                $this->idChat = $idChat;
+
+                return $this;
+        }
+
         /*Funcion para guardar un mensaje en la base de datos*/
 
         public function guardar(){
@@ -100,7 +121,7 @@
             $mensajeEncriptado = Ayudas::encriptarContenido($mensaje);
             //Construir la consulta
             $consulta = "INSERT IGNORE INTO mensajes VALUES(NULL, {$this -> getIdRemitente()}, 
-            {$this -> getIdDestinatario()}, '{$mensajeEncriptado}', '{$this -> getFechaEnvio()}', 
+            {$this -> getIdDestinatario()}, {$this -> getIdChat()}, '{$mensajeEncriptado}', '{$this -> getFechaEnvio()}', 
             '{$this -> getHoraEnvio()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);

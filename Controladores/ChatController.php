@@ -67,6 +67,17 @@
             require_once "Vistas/Chat/Chat.html";
         }
 
+        public function obtenerIdChat(){
+            
+            //Instanciar objeto
+            $usuarioChat = new UsuarioChat();
+            //Crear objeto
+            $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
+            $usuarioChat -> setIdDestinatario($_SESSION['mensajito']);
+            $identificador = $usuarioChat -> obtenerIdentificadorPropioDeChat();
+            return $identificador;
+        }
+
         /*
         Funcion para guardar un mensaje en la base de datos
         */
@@ -78,6 +89,7 @@
             //Contruir objeto
             $mensaje -> setIdRemitente($_SESSION['loginexitoso'] -> id);
             $mensaje -> setIdDestinatario($_SESSION['mensajito']);
+            $mensaje -> setIdChat($this -> obtenerIdChat());
             $mensaje -> setContenido($_POST['mensaje']);
             $mensaje -> setFechaEnvio(date('Y-m-d'));
             $mensaje -> setHoraEnvio(date('H:i:s'));

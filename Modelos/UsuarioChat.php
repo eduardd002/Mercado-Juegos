@@ -54,7 +54,7 @@
 
         public function guardar(){
             //Construir la consulta
-            $consulta = "INSERT INTO usuariochat VALUES (NULL, {$this -> getIdRemitente()}, 
+            $consulta = "INSERT IGNORE INTO usuariochat VALUES (NULL, {$this -> getIdRemitente()}, 
                 {$this -> getIdDestinatario()}, {$this -> getIdChat()})";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
@@ -74,6 +74,7 @@
         */
 
         public function obtenerChats(){
+
             //Construir la consulta
             $consulta = "SELECT id AS 'idUsuarioChat', nombre AS 'nombreChat', foto AS 'fotoChat', apellido AS 'apellidoChat' 
             FROM usuarios WHERE id IN 
@@ -84,7 +85,15 @@
             $resultado = $this -> db -> query($consulta);
             //Retornar el resultado
             return $resultado;
-            
+        }
+
+        public function obtenerIdentificadorPropioDeChat(){
+            //Construir la consulta
+            $consulta = "SELECT idChat from usuariochat WHERE idRemitente = {$this -> getIdRemitente()} AND idDestinatario = {$this -> getIdDestinatario()}"; 
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            $idenficador = $resultado -> fetch_object();
+            return $idenficador -> idChat;
         }
     }
 
