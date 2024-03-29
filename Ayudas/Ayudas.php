@@ -396,5 +396,37 @@
                 header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=login");
             }
         }
+
+        /*
+        Funcion para traer un usuario en concreto
+        */
+
+        public static function obtenerUsuarioEnConcreto($id){
+
+            //Instanciar objeto
+            $usuario = new Usuario();
+            //Construir objeto
+            $usuario -> setId($id);
+            //Obtener resultado
+            $usuarioObtenido = $usuario -> obtenerUno();
+            //Retornar resultado
+            return $usuarioObtenido;
+        }
+
+        /*
+        Funcion para traer un videojuego en concreto
+        */
+
+        public static function obtenerVideojuegoEnConcreto($id){
+
+            //Instanciar objeto
+            $videojuego = new Videojuego();
+            //Construir objeto
+            $videojuego -> setId($id);
+            //Obtener resultado
+            $videojuegoObtenido = $videojuego -> traerUno();
+            //Retornar resultado
+            return $videojuegoObtenido;
+        }
     }
 ?>

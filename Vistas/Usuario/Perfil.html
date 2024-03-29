@@ -1,3 +1,9 @@
+<?php if(isset($_SESSION['guardarbloqueoerror'])) : ?>
+    <div class="alerta alerta-error">
+        <?=$_SESSION['guardarbloqueoerror']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('guardarbloqueoerror'); ?>
 
     <div id="loginYRegistro">
         <h1>Perfil de <?=$listaDatosUsuario['usuario']['nombreUsuario']?></h1>
@@ -6,7 +12,9 @@
         <h3>Municipio: <?=$listaDatosUsuario['usuario']['municipioUsuario']?></h3>
         <h3>Videojuegos publicados: (2)</h3>
         <h3>Videojuegos vendidos: (1)</h3>
-        <a href="<?=rutaInicio?><?=bloqueo?><?=bloquear?>&aBloquear=1">Bloquear</a>
+        <div id="bloquearUsuario">
+            <a class="button button-eliminarBloqueo" href="<?=rutaInicio?><?=bloqueo?><?=bloquear?>&aBloquear=1">Bloquear</a>
+        </div>
     </div>
     <div id="catalogo">
         <?php foreach ($listaDatosUsuario['usuario']['videojuegos'] as $videojuego) : ?>

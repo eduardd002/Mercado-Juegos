@@ -29,20 +29,22 @@
     <h3 id="consolaVideojuego">Consola: 1</h3>
     <h3 id="categoriaVideojuego">Categoria: Disparos</h3>
     <h3 id="unidadesDisponiblesVideojuego">Unidades disponibles: <?=$videojuegoEspecifico -> stock?></h3>
-    <?php if($videojuegoEspecifico -> idVendedor == $_SESSION['loginexitoso'] -> id) : ?>
-        <a href="">Actualizar</a>
-        <a href="">Eliminar</a>
+    <?php if(isset($_SESSION['loginexitoso']) && $videojuegoEspecifico -> idVendedor == $_SESSION['loginexitoso'] -> id) : ?>
+        <div id="botonesDetalle">
+            <a class="button button-actualizarVideojuegoDesdeDetalle" href="">Actualizar</a>
+            <a class="button button-eliminarVideojuegoDesdeDetalle" href="">Eliminar</a>
+        </div>
     <?php else : ?>
         <form action="<?=rutaInicio?><?=transaccion?><?=direccionYPago?>&idVideojuego=<?=$videojuegoEspecifico -> id?>" method="post">
             <label for="cantidadAComprar">Unidades a comprar</label>
             <input type="number" name="cantidadAComprar" required>
-            <input type="submit" value="Comprar">
+            <input type="submit" value="Comprar Ahora">
         </form>
     <?php endif; ?>
     <div class="descripcionVideojuego">
         <h3 id="descripcionVideojuegoTitulo">Descripcion</h3>
         <p id="descripcionVideojuegoTexto"><?=$videojuegoEspecifico -> descripcion?></p>
-        <?php if($videojuegoEspecifico -> idVendedor != $_SESSION['loginexitoso'] -> id) : ?>
+        <?php if(isset($_SESSION['loginexitoso']) && $videojuegoEspecifico -> idVendedor != $_SESSION['loginexitoso'] -> id) : ?>
             <h3 id="vendedorVideojuego">Vendido por: <a href="<?=rutaInicio?><?=usuario?><?=perfil?>&idVendedor=<?=$datosVendedor -> idVendedor?>"><?=$datosVendedor -> nombreVendedor?></a></h3>
         <?php endif; ?>
     </div>

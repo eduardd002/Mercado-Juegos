@@ -1,3 +1,10 @@
+<?php if(isset($_SESSION['verCompraError'])) : ?>
+    <div class="alerta alerta-error">
+        <?=$_SESSION['verCompraError']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('verCompraError'); ?>
+
 <div id="comprasYVentas">
     <h1>Mis Compras</h1>
     <table>

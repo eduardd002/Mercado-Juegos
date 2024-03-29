@@ -601,9 +601,9 @@ Estilos del pie de pagina
     clear: both;
     /*Texto alineado al centro*/
     text-align: center;
-    /*Margen interior izquierdo*/
+    /*Margen interior superior*/
     padding-top: 10px;
-    /*Margen interior izquierdo*/
+    /*Margen interior inferior*/
     padding-bottom: 10px;
     /*Color del texto*/
     color: white;
@@ -716,6 +716,10 @@ Estilos del boton ver detalle
     border: 1px solid rgb(91, 22, 4);
 }
 
+/*
+Estilos del boton para desbloquear a un usuario
+*/
+
 .button-eliminarBloqueo{
     /*Sin flotado*/
     float: unset;
@@ -809,6 +813,7 @@ Estilos de la imagen del registro de usuario
 */
 
 #loginYRegistro img{
+    /*Borde redondo*/
     border-radius: 50%;
     /*Altura*/
     height: 240px;
@@ -1114,11 +1119,94 @@ Estilo del contenido de la descripcion del videojuego del detalle del videojuego
 Estilo de los campos de texto del detalle del videojuego
 */
 
-.detalleVideojuego input{
+.detalleVideojuego input [type='text']{
     /*Margen superior*/
     margin-top: 10px;
     /*Margen inferior*/
     margin-bottom: 47px;
+}
+
+/*
+Estilo de los botones de actualizar y eliminar videojuego en detalle
+*/
+
+#botonesDetalle{
+    /*Flotar hacia la izquierda*/
+    float: left;
+    /*Margen inferior*/
+    margin-bottom: 100px;
+}
+
+/*
+Estilo del boton para realizar la compra
+*/
+
+.detalleVideojuego input[type='submit']{
+    /*Margen superior*/
+    margin-top: 40px;
+    /*Margen inferior*/
+    margin-bottom: 47px;
+    /*Margen interior superior*/
+    padding-top: 7px;
+    /*Margen interior izquierdo*/
+    padding-left: 13px;
+    /*Margen interior derecho*/
+    padding-right: 13px;
+    /*Margen interior inferior*/
+    padding-bottom: 7px;
+}
+
+/*
+Estilo del boton para actualizar el videojuego desde el detalle
+*/
+
+.button-actualizarVideojuegoDesdeDetalle{
+    /*Flotar hacia la izquieda*/
+    float: left;
+    /*Anchor*/
+    width: 90px !important;
+    /*Altura*/
+    height: 20px !important;
+    /*Margen derecho*/
+    margin-right: 50px;
+    /*Color de fondo*/
+    background: orange;
+    /*Margen superior*/
+    margin-top: 10px;
+    /*Margen inferior*/
+    margin-bottom: 50px;
+}
+
+/*
+Estilo del boton para eliminar el videojuego desde el detalle
+*/
+
+.button-eliminarVideojuegoDesdeDetalle{
+    /*Limpiar flotados*/
+    clear: both;
+    /*Dar comportamiento de bloque*/
+    display: block;
+    /*Flotar hacia la izquierda*/
+    float: left;
+    /*Anchor*/
+    width: 90px !important;
+    /*Altura*/
+    height: 20px !important;
+    /*Color de fondo*/
+    background: red;
+}
+
+/*
+Estilo del enlace de los botones de actualizar y eliminar videojuego desde detalle
+*/
+
+#botonesDetalle a{
+    /*Color de letra*/
+    color: white;
+    /*Sin decoracion de texto*/
+    text-decoration: none;
+    /*Texto alineado al centro*/
+    text-align: center;
 }
 
 /*
@@ -1129,7 +1217,7 @@ Estilo del vendedor del videojuego del detalle del videojuego
     /*Margen superior*/
     margin-top: 50px;
     /*Margen inferior*/
-    margin-bottom: 80px;
+    margin-bottom: 50px;
 }
 
 /*
@@ -1139,6 +1227,10 @@ Estilo de la descripcion del videojuego
 .descripcionVideojuego{
     /*Margen izquierdo*/
     margin-left: 75px;
+    /*Limpiar flotados*/
+    clear: both;
+    /*Dar comportamiento de bloque*/
+    display: block;
 }
 
 /*
@@ -1174,10 +1266,13 @@ Estilo de los elementos de la tabla
 td{
     /*Border superior*/
     border-top: 1px solid #CCC;
-    /*Margen interior*/
+    /*Margen interior superior*/
     padding-top: 20px;
+    /*Margen interior izquierdo*/
     padding-left: 40px;
+    /*Margen interior inferior*/
     padding-bottom: 20px;
+    /*Margen interior derecho*/
     padding-right: 40px;
 }
 
@@ -1993,6 +2088,7 @@ Estilo del boton de eliminar cuenta propio de perfil de usuario
 */
 
 .eliminarCuentaMiPerfil{
+    /*Tamaño de letra*/
     font-size: 13px;
     /*Margen centrado*/
     margin: 0px auto;
@@ -2143,6 +2239,7 @@ Estilo del mensaje enviado
 #mensajeenviado p{
     /*Color de letra*/
     color: rgb(43, 40, 40);
+    /*Tamaño de letra*/
     font-size: 15px;
 }
 
@@ -2153,6 +2250,7 @@ Estilo del mensaje enviado
 #mensajeenviado h3{
     /*Color de letra*/
     color: rgb(186, 182, 182);
+    /*Tamaño de letra*/
     font-size: 10px;
 }
 
@@ -2427,7 +2525,9 @@ Estilo de la seccion de comentarios en el detalle del videojuego
     /*Flotar hacia la izquierda*/
     float: left;
     /*Margen inferior*/
-    margin-bottom: 50px;
+    margin-bottom: 20px;
+    /*Margen superior*/
+    margin-top: 25px;
     /*Anchor*/
     width: 1000px;
 }
@@ -2578,4 +2678,13 @@ Estilo de la imagen de agregar a favorito en detalle
     height: 26px;
     /*Margen exterior*/
     margin: 5px !important;
+}
+
+/*
+Estilo del bloque de boton para bloquear el usuario
+*/
+
+#bloquearUsuario{
+    /*Margen izquierdo*/
+    margin-left: 50px;
 }

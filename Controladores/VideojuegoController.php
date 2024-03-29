@@ -21,6 +21,7 @@
     //Incluir el objeto de usuariovideojuego
     require_once 'Modelos/UsuarioVideojuego.php';
 
+    //Incluir el objeto de comentariovideojuego
     require_once 'Modelos/ComentarioVideojuego.php';
 
     class VideojuegoController{
@@ -33,13 +34,10 @@
 
             //Instanciar el objeto
             $usuarioVideojuego = new UsuarioVideojuego();
-
             //Traer el listado de algunos videojuegos
             $listadoAlgunos = $usuarioVideojuego -> listarAlgunos();
-
             //Traer el listado de todos los videojuegos
             $listadoTodos = $usuarioVideojuego -> listarTodos();
-            
             //Incluir la vista
             require_once 'Vistas/Layout/Catalogo.html';
         }
@@ -58,6 +56,36 @@
             $videojuegoEspecifico = $videojuego -> traerUno();
             //Retornar resultado
             return $videojuegoEspecifico;
+        }
+
+        /*
+        Funcion para obtener el usuario vendedor del videojuego
+        */
+
+        public function obtenerUsuarioVendedor($id){
+            //Instanciar el objeto
+            $usuarioVideojuego = new UsuarioVideojuego();
+            //Construir el objeto
+            $usuarioVideojuego -> setIdVideojuego($id);
+            //Traer el resultado
+            $datosVendedor = $usuarioVideojuego -> obtenerUsuarioVendedor();
+            //Retornar el resultado
+            return $datosVendedor;
+        }
+
+        /*
+        Funcion para obtener los comentarios referentes a una publicacion
+        */
+
+        public function obtenerComentariosDeVideojuego($id){
+            //Instanciar el objeto
+            $comentarioVideojuego = new ComentarioVideojuego();
+            //Construir el objeto
+            $comentarioVideojuego -> setIdVideojuego($id);
+            //Traer el resultado
+            $listaComentarios = $comentarioVideojuego -> obtenerComentariosDeVideojuego();
+            //Retornar el resultado
+            return $listaComentarios;
         }
 
         /*
@@ -80,17 +108,13 @@
                     //Comprobar si el resultado ha llegado
                     if($videojuegoEspecifico){
 
-                        //Instanciar el objeto
-                        $usuarioVideojuego = new UsuarioVideojuego();
-                        $usuarioVideojuego -> setIdVideojuego($id);
-                        $datosVendedor = $usuarioVideojuego -> obtenerUsuarioVendedor();
-
-                        $comentarioVideojuego = new ComentarioVideojuego();
-                        $comentarioVideojuego -> setIdVideojuego($id);
-                        $listaComentarios = $comentarioVideojuego -> obtenerComentariosDeVideojuego();
-
+                        //Obtener usuario vendedor del videojuego
+                        $datosVendedor = $this -> obtenerUsuarioVendedor($id);
+                        //Obtener lista de comentarios referentes a una publicacion
+                        $listaComentarios = $this -> obtenerComentariosDeVideojuego($id);
                         //Incluir la vista
                         require_once 'Vistas/Videojuego/Detalle.html';
+
                     }else{
                         //Redirigir al catalogo
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
@@ -251,7 +275,7 @@
             $usuarioId = isset($_SESSION['loginexitoso']) ? $_SESSION['loginexitoso'] -> id : false;
 
             //Comprobar si los datos están llegando
-            if(isset($_POST)){
+            if(isset($_POST) && $usuarioId){
 
                 //Comprobar si cada dato existe
                 $nombre = isset($_POST['nombrevid']) ? $_POST['nombrevid'] : false;
@@ -332,13 +356,8 @@
 
             //Instaciar el objeto
             $usuarioVideojuego = new UsuarioVideojuego();
-            if(Ayudas::comprobarInicioDeSesionUsuario()){
-                $usuarioVideojuego = new UsuarioVideojuego();
-                $usuarioVideojuego -> setIdUsuario($_SESSION['loginexitoso'] -> id);
-            }
             //Traer los datos de la consulta
             $listadoTodos = $usuarioVideojuego -> listarTodos();
-
             //Incluir la vista
             require_once 'Vistas/Videojuego/Todos.html';
         }

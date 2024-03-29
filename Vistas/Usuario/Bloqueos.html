@@ -1,3 +1,10 @@
+<?php if(isset($_SESSION['guardarbloqueoacierto'])) : ?>
+    <div class="alerta alerta-acierto">
+        <?=$_SESSION['guardarbloqueoacierto']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('guardarbloqueoacierto'); ?>
+
 <div id="carrito">
     <h1>Mis Bloqueos</h1>
     <table>

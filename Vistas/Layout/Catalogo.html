@@ -61,6 +61,20 @@
 <?php endif; ?>
 <?php Ayudas::eliminarSesion('videojuegofavorito'); ?>
 
+<?php if(isset($_SESSION['guardarbloqueoerror'])) : ?>
+    <div class="alerta alerta-error">
+        <?=$_SESSION['guardarbloqueoerror']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('guardarbloqueoerror'); ?>
+
+<?php if(isset($_SESSION['verCompraError'])) : ?>
+    <div class="alerta alerta-error">
+        <?=$_SESSION['verCompraError']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('verCompraError'); ?>
+
 <div id="contenidoCentral">
     <?php if(mysqli_num_rows($listadoTodos) == 0) : ?>
         <h1>No Hay Ningun Videojuego</h1>

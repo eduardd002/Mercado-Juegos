@@ -3,51 +3,12 @@
     //OB_START(); para
     ob_start();
 
-    // Configurar el tiempo de vida de la sesión en segundos, en este caso 1800 segundos(1/2 hora) para que la sesion
-    // permanezca por ese tiempo incluso si se cierra una instancia del navegador, todas las instancias del navegador 
-    //o se apaga el pc
-
-    $tiempo_vida = 1800;
-
-    // Configurar el tiempo de vida de la cookie de sesión
-    session_set_cookie_params($tiempo_vida);
-
-    // Establecer la duración máxima de la sesión
-    ini_set('session.gc_maxlifetime', $tiempo_vida);
-
-    // Definir el dominio para la cookie de sesión
-    $dominio = $_SERVER['HTTP_HOST'];
-
-    // Establecer la bandera 'secure' para la cookie de sesión como en este caso que se esta utilizando HTTPS
-    $secure = isset($_SERVER['HTTPS']);
-
-    // Establecer la bandera 'httponly' para la cookie de sesión
-    $httpOnly = true;
-
-    // Configura la cookie de sesión con cada parametro requerido
-    session_set_cookie_params($tiempo_vida, '/', $dominio, $secure, $httpOnly);
-
     // Activar la sesión
     session_start();
 
     //session_destroy();
 
     //var_dump($_SESSION);
-
-    // Verificar si la sesión está activa
-    if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $tiempo_vida)) {
-        // Si ha pasado más tiempo del tiempo de vida, destruir la sesión y mostrar el mensaje
-        session_unset();
-        session_destroy();
-        session_start();
-        $_SESSION['caducidad'] = 'La sesion ha expirado';
-        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
-    } else {
-        // Si no ha pasado más tiempo, actualizar la marca de tiempo de última actividad
-        $_SESSION['last_activity'] = time();
-    }
-
-    //session_destroy();
 
     //Incluir los archivo de autocarga de controladores
     require_once 'Autoload.php';
