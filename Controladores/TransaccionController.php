@@ -136,9 +136,13 @@
             $transaccion -> setBarrio($barrio);
             $transaccion -> setDireccion($direccion);
             $transaccion -> setNombreComprador("Edu");
-            $transaccion -> setApellidoComprador("Edu");
+            $transaccion -> setApellidoComprador("cor");
             $transaccion -> setCorreoComprador("Edu");
-            $transaccion -> setTelefonoComprador("Edu");
+            $transaccion -> setTelefonoComprador("315");
+            $transaccion -> setNombreVendedor("juanda");
+            $transaccion -> setApellidoVendedor("giraldo");
+            $transaccion -> setCorreoVendedor("jd");
+            $transaccion -> setTelefonoVendedor("321");
             $transaccion -> setTotal(400);
             $transaccion -> setFechaRelizacion(date('Y-m-d'));
             $transaccion -> setHoraRealizacion(date("H:i:s"));
@@ -330,7 +334,13 @@
         Funcion para ver el detalle de la compra realizada
         */
 
-        public function verCompras(){
+        public function verCompra(){
+
+            $factura = $_GET['factura'];
+
+            $transaccion = new Transaccion();
+            $transaccion -> setNumeroFactura($factura);
+            $detalle = $transaccion -> detalleCompra();
 
             //Incluir la vista
             require_once "Vistas/Compra/Detalle.html";
@@ -340,7 +350,7 @@
         Funcion para ver el detalle de la venta realizada
         */
 
-        public function verVentas(){
+        public function verVenta(){
 
             //Instanciar el objeto
             $estado = new Estado();

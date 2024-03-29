@@ -9,7 +9,7 @@
         </tr>
         <?php while($lista = $listadoVentas -> fetch_object()) : ?>
             <tr>
-                <td><a href="<?=rutaInicio?><?=transaccion?><?=verVentas?>"><?=$lista -> id?></a></td>
+                <td><a href="<?=rutaInicio?><?=transaccion?><?=verVenta?>&idTransaccion=<?=$lista -> id?>"><?=$lista -> numeroFactura?></a></td>
                 <td><?=$lista -> fechaRealizacion?></td>
                 <td><?=$lista -> horaRealizacion?></td>
                 <td><?=$lista -> total?></td>

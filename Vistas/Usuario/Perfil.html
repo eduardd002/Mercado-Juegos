@@ -1,20 +1,21 @@
 
     <div id="loginYRegistro">
-        <h1>Perfil de <?=$listaDatosUsuario -> nombreUsuario?></h1>
-        <h3>Fecha de union: <?=$listaDatosUsuario -> fechaUsuario?></h3>
-        <h3>Departamento: <?=$listaDatosUsuario -> departamentoUsuario?></h3>
-        <h3>Municipio: <?=$listaDatosUsuario -> municipioUsuario?></h3>
+        <h1>Perfil de <?=$listaDatosUsuario['usuario']['nombreUsuario']?></h1>
+        <h3>Fecha de union: <?=$listaDatosUsuario['usuario']['fechaUsuario']?></h3>
+        <h3>Departamento: <?=$listaDatosUsuario['usuario']['departamentoUsuario']?></h3>
+        <h3>Municipio: <?=$listaDatosUsuario['usuario']['municipioUsuario']?></h3>
         <h3>Videojuegos publicados: (2)</h3>
         <h3>Videojuegos vendidos: (1)</h3>
-        <a href="<?=rutaInicio?><?=bloqueo?><?=bloquear?>&aBloquear=<?=$listaDatosUsuario -> idUsuario?>">Bloquear</a>
+        <a href="<?=rutaInicio?><?=bloqueo?><?=bloquear?>&aBloquear=1">Bloquear</a>
     </div>
     <div id="catalogo">
-        <?php while($datosVideojuegos = $listaDatosUsuarioVideojuego -> fetch_object()) : ?>
+        <?php foreach ($listaDatosUsuario['usuario']['videojuegos'] as $videojuego) : ?>
             <div class="videojuego">
-                <img src="Recursos/ImagenesVideojuegos/<?=$datosVideojuegos -> fotoVideojuego?>" alt="Videojuego">
-                <h2><?=$datosVideojuegos -> nombreVideojuego?></h2>
-                <p>$COP <?=$datosVideojuegos -> precioVideojuego?></p>
+                <img src="Recursos/ImagenesVideojuegos/<?=$videojuego['fotoVideojuego']?>" alt="Videojuego">
+                <h2><?=$videojuego['nombreVideojuego']?></h2>
+                <p>$COP <?=$videojuego['precioVideojuego']?></p>
                 <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-comprarCatalogo">Ver ahora</a>
             </div>
-        <?php endwhile; ?>
+        <?php endforeach; ?>
     </div>
+

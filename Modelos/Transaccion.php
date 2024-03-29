@@ -17,6 +17,10 @@
         private $apellidoComprador;
         private $correoComprador;
         private $telefonoComprador;
+        private $nombreVendedor;
+        private $apellidoVendedor;
+        private $correoVendedor;
+        private $telefonoVendedor;
         private $total;
         private $fechaRelizacion;
         private $horaRealizacion;
@@ -188,6 +192,88 @@
             return $this;
         }
 
+
+
+        /**
+         * Get the value of nombreVendedor
+         */ 
+        public function getNombreVendedor()
+        {
+                return $this->nombreVendedor;
+        }
+
+        /**
+         * Set the value of nombreVendedor
+         *
+         * @return  self
+         */ 
+        public function setNombreVendedor($nombreVendedor)
+        {
+                $this->nombreVendedor = $nombreVendedor;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of apellidoVendedor
+         */ 
+        public function getApellidoVendedor()
+        {
+                return $this->apellidoVendedor;
+        }
+
+        /**
+         * Set the value of apellidoVendedor
+         *
+         * @return  self
+         */ 
+        public function setApellidoVendedor($apellidoVendedor)
+        {
+                $this->apellidoVendedor = $apellidoVendedor;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of correoVendedor
+         */ 
+        public function getCorreoVendedor()
+        {
+                return $this->correoVendedor;
+        }
+
+        /**
+         * Set the value of correoVendedor
+         *
+         * @return  self
+         */ 
+        public function setCorreoVendedor($correoVendedor)
+        {
+                $this->correoVendedor = $correoVendedor;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of telefonoVendedor
+         */ 
+        public function getTelefonoVendedor()
+        {
+                return $this->telefonoVendedor;
+        }
+
+        /**
+         * Set the value of telefonoVendedor
+         *
+         * @return  self
+         */ 
+        public function setTelefonoVendedor($telefonoVendedor)
+        {
+                $this->telefonoVendedor = $telefonoVendedor;
+
+                return $this;
+        }
+
         /*
         Funcion para realizar el registro de la transaccion en la base de datos
         */
@@ -198,7 +284,8 @@
                 {$this -> getIdVendedor()}, {$this -> getIdPago()}, {$this -> getIdEstado()}, 
                 '{$this -> getDepartamento()}', '{$this -> getMunicipio()}', '{$this -> getCodigoPostal()}', 
                 '{$this -> getBarrio()}', '{$this -> getDireccion()}', '{$this -> getNombreComprador()}', 
-                '{$this -> getApellidoComprador()}', '{$this -> getCorreoComprador()}', '{$this -> getTelefonoComprador()}', 
+                '{$this -> getApellidoComprador()}', '{$this -> getCorreoComprador()}', '{$this -> getTelefonoComprador()}', '{$this -> getNombreVendedor()}', 
+                '{$this -> getApellidoVendedor()}', '{$this -> getCorreoVendedor()}', '{$this -> getTelefonoVendedor()}',
                 {$this -> getTotal()}, '{$this -> getFechaRelizacion()}', 
                 '{$this -> getHoraRealizacion()}')";
             //Ejecutar la consulta
@@ -278,6 +365,54 @@
             //Retornar el resultado
             return $ultimaTransaccion;
         }
+
+        public function detalleCompra(){
+            $consulta = "SELECT t.nombreVendedor AS 'nombreVendedor', t.apellidoVendedor AS 'apellidoVendedor', t.telefonoVendedor AS 'telefonoVendedor', t.departamento AS 'departamentoEnvio', t.municipio AS 'municipioEnvio', t.codigoPostal AS 'codigoPostalEnvio', t.direccion AS 'direccionEnvio', t.barrio AS 'barrioEnvio', tt.nombre AS 'tipoTarjetaPago', p.numeroTarjeta AS 'numeroTarjetaPago', te.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.foto AS 'imagenVideojuego'
+                FROM TransaccionVideojuego tv
+                INNER JOIN Transacciones t ON t.id = tv.idTransaccion
+                INNER JOIN Videojuegos v ON v.id = tv.idVideojuego
+                INNER JOIN Pagos p ON p.id = t.idPago
+                INNER JOIN Tarjetas tt ON p.idTarjeta = tt.id
+                INNER JOIN Estados te ON t.idEstado = te.id
+                WHERE t.numeroFactura = {$this -> getNumeroFactura()}";
+        
+            // Ejecutar la consulta
+            $resultados = $this->db->query($consulta);
+        
+            // Array para almacenar la información del usuario y sus videojuegos
+            $informacionCompra = array();
+        
+            // Recorrer los resultados de la consulta
+            while ($fila = $resultados->fetch_object()) {
+                // Verificar si ya se ha almacenado la información del usuario
+                if (!isset($informacionCompra['compra'])) {
+                    // Si no se ha almacenado, almacenar la información del usuario
+                    $informacionCompra['compra'] = array(
+                        'nombreVendedor' => $fila->nombreVendedor,
+                        'apellidoVendedor' => $fila->apellidoVendedor,
+                        'telefonoVendedor' => $fila->telefonoVendedor,
+                        'departamentoEnvio' => $fila->departamentoEnvio,
+                        'municipioEnvio' => $fila->municipioEnvio,
+                        'codigoPostalEnvio' => $fila->codigoPostalEnvio,
+                        'direccionEnvio' => $fila->direccionEnvio,
+                        'barrioEnvio' => $fila->barrioEnvio,
+                        'tipoTarjetaPago' => $fila->tipoTarjetaPago,
+                        'numeroTarjetaPago' => $fila->numeroTarjetaPago,
+                        'tipoEstadoTransaccion' => $fila->tipoEstadoTransaccion,
+                        'totalTransaccion' => $fila->totalTransaccion,
+                        'videojuegos' => array() // Inicializar un array para almacenar los videojuegos del usuario
+                    );
+                }
+        
+                // Almacenar la información del videojuego en el array de videojuegos del usuario
+                $informacionCompra['compra']['videojuegos'][] = array(
+                    'imagenVideojuego' => $fila->imagenVideojuego
+                );
+            }
+        
+            // Retornar la información del usuario y sus videojuegos
+            return $informacionCompra;
+        }        
     }
 
 ?>

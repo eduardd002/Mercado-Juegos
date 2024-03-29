@@ -38,8 +38,8 @@
 
     define("transaccion", "/?controller=TransaccionController");
     define("guardarCompra", "&action=guardar");
-    define("verCompras", "&action=verCompras");
-    define("verVentas", "&action=verVentas");
+    define("verCompra", "&action=verCompra");
+    define("verVenta", "&action=verVenta");
     define("direccionYPago", "&action=direccionYPago");
     define("pago", "&action=pago");
     define("realizar", "&action=exito");

@@ -306,12 +306,6 @@
             $usuarioVideojuego = new UsuarioVideojuego();
             $usuarioVideojuego -> setIdUsuario($idVendedor);
             $listaDatosUsuario = $usuarioVideojuego -> obtenerInformacionUsuario();
-
-            //Instanciar el objeto
-            $usuarioVideojuego2 = new UsuarioVideojuego();
-            $usuarioVideojuego2 -> setIdUsuario($idVendedor);
-            $listaDatosUsuarioVideojuego = $usuarioVideojuego -> obtenerInformacionUsuarioVideojuegos();
-
             //Incluir la vista
             require_once "Vistas/Usuario/Perfil.html";
         }
