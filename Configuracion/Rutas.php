@@ -24,6 +24,7 @@
     define("crear", "&action=crear");
     define("guardar", "&action=guardar");
     define("actualizarVideojuego", "&action=actualizar");
+    define("editarVideojuego", "&action=editar");
     define("eliminarVideojuego", "&action=eliminar");
     define("todos", "&action=todos");
     define("algunos", "&action=inicio");

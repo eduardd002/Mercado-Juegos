@@ -31,7 +31,7 @@
     <h3 id="unidadesDisponiblesVideojuego">Unidades disponibles: <?=$videojuegoEspecifico -> stock?></h3>
     <?php if(isset($_SESSION['loginexitoso']) && $videojuegoEspecifico -> idVendedor == $_SESSION['loginexitoso'] -> id) : ?>
         <div id="botonesDetalle">
-            <a class="button button-actualizarVideojuegoDesdeDetalle" href="">Actualizar</a>
+            <a class="button button-actualizarVideojuegoDesdeDetalle" href="<?=rutaInicio?><?=videojuego?><?=editarVideojuego?>&id=<?=$videojuegoEspecifico -> id?>">Actualizar</a>
             <a class="button button-eliminarVideojuegoDesdeDetalle" href="">Eliminar</a>
         </div>
     <?php else : ?>

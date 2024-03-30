@@ -115,7 +115,7 @@
         }
 
         public function obtenerVideojuegosCreadosPorUsuario(){
-            $consulta = "SELECT v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', c.nombre AS 'nombreConsola', v.stock AS 'stockVideojuego'
+            $consulta = "SELECT v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', c.nombre AS 'nombreConsola', v.stock AS 'stockVideojuego', v.id AS 'idVideojuego'
             FROM Videojuegos v
             INNER JOIN Consolas c ON c.id = v.idUso
             INNER JOIN UsuarioVideojuego uv ON uv.idVideojuego = v.id
@@ -127,11 +127,11 @@
         }
 
         public function obtenerInformacionUsuario(){
-            $consulta = "SELECT u.id AS 'idUsuario', u.nombre AS 'nombreUsuario', u.fechaRegistro AS 'fechaUsuario', u.departamento AS 'departamentoUsuario', u.municipio AS 'municipioUsuario', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.foto AS 'fotoVideojuego'
-                        FROM UsuarioVideojuego uv
-                        INNER JOIN Usuarios u ON u.id = uv.idUsuario
-                        INNER JOIN Videojuegos v ON v.id = uv.idVideojuego
-                        WHERE uv.idUsuario = {$this->getIdUsuario()}";
+            $consulta = "SELECT u.id AS 'idUsuario', u.nombre AS 'nombreUsuario', u.fechaRegistro AS 'fechaUsuario', u.departamento AS 'departamentoUsuario', u.municipio AS 'municipioUsuario', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.foto AS 'fotoVideojuego', v.id AS 'idVideojuego'
+                FROM UsuarioVideojuego uv
+                INNER JOIN Usuarios u ON u.id = uv.idUsuario
+                INNER JOIN Videojuegos v ON v.id = uv.idVideojuego
+                WHERE uv.idUsuario = {$this->getIdUsuario()}";
         
             // Ejecutar la consulta
             $resultados = $this->db->query($consulta);
@@ -156,6 +156,7 @@
         
                 // Almacenar la información del videojuego en el array de videojuegos del usuario
                 $informacionUsuario['usuario']['videojuegos'][] = array(
+                    'idVideojuego' => $fila->idVideojuego,
                     'nombreVideojuego' => $fila->nombreVideojuego,
                     'precioVideojuego' => $fila->precioVideojuego,
                     'fotoVideojuego' => $fila->fotoVideojuego

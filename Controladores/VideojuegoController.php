@@ -329,15 +329,95 @@
                 }
             }
         }
-            
+
         /*
-        Funcion para actualizar un videojuego
+        Funcion para editar una consola en la base de datos
+        */
+
+        public function editarVideojuego($idVideojuego){
+
+            //Instanciar el objeto
+            $videojuego = new Videojuego();
+            //Creo el objeto y retornar el resultado
+            return $videojuego -> setId($idVideojuego);
+        }
+
+        /*
+        Funcion para editar un videojuego
+        */
+
+        public function editar(){
+
+            //Comprobar si los datos están llegando
+            if(isset($_GET)){
+
+                //Comprobar si el dato existe
+                $idVideojuego = isset($_GET['id']) ? $_GET['id'] : false;
+
+                //Si el dato existe
+                if($idVideojuego){
+
+                    //Obtener el resultado
+                    $videojuego = $this -> editarVideojuego($idVideojuego);
+
+                    //Obtener consola
+                    $videojuegoUnico = $videojuego -> traerUno();
+
+                    //Incluir la vista
+                    require_once "Vistas/Videojuego/Actualizar.html";
+
+                }
+            }
+        }
+            
+        public function actualizarVideojuego($id, $precio, $stock){
+
+            //Instanciar el objeto
+            $videojuego = new Videojuego();
+            //Crear objeto
+            $videojuego -> setId($id);
+            $videojuego -> setPrecio($precio);
+            $videojuego -> setStock($stock);
+            //Ejecutar la consulta
+            $actualizado = $videojuego -> actualizar();
+            return $actualizado;
+        }
+
+        /*
+        Funcion para actualizar un usuario
         */
 
         public function actualizar(){
+            
+            //Comprobar si los datos están llegando
+            if(isset($_GET) && isset($_POST)){
 
-            //Incluir la vista
-            require_once 'Vistas/Videojuego/Actualizar.html';
+                //Comprobar si los datos existe
+                $id = isset($_GET['id']) ? $_GET['id'] : false;
+                $precio = isset($_POST['precio']) ? $_POST['precio'] : false;
+                $stock = isset($_POST['stock']) ? $_POST['stock'] : false;
+
+                //Si el dato existe
+                if($id && $precio && $stock){
+
+                    //Llamar la funcion de actualizar
+                    $actualizado = $this -> actualizarVideojuego($id, $precio, $stock);
+
+                    if($actualizado){
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('actualizarvideojuegoacierto', "Videojuego actualizado con exito", '?controller=UsuarioController&action=videojuegos');
+                    }else{
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('actualizarvideojuegosugerencia', "Agrega nuevos datos", '?controller=VideojuegoController&action=editar&id='.$id);
+                    }
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('actualizarvideojuegoerror', "Ha ocurrido un error al actualizar el videojuego", '?controller=VideojuegoController&action=inicio');
+                }
+            }else{
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('actualizarvideojuegoerror', "Ha ocurrido un error al actualizar el videojuego", '?controller=VideojuegoController&action=inicio');
+            }
         }
 
         /*

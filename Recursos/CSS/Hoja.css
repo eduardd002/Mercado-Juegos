@@ -777,7 +777,7 @@ Estilos del formulario de registro de usuario
     /*Texto alineado al centro*/
     text-align: center;
     /*Margen superior*/
-    margin-top: 20px;
+    margin-top: 50px;
     /*Margen inferior*/
     margin-bottom: 20px;
 }
@@ -1292,8 +1292,10 @@ Estilo del titulo del carrito
 #carrito h1{
     /*Titulo alineado al centro*/
     text-align: center;
+    /*Margen superior*/
+    margin-top: 50px;
     /*Margen inferior*/
-    margin-bottom: 30px;
+    margin-bottom: 60px;
 }
 
 /*

@@ -304,13 +304,11 @@
                             if($guardadoChat){
 
                                 //Guardar usuario chat
-                                $guardadoUsuarioChat = $this -> guardarUsuarioChat($this -> traerDuenioDeVideojuego($idVideojuego));
+                                $this -> guardarUsuarioChat($this -> traerDuenioDeVideojuego($idVideojuego));
 
-                                //Comprobar si el usuario chat ha sido guardado con exito
-                                if($guardadoUsuarioChat){
-                                    //Redirigir al menu de direccion y pago
-                                    header("Location:"."http://localhost/Mercado-Juegos/?controller=TransaccionController&action=exito");
-                                }
+                                //Redirigir al menu de direccion y pago
+                                header("Location:"."http://localhost/Mercado-Juegos/?controller=TransaccionController&action=exito");
+                                
                             }
 
                         }else{

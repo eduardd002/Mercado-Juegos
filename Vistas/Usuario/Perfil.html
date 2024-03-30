@@ -22,7 +22,7 @@
                 <img src="Recursos/ImagenesVideojuegos/<?=$videojuego['fotoVideojuego']?>" alt="Videojuego">
                 <h2><?=$videojuego['nombreVideojuego']?></h2>
                 <p>$COP <?=$videojuego['precioVideojuego']?></p>
-                <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-comprarCatalogo">Ver ahora</a>
+                <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>&id=<?=$videojuego['idVideojuego']?>" class="button button-comprarCatalogo">Ver</a>
             </div>
         <?php endforeach; ?>
     </div>

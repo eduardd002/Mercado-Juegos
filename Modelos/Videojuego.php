@@ -135,6 +135,22 @@
             return $resultado;
         }
 
+        public function actualizar(){
+            //Construir la consulta
+            $consulta = "UPDATE videojuegos SET precio = {$this -> getPrecio()}, stock = {$this -> getStock()} 
+            WHERE id = {$this -> getId()}";
+            //Ejecutar la consulta
+            $actualizado = $this -> db -> query($consulta);
+            //Crear bandera
+            $bandera = false;
+            //Comprobar si la consulta se realizo exitosamente
+            if($actualizado && mysqli_affected_rows($this -> db) > 0){
+                $bandera = true;
+            }
+            //Retorno el resultado
+            return $bandera;
+        }
+
         /*
         Funcion para traer un videojuego
         */

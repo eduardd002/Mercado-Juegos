@@ -1,62 +1,21 @@
+<?php if(isset($_SESSION['actualizarvideojuegosugerencia'])) : ?>
+    <div class="alerta alerta-sugerencia">
+        <?=$_SESSION['actualizarvideojuegosugerencia']; ?>
+    </div>
+<?php endif; ?>
+<?php Ayudas::eliminarSesion('actualizarvideojuegosugerencia'); ?>
+
 <div id="loginYRegistro">
     <h1>Actualizar videojuego</h1>
-    <form action="">
+    <form action="<?=rutaInicio?><?=videojuego?><?=actualizarVideojuego?>&id=<?=$videojuegoUnico -> idVideojuego?>" method="post">
         <img src="Recursos/Logotipos/videojuego.png" class="ventaImage" alt="Logo videojuego">
         <div id="bloqueTextoRegistro">
-            <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" required>
-        </div>
-        <div id="bloqueTextoRegistro">
-            <label for="categoria">Categoria</label>
-            <select name="categoria" id="categoria">
-                <option value="accion">Accion</option>
-                <option value="arcade">Arcade</option>
-                <option value="aventura">Aventura</option>
-                <option value="carreras">Carreras</option>
-                <option value="combate">Combate</option>
-                <option value="deportes">Deportes</option>
-                <option value="disparos">Disparos</option>
-                <option value="estrategia">Estrategia</option>
-                <option value="mesa">Mesa</option>
-                <option value="musicales">Musicales</option>
-                <option value="puzzle">Puzzle</option>
-                <option value="rol">Rol</option>
-                <option value="terror">Terror</option>
-            </select>
-        </div>
-        <div id="bloqueTextoRegistro">
-            <label for="consola">Consola</label>
-            <select name="consola" id="consola">
-                <option value="nintendoswitch">Nintendo Switch</option>
-                <option value="playstation3">Play Station 3</option>
-                <option value="playstation4">Play Station 4</option>
-                <option value="playstation5">Play Station 5</option>
-                <option value="xbox360">Xbox 360</option>
-                <option value="xboxone">Xbox One</option>
-                <option value="xboxones">Xbox One S</option>
-                <option value="xboxseriess">Xbox Series S</option>
-                <option value="xboxseriesx">Xbox Series X</option>
-                <option value="windows">Windows</option>
-            </select>
-        </div>
-        <div id="bloqueTextoRegistro">
-            <label for="clasificacion">Clasificacion de edad</label>
-            <select name="clasificacion" id="clasificacion">
-                <option value="ec">EC</option>
-                <option value="e">E</option>
-                <option value="e10+">E10+</option>
-                <option value="t">T</option>
-                <option value="m">M</option>
-                <option value="ao">AO</option>
-            </select>
+            <label for="stock">Stock</label>
+            <input type="number" name="stock" value="<?=$videojuegoUnico -> stock?>" required>
         </div>
         <div id="bloqueTextoRegistro">
             <label for="precio">Precio</label>
-            <input type="number" name="precio" required>
-        </div>
-        <div id="bloqueTextoRegistro">
-            <label for="descripcion">Descripcion</label>
-            <textarea name="descripcion" id="descripcion"></textarea>
+            <input type="number" name="precio" value="<?=$videojuegoUnico -> precio?>" required>
         </div>
         <input type="submit" class="btnRegistro" value="Actualizar">
     </form>
