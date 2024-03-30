@@ -7,6 +7,21 @@
 
     class BloqueoController{
 
+        public function bloquear(){
+
+            //Comprobar si los datos están llegando
+            if(isset($_GET)){
+
+                //Obtener el usuario a bloquear
+                $idUsuarioABloquear = $_GET['aBloquear'];
+
+                $usuario = Ayudas::obtenerUsuarioEnConcreto($idUsuarioABloquear);
+
+                //Incluir la vista
+                require_once 'Vistas/Bloqueo/Bloqueo.html';
+            }
+        }
+
         /*
         Funcion para guardar el bloqueo en la base de datos
         */
@@ -61,14 +76,14 @@
         Funcion para guardar el bloqueo
         */
 
-        public function bloquear(){
+        public function guardar(){
 
             //Comprobar si los datos están llegando
-            if(isset($_GET)){
+            if(isset($_POST) && isset($_GET)){
 
                 //Obtener el usuario a bloquear
-                $idUsuarioABloquear = $_GET['aBloquear'];
-                $motivo = "hola";
+                $idUsuarioABloquear = $_GET['idBloqueado'];
+                $motivo = isset($_POST['motivo']) ? $_POST['motivo'] : false;
                 //Llamar funcion de guardar bloqueo
                 $bloqueoGuardado = $this -> guardarBloqueo($motivo);
 

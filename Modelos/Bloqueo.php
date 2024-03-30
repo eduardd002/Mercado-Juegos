@@ -126,6 +126,18 @@
             return $ultimoBloqueo;
         }
 
+        public function obtenerListaBloqueos(){
+             $consulta = "SELECT ubo.nombre AS 'nombreBloqueado' , ubr.nombre AS 'nombreBloqueador' , b.motivo AS 'motivoBloqueo' , b.fechaBloqueo AS 'fechaBloqueo' , b.horaBloqueo AS 'horaBloqueo'
+                FROM usuarioBloqueo ub
+                INNER JOIN Bloqueos b ON b.id = ub.idBloqueo
+                INNER JOIN Usuarios ubr ON ubr.id = ub.idBloqueador
+                INNER JOIN Usuarios ubo ON ubo.id = ub.idBloqueado";
+                //Ejecutar la consulta
+                $resultado = $this -> db -> query($consulta);
+                //Retornar el resultado
+                return $resultado;
+        }
+
     }
 
 ?>

@@ -1257,6 +1257,7 @@ table{
     width: 100%;
     /*Borde inferior*/
     border-bottom: 1px solid #CCC;
+    margin-bottom: 75px;
 }
 
 /*

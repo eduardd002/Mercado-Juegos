@@ -1,0 +1,25 @@
+<div id="gestiones">
+    <h1>Bloqueos</h1>
+    <?php if(mysqli_num_rows($listaBloqueos) == 0) : ?>
+        <h1>No hay bloqueos</h1>
+    <?php else : ?>
+        <table>
+            <tr>
+                <th>Bloqueador</th>
+                <th>Bloqueado</th>
+                <th>Motivo</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+            </tr>
+            <?php while($bloqueos = $listaBloqueos -> fetch_object()) : ?>
+                <tr>
+                    <td><?=$bloqueos -> nombreBloqueador?></td>
+                    <td><?=$bloqueos -> nombreBloqueado?></td>
+                    <td><?=$bloqueos -> motivoBloqueo?></td>
+                    <td><?=$bloqueos -> fechaBloqueo?></td>
+                    <td><?=$bloqueos -> horaBloqueo?></td>
+                </tr>
+            <?php endwhile;?>
+        </table>
+    <?php endif; ?>
+</div>

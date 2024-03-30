@@ -21,6 +21,8 @@
     //Incluir el objeto de usuario
     require_once 'Modelos/Usuario.php';
 
+    require_once 'Modelos/Bloqueo.php';
+
     class AdministradorController{
 
         /*
@@ -223,6 +225,12 @@
                     Ayudas::crearSesionYRedirigir('eliminaradministradorerror', "Ha ocurrido un error al eliminar el adminsitrador", '?controller=Adminsitrador&action=miPerfil');
                 }
             }
+        }
+
+        public function verBloqueos(){
+            $bloqueo = new Bloqueo();
+            $listaBloqueos = $bloqueo -> obtenerListaBloqueos();
+            require_once "Vistas/Administrador/VerBloqueos.html";
         }
 
         /*
