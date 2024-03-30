@@ -19,7 +19,7 @@
                 <td><a href="<?=rutaInicio?><?=transaccion?><?=verVenta?>&factura=<?=$lista -> numeroFactura?>"><?=$lista -> numeroFactura?></a></td>
                 <td><?=$lista -> fechaRealizacion?></td>
                 <td><?=$lista -> horaRealizacion?></td>
-                <td><?=$lista -> total?></td>
+                <td>$ <?=$lista -> total?></td>
             </tr>
         <?php endwhile; ?>
     </table>

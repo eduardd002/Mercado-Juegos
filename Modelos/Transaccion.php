@@ -367,7 +367,7 @@
         }
 
         public function detalleCompra(){
-            $consulta = "SELECT t.nombreVendedor AS 'nombreVendedor', t.apellidoVendedor AS 'apellidoVendedor', t.telefonoVendedor AS 'telefonoVendedor', t.departamento AS 'departamentoEnvio', t.municipio AS 'municipioEnvio', t.codigoPostal AS 'codigoPostalEnvio', t.direccion AS 'direccionEnvio', t.barrio AS 'barrioEnvio', tt.nombre AS 'tipoTarjetaPago', p.numeroTarjeta AS 'numeroTarjetaPago', te.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.nombre AS 'nombreVideojuegoCompra', u.nombre AS 'usoVideojuegoCompra', c.nombre AS 'consolaVideojuegoCompra', v.precio AS 'precioVideojuegoCompra', t.numeroFactura AS 'factura'
+            $consulta = "SELECT t.nombreVendedor AS 'nombreVendedor', t.apellidoVendedor AS 'apellidoVendedor', t.telefonoVendedor AS 'telefonoVendedor', t.correoVendedor AS 'correoVendedor', t.departamento AS 'departamentoEnvio', t.municipio AS 'municipioEnvio', t.codigoPostal AS 'codigoPostalEnvio', t.direccion AS 'direccionEnvio', t.barrio AS 'barrioEnvio', tt.nombre AS 'tipoTarjetaPago', p.numeroTarjeta AS 'numeroTarjetaPago', te.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.nombre AS 'nombreVideojuegoCompra', u.nombre AS 'usoVideojuegoCompra', c.nombre AS 'consolaVideojuegoCompra', v.precio AS 'precioVideojuegoCompra', t.numeroFactura AS 'factura', tv.unidades AS 'unidadesCompra'
                 FROM TransaccionVideojuego tv
                 INNER JOIN Transacciones t ON t.id = tv.idTransaccion
                 INNER JOIN Videojuegos v ON v.id = tv.idVideojuego
@@ -394,6 +394,7 @@
                         'nombreVendedor' => $fila->nombreVendedor,
                         'apellidoVendedor' => $fila->apellidoVendedor,
                         'telefonoVendedor' => $fila->telefonoVendedor,
+                        'correoVendedor' => $fila->correoVendedor,
                         'departamentoEnvio' => $fila->departamentoEnvio,
                         'municipioEnvio' => $fila->municipioEnvio,
                         'codigoPostalEnvio' => $fila->codigoPostalEnvio,
@@ -402,6 +403,7 @@
                         'tipoTarjetaPago' => $fila->tipoTarjetaPago,
                         'numeroTarjetaPago' => $fila->numeroTarjetaPago,
                         'tipoEstadoTransaccion' => $fila->tipoEstadoTransaccion,
+                        'unidadesCompra' => $fila->unidadesCompra,
                         'totalTransaccion' => $fila->totalTransaccion,
                         'videojuegos' => array() // Inicializar un array para almacenar los videojuegos del usuario
                     );
@@ -421,7 +423,7 @@
         }   
         
         public function detalleVenta(){
-            $consulta = "SELECT t.nombreComprador AS 'nombreComprador', t.apellidoComprador AS 'apellidoComprador', t.telefonoComprador AS 'telefonoComprador', t.departamento AS 'departamentoEnvio', t.municipio AS 'municipioEnvio', t.codigoPostal AS 'codigoPostalEnvio', t.direccion AS 'direccionEnvio', t.barrio AS 'barrioEnvio', tt.nombre AS 'tipoTarjetaPago', p.numeroTarjeta AS 'numeroTarjetaPago', te.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.foto AS 'imagenVideojuego'
+            $consulta = "SELECT t.nombreComprador AS 'nombreComprador', t.apellidoComprador AS 'apellidoComprador', t.telefonoComprador AS 'telefonoComprador', t.correoComprador AS 'correoComprador', t.departamento AS 'departamentoEnvio', t.municipio AS 'municipioEnvio', t.codigoPostal AS 'codigoPostalEnvio', t.direccion AS 'direccionEnvio', t.barrio AS 'barrioEnvio', tt.nombre AS 'tipoTarjetaPago', p.numeroTarjeta AS 'numeroTarjetaPago', te.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.foto AS 'imagenVideojuego', tv.unidades AS 'unidadesCompra', v.precio AS 'precioVideojuegoVenta'
                 FROM TransaccionVideojuego tv
                 INNER JOIN Transacciones t ON t.id = tv.idTransaccion
                 INNER JOIN Videojuegos v ON v.id = tv.idVideojuego
@@ -445,6 +447,7 @@
                         'nombreComprador' => $fila->nombreComprador,
                         'apellidoComprador' => $fila->apellidoComprador,
                         'telefonoComprador' => $fila->telefonoComprador,
+                        'correoComprador' => $fila->correoComprador,
                         'departamentoEnvio' => $fila->departamentoEnvio,
                         'municipioEnvio' => $fila->municipioEnvio,
                         'codigoPostalEnvio' => $fila->codigoPostalEnvio,
@@ -453,6 +456,7 @@
                         'tipoTarjetaPago' => $fila->tipoTarjetaPago,
                         'numeroTarjetaPago' => $fila->numeroTarjetaPago,
                         'tipoEstadoTransaccion' => $fila->tipoEstadoTransaccion,
+                        'unidadesCompra' => $fila->unidadesCompra,
                         'totalTransaccion' => $fila->totalTransaccion,
                         'videojuegos' => array() // Inicializar un array para almacenar los videojuegos del usuario
                     );
@@ -460,7 +464,8 @@
         
                 // Almacenar la información del videojuego en el array de videojuegos del usuario
                 $informacionVenta['venta']['videojuegos'][] = array(
-                    'imagenVideojuego' => $fila->imagenVideojuego
+                    'imagenVideojuego' => $fila->imagenVideojuego,
+                    'precioVideojuegoVenta' => $fila->precioVideojuegoVenta
                 );
             }
         

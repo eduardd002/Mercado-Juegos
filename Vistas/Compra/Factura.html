@@ -1,6 +1,11 @@
 <div id="detalleCompraYVenta">
     <img src="Recursos/Logotipos/Logo.png" alt="logo compra exitosa" style="width: 50px; height: 50px; float: right; margin-top: 20px; margin-right: 20px;">
-    <h1 style="text-align: center;">Factura N = 123456</h1>
+    <h1 style="text-align: center;">Factura De Compra N° <?=$detalle['compra']['factura']?></h1>
+    <h3>Detalles del vendedor</h3>
+    <h5>Nombre: <?=$detalle['compra']['nombreVendedor']?></h5>
+    <h5>Apellido: <?=$detalle['compra']['apellidoVendedor']?></h5>
+    <h5>Telefono: <?=$detalle['compra']['telefonoVendedor']?></h5>
+    <h5>Correo: <?=$detalle['compra']['correoVendedor']?></h5>
     <h3>Detalles del envio</h3>
     <h5>Departamento: <?=$detalle['compra']['departamentoEnvio']?></h5>
     <h5>Municipio: <?=$detalle['compra']['municipioEnvio']?></h5>
@@ -21,6 +26,7 @@
                 <th style="background-color: #f2f2f2; border: 1px solid #ddd; padding: 8px; text-align: left;">Uso</th>
                 <th style="background-color: #f2f2f2; border: 1px solid #ddd; padding: 8px; text-align: left;">Consola</th>
                 <th style="background-color: #f2f2f2; border: 1px solid #ddd; padding: 8px; text-align: left;">Precio</th>
+                <th style="background-color: #f2f2f2; border: 1px solid #ddd; padding: 8px; text-align: left;">Unidades</th>
             </tr>
             <?php foreach ($detalle['compra']['videojuegos'] as $videojuego) : ?>
                 <tr>
@@ -28,13 +34,15 @@
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$videojuego['usoVideojuegoCompra']?></td>
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$videojuego['consolaVideojuegoCompra']?></td>
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">$ <?=$videojuego['precioVideojuegoCompra']?></td>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$detalle['compra']['unidadesCompra']?></td>
                 </tr>
             <?php endforeach; ?>
             <tr>
                 <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"></td>
                 <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"></td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"></td>
                 <td style="border: 1px solid #ddd; padding: 8px; text-align: left; font-weight: bold; color: green; font-size: 15px;">Total</td>
-                <td style="border: 1px solid #ddd; padding: 8px; text-align: left; font-weight: bold; color: green; font-size: 15px;">$ 560000</td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: left; font-weight: bold; color: green; font-size: 15px;">$ <?=$detalle['compra']['totalTransaccion']?></td>
             </tr>
         </table>
     </div>
