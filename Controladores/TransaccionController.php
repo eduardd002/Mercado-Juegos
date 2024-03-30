@@ -45,12 +45,14 @@
             $listadoTarjetas = $tarjeta -> listar();
 
             //Comprobar si el dato está llegando
-            if(isset($_GET)){
-                //Comprobar si el dato existe
-                $id = isset($_GET['idVideojuego']) ? $_GET['idVideojuego'] : false;
+            if(isset($_GET) && isset($_POST)){
 
-                //Comprobar el dato exsiten
-                if($id){
+                //Comprobar si los datos existen
+                $id = isset($_GET['idVideojuego']) ? $_GET['idVideojuego'] : false;
+                $unidades = isset($_POST['cantidadAComprar']) ? $_POST['cantidadAComprar'] : false;
+
+                //Comprobar los datos existen
+                if($id && $unidades){
 
                     //Incluir la vista
                     require_once "Vistas/Transaccion/EnvioYPago.html";
@@ -123,6 +125,9 @@
 
         public function guardarTransaccion($factura, $departamento, $municipio, $codigoPostal, $barrio, $direccion, $idPago, $idVideojuego){
 
+            $comprador = Ayudas::obtenerUsuarioEnConcreto($_SESSION['loginexitoso'] -> id);
+            $vendedor = Ayudas::obtenerUsuarioEnConcreto($this -> traerDuenioDeVideojuego($idVideojuego));
+
             //Instanciar el objeto
             $transaccion = new Transaccion();
             $transaccion -> setNumeroFactura($factura + 1000);
@@ -135,14 +140,14 @@
             $transaccion -> setCodigoPostal($codigoPostal);
             $transaccion -> setBarrio($barrio);
             $transaccion -> setDireccion($direccion);
-            $transaccion -> setNombreComprador(Ayudas::obtenerUsuarioEnConcreto(($_SESSION['loginexitoso'] -> id) -> nombre));
-            $transaccion -> setApellidoComprador(Ayudas::obtenerUsuarioEnConcreto(($_SESSION['loginexitoso'] -> id) -> apellido));
-            $transaccion -> setCorreoComprador(Ayudas::obtenerUsuarioEnConcreto(($_SESSION['loginexitoso'] -> id) -> correo));
-            $transaccion -> setTelefonoComprador(Ayudas::obtenerUsuarioEnConcreto(($_SESSION['loginexitoso'] -> id) -> telefono));
-            $transaccion -> setNombreVendedor(Ayudas::obtenerUsuarioEnConcreto(($this -> traerDuenioDeVideojuego($idVideojuego)) -> nombre));
-            $transaccion -> setApellidoVendedor(Ayudas::obtenerUsuarioEnConcreto(($this -> traerDuenioDeVideojuego($idVideojuego)) -> apellido));
-            $transaccion -> setCorreoVendedor(Ayudas::obtenerUsuarioEnConcreto(($this -> traerDuenioDeVideojuego($idVideojuego)) -> correo));
-            $transaccion -> setTelefonoVendedor(Ayudas::obtenerUsuarioEnConcreto(($this -> traerDuenioDeVideojuego($idVideojuego)) -> telefono));
+            $transaccion -> setNombreComprador($comprador -> nombre);
+            $transaccion -> setApellidoComprador($comprador -> apellido);
+            $transaccion -> setCorreoComprador($comprador -> correo);
+            $transaccion -> setTelefonoComprador($comprador -> numeroTelefono);
+            $transaccion -> setNombreVendedor($vendedor -> nombre);
+            $transaccion -> setApellidoVendedor($vendedor -> apellido);
+            $transaccion -> setCorreoVendedor($vendedor -> correo);
+            $transaccion -> setTelefonoVendedor($vendedor -> numeroTelefono);
             $transaccion -> setTotal(400);
             $transaccion -> setFechaRelizacion(date('Y-m-d'));
             $transaccion -> setHoraRealizacion(date("H:i:s"));
@@ -156,17 +161,19 @@
         Funcion para guardar la transaccion videojuego en la base de datos
         */
 
-        public function guardarTransaccionVideojuego($id, $idVideojuego){
+        public function guardarTransaccionVideojuego($id, $idVideojuego, $unidades){
+
+            $videojuego = Ayudas::obtenerVideojuegoEnConcreto($idVideojuego);
 
             //Instanciar el objeto
             $transaccionVideojuego = new TransaccionVideojuego();
             $transaccionVideojuego -> setIdTransaccion($id);
             $transaccionVideojuego -> setIdVideojuego($idVideojuego);
-            $transaccionVideojuego -> setUnidades(1);
-            $transaccionVideojuego -> setNombreVideojuego((Ayudas::obtenerVideojuegoEnConcreto($idVideojuego)) -> nombre);
-            $transaccionVideojuego -> setPrecioVideojuego((Ayudas::obtenerVideojuegoEnConcreto($idVideojuego)) -> precio);
-            $transaccionVideojuego -> setCategoriaVideojuego((Ayudas::obtenerVideojuegoEnConcreto($idVideojuego)) -> idCategoria);
-            $transaccionVideojuego -> setConsolaVideojuego((Ayudas::obtenerVideojuegoEnConcreto($idVideojuego)) -> idConsola);
+            $transaccionVideojuego -> setUnidades($unidades);
+            $transaccionVideojuego -> setNombreVideojuego($videojuego -> nombre);
+            $transaccionVideojuego -> setPrecioVideojuego($videojuego -> precio);
+            $transaccionVideojuego -> setUsoVideojuego($videojuego -> idUso);
+            $transaccionVideojuego -> setConsolaVideojuego($videojuego -> idConsola);
             //Guardar en la base de datos
             $guardadoTransaccionVideojuego = $transaccionVideojuego -> guardar();
             //Retornar el resultado
@@ -251,6 +258,7 @@
                 
                 //Comprobar si cada dato existe
                 $idVideojuego = isset($_GET['idVideojuego']) ? $_GET['idVideojuego'] : false;
+                $unidades = isset($_GET['unidades']) ? $_GET['unidades'] : false;
                 $departamento = isset($_POST['departamento']) ? $_POST['departamento'] : false;
                 $municipio = isset($_POST['municipio']) ? $_POST['municipio'] : false;
                 $codigoPostal = isset($_POST['codigoPostal']) ? $_POST['codigoPostal'] : false;
@@ -283,7 +291,7 @@
                         $idTransaccion = $this -> obtenerUltimaTransaccion();
 
                         //Obtener el resultado
-                        $guardadoTransaccionVideojuego = $this -> guardarTransaccionVideojuego($idTransaccion, $idVideojuego);
+                        $guardadoTransaccionVideojuego = $this -> guardarTransaccionVideojuego($idTransaccion, $idVideojuego, $unidades);
 
                         //Comprobar si la transaccion videojueo se guardo con exito
                         if($guardadoTransaccionVideojuego){
@@ -338,6 +346,8 @@
 
         public function verCompra(){
 
+            $detalleCompra = null;
+
             //Comprobar si esta llegando la factura por parametro
             if(isset($_GET['factura'])){
                 $factura = $_GET['factura'];
@@ -346,9 +356,11 @@
                 $transaccion -> setNumeroFactura($factura);
                 $detalle = $transaccion -> detalleCompra();
 
+                $detalleCompra = $detalle;
+
                 if($detalle){
                     //Incluir la vista
-                    require_once "Vistas/Compra/Detalle.html";
+                    require_once "Vistas/Compra/Factura.html";
                 }else{
                     //Crear la sesion y redirigir a la ruta pertinente
                     Ayudas::crearSesionYRedirigir("verCompraError", "Ha ocurrido un error al ver el detalle de la compra", "?controller=UsuarioController&action=compras");
@@ -357,20 +369,7 @@
                 //Crear la sesion y redirigir a la ruta pertinente
                 Ayudas::crearSesionYRedirigir("verCompraError", "Ha ocurrido un error al ver el detalle de la compra", "?controller=VideojuegoController&action=inicio");
             }
-        }
-
-        /*
-        Funcion para ver el detalle de la venta realizada
-        */
-
-        public function verVenta(){
-
-            //Instanciar el objeto
-            $estado = new Estado();
-            //Listar todos los usuarios desde la base de datos
-            $listadoEstados = $estado -> listar();
-            //Incluir la vista
-            require_once "Vistas/Venta/Detalle.html";
+            return $detalleCompra;
         }
 
         /*
@@ -379,11 +378,44 @@
 
         public function generarPdf(){
 
-            //Incluir la vista de la compra
-            require_once('Vistas/Compra/Factura.html');
+            $_GET['factura'];
+
+            $detalleCompra = $this -> verCompra();
 
             //Llamar la funcion de ayuda que genera el archivo PDF
-            Ayudas::pdf();
+            Ayudas::pdf($detalleCompra);
+        }
+
+        /*
+        Funcion para ver el detalle de la venta realizada
+        */
+
+        public function verVenta(){
+
+            //Comprobar si esta llegando la factura por parametro
+            if(isset($_GET['factura'])){
+                $factura = $_GET['factura'];
+
+                $transaccion = new Transaccion();
+                $transaccion -> setNumeroFactura($factura);
+                $detalle = $transaccion -> detalleVenta();
+
+                if($detalle){
+
+                    //Instanciar el objeto
+                    $estado = new Estado();
+                    //Listar todos los usuarios desde la base de datos
+                    $listadoEstados = $estado -> listar();
+                    //Incluir la vista
+                    require_once "Vistas/Venta/Detalle.html";
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir("verVentaError", "Ha ocurrido un error al ver el detalle de la venta", "?controller=UsuarioController&action=ventas");
+                }
+            }else{
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir("verVentaError", "Ha ocurrido un error al ver el detalle de la venta", "?controller=VideojuegoController&action=inicio");
+            }
         }
     }
 

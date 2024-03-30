@@ -365,19 +365,6 @@
             require_once "Vistas/Usuario/Compras.html";
         }
 
-        public function bloqueos(){
-
-            //Instanciar el objeto
-            $usuarioBloqueo = new UsuarioBloqueo();
-            //Construir el objeto
-            $usuarioBloqueo -> setIdBloqueador($_SESSION['loginexitoso'] -> id);
-            //Listar todos los usuarios desde la base de datos
-            $listadoBloqueos = $usuarioBloqueo -> obtenerBloqueosPorUsuario();
-
-            //Incluir la vista
-            require_once "Vistas/Usuario/Bloqueos.html";
-        }
-
         /*
         Funcion para ver el listado de ventas realizadas por el usuario
         */
@@ -390,9 +377,21 @@
             $transaccion -> setIdVendedor($_SESSION['loginexitoso'] -> id);
             //Listar todos los usuarios desde la base de datos
             $listadoVentas = $transaccion -> obtenerVentas();
-
             //Incluir la vista
             require_once "Vistas/Usuario/Ventas.html";
+        }
+
+        public function bloqueos(){
+
+            //Instanciar el objeto
+            $usuarioBloqueo = new UsuarioBloqueo();
+            //Construir el objeto
+            $usuarioBloqueo -> setIdBloqueador($_SESSION['loginexitoso'] -> id);
+            //Listar todos los usuarios desde la base de datos
+            $listadoBloqueos = $usuarioBloqueo -> obtenerBloqueosPorUsuario();
+
+            //Incluir la vista
+            require_once "Vistas/Usuario/Bloqueos.html";
         }
 
         /*

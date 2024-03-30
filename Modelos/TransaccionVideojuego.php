@@ -8,7 +8,7 @@
         private $unidades;
         private $nombreVideojuego;
         private $precioVideojuego;
-        private $categoriaVideojuego;
+        private $usoVideojuego;
         private $consolaVideojuego;
         private $db;
 
@@ -70,12 +70,12 @@
             return $this;
         }
 
-        public function getCategoriaVideojuego(){
-            return $this->categoriaVideojuego;
+        public function getUsoVideojuego(){
+            return $this->usoVideojuego;
         }
 
-        public function setCategoriaVideojuego($categoriaVideojuego){
-            $this->categoriaVideojuego = $categoriaVideojuego;
+        public function setUsoVideojuego($usoVideojuego){
+            $this->usoVideojuego = $usoVideojuego;
             return $this;
         }
 
@@ -96,7 +96,7 @@
             //Construir la consulta
             $consulta = "INSERT INTO transaccionvideojuego VALUES(NULL, {$this -> getIdTransaccion()}, 
                 {$this -> getIdVideojuego()}, {$this -> getUnidades()}, '{$this -> getNombreVideojuego()}', 
-                {$this -> getPrecioVideojuego()}, '{$this -> getCategoriaVideojuego()}', 
+                {$this -> getPrecioVideojuego()}, '{$this -> getUsoVideojuego()}', 
                 '{$this -> getConsolaVideojuego()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);

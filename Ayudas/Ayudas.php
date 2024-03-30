@@ -34,7 +34,7 @@
         Funcion para generar archivo en formato PDF
         */
 
-        public static function pdf(){
+        public static function pdf($detalleCompra){
 
             /*Crear instancia del objeto*/
             $html2pdf = new Html2Pdf();
@@ -43,6 +43,7 @@
             ob_start();
             /*OBS_START(); para */
             ob_end_clean();
+            $detalle = $detalleCompra;
             /*Incluir la vista que contiene la informacion que se quiere pasar a formato PDF*/
             require_once 'Vistas/Compra/Factura.html';
             //Conseguir todo el codigo html que hay dentro de un archivo de PHP
@@ -403,6 +404,9 @@
 
         public static function obtenerUsuarioEnConcreto($id){
 
+            //Incluir el objeto de chat
+            require_once 'Modelos/Usuario.php';
+
             //Instanciar objeto
             $usuario = new Usuario();
             //Construir objeto
@@ -418,6 +422,9 @@
         */
 
         public static function obtenerVideojuegoEnConcreto($id){
+
+            //Incluir el objeto de chat
+            require_once 'Modelos/Videojuego.php';
 
             //Instanciar objeto
             $videojuego = new Videojuego();

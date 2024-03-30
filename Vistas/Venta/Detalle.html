@@ -1,18 +1,18 @@
 <div id="detalleCompraYVenta">
     <h1>Detalle de la venta</h1>
     <h3>Detalles del comprador</h3>
-    <h5>Nombre: Arturo</h5>
-    <h5>Apellido: Garcia</h5>
-    <h5>Telefono: 315789441</h5>
+    <h5>Nombre: <?=$detalle['venta']['nombreComprador']?></h5>
+    <h5>Apellido: <?=$detalle['venta']['apellidoComprador']?></h5>
+    <h5>Telefono: <?=$detalle['venta']['telefonoComprador']?></h5>
     <h3>Detalles del envio</h3>
-    <h5>Departamento: Quindio</h5>
-    <h5>Municipio: Armenia</h5>
-    <h5>Codigo postal: 63003</h5>
-    <h5>Direccion: Universidad del Quindio</h5>
-    <h5>Barrio: Norte</h5>
+    <h5>Departamento: <?=$detalle['venta']['departamentoEnvio']?></h5>
+    <h5>Municipio: <?=$detalle['venta']['municipioEnvio']?></h5>
+    <h5>Codigo postal: <?=$detalle['venta']['codigoPostalEnvio']?></h5>
+    <h5>Direccion: <?=$detalle['venta']['direccionEnvio']?></h5>
+    <h5>Barrio: <?=$detalle['venta']['barrioEnvio']?></h5>
     <h3>Detalles del pago</h3>
-    <h5>Tipo de tarjeta: Credito</h5>
-    <h5>Numero de tarjeta: 12345</h5>
+    <h5>Tipo de tarjeta: <?=$detalle['venta']['tipoTarjetaPago']?></h5>
+    <h5>Numero de tarjeta: <?=$detalle['venta']['numeroTarjetaPago']?></h5>
     <h3>Detalles del estado</h3>
     <label for="estado">Estado</label>
     <select name="estado" id="estado">
@@ -22,23 +22,10 @@
     </select>
     <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-cambiarEstado">Cambiar Estado</a>
     <h3>Videojuegos</h3>
-    <h4>Precio Total: COP 230000</h4>
-    <div class="videojuegoCompraYVenta">
-        <img src="Recursos/ImagenesVideojuegos/rdrII.jpg" alt="Videojuego">
-    </div>
-    <div class="videojuegoCompraYVenta">
-        <img src="Recursos/ImagenesVideojuegos/ff22.jpg" alt="Videojuego">
-    </div>
-    <div class="videojuegoCompraYVenta">
-        <img src="Recursos/ImagenesVideojuegos/nba2k.jpg" alt="Videojuego">
-    </div>
-    <div class="videojuegoCompraYVenta">
-        <img src="Recursos/ImagenesVideojuegos/codmwII.jpg" alt="Videojuego">
-    </div>
-    <div class="videojuegoCompraYVenta">
-        <img src="Recursos/ImagenesVideojuegos/dbk.jpg" alt="Videojuego">
-    </div>
-    <div class="videojuegoCompraYVenta">
-        <img src="Recursos/ImagenesVideojuegos/gtaV.jpg" alt="Videojuego">
-    </div>
+    <h4>Precio Total: COP <?=$detalle['venta']['totalTransaccion']?></h4>
+    <?php foreach ($detalle['venta']['videojuegos'] as $videojuego) : ?>
+        <div class="videojuegoCompraYVenta">
+            <img src="Recursos/ImagenesVideojuegos/<?=$videojuego['imagenVideojuego']?>" alt="Videojuego">
+        </div>
+    <?php endforeach; ?>
 </div>

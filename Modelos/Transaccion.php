@@ -367,10 +367,12 @@
         }
 
         public function detalleCompra(){
-            $consulta = "SELECT t.nombreVendedor AS 'nombreVendedor', t.apellidoVendedor AS 'apellidoVendedor', t.telefonoVendedor AS 'telefonoVendedor', t.departamento AS 'departamentoEnvio', t.municipio AS 'municipioEnvio', t.codigoPostal AS 'codigoPostalEnvio', t.direccion AS 'direccionEnvio', t.barrio AS 'barrioEnvio', tt.nombre AS 'tipoTarjetaPago', p.numeroTarjeta AS 'numeroTarjetaPago', te.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.foto AS 'imagenVideojuego'
+            $consulta = "SELECT t.nombreVendedor AS 'nombreVendedor', t.apellidoVendedor AS 'apellidoVendedor', t.telefonoVendedor AS 'telefonoVendedor', t.departamento AS 'departamentoEnvio', t.municipio AS 'municipioEnvio', t.codigoPostal AS 'codigoPostalEnvio', t.direccion AS 'direccionEnvio', t.barrio AS 'barrioEnvio', tt.nombre AS 'tipoTarjetaPago', p.numeroTarjeta AS 'numeroTarjetaPago', te.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.nombre AS 'nombreVideojuegoCompra', u.nombre AS 'usoVideojuegoCompra', c.nombre AS 'consolaVideojuegoCompra', v.precio AS 'precioVideojuegoCompra', t.numeroFactura AS 'factura'
                 FROM TransaccionVideojuego tv
                 INNER JOIN Transacciones t ON t.id = tv.idTransaccion
                 INNER JOIN Videojuegos v ON v.id = tv.idVideojuego
+                INNER JOIN Consolas c ON c.id = v.idConsola
+                INNER JOIN Usos u ON u.id = v.idUso
                 INNER JOIN Pagos p ON p.id = t.idPago
                 INNER JOIN Tarjetas tt ON p.idTarjeta = tt.id
                 INNER JOIN Estados te ON t.idEstado = te.id
@@ -388,6 +390,7 @@
                 if (!isset($informacionCompra['compra'])) {
                     // Si no se ha almacenado, almacenar la información del usuario
                     $informacionCompra['compra'] = array(
+                        'factura' => $fila->factura,
                         'nombreVendedor' => $fila->nombreVendedor,
                         'apellidoVendedor' => $fila->apellidoVendedor,
                         'telefonoVendedor' => $fila->telefonoVendedor,
@@ -406,13 +409,64 @@
         
                 // Almacenar la información del videojuego en el array de videojuegos del usuario
                 $informacionCompra['compra']['videojuegos'][] = array(
-                    'imagenVideojuego' => $fila->imagenVideojuego
+                    'nombreVideojuegoCompra' => $fila->nombreVideojuegoCompra,
+                    'usoVideojuegoCompra' => $fila->usoVideojuegoCompra,
+                    'consolaVideojuegoCompra' => $fila->consolaVideojuegoCompra,
+                    'precioVideojuegoCompra' => $fila->precioVideojuegoCompra
                 );
             }
         
             // Retornar la información del usuario y sus videojuegos
             return $informacionCompra;
-        }        
+        }   
+        
+        public function detalleVenta(){
+            $consulta = "SELECT t.nombreComprador AS 'nombreComprador', t.apellidoComprador AS 'apellidoComprador', t.telefonoComprador AS 'telefonoComprador', t.departamento AS 'departamentoEnvio', t.municipio AS 'municipioEnvio', t.codigoPostal AS 'codigoPostalEnvio', t.direccion AS 'direccionEnvio', t.barrio AS 'barrioEnvio', tt.nombre AS 'tipoTarjetaPago', p.numeroTarjeta AS 'numeroTarjetaPago', te.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.foto AS 'imagenVideojuego'
+                FROM TransaccionVideojuego tv
+                INNER JOIN Transacciones t ON t.id = tv.idTransaccion
+                INNER JOIN Videojuegos v ON v.id = tv.idVideojuego
+                INNER JOIN Pagos p ON p.id = t.idPago
+                INNER JOIN Tarjetas tt ON p.idTarjeta = tt.id
+                INNER JOIN Estados te ON t.idEstado = te.id
+                WHERE t.numeroFactura = {$this -> getNumeroFactura()}";
+        
+            // Ejecutar la consulta
+            $resultados = $this->db->query($consulta);
+        
+            // Array para almacenar la información del usuario y sus videojuegos
+            $informacionVenta = array();
+        
+            // Recorrer los resultados de la consulta
+            while ($fila = $resultados->fetch_object()) {
+                // Verificar si ya se ha almacenado la información del usuario
+                if (!isset($informacionVenta['venta'])) {
+                    // Si no se ha almacenado, almacenar la información del usuario
+                    $informacionVenta['venta'] = array(
+                        'nombreComprador' => $fila->nombreComprador,
+                        'apellidoComprador' => $fila->apellidoComprador,
+                        'telefonoComprador' => $fila->telefonoComprador,
+                        'departamentoEnvio' => $fila->departamentoEnvio,
+                        'municipioEnvio' => $fila->municipioEnvio,
+                        'codigoPostalEnvio' => $fila->codigoPostalEnvio,
+                        'direccionEnvio' => $fila->direccionEnvio,
+                        'barrioEnvio' => $fila->barrioEnvio,
+                        'tipoTarjetaPago' => $fila->tipoTarjetaPago,
+                        'numeroTarjetaPago' => $fila->numeroTarjetaPago,
+                        'tipoEstadoTransaccion' => $fila->tipoEstadoTransaccion,
+                        'totalTransaccion' => $fila->totalTransaccion,
+                        'videojuegos' => array() // Inicializar un array para almacenar los videojuegos del usuario
+                    );
+                }
+        
+                // Almacenar la información del videojuego en el array de videojuegos del usuario
+                $informacionVenta['venta']['videojuegos'][] = array(
+                    'imagenVideojuego' => $fila->imagenVideojuego
+                );
+            }
+        
+            // Retornar la información del usuario y sus videojuegos
+            return $informacionVenta;
+        }   
     }
 
 ?>

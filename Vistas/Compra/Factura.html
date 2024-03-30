@@ -1,0 +1,41 @@
+<div id="detalleCompraYVenta">
+    <img src="Recursos/Logotipos/Logo.png" alt="logo compra exitosa" style="width: 50px; height: 50px; float: right; margin-top: 20px; margin-right: 20px;">
+    <h1 style="text-align: center;">Factura N = 123456</h1>
+    <h3>Detalles del envio</h3>
+    <h5>Departamento: <?=$detalle['compra']['departamentoEnvio']?></h5>
+    <h5>Municipio: <?=$detalle['compra']['municipioEnvio']?></h5>
+    <h5>Codigo postal: <?=$detalle['compra']['codigoPostalEnvio']?></h5>
+    <h5>Direccion: <?=$detalle['compra']['direccionEnvio']?></h5>
+    <h5>Barrio: <?=$detalle['compra']['barrioEnvio']?></h5>
+    <h3>Detalles del pago</h3>
+    <h5>Tipo de tarjeta: <?=$detalle['compra']['tipoTarjetaPago']?></h5>
+    <h5>Numero de tarjeta: <?=$detalle['compra']['numeroTarjetaPago']?></h5>
+    <h3>Detalles del estado</h3>
+    <h5>Pendiente</h5>
+    <a style="color: white;" href="<?=rutaInicio?><?=transaccion?><?=generarPdf?>&factura=<?=$detalle['compra']['factura']?>" class="button-generarPdf">Generar PDF</a>
+    <h3>Videojuegos</h3>
+    <div id="factura">
+        <table style="width: 92%; border-collapse: collapse; margin-bottom: 40px;">
+            <tr>
+                <th style="background-color: #f2f2f2; border: 1px solid #ddd; padding: 8px; text-align: left;">Nombre</th>
+                <th style="background-color: #f2f2f2; border: 1px solid #ddd; padding: 8px; text-align: left;">Uso</th>
+                <th style="background-color: #f2f2f2; border: 1px solid #ddd; padding: 8px; text-align: left;">Consola</th>
+                <th style="background-color: #f2f2f2; border: 1px solid #ddd; padding: 8px; text-align: left;">Precio</th>
+            </tr>
+            <?php foreach ($detalle['compra']['videojuegos'] as $videojuego) : ?>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$videojuego['nombreVideojuegoCompra']?></td>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$videojuego['usoVideojuegoCompra']?></td>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$videojuego['consolaVideojuegoCompra']?></td>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">$ <?=$videojuego['precioVideojuegoCompra']?></td>
+                </tr>
+            <?php endforeach; ?>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"></td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"></td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: left; font-weight: bold; color: green; font-size: 15px;">Total</td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: left; font-weight: bold; color: green; font-size: 15px;">$ 560000</td>
+            </tr>
+        </table>
+    </div>
+</div>
