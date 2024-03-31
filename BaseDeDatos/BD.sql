@@ -35,7 +35,7 @@ CREATE TABLE usuarios (
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT uq_correo UNIQUE(correo),
     CONSTRAINT usuarios_pk PRIMARY KEY ( id )
-)ENGINE = InnoDB;
+);
 
 /*
 Crear tabla administradores
@@ -54,18 +54,7 @@ CREATE TABLE administradores (
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT uq_correo UNIQUE(correo),
     CONSTRAINT administradores_pk PRIMARY KEY ( id )
-)ENGINE = InnoDB;
-
-/*
-Crea tabla de tipo de consolas de videojuego
-*/
-
-CREATE TABLE consolas (
-    id     INTEGER auto_increment NOT NULL,
-    nombre VARCHAR(200) NOT NULL,
-    CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT consolas_pk PRIMARY KEY ( id )
-)ENGINE = InnoDB;
+);
 
 /*
 Crea tabla de categorias
@@ -76,7 +65,18 @@ CREATE TABLE categorias (
     nombre VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT categorias_pk PRIMARY KEY ( id )
-)ENGINE = InnoDB;
+);
+
+/*
+Crea tabla de tipo de consolas de videojuego
+*/
+
+CREATE TABLE consolas (
+    id     INTEGER auto_increment NOT NULL,
+    nombre VARCHAR(200) NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT consolas_pk PRIMARY KEY ( id )
+);
 
 /*
 Crea tabla de tipo de usos de videojuego
@@ -87,7 +87,7 @@ CREATE TABLE usos (
     nombre VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT usos_pk PRIMARY KEY ( id )
-)ENGINE = InnoDB;
+);
 
 /*
 Crear tabla videoujuegos
@@ -105,9 +105,9 @@ CREATE TABLE videojuegos (
     stock           INTEGER NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT videojuegos_pk PRIMARY KEY ( id ),
-    CONSTRAINT videojuegos_consola_fk FOREIGN KEY ( idconsola ) REFERENCES consolas ( id ),
-    CONSTRAINT videojuegos_uso_fk FOREIGN KEY ( iduso ) REFERENCES usos ( id )
-)ENGINE = InnoDB;
+    CONSTRAINT videojuegos_consola_fk FOREIGN KEY ( idConsola ) REFERENCES consolas ( id ),
+    CONSTRAINT videojuegos_uso_fk FOREIGN KEY ( idUso ) REFERENCES usos ( id )
+);
 
 /*
 Crea tabla intermedia de usuario y videojuego
@@ -119,9 +119,9 @@ CREATE TABLE usuariovideojuego (
     idVideojuego INTEGER NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT usuariovideojuego_pk PRIMARY KEY ( id ),
-    CONSTRAINT usuariovideojuego_usuario_fk FOREIGN KEY ( idusuario ) REFERENCES usuarios ( id ),
-    CONSTRAINT usuariovideojuego_videojuego_fk FOREIGN KEY ( idvideojuego ) REFERENCES videojuegos ( id )
-)ENGINE = InnoDB;
+    CONSTRAINT usuariovideojuego_usuario_fk FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id ),
+    CONSTRAINT usuariovideojuego_videojuego_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
+);
 
 /*
 Crear tabla para tipo de tarjetas
@@ -132,7 +132,7 @@ CREATE TABLE tarjetas (
     nombre VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT tarjetas_pk PRIMARY KEY ( id )
-)ENGINE = InnoDB;
+);
 
 /*
 Crear tabla de pagos
@@ -147,8 +147,8 @@ CREATE TABLE pagos (
     fechaExpedicion DATE NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT pagos_pk PRIMARY KEY ( id ),
-    CONSTRAINT pagos_tarjeta_fk FOREIGN KEY ( idtarjeta ) REFERENCES tarjetas ( id )
-)ENGINE = InnoDB;
+    CONSTRAINT pagos_tarjeta_fk FOREIGN KEY ( idTarjeta ) REFERENCES tarjetas ( id )
+);
 
 /*
 Crear tabla para tipo de estados de la transacción
@@ -159,7 +159,7 @@ CREATE TABLE estados (
     nombre VARCHAR(250) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT estados_pk PRIMARY KEY ( id )
-)ENGINE = InnoDB;
+);
 
 /*
 Crear tabla para las transacciones
@@ -195,7 +195,7 @@ CREATE TABLE transacciones (
     CONSTRAINT transacciones_vendedor_fk FOREIGN KEY ( idVendedor ) REFERENCES usuarios ( id ),
     CONSTRAINT transacciones_pago_fk FOREIGN KEY ( idPago ) REFERENCES pagos ( id ),
     CONSTRAINT transacciones_estado_fk FOREIGN KEY ( idEstado ) REFERENCES estados ( id )
-)ENGINE = InnoDB;
+);
 
 /*
 Crea tabla intermedia de usuario y videojuego
@@ -213,8 +213,8 @@ CREATE TABLE transaccionvideojuego (
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT transaccionvideojuego_pk PRIMARY KEY ( id ),
     CONSTRAINT transaccionvideojuego_transaccion_fk FOREIGN KEY ( idTransaccion ) REFERENCES transacciones ( id ),
-    CONSTRAINT transaccionvideojuego_videojuego_fk FOREIGN KEY ( idvideojuego ) REFERENCES videojuegos ( id )
-)ENGINE = InnoDB;
+    CONSTRAINT transaccionvideojuego_videojuego_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
+);
 
 /*
 Crea tabla intermedia de videojuego y categoria
@@ -226,9 +226,9 @@ CREATE TABLE videojuegocategoria (
     idCategoria  INTEGER NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT videojuegocategoria_pk PRIMARY KEY ( id ),
-    CONSTRAINT videojuegocategoria_categoria_fk FOREIGN KEY ( idCategoria ) REFERENCES categorias ( id ) ON DELETE CASCADE,
+    CONSTRAINT videojuegocategoria_categoria_fk FOREIGN KEY ( idCategoria ) REFERENCES categorias ( id ),
     CONSTRAINT videojuegocategoria_videojuego_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
-)ENGINE = InnoDB;
+);
 
 /*
 Crea tabla de comentarios
@@ -243,7 +243,7 @@ CREATE TABLE comentarios (
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT comentarios_pk PRIMARY KEY ( id ),
     CONSTRAINT comentarios_usuario_fk FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id )
-)ENGINE = InnoDB;
+);
 
 /*
 Crea tabla de comentariovideojuego
@@ -257,7 +257,7 @@ CREATE TABLE comentariovideojuego (
     CONSTRAINT comentariovideojuego_pk PRIMARY KEY ( id ),
     CONSTRAINT comentariovideojuego_comentario_fk FOREIGN KEY ( idComentario ) REFERENCES comentarios ( id ),
     CONSTRAINT comentariovideojuego_videojuego_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
-)ENGINE = InnoDB;
+);
 
 /*
 Crear tabla de carritos
@@ -269,7 +269,7 @@ CREATE TABLE carritos (
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT carritos_id PRIMARY KEY ( id ),
     CONSTRAINT usuario_carrito FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id )
-)ENGINE = InnoDB;
+);
 
 /*
 Crear tabla de carritovideojuego
@@ -285,7 +285,7 @@ CREATE TABLE carritovideojuego (
     CONSTRAINT carritovideojuego_id PRIMARY KEY ( id ),
     CONSTRAINT carritovideojuego_carrito FOREIGN KEY ( idCarrito ) REFERENCES carritos ( id ),
     CONSTRAINT carritovideojuego_videojuego FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
-)ENGINE = InnoDB;
+);
 
 /*
 Crear tabla de favoritos
@@ -297,7 +297,7 @@ CREATE TABLE favoritos (
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT favoritos_id PRIMARY KEY ( id ),
     CONSTRAINT usuario_favorito FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id )
-)ENGINE = InnoDB;
+);
 
 /*
 Crear tabla de favoritovideojuego
@@ -312,7 +312,7 @@ CREATE TABLE videojuegofavorito (
     CONSTRAINT favoritovideojuego_id PRIMARY KEY ( id ),
     CONSTRAINT favoritovideojuego_favorito FOREIGN KEY ( idFavorito ) REFERENCES favoritos ( id ),
     CONSTRAINT favoritovideojuego_videojuego FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
-)ENGINE = InnoDB;
+);
 
 /*
 Crear tabla de chats
@@ -323,7 +323,7 @@ CREATE TABLE chats (
     fechaCreacion DATE NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT chats_id PRIMARY KEY ( id )
-)ENGINE = InnoDB;
+);
 
 /*
 Crear tabla de usuario mensaje chat
@@ -340,7 +340,7 @@ CREATE TABLE usuariochat (
     CONSTRAINT usuariomensajechat_remitente FOREIGN KEY ( idRemitente ) REFERENCES usuarios ( id ),
     CONSTRAINT usuariomensajechat_destinatario FOREIGN KEY ( idDestinatario ) REFERENCES usuarios ( id ),
     CONSTRAINT usuariomensajechat_chat FOREIGN KEY ( idChat ) REFERENCES chats ( id )
-)ENGINE = InnoDB;
+);
 
 /*
 Crear tabla de mensajes
@@ -359,7 +359,7 @@ CREATE TABLE mensajes (
     CONSTRAINT mensaje_remitente FOREIGN KEY ( idRemitente ) REFERENCES usuarios ( id ),
     CONSTRAINT mensaje_destinatario FOREIGN KEY ( idDestinatario ) REFERENCES usuarios ( id ),
     CONSTRAINT mensaje_chat FOREIGN KEY ( idChat ) REFERENCES chats ( id )
-)ENGINE = InnoDB;
+);
 
 /*
 Crear tabla de bloqueos
@@ -372,7 +372,7 @@ CREATE TABLE bloqueos (
     horaBloqueo   TIME NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT bloqueos_id PRIMARY KEY ( id )
-)ENGINE = InnoDB;
+);
 /*
 Crear tabla de usuariosbloqueados
 */
@@ -384,10 +384,10 @@ CREATE TABLE usuariobloqueo (
     idBloqueo  INTEGER NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT usuariobloqueo_id PRIMARY KEY ( id ),
-    CONSTRAINT usuariobloqueo_bloqueo FOREIGN KEY ( idBloqueo ) REFERENCES bloqueos ( id ) ON DELETE CASCADE,
+    CONSTRAINT usuariobloqueo_bloqueo FOREIGN KEY ( idBloqueo ) REFERENCES bloqueos ( id ),
     CONSTRAINT usuariobloqueo_bloqueador FOREIGN KEY ( idBloqueador ) REFERENCES usuarios ( id ),
     CONSTRAINT usuariobloqueo_bloqueado FOREIGN KEY ( idBloqueado ) REFERENCES usuarios ( id )
-)ENGINE = InnoDB;
+);
 
 /*
 Crear usuarios

@@ -1,10 +1,12 @@
-<div id="loginYRegistro">
-    <h1 class="tituloCreacionGestiones">Actualizar estado?</h1>
-    <form action="<?=rutaInicio?><?=estado?><?=actualizarEstado?>&id=<?=$estadoUnico -> id?>" method="post">
-        <div id="bloqueTextoRegistro">
-            <label for="nombreestact">Nombre</label>
-            <input type="text" name="nombreestact" value="<?=$estadoUnico -> nombre?>" required>
-        </div>
-        <input type="submit" class="btnRegistro" value="Actualizar">
-    </form>
+<div id="contenidoCentral">     
+   <div id="loginYRegistro">
+        <h1 class="tituloCreacionGestiones">Actualizar estado?</h1>
+        <form action="<?=rutaInicio?><?=estado?><?=actualizarEstado?>&id=<?=$estadoUnico -> id?>" method="post">
+            <div id="bloqueTextoRegistro">
+                <label for="nombreestact">Nombre</label>
+                <input type="text" name="nombreestact" value="<?=$estadoUnico -> nombre?>" required>
+            </div>
+            <input type="submit" class="btnRegistro" value="Actualizar">
+        </form>
+    </div>
 </div>

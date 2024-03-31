@@ -491,18 +491,21 @@
                 //Comprobar si el dato existe
                 $consola = isset($_POST['consolavid']) ? $_POST['consolavid'] : false;
                 $uso = isset($_POST['usovid']) ? $_POST['usovid'] : false;
+                $categoria = isset($_POST['categoriavid']) ? $_POST['categoriavid'] : false;
                 $minimo = isset($_POST['minimo']) ? $_POST['minimo'] : false;
                 $maximo = isset($_POST['maximo']) ? $_POST['maximo'] : false;
 
                 //Comprobar el dato exsiten
-                if($consola && $uso){
+                if($consola && $uso && $categoria){
 
                     //Instaciar el objeto
                     $videojuego = new Videojuego();
                     $videojuego -> setIdConsola($consola);
                     $videojuego -> setIdUso($uso);
                     //Traer los datos de la consulta
-                    $listadoFiltro = $videojuego -> filtro($minimo, $maximo);
+
+                    $listadoFiltro = $videojuego -> filtro($minimo, $maximo, $categoria);
+                    
                     require_once 'Vistas/Videojuego/Filtro.html';
                     
                 }

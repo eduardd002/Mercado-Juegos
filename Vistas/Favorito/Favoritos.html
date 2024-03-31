@@ -1,27 +1,29 @@
-<?php if(isset($_SESSION['guardarfavoritoacierto'])) : ?>
-    <div class="alerta alerta-acierto">
-        <?=$_SESSION['guardarfavoritoacierto']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('guardarfavoritoacierto'); ?>
+<div id="contenidoCentral">      
+    <?php if(isset($_SESSION['guardarfavoritoacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['guardarfavoritoacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('guardarfavoritoacierto'); ?>
 
-<div id="carrito">
-    <h1>Favoritos</h1>
-    <table>
-        <tr>
-            <th>Imagen</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-        </tr>
-        <tr>
-            <td><img src="Recursos/ImagenesVideojuegos/sp.jpg" alt="Logo tienda" class="imgCarrito"></td>
-            <td>Spider Man Miles Morales</td>
-            <td>$ 200000</td>
-        </tr>
-        <tr>
-            <td><img src="Recursos/ImagenesVideojuegos/fte.jpg" alt="Logo tienda" class="imgCarrito"></td>
-            <td>Fortnite</td>
-            <td>$ 180000</td>
-        </tr>
-    </table>
+    <div id="carrito">
+        <h1>Favoritos</h1>
+        <table>
+            <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+            </tr>
+            <tr>
+                <td><img src="Recursos/ImagenesVideojuegos/sp.jpg" alt="Logo tienda" class="imgCarrito"></td>
+                <td>Spider Man Miles Morales</td>
+                <td>$ 200000</td>
+            </tr>
+            <tr>
+                <td><img src="Recursos/ImagenesVideojuegos/fte.jpg" alt="Logo tienda" class="imgCarrito"></td>
+                <td>Fortnite</td>
+                <td>$ 180000</td>
+            </tr>
+        </table>
+    </div>
 </div>

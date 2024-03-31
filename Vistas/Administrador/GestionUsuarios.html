@@ -1,23 +1,25 @@
-<?php if(isset($_SESSION['eliminaradministradorusuarioerror'])) : ?>
-    <div class="alerta alerta-adminError">
-        <?=$_SESSION['eliminaradministradorusuarioerror']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('eliminaradministradorusuarioerror'); ?>
-
-<div id="gestiones">
-    <h1>Gestion de usuarios</h1>
-    <?php if(mysqli_num_rows($listadoUsuarios) == 0) : ?>
-        <h1>No hay usuarios creadas</h1>
-    <?php else : ?>
-        <?php while($usuarios = $listadoUsuarios -> fetch_object()) : ?>
-            <div class="gestionUsuariosLista">
-                <img src="Recursos/ImagenesUsuarios/<?=$usuarios -> foto?>">
-                <h3><?=$usuarios -> nombre?></h3>
-                <h3><?=$usuarios -> apellido?></h3>
-                <h4><?=$usuarios -> fechaRegistro?></h4>
-                <a href="<?=rutaInicio?><?=administrador?><?=eliminarUsuarioAdministrador?>&id=<?=$usuarios -> id?>" class="button button-gestionUsuario">Eliminar cuenta</a>
-            </div>
-        <?php endwhile; ?>
+<div id="contenidoCentral">
+   <?php if(isset($_SESSION['eliminaradministradorusuarioerror'])) : ?>
+        <div class="alerta alerta-adminError">
+            <?=$_SESSION['eliminaradministradorusuarioerror']; ?>
+        </div>
     <?php endif; ?>
+    <?php Ayudas::eliminarSesion('eliminaradministradorusuarioerror'); ?>
+
+    <div id="gestiones">
+        <h1>Gestion de usuarios</h1>
+        <?php if(mysqli_num_rows($listadoUsuarios) == 0) : ?>
+            <h1>No hay usuarios creadas</h1>
+        <?php else : ?>
+            <?php while($usuarios = $listadoUsuarios -> fetch_object()) : ?>
+                <div class="gestionUsuariosLista">
+                    <img src="Recursos/ImagenesUsuarios/<?=$usuarios -> foto?>">
+                    <h3><?=$usuarios -> nombre?></h3>
+                    <h3><?=$usuarios -> apellido?></h3>
+                    <h4><?=$usuarios -> fechaRegistro?></h4>
+                    <a href="<?=rutaInicio?><?=administrador?><?=eliminarUsuarioAdministrador?>&id=<?=$usuarios -> id?>" class="button button-gestionUsuario">Eliminar cuenta</a>
+                </div>
+            <?php endwhile; ?>
+        <?php endif; ?>
+    </div>
 </div>

@@ -190,7 +190,7 @@
         public function eliminar(){
 
             //Construir la consulta
-            $consulta = "DELETE FROM videojuegos WHERE id = {$this -> id}";
+            $consulta = "DELETE FROM videojuegos WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $eliminado = $this -> db -> query($consulta);
             var_dump($eliminado);
@@ -231,41 +231,49 @@
             return $resultado;
         }
 
-        public function filtro($minimo, $maximo){
+        public function filtro($minimo, $maximo, $idCategoria){
             // Construir la consulta inicial sin cláusula WHERE
-            $consulta = "SELECT * FROM videojuegos";
-        
+            $consulta = "SELECT DISTINCT v.* 
+            FROM videojuegocategoria cv
+            INNER JOIN videojuegos v ON v.id = cv.idVideojuego
+            INNER JOIN categorias c ON c.id = cv.idCategoria";
+            
             // Array para almacenar las condiciones de filtro
             $condiciones = [];
-        
+            
             // Aplicar filtro por idConsola si está establecido
             if($this->getIdConsola() != 'null'){
-                $condiciones[] = "idConsola = {$this->getIdConsola()}";
+                $condiciones[] = "v.idConsola = {$this->getIdConsola()}";
             }
-        
+            
             // Aplicar filtro por idUso si está establecido
             if($this->getIdUso() != 'null'){
-                $condiciones[] = "idUso = {$this->getIdUso()}";
+                $condiciones[] = "v.idUso = {$this->getIdUso()}";
             }
-        
+            
             // Aplicar filtro por precio mínimo si está establecido
             if($minimo != ''){
-                $condiciones[] = "precio >= {$minimo}";
+                $condiciones[] = "v.precio >= {$minimo}";
             }
-        
+            
             // Aplicar filtro por precio máximo si está establecido
             if($maximo != ''){
-                $condiciones[] = "precio <= {$maximo}";
+                $condiciones[] = "v.precio <= {$maximo}";
             }
         
+            // Aplicar filtro por categoría si está establecido
+            if($idCategoria != 'null'){
+                $condiciones[] = "cv.idCategoria = {$idCategoria}";
+            }
+            
             // Si hay condiciones, agregar la cláusula WHERE
             if (!empty($condiciones)) {
                 $consulta .= " WHERE " . implode(" AND ", $condiciones);
             }
-        
+            
             // Ejecutar la consulta
             $resultado = $this->db->query($consulta);
-        
+            
             // Retornar resultado
             return $resultado;
         }

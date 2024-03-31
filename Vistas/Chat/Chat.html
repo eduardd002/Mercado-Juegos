@@ -1,57 +1,59 @@
-<?php if(isset($_SESSION['mensajeenviadoerror'])) : ?>
-    <div class="alerta alerta-error">
-        <?=$_SESSION['mensajeenviadoerror']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('mensajeenviadoerror'); ?>
+<div id="contenidoCentral">     
+   <?php if(isset($_SESSION['mensajeenviadoerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['mensajeenviadoerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('mensajeenviadoerror'); ?>
 
-<div id="chatVendedor">
-    <h1 class="tituloCreacionGestiones">Chat</h1>
-    <div id="seccionUsuarios">
-        <?php while($chats = $listadoChats -> fetch_object()) : ?>
-            <a href="<?=rutaInicio?><?=chat?><?=verMensajes?>&idContacto=<?=$chats -> idUsuarioChat?>">
-                <div id="usuarioChat">
-                    <img src="Recursos/ImagenesUsuarios/<?=$chats -> fotoChat?>" alt="Usuario">
-                    <h2><?=$chats -> nombreChat?></h2>
-                    <p><?=$chats -> apellidoChat?></p>
-                </div>
-            </a>
-        <?php endwhile; ?>
-    </div>
-    <div id="seccionChat">
-        <form action="<?=rutaInicio?><?=chat?><?=enviarMensaje?>" method="post">
-            <div id="panelChatVendedor">
-                <?php if(!isset($listadoMensajes)) : ?>
-                    <h2>Presiona un chat para comenzar una conversacion</h2>
-                <?php else : ?>
-                        <?php while($mensajes = $listadoMensajes -> fetch_object()) : ?>
-                            <?php if((($mensajes -> idRemitente == $_SESSION['loginexitoso'] -> id) &&
-                                ($mensajes -> idDestinatario == $_SESSION['mensajito'])) || 
-                                (($mensajes -> idDestinatario == $_SESSION['loginexitoso'] -> id) && 
-                                ($mensajes -> idRemitente == $_SESSION['mensajito']))) : ?>  
-                                <?php if($mensajes -> idRemitente == $_SESSION['loginexitoso'] -> id) : ?>
-                                    <div id="mensajeenviado">
-                                        <h3><?=$mensajes -> fechaEnvio?></h3>
-                                        <h3><?=$mensajes -> horaEnvio?></h3>
-                                        <p><?=Ayudas::desencriptarContenido($mensajes -> contenido)?></p>
-                                    </div>
-                                <?php else : ?>
-                                    <div id="mensajerecibido">
-                                        <h3><?=$mensajes -> fechaEnvio?></h3>
-                                        <h3><?=$mensajes -> horaEnvio?></h3>
-                                        <p><?=Ayudas::desencriptarContenido($mensajes -> contenido)?></p>
-                                    </div>
+    <div id="chatVendedor">
+        <h1 class="tituloCreacionGestiones">Chat</h1>
+        <div id="seccionUsuarios">
+            <?php while($chats = $listadoChats -> fetch_object()) : ?>
+                <a href="<?=rutaInicio?><?=chat?><?=verMensajes?>&idContacto=<?=$chats -> idUsuarioChat?>">
+                    <div id="usuarioChat">
+                        <img src="Recursos/ImagenesUsuarios/<?=$chats -> fotoChat?>" alt="Usuario">
+                        <h2><?=$chats -> nombreChat?></h2>
+                        <p><?=$chats -> apellidoChat?></p>
+                    </div>
+                </a>
+            <?php endwhile; ?>
+        </div>
+        <div id="seccionChat">
+            <form action="<?=rutaInicio?><?=chat?><?=enviarMensaje?>" method="post">
+                <div id="panelChatVendedor">
+                    <?php if(!isset($listadoMensajes)) : ?>
+                        <h2>Presiona un chat para comenzar una conversacion</h2>
+                    <?php else : ?>
+                            <?php while($mensajes = $listadoMensajes -> fetch_object()) : ?>
+                                <?php if((($mensajes -> idRemitente == $_SESSION['loginexitoso'] -> id) &&
+                                    ($mensajes -> idDestinatario == $_SESSION['mensajito'])) || 
+                                    (($mensajes -> idDestinatario == $_SESSION['loginexitoso'] -> id) && 
+                                    ($mensajes -> idRemitente == $_SESSION['mensajito']))) : ?>  
+                                    <?php if($mensajes -> idRemitente == $_SESSION['loginexitoso'] -> id) : ?>
+                                        <div id="mensajeenviado">
+                                            <h3><?=$mensajes -> fechaEnvio?></h3>
+                                            <h3><?=$mensajes -> horaEnvio?></h3>
+                                            <p><?=Ayudas::desencriptarContenido($mensajes -> contenido)?></p>
+                                        </div>
+                                    <?php else : ?>
+                                        <div id="mensajerecibido">
+                                            <h3><?=$mensajes -> fechaEnvio?></h3>
+                                            <h3><?=$mensajes -> horaEnvio?></h3>
+                                            <p><?=Ayudas::desencriptarContenido($mensajes -> contenido)?></p>
+                                        </div>
+                                    <?php endif; ?>
                                 <?php endif; ?>
-                            <?php endif; ?>
-                        <?php endwhile; ?>
-                <?php endif; ?>
-            </div>
-            <?php if(isset($listadoMensajes)) : ?>
-                <div id="campoEnviarMensajeVendedor">
-                    <input type="text" name="mensaje" required>
+                            <?php endwhile; ?>
+                    <?php endif; ?>
                 </div>
-                <input type="submit" class="" value="Enviar">
-            <?php endif; ?>
-        </form>
+                <?php if(isset($listadoMensajes)) : ?>
+                    <div id="campoEnviarMensajeVendedor">
+                        <input type="text" name="mensaje" required>
+                    </div>
+                    <input type="submit" class="" value="Enviar">
+                <?php endif; ?>
+            </form>
+        </div>
     </div>
 </div>

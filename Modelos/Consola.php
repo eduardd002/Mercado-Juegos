@@ -83,7 +83,7 @@
 
         public function eliminar(){
             //Construir la consulta
-            $consulta = "DELETE FROM consolas WHERE id = {$this -> id}";
+            $consulta = "DELETE FROM consolas WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $eliminado = $this -> db -> query($consulta);
             //Crear bandera

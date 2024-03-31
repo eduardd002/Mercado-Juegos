@@ -1,10 +1,10 @@
-<?php if(isset($_SESSION['guardarbloqueoerror'])) : ?>
-    <div class="alerta alerta-error">
-        <?=$_SESSION['guardarbloqueoerror']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('guardarbloqueoerror'); ?>
-
+<div id="contenidoCentral">      
+    <?php if(isset($_SESSION['guardarbloqueoerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['guardarbloqueoerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('guardarbloqueoerror'); ?>
     <div id="loginYRegistro">
         <h1>Perfil de <?=$listaDatosUsuario['usuario']['nombreUsuario']?></h1>
         <h3>Fecha de union: <?=$listaDatosUsuario['usuario']['fechaUsuario']?></h3>
@@ -26,4 +26,4 @@
             </div>
         <?php endforeach; ?>
     </div>
-
+</div>

@@ -35,7 +35,7 @@
                 $desbloqueo = $bloqueo -> eliminar();
 
                 //Incluir la vista
-                require_once 'Vistas/Bloqueo/Bloqueo.html';
+                require_once 'Vistas/Usuario/Bloqueos.html';
             }
         }
 

@@ -1,10 +1,12 @@
-<div id="loginYRegistro">
-    <h1>¿Porque quieres bloquear a <?=$usuario -> nombre?>?</h1>
-    <form action="<?=rutaInicio?><?=bloqueo?><?=guardar?>&idBloqueado=<?=$usuario -> id?>" method="post">
-        <div id="bloqueTextoRegistro">
-            <label for="motivo">Motivos(s)</label>
-            <textarea name="motivo" id="motivo"></textarea>
-        </div>
-        <input type="submit" class="btnRegistro" value="Bloquear">
-    </form>
+<div id="contenidoCentral">      
+    <div id="loginYRegistro">
+        <h1>¿Porque quieres bloquear a <?=$usuario -> nombre?>?</h1>
+        <form action="<?=rutaInicio?><?=bloqueo?><?=guardar?>&idBloqueado=<?=$usuario -> id?>" method="post">
+            <div id="bloqueTextoRegistro">
+                <label for="motivo">Motivos(s)</label>
+                <textarea name="motivo" id="motivo"></textarea>
+            </div>
+            <input type="submit" class="btnRegistro" value="Bloquear">
+        </form>
+    </div>
 </div>

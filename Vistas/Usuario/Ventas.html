@@ -1,26 +1,28 @@
-<?php if(isset($_SESSION['verVentaError'])) : ?>
-    <div class="alerta alerta-error">
-        <?=$_SESSION['verVentaError']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('verVentaError'); ?>
+<div id="contenidoCentral">      
+    <?php if(isset($_SESSION['verVentaError'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['verVentaError']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('verVentaError'); ?>
 
-<div id="carrito">
-    <h1>Mis Ventas</h1>
-    <table>
-        <tr>
-            <th>Factura</th>
-            <th>Fecha</th>
-            <th>Hora</th>
-            <th>Total</th>
-        </tr>
-        <?php while($lista = $listadoVentas -> fetch_object()) : ?>
+    <div id="carrito">
+        <h1>Mis Ventas</h1>
+        <table>
             <tr>
-                <td><a href="<?=rutaInicio?><?=transaccion?><?=verVenta?>&factura=<?=$lista -> numeroFactura?>"><?=$lista -> numeroFactura?></a></td>
-                <td><?=$lista -> fechaRealizacion?></td>
-                <td><?=$lista -> horaRealizacion?></td>
-                <td>$ <?=$lista -> total?></td>
+                <th>Factura</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Total</th>
             </tr>
-        <?php endwhile; ?>
-    </table>
+            <?php while($lista = $listadoVentas -> fetch_object()) : ?>
+                <tr>
+                    <td><a href="<?=rutaInicio?><?=transaccion?><?=verVenta?>&factura=<?=$lista -> numeroFactura?>"><?=$lista -> numeroFactura?></a></td>
+                    <td><?=$lista -> fechaRealizacion?></td>
+                    <td><?=$lista -> horaRealizacion?></td>
+                    <td>$ <?=$lista -> total?></td>
+                </tr>
+            <?php endwhile; ?>
+        </table>
+    </div>
 </div>

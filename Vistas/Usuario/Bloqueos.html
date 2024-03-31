@@ -1,29 +1,35 @@
-<?php if(isset($_SESSION['guardarbloqueoacierto'])) : ?>
-    <div class="alerta alerta-acierto">
-        <?=$_SESSION['guardarbloqueoacierto']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('guardarbloqueoacierto'); ?>
+<div id="contenidoCentral">     
+    <?php if(isset($_SESSION['guardarbloqueoacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['guardarbloqueoacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('guardarbloqueoacierto'); ?>
 
-<div id="carrito">
-    <h1>Mis Bloqueos</h1>
-    <table>
-        <tr>
-            <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Motivo</th>
-            <th>Fecha</th>
-            <th>Hora</th>
-        </tr>
-        <?php while($bloqueos = $listadoBloqueos -> fetch_object()) : ?>
-            <tr>
-                <td><?=$bloqueos -> nombreBloqueado?></td>
-                <td><?=$bloqueos -> apellidoBloqueado?></td>
-                <td><?=$bloqueos -> motivoBloqueo?></td>
-                <td><?=$bloqueos -> fechaBloqueo?></td>
-                <td><?=$bloqueos -> horaBloqueo?></td>
-                <td><a href="<?=rutaInicio?><?=bloqueo?><?=desbloquear?>&idBloqueo=<?=$bloqueos -> idBloqueo?>" class="button button-eliminarBloqueo">Desbloquear</a></td>
-            </tr>
-        <?php endwhile; ?>
-    </table>
+    <?php if(isset($listadoBloqueos)) : ?>
+        <div id="carrito">
+            <h1>Mis Bloqueos</h1>
+            <table>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Motivo</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                </tr>
+                <?php while($bloqueos = $listadoBloqueos -> fetch_object()) : ?>
+                    <tr>
+                        <td><?=$bloqueos -> nombreBloqueado?></td>
+                        <td><?=$bloqueos -> apellidoBloqueado?></td>
+                        <td><?=$bloqueos -> motivoBloqueo?></td>
+                        <td><?=$bloqueos -> fechaBloqueo?></td>
+                        <td><?=$bloqueos -> horaBloqueo?></td>
+                        <td><a href="<?=rutaInicio?><?=bloqueo?><?=desbloquear?>&idBloqueo=<?=$bloqueos -> idBloqueo?>" class="button button-eliminarBloqueo">Desbloquear</a></td>
+                    </tr>
+                <?php endwhile; ?>
+            </table>
+        </div>
+    <?php else : ?>
+    <h1>j</h1>
+    <?php endif; ?>
 </div>

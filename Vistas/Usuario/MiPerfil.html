@@ -1,54 +1,55 @@
-<?php if(isset($_SESSION['actualizarusuarioacierto'])) : ?>
-    <div class="alerta alerta-acierto">
-        <?=$_SESSION['actualizarusuarioacierto']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('actualizarusuarioacierto'); ?>
+<div id="contenidoCentral">      
+    <?php if(isset($_SESSION['actualizarusuarioacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['actualizarusuarioacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizarusuarioacierto'); ?>
 
-<?php if(isset($_SESSION['usuarioactualizado']) && $_SESSION['usuarioactualizado'] == 'Proporciona nuevos datos') : ?>
-    <div class="alerta alerta-error">
-        <?=$_SESSION['usuarioactualizado']; ?>
+    <?php if(isset($_SESSION['usuarioactualizado']) && $_SESSION['usuarioactualizado'] == 'Proporciona nuevos datos') : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['usuarioactualizado']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('usuarioactualizado'); ?>
+    <div id="loginYRegistro">
+        <h1>Mi Perfil</h1>
+        <form action="<?=rutaInicio?><?=usuario?><?=actualizarUsuario?>&id=<?=$_SESSION['loginexitoso'] -> id?>" method="post" enctype="multipart/form-data">
+            <div id="bloqueTextoRegistro">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" value="<?=$usuarioUnico -> nombre?>" required>
+            </div>
+            <img src="Recursos/ImagenesUsuarios/<?=$_SESSION['loginexitoso'] -> foto?>" class="perfilImage" alt="usuario registro">
+            <div id="bloqueTextoRegistro">
+                <label for="apellidos">Apellidos</label>
+                <input type="text" name="apellidos" value="<?=$usuarioUnico -> apellido?>" required>
+            </div>
+            <div id="bloqueTextoRegistro">
+                <label for="email">Email</label>
+                <input type="email" name="email" value="<?=$usuarioUnico -> correo?>" required>
+            </div>
+            <div id="bloqueTextoRegistro">
+                <label for="telefono">Telefono</label>
+                <input type="number" name="telefono" value="<?=$usuarioUnico -> numeroTelefono?>" required>
+            </div>
+            <div id="bloqueTextoRegistro">
+                <label for="password">Contraseña</label>
+                <input type="password" name="password" value="<?=$usuarioUnico -> clave?>" required>
+            </div>
+            <input type="file" accept="image/*">
+            <label class="subirFotoPerfil">*Subir nueva*</label>
+            <div id="bloqueTextoRegistro">
+                <label for="departamento">Departamento</label>
+                <input type="text" name="departamento" value="<?=$usuarioUnico -> departamento?>" required>
+            </div>
+            <div id="bloqueTextoRegistro">
+                <label for="municipio">Municipio</label>
+                <input type="text" name="municipio" value="<?=$usuarioUnico -> municipio?>" required>
+            </div>
+            <div id="botonesusuario">
+                <input type="submit" class="btnRegistro-adminPerfil" value="Actualizar datos">
+                <a href="<?=rutaInicio?><?=usuario?><?=eliminarUsuario?>&id=<?=$_SESSION['loginexitoso'] -> id?>" class="eliminarCuentaMiPerfil">Eliminar cuenta</a>
+            </div>
+        </form>
     </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('usuarioactualizado'); ?>
-
-<div id="loginYRegistro">
-    <h1>Mi Perfil</h1>
-    <form action="<?=rutaInicio?><?=usuario?><?=actualizarUsuario?>&id=<?=$_SESSION['loginexitoso'] -> id?>" method="post" enctype="multipart/form-data">
-        <div id="bloqueTextoRegistro">
-            <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" value="<?=$usuarioUnico -> nombre?>" required>
-        </div>
-        <img src="Recursos/ImagenesUsuarios/<?=$_SESSION['loginexitoso'] -> foto?>" class="perfilImage" alt="usuario registro">
-        <div id="bloqueTextoRegistro">
-            <label for="apellidos">Apellidos</label>
-            <input type="text" name="apellidos" value="<?=$usuarioUnico -> apellido?>" required>
-        </div>
-        <div id="bloqueTextoRegistro">
-            <label for="email">Email</label>
-            <input type="email" name="email" value="<?=$usuarioUnico -> correo?>" required>
-        </div>
-        <div id="bloqueTextoRegistro">
-            <label for="telefono">Telefono</label>
-            <input type="number" name="telefono" value="<?=$usuarioUnico -> numeroTelefono?>" required>
-        </div>
-        <div id="bloqueTextoRegistro">
-            <label for="password">Contraseña</label>
-            <input type="password" name="password" value="<?=$usuarioUnico -> clave?>" required>
-        </div>
-        <input type="file" accept="image/*">
-        <label class="subirFotoPerfil">*Subir nueva*</label>
-        <div id="bloqueTextoRegistro">
-            <label for="departamento">Departamento</label>
-            <input type="text" name="departamento" value="<?=$usuarioUnico -> departamento?>" required>
-        </div>
-        <div id="bloqueTextoRegistro">
-            <label for="municipio">Municipio</label>
-            <input type="text" name="municipio" value="<?=$usuarioUnico -> municipio?>" required>
-        </div>
-        <div id="botonesusuario">
-            <input type="submit" class="btnRegistro-adminPerfil" value="Actualizar datos">
-            <a href="<?=rutaInicio?><?=usuario?><?=eliminarUsuario?>&id=<?=$_SESSION['loginexitoso'] -> id?>" class="eliminarCuentaMiPerfil">Eliminar cuenta</a>
-        </div>
-    </form>
 </div>

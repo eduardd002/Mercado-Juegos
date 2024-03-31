@@ -15,10 +15,12 @@
         <?php $datosAdmin = Ayudas::mostrarDatosAdministrador(); ?>
 
         <header id="cabecera">
-            <div id="titulo">
-                <img src="Recursos/Logotipos/Logo.png" alt="Logo tienda">
-                <h1>MERCADO JUEGOS</h1>
-            </div>
+            <a href="<?=rutaInicio?><?=videojuego?><?=inicio?>">
+                <div id="titulo">
+                    <img src="Recursos/Logotipos/Logo.png" alt="Logo tienda">
+                    <h1>MERCADO JUEGOS</h1>
+                </div>
+            </a>
             <?php if(!isset($_SESSION['loginexitosoa'])) : ?>
                 <form action="<?=rutaInicio?><?=videojuego?><?=buscar?>" method="post">
                     <div id="buscador">
@@ -61,3 +63,4 @@
                 </ul>
             </div>
         </header>
+        

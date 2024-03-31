@@ -1,43 +1,45 @@
-<?php if(isset($_SESSION['guardarcategoriaerror'])) : ?>
-    <div class="alerta alerta-adminError">
-        <?=$_SESSION['guardarcategoriaerror']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('guardarcategoriaerror'); ?>
-
-<?php if(isset($_SESSION['eliminarcategoriaerror'])) : ?>
-    <div class="alerta alerta-adminError">
-        <?=$_SESSION['eliminarcategoriaerror']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('eliminarcategoriaerror'); ?>
-
-<?php if(isset($_SESSION['actualizarcategoriaerror'])) : ?>
-    <div class="alerta alerta-adminError">
-        <?=$_SESSION['actualizarcategoriaerror']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('actualizarcategoriaerror'); ?>
-
-<div id="gestiones">
-    <h1>Gestion de categorias</h1>
-    <?php if(mysqli_num_rows($listadoCategorias) == 0) : ?>
-        <h1>No hay categorias creadas</h1>
-    <?php else : ?>
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-            </tr>
-            <?php while($categorias = $listadoCategorias -> fetch_object()) : ?>
-                <tr>
-                    <td><?=$categorias -> id?></td>
-                    <td><?=$categorias -> nombre?></td>
-                    <td><a href="<?=rutaInicio?><?=categoria?><?=editarCategoria?>&id=<?=$categorias -> id?>" class="button button-actualizarVideojuego">Actualizar</a></td>
-                    <td><a href="<?=rutaInicio?><?=categoria?><?=eliminarCateogoria?>&id=<?=$categorias -> id?>" class="button button-eliminarVideojuego">Eliminar</a></td>
-                </tr>
-            <?php endwhile;?>
-        </table>
+<div id="contenidoCentral">
+    <?php if(isset($_SESSION['guardarcategoriaerror'])) : ?>
+        <div class="alerta alerta-adminError">
+            <?=$_SESSION['guardarcategoriaerror']; ?>
+        </div>
     <?php endif; ?>
-    <a href="<?=rutaInicio?><?=categoria?><?=crearCategoria?>" class="button button-crearGestion">Crear</a>
+    <?php Ayudas::eliminarSesion('guardarcategoriaerror'); ?>
+
+    <?php if(isset($_SESSION['eliminarcategoriaerror'])) : ?>
+        <div class="alerta alerta-adminError">
+            <?=$_SESSION['eliminarcategoriaerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('eliminarcategoriaerror'); ?>
+
+    <?php if(isset($_SESSION['actualizarcategoriaerror'])) : ?>
+        <div class="alerta alerta-adminError">
+            <?=$_SESSION['actualizarcategoriaerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizarcategoriaerror'); ?>
+
+    <div id="gestiones">
+        <h1>Gestion de categorias</h1>
+        <?php if(mysqli_num_rows($listadoCategorias) == 0) : ?>
+            <h1>No hay categorias creadas</h1>
+        <?php else : ?>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                </tr>
+                <?php while($categorias = $listadoCategorias -> fetch_object()) : ?>
+                    <tr>
+                        <td><?=$categorias -> id?></td>
+                        <td><?=$categorias -> nombre?></td>
+                        <td><a href="<?=rutaInicio?><?=categoria?><?=editarCategoria?>&id=<?=$categorias -> id?>" class="button button-actualizarVideojuego">Actualizar</a></td>
+                        <td><a href="<?=rutaInicio?><?=categoria?><?=eliminarCateogoria?>&id=<?=$categorias -> id?>" class="button button-eliminarVideojuego">Eliminar</a></td>
+                    </tr>
+                <?php endwhile;?>
+            </table>
+        <?php endif; ?>
+        <a href="<?=rutaInicio?><?=categoria?><?=crearCategoria?>" class="button button-crearGestion">Crear</a>
+    </div>
 </div>

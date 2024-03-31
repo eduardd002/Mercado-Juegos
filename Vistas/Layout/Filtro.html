@@ -12,7 +12,7 @@
                     <li>
                     <label for="categoriavid">Categoria</label>
                     <select name="categoriavid" id="categoriavid">
-                        <option value=NULL></option>
+                        <option value=null></option>
                         <?php while($categorias = $listadoCategorias -> fetch_object()) : ?>
                             <option value="<?=$categorias -> id?>"><?=$categorias -> nombre?></option>
                         <?php endwhile; ?>
@@ -43,7 +43,7 @@
                     <input type="number" name="minimo" value="">
                 </li>
                 <li>
-                    <label for="maximo">maximo</label>
+                    <label for="maximo">Maximo</label>
                     <input type="number" name="maximo" value="">
                 </li>
                 <li>

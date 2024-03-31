@@ -1,43 +1,45 @@
-<?php if(isset($_SESSION['guardarconsolaerror'])) : ?>
-    <div class="alerta alerta-adminError">
-        <?=$_SESSION['guardarconsolaerror']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('guardarconsolaerror'); ?>
-
-<?php if(isset($_SESSION['eliminarconsolaerror'])) : ?>
-    <div class="alerta alerta-adminError">
-        <?=$_SESSION['eliminarconsolaerror']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('eliminarconsolaerror'); ?>
-
-<?php if(isset($_SESSION['actualizarconsolaerror'])) : ?>
-    <div class="alerta alerta-adminError">
-        <?=$_SESSION['actualizarconsolaerror']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('actualizarconsolaerror'); ?>
-
-<div id="gestiones">
-    <h1>Gestion de consolas</h1>
-    <?php if(mysqli_num_rows($listadoConsolas) == 0) : ?>
-        <h1>No hay categorias consolas</h1>
-    <?php else : ?>
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-            </tr>
-            <?php while($consolas = $listadoConsolas -> fetch_object()) : ?>
-                <tr>
-                    <td><?=$consolas -> id?></td>
-                    <td><?=$consolas -> nombre?></td>
-                    <td><a href="<?=rutaInicio?><?=consola?><?=editarConsola?>&id=<?=$consolas -> id?>" class="button button-actualizarVideojuego">Actualizar</a></td>
-                    <td><a href="<?=rutaInicio?><?=consola?><?=eliminarConsola?>&id=<?=$consolas -> id?>" class="button button-eliminarVideojuego">Eliminar</a></td>
-                </tr>
-            <?php endwhile;?>
-        </table>
+<div id="contenidoCentral">
+    <?php if(isset($_SESSION['guardarconsolaerror'])) : ?>
+        <div class="alerta alerta-adminError">
+            <?=$_SESSION['guardarconsolaerror']; ?>
+        </div>
     <?php endif; ?>
-    <a href="<?=rutaInicio?><?=consola?><?=crearConsola?>" class="button button-crearGestion">Crear</a>
+    <?php Ayudas::eliminarSesion('guardarconsolaerror'); ?>
+
+    <?php if(isset($_SESSION['eliminarconsolaerror'])) : ?>
+        <div class="alerta alerta-adminError">
+            <?=$_SESSION['eliminarconsolaerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('eliminarconsolaerror'); ?>
+
+    <?php if(isset($_SESSION['actualizarconsolaerror'])) : ?>
+        <div class="alerta alerta-adminError">
+            <?=$_SESSION['actualizarconsolaerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizarconsolaerror'); ?>
+
+    <div id="gestiones">
+        <h1>Gestion de consolas</h1>
+        <?php if(mysqli_num_rows($listadoConsolas) == 0) : ?>
+            <h1>No hay categorias consolas</h1>
+        <?php else : ?>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                </tr>
+                <?php while($consolas = $listadoConsolas -> fetch_object()) : ?>
+                    <tr>
+                        <td><?=$consolas -> id?></td>
+                        <td><?=$consolas -> nombre?></td>
+                        <td><a href="<?=rutaInicio?><?=consola?><?=editarConsola?>&id=<?=$consolas -> id?>" class="button button-actualizarVideojuego">Actualizar</a></td>
+                        <td><a href="<?=rutaInicio?><?=consola?><?=eliminarConsola?>&id=<?=$consolas -> id?>" class="button button-eliminarVideojuego">Eliminar</a></td>
+                    </tr>
+                <?php endwhile;?>
+            </table>
+        <?php endif; ?>
+        <a href="<?=rutaInicio?><?=consola?><?=crearConsola?>" class="button button-crearGestion">Crear</a>
+    </div>
 </div>

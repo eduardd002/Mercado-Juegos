@@ -1,43 +1,45 @@
-<?php if(isset($_SESSION['guardartarjetaerror'])) : ?>
-    <div class="alerta alerta-adminError">
-        <?=$_SESSION['guardartarjetaerror']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('guardartarjetaerror'); ?>
-
-<?php if(isset($_SESSION['eliminartarjetaerror'])) : ?>
-    <div class="alerta alerta-adminError">
-        <?=$_SESSION['eliminartarjetaerror']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('eliminartarjetaerror'); ?>
-
-<?php if(isset($_SESSION['actualizartarjetaerror'])) : ?>
-    <div class="alerta alerta-adminError">
-        <?=$_SESSION['actualizartarjetaerror']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('actualizartarjetaerror'); ?>
-
-<div id="gestiones">
-    <h1>Gestion de tarjetas</h1>
-    <?php if(mysqli_num_rows($listadoTarjetas) == 0) : ?>
-        <h1>No hay tarjetas creadas</h1>
-    <?php else : ?>
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-            </tr>
-            <?php while($tarjetas = $listadoTarjetas -> fetch_object()) : ?>
-                <tr>
-                    <td><?=$tarjetas -> id?></td>
-                    <td><?=$tarjetas -> nombre?></td>
-                    <td><a href="<?=rutaInicio?><?=tarjeta?><?=editarTarjeta?>&id=<?=$tarjetas -> id?>" class="button button-actualizarVideojuego">Actualizar</a></td>
-                    <td><a href= "<?=rutaInicio?><?=tarjeta?><?=eliminarTarjeta?>&id=<?=$tarjetas -> id?>" class="button button-eliminarVideojuego">Eliminar</a></td>
-                </tr>
-            <?php endwhile;?>
-        </table>
+<div id="contenidoCentral">   
+   <?php if(isset($_SESSION['guardartarjetaerror'])) : ?>
+        <div class="alerta alerta-adminError">
+            <?=$_SESSION['guardartarjetaerror']; ?>
+        </div>
     <?php endif; ?>
-    <a href="<?=rutaInicio?><?=tarjeta?><?=crearTarjeta?>" class="button button-crearGestion">Crear</a>
+    <?php Ayudas::eliminarSesion('guardartarjetaerror'); ?>
+
+    <?php if(isset($_SESSION['eliminartarjetaerror'])) : ?>
+        <div class="alerta alerta-adminError">
+            <?=$_SESSION['eliminartarjetaerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('eliminartarjetaerror'); ?>
+
+    <?php if(isset($_SESSION['actualizartarjetaerror'])) : ?>
+        <div class="alerta alerta-adminError">
+            <?=$_SESSION['actualizartarjetaerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizartarjetaerror'); ?>
+
+    <div id="gestiones">
+        <h1>Gestion de tarjetas</h1>
+        <?php if(mysqli_num_rows($listadoTarjetas) == 0) : ?>
+            <h1>No hay tarjetas creadas</h1>
+        <?php else : ?>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                </tr>
+                <?php while($tarjetas = $listadoTarjetas -> fetch_object()) : ?>
+                    <tr>
+                        <td><?=$tarjetas -> id?></td>
+                        <td><?=$tarjetas -> nombre?></td>
+                        <td><a href="<?=rutaInicio?><?=tarjeta?><?=editarTarjeta?>&id=<?=$tarjetas -> id?>" class="button button-actualizarVideojuego">Actualizar</a></td>
+                        <td><a href= "<?=rutaInicio?><?=tarjeta?><?=eliminarTarjeta?>&id=<?=$tarjetas -> id?>" class="button button-eliminarVideojuego">Eliminar</a></td>
+                    </tr>
+                <?php endwhile;?>
+            </table>
+        <?php endif; ?>
+        <a href="<?=rutaInicio?><?=tarjeta?><?=crearTarjeta?>" class="button button-crearGestion">Crear</a>
+    </div>
 </div>

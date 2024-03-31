@@ -1,43 +1,45 @@
-<?php if(isset($_SESSION['guardarusoerror'])) : ?>
-    <div class="alerta alerta-adminError">
-        <?=$_SESSION['guardarusoerror']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('guardarusoerror'); ?>
-
-<?php if(isset($_SESSION['eliminarusoerror'])) : ?>
-    <div class="alerta alerta-adminError">
-        <?=$_SESSION['eliminarusoerror']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('eliminarusoerror'); ?>
-
-<?php if(isset($_SESSION['actualizarusoerror'])) : ?>
-    <div class="alerta alerta-adminError">
-        <?=$_SESSION['actualizarusoerror']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('actualizarusoerror'); ?>
-
-<div id="gestiones">
-    <h1>Gestion de usos</h1>
-    <?php if(mysqli_num_rows($listadoUsos) == 0) : ?>
-        <h1>No hay categorias usos</h1>
-    <?php else : ?>
-        <table>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-            </tr>
-            <?php while($usos = $listadoUsos -> fetch_object()) : ?>
-                <tr>
-                    <td><?=$usos -> id?></td>
-                    <td><?=$usos -> nombre?></td>
-                    <td><a href="<?=rutaInicio?><?=uso?><?=editarUso?>&id=<?=$usos -> id?>" class="button button-actualizarVideojuego">Actualizar</a></td>
-                    <td><a href="<?=rutaInicio?><?=uso?><?=eliminarUso?>&id=<?=$usos -> id?>" class="button button-eliminarVideojuego">Eliminar</a></td>
-                </tr>
-            <?php endwhile;?>
-        </table>
+<div id="contenidoCentral"> 
+    <?php if(isset($_SESSION['guardarusoerror'])) : ?>
+        <div class="alerta alerta-adminError">
+            <?=$_SESSION['guardarusoerror']; ?>
+        </div>
     <?php endif; ?>
-    <a href="<?=rutaInicio?><?=uso?><?=crearUso?>" class="button button-crearGestion">Crear</a>
+    <?php Ayudas::eliminarSesion('guardarusoerror'); ?>
+
+    <?php if(isset($_SESSION['eliminarusoerror'])) : ?>
+        <div class="alerta alerta-adminError">
+            <?=$_SESSION['eliminarusoerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('eliminarusoerror'); ?>
+
+    <?php if(isset($_SESSION['actualizarusoerror'])) : ?>
+        <div class="alerta alerta-adminError">
+            <?=$_SESSION['actualizarusoerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizarusoerror'); ?>
+
+    <div id="gestiones">
+        <h1>Gestion de usos</h1>
+        <?php if(mysqli_num_rows($listadoUsos) == 0) : ?>
+            <h1>No hay categorias usos</h1>
+        <?php else : ?>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                </tr>
+                <?php while($usos = $listadoUsos -> fetch_object()) : ?>
+                    <tr>
+                        <td><?=$usos -> id?></td>
+                        <td><?=$usos -> nombre?></td>
+                        <td><a href="<?=rutaInicio?><?=uso?><?=editarUso?>&id=<?=$usos -> id?>" class="button button-actualizarVideojuego">Actualizar</a></td>
+                        <td><a href="<?=rutaInicio?><?=uso?><?=eliminarUso?>&id=<?=$usos -> id?>" class="button button-eliminarVideojuego">Eliminar</a></td>
+                    </tr>
+                <?php endwhile;?>
+            </table>
+        <?php endif; ?>
+        <a href="<?=rutaInicio?><?=uso?><?=crearUso?>" class="button button-crearGestion">Crear</a>
+    </div>
 </div>
