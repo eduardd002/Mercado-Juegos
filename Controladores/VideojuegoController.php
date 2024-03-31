@@ -33,11 +33,11 @@
         public function inicio(){
 
             //Instanciar el objeto
-            $usuarioVideojuego = new UsuarioVideojuego();
+            $videojuego = new Videojuego();
             //Traer el listado de algunos videojuegos
-            $listadoAlgunos = $usuarioVideojuego -> listarAlgunos();
+            $listadoAlgunos = $videojuego -> listarAlgunos();
             //Traer el listado de todos los videojuegos
-            $listadoTodos = $usuarioVideojuego -> listarTodos();
+            $listadoTodos = $videojuego -> listarTodos();
             //Incluir la vista
             require_once 'Vistas/Layout/Catalogo.html';
         }
@@ -421,11 +421,52 @@
         }
 
         /*
-        Funcion para eliminar un videojuego
+        Funcion para eliminar un usuario
+        */
+
+        public function eliminarVideojuego($idVideojuego){
+
+            //Instanciar el objeto
+            $videojuego = new Videojuego();
+            //Crear objeto
+            $videojuego -> setId($idVideojuego);
+            //Ejecutar la consulta
+            $eliminado = $videojuego -> eliminar();
+            //Retornar el resultado
+            return $eliminado;
+        }
+
+        /*
+        Funcion para eliminar un usuario desde el administrador
         */
 
         public function eliminar(){
             
+            //Comprobar si los datos están llegando
+            if(isset($_GET)){
+
+                //Comprobar si el dato existe
+                $idVideojuego = isset($_GET['id']) ? $_GET['id'] : false;
+
+                //Si el dato existe
+                if($idVideojuego){
+
+                    //Ejecutar la consulta
+                    $eliminado = $this -> eliminarVideojuego($idVideojuego);
+
+                    //Comprobar si el usuario ha sido eliminado
+                    if($eliminado){
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('eliminaradministradorusuarioacierto', "El usuario ha sido eliminado exitosamente", '?controller=VideojuegoController&action=videojuegos');
+                    }else{
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('eliminaradministradorusuarioerror', "El usuario no ha sido eliminado exitosamente", '?controller=VideojuegoController&action=videojuegos');
+                    }
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('eliminaradministradorusuarioerror', "Ha ocurrido un error al eliminar el usuario", '?controller=VideojuegoController&action=inicio');
+                }
+            }
         }
 
         /*
@@ -435,11 +476,33 @@
         public function todos(){
 
             //Instaciar el objeto
-            $usuarioVideojuego = new UsuarioVideojuego();
+            $videojuego = new Videojuego();
             //Traer los datos de la consulta
-            $listadoTodos = $usuarioVideojuego -> listarTodos();
+            $listadoTodos = $videojuego -> listarTodos();
             //Incluir la vista
             require_once 'Vistas/Videojuego/Todos.html';
+        }
+
+        public function filtro(){
+
+            //Comprobar si el dato está llegando
+            if(isset($_POST)){
+
+                //Comprobar si el dato existe
+                $consola = isset($_POST['consolavid']) ? $_POST['consolavid'] : false;
+
+                //Comprobar el dato exsiten
+                if($consola){
+                    
+                    //Instaciar el objeto
+                    $videojuego = new Videojuego();
+                    $videojuego -> setIdConsola($consola);
+                    //Traer los datos de la consulta
+                    $listadoFiltro = $videojuego -> filtro();
+                    require_once 'Vistas/Videojuego/Filtro.html';
+                    
+                }
+            }
         }
     }
 

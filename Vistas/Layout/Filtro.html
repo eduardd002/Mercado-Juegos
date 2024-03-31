@@ -1,0 +1,54 @@
+<?php if(isset($_SESSION['loginexitoso']) || !isset($_SESSION['loginexitoso']) && !isset($_SESSION['loginexitosoa'])) : ?>
+    <!-- SECCION MENU DE CATEGORIAS -->
+
+    <nav id="categorias">
+        <ul>
+            <li>
+                <a href="<?=rutaInicio?><?=videojuego?><?=inicio?>">Inicio</a>
+            </li>
+            <li>
+                <form action="<?=rutaInicio?><?=videojuego?><?=filtro?>" method="post">
+                    <?php $listadoCategorias = Ayudas::mostrarCategorias(); ?>
+                    <li>
+                    <label for="categoriavid">Categoria</label>
+                    <select name="categoriavid" id="categoriavid">
+                        <?php while($categorias = $listadoCategorias -> fetch_object()) : ?>
+                            <option value="<?=$categorias -> id?>"><?=$categorias -> nombre?></option>
+                        <?php endwhile; ?>
+                    </select>
+                </li>
+                <li>
+                    <?php $listadoUsos = Ayudas::mostrarUsos(); ?>
+                    <label for="usovid">Uso</label>
+                    <select name="usovid" id="usovid">
+                        <?php while($usos = $listadoUsos -> fetch_object()) : ?>
+                            <option value="<?=$usos -> id?>"><?=$usos -> nombre?></option>
+                        <?php endwhile; ?>
+                    </select>
+                </li>
+                <li>
+                    <?php $listadConsolas = Ayudas::mostrarConsolas(); ?>
+                    <label for="consolavid">Consola</label>
+                    <select name="consolavid" id="consolavid">
+                        <?php while($consolas = $listadConsolas -> fetch_object()) : ?>
+                            <option value="<?=$consolas -> id?>"><?=$consolas -> nombre?></option>
+                        <?php endwhile; ?>
+                    </select>
+                </li>
+                <li>
+                    <label for="">Minimo</label>
+                    <input type="number">
+                </li>
+                <li>
+                    <label for="">maximo</label>
+                    <input type="number">
+                </li>
+                <li>
+                    <input type="submit" value="Aplicar filtro">
+                </li>
+                </form>
+            </li>
+        </ul>
+    </nav>
+<?php else : ?>
+<?php endif; ?>

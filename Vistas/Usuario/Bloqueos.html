@@ -22,7 +22,7 @@
                 <td><?=$bloqueos -> motivoBloqueo?></td>
                 <td><?=$bloqueos -> fechaBloqueo?></td>
                 <td><?=$bloqueos -> horaBloqueo?></td>
-                <td><a href="" class="button button-eliminarBloqueo">Desbloquear</a></td>
+                <td><a href="<?=rutaInicio?><?=bloqueo?><?=desbloquear?>&idBloqueo=<?=$bloqueos -> idBloqueo?>" class="button button-eliminarBloqueo">Desbloquear</a></td>
             </tr>
         <?php endwhile; ?>
     </table>

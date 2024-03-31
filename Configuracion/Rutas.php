@@ -28,6 +28,7 @@
     define("eliminarVideojuego", "&action=eliminar");
     define("todos", "&action=todos");
     define("algunos", "&action=inicio");
+    define("filtro", "&action=filtro");
 
     define("carrito", "/?controller=CarritoController");
     define("verCarrito", "&action=ver");

@@ -84,6 +84,30 @@
             return $listadoCategorias;
         }
 
+        public static function mostrarUsos(){
+
+            //Incluir el objeto de categoria
+            require_once 'Modelos/Uso.php';
+            //Instanciar el objeto
+            $uso = new Uso();
+            //Listar todos los usuarios desde la base de datos
+            $listadoUsos = $uso -> listar();
+            //Retornar el resultado
+            return $listadoUsos;
+        }
+
+        public static function mostrarConsolas(){
+
+            //Incluir el objeto de categoria
+            require_once 'Modelos/Consola.php';
+            //Instanciar el objeto
+            $consola = new Consola();
+            //Listar todos los usuarios desde la base de datos
+            $listadoConsolas = $consola -> listar();
+            //Retornar el resultado
+            return $listadoConsolas;
+        }
+
         /*
         Funcion para listar los datos del usuario
         */

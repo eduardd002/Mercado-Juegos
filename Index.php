@@ -22,7 +22,7 @@
     require_once 'Configuracion/BaseDeDatos.php';
     //Incluir los archivos de las vistas
     require_once 'Vistas/Layout/Cabecera.html';
-    require_once 'Vistas/Layout/Categorias.html';
+    require_once 'Vistas/Layout/Filtro.html';
     
     //Funcion para mostrar un error
     function showError(){

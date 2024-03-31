@@ -342,6 +342,28 @@ Estilos de los enlaces la barra de categorias
     transition: all 300ms;
 }
 
+#categorias select{
+    margin-left: 10px;
+    margin-right: 15px;
+}
+
+#categorias label{
+    color: white;
+    margin-left: 15px;
+    margin-right: 10px;
+}
+
+#categorias input[type='submit']{
+    margin-top: 13px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+#categorias input[type='number']{
+    width: 55px;
+    margin-right: 20px;
+}
+
 /*
 Estilos de los enlaces la barra de categorias, primer elemento (inicio)
 */
@@ -370,7 +392,7 @@ Estilos de la lista de enlaces la barra de categorias
     /*Margen centrado*/
     margin: 0px auto;
     /*Margen izquierdo*/
-    margin-left: 25px;
+    margin-left: 8px;
 }
 
 /*

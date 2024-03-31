@@ -1,0 +1,11 @@
+<div id="busqueda">
+    <h1>Resultado de la busqueda</h1>
+    <?php while($listadoVidejuegosBuscados = $listadoFiltro -> fetch_object()) : ?>
+        <div class="videojuegoBusqueda">
+            <img src="Recursos/ImagenesVideojuegos/<?=$listadoVidejuegosBuscados -> foto?>" alt="Videojuego">
+            <h2><?=$listadoVidejuegosBuscados -> nombre?></h2>
+            <p><?=$listadoVidejuegosBuscados -> precio?></p>
+            <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>&id=<?=$listadoVidejuegosBuscados -> id?>">Ver</a>
+        </div>
+    <?php endwhile;?>
+</div>

@@ -32,7 +32,7 @@
     <?php if(isset($_SESSION['loginexitoso']) && $videojuegoEspecifico -> idVendedor == $_SESSION['loginexitoso'] -> id) : ?>
         <div id="botonesDetalle">
             <a class="button button-actualizarVideojuegoDesdeDetalle" href="<?=rutaInicio?><?=videojuego?><?=editarVideojuego?>&id=<?=$videojuegoEspecifico -> id?>">Actualizar</a>
-            <a class="button button-eliminarVideojuegoDesdeDetalle" href="">Eliminar</a>
+            <a class="button button-eliminarVideojuegoDesdeDetalle" href="<?=rutaInicio?><?=videojuego?><?=eliminarVideojuego?>&id=<?=$videojuegoEspecifico -> idVideojuego?>">Eliminar</a>
         </div>
     <?php else : ?>
         <form action="<?=rutaInicio?><?=transaccion?><?=direccionYPago?>&idVideojuego=<?=$videojuegoEspecifico -> id?>" method="post">

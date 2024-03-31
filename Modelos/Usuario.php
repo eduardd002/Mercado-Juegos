@@ -185,7 +185,7 @@
 
         public function eliminar(){
             //Construir la consulta
-            $consulta = "DELETE FROM usuarios WHERE id = {$this -> id}";
+            $consulta = "DELETE FROM usuarios WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $eliminado = $this -> db -> query($consulta);
             //Crear bandera

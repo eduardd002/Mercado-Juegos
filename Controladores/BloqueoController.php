@@ -22,6 +22,23 @@
             }
         }
 
+        public function desbloquear(){
+
+            //Comprobar si los datos están llegando
+            if(isset($_GET)){
+
+                //Obtener el usuario a bloquear
+                $idBloqueo = $_GET['idBloqueo'];
+
+                $bloqueo = new Bloqueo();
+                $bloqueo -> setId($idBloqueo);
+                $desbloqueo = $bloqueo -> eliminar();
+
+                //Incluir la vista
+                require_once 'Vistas/Bloqueo/Bloqueo.html';
+            }
+        }
+
         /*
         Funcion para guardar el bloqueo en la base de datos
         */

@@ -138,6 +138,18 @@
                 return $resultado;
         }
 
+        public function eliminar(){
+                $consulta = "DELETE FROM bloqueos WHERE id = {$this -> getId()}";
+                $eliminado = $this -> db -> query($consulta);
+                //Crear bandera
+                $bandera = false;
+                //Comprobar si la consulta se realizo exitosamente
+                if($eliminado){
+                        $bandera = true;
+                }
+                //Retorno el resultado
+                return $bandera;
+        }
     }
 
 ?>

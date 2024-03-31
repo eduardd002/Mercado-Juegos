@@ -186,6 +186,60 @@
             //Retornar el resultado
             return $ultimoVideojuego;
         }
+
+        public function eliminar(){
+
+            //Construir la consulta
+            $consulta = "DELETE FROM videojuegos WHERE id = {$this -> id}";
+            //Ejecutar la consulta
+            $eliminado = $this -> db -> query($consulta);
+            var_dump($eliminado);
+            die();
+            //Crear bandera
+            $bandera = false;
+            //Comprobar si la consulta se realizo exitosamente
+            if($eliminado){
+                $bandera = true;
+            }
+            //Retorno el resultado
+            return $bandera;
+        }
+
+        /*
+        Funcion para listar todos los videojuegos
+        */
+
+        public function listarTodos(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM videojuegos ORDER BY id DESC";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Retornar resultado
+            return $resultado;
+        }
+
+        /*
+        Funcion para listar algunos de los videojuegos, en concreto 6
+        */
+
+        public function listarAlgunos(){
+            //Construir la consulta
+            $consulta = "SELECT * FROM videojuegos ORDER BY RAND() LIMIT 6";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Retornar resultado
+            return $resultado;
+        }
+
+        public function filtro(){
+
+            //Construir la consulta
+            $consulta = "SELECT * FROM videojuegos WHERE idConsola = {$this -> getIdConsola()}";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Retornar resultado
+            return $resultado;
+        }
     }
 
 ?>
