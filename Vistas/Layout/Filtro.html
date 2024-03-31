@@ -12,6 +12,7 @@
                     <li>
                     <label for="categoriavid">Categoria</label>
                     <select name="categoriavid" id="categoriavid">
+                        <option value=NULL></option>
                         <?php while($categorias = $listadoCategorias -> fetch_object()) : ?>
                             <option value="<?=$categorias -> id?>"><?=$categorias -> nombre?></option>
                         <?php endwhile; ?>
@@ -21,6 +22,7 @@
                     <?php $listadoUsos = Ayudas::mostrarUsos(); ?>
                     <label for="usovid">Uso</label>
                     <select name="usovid" id="usovid">
+                        <option value="null"></option>
                         <?php while($usos = $listadoUsos -> fetch_object()) : ?>
                             <option value="<?=$usos -> id?>"><?=$usos -> nombre?></option>
                         <?php endwhile; ?>
@@ -30,18 +32,19 @@
                     <?php $listadConsolas = Ayudas::mostrarConsolas(); ?>
                     <label for="consolavid">Consola</label>
                     <select name="consolavid" id="consolavid">
+                        <option value="null"></option>
                         <?php while($consolas = $listadConsolas -> fetch_object()) : ?>
                             <option value="<?=$consolas -> id?>"><?=$consolas -> nombre?></option>
                         <?php endwhile; ?>
                     </select>
                 </li>
                 <li>
-                    <label for="">Minimo</label>
-                    <input type="number">
+                    <label for="minimo">Minimo</label>
+                    <input type="number" name="minimo" value="">
                 </li>
                 <li>
-                    <label for="">maximo</label>
-                    <input type="number">
+                    <label for="maximo">maximo</label>
+                    <input type="number" name="maximo" value="">
                 </li>
                 <li>
                     <input type="submit" value="Aplicar filtro">

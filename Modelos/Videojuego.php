@@ -231,15 +231,45 @@
             return $resultado;
         }
 
-        public function filtro(){
-
-            //Construir la consulta
-            $consulta = "SELECT * FROM videojuegos WHERE idConsola = {$this -> getIdConsola()}";
-            //Ejecutar la consulta
-            $resultado = $this -> db -> query($consulta);
-            //Retornar resultado
+        public function filtro($minimo, $maximo){
+            // Construir la consulta inicial sin cláusula WHERE
+            $consulta = "SELECT * FROM videojuegos";
+        
+            // Array para almacenar las condiciones de filtro
+            $condiciones = [];
+        
+            // Aplicar filtro por idConsola si está establecido
+            if($this->getIdConsola() != 'null'){
+                $condiciones[] = "idConsola = {$this->getIdConsola()}";
+            }
+        
+            // Aplicar filtro por idUso si está establecido
+            if($this->getIdUso() != 'null'){
+                $condiciones[] = "idUso = {$this->getIdUso()}";
+            }
+        
+            // Aplicar filtro por precio mínimo si está establecido
+            if($minimo != ''){
+                $condiciones[] = "precio >= {$minimo}";
+            }
+        
+            // Aplicar filtro por precio máximo si está establecido
+            if($maximo != ''){
+                $condiciones[] = "precio <= {$maximo}";
+            }
+        
+            // Si hay condiciones, agregar la cláusula WHERE
+            if (!empty($condiciones)) {
+                $consulta .= " WHERE " . implode(" AND ", $condiciones);
+            }
+        
+            // Ejecutar la consulta
+            $resultado = $this->db->query($consulta);
+        
+            // Retornar resultado
             return $resultado;
         }
+        
     }
 
 ?>
