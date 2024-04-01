@@ -63,6 +63,17 @@
             //Retornar el resultado
             return $ultimoFavorito;
         }
+
+        public function listar(){
+            $consulta = "SELECT v.nombre AS 'nombreVideojuego', v.foto AS 'imagenVideojuego', v.precio AS 'precioVideojuego'
+                FROM videojuegofavorito vf
+                INNER JOIN favoritos f ON vf.idFavorito = f.id
+                INNER JOIN videojuegos v ON v.id = vf.idVideojuego
+                WHERE f.idUsuario = {$this -> getIdUsuario()}";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            return $resultado;
+        }
     }
 
 ?>

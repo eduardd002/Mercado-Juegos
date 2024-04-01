@@ -20,11 +20,12 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarconsolaerror'); ?>
 
-    <div id="gestiones">
+    <?php if(mysqli_num_rows($listadoConsolas) == 0) : ?>
+        <h1>No hay consolas creadas</h1>
+        <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
+    <?php else : ?>
         <h1>Gestion de consolas</h1>
-        <?php if(mysqli_num_rows($listadoConsolas) == 0) : ?>
-            <h1>No hay categorias consolas</h1>
-        <?php else : ?>
+        <div id="gestiones">
             <table>
                 <tr>
                     <th>Id</th>
@@ -39,7 +40,7 @@
                     </tr>
                 <?php endwhile;?>
             </table>
-        <?php endif; ?>
-        <a href="<?=rutaInicio?><?=consola?><?=crearConsola?>" class="button button-crearGestion">Crear</a>
-    </div>
+            <a href="<?=rutaInicio?><?=consola?><?=crearConsola?>" class="button button-crearGestion">Crear</a>
+        </div>
+    <?php endif; ?>
 </div>

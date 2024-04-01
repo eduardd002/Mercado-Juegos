@@ -51,7 +51,7 @@
     <div class="descripcionVideojuego">
         <h3 id="descripcionVideojuegoTitulo">Descripcion</h3>
         <p id="descripcionVideojuegoTexto"><?=$videojuegoEspecifico['videojuego']['descripcionVideojuego']?></p>
-        <?php if(isset($_SESSION['loginexitoso']) && $videojuegoEspecifico -> idVendedor != $_SESSION['loginexitoso'] -> id) : ?>
+        <?php if(isset($_SESSION['loginexitoso']) && $videojuegoEspecifico['videojuego']['idVendedor'] != $_SESSION['loginexitoso'] -> id) : ?>
             <h3 id="vendedorVideojuego">Vendido por: <a href="<?=rutaInicio?><?=usuario?><?=perfil?>&idVendedor=<?=$datosVendedor -> idVendedor?>"><?=$datosVendedor -> nombreVendedor?></a></h3>
         <?php endif; ?>
     </div>

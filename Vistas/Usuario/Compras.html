@@ -6,23 +6,28 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('verCompraError'); ?>
 
-    <div id="comprasYVentas">
-        <h1>Mis Compras</h1>
-        <table>
-            <tr>
-                <th>Factura</th>
-                <th>Fecha</th>
-                <th>Hora</th>
-                <th>Total</th>
-            </tr>
-            <?php while($lista = $listadoCompras -> fetch_object()) : ?>
+    <?php if(mysqli_num_rows($listadoCompras) == 0) : ?>
+        <h1>No Hay Ninguna Compra</h1>
+        <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
+    <?php else : ?>
+        <div id="comprasYVentas">
+            <h1>Mis Compras</h1>
+            <table>
                 <tr>
-                    <td><a href="<?=rutaInicio?><?=transaccion?><?=verCompra?>&factura=<?=$lista -> numeroFactura?>"><?=$lista -> numeroFactura?></a></td>
-                    <td><?=$lista -> fechaRealizacion?></td>
-                    <td><?=$lista -> horaRealizacion?></td>
-                    <td>$ <?=$lista -> total?></td>
+                    <th>Factura</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                    <th>Total</th>
                 </tr>
-            <?php endwhile; ?>
-        </table>
-    </div>
+                <?php while($lista = $listadoCompras -> fetch_object()) : ?>
+                    <tr>
+                        <td><a href="<?=rutaInicio?><?=transaccion?><?=verCompra?>&factura=<?=$lista -> numeroFactura?>"><?=$lista -> numeroFactura?></a></td>
+                        <td><?=$lista -> fechaRealizacion?></td>
+                        <td><?=$lista -> horaRealizacion?></td>
+                        <td>$ <?=$lista -> total?></td>
+                    </tr>
+                <?php endwhile; ?>
+            </table>
+        </div>
+    <?php endif; ?>
 </div>

@@ -6,11 +6,12 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminaradministradorusuarioerror'); ?>
 
-    <div id="gestiones">
+    <?php if(mysqli_num_rows($listadoUsuarios) == 0) : ?>
+        <h1>No hay usuarios registrados</h1>
+        <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
+    <?php else : ?>
         <h1>Gestion de usuarios</h1>
-        <?php if(mysqli_num_rows($listadoUsuarios) == 0) : ?>
-            <h1>No hay usuarios creadas</h1>
-        <?php else : ?>
+        <div id="gestiones">
             <?php while($usuarios = $listadoUsuarios -> fetch_object()) : ?>
                 <div class="gestionUsuariosLista">
                     <img src="Recursos/ImagenesUsuarios/<?=$usuarios -> foto?>">
@@ -20,6 +21,6 @@
                     <a href="<?=rutaInicio?><?=administrador?><?=eliminarUsuarioAdministrador?>&id=<?=$usuarios -> id?>" class="button button-gestionUsuario">Eliminar cuenta</a>
                 </div>
             <?php endwhile; ?>
-        <?php endif; ?>
-    </div>
+        </div>
+    <?php endif; ?>
 </div>

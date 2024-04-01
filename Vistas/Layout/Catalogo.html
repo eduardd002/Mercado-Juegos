@@ -1,4 +1,6 @@
-<?php require_once 'Vistas/Layout/Filtro.html' ?>
+<?php if(mysqli_num_rows($listadoTodos) > 0) : ?>
+    <?php require_once 'Vistas/Layout/Filtro.html' ?>
+<?php endif; ?>
 
 <div id="contenidoCentral">
     <?php if(isset($_SESSION['loginexitosoinfo'])) : ?>
@@ -87,6 +89,7 @@
 
     <?php if(mysqli_num_rows($listadoTodos) == 0) : ?>
         <h1>No Hay Ningun Videojuego</h1>
+        <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php elseif(mysqli_num_rows($listadoTodos) > 0 && mysqli_num_rows($listadoTodos) <= 6) : ?>
         <h1>Todos Los Videojuegos</h1>
     <?php elseif(mysqli_num_rows($listadoTodos) > 6) : ?>

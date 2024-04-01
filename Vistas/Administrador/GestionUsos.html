@@ -20,11 +20,12 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarusoerror'); ?>
 
-    <div id="gestiones">
+    <?php if(mysqli_num_rows($listadoUsos) == 0) : ?>
+        <h1>No hay usos creados</h1>
+        <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
+    <?php else : ?>
         <h1>Gestion de usos</h1>
-        <?php if(mysqli_num_rows($listadoUsos) == 0) : ?>
-            <h1>No hay categorias usos</h1>
-        <?php else : ?>
+        <div id="gestiones">
             <table>
                 <tr>
                     <th>Id</th>
@@ -39,7 +40,7 @@
                     </tr>
                 <?php endwhile;?>
             </table>
-        <?php endif; ?>
-        <a href="<?=rutaInicio?><?=uso?><?=crearUso?>" class="button button-crearGestion">Crear</a>
-    </div>
+            <a href="<?=rutaInicio?><?=uso?><?=crearUso?>" class="button button-crearGestion">Crear</a>
+        </div>
+    <?php endif; ?>
 </div>

@@ -6,24 +6,26 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardarfavoritoacierto'); ?>
 
-    <div id="carrito">
-        <h1>Favoritos</h1>
-        <table>
-            <tr>
-                <th>Imagen</th>
-                <th>Nombre</th>
-                <th>Precio</th>
-            </tr>
-            <tr>
-                <td><img src="Recursos/ImagenesVideojuegos/sp.jpg" alt="Logo tienda" class="imgCarrito"></td>
-                <td>Spider Man Miles Morales</td>
-                <td>$ 200000</td>
-            </tr>
-            <tr>
-                <td><img src="Recursos/ImagenesVideojuegos/fte.jpg" alt="Logo tienda" class="imgCarrito"></td>
-                <td>Fortnite</td>
-                <td>$ 180000</td>
-            </tr>
-        </table>
-    </div>
+    <?php if(mysqli_num_rows($listadoFavoritos) == 0) : ?>
+        <h1>No Hay Ningun Videojuego Favorito</h1>
+        <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
+    <?php else : ?>
+        <div id="carrito">
+            <h1>Favoritos</h1>
+            <table>
+                <tr>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                </tr>
+                <?php while($favoritos = $listadoFavoritos -> fetch_object()) : ?>
+                    <tr>
+                        <td><img src="Recursos/ImagenesVideojuegos/<?=$favoritos -> imagenVideojuego?>" alt="Logo tienda" class="imgCarrito"></td>
+                        <td><?=$favoritos -> nombreVideojuego?></td>
+                        <td>$ <?=$favoritos -> precioVideojuego?></td>
+                    </tr>
+                <?php endwhile; ?>
+            </table>
+        </div>
+    <?php endif; ?>
 </div>

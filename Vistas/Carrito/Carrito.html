@@ -1,38 +1,34 @@
 <div id="contenidoCentral">
-    <div id="carrito">
-        <h1>Carrito</h1>
-        <table>
-            <tr>
-                <th>Imagen</th>
-                <th>Nombre</th>
-                <th>Precio</th>
-                <th>Unidades</th>
-            </tr>
-            <tr>
-                <td><img src="Recursos/ImagenesVideojuegos/sp.jpg" alt="Logo tienda" class="imgCarrito"></td>
-                <td>Spider Man Miles Morales</td>
-                <td>$ 200000</td>
-                <td>
-                    <a href="" class="buttonDisminuirCarrito">-</a>
-                    2
-                    <a href="" class="buttonAumentarCarrito">+</a>
-                </td>
-            </tr>
-            <tr>
-                <td><img src="Recursos/ImagenesVideojuegos/fte.jpg" alt="Logo tienda" class="imgCarrito"></td>
-                <td>Fortnite</td>
-                <td>$ 180000</td>
-                <td>
-                    <a href="" class="buttonDisminuirCarrito">-</a>
-                    2
-                    <a href="" class="buttonAumentarCarrito">+</a>
-                </td>
-            </tr>
-        </table>
-        <div id="estadisticasCarrito">
-            <a href="" class="buttoneliminarCarrito">Eliminar</a>
-            <a href="<?=rutaInicio?><?=transaccion?><?=direccionYPago?>">Continuar</a>
-            <h3>Total: $ 50000</h3>
+    
+    <?php if(0 == 0) : ?>
+        <h1>No Hay Ningun Videojuego </h1>
+        <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
+    <?php else : ?>
+        <div id="carrito">
+            <h1>Carrito</h1>
+            <table>
+                <tr>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Unidades</th>
+                </tr>
+                <tr>
+                    <td><img src="Recursos/ImagenesVideojuegos/sp.jpg" alt="Logo tienda" class="imgCarrito"></td>
+                    <td>Spider Man Miles Morales</td>
+                    <td>$ 200000</td>
+                    <td>
+                        <a href="" class="buttonDisminuirCarrito">-</a>
+                        2
+                        <a href="" class="buttonAumentarCarrito">+</a>
+                    </td>
+                </tr>
+            </table>
+            <div id="estadisticasCarrito">
+                <a href="" class="buttoneliminarCarrito">Eliminar</a>
+                <a href="<?=rutaInicio?><?=transaccion?><?=direccionYPago?>">Continuar</a>
+                <h3>Total: $ 50000</h3>
+            </div>
         </div>
-    </div>
+    <?php endif; ?> 
 </div>

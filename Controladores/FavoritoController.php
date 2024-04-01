@@ -17,6 +17,11 @@
 
         public function ver(){
 
+            //Instaciar el objeto
+            $favorito = new Favorito();
+            //Traer los datos de la consulta
+            $favorito -> setIdUsuario($_SESSION['loginexitoso'] -> id);
+            $listadoFavoritos = $favorito -> listar();
             //Incluir la vista
             require_once "Vistas/Favorito/Favoritos.html";
         }

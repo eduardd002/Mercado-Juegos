@@ -341,6 +341,7 @@ Estilos de los enlaces la barra de categorias
     margin-left: 10px;
     margin-right: 15px;
     height: 22px;
+    width: 85px;
 }
 
 #categorias label{
@@ -779,7 +780,7 @@ Estilos del enlace del boton para ver todos los videojuegos
     /*Sin decoracion de texto*/
     text-decoration: none;
     /*Margen izquierdo*/
-    margin-left: 445px;
+    margin-left: 475px;
 }
 
 /*
@@ -1423,7 +1424,7 @@ Estilos del titulo de la imagen cuando se ha relizado de forma exitosa
 
 .imgPrincipal{
     /*Margen izquierdo*/
-    margin-left: 300px;
+    margin-left: 350px;
     /*Margen superior*/
     margin-top: 20px;
     /*Margen inferior*/
@@ -2532,6 +2533,7 @@ Estilo del titulo de comentarios
 }
 
 #categoriasDetalle h2{
+    margin-top: 100px;
     margin-bottom: 30px;
 }
 
@@ -2717,6 +2719,8 @@ Estilo del bloque de boton para bloquear el usuario
 }
 
 .noEncontradoLista{
-    width: 20px;
-    height: 20px;
+    margin-top: 35px;
+    margin-left: 400px;
+    width: 400px;
+    height: 400px;
 }

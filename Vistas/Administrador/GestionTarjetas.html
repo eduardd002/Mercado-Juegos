@@ -20,11 +20,12 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizartarjetaerror'); ?>
 
-    <div id="gestiones">
+    <?php if(mysqli_num_rows($listadoTarjetas) == 0) : ?>
+        <h1>No hay tarjetas creadas</h1>
+        <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
+    <?php else : ?>
         <h1>Gestion de tarjetas</h1>
-        <?php if(mysqli_num_rows($listadoTarjetas) == 0) : ?>
-            <h1>No hay tarjetas creadas</h1>
-        <?php else : ?>
+        <div id="gestiones">
             <table>
                 <tr>
                     <th>Id</th>
@@ -39,7 +40,7 @@
                     </tr>
                 <?php endwhile;?>
             </table>
-        <?php endif; ?>
-        <a href="<?=rutaInicio?><?=tarjeta?><?=crearTarjeta?>" class="button button-crearGestion">Crear</a>
-    </div>
+            <a href="<?=rutaInicio?><?=tarjeta?><?=crearTarjeta?>" class="button button-crearGestion">Crear</a>
+        </div>
+    <?php endif; ?>
 </div>
