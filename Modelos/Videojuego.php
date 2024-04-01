@@ -157,17 +157,48 @@
 
         public function traerUno(){
             //Construir la consulta
-            $consulta = "SELECT v.*, v.id AS 'idVideojuego', u.id AS 'idVendedor'
+            $consulta = "SELECT v.id AS 'idVideojuego', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.stock AS 'stockVideojuego', u.id AS 'idVendedor', us.nombre AS 'nombreUso', c.nombre 'categoriaNombre', v.foto AS 'imagenVideojuego', v.descripcion AS 'descripcionVideojuego', co.nombre AS 'nombreConsola'
                 FROM UsuarioVideojuego uv
                 INNER JOIN Videojuegos v ON v.id = uv.idVideojuego 
                 INNER JOIN Usuarios u ON u.id = uv.idUsuario 
-                WHERE idVideojuego = {$this -> getId()}";
-            //Ejecutar la consulta
-            $resultado = $this -> db -> query($consulta);
-            //Obtener el resultado del objeto
-            $videojuego = $resultado -> fetch_object();
-            //Retornar resultado
-            return $videojuego;
+                INNER JOIN Usos us ON us.id = v.idUso
+                INNER JOIN Consolas co ON co.id = v.idConsola
+                INNER JOIN VideojuegoCategoria cv ON cv.idVideojuego = v.id
+                INNER JOIN Categorias c ON cv.idCategoria = c.id
+                WHERE uv.idVideojuego = {$this -> getId()}";
+            // Ejecutar la consulta
+            $resultados = $this->db->query($consulta);
+        
+            // Array para almacenar la información del usuario y sus videojuegos
+            $informacionUsuario = array();
+        
+            // Recorrer los resultados de la consulta
+            while ($fila = $resultados->fetch_object()) {
+                // Verificar si ya se ha almacenado la información del usuario
+                if (!isset($informacionUsuario['videojuego'])) {
+                    // Si no se ha almacenado, almacenar la información del usuario
+                    $informacionUsuario['videojuego'] = array(
+                        'idVideojuego' => $fila->idVideojuego,
+                        'nombreVideojuego' => $fila->nombreVideojuego,
+                        'precioVideojuego' => $fila->precioVideojuego,
+                        'nombreConsola' => $fila->nombreConsola,
+                        'descripcionVideojuego' => $fila->descripcionVideojuego,
+                        'imagenVideojuego' => $fila->imagenVideojuego,
+                        'stockVideojuego' => $fila->stockVideojuego,
+                        'idVendedor' => $fila->idVendedor,
+                        'nombreUso' => $fila->nombreUso,
+                        'categorias' => array() // Inicializar un array para almacenar los videojuegos del usuario
+                    );
+                }
+        
+                // Almacenar la información del videojuego en el array de videojuegos del usuario
+                $informacionUsuario['videojuego']['categorias'][] = array(
+                    'categoriaNombre' => $fila->categoriaNombre,
+                );
+            }
+        
+            // Retornar la información del usuario y sus videojuegos
+            return $informacionUsuario;     
         }
 
         /*

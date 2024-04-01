@@ -1,90 +1,90 @@
 <?php require_once 'Vistas/Layout/Filtro.html' ?>
 
-<?php if(isset($_SESSION['loginexitosoinfo'])) : ?>
-    <div class="alerta alerta-acierto">
-        <?=$_SESSION['loginexitosoinfo']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('loginexitosoinfo'); ?>
-
-<?php if(isset($_SESSION['usuarioactualizado']) && $_SESSION['usuarioactualizado'] == 'El usuario ha sido actualizado exitosamente') : ?>
-    <div class="alerta alerta-acierto">
-        <?=$_SESSION['usuarioactualizado']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('usuarioactualizado'); ?>
-
-<?php if(isset($_SESSION['usuarioactualizado']) && $_SESSION['usuarioactualizado'] == 'Ha ocurrido un error al actualizar el usuario') : ?>
-    <div class="alerta alerta-acierto">
-        <?=$_SESSION['usuarioactualizado']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('usuarioactualizado'); ?>
-
-<?php if(isset($_SESSION['logincerrado']) && $_SESSION['logincerrado'] == 'Sesion cerrada con exito') : ?>
-    <div class="alerta alerta-acierto">
-        <?=$_SESSION['logincerrado']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('logincerrado'); ?>
-
-<?php if(isset($_SESSION['caducidad']) && $_SESSION['caducidad'] == 'La sesion ha expirado') : ?>
-    <div class="alerta alerta-sugerencia">
-        <?=$_SESSION['caducidad']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('caducidad'); ?>
-
-<?php if(isset($_SESSION['guardarvideojuegoacierto'])) : ?>
-    <div class="alerta alerta-acierto">
-        <?=$_SESSION['guardarvideojuegoacierto']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('guardarvideojuegoacierto'); ?>
-
-<?php if(isset($_SESSION['eliminarusuarioacierto'])) : ?>
-    <div class="alerta alerta-acierto">
-        <?=$_SESSION['eliminarusuarioacierto']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('eliminarusuarioacierto'); ?>
-
-<?php if(isset($_SESSION['eliminaradministradoracierto'])) : ?>
-    <div class="alerta alerta-acierto">
-        <?=$_SESSION['eliminaradministradoracierto']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('eliminaradministradoracierto'); ?>
-
-<?php if(isset($_SESSION['videojuegofavorito']) && $_SESSION['videojuegofavorito'] == 'El ideojuego no ha sido agregado a la lista de favoritos') : ?>
-    <div class="alerta alerta-error">
-        <?=$_SESSION['videojuegofavorito']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('videojuegofavorito'); ?>
-
-<?php if(isset($_SESSION['guardarbloqueoerror'])) : ?>
-    <div class="alerta alerta-error">
-        <?=$_SESSION['guardarbloqueoerror']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('guardarbloqueoerror'); ?>
-
-<?php if(isset($_SESSION['actualizarvideojuegoerror'])) : ?>
-    <div class="alerta alerta-error">
-        <?=$_SESSION['actualizarvideojuegoerror']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('actualizarvideojuegoerror'); ?>
-
-<?php if(isset($_SESSION['verCompraError'])) : ?>
-    <div class="alerta alerta-error">
-        <?=$_SESSION['verCompraError']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('verCompraError'); ?>
-
 <div id="contenidoCentral">
+    <?php if(isset($_SESSION['loginexitosoinfo'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['loginexitosoinfo']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('loginexitosoinfo'); ?>
+
+    <?php if(isset($_SESSION['usuarioactualizado']) && $_SESSION['usuarioactualizado'] == 'El usuario ha sido actualizado exitosamente') : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['usuarioactualizado']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('usuarioactualizado'); ?>
+
+    <?php if(isset($_SESSION['usuarioactualizado']) && $_SESSION['usuarioactualizado'] == 'Ha ocurrido un error al actualizar el usuario') : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['usuarioactualizado']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('usuarioactualizado'); ?>
+
+    <?php if(isset($_SESSION['logincerrado']) && $_SESSION['logincerrado'] == 'Sesion cerrada con exito') : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['logincerrado']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('logincerrado'); ?>
+
+    <?php if(isset($_SESSION['caducidad']) && $_SESSION['caducidad'] == 'La sesion ha expirado') : ?>
+        <div class="alerta alerta-sugerencia">
+            <?=$_SESSION['caducidad']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('caducidad'); ?>
+
+    <?php if(isset($_SESSION['guardarvideojuegoacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['guardarvideojuegoacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('guardarvideojuegoacierto'); ?>
+
+    <?php if(isset($_SESSION['eliminarusuarioacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['eliminarusuarioacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('eliminarusuarioacierto'); ?>
+
+    <?php if(isset($_SESSION['eliminaradministradoracierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['eliminaradministradoracierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('eliminaradministradoracierto'); ?>
+
+    <?php if(isset($_SESSION['videojuegofavorito']) && $_SESSION['videojuegofavorito'] == 'El ideojuego no ha sido agregado a la lista de favoritos') : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['videojuegofavorito']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('videojuegofavorito'); ?>
+
+    <?php if(isset($_SESSION['guardarbloqueoerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['guardarbloqueoerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('guardarbloqueoerror'); ?>
+
+    <?php if(isset($_SESSION['actualizarvideojuegoerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['actualizarvideojuegoerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizarvideojuegoerror'); ?>
+
+    <?php if(isset($_SESSION['verCompraError'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['verCompraError']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('verCompraError'); ?>
+
     <?php if(mysqli_num_rows($listadoTodos) == 0) : ?>
         <h1>No Hay Ningun Videojuego</h1>
     <?php elseif(mysqli_num_rows($listadoTodos) > 0 && mysqli_num_rows($listadoTodos) <= 6) : ?>

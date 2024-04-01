@@ -30,7 +30,7 @@ Enlaces de toda la web
 
 a{
     /*Color del texto*/
-    color: white;
+    color: #01b1ea;;
 }
 
 /*
@@ -39,7 +39,7 @@ Enlaces visitados de toda la web
 
 a:visited{
     /*Color del texto*/
-    color: white;
+    color: #01b1ea;;
 }
 
 /*
@@ -48,7 +48,7 @@ Al posicionarse encima de un enlace de la web
 
 a:hover{
     /*Color del texto*/
-    color: #2092d4;
+    color: #3c525f;
 }
 
 /*
@@ -206,7 +206,11 @@ Estilos de los enlaces del menu principal
     padding-left: 25px;
     /*Margen interior derecho*/
     padding-right: 25px;
-    color: black;
+    color: white;
+}
+
+#menuPrincipal a:hover{
+    color: #144064;
 }
 
 /*
@@ -215,7 +219,7 @@ Estilos de los enlaces de el menu desplegable
 
 #menuPrincipal ul li ul li{
     /*Color de fondo*/
-    background: #c2eaed;
+    background: #16cfdc;
 }
 
 /*
@@ -224,7 +228,7 @@ Estilos para aplicar color al pasar por un enlace del submenu
 
 #menuPrincipal ul li ul li a:hover{
     /*Color de fondo*/
-    background: #daeced;
+    background: #46a9e7;
 }
 
 /*
@@ -274,7 +278,7 @@ Estilos de cada elemento del menu principal
     line-height: 35px;
     /*Flotar hacia la izquierda*/
     float: left;
-    color: black;
+    color: white;
 }
 
 /*
@@ -408,7 +412,7 @@ Estilos del contenido central
 
 #contenidoCentral{
     /*Color de fondo*/
-    background: white;
+    background: rgb(248, 248, 248);
     /*Anchor*/
     width: 96.86%;
     /*Flotar hacia la derecha*/
@@ -470,9 +474,7 @@ Estilo de cada videojuego del buscador
     /*Margen izquierdo*/
     margin-left: 140px;
     /*Margen inferior*/
-    margin-bottom: 35px;
-    /*Margen superior*/
-    margin-top: 5px;
+    margin-top: 65px;
     /*Texto alineado al centro*/
     text-align: center;
 }
@@ -911,7 +913,7 @@ Estilo particular de la imagen de pago al comprar un videojuego
 
 .ventaImage{
     /*Margen superior*/
-    margin-top: 80px;
+    margin-top: 60px;
 }
 
 /*
@@ -1055,7 +1057,7 @@ Estilo del titulo del videojuego del detalle del videojuego
 .detalleVideojuego #tituloVideojuego{
     /*Margen inferior*/
     margin-bottom: 40px;
-    text-align: justify;
+    text-align: left;
 }
 
 /*
@@ -1112,7 +1114,7 @@ Estilo del titulo de la descripcion del videojuego del detalle del videojuego
     /*Margen inferior*/
     margin-bottom: 40px;
     /*Margen superior*/
-    margin-top: 80px;
+    margin-top: 60px;
 }
 
 /*
@@ -1737,7 +1739,7 @@ Estilo de las alertas de las sesion acierto en administrador
     /*Comportamiento de bloque*/
     display: block;
     /*Anchor*/
-    width: 99.1%;
+    width: 100%;
     /*Margen inferior*/
     margin-bottom: 50px;
 }
@@ -1756,7 +1758,7 @@ Estilo de las alertas de las sesion error en administrador
     /*Comportamiento de bloque*/
     display: block;
     /*Anchor*/
-    width: 99.1%;
+    width: 100%;
     /*Margen inferior*/
     margin-bottom: 50px;
 }
@@ -1775,7 +1777,7 @@ Estilo de las alertas de las sesion sugerencia en administrador
     /*Comportamiento de bloque*/
     display: block;
     /*Anchor*/
-    width: 99.1%;
+    width: 100%;
     /*Margen inferior*/
     margin-bottom: 50px;
 }
@@ -2525,6 +2527,19 @@ Estilo del titulo de comentarios
     letter-spacing: 1px;
 }
 
+#categoriasDetalle{
+    margin-left: 70px;
+}
+
+#categoriasDetalle h2{
+    margin-bottom: 30px;
+}
+
+#categoriasDetalle h3{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 /*
 Estilo de la seccion de comentarios en el detalle del videojuego
 */
@@ -2699,4 +2714,9 @@ Estilo del bloque de boton para bloquear el usuario
 #bloquearUsuario{
     /*Margen izquierdo*/
     margin-left: 50px;
+}
+
+.noEncontradoLista{
+    width: 20px;
+    height: 20px;
 }

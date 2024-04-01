@@ -1,0 +1,69 @@
+<div id="contenidoCentral">      
+    <?php if(isset($_SESSION['loginexitosoinfo']) && $_SESSION['loginexitosoinfo'] == 'Bienvenido Usuario') : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['loginexitosoinfo']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('loginexitosoinfo'); ?>
+
+    <?php if(isset($_SESSION['guardarcomentarioerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['guardarcomentarioerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('guardarcomentarioerror'); ?>
+
+    <?php if(isset($_SESSION['guardarcomentarioacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['guardarcomentarioacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('guardarcomentarioacierto'); ?>
+
+    <div class="detalleVideojuego">
+        <div id="favoritoDetalle">
+            <a href="<?=rutaInicio?><?=favorito?><?=guardarFavorito?>&idVideojuego=<?=$videojuegoEspecifico -> id?>"><img src="Recursos/Logotipos/estrella.png" alt="Logo favorito"></a>
+        </div>
+        <img src="Recursos/ImagenesVideojuegos/<?=$videojuegoEspecifico -> foto?>" alt="Logo videojuego">
+        <h1 id="tituloVideojuego"><?=$videojuegoEspecifico -> nombre?></h1>
+        <h2 id="precioVideojuego">$ <?=$videojuegoEspecifico -> precio?></h2>
+        <h3 id="consolaVideojuego">Uso: <?=$videojuegoEspecifico -> nombreUso?></h3>
+        <h3 id="unidadesDisponiblesVideojuego">Unidades disponibles: <?=$videojuegoEspecifico -> stock?></h3>
+        <?php if(isset($_SESSION['loginexitoso']) && $videojuegoEspecifico -> idVendedor == $_SESSION['loginexitoso'] -> id) : ?>
+            <div id="botonesDetalle">
+                <a class="button button-actualizarVideojuegoDesdeDetalle" href="<?=rutaInicio?><?=videojuego?><?=editarVideojuego?>&id=<?=$videojuegoEspecifico -> id?>">Actualizar</a>
+                <a class="button button-eliminarVideojuegoDesdeDetalle" href="<?=rutaInicio?><?=videojuego?><?=eliminarVideojuego?>&id=<?=$videojuegoEspecifico -> idVideojuego?>">Eliminar</a>
+            </div>
+        <?php else : ?>
+            <form action="<?=rutaInicio?><?=transaccion?><?=direccionYPago?>&idVideojuego=<?=$videojuegoEspecifico -> id?>" method="post">
+                <label for="cantidadAComprar">Unidades a comprar</label>
+                <input type="number" name="cantidadAComprar" required>
+                <input type="submit" value="Comprar Ahora">
+            </form>
+        <?php endif; ?>
+        <div class="descripcionVideojuego">
+            <h3 id="descripcionVideojuegoTitulo">Descripcion</h3>
+            <p id="descripcionVideojuegoTexto"><?=$videojuegoEspecifico -> descripcion?></p>
+            <?php if(isset($_SESSION['loginexitoso']) && $videojuegoEspecifico -> idVendedor != $_SESSION['loginexitoso'] -> id) : ?>
+                <h3 id="vendedorVideojuego">Vendido por: <a href="<?=rutaInicio?><?=usuario?><?=perfil?>&idVendedor=<?=$datosVendedor -> idVendedor?>"><?=$datosVendedor -> nombreVendedor?></a></h3>
+            <?php endif; ?>
+        </div>
+        <?php while($comentarios = $listaComentarios -> fetch_object()) : ?>
+            <div id="comentario">
+                <div id="comentario">
+                    <img src="Recursos/ImagenesUsuarios/<?=$comentarios -> fotoComentador?>" alt="Logo videojuego">
+                    <h3><?=$comentarios -> nombreComentador?></h3>
+                    <h4><?=Ayudas::desencriptarContenido($comentarios -> contenidoComentario)?></h4>
+                    <h5><?=$comentarios -> fechaCreacionComentario?> - <?=$comentarios -> horaCreacionComentario?></h5>
+                </div>
+            </div>
+        <?php endwhile; ?>
+        <div id="bloquecomentario">
+            <form action="<?=rutaInicio?><?=comentario?><?=guardarComentario?>&id=<?=$videojuegoEspecifico -> id?>" method="post">
+                <h2>¿Quieres agregar un comentario?</h2>
+                <input type="text" name="comentario" required>
+                <input type="submit" class="btnRegistro" value="Comentar">
+            </form>
+        </div>
+    </div>
+</div>
