@@ -3,14 +3,12 @@ Estilos de la cabecera
 */
 
 #contenedor{
-    /*Anchor*/
-    width: 90%;
     /*Margen centrado*/
     margin: 0px auto;
     /*Sombra*/
     box-shadow: 0px 0px 10px gray;
     /*Color de fondo*/
-    background: rgb(235, 235, 235);
+    background: #01b1ea;
 }
 
 /*
@@ -27,21 +25,12 @@ Estilos generales
 }
 
 /*
-Estilos del body
-*/
-
-body{
-    /*Color de fondo*/
-    background: #01b1ea;
-}
-
-/*
 Enlaces de toda la web
 */
 
 a{
     /*Color del texto*/
-    color: #01b1ea;
+    color: white;
 }
 
 /*
@@ -50,7 +39,7 @@ Enlaces visitados de toda la web
 
 a:visited{
     /*Color del texto*/
-    color: #01b1ea;
+    color: white;
 }
 
 /*
@@ -59,7 +48,7 @@ Al posicionarse encima de un enlace de la web
 
 a:hover{
     /*Color del texto*/
-    color: #555;
+    color: #2092d4;
 }
 
 /*
@@ -70,7 +59,7 @@ Estilo del titulo de la tienda
     /*Margen interior*/
     padding: 20px;
     /*Margen izquierdo*/
-    margin-left: 40px;
+    margin-left: 100px;
     /*Flotar hacia la izquierda*/
     float: left;
 }
@@ -102,7 +91,7 @@ Estilo del titulo principal de la tienda
     /*Convertir letra a mayusculas*/
     text-transform: uppercase;
     /*Color de letra*/
-    color: #01b1ea;
+    color: white;
     /*Texto en negrita*/
     font-weight: bold;
     /*Margen superior*/
@@ -217,6 +206,7 @@ Estilos de los enlaces del menu principal
     padding-left: 25px;
     /*Margen interior derecho*/
     padding-right: 25px;
+    color: black;
 }
 
 /*
@@ -284,6 +274,7 @@ Estilos de cada elemento del menu principal
     line-height: 35px;
     /*Flotar hacia la izquierda*/
     float: left;
+    color: black;
 }
 
 /*
@@ -345,6 +336,7 @@ Estilos de los enlaces la barra de categorias
 #categorias select{
     margin-left: 10px;
     margin-right: 15px;
+    height: 22px;
 }
 
 #categorias label{
@@ -357,11 +349,13 @@ Estilos de los enlaces la barra de categorias
     margin-top: 13px;
     margin-left: 40px;
     margin-right: 40px;
+    width: 150px;
 }
 
 #categorias input[type='number']{
-    width: 55px;
+    width: 81px;
     margin-right: 20px;
+    height: 22px;
 }
 
 /*
@@ -416,9 +410,9 @@ Estilos del contenido central
     /*Color de fondo*/
     background: white;
     /*Anchor*/
-    width: 96.4%;
+    width: 96.86%;
     /*Flotar hacia la derecha*/
-    float: right;
+    float: left;
     /*Margen interior*/
     padding: 20px;
     border-top: 1px solid black;
@@ -449,19 +443,13 @@ Estilo de cada videojuego
     /*Color de fondo*/
     background: white;
     /*Anchor*/
-    width: 25%;
+    width: 24.8%;
     /*Borde*/
     border: 1px solid #ccc;
     /*Flotar hacia la izquierda*/
     float: left;
     /*Margen izquierdo*/
-    margin-left: 44px;
-    /*Margen derecho*/
-    margin-right: 44px;
-    /*Margen inferior*/
-    margin-bottom: 22px;
-    /*Margen superior*/
-    margin-top: 40px;
+    margin: 51px;
     /*Texto alineado al centro*/
     text-align: center;
 }
@@ -507,7 +495,7 @@ Estilo de la imagen del videojuego que se presenta en el catalogo, al inicio
     /*Dar comportamiento de bloque*/
     display: block;
     /*Margen izquierdo*/
-    margin-left: 80px;
+    margin-left: 95px;
 }
 
 /*
@@ -766,7 +754,7 @@ Estilos del boton para ver todos los videojuegos
 
 #verTodos{
     /*Margen inferior*/
-    margin-bottom: 30px;
+    margin: 30px;
 }
 
 /*
@@ -1038,6 +1026,7 @@ Estilo del detalle del videojuego
 .detalleVideojuego{
     /*Anchor*/
     width: 95%;
+    margin-top: 50px;
 }
 
 /*
@@ -1066,6 +1055,7 @@ Estilo del titulo del videojuego del detalle del videojuego
 .detalleVideojuego #tituloVideojuego{
     /*Margen inferior*/
     margin-bottom: 40px;
+    text-align: justify;
 }
 
 /*
