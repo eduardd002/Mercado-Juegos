@@ -67,6 +67,7 @@ CREATE TABLE categorias (
     activo          INTEGER NOT NULL,
     nombre VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT uq_nombre UNIQUE(nombre),
     CONSTRAINT categorias_pk PRIMARY KEY ( id )
 );
 
@@ -79,6 +80,7 @@ CREATE TABLE consolas (
     activo          INTEGER NOT NULL,
     nombre VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT uq_nombre UNIQUE(nombre),
     CONSTRAINT consolas_pk PRIMARY KEY ( id )
 );
 
@@ -91,6 +93,7 @@ CREATE TABLE usos (
     activo          INTEGER NOT NULL,
     nombre VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT uq_nombre UNIQUE(nombre),
     CONSTRAINT usos_pk PRIMARY KEY ( id )
 );
 
@@ -139,6 +142,7 @@ CREATE TABLE tarjetas (
     activo          INTEGER NOT NULL,
     nombre VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT uq_nombre UNIQUE(nombre),
     CONSTRAINT tarjetas_pk PRIMARY KEY ( id )
 );
 
@@ -167,6 +171,7 @@ CREATE TABLE estados (
     activo          INTEGER NOT NULL,
     nombre VARCHAR(250) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT uq_nombre UNIQUE(nombre),
     CONSTRAINT estados_pk PRIMARY KEY ( id )
 );
 

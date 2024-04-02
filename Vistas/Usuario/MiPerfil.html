@@ -6,12 +6,20 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarusuarioacierto'); ?>
 
-    <?php if(isset($_SESSION['usuarioactualizado']) && $_SESSION['usuarioactualizado'] == 'Proporciona nuevos datos') : ?>
-        <div class="alerta alerta-error">
-            <?=$_SESSION['usuarioactualizado']; ?>
+    <?php if(isset($_SESSION['actualizarusuariosugerencia'])) : ?>
+        <div class="alerta alerta-sugerencia">
+            <?=$_SESSION['actualizarusuariosugerencia']; ?>
         </div>
     <?php endif; ?>
-    <?php Ayudas::eliminarSesion('usuarioactualizado'); ?>
+    <?php Ayudas::eliminarSesion('actualizarusuariosugerencia'); ?>
+
+    <?php if(isset($_SESSION['actualizarusuarioerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['actualizarusuarioerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizarusuarioerror'); ?>
+
     <div id="loginYRegistro">
         <h1>Mi Perfil</h1>
         <hr>

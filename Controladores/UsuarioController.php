@@ -219,8 +219,14 @@
             $usuario -> setDepartamento($departamento);
             $usuario -> setMunicipio($municipio);
             $usuario -> setFoto($foto);
-            //Ejecutar la consulta
-            $actualizado = $usuario -> actualizar();
+            try{
+                //Ejecutar la consulta
+                $actualizado = $usuario -> actualizar();
+            }catch(mysqli_sql_exception $excepcion){
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('actualizarusuarioerror', "Esta direccion de correo ya existe", '?controller=UsuarioController&action=miPerfil');
+                die();
+            }
             return $actualizado;
         }
 
