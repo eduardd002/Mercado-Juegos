@@ -32,8 +32,8 @@
         <h3 id="unidadesDisponiblesVideojuego">Unidades disponibles: <?=$videojuegoEspecifico['videojuego']['stockVideojuego']?></h3>
         <?php if(isset($_SESSION['loginexitoso']) && $videojuegoEspecifico['videojuego']['idVendedor'] == $_SESSION['loginexitoso'] -> id) : ?>
         <div id="botonesDetalle">
-            <a class="button button-actualizarVideojuegoDesdeDetalle" href="<?=rutaInicio?><?=videojuego?><?=editarVideojuego?>&id=<?=$videojuegoEspecifico -> id?>">Actualizar</a>
-            <a class="button button-eliminarVideojuegoDesdeDetalle" href="<?=rutaInicio?><?=videojuego?><?=eliminarVideojuego?>&id=<?=$videojuegoEspecifico -> idVideojuego?>">Eliminar</a>
+            <a class="button button-actualizarVideojuegoDesdeDetalle" href="<?=rutaInicio?><?=videojuego?><?=editarVideojuego?>&id=<?=$videojuegoEspecifico['videojuego']['idVideojuego']?>">Actualizar</a>
+            <a class="button button-eliminarVideojuegoDesdeDetalle" href="<?=rutaInicio?><?=videojuego?><?=eliminarVideojuego?>&id=<?=$videojuegoEspecifico['videojuego']['idVideojuego']?>">Eliminar</a>
         </div>
     <?php else : ?>
         <form action="<?=rutaInicio?><?=transaccion?><?=direccionYPago?>&idVideojuego=<?=$videojuegoEspecifico['videojuego']['idVideojuego']?>" method="post">

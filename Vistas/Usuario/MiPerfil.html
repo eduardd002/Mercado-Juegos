@@ -14,6 +14,7 @@
     <?php Ayudas::eliminarSesion('usuarioactualizado'); ?>
     <div id="loginYRegistro">
         <h1>Mi Perfil</h1>
+        <hr>
         <form action="<?=rutaInicio?><?=usuario?><?=actualizarUsuario?>&id=<?=$_SESSION['loginexitoso'] -> id?>" method="post" enctype="multipart/form-data">
             <div id="bloqueTextoRegistro">
                 <label for="nombre">Nombre</label>

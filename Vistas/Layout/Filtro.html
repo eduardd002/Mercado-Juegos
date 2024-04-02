@@ -1,11 +1,8 @@
 <?php if(isset($_SESSION['loginexitoso']) || !isset($_SESSION['loginexitoso']) && !isset($_SESSION['loginexitosoa'])) : ?>
     <!-- SECCION MENU DE CATEGORIAS -->
 
-    <nav id="categorias">
+    <nav id="filtro">
         <ul>
-            <li>
-                <a href="<?=rutaInicio?><?=videojuego?><?=inicio?>">Inicio</a>
-            </li>
             <li>
                 <form action="<?=rutaInicio?><?=videojuego?><?=filtro?>" method="post">
                     <?php $listadoCategorias = Ayudas::mostrarCategorias(); ?>
@@ -40,11 +37,11 @@
                 </li>
                 <li>
                     <label for="minimo">Minimo</label>
-                    <input type="number" name="minimo" value="">
+                    <input type="number" name="minimo" placeholder="$" value="">
                 </li>
                 <li>
                     <label for="maximo">Maximo</label>
-                    <input type="number" name="maximo" value="">
+                    <input type="number" name="maximo" placeholder="$" value="">
                 </li>
                 <li>
                     <input type="submit" value="Aplicar filtro">

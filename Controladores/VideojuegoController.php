@@ -32,14 +32,18 @@
 
         public function inicio(){
 
-            //Instanciar el objeto
-            $videojuego = new Videojuego();
-            //Traer el listado de algunos videojuegos
-            $listadoAlgunos = $videojuego -> listarAlgunos();
-            //Traer el listado de todos los videojuegos
-            $listadoTodos = $videojuego -> listarTodos();
-            //Incluir la vista
-            require_once 'Vistas/Layout/Catalogo.html';
+            if(isset($_SESSION['loginexitosoa'])){
+                require_once 'Vistas/Administrador/Inicio.html';
+            }else{
+                //Instanciar el objeto
+                $videojuego = new Videojuego();
+                //Traer el listado de algunos videojuegos
+                $listadoAlgunos = $videojuego -> listarAlgunos();
+                //Traer el listado de todos los videojuegos
+                $listadoTodos = $videojuego -> listarTodos();
+                //Incluir la vista
+                require_once 'Vistas/Layout/Catalogo.html';
+            }
         }
 
         /*

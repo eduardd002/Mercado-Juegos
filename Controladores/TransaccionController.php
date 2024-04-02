@@ -149,7 +149,7 @@
             $transaccion -> setApellidoVendedor($vendedor -> apellido);
             $transaccion -> setCorreoVendedor($vendedor -> correo);
             $transaccion -> setTelefonoVendedor($vendedor -> numeroTelefono);
-            $transaccion -> setTotal($unidades * ($videojuego -> precio));
+            $transaccion -> setTotal($unidades * ($videojuego['videojuego']['precioVideojuego']));
             $transaccion -> setFechaRelizacion(date('Y-m-d'));
             $transaccion -> setHoraRealizacion(date("H:i:s"));
             //Guardar en la base de datos
@@ -171,10 +171,10 @@
             $transaccionVideojuego -> setIdTransaccion($id);
             $transaccionVideojuego -> setIdVideojuego($idVideojuego);
             $transaccionVideojuego -> setUnidades($unidades);
-            $transaccionVideojuego -> setNombreVideojuego($videojuego -> nombre);
-            $transaccionVideojuego -> setPrecioVideojuego($videojuego -> precio);
-            $transaccionVideojuego -> setUsoVideojuego($videojuego -> idUso);
-            $transaccionVideojuego -> setConsolaVideojuego($videojuego -> idConsola);
+            $transaccionVideojuego -> setNombreVideojuego($videojuego['videojuego']['nombreVideojuego']);
+            $transaccionVideojuego -> setPrecioVideojuego($videojuego['videojuego']['precioVideojuego']);
+            $transaccionVideojuego -> setUsoVideojuego($videojuego['videojuego']['nombreUso']);
+            $transaccionVideojuego -> setConsolaVideojuego($videojuego['videojuego']['nombreConsola']);
             //Guardar en la base de datos
             $guardadoTransaccionVideojuego = $transaccionVideojuego -> guardar();
             //Retornar el resultado
@@ -209,6 +209,7 @@
             //Instanciar el objeto
             $chat = new Chat;
             //Crear el objeto
+            $chat -> setActivo(1);
             $chat -> setFechaCreacion(date('Y-m-d'));
             //Guardar en la base de datos
             $guardado = $chat -> guardar();
@@ -239,6 +240,7 @@
             //Instanciar el primer objeto
             $usuarioChat = new UsuarioChat;
             //Crear el primer objeto
+            $usuarioChat -> setActivo(1);
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
             $usuarioChat -> setIdDestinatario($destinatario);
             $usuarioChat -> setIdChat($this -> obtenerUltimoChat());

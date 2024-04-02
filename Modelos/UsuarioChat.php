@@ -64,7 +64,7 @@
 
         public function guardar(){
             //Construir la consulta
-            $consulta = "INSERT INTO usuariochat VALUES (NULL, {$this -> getIdRemitente()}, 
+            $consulta = "INSERT INTO usuariochat VALUES (NULL, {$this -> getActivo()}, {$this -> getIdRemitente()}, 
                 {$this -> getIdDestinatario()}, {$this -> getIdChat()})";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);

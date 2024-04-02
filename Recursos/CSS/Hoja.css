@@ -206,10 +206,12 @@ Estilos de los enlaces del menu principal
     padding-left: 25px;
     /*Margen interior derecho*/
     padding-right: 25px;
+    /*Color del texto*/
     color: white;
 }
 
 #menuPrincipal a:hover{
+    /*Color del texto*/
     color: #144064;
 }
 
@@ -278,6 +280,7 @@ Estilos de cada elemento del menu principal
     line-height: 35px;
     /*Flotar hacia la izquierda*/
     float: left;
+    /*Color del texto*/
     color: white;
 }
 
@@ -305,7 +308,7 @@ Estilos de la cabecera
 Estilos de la barra de categorias
 */
 
-#categorias{
+#filtro {
     /*limpiar flotados*/
     clear: both;
     /*Color de fondo*/
@@ -319,13 +322,13 @@ Estilos de la barra de categorias
 }
 
 /*
-Estilos de los enlaces la barra de categorias
+Estilos de los enlaces la barra de filtro
 */
 
-#categorias a{
+#filtro a{
     /*Dar comportamiento de bloque*/
     display: block;
-    /*Color de letra*/
+    /*Color del texto*/
     color: white;
     /*Sin decoracion de texto*/
     text-decoration: none;
@@ -337,29 +340,59 @@ Estilos de los enlaces la barra de categorias
     transition: all 300ms;
 }
 
-#categorias select{
+/*
+Estilos de los select en la barra de filtro
+*/
+
+#filtro select{
+    /*Margen izquierdo*/
     margin-left: 10px;
+    /*Margen derecho*/
     margin-right: 15px;
+    /*Altura*/
     height: 22px;
-    width: 85px;
+    /*Anchor*/
+    width: 97px;
 }
 
-#categorias label{
+/*
+Estilos de los textos en la barra de filtro
+*/
+
+#filtro label{
+    /*Color de letra*/
     color: white;
+    /*Margen izquierdo*/
     margin-left: 15px;
+    /*Margen derecho*/
     margin-right: 10px;
 }
 
-#categorias input[type='submit']{
+/*
+Estilos del boton de filtrar en la barra de filtro
+*/
+
+#filtro input[type='submit']{
+    /*Margen superior*/
     margin-top: 13px;
+    /*Margen izquierdo*/
     margin-left: 40px;
+    /*Margen derecho*/
     margin-right: 40px;
+    /*Anchor*/
     width: 150px;
 }
 
-#categorias input[type='number']{
-    width: 81px;
+/*
+Estilos de los campos de numero en la barra de filtro
+*/
+
+#filtro input[type='number']{
+    /*Anchor*/
+    width: 97px;
+    /*Margen derecho*/
     margin-right: 20px;
+    /*Altura*/
     height: 22px;
 }
 
@@ -367,7 +400,7 @@ Estilos de los enlaces la barra de categorias
 Estilos de los enlaces la barra de categorias, primer elemento (inicio)
 */
 
-#categorias a:first-child{
+#filtro a:first-child{
     /*Borde derecho*/
     border-left: 1px solid #363636;
 }
@@ -376,7 +409,7 @@ Estilos de los enlaces la barra de categorias, primer elemento (inicio)
 Estilo al posicionarse en alguna categoria
 */
 
-#categorias a:hover{
+#filtro a:hover{
     /*Color de fondo*/
     background: #01b1ea;
 }
@@ -385,7 +418,7 @@ Estilo al posicionarse en alguna categoria
 Estilos de la lista de enlaces la barra de categorias
 */
 
-#categorias ul{
+#filtro ul{
     /*No tenga los puntos de la lista*/
     list-style: none;
     /*Margen centrado*/
@@ -398,7 +431,7 @@ Estilos de la lista de enlaces la barra de categorias
 Estilos de cada elemento de la barra de categorias
 */
 
-#categorias ul li{
+#filtro ul li{
     /*Altura de linea*/
     line-height: 55px;
     /*Flotar hacia la izquierda*/
@@ -420,6 +453,7 @@ Estilos del contenido central
     float: left;
     /*Margen interior*/
     padding: 20px;
+    /*Borde superior*/
     border-top: 1px solid black;
 }
 
@@ -788,7 +822,9 @@ Estilos del formulario de registro de usuario
 */
 
 #loginYRegistro h1{
+    /*limpiar flotados*/
     clear: both;
+    /*Dar comportamiento de bloque*/
     display: block;
     /*Texto alineado al centro*/
     text-align: center;
@@ -1029,6 +1065,7 @@ Estilo del detalle del videojuego
 .detalleVideojuego{
     /*Anchor*/
     width: 95%;
+    /*Margen superior*/
     margin-top: 50px;
 }
 
@@ -1058,6 +1095,7 @@ Estilo del titulo del videojuego del detalle del videojuego
 .detalleVideojuego #tituloVideojuego{
     /*Margen inferior*/
     margin-bottom: 40px;
+    /*Texto alineado a la izquierda*/
     text-align: left;
 }
 
@@ -1271,7 +1309,10 @@ table{
     width: 100%;
     /*Borde inferior*/
     border-bottom: 1px solid #CCC;
+    /*Margen inferior*/
     margin-bottom: 75px;
+    /*Margen superior*/
+    margin-top: 75px;
 }
 
 /*
@@ -1304,12 +1345,14 @@ Estilo del titulo del carrito
 */
 
 #carrito h1{
+    /*Limpiar flotados*/
     clear: both;
+    /*Dar comportamiento de bloque*/
     display: block;
     /*Titulo alineado al centro*/
     text-align: center;
     /*Margen inferior*/
-    margin-bottom: 60px;
+    margin-bottom: 20px;
 }
 
 /*
@@ -1394,6 +1437,15 @@ Estilos de la compra cuando se ha relizado de forma exitosa
 #compraExitosa{
     /*Margen*/
     margin: 10px;
+}
+
+/*
+Estilo de la imagen de compra exitosa
+*/
+
+#compraExitosa img{
+    /*Margen izquierdo*/
+    margin-left: 350px;
 }
 
 /*
@@ -2147,7 +2199,9 @@ Estilo de el apartado de chat de vendedor
 */
 
 #chatVendedor{
+    /*Margen izquierdo*/
     margin-left: 50px;
+    /*Margen derecho*/
     margin-right: 50px;
 }
 
@@ -2452,7 +2506,9 @@ Estilos de los botones en el apartado de mi perfil en usuario
     margin-bottom: 40px;
 }
 
-/*Estilo de los botones en la seccion de perfil de adminsitrador*/
+/*
+Estilo de los botones en la seccion de perfil de adminsitrador
+*/
 
 #botonesadmin a{
     /*Color de letra*/
@@ -2528,17 +2584,34 @@ Estilo del titulo de comentarios
     letter-spacing: 1px;
 }
 
+/*
+Estilo de las categorias en el apartado de detalle del videojuego
+*/
+
 #categoriasDetalle{
+    /*Margen izquierdo*/
     margin-left: 70px;
 }
 
+/*
+Estilo del titulo de categorias
+*/
+
 #categoriasDetalle h2{
+    /*Margen superior*/
     margin-top: 100px;
+    /*Margen inferior*/
     margin-bottom: 30px;
 }
 
+/*
+Estilo de las categorias
+*/
+
 #categoriasDetalle h3{
+    /*Margen superior*/
     margin-top: 5px;
+    /*Margen inferior*/
     margin-bottom: 5px;
 }
 
@@ -2718,9 +2791,17 @@ Estilo del bloque de boton para bloquear el usuario
     margin-left: 50px;
 }
 
+/*
+Estilo de la imagen de elemento no encontrado
+*/
+
 .noEncontradoLista{
+    /*Margen superior*/
     margin-top: 35px;
+    /*Margen izquierdo*/
     margin-left: 400px;
+    /*Anchor*/
     width: 400px;
+    /*Altura*/
     height: 400px;
 }

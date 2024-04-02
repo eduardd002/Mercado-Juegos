@@ -12,6 +12,7 @@
     <?php else : ?>
         <div id="chatVendedor">
             <h1 class="tituloCreacionGestiones">Chat</h1>
+            <hr>
             <div id="seccionUsuarios">
                 <?php while($chats = $listadoChats -> fetch_object()) : ?>
                     <a href="<?=rutaInicio?><?=chat?><?=verMensajes?>&idContacto=<?=$chats -> idUsuarioChat?>">
