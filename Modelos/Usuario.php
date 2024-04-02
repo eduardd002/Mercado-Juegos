@@ -133,12 +133,14 @@
         */
 
         public function guardar(){
-
+            // Mensaje para encriptar
+            $clave = $this -> getClave();
+            $claveEncriptada = Ayudas::encriptarContenido($clave);
             //Construir la consulta
             $consulta = "INSERT INTO usuarios VALUES(NULL, 
                 '{$this -> getNombre()}', '{$this -> getApellido()}', 
                 '{$this -> getFechaNacimiento()}', {$this -> getNumeroTelefono()}, 
-                '{$this -> getCorreo()}', '{$this -> getClave()}', 
+                '{$this -> getCorreo()}', '{$claveEncriptada}', 
                 '{$this -> getDepartamento()}', '{$this -> getMunicipio()}', 
                 '{$this -> getFoto()}', '{$this -> getFechaRegistro()}')";
             //Ejecutar la consulta
@@ -159,6 +161,8 @@
         */
 
         public function login(){
+            // Mensaje para encriptar
+
 
             //Construir la consulta
             $consulta = "SELECT DISTINCT * FROM usuarios WHERE correo = '{$this -> getCorreo()}' AND clave = 

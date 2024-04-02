@@ -83,7 +83,7 @@
             //Crear el objeto
             $favoritoVideojuego -> setIdFavorito($idFavorito);
             $favoritoVideojuego -> setIdVideojuego($videojuegoId);
-            $favoritoVideojuego -> setPrecio($this -> traer($videojuegoId)['videojuego']['idVideojuego']);
+            $favoritoVideojuego -> setPrecio($this -> traer($videojuegoId -> idVideojuego));
             //Guardar en la base de datos
             $guardadoVideojuegoFavorito = $favoritoVideojuego -> guardar();
             //Retornar el resultado

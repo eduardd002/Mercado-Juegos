@@ -111,45 +111,21 @@
         }
 
         public function obtenerInformacionUsuario(){
-            $consulta = "SELECT DISTINCT u.id AS 'idUsuario', u.nombre AS 'nombreUsuario', u.fechaRegistro AS 'fechaUsuario', u.departamento AS 'departamentoUsuario', u.municipio AS 'municipioUsuario', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.foto AS 'fotoVideojuego', v.id AS 'idVideojuego'
+            $consulta = "SELECT DISTINCT COUNT(uv.idUsuario) AS 'cantidadPublicados', u.id AS 'idUsuario', u.nombre AS 'nombreUsuario', u.fechaRegistro AS 'fechaUsuario', u.departamento AS 'departamentoUsuario', u.municipio AS 'municipioUsuario', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.foto AS 'fotoVideojuego', v.id AS 'idVideojuego', v.foto AS 'fotoVideojuego', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego',
+                (SELECT COUNT(idvendedor) FROM transacciones WHERE idvendedor = u.id) AS 'cantidadVendidos'
                 FROM UsuarioVideojuego uv
                 INNER JOIN Usuarios u ON u.id = uv.idUsuario
                 INNER JOIN Videojuegos v ON v.id = uv.idVideojuego
                 WHERE uv.idUsuario = {$this->getIdUsuario()}";
         
             // Ejecutar la consulta
-            $resultados = $this->db->query($consulta);
-        
-            // Array para almacenar la información del usuario y sus videojuegos
-            $informacionUsuario = array();
-        
-            // Recorrer los resultados de la consulta
-            while ($fila = $resultados->fetch_object()) {
-                // Verificar si ya se ha almacenado la información del usuario
-                if (!isset($informacionUsuario['usuario'])) {
-                    // Si no se ha almacenado, almacenar la información del usuario
-                    $informacionUsuario['usuario'] = array(
-                        'idUsuario' => $fila->idUsuario,
-                        'nombreUsuario' => $fila->nombreUsuario,
-                        'fechaUsuario' => $fila->fechaUsuario,
-                        'departamentoUsuario' => $fila->departamentoUsuario,
-                        'municipioUsuario' => $fila->municipioUsuario,
-                        'videojuegos' => array() // Inicializar un array para almacenar los videojuegos del usuario
-                    );
-                }
-        
-                // Almacenar la información del videojuego en el array de videojuegos del usuario
-                $informacionUsuario['usuario']['videojuegos'][] = array(
-                    'idVideojuego' => $fila->idVideojuego,
-                    'nombreVideojuego' => $fila->nombreVideojuego,
-                    'precioVideojuego' => $fila->precioVideojuego,
-                    'fotoVideojuego' => $fila->fotoVideojuego
-                );
-            }
+            $resultado = $this->db->query($consulta);
+
+            $resultados = $resultado -> fetch_object();
         
             // Retornar la información del usuario y sus videojuegos
-            return $informacionUsuario;
-        }        
+            return $resultados;
+        } 
     }
 
 ?>

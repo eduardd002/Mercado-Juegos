@@ -2526,6 +2526,8 @@ Estilo de la seccion de comentario
     margin-top: 30px;
     /*Flotar hacia la izquierda*/
     float: left;
+    /*Margen inferior*/
+    margin-bottom: 50px;
 }
 
 /*
@@ -2534,7 +2536,7 @@ Estilo del boton para enviar el comentario
 
 #bloquecomentario input[type="text"]{
     /*Altura*/
-    height: 20px;
+    height: 30px;
     /*Anchor*/
     width: 500px;
     /*Flotar hacia la izquierda*/
@@ -2548,6 +2550,7 @@ Estilo del campo para enviar el comentario
 */
 
 #bloquecomentario input[type="submit"]{
+    margin: 0px;
     /*Flotar hacia la izquierda*/
     float: left;
     /*Anchor*/
@@ -2589,8 +2592,12 @@ Estilo de las categorias en el apartado de detalle del videojuego
 */
 
 #categoriasDetalle{
+    /*Limpiar flotados*/
+    clear: both;
+    /*Dar comportamiento de bloque*/
+    display: block;
     /*Margen izquierdo*/
-    margin-left: 70px;
+    margin-left: 75px;
 }
 
 /*
