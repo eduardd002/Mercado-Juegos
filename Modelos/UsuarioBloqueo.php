@@ -3,6 +3,7 @@
     class UsuarioBloqueo{
 
         private $id;
+        private $activo;
         private $idBloqueador;
         private $idBloqueado;
         private $idBloqueo;
@@ -34,6 +35,15 @@
 
                 return $this;
         }
+
+        public function getActivo(){
+                return $this->activo;
+            }
+    
+            public function setActivo($activo){
+                $this->activo = $activo;
+                return $this;
+            }
 
         /**
          * Get the value of idBloqueador
@@ -113,7 +123,7 @@
         }
 
         public function obtenerBloqueosPorUsuario(){
-                $consulta = "SELECT b.id AS 'idBloqueo', u.nombre AS 'nombreBloqueado', u.apellido AS 'apellidoBloqueado', b.motivo AS 'motivoBloqueo', b.fechaBloqueo AS 'fechaBloqueo', b.horaBloqueo AS 'horaBloqueo'
+                $consulta = "SELECT DISTINCT b.id AS 'idBloqueo', u.nombre AS 'nombreBloqueado', u.apellido AS 'apellidoBloqueado', b.motivo AS 'motivoBloqueo', b.fechaBloqueo AS 'fechaBloqueo', b.horaBloqueo AS 'horaBloqueo'
                 FROM UsuarioBloqueo ub
                 INNER JOIN Usuarios u ON u.id = ub.idBloqueado
                 INNER JOIN Bloqueos b ON b.id = ub.id

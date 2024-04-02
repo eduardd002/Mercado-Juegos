@@ -3,6 +3,7 @@
     class Mensaje{
 
         private $id;
+        private $activo;
         private $idRemitente;
         private $idDestinatario;
         private $idChat;
@@ -21,6 +22,15 @@
 
         public function setId($id){
             $this->id = $id;
+            return $this;
+        }
+
+        public function getActivo(){
+            return $this->activo;
+        }
+
+        public function setActivo($activo){
+            $this->activo = $activo;
             return $this;
         }
 
@@ -120,7 +130,7 @@
             //Obtener mensaje encriptado
             $mensajeEncriptado = Ayudas::encriptarContenido($mensaje);
             //Construir la consulta
-            $consulta = "INSERT IGNORE INTO mensajes VALUES(NULL, {$this -> getIdRemitente()}, 
+            $consulta = "INSERT INTO mensajes VALUES(NULL, {$this -> getIdRemitente()}, 
             {$this -> getIdDestinatario()}, {$this -> getIdChat()}, '{$mensajeEncriptado}', '{$this -> getFechaEnvio()}', 
             '{$this -> getHoraEnvio()}')";
             //Ejecutar la consulta
@@ -142,7 +152,7 @@
 
         public function obtenerMensajes(){
             //Construir la consulta
-            $consulta = "SELECT * FROM mensajes ORDER BY id ASC";
+            $consulta = "SELECT DISTINCT * FROM mensajes ORDER BY id ASC";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Retornar el resultado

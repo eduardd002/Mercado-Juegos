@@ -3,6 +3,7 @@
     class Administrador{
 
         private $id;
+        private $activo;
         private $nombre;
         private $apellido;
         private $fechanacimiento;
@@ -23,6 +24,15 @@
 
         public function setId($id){
             $this->id = $id;
+            return $this;
+        }
+
+        public function getActivo(){
+            return $this->activo;
+        }
+
+        public function setActivo($activo){
+            $this->activo = $activo;
             return $this;
         }
 
@@ -105,7 +115,7 @@
         public function guardar(){
 
             //Construir la consulta
-            $consulta = "INSERT IGNORE INTO administradores VALUES(NULL, 
+            $consulta = "INSERT INTO administradores VALUES(NULL, 
                 '{$this -> getNombre()}', '{$this -> getApellido()}', 
                 '{$this -> getFechaNacimiento()}', {$this -> getNumeroTelefono()}, 
                 '{$this -> getCorreo()}', '{$this -> getClave()}', 
@@ -130,7 +140,7 @@
         public function login(){
 
             //Construir la consulta
-            $consulta = "SELECT * FROM administradores WHERE correo = '{$this -> getCorreo()}' AND clave = 
+            $consulta = "SELECT DISTINCT * FROM administradores WHERE correo = '{$this -> getCorreo()}' AND clave = 
             '{$this -> getClave()}'";
             //Ejecutar la consulta
             $login = $this -> db -> query($consulta);
@@ -151,7 +161,7 @@
 
         public function eliminar(){
             //Construir la consulta
-            $consulta = "DELETE FROM administradores WHERE id = {$this -> getId()}";
+            $consulta = "UPDATE administradores WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $eliminado = $this -> db -> query($consulta);
             //Crear bandera
@@ -195,7 +205,7 @@
 
         public function obtenerUno(){
             //Construir la consulta
-            $consulta = "SELECT * FROM administradores WHERE id = {$this -> getId()}";
+            $consulta = "SELECT DISTINCT * FROM administradores WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $categoria = $this -> db -> query($consulta);
             //Obtener resultado

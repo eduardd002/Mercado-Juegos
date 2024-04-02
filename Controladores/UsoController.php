@@ -24,6 +24,7 @@
             //Instanciar el objeto
             $uso = new Uso();
             //Crear el objeto
+            $uso -> setActivo(1);
             $uso -> setNombre($nombre);
             //Guardar en la base de datos
             $guardado = $uso -> guardar();

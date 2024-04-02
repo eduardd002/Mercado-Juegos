@@ -307,7 +307,7 @@
 
         public function obtenerVentas(){
             //Construir la consulta
-            $consulta = "SELECT * FROM transacciones WHERE idVendedor = {$this -> getIdVendedor()}";
+            $consulta = "SELECT DISTINCT * FROM transacciones WHERE idVendedor = {$this -> getIdVendedor()}";
             //Ejecutar la consulta
             $lista = $this -> db -> query($consulta);
             //Retornar resultado
@@ -320,7 +320,7 @@
 
         public function obtenerCompras(){
             //Construir la consulta
-            $consulta = "SELECT * FROM transacciones WHERE idComprador = {$this -> getIdComprador()}";
+            $consulta = "SELECT DISTINCT * FROM transacciones WHERE idComprador = {$this -> getIdComprador()}";
             //Ejecutar la consulta
             $lista = $this -> db -> query($consulta);
             //Retornar resultado
@@ -333,7 +333,7 @@
 
         public function traerUltimoIdTransaccion(){
             //Construir la consulta
-            $consulta = "SELECT id FROM transacciones ORDER BY id DESC LIMIT 1";
+            $consulta = "SELECT DISTINCT id FROM transacciones ORDER BY id DESC LIMIT 1";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Obtener ultimo id
@@ -355,7 +355,7 @@
 
         public function ultima(){
             //Construir la consulta
-            $consulta = "SELECT id FROM transacciones ORDER BY id DESC LIMIT 1";
+            $consulta = "SELECT DISTINCT id FROM transacciones ORDER BY id DESC LIMIT 1";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Obtener el resultado del objeto
@@ -367,7 +367,7 @@
         }
 
         public function detalleCompra(){
-            $consulta = "SELECT t.nombreVendedor AS 'nombreVendedor', t.apellidoVendedor AS 'apellidoVendedor', t.telefonoVendedor AS 'telefonoVendedor', t.correoVendedor AS 'correoVendedor', t.departamento AS 'departamentoEnvio', t.municipio AS 'municipioEnvio', t.codigoPostal AS 'codigoPostalEnvio', t.direccion AS 'direccionEnvio', t.barrio AS 'barrioEnvio', tt.nombre AS 'tipoTarjetaPago', p.numeroTarjeta AS 'numeroTarjetaPago', te.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.nombre AS 'nombreVideojuegoCompra', u.nombre AS 'usoVideojuegoCompra', c.nombre AS 'consolaVideojuegoCompra', v.precio AS 'precioVideojuegoCompra', t.numeroFactura AS 'factura', tv.unidades AS 'unidadesCompra'
+            $consulta = "SELECT DISTINCT t.nombreVendedor AS 'nombreVendedor', t.apellidoVendedor AS 'apellidoVendedor', t.telefonoVendedor AS 'telefonoVendedor', t.correoVendedor AS 'correoVendedor', t.departamento AS 'departamentoEnvio', t.municipio AS 'municipioEnvio', t.codigoPostal AS 'codigoPostalEnvio', t.direccion AS 'direccionEnvio', t.barrio AS 'barrioEnvio', tt.nombre AS 'tipoTarjetaPago', p.numeroTarjeta AS 'numeroTarjetaPago', te.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.nombre AS 'nombreVideojuegoCompra', u.nombre AS 'usoVideojuegoCompra', c.nombre AS 'consolaVideojuegoCompra', v.precio AS 'precioVideojuegoCompra', t.numeroFactura AS 'factura', tv.unidades AS 'unidadesCompra'
                 FROM TransaccionVideojuego tv
                 INNER JOIN Transacciones t ON t.id = tv.idTransaccion
                 INNER JOIN Videojuegos v ON v.id = tv.idVideojuego
@@ -423,7 +423,7 @@
         }   
         
         public function detalleVenta(){
-            $consulta = "SELECT t.nombreComprador AS 'nombreComprador', t.apellidoComprador AS 'apellidoComprador', t.telefonoComprador AS 'telefonoComprador', t.correoComprador AS 'correoComprador', t.departamento AS 'departamentoEnvio', t.municipio AS 'municipioEnvio', t.codigoPostal AS 'codigoPostalEnvio', t.direccion AS 'direccionEnvio', t.barrio AS 'barrioEnvio', tt.nombre AS 'tipoTarjetaPago', p.numeroTarjeta AS 'numeroTarjetaPago', te.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.foto AS 'imagenVideojuego', tv.unidades AS 'unidadesCompra', v.precio AS 'precioVideojuegoVenta'
+            $consulta = "SELECT DISTINCT t.nombreComprador AS 'nombreComprador', t.apellidoComprador AS 'apellidoComprador', t.telefonoComprador AS 'telefonoComprador', t.correoComprador AS 'correoComprador', t.departamento AS 'departamentoEnvio', t.municipio AS 'municipioEnvio', t.codigoPostal AS 'codigoPostalEnvio', t.direccion AS 'direccionEnvio', t.barrio AS 'barrioEnvio', tt.nombre AS 'tipoTarjetaPago', p.numeroTarjeta AS 'numeroTarjetaPago', te.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.foto AS 'imagenVideojuego', tv.unidades AS 'unidadesCompra', v.precio AS 'precioVideojuegoVenta'
                 FROM TransaccionVideojuego tv
                 INNER JOIN Transacciones t ON t.id = tv.idTransaccion
                 INNER JOIN Videojuegos v ON v.id = tv.idVideojuego

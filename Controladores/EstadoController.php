@@ -26,6 +26,7 @@
             //Instanciar el objeto
             $estado = new Estado();
             //Crear el objeto
+            $estado -> setActivo(1);
             $estado -> setNombre($nombre);
             //Guardar en la base de datos
             $guardado = $estado -> guardar();

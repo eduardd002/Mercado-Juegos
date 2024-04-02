@@ -3,6 +3,7 @@
     class UsuarioVideojuego{
 
         private $id;
+        private $activo;
         private $idUsuario;
         private $idVideojuego;
         private $db;
@@ -17,6 +18,15 @@
 
         public function setId($id){
             $this->id = $id;
+            return $this;
+        }
+
+        public function getActivo(){
+            return $this->activo;
+        }
+
+        public function setActivo($activo){
+            $this->activo = $activo;
             return $this;
         }
 
@@ -64,7 +74,7 @@
 
         public function obtenerUsuarioVideojuego(){
             //Construir la consulta
-            $consulta = "SELECT idUsuario FROM usuariovideojuego WHERE idVideojuego = {$this -> getIdVideojuego()}";
+            $consulta = "SELECT DISTINCT idUsuario FROM usuariovideojuego WHERE idVideojuego = {$this -> getIdVideojuego()}";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Obtener resultado
@@ -79,7 +89,7 @@
 
         public function obtenerUsuarioVendedor(){
             //Construir la consulta
-            $consulta = "SELECT id AS 'idVendedor', nombre AS 'nombreVendedor' FROM usuarios WHERE id IN (SELECT idUsuario FROM usuariovideojuego WHERE idVideojuego = {$this -> getIdVideojuego()})";
+            $consulta = "SELECT DISTINCT id AS 'idVendedor', nombre AS 'nombreVendedor' FROM usuarios WHERE id IN (SELECT idUsuario FROM usuariovideojuego WHERE idVideojuego = {$this -> getIdVideojuego()})";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Obtener el nombre
@@ -89,7 +99,7 @@
         }
 
         public function obtenerVideojuegosCreadosPorUsuario(){
-            $consulta = "SELECT v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', c.nombre AS 'nombreConsola', v.stock AS 'stockVideojuego', v.id AS 'idVideojuego'
+            $consulta = "SELECT DISTINCT v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', c.nombre AS 'nombreConsola', v.stock AS 'stockVideojuego', v.id AS 'idVideojuego'
             FROM Videojuegos v
             INNER JOIN Consolas c ON c.id = v.idUso
             INNER JOIN UsuarioVideojuego uv ON uv.idVideojuego = v.id
@@ -101,7 +111,7 @@
         }
 
         public function obtenerInformacionUsuario(){
-            $consulta = "SELECT u.id AS 'idUsuario', u.nombre AS 'nombreUsuario', u.fechaRegistro AS 'fechaUsuario', u.departamento AS 'departamentoUsuario', u.municipio AS 'municipioUsuario', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.foto AS 'fotoVideojuego', v.id AS 'idVideojuego'
+            $consulta = "SELECT DISTINCT u.id AS 'idUsuario', u.nombre AS 'nombreUsuario', u.fechaRegistro AS 'fechaUsuario', u.departamento AS 'departamentoUsuario', u.municipio AS 'municipioUsuario', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.foto AS 'fotoVideojuego', v.id AS 'idVideojuego'
                 FROM UsuarioVideojuego uv
                 INNER JOIN Usuarios u ON u.id = uv.idUsuario
                 INNER JOIN Videojuegos v ON v.id = uv.idVideojuego

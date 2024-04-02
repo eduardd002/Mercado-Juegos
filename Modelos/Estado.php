@@ -3,6 +3,7 @@
     class Estado{
 
         private $id;
+        private $activo;
         private $nombre;
         private $db;
 
@@ -16,6 +17,15 @@
 
         public function setId($id){
             $this->id = $id;
+            return $this;
+        }
+
+        public function getActivo(){
+            return $this->activo;
+        }
+
+        public function setActivo($activo){
+            $this->activo = $activo;
             return $this;
         }
 
@@ -35,7 +45,7 @@
         public function guardar(){
 
             //Construir la consulta
-            $consulta = "INSERT IGNORE INTO estados VALUES(NULL, '{$this -> getNombre()}')";
+            $consulta = "INSERT INTO estados VALUES(NULL, '{$this -> getNombre()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera
@@ -55,7 +65,7 @@
 
         public function listar(){
             //Construir la consulta
-            $consulta = "SELECT * FROM estados";
+            $consulta = "SELECT DISTINCT * FROM estados";
             //Ejecutar la consulta
             $lista = $this -> db -> query($consulta);
             //Retornar el resultado
@@ -68,7 +78,7 @@
 
         public function obtenerUno(){
             //Construir la consulta
-            $consulta = "SELECT * FROM estados WHERE id = {$this -> getId()}";
+            $consulta = "SELECT DISTINCT * FROM estados WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $estado = $this -> db -> query($consulta);
             //Obtener resultado
@@ -83,7 +93,7 @@
 
         public function eliminar(){
             //Construir la consulta
-            $consulta = "DELETE FROM estados WHERE id = {$this -> getId()}";
+            $consulta = "UPDATE estados WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $eliminado = $this -> db -> query($consulta);
             //Crear bandera

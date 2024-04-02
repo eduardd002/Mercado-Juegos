@@ -17,6 +17,7 @@
             //Instanciar objeto
             $usuarioChat = new UsuarioChat();
             //Crear objeto
+            $usuarioChat -> setActivo(1);
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
             $usuarioChat -> setIdDestinatario($_SESSION['loginexitoso'] -> id);
             //Traer lista de chats

@@ -203,6 +203,7 @@
             //Instanciar el objeto
             $videojuego = new Videojuego();
             //Crear el objeto
+            $videojuego -> setActivo(1);
             $videojuego -> setNombre($nombre);
             $videojuego -> setIdConsola($consola);
             $videojuego -> setIdUso($uso);

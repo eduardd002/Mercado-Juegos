@@ -2,6 +2,7 @@
     class Chat{
 
         private $id;
+        private $activo;
         private $fechaCreacion;
         private $db;
 
@@ -15,6 +16,15 @@
 
         public function setId($id){
             $this->id = $id;
+            return $this;
+        }
+
+        public function getActivo(){
+            return $this->activo;
+        }
+
+        public function setActivo($activo){
+            $this->activo = $activo;
             return $this;
         }
 
@@ -33,7 +43,7 @@
 
         public function guardar(){
             //Construir la consulta
-            $consulta = "INSERT IGNORE INTO chats VALUES (NULL, '{$this -> fechaCreacion}')";
+            $consulta = "INSERT INTO chats VALUES (NULL, '{$this -> fechaCreacion}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera
@@ -53,7 +63,7 @@
 
         public function ultimo(){
             //Construir la consulta
-            $consulta = "SELECT id FROM chats ORDER BY id DESC LIMIT 1";
+            $consulta = "SELECT DISTINCT id FROM chats ORDER BY id DESC LIMIT 1";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Obtener el resultado del objeto

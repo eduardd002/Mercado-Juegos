@@ -48,6 +48,7 @@
             //Instanciar el objeto
             $bloqueo = new Bloqueo();
             //Crear el objeto
+            $bloqueo -> setActivo(1);
             $bloqueo -> setMotivo($motivo);
             $bloqueo -> setFecha(date('Y-m-d'));
             $bloqueo -> setHora(date('H:i:s'));

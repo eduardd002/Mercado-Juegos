@@ -3,6 +3,7 @@
     class Comentario{
 
         private $id;
+        private $activo;
         private $idUsuario;
         private $contenido;
         private $fechaCreacion;
@@ -21,6 +22,15 @@
              $this->id = $id;
              return $this;
         }
+
+        public function getActivo(){
+          return $this->activo;
+      }
+
+      public function setActivo($activo){
+          $this->activo = $activo;
+          return $this;
+      }
 
         public function getIdUsuario(){
              return $this->idUsuario;
@@ -68,7 +78,7 @@
           //Obtener mensaje encriptado
           $comentarioEncriptado = Ayudas::encriptarContenido($comentario);
           //Construir la consulta
-          $consulta = "INSERT IGNORE INTO comentarios VALUES(NULL, {$this -> getIdUsuario()}, 
+          $consulta = "INSERT INTO comentarios VALUES(NULL, {$this -> getIdUsuario()}, 
                '{$comentarioEncriptado}', '{$this -> getFechaCreacion()}', 
                '{$this -> getHoraCreacion()}')";
           //Ejecutar la consulta
@@ -90,7 +100,7 @@
 
         public function ultimo(){
           //Construir la consulta
-          $consulta = "SELECT id FROM comentarios ORDER BY id DESC LIMIT 1";
+          $consulta = "SELECT DISTINCT id FROM comentarios ORDER BY id DESC LIMIT 1";
           //Ejecutar la consulta
           $resultado = $this -> db -> query($consulta);
           //Obtener el resultado del objeto

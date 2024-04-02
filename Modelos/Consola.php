@@ -3,6 +3,7 @@
     class Consola{
 
         private $id;
+        private $activo;
         private $nombre;
         private $db;
 
@@ -16,6 +17,15 @@
 
         public function setId($id){
             $this->id = $id;
+            return $this;
+        }
+
+        public function getActivo(){
+            return $this->activo;
+        }
+
+        public function setActivo($activo){
+            $this->activo = $activo;
             return $this;
         }
 
@@ -35,7 +45,7 @@
         public function guardar(){
 
             //Construir la consulta
-            $consulta = "INSERT IGNORE INTO consolas VALUES(NULL, '{$this -> getNombre()}')";
+            $consulta = "INSERT INTO consolas VALUES(NULL, '{$this -> getNombre()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera
@@ -55,7 +65,7 @@
 
         public function listar(){
             //Construir la consulta
-            $consulta = "SELECT * FROM consolas";
+            $consulta = "SELECT DISTINCT * FROM consolas";
             //Ejecutar la consulta
             $lista = $this -> db -> query($consulta);
             //Retornar el resultado
@@ -68,7 +78,7 @@
 
         public function obtenerUna(){
             //Construir la consulta
-            $consulta = "SELECT * FROM consolas WHERE id = {$this -> getId()}";
+            $consulta = "SELECT DISTINCT * FROM consolas WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $consola = $this -> db -> query($consulta);
             //Obtener resultado
@@ -83,7 +93,7 @@
 
         public function eliminar(){
             //Construir la consulta
-            $consulta = "DELETE FROM consolas WHERE id = {$this -> getId()}";
+            $consulta = "UPDATE consolas WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $eliminado = $this -> db -> query($consulta);
             //Crear bandera

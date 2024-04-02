@@ -96,7 +96,7 @@
 
         public function ultimo(){
             //Construir la consulta
-            $consulta = "SELECT id FROM pagos ORDER BY id DESC LIMIT 1";
+            $consulta = "SELECT DISTINCT id FROM pagos ORDER BY id DESC LIMIT 1";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Obtener el resultado del objeto

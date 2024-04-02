@@ -17,6 +17,7 @@
             //Instanciar el objeto
             $comentario = new Comentario();
             //Crear el objeto
+            $comentario -> setActivo(1);
             $comentario -> setIdUsuario($_SESSION['loginexitoso'] -> id);
             $comentario -> setContenido($contenido);
             $comentario -> setFechaCreacion(date('y-m-d'));

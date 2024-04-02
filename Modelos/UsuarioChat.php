@@ -3,6 +3,7 @@
     class UsuarioChat{
 
         private $id;
+        private $activo;
         private $idRemitente;
         private $idDestinatario;
         private $idChat;
@@ -14,6 +15,15 @@
 
         public function getId(){
             return $this->id;
+        }
+
+        public function getActivo(){
+            return $this->activo;
+        }
+
+        public function setActivo($activo){
+            $this->activo = $activo;
+            return $this;
         }
 
         public function setId($id){
@@ -54,7 +64,7 @@
 
         public function guardar(){
             //Construir la consulta
-            $consulta = "INSERT IGNORE INTO usuariochat VALUES (NULL, {$this -> getIdRemitente()}, 
+            $consulta = "INSERT INTO usuariochat VALUES (NULL, {$this -> getIdRemitente()}, 
                 {$this -> getIdDestinatario()}, {$this -> getIdChat()})";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
@@ -76,7 +86,7 @@
         public function obtenerChats(){
 
             //Construir la consulta
-            $consulta = "SELECT id AS 'idUsuarioChat', nombre AS 'nombreChat', foto AS 'fotoChat', apellido AS 'apellidoChat' 
+            $consulta = "SELECT DISTINCT id AS 'idUsuarioChat', nombre AS 'nombreChat', foto AS 'fotoChat', apellido AS 'apellidoChat' 
             FROM usuarios WHERE id IN 
             (SELECT idDestinatario FROM usuarioChat WHERE idRemitente = {$this->getIdRemitente()} 
             UNION 
@@ -89,7 +99,7 @@
 
         public function obtenerIdentificadorPropioDeChat(){
             //Construir la consulta
-            $consulta = "SELECT idChat from usuariochat WHERE idRemitente = {$this -> getIdRemitente()} AND idDestinatario = {$this -> getIdDestinatario()} OR
+            $consulta = "SELECT DISTINCT idChat from usuariochat WHERE idRemitente = {$this -> getIdRemitente()} AND idDestinatario = {$this -> getIdDestinatario()} OR
                 idRemitente = {$this -> getIdDestinatario()} AND idDestinatario = {$this -> getIdRemitente()}"; 
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);

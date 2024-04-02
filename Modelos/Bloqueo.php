@@ -3,6 +3,7 @@
     class Bloqueo{
         
         private $id;
+        private $activo;
         private $motivo;
         private $fecha;
         private $hora;
@@ -34,6 +35,15 @@
 
                 return $this;
         }
+
+        public function getActivo(){
+                return $this->activo;
+            }
+    
+            public function setActivo($activo){
+                $this->activo = $activo;
+                return $this;
+            }
 
         /**
          * Get the value of motivo
@@ -115,7 +125,7 @@
 
         public function ultimo(){
             //Construir la consulta
-            $consulta = "SELECT id FROM bloqueos ORDER BY id DESC LIMIT 1";
+            $consulta = "SELECT DISTINCT id FROM bloqueos ORDER BY id DESC LIMIT 1";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Obtener el resultado del objeto
@@ -127,7 +137,7 @@
         }
 
         public function obtenerListaBloqueos(){
-             $consulta = "SELECT ubo.nombre AS 'nombreBloqueado' , ubr.nombre AS 'nombreBloqueador' , b.motivo AS 'motivoBloqueo' , b.fechaBloqueo AS 'fechaBloqueo' , b.horaBloqueo AS 'horaBloqueo'
+             $consulta = "SELECT DISTINCT ubo.nombre AS 'nombreBloqueado' , ubr.nombre AS 'nombreBloqueador' , b.motivo AS 'motivoBloqueo' , b.fechaBloqueo AS 'fechaBloqueo' , b.horaBloqueo AS 'horaBloqueo'
                 FROM usuarioBloqueo ub
                 INNER JOIN Bloqueos b ON b.id = ub.idBloqueo
                 INNER JOIN Usuarios ubr ON ubr.id = ub.idBloqueador
@@ -139,7 +149,7 @@
         }
 
         public function eliminar(){
-                $consulta = "DELETE FROM bloqueos WHERE id = {$this -> getId()}";
+                $consulta = "UPDATE bloqueos WHERE id = {$this -> getId()}";
                 $eliminado = $this -> db -> query($consulta);
                 //Crear bandera
                 $bandera = false;

@@ -3,6 +3,7 @@
     class Carrito{
 
         private $id;
+        private $activo;
         private $idUsuario;
         private $db;
 
@@ -16,6 +17,15 @@
 
         public function setId($id){
             $this->id = $id;
+            return $this;
+        }
+
+        public function getActivo(){
+            return $this->activo;
+        }
+
+        public function setActivo($activo){
+            $this->activo = $activo;
             return $this;
         }
 

@@ -3,6 +3,7 @@
     class ComentarioVideojuego{
 
         private $id;
+        private $activo;
         private $idComenatario;
         private $idVideojuego;
         private $db;
@@ -17,6 +18,15 @@
 
         public function setId($id){
             $this->id = $id;
+            return $this;
+        }
+
+        public function getActivo(){
+            return $this->activo;
+        }
+
+        public function setActivo($activo){
+            $this->activo = $activo;
             return $this;
         }
 
@@ -59,7 +69,7 @@
         }
 
         public function obtenerComentariosDeVideojuego(){
-            $consulta = "SELECT c.contenido AS 'contenidoComentario', u.nombre AS 'nombreComentador', u.foto AS 'fotoComentador', c.fechaCreacion AS 'fechaCreacionComentario', c.horaCreacion AS 'horaCreacionComentario'
+            $consulta = "SELECT DISTINCT c.contenido AS 'contenidoComentario', u.nombre AS 'nombreComentador', u.foto AS 'fotoComentador', c.fechaCreacion AS 'fechaCreacionComentario', c.horaCreacion AS 'horaCreacionComentario'
             FROM Comentarios c
             INNER JOIN Usuarios u ON u.id = c.idUsuario
             INNER JOIN ComentarioVideojuego cv ON cv.idComentario = c.id

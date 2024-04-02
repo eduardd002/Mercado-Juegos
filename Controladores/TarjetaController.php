@@ -24,6 +24,7 @@
             //Instanciar el objeto
             $tarjeta = new Tarjeta();
             //Crear el objeto
+            $tarjeta -> setActivo(1);
             $tarjeta -> setNombre($nombre);
             //Guardar en la base de datos
             $guardado = $tarjeta -> guardar();

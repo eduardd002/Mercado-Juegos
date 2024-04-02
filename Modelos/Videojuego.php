@@ -3,6 +3,7 @@
     class Videojuego{
 
         private $id;
+        private $activo;
         private $idConsola;
         private $idUso;
         private $nombre;
@@ -23,6 +24,15 @@
 
         public function setId($id){
             $this->id = $id;
+            return $this;
+        }
+
+        public function getActivo(){
+            return $this->activo;
+        }
+
+        public function setActivo($activo){
+            $this->activo = $activo;
             return $this;
         }
 
@@ -104,7 +114,7 @@
 
         public function buscar(){
             //Construir la consulta
-            $consulta = "SELECT * FROM videojuegos WHERE nombre LIKE '%{$this -> getNombre()}%'";
+            $consulta = "SELECT DISTINCT * FROM videojuegos WHERE nombre LIKE '%{$this -> getNombre()}%'";
             //Ejecutar la consulta
             $lista = $this -> db -> query($consulta);
             //Retornar el resultado
@@ -157,7 +167,7 @@
 
         public function traerUno(){
             //Construir la consulta
-            $consulta = "SELECT v.id AS 'idVideojuego', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.stock AS 'stockVideojuego', u.id AS 'idVendedor', us.nombre AS 'nombreUso', c.nombre 'categoriaNombre', v.foto AS 'imagenVideojuego', v.descripcion AS 'descripcionVideojuego', co.nombre AS 'nombreConsola'
+            $consulta = "SELECT DISTINCT v.id AS 'idVideojuego', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.stock AS 'stockVideojuego', u.id AS 'idVendedor', us.nombre AS 'nombreUso', c.nombre 'categoriaNombre', v.foto AS 'imagenVideojuego', v.descripcion AS 'descripcionVideojuego', co.nombre AS 'nombreConsola'
                 FROM UsuarioVideojuego uv
                 INNER JOIN Videojuegos v ON v.id = uv.idVideojuego 
                 INNER JOIN Usuarios u ON u.id = uv.idUsuario 
@@ -207,7 +217,7 @@
 
         public function ultimo(){
             //Construir la consulta
-            $consulta = "SELECT id FROM videojuegos ORDER BY id DESC LIMIT 1";
+            $consulta = "SELECT DISTINCT id FROM videojuegos ORDER BY id DESC LIMIT 1";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Obtener el resultado del objeto
@@ -221,7 +231,7 @@
         public function eliminar(){
 
             //Construir la consulta
-            $consulta = "DELETE FROM videojuegos WHERE id = {$this -> getId()}";
+            $consulta = "UPDATE videojuegos WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $eliminado = $this -> db -> query($consulta);
             var_dump($eliminado);
@@ -242,7 +252,7 @@
 
         public function listarTodos(){
             //Construir la consulta
-            $consulta = "SELECT * FROM videojuegos ORDER BY id DESC";
+            $consulta = "SELECT DISTINCT * FROM videojuegos ORDER BY id DESC";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Retornar resultado
@@ -255,7 +265,7 @@
 
         public function listarAlgunos(){
             //Construir la consulta
-            $consulta = "SELECT * FROM videojuegos ORDER BY RAND() LIMIT 6";
+            $consulta = "SELECT DISTINCT * FROM videojuegos ORDER BY RAND() LIMIT 6";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Retornar resultado

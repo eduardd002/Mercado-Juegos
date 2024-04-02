@@ -35,6 +35,7 @@
             //Instanciar el objeto
             $favorito = new Favorito();
             //Crear el objeto
+            $favorito -> setActivo(1);
             $favorito -> setIdUsuario($_SESSION['loginexitoso'] -> id);
             //Guardar en la base de datos
             $guardado = $favorito -> guardar();
@@ -82,7 +83,7 @@
             //Crear el objeto
             $favoritoVideojuego -> setIdFavorito($idFavorito);
             $favoritoVideojuego -> setIdVideojuego($videojuegoId);
-            $favoritoVideojuego -> setPrecio($this -> traer($videojuegoId) -> precio);
+            $favoritoVideojuego -> setPrecio($this -> traer($videojuegoId)['videojuego']['idVideojuego']);
             //Guardar en la base de datos
             $guardadoVideojuegoFavorito = $favoritoVideojuego -> guardar();
             //Retornar el resultado

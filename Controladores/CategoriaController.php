@@ -24,6 +24,7 @@
             //Instanciar el objeto
             $categoria = new Categoria();
             //Crear el objeto
+            $categoria -> setActivo(1);
             $categoria -> setNombre($nombre);
             //Guardar en la base de datos
             $guardado = $categoria -> guardar();

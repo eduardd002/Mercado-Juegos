@@ -3,6 +3,7 @@
     class VideojuegoCategoria{
 
         private $id;
+        private $activo;
         private $idVideojuego;
         private $idCategoria;
         private $db;
@@ -17,6 +18,15 @@
 
         public function setId($id){
             $this->id = $id;
+            return $this;
+        }
+
+        public function getActivo(){
+            return $this->activo;
+        }
+
+        public function setActivo($activo){
+            $this->activo = $activo;
             return $this;
         }
 

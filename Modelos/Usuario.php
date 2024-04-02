@@ -3,6 +3,7 @@
     class Usuario{
 
         private $id;
+        private $activo;
         private $nombre;
         private $apellido;
         private $fechanacimiento;
@@ -25,6 +26,15 @@
 
         public function setId($id){
             $this->id = $id;
+            return $this;
+        }
+
+        public function getActivo(){
+            return $this->activo;
+        }
+
+        public function setActivo($activo){
+            $this->activo = $activo;
             return $this;
         }
 
@@ -125,7 +135,7 @@
         public function guardar(){
 
             //Construir la consulta
-            $consulta = "INSERT IGNORE INTO usuarios VALUES(NULL, 
+            $consulta = "INSERT INTO usuarios VALUES(NULL, 
                 '{$this -> getNombre()}', '{$this -> getApellido()}', 
                 '{$this -> getFechaNacimiento()}', {$this -> getNumeroTelefono()}, 
                 '{$this -> getCorreo()}', '{$this -> getClave()}', 
@@ -151,7 +161,7 @@
         public function login(){
 
             //Construir la consulta
-            $consulta = "SELECT * FROM usuarios WHERE correo = '{$this -> getCorreo()}' AND clave = 
+            $consulta = "SELECT DISTINCT * FROM usuarios WHERE correo = '{$this -> getCorreo()}' AND clave = 
             '{$this -> getClave()}'";
             //Ejecutar la consulta
             $login = $this -> db -> query($consulta);
@@ -172,7 +182,7 @@
 
         public function listar(){
             //Construir la consulta
-            $consulta = "SELECT * FROM usuarios";
+            $consulta = "SELECT DISTINCT * FROM usuarios";
             //Ejecutar la consulta
             $lista = $this -> db -> query($consulta);
             //Retornar el resultado
@@ -185,7 +195,7 @@
 
         public function eliminar(){
             //Construir la consulta
-            $consulta = "DELETE FROM usuarios WHERE id = {$this -> getId()}";
+            $consulta = "UPDATE usuarios WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $eliminado = $this -> db -> query($consulta);
             //Crear bandera
@@ -204,7 +214,7 @@
 
         public function obtenerUno(){
             //Construir la consulta
-            $consulta = "SELECT * FROM usuarios WHERE id = {$this -> getId()}";
+            $consulta = "SELECT DISTINCT * FROM usuarios WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $categoria = $this -> db -> query($consulta);
             //Obtener resultado

@@ -3,6 +3,7 @@
     class Favorito{
 
         private $id;
+        private $activo;
         private $idUsuario;
         private $db;
 
@@ -16,6 +17,15 @@
 
         public function setId($id){
             $this->id = $id;
+            return $this;
+        }
+
+        public function getActivo(){
+            return $this->activo;
+        }
+
+        public function setActivo($activo){
+            $this->activo = $activo;
             return $this;
         }
 
@@ -53,7 +63,7 @@
 
         public function ultimo(){
             //Construir la consulta
-            $consulta = "SELECT id FROM favoritos ORDER BY id DESC LIMIT 1";
+            $consulta = "SELECT DISTINCT id FROM favoritos ORDER BY id DESC LIMIT 1";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Obtener el resultado del objeto
@@ -65,7 +75,7 @@
         }
 
         public function listar(){
-            $consulta = "SELECT v.nombre AS 'nombreVideojuego', v.foto AS 'imagenVideojuego', v.precio AS 'precioVideojuego'
+            $consulta = "SELECT DISTINCT v.nombre AS 'nombreVideojuego', v.foto AS 'imagenVideojuego', v.precio AS 'precioVideojuego'
                 FROM videojuegofavorito vf
                 INNER JOIN favoritos f ON vf.idFavorito = f.id
                 INNER JOIN videojuegos v ON v.id = vf.idVideojuego

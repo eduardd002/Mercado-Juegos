@@ -3,6 +3,7 @@
     class FavoritoVideojuego{
 
         private $id;
+        private $activo;
         private $idVideojuego;
         private $idFavorito;
         private $precio;
@@ -18,6 +19,15 @@
 
         public function setId($id){
             $this->id = $id;
+            return $this;
+        }
+
+        public function getActivo(){
+            return $this->activo;
+        }
+
+        public function setActivo($activo){
+            $this->activo = $activo;
             return $this;
         }
 
@@ -55,7 +65,7 @@
         public function guardar(){
 
             //Construir la consulta
-            $consulta = "INSERT IGNORE INTO videojuegofavorito VALUES(NULL, 
+            $consulta = "INSERT INTO videojuegofavorito VALUES(NULL, 
                 {$this -> getIdVideojuego()}, {$this -> getIdFavorito()}, 
                 {$this -> getPrecio()})";
             //Ejecutar la consulta

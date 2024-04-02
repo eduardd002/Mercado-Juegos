@@ -24,6 +24,7 @@
             //Instanciar el objeto
             $consola = new Consola();
             //Crear el objeto
+            $consola -> setActivo(1);
             $consola -> setNombre($nombre);
             //Guardar en la base de datos
             $guardado = $consola -> guardar();
