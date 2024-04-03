@@ -242,11 +242,16 @@
         */
 
         public function actualizar(){
+
             //Construir la consulta
             $consulta = "UPDATE usuarios SET nombre = '{$this -> getNombre()}', apellido = '{$this -> getApellido()}',
                 numeroTelefono = '{$this -> getNumeroTelefono()}', correo = '{$this -> getCorreo()}', 
-                clave = '{$this -> getClave()}', departamento = '{$this -> getDepartamento()}', 
-                municipio = '{$this -> getMunicipio()}' WHERE id = {$this -> getId()}";
+                departamento = '{$this -> getDepartamento()}', 
+                municipio = '{$this -> getMunicipio()}' ";
+            if($this -> getFoto() != null){
+                $consulta .= ",foto = '{$this -> getFoto()}'";
+            }
+            $consulta .= "WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $actualizado = $this -> db -> query($consulta);
             //Crear bandera

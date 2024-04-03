@@ -212,7 +212,7 @@
             }
         }
 
-        public function actualizarUsuario($id, $nombre, $apellidos, $telefono, $email, $clave, $departamento, $municipio, $foto){
+        public function actualizarUsuario($id, $nombre, $apellidos, $telefono, $email, $departamento, $municipio, $foto){
 
             //Instanciar el objeto
             $usuario = new Usuario();
@@ -222,7 +222,6 @@
             $usuario -> setApellido($apellidos);
             $usuario -> setNumerotelefono($telefono);
             $usuario -> setCorreo($email);
-            $usuario -> setClave($clave);
             $usuario -> setDepartamento($departamento);
             $usuario -> setMunicipio($municipio);
             $usuario -> setFoto($foto);
@@ -252,36 +251,30 @@
                 $apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : false;
                 $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : false;
                 $email = isset($_POST['email']) ? $_POST['email'] : false;
-                $clave = isset($_POST['password']) ? $_POST['password'] : false;
                 $departamento = isset($_POST['departamento']) ? $_POST['departamento'] : false;
                 $municipio = isset($_POST['municipio']) ? $_POST['municipio'] : false;
-                //Añadir archivo de foto
                 $archivo = $_FILES['foto'];
+                $foto = $archivo['name'];
 
                 //Si el dato existe
-                if($id && $nombre && $apellidos && $telefono && $email && $clave && $departamento && $municipio){
+                if($id && $nombre && $apellidos && $telefono && $email && $departamento && $municipio){
 
                     //Comprobar si el formato de la foto es imagen
-                    if(Ayudas::comprobarImagen($archivo['type']) == 2){
-                        //Comprobar si la contraseña es valida
-                        $claveSegura = Ayudas::comprobarContrasenia($clave);
-                        //Comprobar la foto
-                        $foto = Ayudas::guardarImagen($archivo, "ImagenesUsuarios");
+                    if(Ayudas::comprobarImagen($archivo['type']) != 3){
+
+                        if(Ayudas::comprobarImagen($archivo['type']) == 1){
+                            //Comprobar la foto
+                            Ayudas::guardarImagen($archivo, "ImagenesUsuarios");
+                        }
                         //Llamar la funcion de actualizar
-                        $actualizado = $this -> actualizarUsuario($id, $nombre, $apellidos, $telefono, $email, $clave, $departamento, $municipio, $foto);
+                        $actualizado = $this -> actualizarUsuario($id, $nombre, $apellidos, $telefono, $email, $departamento, $municipio, $foto);
 
-                        if($claveSegura){
-
-                            if($actualizado){
-                                //Crear la sesion y redirigir a la ruta pertinente
-                                Ayudas::crearSesionYRedirigir('actualizarusuarioacierto', "Usuario actualizado con exito", '?controller=UsuarioController&action=miPerfil');
-                            }else{
-                                //Crear la sesion y redirigir a la ruta pertinente
-                                Ayudas::crearSesionYRedirigir('actualizarusuariosugerencia', "Agrega nuevos datos", '?controller=UsuarioController&action=miPerfil');
-                            }
+                        if($actualizado){
+                            //Crear la sesion y redirigir a la ruta pertinente
+                            Ayudas::crearSesionYRedirigir('actualizarusuarioacierto', "Usuario actualizado con exito", '?controller=UsuarioController&action=miPerfil');
                         }else{
                             //Crear la sesion y redirigir a la ruta pertinente
-                            Ayudas::crearSesionYRedirigir('actualizarusuariosugerencia', "Clave poco segura", '?controller=UsuarioController&action=miPerfil');
+                            Ayudas::crearSesionYRedirigir('actualizarusuariosugerencia', "Agrega nuevos datos", '?controller=UsuarioController&action=miPerfil');
                         }
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
