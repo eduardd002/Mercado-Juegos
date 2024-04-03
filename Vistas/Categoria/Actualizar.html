@@ -1,10 +1,11 @@
 <div id="contenidoCentral">      
     <div id="loginYRegistro">
         <h1 class="tituloCreacionGestiones">Actualizar categoria</h1>
+        <hr>
+        <img src="Recursos/Logotipos/casa.png" class="imagenGestion" alt="">
         <form action="<?=rutaInicio?><?=categoria?><?=actualizarCategoria?>&id=<?=$categoriaUnica -> id?>" method="post">
             <div id="bloqueTextoRegistro">
                 <label for="nombrecatact">Nombre</label>
-                <hr>
                 <input type="text" name="nombrecatact" value="<?=$categoriaUnica -> nombre?>" required>
             </div>
             <input type="submit" class="btnRegistro" value="Actualizar">

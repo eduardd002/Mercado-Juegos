@@ -26,9 +26,14 @@
             //Crear el objeto
             $categoria -> setActivo(1);
             $categoria -> setNombre($nombre);
-            //Guardar en la base de datos
-            $guardado = $categoria -> guardar();
-            //Retornar resultado
+            try{
+                //Ejecutar la consulta
+                $guardado = $categoria -> guardar();
+            }catch(mysqli_sql_exception $excepcion){
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('guardarcategoriaerror', "Este nombre de categoria ya existe", '?controller=CategoriaController&action=crear');
+                die();
+            }
             return $guardado;
         }
 
@@ -53,12 +58,18 @@
                     if($guardado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('guardarcategoriaacierto', "La categoria ha sido creada con exito", '?controller=AdministradorController&action=administrar');
+                        Ayudas::crearSesionYRedirigir('guardarcategoriaacierto', "La categoria ha sido creada con exito", '?controller=AdministradorController&action=gestionarCategoria');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('guardarcategoriaerror', "La categoria no ha sido creada con exito", '?controller=AdministradorController&action=crearCategoria');
+                        Ayudas::crearSesionYRedirigir('guardarcategoriaerror', "La categoria no ha sido creada con exito", '?controller=CategoriaController&action=crear');
                     }
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('guardarcategoriaerror', "Ha ocurrido un error al guardar la categoria", '?controller=CategoriaController&action=crear');
                 }
+            }else{
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('guardarcategoriaerror', "Ha ocurrido un error al guardar la categoria", '?controller=CategoriaController&action=crear');
             }
         }
 

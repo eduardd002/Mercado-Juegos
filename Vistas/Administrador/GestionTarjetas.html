@@ -1,10 +1,25 @@
 <div id="contenidoCentral">   
-   <?php if(isset($_SESSION['guardartarjetaerror'])) : ?>
-        <div class="alerta alerta-adminError">
-            <?=$_SESSION['guardartarjetaerror']; ?>
+
+    <?php if(isset($_SESSION['guardartarjetaacierto'])) : ?>
+        <div class="alerta alerta-adminAcierto">
+            <?=$_SESSION['guardartarjetaacierto']; ?>
         </div>
     <?php endif; ?>
-    <?php Ayudas::eliminarSesion('guardartarjetaerror'); ?>
+    <?php Ayudas::eliminarSesion('guardartarjetaacierto'); ?>
+
+    <?php if(isset($_SESSION['eliminartarjetaacierto'])) : ?>
+        <div class="alerta alerta-adminAcierto">
+            <?=$_SESSION['eliminartarjetaacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('eliminartarjetaacierto'); ?>
+
+    <?php if(isset($_SESSION['actualizartarjetaacierto'])) : ?>
+        <div class="alerta alerta-adminAcierto">
+            <?=$_SESSION['actualizartarjetaacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizartarjetaacierto'); ?>
 
     <?php if(isset($_SESSION['eliminartarjetaerror'])) : ?>
         <div class="alerta alerta-adminError">
@@ -41,7 +56,7 @@
                     </tr>
                 <?php endwhile;?>
             </table>
-            <a href="<?=rutaInicio?><?=tarjeta?><?=crearTarjeta?>" class="button button-crearGestion">Crear</a>
         </div>
     <?php endif; ?>
+    <a href="<?=rutaInicio?><?=tarjeta?><?=crearTarjeta?>" class="button button-crearGestion">Crear</a>
 </div>

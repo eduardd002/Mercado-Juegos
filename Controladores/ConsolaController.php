@@ -26,9 +26,14 @@
             //Crear el objeto
             $consola -> setActivo(1);
             $consola -> setNombre($nombre);
-            //Guardar en la base de datos
-            $guardado = $consola -> guardar();
-            //Retornar resultado
+            try{
+                //Ejecutar la consulta
+                $guardado = $consola -> guardar();
+            }catch(mysqli_sql_exception $excepcion){
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('guardarconsolaerror', "Este nombre de consola ya existe", '?controller=ConsolaController&action=crear');
+                die();
+            }
             return $guardado;
         }
 
@@ -53,12 +58,18 @@
                     if($guardado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('guardarconsolaacierto', "La consola ha sido creada con exito", '?controller=AdministradorController&action=administrar');
+                        Ayudas::crearSesionYRedirigir('guardarconsolaacierto', "La consola ha sido creada con exito", '?controller=AdministradorController&action=gestionarConsola');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('guardarconsolaerror', "La consola no ha sido creada con exito", '?controller=AdministradorController&action=crearConsola');
                     }
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('guardarconsolaerror', "Ha ocurrido un error al guardar la consola", '?controller=ConsolaController&action=crear');
                 }
+            }else{
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('guardarconsolaerror', "Ha ocurrido un error al guardar la consola", '?controller=ConsolaController&action=crear');
             }
         }
 
@@ -103,9 +114,9 @@
                         Ayudas::crearSesionYRedirigir('eliminarconsolaacierto', "La consola ha sido eliminada exitosamente", '?controller=AdministradorController&action=administrar');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('eliminarconsolaerror', "La consola no ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarConsola');
+                        Ayudas::crearSesionYRedirigir('guardarconsolaerror', "La consola no ha sido creado con exito", '?controller=ConsolaController&action=crear');
                     }
-                }  
+                }
             }
         }
 

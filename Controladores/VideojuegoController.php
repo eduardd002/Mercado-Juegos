@@ -245,6 +245,7 @@
             //Instanciar el objeto
             $videojuegoCategoria = new VideojuegoCategoria();
             //Crear el objeto
+            $videojuegoCategoria -> setActivo(1);
             $videojuegoCategoria -> setIdVideojuego($this -> obtenerUltimoVideojuego());
             $videojuegoCategoria -> setIdCategoria($categorias);
             //Guardar en la base de datos
@@ -261,7 +262,8 @@
 
             //Instanciar el objeto
             $usuarioVideojuego = new UsuarioVideojuego();
-            //Crear el objeto          
+            //Crear el objeto         
+            $usuarioVideojuego -> setActivo(1); 
             $usuarioVideojuego -> setIdVideojuego($this -> obtenerUltimoVideojuego());
             $usuarioVideojuego -> setIdUsuario($usuarioId);
             //Guardar en la base de datos

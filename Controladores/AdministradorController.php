@@ -105,9 +105,14 @@
             $administrador -> setClave($clave);
             $administrador -> setFecharegistro(date('y-m-d'));
             $administrador -> setFoto($nombreArchivo);
-            //Guardar en la base de datos
-            $guardado = $administrador -> guardar();
-            //Retornar el resultado
+            try{
+                //Ejecutar la consulta
+                $guardado = $administrador -> guardar();
+            }catch(mysqli_sql_exception $excepcion){
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('guardaradministradorerror', "Esta direccion de correo ya existe", '?controller=AdministradorController&action=registro');
+                die();
+            }
             return $guardado;
         }
 
@@ -135,11 +140,12 @@
 
                     //Comprobar si la contraseña es valida
                     $claveSegura = Ayudas::comprobarContrasenia($clave);
-                    //Comprobar si la foto es valida
-                    $fotoGuardada = Ayudas::guardarImagen($archivo, "ImagenesAdministradores");
                     
                     //Comprobar si todo esta correcto para guardar el administrador
                     if($claveSegura){
+
+                        //Comprobar si la foto es valida
+                        $fotoGuardada = Ayudas::guardarImagen($archivo, "ImagenesAdministradores");
 
                         //Comprobar si la foto ha sido guardada
                         if($fotoGuardada){
@@ -153,7 +159,7 @@
                                Ayudas::iniciarSesionAdmnistrador($email, $clave);
                             }else{
                                 //Crear la sesion y redirigir a la ruta pertinente
-                                Ayudas::crearSesionYRedirigir("guardaradministradorerror", "Ya existe una direccion de correo asociada", "?controller=AdministradorController&action=registro");
+                                Ayudas::crearSesionYRedirigir("guardaradministradorerror", "Ha ocurrido un error al guardar el administrador", "?controller=AdministradorController&action=registro");
                             }
                         }else{
 

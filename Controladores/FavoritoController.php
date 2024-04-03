@@ -78,12 +78,15 @@
 
         public function guardarFavoritoVideojuego($videojuegoId, $idFavorito){
 
+            $videojuego = $this -> traer($videojuegoId);
+
             //Instanciar el objeto
             $favoritoVideojuego = new FavoritoVideojuego();
             //Crear el objeto
+            $favoritoVideojuego -> setActivo(1);
             $favoritoVideojuego -> setIdFavorito($idFavorito);
             $favoritoVideojuego -> setIdVideojuego($videojuegoId);
-            $favoritoVideojuego -> setPrecio($this -> traer($videojuegoId -> idVideojuego));
+            $favoritoVideojuego -> setPrecio($videojuego['videojuego']['precioVideojuego']);
             //Guardar en la base de datos
             $guardadoVideojuegoFavorito = $favoritoVideojuego -> guardar();
             //Retornar el resultado

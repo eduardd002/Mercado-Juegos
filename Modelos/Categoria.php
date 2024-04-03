@@ -45,7 +45,7 @@
         public function guardar(){
 
             //Construir la consulta
-            $consulta = "INSERT INTO categorias VALUES(NULL, '{$this -> getNombre()}')";
+            $consulta = "INSERT INTO categorias VALUES(NULL, {$this -> getActivo()}, '{$this -> getNombre()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera

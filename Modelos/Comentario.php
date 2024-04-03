@@ -78,7 +78,7 @@
           //Obtener mensaje encriptado
           $comentarioEncriptado = Ayudas::encriptarContenido($comentario);
           //Construir la consulta
-          $consulta = "INSERT INTO comentarios VALUES(NULL, {$this -> getIdUsuario()}, 
+          $consulta = "INSERT INTO comentarios VALUES(NULL, {$this -> getActivo()}, {$this -> getIdUsuario()}, 
                '{$comentarioEncriptado}', '{$this -> getFechaCreacion()}', 
                '{$this -> getHoraCreacion()}')";
           //Ejecutar la consulta

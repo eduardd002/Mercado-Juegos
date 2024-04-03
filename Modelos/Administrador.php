@@ -113,12 +113,13 @@
         */
 
         public function guardar(){
-
+            $clave = $this -> getClave();
+            $claveSegura = password_hash($clave, PASSWORD_BCRYPT, ['cost'=>4]);
             //Construir la consulta
-            $consulta = "INSERT INTO administradores VALUES(NULL, 
+            $consulta = "INSERT INTO administradores VALUES(NULL, {$this -> getActivo()},
                 '{$this -> getNombre()}', '{$this -> getApellido()}', 
                 '{$this -> getFechaNacimiento()}', {$this -> getNumeroTelefono()}, 
-                '{$this -> getCorreo()}', '{$this -> getClave()}', 
+                '{$this -> getCorreo()}', '{$claveSegura}', 
                 '{$this -> getFoto()}', '{$this -> getFechaRegistro()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
@@ -148,7 +149,7 @@
 
 
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM adminstradores WHERE correo = '{$this -> getCorreo()}'";
+            $consulta = "SELECT DISTINCT * FROM administradores WHERE correo = '{$this -> getCorreo()}'";
             $clave = $this -> traerClave($this -> getCorreo());
             $claveAsociada = $clave -> clave;
             $resultado = false;

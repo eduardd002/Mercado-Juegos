@@ -26,9 +26,14 @@
             //Crear el objeto
             $tarjeta -> setActivo(1);
             $tarjeta -> setNombre($nombre);
-            //Guardar en la base de datos
-            $guardado = $tarjeta -> guardar();
-            //Retornar resultado
+            try{
+                //Ejecutar la consulta
+                $guardado = $tarjeta -> guardar();
+            }catch(mysqli_sql_exception $excepcion){
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('guardartarjetaerror', "Este nombre de tarjeta ya existe", '?controller=TarjetaController&action=crear');
+                die();
+            }
             return $guardado;
         }
 
@@ -53,12 +58,18 @@
                     if($guardado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('guardartarjetaacierto', "La tarjeta ha sido creada con exito", '?controller=AdministradorController&action=administrar');
+                        Ayudas::crearSesionYRedirigir('guardartarjetaacierto', "La tarjeta ha sido creada con exito", '?controller=AdministradorController&action=gestionarTarjeta');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('guardartarjetaerror', "La tarjeta no ha sido creada con exito", '?controller=AdministradorController&action=crearTarjeta');
+                        Ayudas::crearSesionYRedirigir('guardartarjetaerror', "La tarjeta no ha sido creada con exito", '?controller=CategoriaController&action=crear');
                     }
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('guardartarjetaerror', "Ha ocurrido un error al guardar la tarjeta", '?controller=CategoriaController&action=crear');
                 }
+            }else{
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('guardartarjetaerror', "Ha ocurrido un error al guardar la tarjeta", '?controller=CategoriaController&action=crear');
             }
         }
 

@@ -65,7 +65,7 @@
         public function guardar(){
 
             //Construir la consulta
-            $consulta = "INSERT INTO videojuegofavorito VALUES(NULL, 
+            $consulta = "INSERT INTO videojuegofavorito VALUES(NULL, {$this -> getActivo()}, 
                 {$this -> getIdVideojuego()}, {$this -> getIdFavorito()}, 
                 {$this -> getPrecio()})";
             //Ejecutar la consulta

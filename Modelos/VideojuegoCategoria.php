@@ -55,7 +55,7 @@
         public function guardar(){
             //Construir la consulta
             foreach($this -> getIdCategoria() as $categorias){
-                $consulta = "INSERT INTO videojuegocategoria VALUES(NULL, {$this -> getIdVideojuego()}, {$categorias})";
+                $consulta = "INSERT INTO videojuegocategoria VALUES(NULL, {$this -> getActivo()}, {$this -> getIdVideojuego()}, {$categorias})";
                 //Ejecutar la consulta
                 $registro = $this -> db -> query($consulta);
             }

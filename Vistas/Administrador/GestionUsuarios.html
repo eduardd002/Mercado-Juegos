@@ -1,4 +1,12 @@
 <div id="contenidoCentral">
+
+    <?php if(isset($_SESSION['eliminaradministradorusuarioacierto'])) : ?>
+        <div class="alerta alerta-adminAcierto">
+            <?=$_SESSION['eliminaradministradorusuarioacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('eliminaradministradorusuarioacierto'); ?>
+
    <?php if(isset($_SESSION['eliminaradministradorusuarioerror'])) : ?>
         <div class="alerta alerta-adminError">
             <?=$_SESSION['eliminaradministradorusuarioerror']; ?>

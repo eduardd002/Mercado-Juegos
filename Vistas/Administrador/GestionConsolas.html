@@ -1,10 +1,25 @@
 <div id="contenidoCentral">
-    <?php if(isset($_SESSION['guardarconsolaerror'])) : ?>
-        <div class="alerta alerta-adminError">
-            <?=$_SESSION['guardarconsolaerror']; ?>
+
+    <?php if(isset($_SESSION['eliminarconsolaacierto'])) : ?>
+        <div class="alerta alerta-adminAcierto">
+            <?=$_SESSION['eliminarconsolaacierto']; ?>
         </div>
     <?php endif; ?>
-    <?php Ayudas::eliminarSesion('guardarconsolaerror'); ?>
+    <?php Ayudas::eliminarSesion('eliminarconsolaacierto'); ?>
+
+    <?php if(isset($_SESSION['actualizarconsolaacierto'])) : ?>
+        <div class="alerta alerta-adminAcierto">
+            <?=$_SESSION['actualizarconsolaacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizarconsolaacierto'); ?>
+
+    <?php if(isset($_SESSION['guardarconsolaacierto'])) : ?>
+        <div class="alerta alerta-adminAcierto">
+            <?=$_SESSION['guardarconsolaacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('guardarconsolaacierto'); ?>
 
     <?php if(isset($_SESSION['eliminarconsolaerror'])) : ?>
         <div class="alerta alerta-adminError">
@@ -41,7 +56,7 @@
                     </tr>
                 <?php endwhile;?>
             </table>
-            <a href="<?=rutaInicio?><?=consola?><?=crearConsola?>" class="button button-crearGestion">Crear</a>
         </div>
     <?php endif; ?>
+    <a href="<?=rutaInicio?><?=consola?><?=crearConsola?>" class="button button-crearGestion">Crear</a>
 </div>

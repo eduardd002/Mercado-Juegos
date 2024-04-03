@@ -829,7 +829,7 @@ Estilos del formulario de registro de usuario
     /*Texto alineado al centro*/
     text-align: center;
     /*Margen inferior*/
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 /*
@@ -981,7 +981,7 @@ Estilos del formulario de login
 
 #bloqueTextoRegistro{
     /*Margen superior*/
-    margin-top: 20px;
+    margin-top: 30px;
     /*Margen inferior*/
     margin-bottom: 20px;
     /*Margen izquierdo*/
@@ -1958,10 +1958,8 @@ Estilo de enlaces de gestiones
 */
 
 #gestiones a{
-    /*Flotar hacia la derecha*/
-    float: right;
     /*Margen derecho*/
-    margin-right: 50px;
+    margin-left: 250px !important;
 }
 
 /*
@@ -1972,9 +1970,9 @@ Estilo del boton para crear una gestion
     /*Texto centrado*/
     text-align: center;
    /*Margen derecho*/
-    margin-right: 450px !important;
+    margin-left: 550px !important;
     /*Anchor*/
-    width: 80px;
+    width: 120px;
     /*Margen superior*/
     margin-top: 30px !important;
     /*Sin decoracion de texto*/
@@ -2006,8 +2004,8 @@ Estilo de perfil de la cuenta de usuario en gestion de usuarios
     border: 0.5px solid #333;
     /*Margen izquierdo*/
     margin-left: 175px;
-    /*Margen inferior*/
-    margin-bottom: 50px;
+    /*Margen superior*/
+    margin-top: 100px;
 }
 
 /*
@@ -2536,7 +2534,7 @@ Estilo del boton para enviar el comentario
 
 #bloquecomentario input[type="text"]{
     /*Altura*/
-    height: 30px;
+    height: 27px;
     /*Anchor*/
     width: 500px;
     /*Flotar hacia la izquierda*/
@@ -2811,4 +2809,13 @@ Estilo de la imagen de elemento no encontrado
     width: 400px;
     /*Altura*/
     height: 400px;
+}
+
+.imagenGestion{
+    margin-top: 50px !important;
+    margin-right: 120px !important;
+    margin-left: 5px !important;
+    margin-bottom: 50px !important;
+    width: 125px !important;
+    height: 125px !important;
 }

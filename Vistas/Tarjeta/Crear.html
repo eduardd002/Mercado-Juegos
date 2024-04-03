@@ -1,7 +1,16 @@
-<div id="contenidoCentral">      
+<div id="contenidoCentral">    
+    
+    <?php if(isset($_SESSION['guardartarjetaerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['guardartarjetaerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('guardartarjetaerror'); ?>
+
     <div id="loginYRegistro">
         <h1 class="tituloCreacionGestiones">Crear tarjeta</h1>
         <hr>
+        <img src="Recursos/Logotipos/casa.png" class="imagenGestion" alt="">
         <form action="<?=rutaInicio?><?=tarjeta?><?=guardarTarjeta?>" method="post">
             <div id="bloqueTextoRegistro">
                 <label for="nombretar">Nombre</label>

@@ -1,10 +1,11 @@
 <div id="contenidoCentral">      
     <div id="loginYRegistro">
         <h1 class="tituloCreacionGestiones">Actualizar consola?</h1>
+        <hr>
+        <img src="Recursos/Logotipos/casa.png" class="imagenGestion" alt="">
         <form action="<?=rutaInicio?><?=consola?><?=actualizarConsola?>&id=<?=$consolaUnica -> id?>" method="post">
             <div id="bloqueTextoRegistro">
                 <label for="nombreconsact">Nombre</label>
-                <hr>
                 <input type="text" name="nombreconsact" value="<?=$consolaUnica -> nombre?>" required>
             </div>
             <input type="submit" class="btnRegistro" value="Actualizar">

@@ -1,10 +1,25 @@
 <div id="contenidoCentral">
-    <?php if(isset($_SESSION['guardarestadoerror'])) : ?>
-        <div class="alerta alerta-adminError">
-            <?=$_SESSION['guardarestadoerror']; ?>
+
+    <?php if(isset($_SESSION['eliminarestadoacierto'])) : ?>
+        <div class="alerta alerta-adminAcierto">
+            <?=$_SESSION['eliminarestadoacierto']; ?>
         </div>
     <?php endif; ?>
-    <?php Ayudas::eliminarSesion('guardarestadoerror'); ?>
+    <?php Ayudas::eliminarSesion('eliminarestadoacierto'); ?>
+
+    <?php if(isset($_SESSION['actualizarestadoacierto'])) : ?>
+        <div class="alerta alerta-adminAcierto">
+            <?=$_SESSION['actualizarestadoacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizarestadoacierto'); ?>
+
+    <?php if(isset($_SESSION['guardarestadoacierto'])) : ?>
+        <div class="alerta alerta-adminAcierto">
+            <?=$_SESSION['guardarestadoacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('guardarestadoacierto'); ?>
 
     <?php if(isset($_SESSION['eliminarestadoerror'])) : ?>
         <div class="alerta alerta-adminError">
@@ -41,7 +56,7 @@
                     </tr>
                 <?php endwhile;?>
             </table>
-            <a href="<?=rutaInicio?><?=estado?><?=crearEstado?>" class="button button-crearGestion">Crear</a>
         </div>
     <?php endif; ?>
+    <a href="<?=rutaInicio?><?=estado?><?=crearEstado?>" class="button button-crearGestion">Crear</a>
 </div>

@@ -127,7 +127,7 @@
 
         public function guardar(){
             //Construir la consulta
-            $consulta = "INSERT INTO videojuegos VALUES(NULL, {$this -> getIdConsola()}, 
+            $consulta = "INSERT INTO videojuegos VALUES(NULL, {$this -> getActivo()}, {$this -> getIdConsola()}, 
                 {$this -> getIdUso()}, '{$this -> getNombre()}', 
                 {$this -> getPrecio()}, '{$this -> getDescripcion()}', 
                 '{$this -> getFoto()}', '{$this -> getFechaCreacion()}', 

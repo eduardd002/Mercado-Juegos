@@ -54,7 +54,7 @@
 
         public function guardar(){
             //Construir la consulta
-            $consulta = "INSERT INTO usuariovideojuego VALUES(NULL, {$this -> getIdUsuario()}, {$this -> getIdVideojuego()})";
+            $consulta = "INSERT INTO usuariovideojuego VALUES(NULL, {$this -> getActivo()}, {$this -> getIdUsuario()}, {$this -> getIdVideojuego()})";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera

@@ -51,6 +51,7 @@
             //Instanciar el objeto
             $comentarioVideojuego = new ComentarioVideojuego();
             //Crear el objeto
+            $comentarioVideojuego -> setActivo(1);
             $comentarioVideojuego -> setIdVideojuego($videojuego);
             $comentarioVideojuego -> setIdComentario($id);
             //Guardar en la base de datos

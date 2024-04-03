@@ -45,7 +45,7 @@
         public function guardar(){
 
             //Construir la consulta
-            $consulta = "INSERT INTO consolas VALUES(NULL, '{$this -> getNombre()}')";
+            $consulta = "INSERT INTO consolas VALUES(NULL, {$this -> getActivo()}, '{$this -> getNombre()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera

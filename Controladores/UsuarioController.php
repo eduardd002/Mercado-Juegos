@@ -57,8 +57,14 @@
             $usuario -> setMunicipio($municipio);
             $usuario -> setFecharegistro(date('y-m-d'));
             $usuario -> setFoto($nombreArchivo);
-            //Guardar en la base de datos
-            $guardado = $usuario -> guardar();
+            try{
+                //Ejecutar la consulta
+                $guardado = $usuario -> guardar();
+            }catch(mysqli_sql_exception $excepcion){
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('guardarusuarioerror', "Esta direccion de correo ya existe", '?controller=UsuarioController&action=registro');
+                die();
+            }
             //Retornar el resultado
             return $guardado;
         }
@@ -89,11 +95,12 @@
 
                     //Comprobar si la contraseña es valida
                     $claveSegura = Ayudas::comprobarContrasenia($clave);
-                    //Comprobar si la foto es valida
-                    $fotoGuardada = Ayudas::guardarImagen($archivo, "ImagenesUsuarios");
                     
                     //Comprobar si todo esta correcto para guardar el usuario
                     if($claveSegura){
+
+                        //Comprobar si la foto es valida
+                        $fotoGuardada = Ayudas::guardarImagen($archivo, "ImagenesUsuarios");
 
                         //Comprobar si la foto ha sido guardada
                         if($fotoGuardada){
@@ -107,7 +114,7 @@
                                Ayudas::iniciarSesionUsuario($email, $clave);
                             }else{
                                 //Crear la sesion y redirigir a la ruta pertinente
-                                Ayudas::crearSesionYRedirigir("guardarusuarioerror", "Ya existe una direccion de correo asociada", "?controller=UsuarioController&action=registro");
+                                Ayudas::crearSesionYRedirigir("guardarusuarioerror", "Ha ocurrido un error al guardar el usuario", "?controller=UsuarioController&action=registro");
                             }
                         }else{
 

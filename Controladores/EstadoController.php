@@ -28,9 +28,15 @@
             //Crear el objeto
             $estado -> setActivo(1);
             $estado -> setNombre($nombre);
-            //Guardar en la base de datos
-            $guardado = $estado -> guardar();
-            //Retornar resultado
+            //Ejecutar la consulta
+            try{
+                //Ejecutar la consulta
+                $guardado = $estado -> guardar();
+            }catch(mysqli_sql_exception $excepcion){
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('guardarestadoerror', "Este nombre de estado ya existe", '?controller=EstadoController&action=crear');
+                die();
+            }
             return $guardado;
         }
 
@@ -55,12 +61,18 @@
                     if($guardado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('guardarestadoacierto', "El estado ha sido creado con exito", '?controller=AdministradorController&action=administrar');
+                        Ayudas::crearSesionYRedirigir('guardarestadoacierto', "El estado ha sido creado con exito", '?controller=AdministradorController&action=gestionarEstado');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('guardarestadoerror', "El estado no ha sido creado con exito", '?controller=AdministradorController&action=crearEstado');
+                        Ayudas::crearSesionYRedirigir('guardarestadoerror', "La consola no ha sido creado con exito", '?controller=EstadoController&action=crear');
                     }
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('guardarestadoerror', "Ha ocurrido un error al guardar el estado", '?controller=EstadoController&action=crear');
                 }
+            }else{
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('guardarestadoerror', "Ha ocurrido un error al guardar el estado", '?controller=EstadoController&action=crear');
             }
         }
 

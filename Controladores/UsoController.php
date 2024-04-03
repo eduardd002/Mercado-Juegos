@@ -26,9 +26,14 @@
             //Crear el objeto
             $uso -> setActivo(1);
             $uso -> setNombre($nombre);
-            //Guardar en la base de datos
-            $guardado = $uso -> guardar();
-            //Retornar resultado
+            try{
+                //Ejecutar la consulta
+                $guardado = $uso -> guardar();
+            }catch(mysqli_sql_exception $excepcion){
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('guardarusoerror', "Este nombre de uso ya existe", '?controller=UsoController&action=crear');
+                die();
+            }
             return $guardado;
         }
 
@@ -53,12 +58,18 @@
                     if($guardado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('guardarusoacierto', "El uso ha sido creado con exito", '?controller=AdministradorController&action=administrar');
+                        Ayudas::crearSesionYRedirigir('guardarusoacierto', "El uso ha sido creado con exito", '?controller=AdministradorController&action=gestionarUso');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('guardarusoerror', "El uso no ha sido creado con exito", '?controller=AdministradorController&action=crearUso');
+                        Ayudas::crearSesionYRedirigir('guardarusoerror', "El uso no ha sido creado con exito", '?controller=UsoController&action=crear');
                     }
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('guardarusoerror', "Ha ocurrido un error al guardar el uso", '?controller=UsoController&action=crear');
                 }
+            }else{
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('guardarusoerror', "Ha ocurrido un error al guardar el uso", '?controller=UsoController&action=crear');
             }
         }
 

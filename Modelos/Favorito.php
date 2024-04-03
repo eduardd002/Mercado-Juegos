@@ -44,7 +44,7 @@
 
         public function guardar(){
             //Construir consulta
-            $consulta = "INSERT INTO favoritos VALUES(NULL, {$this -> getIdUsuario()})";
+            $consulta = "INSERT INTO favoritos VALUES(NULL, {$this -> getActivo()}, {$this -> getIdUsuario()})";
             //Ejecutar la consulta
             $guardado = $this -> db -> query($consulta);
             //Crear bandera
