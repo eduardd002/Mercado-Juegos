@@ -133,16 +133,28 @@
             return $resultado;
         }
 
+        public function traerClave($correo){
+            $consulta = "SELECT clave FROM administradores WHERE correo = '$correo'";
+            $clave = $this -> db -> query($consulta);
+            $resultado = $clave -> fetch_object();
+            return $resultado;
+        }
+
         /*
         Funcion para realizar el inicio de sesion
         */
 
         public function login(){
 
+
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM administradores WHERE correo = '{$this -> getCorreo()}' AND clave = 
-            '{$this -> getClave()}'";
-            //Ejecutar la consulta
+            $consulta = "SELECT DISTINCT * FROM adminstradores WHERE correo = '{$this -> getCorreo()}'";
+            $clave = $this -> traerClave($this -> getCorreo());
+            $claveAsociada = $clave -> clave;
+            $resultado = false;
+            $alho = password_verify($this -> getClave(), $claveAsociada);
+            if($alho){
+                //Ejecutar la consulta
             $login = $this -> db -> query($consulta);
             //Obtener el resultado del objeto
             $usuario = $login -> fetch_object();
@@ -150,6 +162,7 @@
             if($usuario){
                 //Establecer una variable bandera con el valor del objeto
                 $resultado = $usuario;
+            }
             }
             //Retornar el resultado
             return $resultado;

@@ -133,11 +133,13 @@
         */
 
         public function guardar(){
+            $clave = $this -> getClave();
+            $claveSegura = password_hash($clave, PASSWORD_BCRYPT, ['cost'=>4]);
             //Construir la consulta
             $consulta = "INSERT INTO usuarios VALUES(NULL, {$this -> getActivo()},
                 '{$this -> getNombre()}', '{$this -> getApellido()}', 
                 '{$this -> getFechaNacimiento()}', {$this -> getNumeroTelefono()}, 
-                '{$this -> getCorreo()}', '{$this -> getClave()}', 
+                '{$this -> getCorreo()}', '{$claveSegura}', 
                 '{$this -> getDepartamento()}', '{$this -> getMunicipio()}', 
                 '{$this -> getFoto()}', '{$this -> getFechaRegistro()}')";
             //Ejecutar la consulta
@@ -153,15 +155,28 @@
             return $resultado;
         }
 
+        public function traerClave($correo){
+            $consulta = "SELECT clave FROM usuarios WHERE correo = '$correo'";
+            $clave = $this -> db -> query($consulta);
+            $resultado = $clave -> fetch_object();
+            return $resultado;
+        }
+
         /*
         Funcion para realizar el inicio de sesion
         */
 
         public function login(){
+
+
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM usuarios WHERE correo = '{$this -> getCorreo()}' AND clave = 
-            '{$this -> getClave()}'";
-            //Ejecutar la consulta
+            $consulta = "SELECT DISTINCT * FROM usuarios WHERE correo = '{$this -> getCorreo()}'";
+            $clave = $this -> traerClave($this -> getCorreo());
+            $claveAsociada = $clave -> clave;
+            $resultado = false;
+            $alho = password_verify($this -> getClave(), $claveAsociada);
+            if($alho){
+                //Ejecutar la consulta
             $login = $this -> db -> query($consulta);
             //Obtener el resultado del objeto
             $usuario = $login -> fetch_object();
@@ -169,6 +184,7 @@
             if($usuario){
                 //Establecer una variable bandera con el valor del objeto
                 $resultado = $usuario;
+            }
             }
             //Retornar el resultado
             return $resultado;
