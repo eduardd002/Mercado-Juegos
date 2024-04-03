@@ -313,6 +313,10 @@
             $usuarioVideojuego = new UsuarioVideojuego();
             $usuarioVideojuego -> setIdUsuario($idVendedor);
             $listaDatosUsuario = $usuarioVideojuego -> obtenerInformacionUsuario();
+
+            $publicados = $usuarioVideojuego -> obtenerTotalPublicados();
+
+            $vendidos = $usuarioVideojuego -> obtenerTotalVendidos();
             //Incluir la vista
             require_once "Vistas/Usuario/Perfil.html";
         }

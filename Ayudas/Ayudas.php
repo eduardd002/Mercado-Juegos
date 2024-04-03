@@ -26,7 +26,7 @@
         public static function desencriptarContenido($contenido){
 
             // Encriptar el mensaje
-            $mensajeDesencriptado = openssl_decrypt($contenido, 'aes-256-cbc', claveEncriptacion, 0, '1234567890123456');;
+            $mensajeDesencriptado = openssl_decrypt($contenido, 'aes-256-cbc', claveEncriptacion, 0, '1234567890123456');
             return $mensajeDesencriptado;
         }
 
