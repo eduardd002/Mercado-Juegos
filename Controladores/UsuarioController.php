@@ -278,8 +278,11 @@
                         }
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizarusuariosugerencia', "El formato de la foto debe ser una imagen", '?controller=UsuarioController&action=miPerfil');
+                        Ayudas::crearSesionYRedirigir('actualizarusuarioerror', "El formato de la foto debe ser una imagen", '?controller=UsuarioController&action=miPerfil');
                     }
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('actualizarusuarioerror', "Ha ocurrido un error al actualizar el usuario", '?controller=UsuarioController&action=miPerfil');
                 }
             }
         }

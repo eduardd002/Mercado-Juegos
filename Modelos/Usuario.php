@@ -156,7 +156,7 @@
         }
 
         public function traerClave($correo){
-            $consulta = "SELECT clave FROM usuarios WHERE correo = '$correo'";
+            $consulta = "SELECT clave FROM usuarios WHERE correo = '$correo' AND activo = 1";
             $clave = $this -> db -> query($consulta);
             $resultado = $clave -> fetch_object();
             return $resultado;
@@ -170,7 +170,7 @@
 
 
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM usuarios WHERE correo = '{$this -> getCorreo()}'";
+            $consulta = "SELECT DISTINCT * FROM usuarios WHERE correo = '{$this -> getCorreo()}' AND activo = 1";
             $clave = $this -> traerClave($this -> getCorreo());
             $claveAsociada = $clave -> clave;
             $resultado = false;
@@ -196,7 +196,7 @@
 
         public function listar(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM usuarios";
+            $consulta = "SELECT DISTINCT * FROM usuarios AND activo = 1";
             //Ejecutar la consulta
             $lista = $this -> db -> query($consulta);
             //Retornar el resultado
@@ -209,7 +209,7 @@
 
         public function eliminar(){
             //Construir la consulta
-            $consulta = "UPDATE usuarios WHERE id = {$this -> getId()}";
+            $consulta = "UPDATE usuarios SET activo = 0 WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $eliminado = $this -> db -> query($consulta);
             //Crear bandera
@@ -228,7 +228,7 @@
 
         public function obtenerUno(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM usuarios WHERE id = {$this -> getId()}";
+            $consulta = "SELECT DISTINCT * FROM usuarios WHERE id = {$this -> getId()} AND activo = 1";
             //Ejecutar la consulta
             $categoria = $this -> db -> query($consulta);
             //Obtener resultado

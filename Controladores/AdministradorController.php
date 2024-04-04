@@ -371,7 +371,7 @@
         Funcion para actuazliar el administrador
         */
 
-        public function actualizarAdministrador($id, $nombre, $apellidos, $email, $clave, $telefono, $foto){
+        public function actualizarAdministrador($id, $nombre, $apellidos, $email, $telefono, $foto){
 
             //Instanciar el objeto
             $administrador = new Administrador();
@@ -380,11 +380,16 @@
             $administrador -> setNombre($nombre);
             $administrador -> setApellido($apellidos);
             $administrador -> setCorreo($email);
-            $administrador -> setClave($clave);
             $administrador -> setNumerotelefono($telefono);
             $administrador -> setFoto($foto);
-            $actualizado = $administrador -> actualizar();
-            //Retornar resultado
+            try{
+                //Ejecutar la consulta
+                $actualizado = $administrador -> actualizar();
+            }catch(mysqli_sql_exception $excepcion){
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('actualizarusuarioerror', "Esta direccion de correo ya existe", '?controller=AdministradorController&action=miPerfil');
+                die();
+            }
             return $actualizado;
         }
 
@@ -402,35 +407,30 @@
                 $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
                 $apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : false;
                 $email = isset($_POST['email']) ? $_POST['email'] : false;
-                $clave = isset($_POST['password']) ? $_POST['password'] : false;
                 $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : false;
-                //Añadir archivo de foto
                 $archivo = $_FILES['foto'];
+                $foto = $archivo['name'];
 
                 //Si el dato existe
-                if($id && $nombre && $apellidos && $email && $clave && $telefono){
+                if($id && $nombre && $apellidos && $email && $telefono){
 
                     //Comprobar si el formato de la foto es imagen
-                    if(Ayudas::comprobarImagen($archivo['type']) == 2){
-                        //Comprobar si la contraseña es valida
-                        $claveSegura = Ayudas::comprobarContrasenia($clave);
-                        //Comprobar la foto
-                        $foto = Ayudas::guardarImagen($archivo, "ImagenesAdministradores");
+                    if(Ayudas::comprobarImagen($archivo['type']) != 3){
+
+                        if(Ayudas::comprobarImagen($archivo['type']) == 1){
+                            //Comprobar la foto
+                            Ayudas::guardarImagen($archivo, "ImagenesAdministradores");
+                        }
+
                         //Llamar la funcion de actualizar
-                        $actualizado = $this -> actualizarAdministrador($id, $nombre, $apellidos, $email, $clave, $telefono, $foto);
+                        $actualizado = $this -> actualizarAdministrador($id, $nombre, $apellidos, $email, $telefono, $foto);
 
-                        if($claveSegura){
-
-                            if($actualizado){
-                                //Crear la sesion y redirigir a la ruta pertinente
-                                Ayudas::crearSesionYRedirigir('actualizaradministradoracierto', "Administrador actualizado con exito", '?controller=AdministradorController&action=miPerfil');
-                            }else{
-                                //Crear la sesion y redirigir a la ruta pertinente
-                                Ayudas::crearSesionYRedirigir('actualizaradministradorsugerencia', "Agrega nuevos datos", '?controller=AdministradorController&action=miPerfil');
-                            }
+                        if($actualizado){
+                            //Crear la sesion y redirigir a la ruta pertinente
+                            Ayudas::crearSesionYRedirigir('actualizaradministradoracierto', "Administrador actualizado con exito", '?controller=AdministradorController&action=miPerfil');
                         }else{
                             //Crear la sesion y redirigir a la ruta pertinente
-                            Ayudas::crearSesionYRedirigir('actualizaradministradorsugerencia', "Clave poco segura", '?controller=AdministradorController&action=miPerfil');
+                            Ayudas::crearSesionYRedirigir('actualizaradministradorsugerencia', "Agrega nuevos datos", '?controller=AdministradorController&action=miPerfil');
                         }
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente

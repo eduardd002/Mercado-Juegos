@@ -9,19 +9,19 @@
     <div id="loginYRegistro">
         <h1>Actualizar videojuego</h1>
         <hr>
-        <form action="<?=rutaInicio?><?=videojuego?><?=actualizarVideojuego?>&id=<?=$videojuegoUnico -> idVideojuego?>" method="post">
+        <form action="<?=rutaInicio?><?=videojuego?><?=actualizarVideojuego?>&id=<?=$videojuegoUnico['videojuego']['idVideojuego']?>" method="post">
             <img src="Recursos/Logotipos/videojuego.png" class="ventaImage" alt="Logo videojuego">
             <div id="bloqueTextoRegistro">
                 <label for="stock">Stock</label>
-                <input type="number" name="stock" value="<?=$videojuegoUnico -> stock?>" required>
+                <input type="number" name="stock" value="<?=$videojuegoUnico['videojuego']['stockVideojuego']?>" required>
             </div>
             <div id="bloqueTextoRegistro">
                 <label for="precio">Precio</label>
-                <input type="number" name="precio" value="<?=$videojuegoUnico -> precio?>" required>
+                <input type="number" name="precio" value="<?=$videojuegoUnico['videojuego']['precioVideojuego']?>" required>
             </div>
             <div id="bloqueTextoRegistro">
                 <label for="descripcionvid">Descripcion</label>
-                <textarea name="descripcionvid" id="descripcionvid" required></textarea>
+                <textarea name="descripcionvid" id="descripcionvid" required><?=$videojuegoUnico['videojuego']['precioVideojuego']?></textarea>
             </div>
             <input type="submit" class="btnRegistro" value="Actualizar">
         </form>

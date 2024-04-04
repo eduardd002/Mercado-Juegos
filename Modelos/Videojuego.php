@@ -114,7 +114,7 @@
 
         public function buscar(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM videojuegos WHERE nombre LIKE '%{$this -> getNombre()}%'";
+            $consulta = "SELECT DISTINCT * FROM videojuegos WHERE nombre LIKE '%{$this -> getNombre()}%' AND activo = 1";
             //Ejecutar la consulta
             $lista = $this -> db -> query($consulta);
             //Retornar el resultado
@@ -175,7 +175,7 @@
                 INNER JOIN Consolas co ON co.id = v.idConsola
                 INNER JOIN VideojuegoCategoria cv ON cv.idVideojuego = v.id
                 INNER JOIN Categorias c ON cv.idCategoria = c.id
-                WHERE uv.idVideojuego = {$this -> getId()}";
+                WHERE uv.idVideojuego = {$this -> getId()} AND activo = 1";
             // Ejecutar la consulta
             $resultados = $this->db->query($consulta);
         
@@ -217,7 +217,7 @@
 
         public function ultimo(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT id FROM videojuegos ORDER BY id DESC LIMIT 1";
+            $consulta = "SELECT DISTINCT id FROM videojuegos ORDER BY id DESC LIMIT 1 WHERE activo = 1";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Obtener el resultado del objeto
@@ -231,7 +231,7 @@
         public function eliminar(){
 
             //Construir la consulta
-            $consulta = "UPDATE videojuegos WHERE id = {$this -> getId()}";
+            $consulta = "UPDATE videojuegos SET activo = 0 WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $eliminado = $this -> db -> query($consulta);
             var_dump($eliminado);
@@ -252,7 +252,7 @@
 
         public function listarTodos(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM videojuegos ORDER BY id DESC";
+            $consulta = "SELECT DISTINCT * FROM videojuegos ORDER BY id DESC WHERE activo = 1";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Retornar resultado
@@ -265,7 +265,7 @@
 
         public function listarAlgunos(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM videojuegos ORDER BY RAND() LIMIT 6";
+            $consulta = "SELECT DISTINCT * FROM videojuegos ORDER BY RAND() LIMIT 6 WHERE activo = 1";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Retornar resultado
@@ -277,8 +277,8 @@
             $consulta = "SELECT DISTINCT v.* 
             FROM videojuegocategoria cv
             INNER JOIN videojuegos v ON v.id = cv.idVideojuego
-            INNER JOIN categorias c ON c.id = cv.idCategoria";
-            
+            INNER JOIN categorias c ON c.id = cv.idCategoria
+            WHERE activo = 1";
             // Array para almacenar las condiciones de filtro
             $condiciones = [];
             

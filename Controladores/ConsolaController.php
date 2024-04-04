@@ -200,11 +200,14 @@
                     if($actualizado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizarconsolaacierto', "La consola ha sido actualizada exitosamente", '?controller=AdministradorController&action=administrar');
+                        Ayudas::crearSesionYRedirigir('actualizarconsolaacierto', "La consola ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarConsola');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizarconsolaerror', "La consola no ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarConsola');
+                        Ayudas::crearSesionYRedirigir('actualizarconsolaerror', "La consola no ha sido actualizada exitosamente", '?controller=ConsolaController&action=editar&id='.$idConsola);
                     }
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('actualizarconsolaerror', "Ha ocurrido un error al actualizar la consola", '?controller=ConsolaController&action=editar&id='.$idConsola);
                 }  
             }
         }

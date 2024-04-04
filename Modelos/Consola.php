@@ -65,7 +65,7 @@
 
         public function listar(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM consolas";
+            $consulta = "SELECT DISTINCT * FROM consolas AND activo = 1";
             //Ejecutar la consulta
             $lista = $this -> db -> query($consulta);
             //Retornar el resultado
@@ -78,7 +78,7 @@
 
         public function obtenerUna(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM consolas WHERE id = {$this -> getId()}";
+            $consulta = "SELECT DISTINCT * FROM consolas WHERE id = {$this -> getId()} AND activo = 1";
             //Ejecutar la consulta
             $consola = $this -> db -> query($consulta);
             //Obtener resultado
@@ -93,7 +93,7 @@
 
         public function eliminar(){
             //Construir la consulta
-            $consulta = "UPDATE consolas WHERE id = {$this -> getId()}";
+            $consulta = "UPDATE consolas SET activo = 0 WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $eliminado = $this -> db -> query($consulta);
             //Crear bandera

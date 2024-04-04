@@ -200,11 +200,14 @@
                     if($actualizado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizarcategoriaacierto', "La categoria ha sido actualizada exitosamente", '?controller=AdministradorController&action=administrar');
+                        Ayudas::crearSesionYRedirigir('actualizarcategoriaacierto', "La categoria ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarCategoria');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizarcategoriaerror', "La categoria no ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarCategoria');
+                        Ayudas::crearSesionYRedirigir('actualizarcategoriaerror', "La categoria no ha sido actualizada exitosamente", '?controller=CategoriaController&action=editar&id='.$idCategoria);
                     }
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('actualizarcategoriaerror', "Ha ocurrido un error al actualizar la cateogoria", '?controller=CategoriaController&action=editar&id='.$idCategoria);
                 }  
             }
         }

@@ -135,7 +135,7 @@
         }
 
         public function traerClave($correo){
-            $consulta = "SELECT clave FROM administradores WHERE correo = '$correo'";
+            $consulta = "SELECT clave FROM administradores WHERE correo = '$correo' AND activo = 1";
             $clave = $this -> db -> query($consulta);
             $resultado = $clave -> fetch_object();
             return $resultado;
@@ -149,7 +149,7 @@
 
 
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM administradores WHERE correo = '{$this -> getCorreo()}'";
+            $consulta = "SELECT DISTINCT * FROM administradores WHERE correo = '{$this -> getCorreo()}' AND activo = 1";
             $clave = $this -> traerClave($this -> getCorreo());
             $claveAsociada = $clave -> clave;
             $resultado = false;
@@ -175,7 +175,7 @@
 
         public function eliminar(){
             //Construir la consulta
-            $consulta = "UPDATE administradores WHERE id = {$this -> getId()}";
+            $consulta = "UPDATE administradores SET activo = 0 WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $eliminado = $this -> db -> query($consulta);
             //Crear bandera
@@ -193,14 +193,14 @@
         */
 
         public function actualizar(){
+
             //Construir la consulta
-            $consulta = "UPDATE administradores SET nombre = '{$this -> getNombre()}', apellido = '{$this -> getApellido()}',
-                numeroTelefono = '{$this -> getNumeroTelefono()}', correo = '{$this -> getCorreo()}', 
-                clave = '{$this -> getClave()}'"; 
-                if($this -> getFoto() != null){
-                    $consulta .= ", foto = '{$this -> getFoto()} '";
-                }
-                $consulta .= "WHERE id = {$this -> getId()}";
+            $consulta = "UPDATE administradores SET nombre = '{$this -> getNombre()}', apellido = '{$this -> getApellido()}', 
+            numeroTelefono = '{$this -> getNumeroTelefono()}', correo = '{$this -> getCorreo()}' ";
+            if($this -> getFoto() != null){
+                $consulta .= ",foto = '{$this -> getFoto()}'";
+            }
+            $consulta .= "WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $actualizado = $this -> db -> query($consulta);
             //Crear bandera
@@ -219,7 +219,7 @@
 
         public function obtenerUno(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM administradores WHERE id = {$this -> getId()}";
+            $consulta = "SELECT DISTINCT * FROM administradores WHERE id = {$this -> getId()} AND activo = 1";
             //Ejecutar la consulta
             $categoria = $this -> db -> query($consulta);
             //Obtener resultado

@@ -43,10 +43,6 @@
             </div>
             <input type="file" name="foto" accept="image/*">
             <label class="subirFotoPerfil">*Subir nueva*</label>
-            <div id="bloqueTextoRegistro">
-                <label for="password">Contraseña</label>
-                <input type="password" name="password" value="<?=$adminUnico -> clave?>" required>
-            </div>
             <div id="botonesadmin">
                 <input type="submit" class="btnRegistro-adminPerfil" value="Actualizar datos">
                 <a href="<?=rutaInicio?><?=administrador?><?=eliminarAdministrador?>&id=<?=$_SESSION['loginexitosoa'] -> id?>" class="eliminarCuentaMiPerfil" class="eliminarCuentaMiPerfil">Eliminar cuenta</a>

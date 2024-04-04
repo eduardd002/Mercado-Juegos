@@ -200,11 +200,14 @@
                     if($actualizado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizartarjetaacierto', "La tarjeta ha sido actualizada exitosamente", '?controller=AdministradorController&action=administrar');
+                        Ayudas::crearSesionYRedirigir('actualizartarjetaacierto', "La tarjeta ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarTarjeta');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizartarjetaerror', "La tarjeta no ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarTarjeta');
+                        Ayudas::crearSesionYRedirigir('actualizartarjetaerror', "La tarjeta no ha sido actualizada exitosamente", '?controller=TarjetaController&action=editar&id='.$idTarjeta);
                     }
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('actualizartarjetaerror', "Ha ocurrido un error al actualizar la tarjeta", '?controller=TarjetaController&action=editar&id='.$idTarjeta);
                 }  
             }
         }

@@ -203,11 +203,14 @@
                     if($actualizado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizarestadoacierto', "El estado ha sido actualizado exitosamente", '?controller=AdministradorController&action=administrar');
+                        Ayudas::crearSesionYRedirigir('actualizarestadoacierto', "El estado ha sido actualizado exitosamente", '?controller=AdministradorController&action=gestionarEstado');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizarestadoerror', "El estado no ha sido actualizado exitosamente", '?controller=AdministradorController&action=gestionarEstado');
+                        Ayudas::crearSesionYRedirigir('actualizarestadoerror', "El estado no ha sido actualizado exitosamente", '?controller=EstadoController&action=editar&id='.$idEstado);
                     }
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('actualizarestadoerror', "Ha ocurrido un error al actualizar el estado", '?controller=EstadoController&action=editar&id='.$idEstado);
                 }  
             }
         }
