@@ -111,12 +111,15 @@
                     if($eliminado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('eliminartarjetaacierto', "La tarjeta ha sido eliminada exitosamente", '?controller=AdministradorController&action=administrar');
+                        Ayudas::crearSesionYRedirigir('eliminartarjetaacierto', "La tarjeta ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarTarjeta');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('eliminartarjetaerror', "La tarjeta no ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarTarjeta');
                     }
-                }  
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('eliminartarjetaerror', "Ha ocurrido un error al eliminar la tarjeta", '?controller=AdministradorController&action=gestionarTarjeta'); 
+                } 
             }
         }
 
@@ -177,7 +180,7 @@
             return $actualizado;
         }
 
-                /*
+        /*
         Funcion para actualizar una tarjeta
         */
 

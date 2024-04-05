@@ -196,7 +196,7 @@
 
         public function listar(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM usuarios AND activo = 1";
+            $consulta = "SELECT DISTINCT * FROM usuarios WHERE activo = 1";
             //Ejecutar la consulta
             $lista = $this -> db -> query($consulta);
             //Retornar el resultado

@@ -317,7 +317,7 @@
                             //Comprobar si el videojuego cateogoria y videojuego usuario han sido guardados exitosamente
                             if($guardadoUsuarioVideojuego && $guardadoCategoriaVideojuego){
                                 //Crear la sesion y redirigir a la ruta pertinente
-                                Ayudas::crearSesionYRedirigir("guardarvideojuegoacierto", "El videojuego ha sido guardado con exito", "?controller=VideojuegoController&action=inicio");
+                                Ayudas::crearSesionYRedirigir("guardarvideojuegoacierto", "El videojuego ha sido guardado con exito", "?controller=UsuarioController&action=videojuegos");
                             }else{
                                 //Crear la sesion y redirigir a la ruta pertinente
                                 Ayudas::crearSesionYRedirigir("guardarvideojuegoerror", "Ha ocurrido un error al guardar el videojuego", "?controller=VideojuegoController&action=crear");
@@ -464,14 +464,14 @@
                     //Comprobar si el usuario ha sido eliminado
                     if($eliminado){
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('eliminaradministradorusuarioacierto', "El usuario ha sido eliminado exitosamente", '?controller=VideojuegoController&action=videojuegos');
+                        Ayudas::crearSesionYRedirigir('eliminarvideojuegoacierto', "El videojuego ha sido eliminado exitosamente", '?controller=UsuarioController&action=videojuegos');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('eliminaradministradorusuarioerror', "El usuario no ha sido eliminado exitosamente", '?controller=VideojuegoController&action=videojuegos');
+                        Ayudas::crearSesionYRedirigir('eliminarvideojuegoerror', "El videojuego no ha sido eliminado exitosamente", '?controller=UsuarioController&action=videojuegos');
                     }
                 }else{
                     //Crear la sesion y redirigir a la ruta pertinente
-                    Ayudas::crearSesionYRedirigir('eliminaradministradorusuarioerror', "Ha ocurrido un error al eliminar el usuario", '?controller=VideojuegoController&action=inicio');
+                    Ayudas::crearSesionYRedirigir('eliminarvideojuegoerror', "Ha ocurrido un error al eliminar el videojuego", '?controller=UsuarioController&action=videojuegos');
                 }
             }
         }

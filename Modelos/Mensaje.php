@@ -130,7 +130,7 @@
             //Obtener mensaje encriptado
             $mensajeEncriptado = Ayudas::encriptarContenido($mensaje);
             //Construir la consulta
-            $consulta = "INSERT INTO mensajes VALUES(NULL, {$this -> getIdRemitente()}, 
+            $consulta = "INSERT INTO mensajes VALUES(NULL, {$this -> getActivo()}, {$this -> getIdRemitente()}, 
             {$this -> getIdDestinatario()}, {$this -> getIdChat()}, '{$mensajeEncriptado}', '{$this -> getFechaEnvio()}', 
             '{$this -> getHoraEnvio()}')";
             //Ejecutar la consulta

@@ -111,12 +111,15 @@
                     if($eliminado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('eliminarusoacierto', "El uso ha sido eliminado exitosamente", '?controller=AdministradorController&action=administrar');
+                        Ayudas::crearSesionYRedirigir('eliminarusoacierto', "El uso ha sido eliminado exitosamente", '?controller=AdministradorController&action=gestionarUso');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('eliminarusoerror', "El uso no ha sido eliminado exitosamente", '?controller=AdministradorController&action=gestionarUso');
                     }
-                }  
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('eliminarusoerror', "Ha ocurrido un error al eliminar el uso", '?controller=AdministradorController&action=gestionarUso');
+                }
             }
         }
 

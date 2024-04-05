@@ -65,7 +65,7 @@
 
         public function listar(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM tarjetas AND activo = 1";
+            $consulta = "SELECT DISTINCT * FROM tarjetas WHERE activo = 1";
             //Ejecutar la consulta
             $lista = $this -> db -> query($consulta);
             //Retornar el resultado

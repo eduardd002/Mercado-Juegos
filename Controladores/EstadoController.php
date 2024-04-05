@@ -114,12 +114,15 @@
                     if($eliminado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('eliminarestadoacierto', "El estado ha sido eliminado exitosamente", '?controller=AdministradorController&action=administrar');
+                        Ayudas::crearSesionYRedirigir('eliminarestadoacierto', "El estado ha sido eliminado exitosamente", '?controller=AdministradorController&action=gestionarEstado');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('eliminarestadoerror', "El estado no ha sido eliminado exitosamente", '?controller=AdministradorController&action=gestionarEstado');
                     }
-                }  
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('eliminarestadoerror', "Ha ocurrido un error al eliminar el estado", '?controller=AdministradorController&action=gestionarEstado');
+                }
             }
         }
 

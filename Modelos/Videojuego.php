@@ -175,7 +175,7 @@
                 INNER JOIN Consolas co ON co.id = v.idConsola
                 INNER JOIN VideojuegoCategoria cv ON cv.idVideojuego = v.id
                 INNER JOIN Categorias c ON cv.idCategoria = c.id
-                WHERE uv.idVideojuego = {$this -> getId()} AND activo = 1";
+                WHERE uv.idVideojuego = {$this -> getId()} AND v.activo = 1";
             // Ejecutar la consulta
             $resultados = $this->db->query($consulta);
         
@@ -217,7 +217,7 @@
 
         public function ultimo(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT id FROM videojuegos ORDER BY id DESC LIMIT 1 WHERE activo = 1";
+            $consulta = "SELECT DISTINCT id FROM videojuegos WHERE activo = 1 ORDER BY id DESC LIMIT 1";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Obtener el resultado del objeto
@@ -234,8 +234,6 @@
             $consulta = "UPDATE videojuegos SET activo = 0 WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $eliminado = $this -> db -> query($consulta);
-            var_dump($eliminado);
-            die();
             //Crear bandera
             $bandera = false;
             //Comprobar si la consulta se realizo exitosamente
@@ -252,7 +250,7 @@
 
         public function listarTodos(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM videojuegos ORDER BY id DESC WHERE activo = 1";
+            $consulta = "SELECT DISTINCT * FROM videojuegos WHERE activo = 1 ORDER BY id DESC";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Retornar resultado
@@ -265,7 +263,7 @@
 
         public function listarAlgunos(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM videojuegos ORDER BY RAND() LIMIT 6 WHERE activo = 1";
+            $consulta = "SELECT DISTINCT * FROM videojuegos WHERE activo = 1 ORDER BY RAND() LIMIT 6";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Retornar resultado
@@ -278,7 +276,7 @@
             FROM videojuegocategoria cv
             INNER JOIN videojuegos v ON v.id = cv.idVideojuego
             INNER JOIN categorias c ON c.id = cv.idCategoria
-            WHERE activo = 1";
+            WHERE v.activo = 1";
             // Array para almacenar las condiciones de filtro
             $condiciones = [];
             

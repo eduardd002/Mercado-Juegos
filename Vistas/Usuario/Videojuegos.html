@@ -6,6 +6,20 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarvideojuegoacierto'); ?>
 
+    <?php if(isset($_SESSION['guardarvideojuegoacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['guardarvideojuegoacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('guardarvideojuegoacierto'); ?>
+
+    <?php if(isset($_SESSION['eliminarvideojuegoacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['eliminarvideojuegoacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('eliminarvideojuegoacierto'); ?>
+
     <?php if(mysqli_num_rows($listaVideojuegos) == 0) : ?>
         <h1>No Hay Ningun Videojuego Creado</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">

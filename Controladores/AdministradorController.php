@@ -355,7 +355,7 @@
                     //Comprobar si el usuario ha sido eliminado
                     if($eliminado){
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('eliminaradministradorusuarioacierto', "El usuario ha sido eliminado exitosamente", '?controller=AdministradorController&action=administrar');
+                        Ayudas::crearSesionYRedirigir('eliminaradministradorusuarioacierto', "El usuario ha sido eliminado exitosamente", '?controller=AdministradorController&action=gestionarUsuario');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('eliminaradministradorusuarioerror', "El usuario no ha sido eliminado exitosamente", '?controller=AdministradorController&action=gestionarUsuario');

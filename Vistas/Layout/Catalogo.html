@@ -10,20 +10,6 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('loginexitosoinfo'); ?>
 
-    <?php if(isset($_SESSION['usuarioactualizado']) && $_SESSION['usuarioactualizado'] == 'El usuario ha sido actualizado exitosamente') : ?>
-        <div class="alerta alerta-acierto">
-            <?=$_SESSION['usuarioactualizado']; ?>
-        </div>
-    <?php endif; ?>
-    <?php Ayudas::eliminarSesion('usuarioactualizado'); ?>
-
-    <?php if(isset($_SESSION['usuarioactualizado']) && $_SESSION['usuarioactualizado'] == 'Ha ocurrido un error al actualizar el usuario') : ?>
-        <div class="alerta alerta-acierto">
-            <?=$_SESSION['usuarioactualizado']; ?>
-        </div>
-    <?php endif; ?>
-    <?php Ayudas::eliminarSesion('usuarioactualizado'); ?>
-
     <?php if(isset($_SESSION['logincerrado']) && $_SESSION['logincerrado'] == 'Sesion cerrada con exito') : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['logincerrado']; ?>
@@ -37,13 +23,6 @@
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('caducidad'); ?>
-
-    <?php if(isset($_SESSION['guardarvideojuegoacierto'])) : ?>
-        <div class="alerta alerta-acierto">
-            <?=$_SESSION['guardarvideojuegoacierto']; ?>
-        </div>
-    <?php endif; ?>
-    <?php Ayudas::eliminarSesion('guardarvideojuegoacierto'); ?>
 
     <?php if(isset($_SESSION['eliminarusuarioacierto'])) : ?>
         <div class="alerta alerta-acierto">

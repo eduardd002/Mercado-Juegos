@@ -111,12 +111,15 @@
                     if($eliminado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('eliminarcategoriaacierto', "La categoria ha sido eliminada exitosamente", '?controller=AdministradorController&action=administrar');
+                        Ayudas::crearSesionYRedirigir('eliminarcategoriaacierto', "La categoria ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarCategoria');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('eliminarcategoriaerror', "La categoria no ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarCategoria');
                     }
-                }  
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('eliminarcategoriaerror', "Ha ocurrido un error al eliminar la categoria", '?controller=AdministradorController&action=gestionarCategoria');
+                }
             }
         }
 

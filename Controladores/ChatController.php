@@ -73,6 +73,7 @@
             //Instanciar objeto
             $usuarioChat = new UsuarioChat();
             //Crear objeto
+            $usuarioChat -> setActivo(1);
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
             $usuarioChat -> setIdDestinatario($_SESSION['mensajito']);
             $identificador = $usuarioChat -> obtenerIdentificadorPropioDeChat();
@@ -88,6 +89,7 @@
             //Instanciar mensaje
             $mensaje = new Mensaje();
             //Contruir objeto
+            $mensaje -> setActivo(1);
             $mensaje -> setIdRemitente($_SESSION['loginexitoso'] -> id);
             $mensaje -> setIdDestinatario($_SESSION['mensajito']);
             $mensaje -> setIdChat($this -> obtenerIdChat());

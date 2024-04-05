@@ -103,7 +103,7 @@
             FROM Videojuegos v
             INNER JOIN Consolas c ON c.id = v.idUso
             INNER JOIN UsuarioVideojuego uv ON uv.idVideojuego = v.id
-            WHERE uv.idUsuario = {$this -> getIdUsuario()}";
+            WHERE uv.idUsuario = {$this -> getIdUsuario()} AND v.activo = 1";
             //Ejecutar la consulta
             $lista = $this -> db -> query($consulta);
             //Retornar el resultado
@@ -115,7 +115,7 @@
                 FROM UsuarioVideojuego uv
                 INNER JOIN Usuarios u ON u.id = uv.idUsuario
                 INNER JOIN Videojuegos v ON v.id = uv.idVideojuego
-                WHERE uv.idUsuario = {$this->getIdUsuario()}";
+                WHERE uv.idUsuario = {$this->getIdUsuario()} AND v.activo = 1";
         
             // Ejecutar la consulta
             $resultados = $this->db->query($consulta);
