@@ -24,6 +24,7 @@
                         <td><img src="Recursos/ImagenesVideojuegos/<?=$favoritos -> imagenVideojuego?>" alt="Logo tienda" class="imgCarrito"></td>
                         <td><?=$favoritos -> nombreVideojuego?></td>
                         <td>$ <?=$favoritos -> precioVideojuego?></td>
+                        <td><a class="button button-eliminarVideojuego" href="<?=rutaInicio?><?=transaccion?><?=direccionYPago?>">Eliminar</a></td>
                     </tr>
                 <?php endwhile; ?>
             </table>

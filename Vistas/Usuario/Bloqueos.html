@@ -6,6 +6,13 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardarbloqueoacierto'); ?>
 
+    <?php if(isset($_SESSION['guardardesbloqueoacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['guardardesbloqueoacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('guardardesbloqueoacierto'); ?>
+
     <?php if(mysqli_num_rows($listadoBloqueos) == 0) : ?>
         <h1>No Hay Ningun Usario Bloqueado</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">

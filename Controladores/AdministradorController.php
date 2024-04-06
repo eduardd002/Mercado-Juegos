@@ -35,6 +35,12 @@
             require_once "Vistas/Administrador/Registro.html";
         }
 
+        public function cambiarClave(){
+
+            //Incluir la vista
+            require_once "Vistas/Administrador/CambiarClave.html";
+        }
+
         /*
         Funcion para entrar a las funciones de administrador
         */
@@ -440,6 +446,65 @@
                     //Crear la sesion y redirigir a la ruta pertinente
                     Ayudas::crearSesionYRedirigir('actualizaradministrador', "Ha ocurrido un error al actualizar el administrador", '?controller=AdministradorController&action=miPerfil');
                 } 
+            }
+        }
+
+        
+        public function comprobarClaves($actual){
+
+            $administrador = new Administrador();
+            $correo = $_SESSION['loginexitosoa'] -> correo;
+            $claveAdministrador = $administrador -> traerClave($correo);
+            $alho = password_verify($actual, $claveAdministrador -> clave);
+            if($alho){
+                return true;
+            }
+
+        }
+
+        public function actualizarNuevaClave($clave){
+
+            //Instanciar el objeto
+            $administrador = new Administrador();
+            //Crear objeto
+            $administrador -> setId($_SESSION['loginexitosoa'] -> id);
+            $administrador -> setClave($clave);
+            //Ejecutar la consulta
+            $actualizado = $administrador -> actualizarClave();
+            return $actualizado;
+        }
+
+        public function actualizarClave(){
+            
+            //Comprobar si los datos están llegando
+            if(isset($_POST)){
+
+                $actual = isset($_POST['passwordactual']) ? $_POST['passwordactual'] : false;
+                $nueva = isset($_POST['passwordnueva']) ? $_POST['passwordnueva'] : false;
+
+                //Si el dato existe
+                if($actual && $nueva){
+                    $seguta = Ayudas::comprobarContrasenia($nueva);
+                    if($seguta){
+                        if($this -> comprobarClaves($actual)){
+                            $actualizada = $this -> actualizarNuevaClave($nueva);
+                            if($actualizada){
+                                Ayudas::crearSesionYRedirigir('actualizarclaveacierto', "La clave ha sido actualizada con exito", '?controller=AdministradorController&action=cambiarClave');
+                            }else{
+                                Ayudas::crearSesionYRedirigir('actualizarclaveerror', "La clave no ha sido actualizada con exito", '?controller=AdministradorController&action=cambiarClave');
+                            }
+                        }else{
+                            Ayudas::crearSesionYRedirigir('actualizarclaveerror', "Clave actual incorrecta", '?controller=AdministradorController&action=cambiarClave');
+                        }
+                    }else{
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('actualizarclaveerror', "Clave poco segura", '?controller=AdministradorController&action=cambiarClave');
+                    }
+                    
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('actualizarclaveerror', "Ha ocurrido un error al actualizar la clave", '?controller=AdministradorController&action=cambiarClave');
+                }
             }
         }
     }

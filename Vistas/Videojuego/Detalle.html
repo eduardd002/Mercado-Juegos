@@ -20,6 +20,20 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardarcomentarioacierto'); ?>
 
+    <?php if(isset($_SESSION['eliminarcomentarioerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['eliminarcomentarioerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('eliminarcomentarioerror'); ?>
+
+    <?php if(isset($_SESSION['eliminarcomentarioacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['eliminarcomentarioacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('eliminarcomentarioacierto'); ?>
+
     <div class="detalleVideojuego">
         <div id="favoritoDetalle">
             <a href="<?=rutaInicio?><?=favorito?><?=guardarFavorito?>&idVideojuego=<?=$videojuegoEspecifico['videojuego']['idVideojuego']?>"><img src="Recursos/Logotipos/estrella.png" alt="Logo favorito"></a>
@@ -62,7 +76,7 @@
                 <h3><?=$comentarios -> nombreComentador?></h3>
                 <h4><?=Ayudas::desencriptarContenido($comentarios -> contenidoComentario)?></h4>
                 <h5><?=$comentarios -> fechaCreacionComentario?> - <?=$comentarios -> horaCreacionComentario?></h5>
-                <a href="">Eliminar</a>
+                <a href="<?=rutaInicio?><?=comentario?><?=eliminarComentario?>&idComentario=<?=$comentarios -> idComentario?>&idVideojuego=<?=$videojuegoEspecifico['videojuego']['idVideojuego']?>">Eliminar</a>
             </div>
         </div>
     <?php endwhile; ?>

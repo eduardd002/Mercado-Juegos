@@ -168,7 +168,6 @@
 
         public function login(){
 
-
             //Construir la consulta
             $consulta = "SELECT DISTINCT * FROM usuarios WHERE correo = '{$this -> getCorreo()}' AND activo = 1";
             $clave = $this -> traerClave($this -> getCorreo());
@@ -252,6 +251,24 @@
                 $consulta .= ",foto = '{$this -> getFoto()}'";
             }
             $consulta .= "WHERE id = {$this -> getId()}";
+            //Ejecutar la consulta
+            $actualizado = $this -> db -> query($consulta);
+            //Crear bandera
+            $bandera = false;
+            //Comprobar si la consulta se realizo exitosamente
+            if($actualizado && mysqli_affected_rows($this -> db) > 0){
+                $bandera = true;
+            }
+            //Retorno el resultado
+            return $bandera;
+        }
+
+        public function actualizarClave(){
+            $clave = $this -> getClave();
+            $claveSegura = password_hash($clave, PASSWORD_BCRYPT, ['cost'=>4]);
+            //Construir la consulta
+            $consulta = "UPDATE usuarios SET clave = '{$claveSegura}' 
+                WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $actualizado = $this -> db -> query($consulta);
             //Crear bandera

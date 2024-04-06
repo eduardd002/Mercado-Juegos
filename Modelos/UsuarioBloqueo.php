@@ -107,7 +107,7 @@
 
         public function guardar(){
             //Construir la consulta
-            $consulta = "INSERT INTO usuariobloqueo VALUES(NULL, {$this -> getIdBloqueador()}, 
+            $consulta = "INSERT INTO usuariobloqueo VALUES(NULL, {$this -> getActivo()}, {$this -> getIdBloqueador()}, 
                 {$this -> getIdBloqueado()}, {$this -> getIdBloqueo()})";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
@@ -127,7 +127,7 @@
                 FROM UsuarioBloqueo ub
                 INNER JOIN Usuarios u ON u.id = ub.idBloqueado
                 INNER JOIN Bloqueos b ON b.id = ub.id
-                WHERE ub.idBloqueador = {$this -> getIdBloqueador()}";
+                WHERE ub.idBloqueador = {$this -> getIdBloqueador()} AND b.activo = 1";
                 //Ejecutar la consulta
                 $lista = $this -> db -> query($consulta);
                 //Retornar el resultado

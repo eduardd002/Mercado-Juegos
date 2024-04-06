@@ -69,11 +69,11 @@
         }
 
         public function obtenerComentariosDeVideojuego(){
-            $consulta = "SELECT DISTINCT c.contenido AS 'contenidoComentario', u.nombre AS 'nombreComentador', u.foto AS 'fotoComentador', c.fechaCreacion AS 'fechaCreacionComentario', c.horaCreacion AS 'horaCreacionComentario'
+            $consulta = "SELECT DISTINCT c.contenido AS 'contenidoComentario', u.nombre AS 'nombreComentador', u.foto AS 'fotoComentador', c.fechaCreacion AS 'fechaCreacionComentario', c.horaCreacion AS 'horaCreacionComentario', c.id AS 'idComentario'
             FROM Comentarios c
             INNER JOIN Usuarios u ON u.id = c.idUsuario
             INNER JOIN ComentarioVideojuego cv ON cv.idComentario = c.id
-            WHERE cv.idVideojuego = {$this -> getIdVideojuego()}";
+            WHERE cv.idVideojuego = {$this -> getIdVideojuego()} AND c.activo = 1";
             //Ejecutar la consulta
             $lista = $this -> db -> query($consulta);
             //Retornar el resultado

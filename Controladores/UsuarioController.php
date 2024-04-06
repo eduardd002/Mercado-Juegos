@@ -27,6 +27,12 @@
             require_once "Vistas/Usuario/Login.html";
         }
 
+        public function cambiarClave(){
+
+            //Incluir la vista
+            require_once "Vistas/Usuario/CambiarClave.html";
+        }
+
         /*
         Funcion para realizar el registro del usuario
         */
@@ -420,6 +426,64 @@
             $listaVideojuegos = $usuarioVideojuego -> obtenerVideojuegosCreadosPorUsuario();
             //Incluir la vista
             require_once "Vistas/Usuario/Videojuegos.html";
+        }
+
+        public function comprobarClaves($actual){
+
+            $usuario = new Usuario();
+            $correo = $_SESSION['loginexitoso'] -> correo;
+            $claveUsuario = $usuario -> traerClave($correo);
+            $alho = password_verify($actual, $claveUsuario -> clave);
+            if($alho){
+                return true;
+            }
+
+        }
+
+        public function actualizarNuevaClave($clave){
+
+            //Instanciar el objeto
+            $usuario = new Usuario();
+            //Crear objeto
+            $usuario -> setId($_SESSION['loginexitoso'] -> id);
+            $usuario -> setClave($clave);
+            //Ejecutar la consulta
+            $actualizado = $usuario -> actualizarClave();
+            return $actualizado;
+        }
+
+        public function actualizarClave(){
+            
+            //Comprobar si los datos están llegando
+            if(isset($_POST)){
+
+                $actual = isset($_POST['passwordactual']) ? $_POST['passwordactual'] : false;
+                $nueva = isset($_POST['passwordnueva']) ? $_POST['passwordnueva'] : false;
+
+                //Si el dato existe
+                if($actual && $nueva){
+                    $seguta = Ayudas::comprobarContrasenia($nueva);
+                    if($seguta){
+                        if($this -> comprobarClaves($actual)){
+                            $actualizada = $this -> actualizarNuevaClave($nueva);
+                            if($actualizada){
+                                Ayudas::crearSesionYRedirigir('actualizarclaveacierto', "La clave ha sido actualizada con exito", '?controller=UsuarioController&action=cambiarClave');
+                            }else{
+                                Ayudas::crearSesionYRedirigir('actualizarclaveerror', "La clave no ha sido actualizada con exito", '?controller=UsuarioController&action=cambiarClave');
+                            }
+                        }else{
+                            Ayudas::crearSesionYRedirigir('actualizarclaveerror', "Clave actual incorrecta", '?controller=UsuarioController&action=cambiarClave');
+                        }
+                    }else{
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('actualizarclaveerror', "Clave poco segura", '?controller=UsuarioController&action=cambiarClave');
+                    }
+                    
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('actualizarclaveerror', "Ha ocurrido un error al actualizar la clave", '?controller=UsuarioController&action=cambiarClave');
+                }
+            }
         }
 
     }

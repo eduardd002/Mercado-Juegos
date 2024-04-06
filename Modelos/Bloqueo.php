@@ -13,9 +13,6 @@
             $this -> db = BaseDeDatos::connect();
         }
 
-        
-
-
         /**
          * Get the value of id
          */ 
@@ -108,7 +105,7 @@
 
         public function guardar(){
             //Construir la consulta
-            $consulta = "INSERT INTO bloqueos VALUES(NULL, '{$this -> getMotivo()}', 
+            $consulta = "INSERT INTO bloqueos VALUES(NULL, {$this -> getActivo()}, '{$this -> getMotivo()}',
             '{$this -> getFecha()}', '{$this -> getHora()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
@@ -141,7 +138,8 @@
                 FROM usuarioBloqueo ub
                 INNER JOIN Bloqueos b ON b.id = ub.idBloqueo
                 INNER JOIN Usuarios ubr ON ubr.id = ub.idBloqueador
-                INNER JOIN Usuarios ubo ON ubo.id = ub.idBloqueado";
+                INNER JOIN Usuarios ubo ON ubo.id = ub.idBloqueado
+                WHERE b.activo = 1";
                 //Ejecutar la consulta
                 $resultado = $this -> db -> query($consulta);
                 //Retornar el resultado
@@ -149,7 +147,7 @@
         }
 
         public function eliminar(){
-                $consulta = "UPDATE bloqueos WHERE id = {$this -> getId()}";
+                $consulta = "UPDATE bloqueos SET activo = 0 WHERE id = {$this -> getId()}";
                 $eliminado = $this -> db -> query($consulta);
                 //Crear bandera
                 $bandera = false;

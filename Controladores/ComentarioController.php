@@ -106,6 +106,56 @@
                 }
             }
         }
+
+        /*
+        Funcion para eliminar un usuario
+        */
+
+        public function eliminarComentario($idComentario){
+
+            //Instanciar el objeto
+            $comentario = new Comentario();
+            //Crear objeto
+            $comentario -> setId($idComentario);
+            //Ejecutar la consulta
+            $eliminado = $comentario -> eliminar();
+            //Retornar el resultado
+            return $eliminado;
+        }
+
+        /*
+        Funcion para eliminar un usuario desde el administrador
+        */
+
+        public function eliminar(){
+            
+            //Comprobar si los datos están llegando
+            if(isset($_GET)){
+
+                //Comprobar si el dato existe
+                $idComentario = isset($_GET['idComentario']) ? $_GET['idComentario'] : false;
+                $idVideojuego = isset($_GET['idVideojuego']) ? $_GET['idVideojuego'] : false;
+
+                //Si el dato existe
+                if($idComentario && $idVideojuego){
+
+                    //Ejecutar la consulta
+                    $eliminado = $this -> eliminarComentario($idComentario);
+
+                    //Comprobar si el usuario ha sido eliminado
+                    if($eliminado){
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('eliminarcomentarioacierto', "El comentario ha sido eliminado exitosamente", '?controller=VideojuegoController&action=detalle&id='.$idVideojuego);
+                    }else{
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('eliminarcomentarioerror', "El comentario no ha sido eliminado exitosamente", '?controller=VideojuegoController&action=detalle&id='.$idVideojuego);
+                    }
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('eliminarcomentarioerror', "Ha ocurrido un error al eliminar el comentario", '?controller=VideojuegoController&action=detalle&id='.$idVideojuego);
+                }
+            }
+        }
     }
 
 ?>

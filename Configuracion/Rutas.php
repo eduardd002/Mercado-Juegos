@@ -16,6 +16,8 @@
     define("videojuegos", "&action=videojuegos");
     define("eliminarUsuario", "&action=eliminar");
     define("actualizarUsuario", "&action=actualizar");
+    define("cambiarClave", "&action=cambiarClave");
+    define("actualizarClave", "&action=actualizarClave");
 
     define("videojuego", "/?controller=VideojuegoController");
     define("inicio", "&action=inicio");
@@ -104,6 +106,7 @@
 
     define("comentario", "/?controller=ComentarioController");
     define("guardarComentario", "&action=guardar");
+    define("eliminarComentario", "&action=eliminar");
 
     define("bloqueo", "/?controller=BloqueoController");
     define("bloquear", "&action=bloquear");

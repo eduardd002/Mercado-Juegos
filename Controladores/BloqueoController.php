@@ -7,6 +7,19 @@
 
     class BloqueoController{
 
+        public function bloqueos(){
+
+            //Instanciar el objeto
+            $usuarioBloqueo = new UsuarioBloqueo();
+            //Construir el objeto
+            $usuarioBloqueo -> setIdBloqueador($_SESSION['loginexitoso'] -> id);
+            //Listar todos los usuarios desde la base de datos
+            $listadoBloqueos = $usuarioBloqueo -> obtenerBloqueosPorUsuario();
+
+            //Incluir la vista
+            require_once "Vistas/Usuario/Bloqueos.html";
+        }
+
         public function bloquear(){
 
             //Comprobar si los datos están llegando
@@ -34,8 +47,10 @@
                 $bloqueo -> setId($idBloqueo);
                 $desbloqueo = $bloqueo -> eliminar();
 
-                //Incluir la vista
-                require_once 'Vistas/Usuario/Bloqueos.html';
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir("guardardesbloqueoacierto", "El desbloqueo ha sido guardado con exito", "?controller=UsuarioController&action=bloqueos");
+
+                $this -> bloqueos();
             }
         }
 
@@ -81,6 +96,7 @@
             //Instanciar el objeto
             $usuarioBloqueo = new UsuarioBloqueo();
             //Crear el objeto
+            $usuarioBloqueo -> setActivo(1);
             $usuarioBloqueo -> setIdBloqueador($_SESSION['loginexitoso'] -> id);
             $usuarioBloqueo -> setIdBloqueado($idUsuarioABloquear);
             $usuarioBloqueo -> setIdBloqueo($this -> obtenerUltimoBloqueo());

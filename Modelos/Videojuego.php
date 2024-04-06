@@ -217,7 +217,7 @@
 
         public function ultimo(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT id FROM videojuegos WHERE activo = 1 ORDER BY id DESC LIMIT 1";
+            $consulta = "SELECT DISTINCT id FROM videojuegos ORDER BY id DESC LIMIT 1";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Obtener el resultado del objeto
@@ -275,7 +275,7 @@
             $consulta = "SELECT DISTINCT v.* 
             FROM videojuegocategoria cv
             INNER JOIN videojuegos v ON v.id = cv.idVideojuego
-            INNER JOIN categorias c ON c.id = cv.idCategoria
+            INNER JOIN categorias c ON c.id = cv.idCategoria 
             WHERE v.activo = 1";
             // Array para almacenar las condiciones de filtro
             $condiciones = [];
@@ -307,7 +307,7 @@
             
             // Si hay condiciones, agregar la cláusula WHERE
             if (!empty($condiciones)) {
-                $consulta .= " WHERE " . implode(" AND ", $condiciones);
+                $consulta .= " AND " . implode(" AND ", $condiciones);
             }
             
             // Ejecutar la consulta
