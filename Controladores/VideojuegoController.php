@@ -37,12 +37,12 @@
             }else{
                 //Instanciar el objeto
                 $usuarioVideojuego = new UsuarioVideojuego();
-                //Traer el listado de algunos videojuegos
-                $listadoAlgunos = $usuarioVideojuego -> listarAlgunos();
                 //Traer el listado de todos los videojuegos
                 if(isset($_SESSION['loginexitoso'])){
                     $usuarioVideojuego -> setIdUsuario($_SESSION['loginexitoso'] -> id);
                 }
+                //Traer el listado de algunos videojuegos
+                $listadoAlgunos = $usuarioVideojuego -> listarAlgunos();
                 $listadoTodos = $usuarioVideojuego -> listarTodos();
                 //Incluir la vista
                 require_once 'Vistas/Layout/Catalogo.html';
@@ -488,7 +488,9 @@
             //Instaciar el objeto
             $usuarioVideojuego = new UsuarioVideojuego();
             //Traer los datos de la consulta
-            $usuarioVideojuego -> setIdUsuario($_SESSION['loginexitoso'] -> id);
+            if(isset($_SESSION['loginexitoso'])){
+                $usuarioVideojuego -> setIdUsuario($_SESSION['loginexitoso'] -> id);
+            }
             $listadoTodos = $usuarioVideojuego -> listarTodos();
             //Incluir la vista
             require_once 'Vistas/Videojuego/Todos.html';
