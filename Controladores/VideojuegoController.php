@@ -36,11 +36,14 @@
                 require_once 'Vistas/Administrador/Inicio.html';
             }else{
                 //Instanciar el objeto
-                $videojuego = new Videojuego();
+                $usuarioVideojuego = new UsuarioVideojuego();
                 //Traer el listado de algunos videojuegos
-                $listadoAlgunos = $videojuego -> listarAlgunos();
+                $listadoAlgunos = $usuarioVideojuego -> listarAlgunos();
                 //Traer el listado de todos los videojuegos
-                $listadoTodos = $videojuego -> listarTodos();
+                if(isset($_SESSION['loginexitoso'])){
+                    $usuarioVideojuego -> setIdUsuario($_SESSION['loginexitoso'] -> id);
+                }
+                $listadoTodos = $usuarioVideojuego -> listarTodos();
                 //Incluir la vista
                 require_once 'Vistas/Layout/Catalogo.html';
             }
@@ -483,9 +486,10 @@
         public function todos(){
 
             //Instaciar el objeto
-            $videojuego = new Videojuego();
+            $usuarioVideojuego = new UsuarioVideojuego();
             //Traer los datos de la consulta
-            $listadoTodos = $videojuego -> listarTodos();
+            $usuarioVideojuego -> setIdUsuario($_SESSION['loginexitoso'] -> id);
+            $listadoTodos = $usuarioVideojuego -> listarTodos();
             //Incluir la vista
             require_once 'Vistas/Videojuego/Todos.html';
         }

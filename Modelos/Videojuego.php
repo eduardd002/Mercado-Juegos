@@ -244,30 +244,20 @@
             return $bandera;
         }
 
-        /*
-        Funcion para listar todos los videojuegos
-        */
+        public function actualizarStock(){
 
-        public function listarTodos(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM videojuegos WHERE activo = 1 ORDER BY id DESC";
+            $consulta = "UPDATE videojuegos SET stock = {$this -> getStock()} WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
-            $resultado = $this -> db -> query($consulta);
-            //Retornar resultado
-            return $resultado;
-        }
-
-        /*
-        Funcion para listar algunos de los videojuegos, en concreto 6
-        */
-
-        public function listarAlgunos(){
-            //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM videojuegos WHERE activo = 1 ORDER BY RAND() LIMIT 6";
-            //Ejecutar la consulta
-            $resultado = $this -> db -> query($consulta);
-            //Retornar resultado
-            return $resultado;
+            $actualizado = $this -> db -> query($consulta);
+            //Crear bandera
+            $bandera = false;
+            //Comprobar si la consulta se realizo exitosamente
+            if($actualizado){
+                $bandera = true;
+            }
+            //Retorno el resultado
+            return $bandera;
         }
 
         public function filtro($minimo, $maximo, $idCategoria){

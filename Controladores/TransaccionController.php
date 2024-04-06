@@ -31,6 +31,8 @@
     //Incluir el objeto de usuario videojuego
     require_once 'Modelos/UsuarioVideojuego.php';
 
+    require_once 'Modelos/Videojuego.php';
+
     class TransaccionController{
 
         /*
@@ -307,7 +309,7 @@
 
                                 //Guardar usuario chat
                                 $this -> guardarUsuarioChat($this -> traerDuenioDeVideojuego($idVideojuego));
-
+                                $this -> actualizarStock($idVideojuego, $unidades);
                                 //Redirigir al menu de direccion y pago
                                 header("Location:"."http://localhost/Mercado-Juegos/?controller=TransaccionController&action=exito");
                                 
@@ -423,6 +425,16 @@
                 //Crear la sesion y redirigir a la ruta pertinente
                 Ayudas::crearSesionYRedirigir("verVentaError", "Ha ocurrido un error al ver el detalle de la venta", "?controller=VideojuegoController&action=inicio");
             }
+        }
+
+        public function actualizarStock($id, $unidadesCompradas){
+            $videojuegoUnico = Ayudas::obtenerVideojuegoEnConcreto($id);
+            $stockActual = $videojuegoUnico['videojuego']['stockVideojuego'];
+
+            $videojuego = new Videojuego();
+            $videojuego -> setId($id);
+            $videojuego -> setStock($stockActual - $unidadesCompradas);
+            $videojuego -> actualizarStock();
         }
     }
 

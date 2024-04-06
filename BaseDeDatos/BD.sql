@@ -409,7 +409,6 @@ CREATE TABLE usuariobloqueo (
     idBloqueado  INTEGER NOT NULL,
     idBloqueo  INTEGER NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT uq_blr_blo UNIQUE (idBloqueador, idBloqueado),
     CONSTRAINT usuariobloqueo_id PRIMARY KEY ( id ),
     CONSTRAINT usuariobloqueo_bloqueo FOREIGN KEY ( idBloqueo ) REFERENCES bloqueos ( id ),
     CONSTRAINT usuariobloqueo_bloqueador FOREIGN KEY ( idBloqueador ) REFERENCES usuarios ( id ),

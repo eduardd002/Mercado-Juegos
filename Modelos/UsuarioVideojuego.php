@@ -168,6 +168,57 @@
             // Retornar la información del usuario y sus videojuegos
             return $resultado;
         }
+        
+        /*
+        Funcion para listar algunos de los videojuegos, en concreto 6
+        */
+
+        public function listarAlgunos(){
+            //Construir la consulta
+            $consulta = "SELECT v.*
+                FROM usuariovideojuego uv
+                INNER JOIN videojuegos v ON v.id = uv.idVideojuego
+                EXCEPT
+                SELECT v.*
+                FROM usuariovideojuego uv
+                INNER JOIN videojuegos v ON v.id = uv.idVideojuego
+                INNER JOIN usuariobloqueo ub ON ub.idBloqueado = uv.idUsuario
+                INNER JOIN bloqueos b ON b.id = ub.idBloqueo
+                WHERE v.activo = 1 ";
+                if($this -> getIdUsuario() != null){
+                    $consulta .= "AND ub.idBloqueador = {$this -> getIdUsuario()}" ;
+                }
+            $consulta .= "ORDER BY RAND() LIMIT 6";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Retornar resultado
+            return $resultado;
+        }
+
+        /*
+        Funcion para listar todos los videojuegos
+        */
+
+        public function listarTodos(){
+            //Construir la consulta
+            $consulta = "SELECT v.*
+                FROM usuariovideojuego uv
+                INNER JOIN videojuegos v ON v.id = uv.idVideojuego
+                EXCEPT
+                SELECT v.*
+                FROM usuariovideojuego uv
+                INNER JOIN videojuegos v ON v.id = uv.idVideojuego
+                INNER JOIN usuariobloqueo ub ON ub.idBloqueado = uv.idUsuario
+                INNER JOIN bloqueos b ON b.id = ub.idBloqueo
+                WHERE v.activo = 1 ";
+                if($this -> getIdUsuario() != null){
+                    $consulta .= "AND ub.idBloqueador = {$this -> getIdUsuario()}";
+                }
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Retornar resultado
+            return $resultado;
+        }
     }
 
 ?>

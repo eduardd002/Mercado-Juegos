@@ -1124,6 +1124,21 @@ Estilo del tipo de consola del videojuego del detalle del videojuego
 }
 
 /*
+Estilo de texto cuando no hay stock disponible
+*/
+
+.detalleVideojuego #stockNoDisponible{
+    /*Color de letra*/
+    color: red;
+    /*Margen superior*/
+    margin-top: 60px;
+    /*Margen inferior*/
+    margin-bottom: 200px;
+    /*Tamaño de letra*/
+    font-size: 30px;
+}
+
+/*
 Estilo del tipo de categoria del videojuego del detalle del videojuego
 */
 
