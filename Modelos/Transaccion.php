@@ -367,13 +367,14 @@
         }
 
         public function detalleCompra(){
-            $consulta = "SELECT DISTINCT t.nombreVendedor AS 'nombreVendedor', t.apellidoVendedor AS 'apellidoVendedor', t.telefonoVendedor AS 'telefonoVendedor', t.correoVendedor AS 'correoVendedor', t.departamento AS 'departamentoEnvio', t.municipio AS 'municipioEnvio', t.codigoPostal AS 'codigoPostalEnvio', t.direccion AS 'direccionEnvio', t.barrio AS 'barrioEnvio', tt.nombre AS 'tipoTarjetaPago', p.numeroTarjeta AS 'numeroTarjetaPago', te.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.nombre AS 'nombreVideojuegoCompra', u.nombre AS 'usoVideojuegoCompra', c.nombre AS 'consolaVideojuegoCompra', v.precio AS 'precioVideojuegoCompra', t.numeroFactura AS 'factura', tv.unidades AS 'unidadesCompra'
+            $consulta = "SELECT DISTINCT t.nombreVendedor AS 'nombreVendedor', t.apellidoVendedor AS 'apellidoVendedor', t.telefonoVendedor AS 'telefonoVendedor', t.correoVendedor AS 'correoVendedor', t.departamento AS 'departamentoEnvio', t.municipio AS 'municipioEnvio', t.codigoPostal AS 'codigoPostalEnvio', t.direccion AS 'direccionEnvio', t.barrio AS 'barrioEnvio', tt.nombre AS 'tipoTarjetaPago', p.numeroTarjeta AS 'numeroTarjetaPago', e.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.nombre AS 'nombreVideojuegoCompra', u.nombre AS 'usoVideojuegoCompra', c.nombre AS 'consolaVideojuegoCompra', v.precio AS 'precioVideojuegoCompra', t.numeroFactura AS 'factura', tv.unidades AS 'unidadesCompra', e.nombre AS 'estadoCompra'
                 FROM TransaccionVideojuego tv
                 INNER JOIN Transacciones t ON t.id = tv.idTransaccion
                 INNER JOIN Videojuegos v ON v.id = tv.idVideojuego
                 INNER JOIN Consolas c ON c.id = v.idConsola
                 INNER JOIN Usos u ON u.id = v.idUso
                 INNER JOIN Pagos p ON p.id = t.idPago
+                INNER JOIN Estados e ON e.id = t.idEstado
                 INNER JOIN Tarjetas tt ON p.idTarjeta = tt.id
                 INNER JOIN Estados te ON t.idEstado = te.id
                 WHERE t.numeroFactura = {$this -> getNumeroFactura()}";
@@ -405,6 +406,7 @@
                         'tipoEstadoTransaccion' => $fila->tipoEstadoTransaccion,
                         'unidadesCompra' => $fila->unidadesCompra,
                         'totalTransaccion' => $fila->totalTransaccion,
+                        'estadoCompra' => $fila->estadoCompra,
                         'videojuegos' => array() // Inicializar un array para almacenar los videojuegos del usuario
                     );
                 }
@@ -423,7 +425,7 @@
         }   
         
         public function detalleVenta(){
-            $consulta = "SELECT DISTINCT t.nombreComprador AS 'nombreComprador', t.apellidoComprador AS 'apellidoComprador', t.telefonoComprador AS 'telefonoComprador', t.correoComprador AS 'correoComprador', t.departamento AS 'departamentoEnvio', t.municipio AS 'municipioEnvio', t.codigoPostal AS 'codigoPostalEnvio', t.direccion AS 'direccionEnvio', t.barrio AS 'barrioEnvio', tt.nombre AS 'tipoTarjetaPago', p.numeroTarjeta AS 'numeroTarjetaPago', te.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.foto AS 'imagenVideojuego', tv.unidades AS 'unidadesCompra', v.precio AS 'precioVideojuegoVenta'
+            $consulta = "SELECT DISTINCT t.nombreComprador AS 'nombreComprador', t.apellidoComprador AS 'apellidoComprador', t.telefonoComprador AS 'telefonoComprador', t.correoComprador AS 'correoComprador', t.departamento AS 'departamentoEnvio', t.municipio AS 'municipioEnvio', t.codigoPostal AS 'codigoPostalEnvio', t.direccion AS 'direccionEnvio', t.barrio AS 'barrioEnvio', tt.nombre AS 'tipoTarjetaPago', p.numeroTarjeta AS 'numeroTarjetaPago', te.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.foto AS 'imagenVideojuego', tv.unidades AS 'unidadesCompra', v.precio AS 'precioVideojuegoVenta', t.numeroFactura AS 'facturaVenta', t.id AS 'idTransaccion', te.nombre AS 'estadoNombre'
                 FROM TransaccionVideojuego tv
                 INNER JOIN Transacciones t ON t.id = tv.idTransaccion
                 INNER JOIN Videojuegos v ON v.id = tv.idVideojuego
@@ -444,6 +446,8 @@
                 if (!isset($informacionVenta['venta'])) {
                     // Si no se ha almacenado, almacenar la información del usuario
                     $informacionVenta['venta'] = array(
+                        'facturaVenta' => $fila->facturaVenta,
+                        'idTransaccion' => $fila->idTransaccion,
                         'nombreComprador' => $fila->nombreComprador,
                         'apellidoComprador' => $fila->apellidoComprador,
                         'telefonoComprador' => $fila->telefonoComprador,
@@ -458,6 +462,7 @@
                         'tipoEstadoTransaccion' => $fila->tipoEstadoTransaccion,
                         'unidadesCompra' => $fila->unidadesCompra,
                         'totalTransaccion' => $fila->totalTransaccion,
+                        'estadoNombre' => $fila->estadoNombre,
                         'videojuegos' => array() // Inicializar un array para almacenar los videojuegos del usuario
                     );
                 }
@@ -472,6 +477,22 @@
             // Retornar la información del usuario y sus videojuegos
             return $informacionVenta;
         }   
+
+        public function cambiarEstado(){
+            //Construir la consulta
+            $consulta = "UPDATE transacciones SET idEstado = {$this -> getIdEstado()} 
+            WHERE id = {$this -> getId()}";
+            //Ejecutar la consulta
+            $actualizado = $this -> db -> query($consulta);
+            //Crear bandera
+            $bandera = false;
+            //Comprobar si la consulta se realizo exitosamente
+            if($actualizado && mysqli_affected_rows($this -> db) > 0){
+                $bandera = true;
+            }
+            //Retorno el resultado
+            return $bandera;
+        }
     }
 
 ?>

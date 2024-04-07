@@ -35,6 +35,48 @@
 
     class TransaccionController{
 
+        public function editarEstado($id, $estado){
+
+            //Instanciar el objeto
+            $transaccion = new Transaccion();
+            //Crear objeto
+            $transaccion -> setId($id);
+            $transaccion -> setIdEstado($estado);
+            //Ejecutar la consulta
+            $actualizado = $transaccion -> cambiarEstado();
+            return $actualizado;
+        }
+
+        public function cambiarEstado(){
+
+            //Comprobar si los datos están llegando
+            if(isset($_GET) && isset($_POST)){
+
+                //Comprobar si los datos existe
+                $id = isset($_GET['id']) ? $_GET['id'] : false;
+                $idEstado = isset($_POST['estado']) ? $_POST['estado'] : false;
+
+                //Si el dato existe
+                if($id && $idEstado){
+
+                    //Llamar la funcion de actualizar
+                    $actualizado = $this -> editarEstado($id, $idEstado);
+                    $factura = $id + 999;
+
+                    if($actualizado){
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('actualizarestadoacierto', "Estado actualizado con exito", '?controller=TransaccionController&action=verVenta&factura='.$factura);
+                    }else{
+                        //Crear la sesion y redirigir a la ruta pertinente
+                        Ayudas::crearSesionYRedirigir('actualizarestadosugerencia', "Agrega un nuevo estado", '?controller=TransaccionController&action=verVenta&factura='.$factura);
+                    }
+                }else{
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir('actualizarestadoerror', "Ha ocurrido un error al actualizar el estado de la transaccion", '?controller=UsuarioController&action=ventas');
+                }
+            }
+        }
+
         /*
         Funcion para ver el formulario de direccion y compra al comprar un videojuego
         */
@@ -246,6 +288,7 @@
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
             $usuarioChat -> setIdDestinatario($destinatario);
             $usuarioChat -> setIdChat($this -> obtenerUltimoChat());
+            $usuarioChat -> setIdMensaje(null);
             //Guardar en la base de datos el primer objeto
             $guardado = $usuarioChat -> guardar();
             //Retonar el resultado
@@ -301,6 +344,7 @@
                         //Comprobar si la transaccion videojueo se guardo con exito
                         if($guardadoTransaccionVideojuego){
 
+                            $this -> actualizarStock($idVideojuego, $unidades);
                             //Guardar el chat
                             $guardadoChat = $this -> guardarChat();
 
@@ -309,7 +353,6 @@
 
                                 //Guardar usuario chat
                                 $this -> guardarUsuarioChat($this -> traerDuenioDeVideojuego($idVideojuego));
-                                $this -> actualizarStock($idVideojuego, $unidades);
                                 //Redirigir al menu de direccion y pago
                                 header("Location:"."http://localhost/Mercado-Juegos/?controller=TransaccionController&action=exito");
                                 

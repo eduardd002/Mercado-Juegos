@@ -47,6 +47,7 @@
     define("direccionYPago", "&action=direccionYPago");
     define("pago", "&action=pago");
     define("realizar", "&action=exito");
+    define("cambiarEstado", "&action=cambiarEstado");
     define("generarPdf", "&action=generarPdf");
 
     define("administrador", "/?controller=AdministradorController");

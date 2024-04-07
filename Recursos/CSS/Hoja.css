@@ -1641,6 +1641,20 @@ Estilo del campo de total en mis compras y ventas
 */
 
 #detalleCompraYVenta h4{
+    font-size: 23px;
+    color: green;
+    /*Margen superior*/
+    margin-top: 15px;
+    /*Margen inferior*/
+    margin-bottom: 35px;
+}
+
+/*
+Estilo del texto de la tarjeta del videojuego en detalle venta
+*/
+
+#detalleCompraYVenta h6{
+    font-size: 17px;
     /*Margen superior*/
     margin-top: 15px;
     /*Margen inferior*/
@@ -2776,4 +2790,8 @@ Estilo de la imagen de elemento no encontrado
     margin-bottom: 50px !important;
     width: 125px !important;
     height: 125px !important;
+}
+
+#detalleCompraYVenta select{
+    margin-bottom: 50px;
 }

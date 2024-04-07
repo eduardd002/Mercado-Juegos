@@ -7,6 +7,7 @@
         private $idRemitente;
         private $idDestinatario;
         private $idChat;
+        private $idMensaje;
         private $db;
 
         public function __construct(){
@@ -58,6 +59,27 @@
             return $this;
         }
 
+        
+        /**
+         * Get the value of idMensaje
+         */ 
+        public function getIdMensaje()
+        {
+                return $this->idMensaje;
+        }
+
+        /**
+         * Set the value of idMensaje
+         *
+         * @return  self
+         */ 
+        public function setIdMensaje($idMensaje)
+        {
+                $this->idMensaje = $idMensaje;
+
+                return $this;
+        }
+
         /*
         Funcion para guardar el usuario chat en la base de datos
         */
@@ -65,7 +87,11 @@
         public function guardar(){
             //Construir la consulta
             $consulta = "INSERT INTO usuariochat VALUES (NULL, {$this -> getActivo()}, {$this -> getIdRemitente()}, 
-                {$this -> getIdDestinatario()}, {$this -> getIdChat()})";
+                {$this -> getIdDestinatario()}, {$this -> getIdChat()}";
+                if($this -> getIdMensaje() == null){
+                    $consulta .= ", NULL";
+                }
+                $consulta .= ")";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera

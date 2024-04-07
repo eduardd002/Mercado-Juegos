@@ -1,4 +1,26 @@
-<div id="contenidoCentral">      
+<div id="contenidoCentral">   
+    
+    <?php if(isset($_SESSION['actualizarestadoacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['actualizarestadoacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizarestadoacierto'); ?>
+
+    <?php if(isset($_SESSION['actualizarestadosugerencia'])) : ?>
+    <div class="alerta alerta-sugerencia">
+        <?=$_SESSION['actualizarestadosugerencia']; ?>
+    </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizarestadosugerencia'); ?>
+
+    <?php if(isset($_SESSION['actualizarestadoerror'])) : ?>
+    <div class="alerta alerta-error">
+        <?=$_SESSION['actualizarestadoerror']; ?>
+    </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizarestadoerror'); ?>
+
     <div id="detalleCompraYVenta">
         <h1>Detalle de la venta</h1>
         <h3>Detalles del comprador</h3>
@@ -16,20 +38,24 @@
         <h5>Tipo de tarjeta: <?=$detalle['venta']['tipoTarjetaPago']?></h5>
         <h5>Numero de tarjeta: <?=$detalle['venta']['numeroTarjetaPago']?></h5>
         <h3>Detalles del estado</h3>
-        <label for="estado">Estado</label>
-        <select name="estado" id="estado">
-            <?php while($estados = $listadoEstados -> fetch_object()) : ?>
-                <option value="<?=$estados -> nombre?>"><?=$estados -> nombre?></option>
-            <?php endwhile; ?>
-        </select>
-        <a href="<?=rutaInicio?><?=videojuego?><?=detalle?>" class="button button-cambiarEstado">Cambiar Estado</a>
+        <form action="<?=rutaInicio?><?=transaccion?><?=cambiarEstado?>&id=<?=$detalle['venta']['idTransaccion']?>" method="post">
+            <label for="estado">Estado</label>
+            <select name="estado" id="estado">
+                <?php while($estados = $listadoEstados -> fetch_object()) : ?>
+                    <option value="<?= $estados->id ?>" <?=($detalle['venta']['estadoNombre'] == $estados->nombre) ? 'selected' : '' ?>>
+                        <?= $estados->nombre ?>
+                    </option>
+                <?php endwhile; ?>
+            </select>
+            <input type="submit" value="Cambiar Estado">
+        </form>
         <h3>Videojuegos</h3>
         <h4>Precio Total: $ <?=$detalle['venta']['totalTransaccion']?></h4>
         <?php foreach ($detalle['venta']['videojuegos'] as $videojuego) : ?>
             <div class="videojuegoCompraYVenta">
-                <h4>Precio: $ <?=$videojuego['precioVideojuegoVenta']?></h4>
-                <h4>Unidades: <?=$detalle['venta']['unidadesCompra']?></h4>
-                <h4>Total: $ <?=$detalle['venta']['totalTransaccion']?></h4>
+                <h6>Precio: $ <?=$videojuego['precioVideojuegoVenta']?></h6>
+                <h6>Unidades: <?=$detalle['venta']['unidadesCompra']?></h6>
+                <h6>Total: $ <?=$detalle['venta']['totalTransaccion']?></h6>
                 <img src="Recursos/ImagenesVideojuegos/<?=$videojuego['imagenVideojuego']?>" alt="Videojuego">
             </div>
         <?php endforeach; ?>

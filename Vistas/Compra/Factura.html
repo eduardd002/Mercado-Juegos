@@ -17,7 +17,7 @@
         <h5>Tipo de tarjeta: <?=$detalle['compra']['tipoTarjetaPago']?></h5>
         <h5>Numero de tarjeta: <?=$detalle['compra']['numeroTarjetaPago']?></h5>
         <h3>Detalles del estado</h3>
-        <h5>Pendiente</h5>
+        <h5><?=$detalle['compra']['estadoCompra']?></h5>
         <a style="color: white;" href="<?=rutaInicio?><?=transaccion?><?=generarPdf?>&factura=<?=$detalle['compra']['factura']?>" class="button-generarPdf">Generar PDF</a>
         <h3>Videojuegos</h3>
         <div id="factura">
