@@ -43,6 +43,10 @@
                 //Obtener el usuario a bloquear
                 $idBloqueo = $_GET['idBloqueo'];
 
+                $desbloqueoUsuarioVideojuego = new UsuarioBloqueo();
+                $desbloqueoUsuarioVideojuego -> setIdBloqueo($idBloqueo);
+                $desbloqueoVideojuegoUsuario = $desbloqueoUsuarioVideojuego -> eliminar();
+
                 $bloqueo = new Bloqueo();
                 $bloqueo -> setId($idBloqueo);
                 $desbloqueo = $bloqueo -> eliminar();

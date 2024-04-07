@@ -186,7 +186,7 @@
                     INNER JOIN videojuegos v ON v.id = uv.idVideojuego
                     INNER JOIN usuariobloqueo ub ON ub.idBloqueado = uv.idUsuario
                     INNER JOIN bloqueos b ON b.id = ub.idBloqueo
-                    AND ub.idBloqueador = {$this -> getIdUsuario()} ";
+                    AND ub.idBloqueador = {$this -> getIdUsuario()} AND ub.activo = 1 ";
                 }
             $consulta .= "ORDER BY RAND() LIMIT 6";
             //Ejecutar la consulta
@@ -212,7 +212,7 @@
                     INNER JOIN videojuegos v ON v.id = uv.idVideojuego
                     INNER JOIN usuariobloqueo ub ON ub.idBloqueado = uv.idUsuario
                     INNER JOIN bloqueos b ON b.id = ub.idBloqueo
-                    AND ub.idBloqueador = {$this -> getIdUsuario()}";
+                    AND ub.idBloqueador = {$this -> getIdUsuario()} AND ub.activo = 1";
                 }
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);

@@ -440,7 +440,7 @@
                         }
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizaradministradorsugerencia', "El formato de la foto debe ser una imagen", '?controller=AdministradorController&action=miPerfil');
+                        Ayudas::crearSesionYRedirigir('actualizaradministradorerror', "El formato de la foto debe ser una imagen", '?controller=AdministradorController&action=miPerfil');
                     }
                 }else{
                     //Crear la sesion y redirigir a la ruta pertinente

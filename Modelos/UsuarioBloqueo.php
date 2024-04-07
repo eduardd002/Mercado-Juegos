@@ -133,6 +133,19 @@
                 //Retornar el resultado
                 return $lista;
         }
+
+        public function eliminar(){
+                $consulta = "UPDATE usuarioBloqueo SET activo = 0 WHERE idBloqueo = {$this -> getIdBloqueo()}";
+                $eliminado = $this -> db -> query($consulta);
+                //Crear bandera
+                $bandera = false;
+                //Comprobar si la consulta se realizo exitosamente
+                if($eliminado){
+                        $bandera = true;
+                }
+                //Retorno el resultado
+                return $bandera;
+        }
     }
 
 ?>
