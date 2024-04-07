@@ -174,9 +174,14 @@
             //Crear objeto
             $tarjeta -> setId($idTarjeta);
             $tarjeta -> setNombre($nombre);
-            //Ejecutar la consulta
-            $actualizado = $tarjeta -> actualizar();
-            //Retornar el resultado
+            try{
+                //Ejecutar la consulta
+                $actualizado = $tarjeta -> actualizar();
+            }catch(mysqli_sql_exception $excepcion){
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('actualizartarjetaerror', "Este nombre de tarjeta ya existe", '?controller=TarjetaController&action=editar&id='.$idTarjeta);
+                die();
+            }
             return $actualizado;
         }
 
@@ -206,7 +211,7 @@
                         Ayudas::crearSesionYRedirigir('actualizartarjetaacierto', "La tarjeta ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarTarjeta');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizartarjetaerror', "La tarjeta no ha sido actualizada exitosamente", '?controller=TarjetaController&action=editar&id='.$idTarjeta);
+                        Ayudas::crearSesionYRedirigir('actualizartarjetasugerencia', "Introduce nuevos datos", '?controller=TarjetaController&action=editar&id='.$idTarjeta);
                     }
                 }else{
                     //Crear la sesion y redirigir a la ruta pertinente

@@ -1,20 +1,27 @@
 <div id="contenidoCentral">
    <?php if(isset($_SESSION['actualizaradministradoracierto'])) : ?>
-        <div class="alerta alerta-adminAcierto">
+        <div class="alerta alerta-acierto">
             <?=$_SESSION['actualizaradministradoracierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizaradministradoracierto'); ?>
 
     <?php if(isset($_SESSION['actualizaradministradorsugerencia'])) : ?>
-        <div class="alerta alerta-adminSugerencia">
+        <div class="alerta alerta-sugerencia">
             <?=$_SESSION['actualizaradministradorsugerencia']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizaradministradorsugerencia'); ?>
 
+    <?php if(isset($_SESSION['actualizaradministradorerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['actualizaradministradorerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizaradministradorerror'); ?>
+
     <?php if(isset($_SESSION['eliminaradministradorerror'])) : ?>
-        <div class="alerta alerta-adminError">
+        <div class="alerta alerta-error">
             <?=$_SESSION['eliminaradministradorerror']; ?>
         </div>
     <?php endif; ?>

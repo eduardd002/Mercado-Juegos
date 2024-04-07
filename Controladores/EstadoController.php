@@ -177,9 +177,14 @@
             //Crear objeto
             $estado -> setId($idEstado);
             $estado -> setNombre($nombre);
-            //Ejecutar la consulta
-            $actualizado = $estado -> actualizar();
-            //Retornar el resultado
+            try{
+                //Ejecutar la consulta
+                $actualizado = $estado -> actualizar();
+            }catch(mysqli_sql_exception $excepcion){
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('actualizarestadoerror', "Este nombre de estado ya existe", '?controller=EstadoController&action=editar&id='.$idEstado);
+                die();
+            }
             return $actualizado;
         }
 
@@ -209,7 +214,7 @@
                         Ayudas::crearSesionYRedirigir('actualizarestadoacierto', "El estado ha sido actualizado exitosamente", '?controller=AdministradorController&action=gestionarEstado');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizarestadoerror', "El estado no ha sido actualizado exitosamente", '?controller=EstadoController&action=editar&id='.$idEstado);
+                        Ayudas::crearSesionYRedirigir('actualizarestadosugerencia', "Introduce nuevos datos", '?controller=EstadoController&action=editar&id='.$idEstado);
                     }
                 }else{
                     //Crear la sesion y redirigir a la ruta pertinente

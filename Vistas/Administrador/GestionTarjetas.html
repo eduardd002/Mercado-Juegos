@@ -1,39 +1,32 @@
 <div id="contenidoCentral">   
 
     <?php if(isset($_SESSION['guardartarjetaacierto'])) : ?>
-        <div class="alerta alerta-adminAcierto">
+        <div class="alerta alerta-acierto">
             <?=$_SESSION['guardartarjetaacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardartarjetaacierto'); ?>
 
     <?php if(isset($_SESSION['eliminartarjetaacierto'])) : ?>
-        <div class="alerta alerta-adminAcierto">
+        <div class="alerta alerta-acierto">
             <?=$_SESSION['eliminartarjetaacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminartarjetaacierto'); ?>
 
     <?php if(isset($_SESSION['actualizartarjetaacierto'])) : ?>
-        <div class="alerta alerta-adminAcierto">
+        <div class="alerta alerta-acierto">
             <?=$_SESSION['actualizartarjetaacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizartarjetaacierto'); ?>
 
     <?php if(isset($_SESSION['eliminartarjetaerror'])) : ?>
-        <div class="alerta alerta-adminError">
+        <div class="alerta alerta-error">
             <?=$_SESSION['eliminartarjetaerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminartarjetaerror'); ?>
-
-    <?php if(isset($_SESSION['actualizartarjetaerror'])) : ?>
-        <div class="alerta alerta-adminError">
-            <?=$_SESSION['actualizartarjetaerror']; ?>
-        </div>
-    <?php endif; ?>
-    <?php Ayudas::eliminarSesion('actualizartarjetaerror'); ?>
 
     <?php if(mysqli_num_rows($listadoTarjetas) == 0) : ?>
         <h1>No hay tarjetas creadas</h1>

@@ -174,9 +174,14 @@
             //Crear objeto
             $categoria -> setId($idCategoria);
             $categoria -> setNombre($nombre);
-            //Ejecutar la consulta
-            $actualizado = $categoria -> actualizar();
-            //Retornar el resultado
+            try{
+                //Ejecutar la consulta
+                $actualizado = $categoria -> actualizar();
+            }catch(mysqli_sql_exception $excepcion){
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('actualizarcategoriaerror', "Este nombre de categoria ya existe", '?controller=CategoriaController&action=editar&id='.$idCategoria);
+                die();
+            }
             return $actualizado;
         }
 
@@ -206,7 +211,7 @@
                         Ayudas::crearSesionYRedirigir('actualizarcategoriaacierto', "La categoria ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarCategoria');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizarcategoriaerror', "La categoria no ha sido actualizada exitosamente", '?controller=CategoriaController&action=editar&id='.$idCategoria);
+                        Ayudas::crearSesionYRedirigir('actualizarcategoriasugerencia', "Introduce nuevos datos", '?controller=CategoriaController&action=editar&id='.$idCategoria);
                     }
                 }else{
                     //Crear la sesion y redirigir a la ruta pertinente

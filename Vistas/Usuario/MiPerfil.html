@@ -39,7 +39,7 @@
             </div>
             <div id="bloqueTextoRegistro">
                 <label for="telefono">Telefono</label>
-                <input type="number" name="telefono" value="<?=$usuarioUnico -> numeroTelefono?>" required>
+                <input type="number" name="telefono" min="3000000000" max="3999999999" value="<?=$usuarioUnico -> numeroTelefono?>" required>
             </div>
             <input type="file" name="foto" accept="image/*">
             <label class="subirFotoPerfil">*Subir nueva*</label>

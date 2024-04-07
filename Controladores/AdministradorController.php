@@ -393,7 +393,7 @@
                 $actualizado = $administrador -> actualizar();
             }catch(mysqli_sql_exception $excepcion){
                 //Crear la sesion y redirigir a la ruta pertinente
-                Ayudas::crearSesionYRedirigir('actualizarusuarioerror', "Esta direccion de correo ya existe", '?controller=AdministradorController&action=miPerfil');
+                Ayudas::crearSesionYRedirigir('actualizaradministradorerror', "Esta direccion de correo ya existe", '?controller=AdministradorController&action=miPerfil');
                 die();
             }
             return $actualizado;

@@ -119,7 +119,7 @@
             //Crear bandera
             $bandera = false;
             //Comprobar si la consulta se realizo exitosamente
-            if($actualizado){
+            if($actualizado && mysqli_affected_rows($this -> db) > 0){
                 $bandera = true;
             }
             //Retorno el resultado

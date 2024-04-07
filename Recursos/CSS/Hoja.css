@@ -1794,63 +1794,6 @@ Estilo de las alertas de las sesiones flash
 }
 
 /*
-Estilo de las alertas de las sesion acierto en administrador
-*/
-
-.alerta-adminAcierto{
-    /*Flotar hacia la izquierda*/
-    float: left;
-    /*Color de fondo*/
-    background: green;
-    /*Limpiar flotados*/
-    clear: both;
-    /*Comportamiento de bloque*/
-    display: block;
-    /*Anchor*/
-    width: 100%;
-    /*Margen inferior*/
-    margin-bottom: 50px;
-}
-
-/*
-Estilo de las alertas de las sesion error en administrador
-*/
-
-.alerta-adminError{
-    /*Flotar hacia la izquierda*/
-    float: left;
-    /*Color de fondo*/
-    background: red;
-    /*Limpiar flotados*/
-    clear: both;
-    /*Comportamiento de bloque*/
-    display: block;
-    /*Anchor*/
-    width: 100%;
-    /*Margen inferior*/
-    margin-bottom: 50px;
-}
-
-/*
-Estilo de las alertas de las sesion sugerencia en administrador
-*/
-
-.alerta-adminSugerencia{
-    /*Flotar hacia la izquierda*/
-    float: left;
-    /*Color de fondo*/
-    background: orange;
-    /*Limpiar flotados*/
-    clear: both;
-    /*Comportamiento de bloque*/
-    display: block;
-    /*Anchor*/
-    width: 100%;
-    /*Margen inferior*/
-    margin-bottom: 50px;
-}
-
-/*
 Estilo de las alertas de error
 */
 

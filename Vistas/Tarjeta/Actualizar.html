@@ -1,6 +1,21 @@
-<div id="contenidoCentral">      
+<div id="contenidoCentral">   
+    
+    <?php if(isset($_SESSION['actualizartarjetaerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['actualizartarjetaerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizartarjetaerror'); ?>
+
+    <?php if(isset($_SESSION['actualizartarjetasugerencia'])) : ?>
+        <div class="alerta alerta-sugerencia">
+            <?=$_SESSION['actualizartarjetasugerencia']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizartarjetasugerencia'); ?>
+
     <div id="loginYRegistro">
-        <h1 class="tituloCreacionGestiones">Actualizar tarjeta?</h1>
+        <h1 class="tituloCreacionGestiones">Actualizar tarjeta</h1>
         <hr>
         <img src="Recursos/Logotipos/casa.png" class="imagenGestion" alt="">
         <form action="<?=rutaInicio?><?=tarjeta?><?=actualizarTarjeta?>&id=<?=$tarjetaUnica -> id?>" method="post">

@@ -1,39 +1,32 @@
 <div id="contenidoCentral"> 
 
     <?php if(isset($_SESSION['actualizarusoacierto'])) : ?>
-        <div class="alerta alerta-adminAcierto">
+        <div class="alerta alerta-acierto">
             <?=$_SESSION['actualizarusoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarusoacierto'); ?>
 
     <?php if(isset($_SESSION['eliminarusoacierto'])) : ?>
-        <div class="alerta alerta-adminAcierto">
+        <div class="alerta alerta-acierto">
             <?=$_SESSION['eliminarusoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarusoacierto'); ?>
 
     <?php if(isset($_SESSION['guardarusoacierto'])) : ?>
-        <div class="alerta alerta-adminAcierto">
+        <div class="alerta alerta-acierto">
             <?=$_SESSION['guardarusoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardarusoacierto'); ?>
 
     <?php if(isset($_SESSION['eliminarusoerror'])) : ?>
-        <div class="alerta alerta-adminError">
+        <div class="alerta alerta-error">
             <?=$_SESSION['eliminarusoerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarusoerror'); ?>
-
-    <?php if(isset($_SESSION['actualizarusoerror'])) : ?>
-        <div class="alerta alerta-adminError">
-            <?=$_SESSION['actualizarusoerror']; ?>
-        </div>
-    <?php endif; ?>
-    <?php Ayudas::eliminarSesion('actualizarusoerror'); ?>
 
     <?php if(mysqli_num_rows($listadoUsos) == 0) : ?>
         <h1>No hay usos creados</h1>

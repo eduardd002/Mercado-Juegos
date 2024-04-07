@@ -1,6 +1,21 @@
-<div id="contenidoCentral">      
+<div id="contenidoCentral">   
+    
+    <?php if(isset($_SESSION['actualizarusoerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['actualizarusoerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizarusoerror'); ?>
+
+    <?php if(isset($_SESSION['actualizarusosugerencia'])) : ?>
+        <div class="alerta alerta-sugerencia">
+            <?=$_SESSION['actualizarusosugerencia']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizarusosugerencia'); ?>
+    
     <div id="loginYRegistro">
-        <h1 class="tituloCreacionGestiones">Actualizar uso?</h1>
+        <h1 class="tituloCreacionGestiones">Actualizar uso</h1>
         <hr>
         <img src="Recursos/Logotipos/casa.png" class="imagenGestion" alt="">
         <form action="<?=rutaInicio?><?=uso?><?=actualizarUso?>&id=<?=$usoUnico -> id?>" method="post">

@@ -1,6 +1,21 @@
 <div id="contenidoCentral">     
+
+    <?php if(isset($_SESSION['actualizarestadoerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['actualizarestadoerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizarestadoerror'); ?>
+
+    <?php if(isset($_SESSION['actualizarestadosugerencia'])) : ?>
+        <div class="alerta alerta-sugerencia">
+            <?=$_SESSION['actualizarestadosugerencia']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizarestadosugerencia'); ?>
+
    <div id="loginYRegistro">
-        <h1 class="tituloCreacionGestiones">Actualizar estado?</h1>
+        <h1 class="tituloCreacionGestiones">Actualizar estado</h1>
         <hr>
         <img src="Recursos/Logotipos/casa.png" class="imagenGestion" alt="">
         <form action="<?=rutaInicio?><?=estado?><?=actualizarEstado?>&id=<?=$estadoUnico -> id?>" method="post">

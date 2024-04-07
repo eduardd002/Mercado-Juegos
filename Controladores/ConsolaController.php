@@ -174,9 +174,14 @@
             //Crear objeto
             $consola -> setId($idConsola);
             $consola -> setNombre($nombre);
-            //Ejecutar la consulta
-            $actualizado = $consola -> actualizar();
-            //Retornar el resultado
+            try{
+                //Ejecutar la consulta
+                $actualizado = $consola -> actualizar();
+            }catch(mysqli_sql_exception $excepcion){
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('actualizarconsolaerror', "Este nombre de consola ya existe", '?controller=ConsolaController&action=editar&id='.$idConsola);
+                die();
+            }
             return $actualizado;
         }
 
@@ -206,7 +211,7 @@
                         Ayudas::crearSesionYRedirigir('actualizarconsolaacierto', "La consola ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarConsola');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizarconsolaerror', "La consola no ha sido actualizada exitosamente", '?controller=ConsolaController&action=editar&id='.$idConsola);
+                        Ayudas::crearSesionYRedirigir('actualizarconsolasugerencia', "Introduce nuevos datos", '?controller=ConsolaController&action=editar&id='.$idConsola);
                     }
                 }else{
                     //Crear la sesion y redirigir a la ruta pertinente

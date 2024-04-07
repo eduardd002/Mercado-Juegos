@@ -1,39 +1,32 @@
 <div id="contenidoCentral">
 
     <?php if(isset($_SESSION['eliminarestadoacierto'])) : ?>
-        <div class="alerta alerta-adminAcierto">
+        <div class="alerta alerta-acierto">
             <?=$_SESSION['eliminarestadoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarestadoacierto'); ?>
 
     <?php if(isset($_SESSION['actualizarestadoacierto'])) : ?>
-        <div class="alerta alerta-adminAcierto">
+        <div class="alerta alerta-acierto">
             <?=$_SESSION['actualizarestadoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarestadoacierto'); ?>
 
     <?php if(isset($_SESSION['guardarestadoacierto'])) : ?>
-        <div class="alerta alerta-adminAcierto">
+        <div class="alerta alerta-acierto">
             <?=$_SESSION['guardarestadoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardarestadoacierto'); ?>
 
     <?php if(isset($_SESSION['eliminarestadoerror'])) : ?>
-        <div class="alerta alerta-adminError">
+        <div class="alerta alerta-error">
             <?=$_SESSION['eliminarestadoerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarestadoerror'); ?>
-
-    <?php if(isset($_SESSION['actualizarestadoerror'])) : ?>
-        <div class="alerta alerta-adminError">
-            <?=$_SESSION['actualizarestadoerror']; ?>
-        </div>
-    <?php endif; ?>
-    <?php Ayudas::eliminarSesion('actualizarestadoerror'); ?>
 
     <?php if(mysqli_num_rows($listadoEstados) == 0) : ?>
         <h1>No hay estados creados</h1>

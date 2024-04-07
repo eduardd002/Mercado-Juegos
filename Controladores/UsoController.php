@@ -174,9 +174,14 @@
             //Crear objeto
             $uso -> setId($idUso);
             $uso -> setNombre($nombre);
-            //Ejecutar la consulta
-            $actualizado = $uso -> actualizar();
-            //Retornar el resultado
+            try{
+                //Ejecutar la consulta
+                $actualizado = $uso -> actualizar();
+            }catch(mysqli_sql_exception $excepcion){
+                //Crear la sesion y redirigir a la ruta pertinente
+                Ayudas::crearSesionYRedirigir('actualizarusoerror', "Este nombre de uso ya existe", '?controller=UsoController&action=editar&id='.$idUso);
+                die();
+            }
             return $actualizado;
         }
 
@@ -206,7 +211,7 @@
                         Ayudas::crearSesionYRedirigir('actualizarusoacierto', "El uso ha sido actualizado exitosamente", '?controller=AdministradorController&action=gestionarUso');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizarusoerror', "El uso no ha sido actualizado exitosamente", '?controller=UsoController&action=editar&id='.$idUso);
+                        Ayudas::crearSesionYRedirigir('actualizarusosugerencia', "Introduce nuevos datos", '?controller=UsoController&action=editar&id='.$idUso);
                     }
                 }else{
                     //Crear la sesion y redirigir a la ruta pertinente
