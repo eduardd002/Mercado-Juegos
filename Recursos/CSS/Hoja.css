@@ -3,7 +3,7 @@ Estilos de la cabecera
 */
 
 #contenedor{
-    /*Margen centrado*/
+    /*Margen exterior automatico*/
     margin: 0px auto;
     /*Sombra*/
     box-shadow: 0px 0px 10px gray;
@@ -58,7 +58,7 @@ Estilo del titulo de la tienda
 #titulo{
     /*Margen interior*/
     padding: 20px;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 100px;
     /*Flotar hacia la izquierda*/
     float: left;
@@ -94,11 +94,11 @@ Estilo del titulo principal de la tienda
     color: white;
     /*Texto en negrita*/
     font-weight: bold;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 22px;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 50px;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 40px;
     /*Sombra del texto*/
     text-shadow: 0px 2px 1px #222222;
@@ -113,7 +113,7 @@ Estilo del buscador
 #buscador{
     /*Flotar hacia la izquierda*/
     float: left;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 50px;
 }
 
@@ -126,7 +126,7 @@ Estilo del campo de imagen de la barra del buscador
     height: 13px;
     /*Anchor*/
     width: 15px;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 40px;
 }
 
@@ -141,7 +141,7 @@ Estilo del campo de texto de la barra del buscador
     width: 130px;
     /*Flotar hacia la izquierda*/
     float: left !important;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 10px;
 }
 
@@ -174,7 +174,7 @@ Estilo de las opciones del menu principal
     color: #01b1ea;
     /*Altura*/
     height: 70px;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 45px;
 }
 
@@ -185,7 +185,7 @@ Estilos de la foto de usuario en el menu principal
 #menuPrincipal img{
     /*Borde redondo*/
     border-radius: 50%;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 5px;
     /*Altura*/
     height: 20px;
@@ -209,6 +209,10 @@ Estilos de los enlaces del menu principal
     /*Color del texto*/
     color: white;
 }
+
+/*
+Al posicionarse encima del enlace del titulo principal
+*/
 
 #menuPrincipal a:hover{
     /*Color del texto*/
@@ -345,9 +349,9 @@ Estilos de los select en la barra de filtro
 */
 
 #filtro select{
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 10px;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 15px;
     /*Altura*/
     height: 22px;
@@ -362,9 +366,9 @@ Estilos de los textos en la barra de filtro
 #filtro label{
     /*Color de letra*/
     color: white;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 15px;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 10px;
 }
 
@@ -373,11 +377,11 @@ Estilos del boton de filtrar en la barra de filtro
 */
 
 #filtro input[type='submit']{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 13px;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 40px;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 40px;
     /*Anchor*/
     width: 150px;
@@ -390,7 +394,7 @@ Estilos de los campos de numero en la barra de filtro
 #filtro input[type='number']{
     /*Anchor*/
     width: 97px;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 20px;
     /*Altura*/
     height: 22px;
@@ -401,7 +405,7 @@ Estilos de los enlaces la barra de categorias, primer elemento (inicio)
 */
 
 #filtro a:first-child{
-    /*Borde derecho*/
+    /*Borde izquierdo*/
     border-left: 1px solid #363636;
 }
 
@@ -421,9 +425,9 @@ Estilos de la lista de enlaces la barra de categorias
 #filtro ul{
     /*No tenga los puntos de la lista*/
     list-style: none;
-    /*Margen centrado*/
+    /*Margen exterior automatico*/
     margin: 0px auto;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 8px;
 }
 
@@ -449,7 +453,7 @@ Estilos del contenido central
     background: rgb(248, 248, 248);
     /*Anchor*/
     width: 96.86%;
-    /*Flotar hacia la derecha*/
+    /*Flotar hacia la izquierda*/
     float: left;
     /*Margen interior*/
     padding: 20px;
@@ -468,7 +472,7 @@ Estilos del titulo de contenido central
     font-weight: normal;
     /*Texto alineado al centro*/
     text-align: center;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 20px;
     /*Margen interior*/
     padding: 20px;
@@ -487,7 +491,7 @@ Estilo de cada videojuego
     border: 1px solid #ccc;
     /*Flotar hacia la izquierda*/
     float: left;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin: 51px;
     /*Texto alineado al centro*/
     text-align: center;
@@ -506,9 +510,9 @@ Estilo de cada videojuego del buscador
     border: 1px solid #ccc;
     /*Flotar hacia la izquierda*/
     float: left;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 140px;
-    /*Margen inferior*/
+    /*Margen exterior superior*/
     margin-top: 65px;
     /*Texto alineado al centro*/
     text-align: center;
@@ -523,15 +527,15 @@ Estilo de la imagen del videojuego que se presenta en el catalogo, al inicio
     height: 125px;
     /*Anchor*/
     width: 115px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 10px;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 10px;
     /*Limpiar flotados*/
     clear: both;
     /*Dar comportamiento de bloque*/
     display: block;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 95px;
 }
 
@@ -546,11 +550,11 @@ Estilo de la imagen del videojuego que se presenta en el catalogo, al inicio dek
     height: 145px;
     /*Anchor*/
     width: 135px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 10px;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 10px;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 40px;
 }
 
@@ -561,7 +565,7 @@ Estilo del titulo del videojuego dek catalogo
 .videojuego h2{
     /*Tamaña de la fuente del texto*/
     font-size: 18px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 10px;
     /*Evitar el salto de línea*/
     white-space: nowrap;
@@ -569,9 +573,9 @@ Estilo del titulo del videojuego dek catalogo
     overflow: hidden;
     /*Muestra puntos suspensivos (...) para indicar que hay más texto*/
     text-overflow: ellipsis;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 30px;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 30px;
 }
 
@@ -580,11 +584,11 @@ Estilo del titulo del videojuego del buscador
 */
 
 .videojuegoBusqueda h2{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 25px;
     /*Tamaña de la fuente del texto*/
     font-size: 18px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 25px;
 }
 
@@ -593,7 +597,7 @@ Estilo del precio del videojuego del catalogo
 */
 
 .videojuego p{
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 15px;
     /*Color del texto*/
     color: #555;
@@ -606,9 +610,9 @@ Estilo del precio del videojuego del buscador
 */
 
 .videojuegoBusqueda p{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 25px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 25px;
     /*Color del texto*/
     color: #555;
@@ -632,11 +636,11 @@ Estilo del titulo del buscador
 */
 
 #busqueda h1{
-    /*Magin superior*/
+    /*Magin exterior superior*/
     margin-top: 30px;
-    /*Magin inferior*/
+    /*Magin exterior inferior*/
     margin-bottom: 30px;
-    /*Texto alineado*/
+    /*Texto alineado al centro*/
     text-align: center;
 }
 
@@ -682,7 +686,7 @@ button, .button{
     background: #2979cd;
     /*Borde*/
     border: 1px solid #11608e;
-    /*Cambiar apariencia del cursor*/
+    /*Cambiar apariencia del cursor a punteador*/
     cursor:pointer;
 }
 
@@ -706,11 +710,11 @@ Estilos del boton ver detalle
 .button-actualizarVideojuego{
     /*Anchor*/
     width: 70px;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 10px;
     /*Sin decoracion de texto*/
     text-decoration: none;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 10px;
     /*Color del letra*/
     color: white !important;
@@ -729,13 +733,13 @@ Estilo del boton para generar el pdf
     padding: 7px !important;
     /*Anchor*/
     width: 70px;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 10px;
     /*Sin decoracion de texto*/
     text-decoration: none;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 30px;
-    /*Color del letra*/
+    /*Color de letra*/
     color: white !important;
     /*Color de fondo*/
     background: #2979cd;
@@ -779,7 +783,7 @@ Estilos del boton para desbloquear a un usuario
     color: white !important;
     /*Color de fondo*/
     background: red;
-    /*Sin texto de decoracion*/
+    /*Sin decoracion de texto*/
     text-decoration: none;
     /*Borde*/
     border: 1px solid rgb(91, 22, 4);
@@ -790,7 +794,7 @@ Estilos del boton para ver todos los videojuegos
 */
 
 #verTodos{
-    /*Margen inferior*/
+    /*Margen exterior*/
     margin: 30px;
 }
 
@@ -809,11 +813,11 @@ Estilos del enlace del boton para ver todos los videojuegos
     background: #007EE5;
     /*Borde*/
     border: 1px solid #156785;
-    /*Cambiar apariencia del cursor*/
+    /*Cambiar apariencia del cursor a punteador*/
     cursor: pointer;
     /*Sin decoracion de texto*/
     text-decoration: none;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 475px;
 }
 
@@ -828,7 +832,7 @@ Estilos del formulario de registro de usuario
     display: block;
     /*Texto alineado al centro*/
     text-align: center;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 30px;
 }
 
@@ -839,9 +843,9 @@ Estilos de titulo de un videojuego de un perfil que se visita
 #loginYRegistro h2{
     /*Texto alineado al centro*/
     text-align: center;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 30px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 20px;
 }
 
@@ -850,11 +854,11 @@ Estilos de subtitulos de un perfil que se visita
 */
 
 #loginYRegistro h3{
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 50px;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 30px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 20px;
 }
 
@@ -871,7 +875,7 @@ Estilos de la imagen del registro de usuario
     width: 230px;
     /*Flotar hacia la derecha*/
     float: right;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 125px;
 }
 
@@ -882,9 +886,9 @@ Estilos del boton de login y registro de usuario
 #loginYRegistro input[type="submit"]{
     /*Altura*/
     width: 150px;
-    /*Margen centrado*/
+    /*Margen exterior automatico*/
     margin: 0px auto;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 30px;
 }
 
@@ -893,7 +897,7 @@ Estilo particular del boton de login
 */
 
 .btnLogin{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 105px !important;
 }
 
@@ -902,7 +906,7 @@ Estilo particular del boton de registro de usuario
 */
 
 .btnRegistro{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 30px;
 }
 
@@ -911,9 +915,9 @@ Estilo particular de la imagen del login
 */
 
 .loginImage{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 0px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 20px;
 }
 
@@ -922,7 +926,7 @@ Estilo particular de la imagen del registro de usuario
 */
 
 .registerImage{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 140px;
 }
 
@@ -931,7 +935,7 @@ Estilo particular de la imagen al vender un videojuego
 */
 
 .envioImage{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 100px;
 }
 
@@ -940,7 +944,7 @@ Estilo particular de la imagen de direccion al comprar un videojuego
 */
 
 .pagoImage{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 90px;
 }
 
@@ -949,7 +953,7 @@ Estilo particular de la imagen de pago al comprar un videojuego
 */
 
 .ventaImage{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 60px;
 }
 
@@ -958,7 +962,7 @@ Estilo particular de la imagen del registro de usuario
 */
 
 .perfilImage{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 50px;
 }
 
@@ -967,11 +971,11 @@ Estilos del formulario de registro de usuario
 */
 
 #bloqueTextoLogin{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 40px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 40px;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 140px;
 }
 
@@ -980,11 +984,11 @@ Estilos del formulario de login
 */
 
 #bloqueTextoRegistro{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 30px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 20px;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 125px;
 }
 
@@ -995,7 +999,7 @@ Estilos de los labels del formulario de registro de usuario
 #bloqueTextoRegistro label{
     /*Dar comportamiento de bloque*/
     display: block;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 5px;
     /*Tamaño de la fuente del texto*/
     font-size: 25px;
@@ -1008,7 +1012,7 @@ Estilos de los labels del formulario de login
 #bloqueTextoLogin label{
     /*Dar comportamiento de bloque*/
     display: block;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 5px;
     /*Tamaño de la fuente del texto*/
     font-size: 25px;
@@ -1041,7 +1045,7 @@ Estilos pagina no existe
 */
 
 #paginaNoEncontrada{
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 300px;
 }
 
@@ -1052,9 +1056,9 @@ Estilo titulo pagina no existe
 #paginaNoEncontrada h1{
     /*Flotar hacia la izquierda*/
     float: left;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 20px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 20px;
 }
 
@@ -1065,7 +1069,7 @@ Estilo del detalle del videojuego
 .detalleVideojuego{
     /*Anchor*/
     width: 95%;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 50px;
 }
 
@@ -1074,11 +1078,11 @@ Estilo de la imagen del detalle del videojuego
 */
 
 .detalleVideojuego img{
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 75px;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 75px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 20px;
     /*Dar comportamiento de bloque*/
     display: block;
@@ -1093,7 +1097,7 @@ Estilo del titulo del videojuego del detalle del videojuego
 */
 
 .detalleVideojuego #tituloVideojuego{
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 40px;
     /*Texto alineado a la izquierda*/
     text-align: left;
@@ -1104,9 +1108,9 @@ Estilo del precio del videojuego del detalle del videojuego
 */
 
 .detalleVideojuego #precioVideojuego{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 40px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 40px;
     /*Color de letra*/
     color: green;
@@ -1117,9 +1121,9 @@ Estilo del tipo de consola del videojuego del detalle del videojuego
 */
 
 .detalleVideojuego #consolaVideojuego{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 40px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 40px;
 }
 
@@ -1130,9 +1134,9 @@ Estilo de texto cuando no hay stock disponible
 .detalleVideojuego #stockNoDisponible{
     /*Color de letra*/
     color: red;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 60px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 200px;
     /*Tamaño de letra*/
     font-size: 30px;
@@ -1143,9 +1147,9 @@ Estilo del tipo de categoria del videojuego del detalle del videojuego
 */
 
 .detalleVideojuego #categoriaVideojuego{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 40px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 40px;
 }
 
@@ -1154,9 +1158,9 @@ Estilo de las unidades del videojuego del detalle del videojuego
 */
 
 .detalleVideojuego #unidadesDisponiblesVideojuego{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 40px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 40px;
 }
 
@@ -1165,9 +1169,9 @@ Estilo del titulo de la descripcion del videojuego del detalle del videojuego
 */
 
 .detalleVideojuego #descripcionVideojuegoTitulo{
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 40px;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 60px;
 }
 
@@ -1176,9 +1180,9 @@ Estilo del contenido de la descripcion del videojuego del detalle del videojuego
 */
 
 .detalleVideojuego #descripcionVideojuegoTexto{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 40px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 40px;
 }
 
@@ -1187,9 +1191,9 @@ Estilo de los campos de texto del detalle del videojuego
 */
 
 .detalleVideojuego input [type='text']{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 10px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 47px;
 }
 
@@ -1200,7 +1204,7 @@ Estilo de los botones de actualizar y eliminar videojuego en detalle
 #botonesDetalle{
     /*Flotar hacia la izquierda*/
     float: left;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 100px;
 }
 
@@ -1209,9 +1213,9 @@ Estilo del boton para realizar la compra
 */
 
 .detalleVideojuego input[type='submit']{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 40px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 47px;
     /*Margen interior superior*/
     padding-top: 7px;
@@ -1234,13 +1238,13 @@ Estilo del boton para actualizar el videojuego desde el detalle
     width: 90px !important;
     /*Altura*/
     height: 20px !important;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 50px;
     /*Color de fondo*/
     background: orange;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 10px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 50px;
 }
 
@@ -1281,9 +1285,9 @@ Estilo del vendedor del videojuego del detalle del videojuego
 */
 
 .detalleVideojuego #vendedorVideojuego{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 50px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 50px;
 }
 
@@ -1292,7 +1296,7 @@ Estilo de la descripcion del videojuego
 */
 
 .descripcionVideojuego{
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 75px;
     /*Limpiar flotados*/
     clear: both;
@@ -1309,7 +1313,7 @@ Estilo de la imagen del carrito
     height: 80px;
     /*Dar comportamiento de bloque*/
     display: block;
-    /*Margen*/
+    /*Margen exterior*/
     margin: 10px auto; 
 }
 
@@ -1324,9 +1328,9 @@ table{
     width: 100%;
     /*Borde inferior*/
     border-bottom: 1px solid #CCC;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 75px;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 75px;
 }
 
@@ -1348,14 +1352,6 @@ td{
 }
 
 /*
-Estilo del carrito
-*/
-
-#carrito{
-
-}
-
-/*
 Estilo del titulo del carrito
 */
 
@@ -1366,7 +1362,7 @@ Estilo del titulo del carrito
     display: block;
     /*Titulo alineado al centro*/
     text-align: center;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 20px;
 }
 
@@ -1375,7 +1371,7 @@ Estilo de la estadistica del carrito
 */
 
 #estadisticasCarrito{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 30px;
 }
 
@@ -1386,9 +1382,9 @@ Estilo de los enlaces de la estadistica del carrito
 #estadisticasCarrito a{
     /*Flotar hacia la derecha*/
     float: right;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 40px;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 20px;
     /*Borde redondo*/
     border-radius: 2px;
@@ -1402,7 +1398,7 @@ Estilo de los enlaces de la estadistica del carrito
     background: #2979cd;
     /*Borde*/
     border: 1px solid #11608e;
-    /*Cambiar apariencia del cursor*/
+    /*Cambiar apariencia del cursor a punteador*/
     cursor:pointer;
     /*Quitar decoracion del texto*/
     text-decoration: none;
@@ -1413,11 +1409,11 @@ Estilo del titulo de la estadistica del carrito
 */
 
 #estadisticasCarrito h3{
-    /*Flotar hacia la derecha*/
+    /*Flotar hacia la izquierda*/
     float: left;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 50px;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 40px;
 }
 
@@ -1441,7 +1437,7 @@ Estilo del text area de registro
     width: 400px;
     /*Altura*/
     height: 100px;
-    /*Margen ingerior*/
+    /*Margen exterior inferior*/
     margin-bottom: 15px;
 }
 
@@ -1450,7 +1446,7 @@ Estilos de la compra cuando se ha relizado de forma exitosa
 */
 
 #compraExitosa{
-    /*Margen*/
+    /*Margen exterior*/
     margin: 10px;
 }
 
@@ -1459,7 +1455,7 @@ Estilo de la imagen de compra exitosa
 */
 
 #compraExitosa img{
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 350px;
 }
 
@@ -1468,9 +1464,9 @@ Estilos del titulo de la compra cuando se ha relizado de forma exitosa
 */
 
 #compraExitosa h1{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 30px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 30px;
     /*Texto alineado al centro*/
     text-align: center;
@@ -1490,11 +1486,11 @@ Estilos del titulo de la imagen cuando se ha relizado de forma exitosa
 */
 
 .imgPrincipal{
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 350px;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 20px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 20px;
     /*Flotar hacia la izquierda*/
     float: left;
@@ -1509,13 +1505,13 @@ Estilos del enlace de ir al inicio cuando se ha relizado de forma exitosa
 */
 
 #compraExitosa a{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 30px;
     /*Sin decoracion de texto*/
     text-decoration: none;
     /*FLotar hacia la derecha*/
     float: right;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 50px;
 }
 
@@ -1555,21 +1551,13 @@ comprasYVentas td{
 }
 
 /*
-Estilo de las listas de compras y ventas
-*/
-
-#comprasYVentas{
-
-}
-
-/*
 Estilo del titulo de compras y ventas
 */
 
 #comprasYVentas h1{
     /*Titulo alineado al centro*/
     text-align: center;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 30px;
 }
 
@@ -1578,9 +1566,9 @@ Estilo de titulos de total en mis compras y ventas
 */
 
 #detalleCompraYVenta{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 50px;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 75px;
 }
 
@@ -1589,7 +1577,7 @@ Estilo de titulos de total en mis compras y ventas
 */
 
 #detalleCompraYVenta h1{
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 55px;
     /*Texto alineado al centro*/
     text-align: center;
@@ -1602,7 +1590,7 @@ Estilo de los enlaces de total en mis compras y ventas
 #detalleCompraYVenta a{
     /*Tamaño de letra*/
     font-size: 14px;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 20px;
     /*Color de letra*/
     color: white;
@@ -1619,9 +1607,9 @@ Estilo de subtitulos de total en mis compras y ventas
 */
 
 #detalleCompraYVenta h3{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 50px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 50px;
 }
 
@@ -1630,9 +1618,9 @@ Estilo de campos de total en mis compras y ventas
 */
 
 #detalleCompraYVenta h5{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 15px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 15px;
 }
 
@@ -1641,11 +1629,13 @@ Estilo del campo de total en mis compras y ventas
 */
 
 #detalleCompraYVenta h4{
+    /*Tamaño de letra*/
     font-size: 23px;
+    /*Color de letra*/
     color: green;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 15px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 35px;
 }
 
@@ -1654,10 +1644,11 @@ Estilo del texto de la tarjeta del videojuego en detalle venta
 */
 
 #detalleCompraYVenta h6{
+    /*Tamaño de letra*/
     font-size: 17px;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 15px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 35px;
 }
 
@@ -1674,9 +1665,9 @@ Estilo de mis compras y ventas
     border: 1px solid #ccc;
     /*Flotar hacia la izquierda*/
     float: left;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 35px;
-    /*Margen superior*/
+    /*Margen exterior derecho*/
     margin-right: 30px;
     /*Texto alineado al centro*/
     text-align: center;
@@ -1693,11 +1684,11 @@ Estilo de la imagen del videojuego en compras y ventas
     height: 145px;
     /*Anchor*/
     width: 135px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 5px;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 5px;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 17px;
 }
 
@@ -1714,7 +1705,7 @@ Estilo del boton para eliminar el carrito
     border: 1px solid #222;
     /*Color de fondo*/
     background: red !important;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 85px !important;
 }
 
@@ -1727,7 +1718,7 @@ Estilo del boton para aumentar las unidades del carrito
     padding: 7px;
     /*Tamaño de letra*/
     font-size: 20px;
-    /*Decoracion del texto*/
+    /*Sin decoracion del texto*/
     text-decoration: none;
     /*Color de letra*/
     color: white !important;
@@ -1735,7 +1726,7 @@ Estilo del boton para aumentar las unidades del carrito
     border: 1px solid black;
     /*Color de fondo*/
     background: #5d5e5c;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 20px;
 }
 
@@ -1752,7 +1743,7 @@ Estilo del boton para disminuir las unidades del carrito
     padding-right: 10px;
     /*Tamaño de letra*/
     font-size: 20px;
-    /*Decoracion del texto*/
+    /*Sin decoracion del texto*/
     text-decoration: none;
     /*Color de letra*/
     color: white !important;
@@ -1760,7 +1751,7 @@ Estilo del boton para disminuir las unidades del carrito
     border: 1px solid black;
     /*Color de fondo*/
     background: #5d5e5c;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 20px;
 }
 
@@ -1771,9 +1762,9 @@ Estilo del campo para subir la foto
 #loginYRegistro input[type="file"]{
     /*Flotar hacia la derecha*/
     float: right;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 70px;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 10px;
 }
 
@@ -1791,7 +1782,7 @@ Estilo de las alertas de las sesiones flash
 */
 
 .alerta{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 20px;
     /*Margen interior*/
     padding: 5px;
@@ -1843,9 +1834,9 @@ Estilo de panel del administrador
     clear: both;
     /*Dar comportamiento de bloque*/
     display: block;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 75px;
-    /*Margen*/
+    /*Marge exterior izquierdo*/
     margin-left: 150px;
 }
 
@@ -1858,9 +1849,9 @@ Estilo de panel de los enlaces del panel de administrador
     letter-spacing: 2px;
     /*Tamaño de letra*/
     font-size: 20px;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 50px !important;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 50px;
     /*Dar comportamiento de bloque*/
     display: block;
@@ -1880,9 +1871,9 @@ Estilo de la imagen del panel de administrador
 */
 
 #administradorpanel img{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 80px;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 150px;
     /*Anchor*/
     width: 225px;
@@ -1908,7 +1899,7 @@ Estilo del titulo de gestiones
 */
 
 #gestiones h1{
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 50px;
     /*Texto alineado al centro*/
     text-align: center;
@@ -1930,7 +1921,7 @@ Estilo de enlaces de gestiones
 */
 
 #gestiones a{
-    /*Margen derecho*/
+    /*Margen exterior izquierdo*/
     margin-left: 250px !important;
 }
 
@@ -1941,15 +1932,15 @@ Estilo del boton para crear una gestion
 .button-crearGestion{
     /*Texto centrado*/
     text-align: center;
-   /*Margen derecho*/
+   /*Margen exterior izquierdo*/
     margin-left: 550px !important;
     /*Anchor*/
     width: 120px;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 30px !important;
     /*Sin decoracion de texto*/
     text-decoration: none;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 30px !important;
     /*Color del letra*/
     color: white !important;
@@ -1974,9 +1965,9 @@ Estilo de perfil de la cuenta de usuario en gestion de usuarios
     display: block;
     /*Borde*/
     border: 0.5px solid #333;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 175px;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 100px;
 }
 
@@ -1985,7 +1976,7 @@ Estilo de la foto de perfil de la cuenta de usuario en gestion de usuarios
 */
 
 .gestionUsuariosLista img{
-    /*Margen centrado*/
+    /*Margen exterior*/
     margin: 20px;
     /*Flotar hacia la izquierda*/
     float: left;
@@ -2004,9 +1995,9 @@ Estilo del texto de la cuenta de usuario en gestion de usuarios
 .gestionUsuariosLista h3{
     /*Texto alineado al centro*/
     text-align: center;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 20px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 20px;
 }
 
@@ -2017,9 +2008,9 @@ Estilo del texto de la cuenta de usuario en gestion de usuarios
 .gestionUsuariosLista h4{
     /*Texto alineado al centro*/
     text-align: center;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 20px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 20px;
 }
 
@@ -2032,11 +2023,11 @@ Estilo del enlace de eliminar cuenta de usuario en gestion de usuarios
     float: left !important;
     /*Texto alineado al centro*/
     text-align: center;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 5px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 20px;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 275px;
 }
 
@@ -2045,7 +2036,7 @@ Estilo del boton para crear una gestion
 */
 
 .button-gestionUsuario{
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 220px !important;
     /*Texto centrado*/
     text-align: center;
@@ -2079,7 +2070,7 @@ Estilo del enlace para registrarse como administrador
 .regisAdmin{
     /*Flotar hacia la derecha*/
     float: right !important;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 140px;
 }
 
@@ -2099,9 +2090,9 @@ Estilo de seccion de botones en mi perfil
 */
 
 #botonesMiPerfil{
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 300px;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 30px;
 }
 
@@ -2110,9 +2101,9 @@ Estilo de cada uno de los de botones en mi perfil
 */
 
 #botonesMiPerfil li{
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 60px;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 60px;
     /*Flotar hacia la izquierda*/
     float: left;
@@ -2127,7 +2118,7 @@ Estilo del boton de eliminar cuenta propio de perfil de usuario
 .eliminarCuentaMiPerfil{
     /*Tamaño de letra*/
     font-size: 13px;
-    /*Margen centrado*/
+    /*Margen exterior automatico*/
     margin: 0px auto;
     /*Borde redondo*/
     border-radius: 2px;
@@ -2145,11 +2136,11 @@ Estilo del boton de eliminar cuenta propio de perfil de usuario
     background: red;
     /*Borde*/
     border: 1px solid #861a02;
-    /*Cambiar apariencia del cursor*/
+    /*Cambiar apariencia del cursor a punteador*/
     cursor: pointer;
     /*Sin decoracion de texto*/
     text-decoration: none;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 410px !important;
 }
 
@@ -2169,9 +2160,9 @@ Estilo de el apartado de chat de vendedor
 */
 
 #chatVendedor{
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 50px;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 50px;
 }
 
@@ -2182,7 +2173,7 @@ Estilo de titulo en el chat de vendedor
 #chatVendedor h1{
     /*Texto alineado al centro*/
     text-align: center;
-    /*Magen inferior*/
+    /*Magen exterior inferior*/
     margin-bottom: 20px;
 }
 
@@ -2195,13 +2186,13 @@ Estilo de panel del chat de vendedor
     background: #a0def2;
     /*Borde*/
     border: 1px solid #144064;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 50px;
     /*Altura*/
     height: 400px;
     /*Anchor*/
     width: 500px;
-    /*Aplicar scroll en chat*/
+    /*Aplicar scroll vertical automatico*/
     overflow-y: auto;
 }
 
@@ -2229,9 +2220,9 @@ Estilo del campo para enviar el mensaje en chat del vendedor
     height: 26px;
     /*Anchor*/
     width: 300px;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 50px;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 35px;
 }
 
@@ -2253,9 +2244,9 @@ Estilo del mensaje enviado
     clear: both;
     /*Dar comportamiento del bloque*/
     display: block;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 15px;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 25px;
     /*Margen interior*/
     padding: 20px;
@@ -2263,7 +2254,7 @@ Estilo del mensaje enviado
     background: white;
     /*Flotar hacia la izquierda*/
     float: left;
-    /*Borde semi redondo*/
+    /*Borde redondo*/
     border-radius: 40%;
     /*Anchor*/
     width: 130px;
@@ -2298,15 +2289,15 @@ Estilo del mensaje recibido
 */
 
 #mensajerecibido{
-    /*Flotar hacia la dere*/
+    /*Flotar hacia la derecha*/
     float: right;
     /*Limpiar flotados*/
     clear: both;
     /*Dar comportamiento del bloque*/
     display: block;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 15px;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 25px;
     /*Margen interior*/
     padding: 20px;
@@ -2314,7 +2305,7 @@ Estilo del mensaje recibido
     background: white;
     /*Flotar hacia la derecha*/
     float: right;
-    /*Borden semi-redondo*/
+    /*Borden redondo*/
     border-radius: 40%;
     /*Anchor*/
     width: 130px;
@@ -2351,9 +2342,9 @@ Estilo de la seccion de usuarios en el chat
 #seccionUsuarios{
     /*Flotar hacia la izquierda*/
     float: left;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 30px;
-    /*Aplicar scroll*/
+    /*Aplicar scroll vertical automatico*/
     overflow-y: auto;
     /*Altura*/
     height: 480px;
@@ -2361,7 +2352,7 @@ Estilo de la seccion de usuarios en el chat
     width: 450px;
     /*Borde*/
     border: 1px solid #333;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 50px;
 }
 
@@ -2381,7 +2372,7 @@ Estilo de la seccion del chat
 #seccionChat{
     /*Flotar hacia la derecha*/
     float: right;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 30px;
 }
 
@@ -2390,7 +2381,7 @@ Estilo del los usuarios del chat
 */
 
 #usuarioChat{
-    /*Borde*/
+    /*Borde inferior*/
     border-bottom: 1px solid black;
     /*Margen exterior*/
     margin: 20px;
@@ -2413,7 +2404,7 @@ Estilo de la foto de perfil en el chat de vendedor
     height: 65px;
     /*Borde redondo*/
     border-radius: 50%;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 20px;
 }
 
@@ -2424,7 +2415,7 @@ Estilo del subtitulo del chat
 #usuarioChat h2{
     /*Sin flotado*/
     float: none;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 20px;
 }
 
@@ -2435,7 +2426,7 @@ Estilo del texto del chat
 #usuarioChat p{
     /*Sin flotado*/
     float: none;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 10px;
 }
 
@@ -2446,11 +2437,11 @@ Estilo del boton de registro en administrador
 .btnRegistro-adminPerfil{
     /*Flotar hacia la izquierda*/
     float: left;
-    /*Margen*/
+    /*Margen exterior*/
     margin: 0px !important;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 300px !important;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 300px !important;
 }
 
@@ -2459,9 +2450,9 @@ Estilos de los botones en el apartado de mi perfil en administrador
 */
 
 #botonesadmin{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 100px !important;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 40px;
 }
 
@@ -2470,9 +2461,9 @@ Estilos de los botones en el apartado de mi perfil en usuario
 */
 
 #botonesusuario{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 40px !important;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 40px;
 }
 
@@ -2490,13 +2481,13 @@ Estilo de la seccion de comentario
 */
 
 #bloquecomentario{
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 75px;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 30px;
     /*Flotar hacia la izquierda*/
     float: left;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 50px;
 }
 
@@ -2511,7 +2502,7 @@ Estilo del boton para enviar el comentario
     width: 500px;
     /*Flotar hacia la izquierda*/
     float: left;
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 10px;
 }
 
@@ -2520,6 +2511,7 @@ Estilo del campo para enviar el comentario
 */
 
 #bloquecomentario input[type="submit"]{
+    /*Margen exterior*/
     margin: 0px;
     /*Flotar hacia la izquierda*/
     float: left;
@@ -2532,7 +2524,7 @@ Estilo de la seccion de comentario en el apartado de titulo
 */
 
 #bloquecomentario h2{
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 30px;
 }
 
@@ -2549,9 +2541,9 @@ Estilo del titulo de comentarios
     clear: both;
     /*Dar comportamiento de bloque*/
     display: block;
-    /*Texto alineado*/
+    /*Texto alineado al centro*/
     text-align: center;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 50px;
     /*Espacio entre cada letra*/
     letter-spacing: 1px;
@@ -2566,7 +2558,7 @@ Estilo de las categorias en el apartado de detalle del videojuego
     clear: both;
     /*Dar comportamiento de bloque*/
     display: block;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 75px;
 }
 
@@ -2575,9 +2567,9 @@ Estilo del titulo de categorias
 */
 
 #categoriasDetalle h2{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 100px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 30px;
 }
 
@@ -2586,9 +2578,9 @@ Estilo de las categorias
 */
 
 #categoriasDetalle h3{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 5px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 5px;
 }
 
@@ -2603,9 +2595,9 @@ Estilo de la seccion de comentarios en el detalle del videojuego
     display: block;
     /*Flotar hacia la izquierda*/
     float: left;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 20px;
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 25px;
     /*Anchor*/
     width: 1000px;
@@ -2616,7 +2608,7 @@ Estilo de la imagen de perfil del usuario en los comentarios
 */
 
 #comentario img{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 10px;
     /*Borde redondo*/
     border-radius: 50%;
@@ -2633,9 +2625,9 @@ Estilo del texto de la seccion superior de los comentarios
 */
 
 #comentario h3{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 10px;
-    /*Margen ingerior*/
+    /*Margen exterior inferior*/
     margin-bottom: 10px;
 }
 
@@ -2644,9 +2636,9 @@ Estilo del texto de la seccion intermedia de los comentarios
 */
 
 #comentario h4{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 10px;
-    /*Margen ingerior*/
+    /*Margen exterior inferior*/
     margin-bottom: 10px;
 }
 
@@ -2655,9 +2647,9 @@ Estilo del texto de la seccion inferior de los comentarios
 */
 
 #comentario h5{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 10px;
-    /*Margen ingerior*/
+    /*Margen exterior inferior*/
     margin-bottom: 10px;
 }
 
@@ -2666,7 +2658,7 @@ Estilo del enlace del comentario
 */
 
 #comentario a{
-    /*Margen derecho*/
+    /*Margen exterior derecho*/
     margin-right: 20px;
     /*Flotar hacia la izquierda*/
     float: left;
@@ -2677,9 +2669,9 @@ Estilos del chat
 */
 
 .chatear{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 70px;
-    /*Margen inferior*/
+    /*Margen exterior inferior*/
     margin-bottom: 30px;
 }
 
@@ -2703,7 +2695,7 @@ Estilo del boton de confirmar pedido al dilegenciar envio y pago
 */
 
 #botonEnvioYPago{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 10px;
     /*Limpiar flotados*/
     clear: both;
@@ -2764,7 +2756,7 @@ Estilo del bloque de boton para bloquear el usuario
 */
 
 #bloquearUsuario{
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 50px;
 }
 
@@ -2773,9 +2765,9 @@ Estilo de la imagen de elemento no encontrado
 */
 
 .noEncontradoLista{
-    /*Margen superior*/
+    /*Margen exterior superior*/
     margin-top: 35px;
-    /*Margen izquierdo*/
+    /*Margen exterior izquierdo*/
     margin-left: 400px;
     /*Anchor*/
     width: 400px;
@@ -2783,15 +2775,30 @@ Estilo de la imagen de elemento no encontrado
     height: 400px;
 }
 
+/*
+Estilo de la imagen de las gestiones por parte del administrador
+*/
+
 .imagenGestion{
+    /*Margen exterior superior*/
     margin-top: 50px !important;
+    /*Margen exterior derecho*/
     margin-right: 120px !important;
+    /*Margen exterior izquierdo*/
     margin-left: 5px !important;
+    /*Margen exterior inferior*/
     margin-bottom: 50px !important;
+    /*Anchor*/
     width: 125px !important;
+    /*Altura*/
     height: 125px !important;
 }
 
+/*
+Estilo del select en detalle venta
+*/
+
 #detalleCompraYVenta select{
+    /*Margen exterior inferior*/
     margin-bottom: 50px;
 }
