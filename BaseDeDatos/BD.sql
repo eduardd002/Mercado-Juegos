@@ -1,4 +1,8 @@
 /*
+Arhivo con todas las tablas del proyecto
+*/
+
+/*
 Eliminar la base de datos
 */
 
@@ -398,6 +402,7 @@ CREATE TABLE bloqueos (
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT bloqueos_id PRIMARY KEY ( id )
 );
+
 /*
 Crear tabla de usuariosbloqueados
 */
