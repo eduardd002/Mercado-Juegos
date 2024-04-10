@@ -7,7 +7,7 @@
         private $idRemitente;
         private $idDestinatario;
         private $idChat;
-        private $idMensaje;
+        private $mensaje;
         private $db;
 
         public function __construct(){
@@ -63,9 +63,9 @@
         /**
          * Get the value of idMensaje
          */ 
-        public function getIdMensaje()
+        public function getMensaje()
         {
-                return $this->idMensaje;
+                return $this->mensaje;
         }
 
         /**
@@ -73,9 +73,9 @@
          *
          * @return  self
          */ 
-        public function setIdMensaje($idMensaje)
+        public function setMensaje($mensaje)
         {
-                $this->idMensaje = $idMensaje;
+                $this->mensaje = $mensaje;
 
                 return $this;
         }
@@ -88,7 +88,7 @@
             //Construir la consulta
             $consulta = "INSERT INTO usuariochat VALUES (NULL, {$this -> getActivo()}, {$this -> getIdRemitente()}, 
                 {$this -> getIdDestinatario()}, {$this -> getIdChat()}";
-                if($this -> getIdMensaje() == null){
+                if($this -> getMensaje() == null){
                     $consulta .= ", NULL";
                 }
                 $consulta .= ")";

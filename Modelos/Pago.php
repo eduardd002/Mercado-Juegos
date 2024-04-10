@@ -3,11 +3,10 @@
     class Pago{
 
         private $id;
-        private $idTarjeta;
-        private $numeroTarjeta;
-        private $titular;
-        private $codigoSeguridad;
-        private $fechaExpedicion;
+        private $idMedioPago;
+        private $idUsuario;
+        private $activo;
+        private $numero;
         private $db;
 
         public function __construct(){
@@ -23,49 +22,86 @@
             return $this;
         }
 
-        public function getIdTarjeta(){
-            return $this->idTarjeta;
+        
+        /**
+         * Get the value of idMedioPago
+         */ 
+        public function getIdMedioPago()
+        {
+                return $this->idMedioPago;
         }
 
-        public function setIdTarjeta($idTarjeta){
-            $this->idTarjeta = $idTarjeta;
-            return $this;
+        
+        /**
+         * Get the value of numero
+         */ 
+        public function getNumero()
+        {
+                return $this->numero;
         }
 
-        public function getNumeroTarjeta(){
-            return $this->numeroTarjeta;
+        /**
+         * Set the value of numero
+         *
+         * @return  self
+         */ 
+        public function setNumero($numero)
+        {
+                $this->numero = $numero;
+
+                return $this;
         }
 
-        public function setNumeroTarjeta($numeroTarjeta){
-            $this->numeroTarjeta = $numeroTarjeta;
-            return $this;
+        /**
+         * Set the value of idMedioPago
+         *
+         * @return  self
+         */ 
+        public function setIdMedioPago($idMedioPago)
+        {
+                $this->idMedioPago = $idMedioPago;
+
+                return $this;
         }
 
-        public function getTitular(){
-            return $this->titular;
+        /**
+         * Get the value of idUsuario
+         */ 
+        public function getIdUsuario()
+        {
+                return $this->idUsuario;
         }
 
-        public function setTitular($titular){
-            $this->titular = $titular;
-            return $this;
+        /**
+         * Set the value of idUsuario
+         *
+         * @return  self
+         */ 
+        public function setIdUsuario($idUsuario)
+        {
+                $this->idUsuario = $idUsuario;
+
+                return $this;
         }
 
-        public function getCodigoSeguridad(){
-            return $this->codigoSeguridad;
+        /**
+         * Get the value of activo
+         */ 
+        public function getActivo()
+        {
+                return $this->activo;
         }
 
-        public function setCodigoSeguridad($codigoSeguridad){
-            $this->codigoSeguridad = $codigoSeguridad;
-            return $this;
-        }
+        /**
+         * Set the value of activo
+         *
+         * @return  self
+         */ 
+        public function setActivo($activo)
+        {
+                $this->activo = $activo;
 
-        public function getFechaExpedicion(){
-            return $this->fechaExpedicion;
-        }
-
-        public function setFechaExpedicion($fechaExpedicion){
-            $this->fechaExpedicion = $fechaExpedicion;
-            return $this;
+                return $this;
         }
 
                 /*
@@ -74,9 +110,8 @@
 
         public function guardar(){
             //Construir la consulta
-            $consulta = "INSERT INTO pagos VALUES(NULL, {$this -> getIdTarjeta()}, 
-                '{$this -> getNumeroTarjeta()}', '{$this -> getTitular()}', 
-                '{$this -> getCodigoSeguridad()}', '{$this -> getFechaExpedicion()}')";
+            $consulta = "INSERT INTO pagos VALUES(NULL, {$this -> getActivo()}, {$this -> getIdUsuario()}, {$this -> getIdMedioPago()}, 
+                '{$this -> getNUmero()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera

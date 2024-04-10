@@ -3,6 +3,7 @@
     class Videojuego{
 
         private $id;
+        private $idUsuario;
         private $activo;
         private $idConsola;
         private $idUso;
@@ -25,6 +26,26 @@
         public function setId($id){
             $this->id = $id;
             return $this;
+        }
+
+                /**
+         * Get the value of idUsuario
+         */ 
+        public function getIdUsuario()
+        {
+                return $this->idUsuario;
+        }
+
+        /**
+         * Set the value of idUsuario
+         *
+         * @return  self
+         */ 
+        public function setIdUsuario($idUsuario)
+        {
+                $this->idUsuario = $idUsuario;
+
+                return $this;
         }
 
         public function getActivo(){
@@ -127,7 +148,7 @@
 
         public function guardar(){
             //Construir la consulta
-            $consulta = "INSERT INTO videojuegos VALUES(NULL, {$this -> getActivo()}, {$this -> getIdConsola()}, 
+            $consulta = "INSERT INTO videojuegos VALUES(NULL, {$this -> getActivo()}, {$this -> getIdUsuario()}, {$this -> getIdConsola()}, 
                 {$this -> getIdUso()}, '{$this -> getNombre()}', 
                 {$this -> getPrecio()}, '{$this -> getDescripcion()}', 
                 '{$this -> getFoto()}', '{$this -> getFechaCreacion()}', 

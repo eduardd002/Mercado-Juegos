@@ -6,10 +6,6 @@
         private $idTransaccion;
         private $idVideojuego;
         private $unidades;
-        private $nombreVideojuego;
-        private $precioVideojuego;
-        private $usoVideojuego;
-        private $consolaVideojuego;
         private $db;
 
         public function __construct(){
@@ -52,42 +48,6 @@
             return $this;
         }
 
-        public function getNombreVideojuego(){
-            return $this->nombreVideojuego;
-        }
-
-        public function setNombreVideojuego($nombreVideojuego){
-            $this->nombreVideojuego = $nombreVideojuego;
-            return $this;
-        }
-
-        public function getPrecioVideojuego(){
-            return $this->precioVideojuego;
-        }
-
-        public function setPrecioVideojuego($precioVideojuego){
-            $this->precioVideojuego = $precioVideojuego;
-            return $this;
-        }
-
-        public function getUsoVideojuego(){
-            return $this->usoVideojuego;
-        }
-
-        public function setUsoVideojuego($usoVideojuego){
-            $this->usoVideojuego = $usoVideojuego;
-            return $this;
-        }
-
-        public function getConsolaVideojuego(){
-            return $this->consolaVideojuego;
-        }
-
-        public function setConsolaVideojuego($consolaVideojuego){
-            $this->consolaVideojuego = $consolaVideojuego;
-            return $this;
-        }
-
         /*
         Funcion para realizar el registro de la transaccion en la base de datos
         */
@@ -95,9 +55,7 @@
         public function guardar(){
             //Construir la consulta
             $consulta = "INSERT INTO transaccionvideojuego VALUES(NULL, {$this -> getIdTransaccion()}, 
-                {$this -> getIdVideojuego()}, {$this -> getUnidades()}, '{$this -> getNombreVideojuego()}', 
-                {$this -> getPrecioVideojuego()}, '{$this -> getUsoVideojuego()}', 
-                '{$this -> getConsolaVideojuego()}')";
+                {$this -> getIdVideojuego()}, {$this -> getUnidades()})";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera

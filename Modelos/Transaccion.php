@@ -8,22 +8,9 @@
         private $idVendedor;
         private $idPago;
         private $idEstado;
-        private $departamento;
-        private $municipio;
-        private $codigoPostal;
-        private $barrio;
-        private $direccion;
-        private $nombreComprador;
-        private $apellidoComprador;
-        private $correoComprador;
-        private $telefonoComprador;
-        private $nombreVendedor;
-        private $apellidoVendedor;
-        private $correoVendedor;
-        private $telefonoVendedor;
         private $total;
-        private $fechaRelizacion;
-        private $horaRealizacion;
+        private $idEnvio;
+        private $fechaHora;
         private $db;
 
         public function __construct(){
@@ -84,87 +71,6 @@
             return $this;
         }
 
-        public function getDepartamento(){
-            return $this->departamento;
-        }
-
-        public function setDepartamento($departamento){
-            $this->departamento = $departamento;
-            return $this;
-        }
-
-        public function getMunicipio(){
-            return $this->municipio;
-        }
-
-        public function setMunicipio($municipio){
-            $this->municipio = $municipio;
-            return $this;
-        }
-
-        public function getCodigoPostal(){
-            return $this->codigoPostal;
-        }
-
-        public function setCodigoPostal($codigoPostal){
-            $this->codigoPostal = $codigoPostal;
-            return $this;
-        }
-
-        public function getBarrio(){
-            return $this->barrio;
-        }
-
-        public function setBarrio($barrio){
-            $this->barrio = $barrio;
-            return $this;
-        }
-
-        public function getDireccion(){
-            return $this->direccion;
-        }
-
-        public function setDireccion($direccion){
-            $this->direccion = $direccion;
-            return $this;
-        }
-
-        public function getNombreComprador(){
-            return $this->nombreComprador;
-        }
-
-        public function setNombreComprador($nombreComprador){
-            $this->nombreComprador = $nombreComprador;
-            return $this;
-        }
-
-        public function getApellidoComprador(){
-            return $this->apellidoComprador;
-        }
-
-        public function setApellidoComprador($apellidoComprador){
-            $this->apellidoComprador = $apellidoComprador;
-            return $this;
-        }
-
-        public function getCorreoComprador(){
-            return $this->correoComprador;
-        }
-
-        public function setCorreoComprador($correoComprador){
-            $this->correoComprador = $correoComprador;
-            return $this;
-        }
-
-        public function getTelefonoComprador(){
-            return $this->telefonoComprador;
-        }
-
-        public function setTelefonoComprador($telefonoComprador){
-            $this->telefonoComprador = $telefonoComprador;
-            return $this;
-        }
-
         public function getTotal(){
             return $this->total;
         }
@@ -174,102 +80,31 @@
             return $this;
         }
 
-        public function getFechaRelizacion(){
-            return $this->fechaRelizacion;
+        public function getFechaHora(){
+            return $this->fechaHora;
         }
 
-        public function setFechaRelizacion($fechaRelizacion){
-            $this->fechaRelizacion = $fechaRelizacion;
+        public function setFechaHora($fechaHora){
+            $this->fechaHora = $fechaHora;
             return $this;
         }
 
-        public function getHoraRealizacion(){
-            return $this->horaRealizacion;
-        }
-
-        public function setHoraRealizacion($horaRealizacion){
-            $this->horaRealizacion = $horaRealizacion;
-            return $this;
-        }
-
-
-
-        /**
-         * Get the value of nombreVendedor
+                /**
+         * Get the value of idEnvio
          */ 
-        public function getNombreVendedor()
+        public function getIdEnvio()
         {
-                return $this->nombreVendedor;
+                return $this->idEnvio;
         }
 
         /**
-         * Set the value of nombreVendedor
+         * Set the value of idEnvio
          *
          * @return  self
          */ 
-        public function setNombreVendedor($nombreVendedor)
+        public function setIdEnvio($idEnvio)
         {
-                $this->nombreVendedor = $nombreVendedor;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of apellidoVendedor
-         */ 
-        public function getApellidoVendedor()
-        {
-                return $this->apellidoVendedor;
-        }
-
-        /**
-         * Set the value of apellidoVendedor
-         *
-         * @return  self
-         */ 
-        public function setApellidoVendedor($apellidoVendedor)
-        {
-                $this->apellidoVendedor = $apellidoVendedor;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of correoVendedor
-         */ 
-        public function getCorreoVendedor()
-        {
-                return $this->correoVendedor;
-        }
-
-        /**
-         * Set the value of correoVendedor
-         *
-         * @return  self
-         */ 
-        public function setCorreoVendedor($correoVendedor)
-        {
-                $this->correoVendedor = $correoVendedor;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of telefonoVendedor
-         */ 
-        public function getTelefonoVendedor()
-        {
-                return $this->telefonoVendedor;
-        }
-
-        /**
-         * Set the value of telefonoVendedor
-         *
-         * @return  self
-         */ 
-        public function setTelefonoVendedor($telefonoVendedor)
-        {
-                $this->telefonoVendedor = $telefonoVendedor;
+                $this->idEnvio = $idEnvio;
 
                 return $this;
         }
@@ -281,13 +116,9 @@
         public function guardar(){
             //Construir la consulta
             $consulta = "INSERT INTO transacciones VALUES(NULL, {$this -> getNumeroFactura()}, {$this -> getIdComprador()}, 
-                {$this -> getIdVendedor()}, {$this -> getIdPago()}, {$this -> getIdEstado()}, 
-                '{$this -> getDepartamento()}', '{$this -> getMunicipio()}', '{$this -> getCodigoPostal()}', 
-                '{$this -> getBarrio()}', '{$this -> getDireccion()}', '{$this -> getNombreComprador()}', 
-                '{$this -> getApellidoComprador()}', '{$this -> getCorreoComprador()}', '{$this -> getTelefonoComprador()}', '{$this -> getNombreVendedor()}', 
-                '{$this -> getApellidoVendedor()}', '{$this -> getCorreoVendedor()}', '{$this -> getTelefonoVendedor()}',
-                {$this -> getTotal()}, '{$this -> getFechaRelizacion()}', 
-                '{$this -> getHoraRealizacion()}')";
+                {$this -> getIdVendedor()}, {$this -> getIdPago()}, {$this -> getIdEstado()}, {$this -> getIdEnvio()}, 
+                {$this -> getTotal()}, 
+                '{$this -> getFechaHora()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera

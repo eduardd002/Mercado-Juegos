@@ -1,6 +1,6 @@
 <?php
 
-    class Tarjeta{
+    class MedioPago{
 
         private $id;
         private $activo;

@@ -1,17 +1,57 @@
 <?php
 
-    class Bloqueo{
-        
+    class UsuarioBloqueo{
+
         private $id;
         private $activo;
+        private $idBloqueador;
+        private $idBloqueado;
         private $motivo;
-        private $fecha;
-        private $hora;
+        private $fechaHora;
         private $db;
 
         public function __construct(){
             $this -> db = BaseDeDatos::connect();
         }
+
+        public function getMotivo()
+        {
+                return $this->motivo;
+        }
+
+        /**
+         * Set the value of motivo
+         *
+         * @return  self
+         */ 
+        public function setMotivo($motivo)
+        {
+                $this->motivo = $motivo;
+
+                return $this;
+        }
+
+        
+        /**
+         * Get the value of fecha
+         */ 
+        public function getFechaHora()
+        {
+                return $this->fechaHora;
+        }
+
+        /**
+         * Set the value of fecha
+         *
+         * @return  self
+         */ 
+        public function setFechaHora($fechaHora)
+        {
+                $this->fechaHora = $fechaHora;
+
+                return $this;
+        }
+
 
         /**
          * Get the value of id
@@ -43,70 +83,49 @@
             }
 
         /**
-         * Get the value of motivo
+         * Get the value of idBloqueador
          */ 
-        public function getMotivo()
+        public function getIdBloqueador()
         {
-                return $this->motivo;
+                return $this->idBloqueador;
         }
 
         /**
-         * Set the value of motivo
+         * Set the value of idBloqueador
          *
          * @return  self
          */ 
-        public function setMotivo($motivo)
+        public function setIdBloqueador($idBloqueador)
         {
-                $this->motivo = $motivo;
-
-                return $this;
-        }
-
-        
-        /**
-         * Get the value of fecha
-         */ 
-        public function getFecha()
-        {
-                return $this->fecha;
-        }
-
-        /**
-         * Set the value of fecha
-         *
-         * @return  self
-         */ 
-        public function setFecha($fecha)
-        {
-                $this->fecha = $fecha;
+                $this->idBloqueador = $idBloqueador;
 
                 return $this;
         }
 
         /**
-         * Get the value of hora
+         * Get the value of idBloqueado
          */ 
-        public function getHora()
+        public function getIdBloqueado()
         {
-                return $this->hora;
+                return $this->idBloqueado;
         }
 
         /**
-         * Set the value of hora
+         * Set the value of idBloqueado
          *
          * @return  self
          */ 
-        public function setHora($hora)
+        public function setIdBloqueado($idBloqueado)
         {
-                $this->hora = $hora;
+                $this->idBloqueado = $idBloqueado;
 
                 return $this;
         }
 
         public function guardar(){
             //Construir la consulta
-            $consulta = "INSERT INTO bloqueos VALUES(NULL, {$this -> getActivo()}, '{$this -> getMotivo()}',
-            '{$this -> getFecha()}', '{$this -> getHora()}')";
+            $consulta = "INSERT INTO usuariobloqueo VALUES(NULL, {$this -> getActivo()}, {$this -> getIdBloqueador()}, 
+                {$this -> getIdBloqueado()}, '{$this -> getMotivo()}', '{$this -> getFechaHora()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera
@@ -120,34 +139,20 @@
             return $resultado;
         }
 
-        public function ultimo(){
-            //Construir la consulta
-            $consulta = "SELECT DISTINCT id FROM bloqueos ORDER BY id DESC LIMIT 1";
-            //Ejecutar la consulta
-            $resultado = $this -> db -> query($consulta);
-            //Obtener el resultado del objeto
-            $ultimo = $resultado -> fetch_object();
-            //Devolver resultado
-            $ultimoBloqueo = $ultimo -> id;
-            //Retornar el resultado
-            return $ultimoBloqueo;
-        }
-
-        public function obtenerListaBloqueos(){
-             $consulta = "SELECT DISTINCT ubo.nombre AS 'nombreBloqueado' , ubr.nombre AS 'nombreBloqueador' , b.motivo AS 'motivoBloqueo' , b.fechaBloqueo AS 'fechaBloqueo' , b.horaBloqueo AS 'horaBloqueo'
-                FROM usuarioBloqueo ub
-                INNER JOIN Bloqueos b ON b.id = ub.idBloqueo
-                INNER JOIN Usuarios ubr ON ubr.id = ub.idBloqueador
-                INNER JOIN Usuarios ubo ON ubo.id = ub.idBloqueado
-                WHERE b.activo = 1";
+        public function obtenerBloqueosPorUsuario(){
+                $consulta = "SELECT DISTINCT b.id AS 'idBloqueo', u.nombre AS 'nombreBloqueado', u.apellido AS 'apellidoBloqueado', b.motivo AS 'motivoBloqueo', b.fechaBloqueo AS 'fechaBloqueo', b.horaBloqueo AS 'horaBloqueo'
+                FROM UsuarioBloqueo ub
+                INNER JOIN Usuarios u ON u.id = ub.idBloqueado
+                INNER JOIN Bloqueos b ON b.id = ub.id
+                WHERE ub.idBloqueador = {$this -> getIdBloqueador()} AND b.activo = 1";
                 //Ejecutar la consulta
-                $resultado = $this -> db -> query($consulta);
+                $lista = $this -> db -> query($consulta);
                 //Retornar el resultado
-                return $resultado;
+                return $lista;
         }
 
         public function eliminar(){
-                $consulta = "UPDATE bloqueos SET activo = 0 WHERE id = {$this -> getId()}";
+                $consulta = "UPDATE usuarioBloqueo SET activo = 0 WHERE idBloqueador = {$this -> getIdBloqueado()} AND idBloqueado = {$this -> getIdBloqueador()}";
                 $eliminado = $this -> db -> query($consulta);
                 //Crear bandera
                 $bandera = false;
@@ -158,6 +163,32 @@
                 //Retorno el resultado
                 return $bandera;
         }
+    
+            public function ultimo(){
+                //Construir la consulta
+                $consulta = "SELECT DISTINCT id FROM bloqueos ORDER BY id DESC LIMIT 1";
+                //Ejecutar la consulta
+                $resultado = $this -> db -> query($consulta);
+                //Obtener el resultado del objeto
+                $ultimo = $resultado -> fetch_object();
+                //Devolver resultado
+                $ultimoBloqueo = $ultimo -> id;
+                //Retornar el resultado
+                return $ultimoBloqueo;
+            }
+    
+            public function obtenerListaBloqueos(){
+                 $consulta = "SELECT DISTINCT ubo.nombre AS 'nombreBloqueado' , ubr.nombre AS 'nombreBloqueador' , b.motivo AS 'motivoBloqueo' , b.fechaBloqueo AS 'fechaBloqueo' , b.horaBloqueo AS 'horaBloqueo'
+                    FROM usuarioBloqueo ub
+                    INNER JOIN Bloqueos b ON b.id = ub.idBloqueo
+                    INNER JOIN Usuarios ubr ON ubr.id = ub.idBloqueador
+                    INNER JOIN Usuarios ubo ON ubo.id = ub.idBloqueado
+                    WHERE b.activo = 1";
+                    //Ejecutar la consulta
+                    $resultado = $this -> db -> query($consulta);
+                    //Retornar el resultado
+                    return $resultado;
+            }
     }
 
 ?>

@@ -107,6 +107,7 @@ Crear tabla videoujuegos
 
 CREATE TABLE videojuegos (
     id              INTEGER auto_increment NOT NULL,
+    idUsuario       INTEGER NOT NULL,
     activo          INTEGER NOT NULL,
     idConsola       INTEGER NOT NULL,
     idUso           INTEGER NOT NULL,
@@ -119,29 +120,15 @@ CREATE TABLE videojuegos (
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT videojuegos_pk PRIMARY KEY ( id ),
     CONSTRAINT videojuegos_consola_fk FOREIGN KEY ( idConsola ) REFERENCES consolas ( id ),
-    CONSTRAINT videojuegos_uso_fk FOREIGN KEY ( idUso ) REFERENCES usos ( id )
+    CONSTRAINT videojuegos_uso_fk FOREIGN KEY ( idUso ) REFERENCES usos ( id ),
+    CONSTRAINT videojuegos_usuario_fk_usuario_fk FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id )
 );
 
 /*
-Crea tabla intermedia de usuario y videojuego
+Crear tabla para tipo de medios de pago
 */
 
-CREATE TABLE usuariovideojuego (
-    id           INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
-    idUsuario    INTEGER NOT NULL,
-    idVideojuego INTEGER NOT NULL,
-    CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT usuariovideojuego_pk PRIMARY KEY ( id ),
-    CONSTRAINT usuariovideojuego_usuario_fk FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id ),
-    CONSTRAINT usuariovideojuego_videojuego_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
-);
-
-/*
-Crear tabla para tipo de tarjetas
-*/
-
-CREATE TABLE tarjetas (
+CREATE TABLE mediospago (
     id              INTEGER auto_increment NOT NULL,
     activo          INTEGER NOT NULL,
     nombre VARCHAR(200) NOT NULL,
@@ -151,19 +138,37 @@ CREATE TABLE tarjetas (
 );
 
 /*
+Crear tabla para tipo de envios
+*/
+
+CREATE TABLE envios (
+    id              INTEGER auto_increment NOT NULL,
+    idUsuario      INTEGER NOT NULL,
+    activo          INTEGER NOT NULL,
+    departamento      VARCHAR(250) NOT NULL,
+    municipio         VARCHAR(200) NOT NULL,
+    codigoPostal      VARCHAR(200) NOT NULL,
+    barrio            VARCHAR(250) NOT NULL,
+    direccion         TEXT NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT envios_pk PRIMARY KEY ( id ),
+    CONSTRAINT envios_usuario_fk FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id )
+);
+
+/*
 Crear tabla de pagos
 */
 
 CREATE TABLE pagos (
     id              INTEGER auto_increment NOT NULL,
-    idTarjeta       INTEGER NOT NULL,
-    numeroTarjeta   VARCHAR(200) NOT NULL,
-    titular         VARCHAR(250) NOT NULL,
-    codigoSeguridad VARCHAR(200) NOT NULL,
-    fechaExpedicion DATE NOT NULL,
+    activo          INTEGET NOT NULL,
+    idUsuario      INTEGER NOT NULL,
+    idMedioPago       INTEGER NOT NULL,
+    numero   VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT pagos_pk PRIMARY KEY ( id ),
-    CONSTRAINT pagos_tarjeta_fk FOREIGN KEY ( idTarjeta ) REFERENCES tarjetas ( id )
+    CONSTRAINT pagos_tarjeta_fk FOREIGN KEY ( idTarjeta ) REFERENCES tarjetas ( id ),
+    CONSTRAINT pagos_usuario_fk FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id )
 );
 
 /*
@@ -190,28 +195,16 @@ CREATE TABLE transacciones (
     idVendedor        INTEGER NOT NULL,
     idPago            INTEGER NOT NULL,
     idEstado          INTEGER NOT NULL,
-    departamento      VARCHAR(250) NOT NULL,
-    municipio         VARCHAR(200) NOT NULL,
-    codigoPostal      VARCHAR(200) NOT NULL,
-    barrio            VARCHAR(250) NOT NULL,
-    direccion         TEXT NOT NULL,
-    nombreComprador   VARCHAR(200) NOT NULL,
-    apellidoComprador VARCHAR(200) NOT NULL,
-    correoComprador   VARCHAR(200) NOT NULL,
-    telefonoComprador VARCHAR(200) NOT NULL,
-    nombreVendedor   VARCHAR(200) NOT NULL,
-    apellidoVendedor VARCHAR(200) NOT NULL,
-    correoVendedor   VARCHAR(200) NOT NULL,
-    telefonoVendedor VARCHAR(200) NOT NULL,
+    idEnvio           INTEGER NOT NULL,
     total             INTEGER NOT NULL,
-    fechaRealizacion  DATE NOT NULL,
-    horaRealizacion   TIME NOT NULL,
+    fechaHora  DATE NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT uq_nf UNIQUE(numeroFactura),
     CONSTRAINT compras_pk PRIMARY KEY ( id ),
     CONSTRAINT transacciones_comprador_fk FOREIGN KEY ( idComprador ) REFERENCES usuarios ( id ),
     CONSTRAINT transacciones_vendedor_fk FOREIGN KEY ( idVendedor ) REFERENCES usuarios ( id ),
     CONSTRAINT transacciones_pago_fk FOREIGN KEY ( idPago ) REFERENCES pagos ( id ),
+    CONSTRAINT transacciones_envio_fk FOREIGN KEY ( idEnvio ) REFERENCES envios ( id ),
     CONSTRAINT transacciones_estado_fk FOREIGN KEY ( idEstado ) REFERENCES estados ( id )
 );
 
@@ -224,10 +217,6 @@ CREATE TABLE transaccionvideojuego (
     idTransaccion       INTEGER NOT NULL,
     idVideojuego        INTEGER NOT NULL,
     unidades            INTEGER NOT NULL,
-    nombreVideojuego    VARCHAR(200) NOT NULL,
-    precioVideojuego    INTEGER NOT NULL,
-    usoVideojuego VARCHAR(250) NOT NULL,
-    consolaVideojuego   VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT transaccionvideojuego_pk PRIMARY KEY ( id ),
     CONSTRAINT transaccionvideojuego_transaccion_fk FOREIGN KEY ( idTransaccion ) REFERENCES transacciones ( id ),
@@ -250,34 +239,20 @@ CREATE TABLE videojuegocategoria (
 );
 
 /*
-Crea tabla de comentarios
-*/
-
-CREATE TABLE comentarios (
-    id     INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
-    idUsuario INTEGER NOT NULL,
-    contenido TEXT NOT NULL,
-    fechaCreacion DATE NOT NULL,
-    horaCreacion TIME NOT NULL,
-    CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT comentarios_pk PRIMARY KEY ( id ),
-    CONSTRAINT comentarios_usuario_fk FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id )
-);
-
-/*
 Crea tabla de comentariovideojuego
 */
 
-CREATE TABLE comentariovideojuego (
+CREATE TABLE comentariousuariovideojuego (
     id     INTEGER auto_increment NOT NULL,
     activo          INTEGER NOT NULL,
-    idComentario INTEGER NOT NULL,
+    idUsuario INTEGER NOT NULL,
     idVideojuego INTEGER NOT NULL,
+    contenido TEXT NOT NULL,
+    fechaHora DATETIME,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT comentariovideojuego_pk PRIMARY KEY ( id ),
-    CONSTRAINT comentariovideojuego_comentario_fk FOREIGN KEY ( idComentario ) REFERENCES comentarios ( id ),
-    CONSTRAINT comentariovideojuego_videojuego_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
+    CONSTRAINT comentariovideojuego_videojuego_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id ),
+    CONSTRAINT comentariovideojuego_usuario_fk FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id )
 );
 
 /*
@@ -358,10 +333,11 @@ Crear tabla de usuario mensaje chat
 CREATE TABLE usuariochat (
     id   INTEGER auto_increment NOT NULL,
     activo          INTEGER NOT NULL,
+    mensaje TEXT NOT NULL,
     idRemitente  INTEGER NOT NULL,
     idDestinatario  INTEGER NOT NULL,
     idChat  INTEGER NOT NULL,
-    idMensaje  INTEGER NULL,
+    fechaHora DATETIME NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT usuariomensajechat_id PRIMARY KEY ( id ),
     CONSTRAINT usuariomensajechat_remitente FOREIGN KEY ( idRemitente ) REFERENCES usuarios ( id ),
@@ -370,52 +346,18 @@ CREATE TABLE usuariochat (
 );
 
 /*
-Crear tabla de mensajes
-*/
-
-CREATE TABLE mensajes (
-    id   INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
-    idRemitente  INTEGER NOT NULL,
-    idDestinatario  INTEGER NOT NULL,
-    idChat  INTEGER NOT NULL,
-    contenido   TEXT NOT NULL,
-    fechaEnvio    DATE NOT NULL,
-    horaEnvio   TIME NOT NULL,
-    CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT mensaje_id PRIMARY KEY ( id ),
-    CONSTRAINT mensaje_remitente FOREIGN KEY ( idRemitente ) REFERENCES usuarios ( id ),
-    CONSTRAINT mensaje_destinatario FOREIGN KEY ( idDestinatario ) REFERENCES usuarios ( id ),
-    CONSTRAINT mensaje_chat FOREIGN KEY ( idChat ) REFERENCES chats ( id )
-);
-
-/*
-Crear tabla de bloqueos
+Crear tabla de usuariosbloqueados
 */
 
 CREATE TABLE bloqueos (
     id   INTEGER auto_increment NOT NULL,
     activo          INTEGER NOT NULL,
-    motivo  TEXT NOT NULL,
-    fechaBloqueo    DATE NOT NULL,
-    horaBloqueo   TIME NOT NULL,
-    CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT bloqueos_id PRIMARY KEY ( id )
-);
-
-/*
-Crear tabla de usuariosbloqueados
-*/
-
-CREATE TABLE usuariobloqueo (
-    id   INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
     idBloqueador  INTEGER NOT NULL,
     idBloqueado  INTEGER NOT NULL,
-    idBloqueo  INTEGER NOT NULL,
+    motivo TEXT NOT NULL,
+    fechaHora DATETIME NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT usuariobloqueo_id PRIMARY KEY ( id ),
-    CONSTRAINT usuariobloqueo_bloqueo FOREIGN KEY ( idBloqueo ) REFERENCES bloqueos ( id ),
     CONSTRAINT usuariobloqueo_bloqueador FOREIGN KEY ( idBloqueador ) REFERENCES usuarios ( id ),
     CONSTRAINT usuariobloqueo_bloqueado FOREIGN KEY ( idBloqueado ) REFERENCES usuarios ( id )
 );

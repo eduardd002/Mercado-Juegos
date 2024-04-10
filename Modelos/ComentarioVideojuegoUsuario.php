@@ -1,11 +1,13 @@
 <?php
 
-    class ComentarioVideojuego{
+    class ComentarioVideojuegoUsuario{
 
         private $id;
         private $activo;
-        private $idComenatario;
+        private $idUsuario;
         private $idVideojuego;
+        private $contenido;
+        private $fechaHora;
         private $db;
 
         public function __construct(){
@@ -30,6 +32,27 @@
             return $this;
         }
 
+        
+        /**
+         * Get the value of idUsuario
+         */ 
+        public function getIdUsuario()
+        {
+                return $this->idUsuario;
+        }
+
+        /**
+         * Set the value of idUsuario
+         *
+         * @return  self
+         */ 
+        public function setIdUsuario($idUsuario)
+        {
+                $this->idUsuario = $idUsuario;
+
+                return $this;
+        }
+
         public function getIdVideojuego(){
             return $this->idVideojuego;
         }
@@ -39,14 +62,31 @@
             return $this;
         }
 
-        public function getIdComentario(){
-            return $this->idComenatario;
+        public function getFechaHora()
+        {
+                return $this->fechaHora;
         }
 
-        public function setIdComentario($categoriaId){
-            $this->idComenatario = $categoriaId;
-            return $this;
+        /**
+         * Set the value of fecha
+         *
+         * @return  self
+         */ 
+        public function setFechaHora($fechaHora)
+        {
+                $this->fechaHora = $fechaHora;
+
+                return $this;
         }
+
+        public function getContenido(){
+            return $this->contenido;
+       }
+
+       public function setContenido($contenido){
+            $this->contenido = $contenido;
+            return $this;
+       }
 
         /*
         Funcion para guardar la relacion entre videojuego y comentario en la base de datos
@@ -54,7 +94,7 @@
 
         public function guardar(){
             //Construir la consulta
-            $consulta = "INSERT INTO comentariovideojuego VALUES(NULL, {$this -> getActivo()}, {$this -> getIdComentario()}, {$this -> getIdVideojuego()})";
+            $consulta = "INSERT INTO comentariovideojuego VALUES(NULL, {$this -> getActivo()}, {$this -> getIdUsuario()}, {$this -> getIdVideojuego()}, '{$this -> getContenido()}', '{$this -> getFechaHora()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera
