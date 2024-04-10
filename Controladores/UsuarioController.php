@@ -9,11 +9,7 @@
     //Incluir el objeto de transaccion
     require_once 'Modelos/Transaccion.php';
 
-    
-    require_once 'Modelos/UsuarioVideojuego.php';
-
-    
-    require_once 'Modelos/UsuarioBloqueo.php';
+    require_once 'Modelos/Bloqueo.php';
 
     class UsuarioController{
 
@@ -319,13 +315,13 @@
             $idVendedor = $_GET['idVendedor'];
 
             //Instanciar el objeto
-            $usuarioVideojuego = new UsuarioVideojuego();
-            $usuarioVideojuego -> setIdUsuario($idVendedor);
-            $listaDatosUsuario = $usuarioVideojuego -> obtenerInformacionUsuario();
+            $usuario = new Usuario();
+            $usuario -> setId($idVendedor);
+            $listaDatosUsuario = $usuario -> obtenerInformacionUsuario();
 
-            $publicados = $usuarioVideojuego -> obtenerTotalPublicados();
+            $publicados = $usuario -> obtenerTotalPublicados();
 
-            $vendidos = $usuarioVideojuego -> obtenerTotalVendidos();
+            $vendidos = $usuario -> obtenerTotalVendidos();
             //Incluir la vista
             require_once "Vistas/Usuario/Perfil.html";
         }
@@ -404,11 +400,11 @@
         public function bloqueos(){
 
             //Instanciar el objeto
-            $usuarioBloqueo = new UsuarioBloqueo();
+            $bloqueo = new Bloqueo();
             //Construir el objeto
-            $usuarioBloqueo -> setIdBloqueador($_SESSION['loginexitoso'] -> id);
+            $bloqueo -> setIdBloqueador($_SESSION['loginexitoso'] -> id);
             //Listar todos los usuarios desde la base de datos
-            $listadoBloqueos = $usuarioBloqueo -> obtenerBloqueosPorUsuario();
+            $listadoBloqueos = $bloqueo -> obtenerBloqueosPorUsuario();
 
             //Incluir la vista
             require_once "Vistas/Usuario/Bloqueos.html";
@@ -421,9 +417,9 @@
         public function videojuegos(){
 
             //Instanciar el objeto
-            $usuarioVideojuego = new UsuarioVideojuego();
-            $usuarioVideojuego -> setIdUsuario($_SESSION['loginexitoso'] -> id);
-            $listaVideojuegos = $usuarioVideojuego -> obtenerVideojuegosCreadosPorUsuario();
+            $usuario = new Usuario();
+            $usuario -> setId($_SESSION['loginexitoso'] -> id);
+            $listaVideojuegos = $usuario -> obtenerVideojuegosCreadosPorUsuario();
             //Incluir la vista
             require_once "Vistas/Usuario/Videojuegos.html";
         }

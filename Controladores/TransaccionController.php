@@ -84,9 +84,9 @@
         public function direccionYPago(){
 
             //Instanciar el objeto
-            $tarjeta = new Tarjeta();
+            $medioPago = new MedioPago();
             //Listar todas las categorias desde la base de datos
-            $listadoTarjetas = $tarjeta -> listar();
+            $listadoTarjetas = $medioPago -> listar();
 
             //Comprobar si el dato está llegando
             if(isset($_GET) && isset($_POST)){
@@ -152,11 +152,11 @@
 
         public function traerDuenioDeVideojuego($idVideojuego){
             //Instanciar el objeto
-            $usuarioVideojuego = new UsuarioVideojuego();
+            $videojuego = new Videojuego();
             //Crear el objeto
-            $usuarioVideojuego -> setIdVideojuego($idVideojuego);
+            $videojuego -> setId($idVideojuego);
             //Obtener el usuario
-            $idUsuario = $usuarioVideojuego -> obtenerUsuarioVideojuego();
+            $idUsuario = $videojuego -> obtenerUsuarioVideojuego();
             //Obtener el id del usuario
             $id = $idUsuario -> idUsuario;
             //Retornar el id
@@ -180,22 +180,7 @@
             $transaccion -> setIdVendedor($this -> traerDuenioDeVideojuego($idVideojuego));
             $transaccion -> setIdPago($idPago);
             $transaccion -> setIdEstado(1);
-            $transaccion -> setDepartamento($departamento);
-            $transaccion -> setMunicipio($municipio);
-            $transaccion -> setCodigoPostal($codigoPostal);
-            $transaccion -> setBarrio($barrio);
-            $transaccion -> setDireccion($direccion);
-            $transaccion -> setNombreComprador($comprador -> nombre);
-            $transaccion -> setApellidoComprador($comprador -> apellido);
-            $transaccion -> setCorreoComprador($comprador -> correo);
-            $transaccion -> setTelefonoComprador($comprador -> numeroTelefono);
-            $transaccion -> setNombreVendedor($vendedor -> nombre);
-            $transaccion -> setApellidoVendedor($vendedor -> apellido);
-            $transaccion -> setCorreoVendedor($vendedor -> correo);
-            $transaccion -> setTelefonoVendedor($vendedor -> numeroTelefono);
             $transaccion -> setTotal($unidades * ($videojuego['videojuego']['precioVideojuego']));
-            $transaccion -> setFechaRelizacion(date('Y-m-d'));
-            $transaccion -> setHoraRealizacion(date("H:i:s"));
             //Guardar en la base de datos
             $guardadoTransaccion = $transaccion -> guardar();
             //Retornar el resultado
@@ -215,10 +200,6 @@
             $transaccionVideojuego -> setIdTransaccion($id);
             $transaccionVideojuego -> setIdVideojuego($idVideojuego);
             $transaccionVideojuego -> setUnidades($unidades);
-            $transaccionVideojuego -> setNombreVideojuego($videojuego['videojuego']['nombreVideojuego']);
-            $transaccionVideojuego -> setPrecioVideojuego($videojuego['videojuego']['precioVideojuego']);
-            $transaccionVideojuego -> setUsoVideojuego($videojuego['videojuego']['nombreUso']);
-            $transaccionVideojuego -> setConsolaVideojuego($videojuego['videojuego']['nombreConsola']);
             //Guardar en la base de datos
             $guardadoTransaccionVideojuego = $transaccionVideojuego -> guardar();
             //Retornar el resultado
@@ -229,15 +210,11 @@
         Funcion para guardar el pago en la base de datos
         */
 
-        public function guardarPago($idTarjeta, $numeroTarjeta, $titular, $codigoDeSeguridad, $fechaExpedicion){
+        public function guardarPago($numero){
 
             //Instanciar el objeto
             $pago = new Pago();
-            $pago -> setIdTarjeta($idTarjeta);
-            $pago -> setNumeroTarjeta($numeroTarjeta);
-            $pago -> setTitular($titular);
-            $pago -> setCodigoSeguridad($codigoDeSeguridad);
-            $pago -> setFechaExpedicion($fechaExpedicion);
+            $pago -> setNumero($numero);
             //Guardar en la base de datos
             $guardadoPago = $pago -> guardar();
             //Retornar el resultado
@@ -288,7 +265,6 @@
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
             $usuarioChat -> setIdDestinatario($destinatario);
             $usuarioChat -> setIdChat($this -> obtenerUltimoChat());
-            $usuarioChat -> setIdMensaje(null);
             //Guardar en la base de datos el primer objeto
             $guardado = $usuarioChat -> guardar();
             //Retonar el resultado

@@ -189,7 +189,7 @@
             /*Verificar que el inicio de sesion de usuario no exista*/
             if(!isset($_SESSION['loginexitoso'])){
                 /*Redirigir*/
-                header("Location:"."http:/*localhost/Mercado-Juegos/".$seccion);
+                header("Location:"."http://localhost/Mercado-Juegos/".$seccion);
                 /*Crear sesion con contenido informativo al usuario*/
                 $_SESSION['iniciodesesion'] = "Debes iniciar sesion primero";
             }
@@ -204,7 +204,7 @@
             /*Verificar que el inicio de sesion de usuario no exista*/
             if(!isset($_SESSION['loginexitoso'])){
                 /*Redirigir*/
-                header("Location:"."http:/*localhost/Mercado-Juegos/".$seccion);
+                header("Location:"."http://localhost/Mercado-Juegos/".$seccion);
                 /*Crear sesion con contenido informativo al usuario*/
                 $_SESSION['comentariopendiente'] = "Por favor inicia sesion antes de comentar";
                 /*Crear sesion con id de videojuego que se quiere comentar*/
@@ -221,7 +221,7 @@
             /*Verificar que el inicio de sesion de usuario no exista*/
             if(!isset($_SESSION['loginexitoso'])){
                 /*Redirigir*/
-                header("Location:"."http:/*localhost/Mercado-Juegos/".$seccion);
+                header("Location:"."http://localhost/Mercado-Juegos/".$seccion);
                 /*Crear sesion con contenido informativo al usuario*/
                 $_SESSION['favoritopendiente'] = "Por favor inicia sesion antes de agregar a favoritos";
             }
@@ -236,7 +236,7 @@
             /*Verificar que el inicio de sesion de administrador no exista*/
             if(!isset($_SESSION['loginexitosoa'])){
                 /*Redirigir al inicio*/
-                header("Location:"."http:/*localhost/Mercado-Juegos/?controller=UsuarioController&action=login");
+                header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=login");
             }
         }
 
@@ -248,7 +248,7 @@
             /*Crear sesion*/
             $_SESSION[$nombreSesion] = $contenidoSesion;
             /*Redirigir*/
-            header("Location:"."http:/*localhost/Mercado-Juegos/".$ruta);
+            header("Location:"."http://localhost/Mercado-Juegos/".$ruta);
         }
 
         /*
@@ -379,7 +379,7 @@
                 /*Comprobar si se quiere hacer un comentario sin estar previemente logueado*/
                 if(isset($_SESSION['comentariopendiente'])){
                    /*Redirigir al comentario pendiente*/
-                   header("Location:"."http:/*localhost/Mercado-Juegos/?controller=VideojuegoController&action=detalle&id=".$_SESSION['idvideojuegopendientecomentario']);
+                   header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=detalle&id=".$_SESSION['idvideojuegopendientecomentario']);
                    /*Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes*/
                    Ayudas::eliminarSesion('comentariopendiente');
                    Ayudas::eliminarSesion('idvideojuegopendientecomentario');
@@ -388,19 +388,19 @@
                     /*Comprobar si la solicitud viene desde el catalogo*/
                     if(isset($_SESSION['catalogofavorito'])){    
                         /*Redirigir al lugar requerido*/
-                        header("Location:"."http:/*localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio"); 
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio"); 
                         /*Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes*/
                         Ayudas::eliminarSesion('catalogofavorito');
                     }else if(isset($_SESSION['catalogofavoritot'])){
                         /*Redirigir al lugar requerido*/
-                        header("Location:"."http:/*localhost/Mercado-Juegos/?controller=VideojuegoController&action=todos"); 
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=todos"); 
                         /*Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes*/
                         Ayudas::eliminarSesion('catalogofavoritot');
                     }
                     /*Comprobar si la solicitud viene desde el detalle del videojuego*/
                     else{
                         /*Redirigir al lugar requerido*/
-                        header("Location:"."http:/*localhost/Mercado-Juegos/?controller=VideojuegoController&action=detalle&id=".$_SESSION['idvideojuegopendientefavorito']);
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=detalle&id=".$_SESSION['idvideojuegopendientefavorito']);
                         /*Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes*/
                         Ayudas::eliminarSesion('idvideojuegopendientefavorito');
                     }
@@ -408,19 +408,19 @@
                     Ayudas::eliminarSesion('favoritopendiente');
                 }else{
                     /*Redirigir al inicio*/
-                    header("Location:"."http:/*localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+                    header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
                 }
             }else if($ingresoa && is_object($ingresoa)){
                 /*Crear la sesion con el objeto completo del administrador*/
                 $_SESSION['loginexitosoa'] = $ingresoa;
                 $_SESSION['loginexitosoinfoa'] = "Bienvenido administrador";
                 /*Redirigir al inicio*/
-                header("Location:"."http:/*localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+                header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
             }else{
                 /*Crear la sesion de error al realizar el login*/
                 $_SESSION['error_login'] = 'Este usuario no se encuentra registrado';
                 /*Redirigir al login*/
-                header("Location:"."http:/*localhost/Mercado-Juegos/?controller=UsuarioController&action=login");
+                header("Location:"."http://localhost/Mercado-Juegos/?controller=UsuarioController&action=login");
             }
         }
 

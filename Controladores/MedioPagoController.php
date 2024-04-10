@@ -1,9 +1,9 @@
 <?php
 
     //Incluir el objeto de tarjeta
-    require_once 'Modelos/Tarjeta.php';
+    require_once 'Modelos/MedioPago.php';
 
-    class TarjetaController{
+    class MedioPagoController{
 
         /*
         Funcion para crear una tarjeta
@@ -12,7 +12,7 @@
         public function crear(){
 
             //Incluir la vista
-            require_once "Vistas/Tarjeta/Crear.html";
+            require_once "Vistas/MedioPago/Crear.html";
         }
 
         /*
@@ -22,13 +22,13 @@
         public function guardarTarjeta($nombre){
 
             //Instanciar el objeto
-            $tarjeta = new Tarjeta();
+            $medioPago = new MedioPago();
             //Crear el objeto
-            $tarjeta -> setActivo(1);
-            $tarjeta -> setNombre($nombre);
+            $medioPago -> setActivo(1);
+            $medioPago -> setNombre($nombre);
             try{
                 //Ejecutar la consulta
-                $guardado = $tarjeta -> guardar();
+                $guardado = $medioPago -> guardar();
             }catch(mysqli_sql_exception $excepcion){
                 //Crear la sesion y redirigir a la ruta pertinente
                 Ayudas::crearSesionYRedirigir('guardartarjetaerror', "Este nombre de tarjeta ya existe", '?controller=TarjetaController&action=crear');
@@ -80,11 +80,11 @@
         public function eliminarTarjeta($idTarjeta){
 
             //Instanciar el objeto
-            $tarjeta = new Tarjeta();
+            $medioPago = new MedioPago();
             //Crear objeto
-            $tarjeta -> setId($idTarjeta);
+            $medioPago -> setId($idTarjeta);
             //Ejecutar la consulta
-            $eliminado = $tarjeta -> eliminar();
+            $eliminado = $medioPago -> eliminar();
             //Retornar resultado
             return $eliminado;
         }
@@ -130,9 +130,9 @@
         public function editarTarjeta($idTarjeta){
 
             //Instanciar el objeto
-            $tarjeta = new Tarjeta();
+            $medioPago = new MedioPago();
             //Creo el objeto y retornar el resultado
-            return $tarjeta -> setId($idTarjeta);
+            return $medioPago -> setId($idTarjeta);
         }
 
         /*
@@ -170,13 +170,13 @@
         public function actualizarTarjeta($idTarjeta, $nombre){
 
             //Instanciar el objeto
-            $tarjeta = new Tarjeta();
+            $medioPago = new MedioPago();
             //Crear objeto
-            $tarjeta -> setId($idTarjeta);
-            $tarjeta -> setNombre($nombre);
+            $medioPago -> setId($idTarjeta);
+            $medioPago -> setNombre($nombre);
             try{
                 //Ejecutar la consulta
-                $actualizado = $tarjeta -> actualizar();
+                $actualizado = $medioPago -> actualizar();
             }catch(mysqli_sql_exception $excepcion){
                 //Crear la sesion y redirigir a la ruta pertinente
                 Ayudas::crearSesionYRedirigir('actualizartarjetaerror', "Este nombre de tarjeta ya existe", '?controller=TarjetaController&action=editar&id='.$idTarjeta);

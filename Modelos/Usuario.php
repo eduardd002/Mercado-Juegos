@@ -281,6 +281,126 @@
             return $bandera;
         }
 
+        public function obtenerInformacionUsuario(){
+            $consulta = "SELECT u.id AS 'idUsuario', u.nombre AS 'nombreUsuario', u.fechaRegistro AS 'fechaUsuario', u.departamento AS 'departamentoUsuario', u.municipio AS 'municipioUsuario', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.foto AS 'fotoVideojuego', v.id AS 'idVideojuego'
+                FROM UsuarioVideojuego uv
+                INNER JOIN Usuarios u ON u.id = uv.idUsuario
+                INNER JOIN Videojuegos v ON v.id = uv.idVideojuego
+                WHERE uv.idUsuario = {$this->getId()} AND v.activo = 1";
+        
+            // Ejecutar la consulta
+            $resultados = $this->db->query($consulta);
+        
+            // Array para almacenar la información del usuario y sus videojuegos
+            $informacionUsuario = array();
+        
+            // Recorrer los resultados de la consulta
+            while ($fila = $resultados->fetch_object()) {
+                // Verificar si ya se ha almacenado la información del usuario
+                if (!isset($informacionUsuario['usuario'])) {
+                    // Si no se ha almacenado, almacenar la información del usuario
+                    $informacionUsuario['usuario'] = array(
+                        'idUsuario' => $fila->idUsuario,
+                        'nombreUsuario' => $fila->nombreUsuario,
+                        'fechaUsuario' => $fila->fechaUsuario,
+                        'departamentoUsuario' => $fila->departamentoUsuario,
+                        'municipioUsuario' => $fila->municipioUsuario,
+                        'videojuegos' => array() // Inicializar un array para almacenar los videojuegos del usuario
+                    );
+                }
+        
+                // Almacenar la información del videojuego en el array de videojuegos del usuario
+                $informacionUsuario['usuario']['videojuegos'][] = array(
+                    'idVideojuego' => $fila->idVideojuego,
+                    'nombreVideojuego' => $fila->nombreVideojuego,
+                    'precioVideojuego' => $fila->precioVideojuego,
+                    'fotoVideojuego' => $fila->fotoVideojuego
+                );
+            }
+        
+            // Retornar la información del usuario y sus videojuegos
+            return $informacionUsuario;
+        } 
+
+        public function obtenerTotalPublicados(){
+            $consulta = "SELECT COUNT(idUsuario) AS 'videojuegosPublicados' FROM usuariovideojuego WHERE idUsuario = {$this -> getId()}";
+            // Ejecutar la consulta
+            $total = $this->db->query($consulta);
+            $resultado = $total -> fetch_object();
+            // Retornar la información del usuario y sus videojuegos
+            return $resultado;
+        }
+
+        public function obtenerTotalVendidos(){
+            $consulta = "SELECT COUNT(idVendedor) AS 'videojuegosVendidos' FROM Transacciones WHERE idVendedor = {$this -> getId()}";
+            // Ejecutar la consulta
+            $total = $this->db->query($consulta);
+            $resultado = $total -> fetch_object();
+            // Retornar la información del usuario y sus videojuegos
+            return $resultado;
+        }
+
+        public function obtenerVideojuegosCreadosPorUsuario(){
+            $consulta = "SELECT DISTINCT v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', c.nombre AS 'nombreConsola', v.stock AS 'stockVideojuego', v.id AS 'idVideojuego', v.foto AS 'imagenVideojuego'
+            FROM Videojuegos v
+            INNER JOIN Consolas c ON c.id = v.idUso
+            INNER JOIN Usuarios u ON u.id = v.idUsuario
+            WHERE u.id = {$this -> getId()} AND v.activo = 1";
+            //Ejecutar la consulta
+            $lista = $this -> db -> query($consulta);
+            //Retornar el resultado
+            return $lista;
+        }
+
+        /*
+        Funcion para listar algunos de los videojuegos, en concreto 6
+        */
+
+        public function listarAlgunos(){
+            //Construir la consulta
+            $consulta = "SELECT v.*
+                FROM videojuegos v
+                INNER JOIN usuarios u ON u.id = v.idUsuario
+                WHERE v.activo = 1 ";
+                if($this -> getId() != null){
+                    $consulta .= "EXCEPT
+                    SELECT v.*
+                    FROM videojuegos v
+                    INNER JOIN usuarios u ON u.id = v.idUsuario
+                    INNER JOIN bloqueos b ON b.idBloqueador = v.idUsuario
+                    AND b.idBloqueador = {$this -> getId()} AND b.activo = 1 ";
+                }
+            $consulta .= "ORDER BY RAND() LIMIT 6";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Retornar resultado
+            return $resultado;
+        }
+
+        /*
+        Funcion para listar todos los videojuegos
+        */
+
+        public function listarTodos(){
+            //Construir la consulta
+            $consulta = "SELECT v.*
+                FROM videojuegos v
+                INNER JOIN usuarios u ON v.idUsuario = u.id
+                WHERE v.activo = 1 ";
+                if($this -> getId() != null){
+                    $consulta .= "EXCEPT
+                    SELECT v.*
+                    FROM videojuegos v
+                    INNER JOIN usuarios u ON u.id = v.idUsuario
+                    INNER JOIN bloqueos b ON b.idBloqueador = v.idUsuario
+                    AND b.idBloqueador = {$this -> getId()} AND b.activo = 1 ";
+                }
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Retornar resultado
+            return $resultado;
+        }
+
     }
 
 ?>

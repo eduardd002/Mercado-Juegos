@@ -1,6 +1,6 @@
 <?php
 
-    class UsuarioBloqueo{
+    class Bloqueo{
 
         private $id;
         private $activo;
@@ -140,11 +140,10 @@
         }
 
         public function obtenerBloqueosPorUsuario(){
-                $consulta = "SELECT DISTINCT b.id AS 'idBloqueo', u.nombre AS 'nombreBloqueado', u.apellido AS 'apellidoBloqueado', b.motivo AS 'motivoBloqueo', b.fechaBloqueo AS 'fechaBloqueo', b.horaBloqueo AS 'horaBloqueo'
-                FROM UsuarioBloqueo ub
-                INNER JOIN Usuarios u ON u.id = ub.idBloqueado
-                INNER JOIN Bloqueos b ON b.id = ub.id
-                WHERE ub.idBloqueador = {$this -> getIdBloqueador()} AND b.activo = 1";
+                $consulta = "SELECT DISTINCT b.id AS 'idBloqueo', u.nombre AS 'nombreBloqueado', u.apellido AS 'apellidoBloqueado', b.motivo AS 'motivoBloqueo', b.fechaHora AS 'fechaBloqueo'
+                FROM Bloqueos b
+                INNER JOIN Usuarios u ON u.id = b.idBloqueador
+                WHERE b.idBloqueador = {$this -> getIdBloqueador()} AND b.activo = 1";
                 //Ejecutar la consulta
                 $lista = $this -> db -> query($consulta);
                 //Retornar el resultado

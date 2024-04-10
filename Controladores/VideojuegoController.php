@@ -1,5 +1,7 @@
 <?php
 
+    require_once 'Modelos/Usuario.php';
+
     //Incluir el objeto de videojuego
     require_once 'Modelos/Videojuego.php';
 
@@ -7,7 +9,7 @@
     require_once 'Modelos/Categoria.php';
 
     //Incluir el objeto de comentario
-    require_once 'Modelos/Comentario.php';
+    require_once 'Modelos/ComentarioUsuarioVideojuego.php';
 
     //Incluir el objeto de consola
     require_once 'Modelos/Consola.php';
@@ -18,11 +20,8 @@
     //Incluir el objeto de videojuegocategoria
     require_once 'Modelos/VideojuegoCategoria.php';
 
-    //Incluir el objeto de usuariovideojuego
-    require_once 'Modelos/UsuarioVideojuego.php';
-
     //Incluir el objeto de comentariovideojuego
-    require_once 'Modelos/ComentarioVideojuego.php';
+    require_once 'Modelos/ComentarioUsuarioVideojuego.php';
 
     class VideojuegoController{
 
@@ -36,14 +35,14 @@
                 require_once 'Vistas/Administrador/Inicio.html';
             }else{
                 //Instanciar el objeto
-                $usuarioVideojuego = new UsuarioVideojuego();
+                $usuario = new Usuario();
                 //Traer el listado de todos los videojuegos
                 if(isset($_SESSION['loginexitoso'])){
-                    $usuarioVideojuego -> setIdUsuario($_SESSION['loginexitoso'] -> id);
+                    $usuario -> setId($_SESSION['loginexitoso'] -> id);
                 }
                 //Traer el listado de algunos videojuegos
-                $listadoAlgunos = $usuarioVideojuego -> listarAlgunos();
-                $listadoTodos = $usuarioVideojuego -> listarTodos();
+                $listadoAlgunos = $usuario -> listarAlgunos();
+                $listadoTodos = $usuario -> listarTodos();
                 //Incluir la vista
                 require_once 'Vistas/Layout/Catalogo.html';
             }
@@ -71,11 +70,11 @@
 
         public function obtenerUsuarioVendedor($id){
             //Instanciar el objeto
-            $usuarioVideojuego = new UsuarioVideojuego();
+            $videojuego = new Videojuego();
             //Construir el objeto
-            $usuarioVideojuego -> setIdVideojuego($id);
+            $videojuego -> setId($id);
             //Traer el resultado
-            $datosVendedor = $usuarioVideojuego -> obtenerUsuarioVendedor();
+            $datosVendedor = $videojuego -> obtenerUsuarioVendedor();
             //Retornar el resultado
             return $datosVendedor;
         }
@@ -86,11 +85,11 @@
 
         public function obtenerComentariosDeVideojuego($id){
             //Instanciar el objeto
-            $comentarioVideojuego = new ComentarioVideojuego();
+            $comentarioUsuarioVideojuego = new ComentarioUsuarioVideojuego();
             //Construir el objeto
-            $comentarioVideojuego -> setIdVideojuego($id);
+            $comentarioUsuarioVideojuego -> setIdVideojuego($id);
             //Traer el resultado
-            $listaComentarios = $comentarioVideojuego -> obtenerComentariosDeVideojuego();
+            $listaComentarios = $comentarioUsuarioVideojuego -> obtenerComentariosDeVideojuego();
             //Retornar el resultado
             return $listaComentarios;
         }
@@ -258,24 +257,6 @@
         }
 
         /*
-        Funcion para guardar el videojuego usuario en la base de datos
-        */
-
-        public function guardarVideojuegoUsuario($usuarioId){
-
-            //Instanciar el objeto
-            $usuarioVideojuego = new UsuarioVideojuego();
-            //Crear el objeto         
-            $usuarioVideojuego -> setActivo(1); 
-            $usuarioVideojuego -> setIdVideojuego($this -> obtenerUltimoVideojuego());
-            $usuarioVideojuego -> setIdUsuario($usuarioId);
-            //Guardar en la base de datos
-            $guardadoUsuarioVideojuego = $usuarioVideojuego -> guardar();
-            //Retornar el resultado
-            return $guardadoUsuarioVideojuego;
-        }
-
-        /*
         Funcion para guardar el videojuego en la base de datos
         */
 
@@ -315,10 +296,9 @@
 
                             //Guardar el videojuego cateogoria y videojuego usuario
                             $guardadoCategoriaVideojuego = $this -> guardarVideojuegoCategoria($categorias);
-                            $guardadoUsuarioVideojuego = $this -> guardarVideojuegoUsuario($usuarioId);
 
                             //Comprobar si el videojuego cateogoria y videojuego usuario han sido guardados exitosamente
-                            if($guardadoUsuarioVideojuego && $guardadoCategoriaVideojuego){
+                            if($guardadoCategoriaVideojuego){
                                 //Crear la sesion y redirigir a la ruta pertinente
                                 Ayudas::crearSesionYRedirigir("guardarvideojuegoacierto", "El videojuego ha sido guardado con exito", "?controller=UsuarioController&action=videojuegos");
                             }else{
@@ -486,12 +466,12 @@
         public function todos(){
 
             //Instaciar el objeto
-            $usuarioVideojuego = new UsuarioVideojuego();
+            $usuario = new Usuario();
             //Traer los datos de la consulta
             if(isset($_SESSION['loginexitoso'])){
-                $usuarioVideojuego -> setIdUsuario($_SESSION['loginexitoso'] -> id);
+                $usuario -> setId($_SESSION['loginexitoso'] -> id);
             }
-            $listadoTodos = $usuarioVideojuego -> listarTodos();
+            $listadoTodos = $usuario -> listarTodos();
             //Incluir la vista
             require_once 'Vistas/Videojuego/Todos.html';
         }

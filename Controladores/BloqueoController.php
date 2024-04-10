@@ -2,19 +2,17 @@
 
     //Incluir el objeto de bloqueo
     require_once "Modelos/Bloqueo.php";
-    //Incluir el objeto de usuario bloqueo
-    require_once "Modelos/UsuarioBloqueo.php";
 
     class BloqueoController{
 
         public function bloqueos(){
 
             //Instanciar el objeto
-            $usuarioBloqueo = new UsuarioBloqueo();
+            $bloqueo = new Bloqueo();
             //Construir el objeto
-            $usuarioBloqueo -> setIdBloqueador($_SESSION['loginexitoso'] -> id);
+            $bloqueo -> setIdBloqueador($_SESSION['loginexitoso'] -> id);
             //Listar todos los usuarios desde la base de datos
-            $listadoBloqueos = $usuarioBloqueo -> obtenerBloqueosPorUsuario();
+            $listadoBloqueos = $bloqueo -> obtenerBloqueosPorUsuario();
 
             //Incluir la vista
             require_once "Vistas/Usuario/Bloqueos.html";
@@ -43,8 +41,8 @@
                 //Obtener el usuario a bloquear
                 $idBloqueo = $_GET['idBloqueo'];
 
-                $desbloqueoUsuarioVideojuego = new UsuarioBloqueo();
-                $desbloqueoUsuarioVideojuego -> setIdBloqueo($idBloqueo);
+                $desbloqueoUsuarioVideojuego = new Bloqueo();
+                $desbloqueoUsuarioVideojuego -> setId($idBloqueo);
                 $desbloqueoVideojuegoUsuario = $desbloqueoUsuarioVideojuego -> eliminar();
 
                 $bloqueo = new Bloqueo();
@@ -69,8 +67,7 @@
             //Crear el objeto
             $bloqueo -> setActivo(1);
             $bloqueo -> setMotivo($motivo);
-            $bloqueo -> setFecha(date('Y-m-d'));
-            $bloqueo -> setHora(date('H:i:s'));
+            $bloqueo -> setFechaHora(date('Y-m-d H:i:s'));
             //Guardar en la base de datos
             $guardado = $bloqueo -> guardar();
             //Retornar el resultado
@@ -98,12 +95,12 @@
         public function guardarUsuarioBloqueo($idUsuarioABloquear){
 
             //Instanciar el objeto
-            $usuarioBloqueo = new UsuarioBloqueo();
+            $usuarioBloqueo = new Bloqueo();
             //Crear el objeto
             $usuarioBloqueo -> setActivo(1);
             $usuarioBloqueo -> setIdBloqueador($_SESSION['loginexitoso'] -> id);
             $usuarioBloqueo -> setIdBloqueado($idUsuarioABloquear);
-            $usuarioBloqueo -> setIdBloqueo($this -> obtenerUltimoBloqueo());
+            $usuarioBloqueo -> setId($this -> obtenerUltimoBloqueo());
             //Guardar en la base de datos
             $guardado = $usuarioBloqueo -> guardar();
             //Retornar el resultado

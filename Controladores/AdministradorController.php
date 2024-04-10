@@ -13,7 +13,7 @@
     require_once 'Modelos/Categoria.php';
 
     //Incluir el objeto de tarjeta
-    require_once 'Modelos/Tarjeta.php';
+    require_once 'Modelos/MedioPago.php';
 
     //Incluir el objeto de administrador
     require_once 'Modelos/Administrador.php';
@@ -278,11 +278,11 @@
 
         public function gestionarTarjeta(){
             //Instanciar el objeto
-            $tarjeta = new Tarjeta();
+            $medioPago = new MedioPago();
             //Listar todas las tarjetas desde la base de datos
-            $listadoTarjetas = $tarjeta -> listar();
+            $listadoTarjetas = $medioPago -> listar();
             //Incluir la vista
-            require_once "Vistas/Administrador/GestionTarjetas.html";
+            require_once "Vistas/Administrador/GestionMediosPago.html";
         }
 
         /*

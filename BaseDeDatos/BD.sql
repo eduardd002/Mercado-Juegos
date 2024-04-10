@@ -161,13 +161,13 @@ Crear tabla de pagos
 
 CREATE TABLE pagos (
     id              INTEGER auto_increment NOT NULL,
-    activo          INTEGET NOT NULL,
+    activo          INTEGER NOT NULL,
     idUsuario      INTEGER NOT NULL,
     idMedioPago       INTEGER NOT NULL,
     numero   VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT pagos_pk PRIMARY KEY ( id ),
-    CONSTRAINT pagos_tarjeta_fk FOREIGN KEY ( idTarjeta ) REFERENCES tarjetas ( id ),
+    CONSTRAINT pagos_medioPago_fk FOREIGN KEY ( idMedioPago ) REFERENCES mediospago ( id ),
     CONSTRAINT pagos_usuario_fk FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id )
 );
 

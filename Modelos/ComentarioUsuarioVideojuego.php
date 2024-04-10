@@ -1,6 +1,6 @@
 <?php
 
-    class ComentarioVideojuegoUsuario{
+    class ComentarioUsuarioVideojuego{
 
         private $id;
         private $activo;
@@ -118,6 +118,22 @@
             $lista = $this -> db -> query($consulta);
             //Retornar el resultado
             return $lista;
+        }
+
+        public function eliminar(){
+
+            //Construir la consulta
+            $consulta = "UPDATE comentarios SET activo = 0 WHERE id = {$this -> getId()}";
+            //Ejecutar la consulta
+            $eliminado = $this -> db -> query($consulta);
+            //Crear bandera
+            $bandera = false;
+            //Comprobar si la consulta se realizo exitosamente
+            if($eliminado){
+                $bandera = true;
+            }
+            //Retorno el resultado
+            return $bandera;
         }
     }
 

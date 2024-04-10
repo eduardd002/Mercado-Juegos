@@ -327,7 +327,32 @@
             // Retornar resultado
             return $resultado;
         }
-        
+
+        public function obtenerUsuarioVendedor(){
+            //Construir la consulta
+            $consulta = "SELECT DISTINCT id AS 'idVendedor', nombre AS 'nombreVendedor' FROM usuarios WHERE id IN (SELECT idUsuario FROM usuariovideojuego WHERE idVideojuego = {$this -> getId()})";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Obtener el nombre
+            $nombre = $resultado -> fetch_object();
+            //Retornar el resultado
+            return $nombre;
+        }
+
+        /*
+        Funcion para obtener el usuario dueño del videojuego creado
+        */
+
+        public function obtenerUsuarioVideojuego(){
+            //Construir la consulta
+            $consulta = "SELECT DISTINCT idUsuario FROM usuariovideojuego WHERE idVideojuego = {$this -> getId()}";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
+            //Obtener resultado
+            $usuario = $resultado -> fetch_object();
+            //Retornar el id del usuario
+            return $usuario;
+        }
     }
 
 ?>
