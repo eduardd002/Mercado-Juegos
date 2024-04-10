@@ -189,14 +189,13 @@
         public function traerUno(){
             //Construir la consulta
             $consulta = "SELECT DISTINCT v.id AS 'idVideojuego', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.stock AS 'stockVideojuego', u.id AS 'idVendedor', us.nombre AS 'nombreUso', c.nombre 'categoriaNombre', v.foto AS 'imagenVideojuego', v.descripcion AS 'descripcionVideojuego', co.nombre AS 'nombreConsola'
-                FROM UsuarioVideojuego uv
-                INNER JOIN Videojuegos v ON v.id = uv.idVideojuego 
-                INNER JOIN Usuarios u ON u.id = uv.idUsuario 
+                FROM Videojuegos v
+                INNER JOIN Usuarios u ON u.id = v.idUsuario 
                 INNER JOIN Usos us ON us.id = v.idUso
                 INNER JOIN Consolas co ON co.id = v.idConsola
                 INNER JOIN VideojuegoCategoria cv ON cv.idVideojuego = v.id
                 INNER JOIN Categorias c ON cv.idCategoria = c.id
-                WHERE uv.idVideojuego = {$this -> getId()} AND v.activo = 1";
+                WHERE u.id = {$this -> getId()} AND v.activo = 1";
             // Ejecutar la consulta
             $resultados = $this->db->query($consulta);
         
@@ -330,7 +329,7 @@
 
         public function obtenerUsuarioVendedor(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT id AS 'idVendedor', nombre AS 'nombreVendedor' FROM usuarios WHERE id IN (SELECT idUsuario FROM usuariovideojuego WHERE idVideojuego = {$this -> getId()})";
+            $consulta = "SELECT DISTINCT id AS 'idVendedor', nombre AS 'nombreVendedor' FROM usuarios WHERE id IN (SELECT idUsuario FROM videojuegos WHERE id = {$this -> getId()})";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Obtener el nombre

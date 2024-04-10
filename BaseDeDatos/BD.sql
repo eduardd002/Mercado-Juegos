@@ -107,8 +107,8 @@ Crear tabla videoujuegos
 
 CREATE TABLE videojuegos (
     id              INTEGER auto_increment NOT NULL,
-    idUsuario       INTEGER NOT NULL,
     activo          INTEGER NOT NULL,
+    idUsuario       INTEGER NOT NULL,
     idConsola       INTEGER NOT NULL,
     idUso           INTEGER NOT NULL,
     nombre          VARCHAR(200) NOT NULL,
@@ -134,7 +134,7 @@ CREATE TABLE mediospago (
     nombre VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT uq_nombre UNIQUE(nombre),
-    CONSTRAINT tarjetas_pk PRIMARY KEY ( id )
+    CONSTRAINT mediospago_pk PRIMARY KEY ( id )
 );
 
 /*

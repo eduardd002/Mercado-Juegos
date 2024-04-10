@@ -124,7 +124,7 @@
 
         public function guardar(){
             //Construir la consulta
-            $consulta = "INSERT INTO usuariobloqueo VALUES(NULL, {$this -> getActivo()}, {$this -> getIdBloqueador()}, 
+            $consulta = "INSERT INTO bloqueos VALUES(NULL, {$this -> getActivo()}, {$this -> getIdBloqueador()}, 
                 {$this -> getIdBloqueado()}, '{$this -> getMotivo()}', '{$this -> getFechaHora()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
@@ -140,9 +140,9 @@
         }
 
         public function obtenerBloqueosPorUsuario(){
-                $consulta = "SELECT DISTINCT b.id AS 'idBloqueo', u.nombre AS 'nombreBloqueado', u.apellido AS 'apellidoBloqueado', b.motivo AS 'motivoBloqueo', b.fechaHora AS 'fechaBloqueo'
+                $consulta = "SELECT DISTINCT u.id AS 'idUsuarioBloqueado', u.nombre AS 'nombreBloqueado', u.apellido AS 'apellidoBloqueado', b.motivo AS 'motivoBloqueo', b.fechaHora AS 'fechaBloqueo'
                 FROM Bloqueos b
-                INNER JOIN Usuarios u ON u.id = b.idBloqueador
+                INNER JOIN Usuarios u ON u.id = b.idBloqueado
                 WHERE b.idBloqueador = {$this -> getIdBloqueador()} AND b.activo = 1";
                 //Ejecutar la consulta
                 $lista = $this -> db -> query($consulta);
@@ -151,7 +151,7 @@
         }
 
         public function eliminar(){
-                $consulta = "UPDATE usuarioBloqueo SET activo = 0 WHERE idBloqueador = {$this -> getIdBloqueado()} AND idBloqueado = {$this -> getIdBloqueador()}";
+                $consulta = "UPDATE bloqueos SET activo = 0 WHERE idBloqueador = {$this -> getIdBloqueador()} AND idBloqueado = {$this -> getIdBloqueado()}";
                 $eliminado = $this -> db -> query($consulta);
                 //Crear bandera
                 $bandera = false;
@@ -177,11 +177,10 @@
             }
     
             public function obtenerListaBloqueos(){
-                 $consulta = "SELECT DISTINCT ubo.nombre AS 'nombreBloqueado' , ubr.nombre AS 'nombreBloqueador' , b.motivo AS 'motivoBloqueo' , b.fechaBloqueo AS 'fechaBloqueo' , b.horaBloqueo AS 'horaBloqueo'
-                    FROM usuarioBloqueo ub
-                    INNER JOIN Bloqueos b ON b.id = ub.idBloqueo
-                    INNER JOIN Usuarios ubr ON ubr.id = ub.idBloqueador
-                    INNER JOIN Usuarios ubo ON ubo.id = ub.idBloqueado
+                    $consulta = "SELECT DISTINCT ubo.nombre AS 'nombreBloqueado', ubr.nombre AS 'nombreBloqueador', b.motivo AS 'motivoBloqueo', b.fechaHora AS 'fechaBloqueo'
+                    FROM Bloqueos b
+                    INNER JOIN Usuarios ubr ON ubr.id = b.idBloqueador
+                    INNER JOIN Usuarios ubo ON ubo.id = b.idBloqueado
                     WHERE b.activo = 1";
                     //Ejecutar la consulta
                     $resultado = $this -> db -> query($consulta);

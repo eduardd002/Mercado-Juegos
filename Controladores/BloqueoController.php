@@ -34,19 +34,15 @@
         }
 
         public function desbloquear(){
-
             //Comprobar si los datos están llegando
             if(isset($_GET)){
 
                 //Obtener el usuario a bloquear
-                $idBloqueo = $_GET['idBloqueo'];
-
-                $desbloqueoUsuarioVideojuego = new Bloqueo();
-                $desbloqueoUsuarioVideojuego -> setId($idBloqueo);
-                $desbloqueoVideojuegoUsuario = $desbloqueoUsuarioVideojuego -> eliminar();
+                $idUsuarioADesbloquear = $_GET['usuarioBloqueo'];
 
                 $bloqueo = new Bloqueo();
-                $bloqueo -> setId($idBloqueo);
+                $bloqueo -> setIdBloqueado($idUsuarioADesbloquear);
+                $bloqueo -> setIdBloqueador($_SESSION['loginexitoso'] -> id);
                 $desbloqueo = $bloqueo -> eliminar();
 
                 //Crear la sesion y redirigir a la ruta pertinente
@@ -60,49 +56,18 @@
         Funcion para guardar el bloqueo en la base de datos
         */
 
-        public function guardarBloqueo($motivo){
+        public function guardarBloqueo($motivo, $idUsuarioABloquear){
             
             //Instanciar el objeto
             $bloqueo = new Bloqueo();
             //Crear el objeto
             $bloqueo -> setActivo(1);
+            $bloqueo -> setIdBloqueador($_SESSION['loginexitoso'] -> id);
+            $bloqueo -> setIdBloqueado($idUsuarioABloquear);
             $bloqueo -> setMotivo($motivo);
             $bloqueo -> setFechaHora(date('Y-m-d H:i:s'));
             //Guardar en la base de datos
             $guardado = $bloqueo -> guardar();
-            //Retornar el resultado
-            return $guardado;
-        }
-
-        /*
-        Funcion para obtener el ultimo bloqueo registrado
-        */
-
-        public function obtenerUltimoBloqueo(){
-
-            //Instanciar el objeto
-            $bloqueo = new Bloqueo();
-            //Obtener id del ultimo bloqueo registrado
-            $id = $bloqueo -> ultimo();
-            //Retornar resultado
-            return $id;
-        }
-
-        /*
-        Funcion para guardar el usuario bloqueo en la base de datos
-        */
-
-        public function guardarUsuarioBloqueo($idUsuarioABloquear){
-
-            //Instanciar el objeto
-            $usuarioBloqueo = new Bloqueo();
-            //Crear el objeto
-            $usuarioBloqueo -> setActivo(1);
-            $usuarioBloqueo -> setIdBloqueador($_SESSION['loginexitoso'] -> id);
-            $usuarioBloqueo -> setIdBloqueado($idUsuarioABloquear);
-            $usuarioBloqueo -> setId($this -> obtenerUltimoBloqueo());
-            //Guardar en la base de datos
-            $guardado = $usuarioBloqueo -> guardar();
             //Retornar el resultado
             return $guardado;
         }
@@ -120,24 +85,15 @@
                 $idUsuarioABloquear = $_GET['idBloqueado'];
                 $motivo = isset($_POST['motivo']) ? $_POST['motivo'] : false;
                 //Llamar funcion de guardar bloqueo
-                $bloqueoGuardado = $this -> guardarBloqueo($motivo);
+                $bloqueoGuardado = $this -> guardarBloqueo($motivo, $idUsuarioABloquear);
 
                 //Comprobar si el bloqueo se guardo con exito
                 if($bloqueoGuardado){
 
-                    //Llamar funcion de guardar bloqueo usuario
-                    $bloqueoUsuarioGuardado = $this -> guardarUsuarioBloqueo($idUsuarioABloquear);
-
-                    //Comprobar si el bloqueo se guardo con exito
-                    if($bloqueoUsuarioGuardado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir("guardarbloqueoacierto", "El bloqueo ha sido guardado con exito", "?controller=UsuarioController&action=bloqueos");
-                    }else{
-
-                        //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir("guardarbloqueoerror", "Ha ocurrido un error al guardar el bloqueo del usuario", "?controller=UsuarioController&action=perfil&idVendedor=$idUsuarioABloquear");
-                    }
+                    
                 }else{
 
                     //Crear la sesion y redirigir a la ruta pertinente

@@ -25,8 +25,7 @@
                     <th>Nombre</th>
                     <th>Apellidos</th>
                     <th>Motivo</th>
-                    <th>Fecha</th>
-                    <th>Hora</th>
+                    <th>Fecha y hora</th>
                 </tr>
                 <?php while($bloqueos = $listadoBloqueos -> fetch_object()) : ?>
                     <tr>
@@ -34,8 +33,7 @@
                         <td><?=$bloqueos -> apellidoBloqueado?></td>
                         <td><?=$bloqueos -> motivoBloqueo?></td>
                         <td><?=$bloqueos -> fechaBloqueo?></td>
-                        <td><?=$bloqueos -> horaBloqueo?></td>
-                        <td><a href="<?=rutaInicio?><?=bloqueo?><?=desbloquear?>&idBloqueo=<?=$bloqueos -> idBloqueo?>" class="button button-eliminarBloqueo">Desbloquear</a></td>
+                        <td><a href="<?=rutaInicio?><?=bloqueo?><?=desbloquear?>&usuarioBloqueo=<?=$bloqueos -> idUsuarioBloqueado?>" class="button button-eliminarBloqueo">Desbloquear</a></td>
                     </tr>
                 <?php endwhile; ?>
             </table>

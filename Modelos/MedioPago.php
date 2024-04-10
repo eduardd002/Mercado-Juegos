@@ -39,13 +39,13 @@
         }
 
         /*
-        Funcion para realizar el registro de la tarjeta en la base de datos
+        Funcion para realizar el registro de el medio de pago en la base de datos
         */
 
         public function guardar(){
 
             //Construir la consulta
-            $consulta = "INSERT INTO tarjetas VALUES(NULL, {$this -> getActivo()}, '{$this -> getNombre()}')";
+            $consulta = "INSERT INTO mediospago VALUES(NULL, {$this -> getActivo()}, '{$this -> getNombre()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera
@@ -60,7 +60,7 @@
         }
 
         /*
-        Funcion para listar todas las tarjetas
+        Funcion para listar todas los medios de pago
         */
 
         public function listar(){
@@ -73,27 +73,27 @@
         }
 
         /*
-        Funcion para obtener una tarjeta
+        Funcion para obtener un medio de pago
         */
 
         public function obtenerUna(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM tarjetas WHERE id = {$this -> getId()} AND activo = 1";
+            $consulta = "SELECT DISTINCT * FROM mediospago WHERE id = {$this -> getId()} AND activo = 1";
             //Ejecutar la consulta
-            $tarjeta = $this -> db -> query($consulta);
+            $medio = $this -> db -> query($consulta);
             //Obtener resultado
-            $resultado = $tarjeta -> fetch_object();
+            $resultado = $medio -> fetch_object();
             //Retornar el resultado
             return $resultado;
         }
 
         /*
-        Funcion para eliminar la tarjeta
+        Funcion para eliminar el medio de pago
         */
 
         public function eliminar(){
             //Construir la consulta
-            $consulta = "UPDATE tarjetas SET activo = 0 WHERE id = {$this -> getId()}";
+            $consulta = "UPDATE mediospago SET activo = 0 WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $eliminado = $this -> db -> query($consulta);
             //Crear bandera
@@ -107,12 +107,12 @@
         }
 
         /*
-        Funcion para actualizar la tarjeta
+        Funcion para actualizar el medio de pago
         */
 
         public function actualizar(){
             //Construir la consulta
-            $consulta = "UPDATE tarjetas SET nombre = '{$this -> getNombre()}' 
+            $consulta = "UPDATE mediospago SET nombre = '{$this -> getNombre()}' 
                 WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $actualizado = $this -> db -> query($consulta);

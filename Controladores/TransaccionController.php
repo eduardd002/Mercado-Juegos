@@ -13,8 +13,8 @@
     //Incluir el objeto de transaccion
     require_once 'Modelos/Transaccion.php';
 
-    //Incluir el objeto de tarjeta
-    require_once 'Modelos/Tarjeta.php';
+    //Incluir el objeto de medio de pago
+    require_once 'Modelos/MedioPago.php';
 
     //Incluir el objeto de estado
     require_once 'Modelos/Estado.php';
@@ -28,10 +28,9 @@
     //Incluir el objeto de usuario chat
     require_once 'Modelos/UsuarioChat.php';
 
-    //Incluir el objeto de usuario videojuego
-    require_once 'Modelos/UsuarioVideojuego.php';
-
     require_once 'Modelos/Videojuego.php';
+
+    require_once 'Modelos/Usuario.php';
 
     class TransaccionController{
 
@@ -86,7 +85,7 @@
             //Instanciar el objeto
             $medioPago = new MedioPago();
             //Listar todas las categorias desde la base de datos
-            $listadoTarjetas = $medioPago -> listar();
+            $listadoMediosPago = $medioPago -> listar();
 
             //Comprobar si el dato está llegando
             if(isset($_GET) && isset($_POST)){
@@ -288,7 +287,7 @@
                 $codigoPostal = isset($_POST['codigoPostal']) ? $_POST['codigoPostal'] : false;
                 $barrio = isset($_POST['barrio']) ? $_POST['barrio'] : false;
                 $direccion = isset($_POST['direccion']) ? $_POST['direccion'] : false;
-                $idTarjeta = isset($_POST['idTarjeta']) ? $_POST['idTarjeta'] : false;
+                $idMedioPago = isset($_POST['idMedioPago']) ? $_POST['idMedioPago'] : false;
                 $numeroTarjeta = isset($_POST['numeroTarjeta']) ? $_POST['numeroTarjeta'] : false;
                 $titular = isset($_POST['titular']) ? $_POST['titular'] : false;
                 $codigoDeSeguridad = isset($_POST['codigoSeguridad']) ? $_POST['codigoSeguridad'] : false;
@@ -296,10 +295,10 @@
 
                 //Comprobar si todos los datos exsiten
                 if($departamento && $municipio && $codigoPostal && $barrio && $direccion && 
-                    $idTarjeta && $numeroTarjeta && $titular && $codigoDeSeguridad && $fechaExpedicion){
+                    $idMedioPago && $numeroTarjeta && $titular && $codigoDeSeguridad && $fechaExpedicion){
 
                     //Obtener los resultados
-                    $guardadoPago = $this -> guardarPago($idTarjeta, $numeroTarjeta, $titular, $codigoDeSeguridad, $fechaExpedicion);
+                    $guardadoPago = $this -> guardarPago($idMedioPago, $numeroTarjeta, $titular, $codigoDeSeguridad, $fechaExpedicion);
 
                     //Traer ultimo pago
                     $pago = $this -> obtenerUltimoPago();

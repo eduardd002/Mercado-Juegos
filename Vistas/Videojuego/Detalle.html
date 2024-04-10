@@ -81,7 +81,7 @@
                     <img src="Recursos/ImagenesUsuarios/<?=$comentarios -> fotoComentador?>" alt="Logo videojuego">
                     <h3><?=$comentarios -> nombreComentador?></h3>
                     <h4><?=Ayudas::desencriptarContenido($comentarios -> contenidoComentario)?></h4>
-                    <h5><?=$comentarios -> fechaCreacionComentario?> - <?=$comentarios -> horaCreacionComentario?></h5>
+                    <h5><?=$comentarios -> fechaCreacionComentario?></h5>
                     <a href="<?=rutaInicio?><?=comentario?><?=eliminarComentario?>&idComentario=<?=$comentarios -> idComentario?>&idVideojuego=<?=$videojuegoEspecifico['videojuego']['idVideojuego']?>">Eliminar</a>
                 </div>
             </div>

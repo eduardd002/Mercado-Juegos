@@ -204,12 +204,13 @@
         Funcion para guardar el videojuego en la base de datos
         */
 
-        public function guardarVideojuego($nombre, $consola, $uso, $precio, $descripcion, $stock, $nombreArchivo){
+        public function guardarVideojuego($usuario, $nombre, $consola, $uso, $precio, $descripcion, $stock, $nombreArchivo){
 
             //Instanciar el objeto
             $videojuego = new Videojuego();
             //Crear el objeto
             $videojuego -> setActivo(1);
+            $videojuego -> setIdUsuario($usuario);
             $videojuego -> setNombre($nombre);
             $videojuego -> setIdConsola($consola);
             $videojuego -> setIdUso($uso);
@@ -289,7 +290,7 @@
                     if($fotoGuardada){
 
                         //Guardar en la base de datos
-                        $guardado = $this -> guardarVideojuego($nombre, $consola, $uso, $precio, $descripcion, $stock, $foto);
+                        $guardado = $this -> guardarVideojuego($usuarioId, $nombre, $consola, $uso, $precio, $descripcion, $stock, $foto);
 
                         //Comprobar si ha sido guardado el videojuego con exito
                         if($guardado){

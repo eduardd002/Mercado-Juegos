@@ -206,7 +206,7 @@
                 INNER JOIN Usos u ON u.id = v.idUso
                 INNER JOIN Pagos p ON p.id = t.idPago
                 INNER JOIN Estados e ON e.id = t.idEstado
-                INNER JOIN Tarjetas tt ON p.idTarjeta = tt.id
+                INNER JOIN Tarjetas tt ON p.idMedioPago = tt.id
                 INNER JOIN Estados te ON t.idEstado = te.id
                 WHERE t.numeroFactura = {$this -> getNumeroFactura()}";
         
@@ -261,7 +261,7 @@
                 INNER JOIN Transacciones t ON t.id = tv.idTransaccion
                 INNER JOIN Videojuegos v ON v.id = tv.idVideojuego
                 INNER JOIN Pagos p ON p.id = t.idPago
-                INNER JOIN Tarjetas tt ON p.idTarjeta = tt.id
+                INNER JOIN Tarjetas tt ON p.idMedioPago = tt.id
                 INNER JOIN Estados te ON t.idEstado = te.id
                 WHERE t.numeroFactura = {$this -> getNumeroFactura()}";
         

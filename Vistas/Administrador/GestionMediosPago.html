@@ -1,38 +1,38 @@
 <div id="contenidoCentral">   
 
-    <?php if(isset($_SESSION['guardartarjetaacierto'])) : ?>
+    <?php if(isset($_SESSION['guardarmediopagoacierto'])) : ?>
         <div class="alerta alerta-acierto">
-            <?=$_SESSION['guardartarjetaacierto']; ?>
+            <?=$_SESSION['guardarmediopagoacierto']; ?>
         </div>
     <?php endif; ?>
-    <?php Ayudas::eliminarSesion('guardartarjetaacierto'); ?>
+    <?php Ayudas::eliminarSesion('guardarmediopagoacierto'); ?>
 
-    <?php if(isset($_SESSION['eliminartarjetaacierto'])) : ?>
+    <?php if(isset($_SESSION['eliminarmediopagoacierto'])) : ?>
         <div class="alerta alerta-acierto">
-            <?=$_SESSION['eliminartarjetaacierto']; ?>
+            <?=$_SESSION['eliminarmediopagoacierto']; ?>
         </div>
     <?php endif; ?>
-    <?php Ayudas::eliminarSesion('eliminartarjetaacierto'); ?>
+    <?php Ayudas::eliminarSesion('eliminarmediopagoacierto'); ?>
 
-    <?php if(isset($_SESSION['actualizartarjetaacierto'])) : ?>
+    <?php if(isset($_SESSION['actualizarmediopagoacierto'])) : ?>
         <div class="alerta alerta-acierto">
-            <?=$_SESSION['actualizartarjetaacierto']; ?>
+            <?=$_SESSION['actualizarmediopagoacierto']; ?>
         </div>
     <?php endif; ?>
-    <?php Ayudas::eliminarSesion('actualizartarjetaacierto'); ?>
+    <?php Ayudas::eliminarSesion('actualizarmediopagoacierto'); ?>
 
-    <?php if(isset($_SESSION['eliminartarjetaerror'])) : ?>
+    <?php if(isset($_SESSION['eliminarmediopagoerror'])) : ?>
         <div class="alerta alerta-error">
-            <?=$_SESSION['eliminartarjetaerror']; ?>
+            <?=$_SESSION['eliminarmediopagoerror']; ?>
         </div>
     <?php endif; ?>
-    <?php Ayudas::eliminarSesion('eliminartarjetaerror'); ?>
+    <?php Ayudas::eliminarSesion('eliminarmediopagoerror'); ?>
 
-    <?php if(mysqli_num_rows($listadoTarjetas) == 0) : ?>
-        <h1>No hay tarjetas creadas</h1>
+    <?php if(mysqli_num_rows($listadoMediosPago) == 0) : ?>
+        <h1>No hay medios de pago creados</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
-        <h1>Gestion de tarjetas</h1>
+        <h1>Gestion de medios de pago</h1>
         <hr>
         <div id="gestiones">
             <table>
@@ -40,16 +40,16 @@
                     <th>Id</th>
                     <th>Nombre</th>
                 </tr>
-                <?php while($tarjetas = $listadoTarjetas -> fetch_object()) : ?>
+                <?php while($medios = $listadoMediosPago -> fetch_object()) : ?>
                     <tr>
-                        <td><?=$tarjetas -> id?></td>
-                        <td><?=$tarjetas -> nombre?></td>
-                        <td><a href="<?=rutaInicio?><?=tarjeta?><?=editarTarjeta?>&id=<?=$tarjetas -> id?>" class="button button-actualizarVideojuego">Actualizar</a></td>
-                        <td><a href= "<?=rutaInicio?><?=tarjeta?><?=eliminarTarjeta?>&id=<?=$tarjetas -> id?>" class="button button-eliminarVideojuego">Eliminar</a></td>
+                        <td><?=$medios -> id?></td>
+                        <td><?=$medios -> nombre?></td>
+                        <td><a href="<?=rutaInicio?><?=medioPago?><?=editarMedioPago?>&id=<?=$medios -> id?>" class="button button-actualizarVideojuego">Actualizar</a></td>
+                        <td><a href= "<?=rutaInicio?><?=medioPago?><?=eliminarMedioPago?>&id=<?=$medios -> id?>" class="button button-eliminarVideojuego">Eliminar</a></td>
                     </tr>
                 <?php endwhile;?>
             </table>
         </div>
     <?php endif; ?>
-    <a href="<?=rutaInicio?><?=tarjeta?><?=crearTarjeta?>" class="button button-crearGestion">Crear</a>
+    <a href="<?=rutaInicio?><?=medioPago?><?=crearMedioPago?>" class="button button-crearGestion">Crear</a>
 </div>

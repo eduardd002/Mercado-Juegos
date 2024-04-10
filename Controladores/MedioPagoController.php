@@ -1,12 +1,12 @@
 <?php
 
-    //Incluir el objeto de tarjeta
+    //Incluir el objeto de medio de pago
     require_once 'Modelos/MedioPago.php';
 
     class MedioPagoController{
 
         /*
-        Funcion para crear una tarjeta
+        Funcion para crear un medio de pago
         */
 
         public function crear(){
@@ -16,10 +16,10 @@
         }
 
         /*
-        Funcion para guardar una tarjeta en la base de datos
+        Funcion para guardar un medio de pago en la base de datos
         */
 
-        public function guardarTarjeta($nombre){
+        public function guardarMedioPago($nombre){
 
             //Instanciar el objeto
             $medioPago = new MedioPago();
@@ -31,14 +31,14 @@
                 $guardado = $medioPago -> guardar();
             }catch(mysqli_sql_exception $excepcion){
                 //Crear la sesion y redirigir a la ruta pertinente
-                Ayudas::crearSesionYRedirigir('guardartarjetaerror', "Este nombre de tarjeta ya existe", '?controller=TarjetaController&action=crear');
+                Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "Este nombre de medio de pago ya existe", '?controller=MedioPagoController&action=crear');
                 die();
             }
             return $guardado;
         }
 
         /*
-        Funcion para guardar una tarjeta
+        Funcion para guardar un medio de pago
         */
 
         public function guardar(){
@@ -53,36 +53,36 @@
                 if($nombre){
                     
                     //Obtener el resultado
-                    $guardado = $this -> guardarTarjeta($nombre);
+                    $guardado = $this -> guardarMedioPago($nombre);
                     //Comprobar se ejecutó con exito la consulta
                     if($guardado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('guardartarjetaacierto', "La tarjeta ha sido creada con exito", '?controller=AdministradorController&action=gestionarTarjeta');
+                        Ayudas::crearSesionYRedirigir('guardarmediopagoacierto', "El medio de pago ha sido creado con exito", '?controller=AdministradorController&action=gestionarMedioPago');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('guardartarjetaerror', "La tarjeta no ha sido creada con exito", '?controller=CategoriaController&action=crear');
+                        Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "El medio de pago no ha sido creado con exito", '?controller=CategoriaController&action=crear');
                     }
                 }else{
                     //Crear la sesion y redirigir a la ruta pertinente
-                    Ayudas::crearSesionYRedirigir('guardartarjetaerror', "Ha ocurrido un error al guardar la tarjeta", '?controller=CategoriaController&action=crear');
+                    Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "Ha ocurrido un error al guardar el medio de pago", '?controller=CategoriaController&action=crear');
                 }
             }else{
                 //Crear la sesion y redirigir a la ruta pertinente
-                Ayudas::crearSesionYRedirigir('guardartarjetaerror', "Ha ocurrido un error al guardar la tarjeta", '?controller=CategoriaController&action=crear');
+                Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "Ha ocurrido un error al guardar el medio de pago", '?controller=CategoriaController&action=crear');
             }
         }
 
         /*
-        Funcion para eliminar una tarjeta en la base de datos
+        Funcion para eliminar un medio de pago en la base de datos
         */
 
-        public function eliminarTarjeta($idTarjeta){
+        public function eliminarMedioPago($idMedioPago){
 
             //Instanciar el objeto
             $medioPago = new MedioPago();
             //Crear objeto
-            $medioPago -> setId($idTarjeta);
+            $medioPago -> setId($idMedioPago);
             //Ejecutar la consulta
             $eliminado = $medioPago -> eliminar();
             //Retornar resultado
@@ -90,7 +90,7 @@
         }
 
         /*
-        Funcion para eliminar una tarjeta
+        Funcion para eliminar un medio de pago
         */
 
         public function eliminar(){
@@ -99,44 +99,44 @@
             if(isset($_GET)){
 
                 //Comprobar si el dato existe
-                $idTarjeta = isset($_GET['id']) ? $_GET['id'] : false;
+                $idMedioPago = isset($_GET['id']) ? $_GET['id'] : false;
 
                 //Si el dato existe
-                if($idTarjeta){
+                if($idMedioPago){
 
                     //Obtener el resultado
-                    $eliminado = $this -> eliminarTarjeta($idTarjeta);
+                    $eliminado = $this -> eliminarMedioPago($idMedioPago);
 
-                    //Comprobar si la tarjeta ha sido eliminada con exito
+                    //Comprobar si el medio de pago ha sido eliminada con exito
                     if($eliminado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('eliminartarjetaacierto', "La tarjeta ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarTarjeta');
+                        Ayudas::crearSesionYRedirigir('eliminarmediopagoacierto', "el medio de pago ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarMedioPago');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('eliminartarjetaerror', "La tarjeta no ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarTarjeta');
+                        Ayudas::crearSesionYRedirigir('eliminarmediopagoerror', "el medio de pago no ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarMedioPago');
                     }
                 }else{
                     //Crear la sesion y redirigir a la ruta pertinente
-                    Ayudas::crearSesionYRedirigir('eliminartarjetaerror', "Ha ocurrido un error al eliminar la tarjeta", '?controller=AdministradorController&action=gestionarTarjeta'); 
+                    Ayudas::crearSesionYRedirigir('eliminarmediopagoerror', "Ha ocurrido un error al eliminar el medio de pago", '?controller=AdministradorController&action=gestionarMedioPago'); 
                 } 
             }
         }
 
         /*
-        Funcion para editar una tarjeta en la base de datos
+        Funcion para editar un medio de pago en la base de datos
         */
 
-        public function editarTarjeta($idTarjeta){
+        public function editarMedioPago($idMedioPago){
 
             //Instanciar el objeto
             $medioPago = new MedioPago();
             //Creo el objeto y retornar el resultado
-            return $medioPago -> setId($idTarjeta);
+            return $medioPago -> setId($idMedioPago);
         }
 
         /*
-        Funcion para editar una tarjeta
+        Funcion para editar un medio de pago
         */
 
         public function editar(){
@@ -145,48 +145,48 @@
             if(isset($_GET)){
 
                 //Comprobar si el dato existe
-                $idTarjeta = isset($_GET['id']) ? $_GET['id'] : false;
+                $idMedioPago = isset($_GET['id']) ? $_GET['id'] : false;
 
                 //Si el dato existe
-                if($idTarjeta){
+                if($idMedioPago){
 
                     //Obtener el resultado
-                    $tarjeta = $this -> editarTarjeta($idTarjeta);
+                    $medioPago = $this -> editarMedioPago($idMedioPago);
 
-                    //Obtener tarjeta
-                    $tarjetaUnica = $tarjeta -> obtenerUna();
+                    //Obtener medio de pago
+                    $medioPagoUnico = $medioPago -> obtenerUna();
 
                     //Incluir la vista
-                    require_once "Vistas/Tarjeta/Actualizar.html";
+                    require_once "Vistas/MedioPago/Actualizar.html";
 
                 }
             }
         }
 
         /*
-        Funcion para actualizar una tarjeta en la base de datos
+        Funcion para actualizar un medio de pago en la base de datos
         */
 
-        public function actualizarTarjeta($idTarjeta, $nombre){
+        public function actualizarMedioPago($idMedioPago, $nombre){
 
             //Instanciar el objeto
             $medioPago = new MedioPago();
             //Crear objeto
-            $medioPago -> setId($idTarjeta);
+            $medioPago -> setId($idMedioPago);
             $medioPago -> setNombre($nombre);
             try{
                 //Ejecutar la consulta
                 $actualizado = $medioPago -> actualizar();
             }catch(mysqli_sql_exception $excepcion){
                 //Crear la sesion y redirigir a la ruta pertinente
-                Ayudas::crearSesionYRedirigir('actualizartarjetaerror', "Este nombre de tarjeta ya existe", '?controller=TarjetaController&action=editar&id='.$idTarjeta);
+                Ayudas::crearSesionYRedirigir('actualizarmediopagoerror', "Este nombre de medio de pago ya existe", '?controller=MedioPagoController&action=editar&id='.$idMedioPago);
                 die();
             }
             return $actualizado;
         }
 
         /*
-        Funcion para actualizar una tarjeta
+        Funcion para actualizar un medio de pago
         */
 
         public function actualizar(){
@@ -195,27 +195,27 @@
             if(isset($_GET) && isset($_POST)){
 
                 //Comprobar si los datos existe
-                $idTarjeta = isset($_GET['id']) ? $_GET['id'] : false;
+                $idMedioPago = isset($_GET['id']) ? $_GET['id'] : false;
                 $nombre = isset($_POST['nombretaract']) ? $_POST['nombretaract'] : false;
 
                 //Si el dato existe
-                if($idTarjeta){
+                if($idMedioPago){
 
                     //Obtener el resultado
-                    $actualizado = $this -> actualizarTarjeta($idTarjeta, $nombre);
+                    $actualizado = $this -> actualizarMedioPago($idMedioPago, $nombre);
 
-                    //Comprobar si la tarjeta ha sido actualizada
+                    //Comprobar si el medio de pago ha sido actualizada
                     if($actualizado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizartarjetaacierto', "La tarjeta ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarTarjeta');
+                        Ayudas::crearSesionYRedirigir('actualizarmediopagoacierto', "el medio de pago ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarMedioPago');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizartarjetasugerencia', "Introduce nuevos datos", '?controller=TarjetaController&action=editar&id='.$idTarjeta);
+                        Ayudas::crearSesionYRedirigir('actualizarmediopagosugerencia', "Introduce nuevos datos", '?controller=MedioPagoController&action=editar&id='.$idMedioPago);
                     }
                 }else{
                     //Crear la sesion y redirigir a la ruta pertinente
-                    Ayudas::crearSesionYRedirigir('actualizartarjetaerror', "Ha ocurrido un error al actualizar la tarjeta", '?controller=TarjetaController&action=editar&id='.$idTarjeta);
+                    Ayudas::crearSesionYRedirigir('actualizarmediopagoerror', "Ha ocurrido un error al actualizar el medio de pago", '?controller=MedioPagoController&action=editar&id='.$idMedioPago);
                 }  
             }
         }

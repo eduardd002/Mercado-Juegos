@@ -283,10 +283,9 @@
 
         public function obtenerInformacionUsuario(){
             $consulta = "SELECT u.id AS 'idUsuario', u.nombre AS 'nombreUsuario', u.fechaRegistro AS 'fechaUsuario', u.departamento AS 'departamentoUsuario', u.municipio AS 'municipioUsuario', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.foto AS 'fotoVideojuego', v.id AS 'idVideojuego'
-                FROM UsuarioVideojuego uv
-                INNER JOIN Usuarios u ON u.id = uv.idUsuario
-                INNER JOIN Videojuegos v ON v.id = uv.idVideojuego
-                WHERE uv.idUsuario = {$this->getId()} AND v.activo = 1";
+                FROM Videojuegos v
+                INNER JOIN Usuarios u ON u.id = v.idUsuario
+                WHERE v.idUsuario = {$this->getId()} AND v.activo = 1";
         
             // Ejecutar la consulta
             $resultados = $this->db->query($consulta);
@@ -323,7 +322,7 @@
         } 
 
         public function obtenerTotalPublicados(){
-            $consulta = "SELECT COUNT(idUsuario) AS 'videojuegosPublicados' FROM usuariovideojuego WHERE idUsuario = {$this -> getId()}";
+            $consulta = "SELECT COUNT(idUsuario) AS 'videojuegosPublicados' FROM videojuegos WHERE idUsuario = {$this -> getId()}";
             // Ejecutar la consulta
             $total = $this->db->query($consulta);
             $resultado = $total -> fetch_object();
@@ -365,9 +364,9 @@
                 if($this -> getId() != null){
                     $consulta .= "EXCEPT
                     SELECT v.*
-                    FROM videojuegos v
-                    INNER JOIN usuarios u ON u.id = v.idUsuario
-                    INNER JOIN bloqueos b ON b.idBloqueador = v.idUsuario
+                    FROM bloqueos b
+                    INNER JOIN usuarios u ON u.id = b.idBloqueado
+                    INNER JOIN videojuegos v ON v.idUsuario = u.id
                     AND b.idBloqueador = {$this -> getId()} AND b.activo = 1 ";
                 }
             $consulta .= "ORDER BY RAND() LIMIT 6";
@@ -390,9 +389,9 @@
                 if($this -> getId() != null){
                     $consulta .= "EXCEPT
                     SELECT v.*
-                    FROM videojuegos v
-                    INNER JOIN usuarios u ON u.id = v.idUsuario
-                    INNER JOIN bloqueos b ON b.idBloqueador = v.idUsuario
+                    FROM bloqueos b
+                    INNER JOIN usuarios u ON u.id = b.idBloqueado
+                    INNER JOIN videojuegos v ON v.idUsuario = u.id
                     AND b.idBloqueador = {$this -> getId()} AND b.activo = 1 ";
                 }
             //Ejecutar la consulta

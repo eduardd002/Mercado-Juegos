@@ -12,7 +12,7 @@
     //Incluir el objeto de categoria
     require_once 'Modelos/Categoria.php';
 
-    //Incluir el objeto de tarjeta
+    //Incluir el objeto de medio de pago
     require_once 'Modelos/MedioPago.php';
 
     //Incluir el objeto de administrador
@@ -273,14 +273,14 @@
         }
 
         /*
-        Funcion para gestionar las tarjetas
+        Funcion para gestionar los medios de pago
         */
 
-        public function gestionarTarjeta(){
+        public function gestionarMedioPago(){
             //Instanciar el objeto
             $medioPago = new MedioPago();
-            //Listar todas las tarjetas desde la base de datos
-            $listadoTarjetas = $medioPago -> listar();
+            //Listar todas los medios de pago desde la base de datos
+            $listadoMediosPago = $medioPago -> listar();
             //Incluir la vista
             require_once "Vistas/Administrador/GestionMediosPago.html";
         }

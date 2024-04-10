@@ -94,7 +94,7 @@
 
         public function guardar(){
             //Construir la consulta
-            $consulta = "INSERT INTO comentariovideojuego VALUES(NULL, {$this -> getActivo()}, {$this -> getIdUsuario()}, {$this -> getIdVideojuego()}, '{$this -> getContenido()}', '{$this -> getFechaHora()}')";
+            $consulta = "INSERT INTO comentariousuariovideojuego VALUES(NULL, {$this -> getActivo()}, {$this -> getIdUsuario()}, {$this -> getIdVideojuego()}, '{$this -> getContenido()}', '{$this -> getFechaHora()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera
@@ -109,11 +109,10 @@
         }
 
         public function obtenerComentariosDeVideojuego(){
-            $consulta = "SELECT DISTINCT c.contenido AS 'contenidoComentario', u.nombre AS 'nombreComentador', u.foto AS 'fotoComentador', c.fechaCreacion AS 'fechaCreacionComentario', c.horaCreacion AS 'horaCreacionComentario', c.id AS 'idComentario'
-            FROM Comentarios c
+            $consulta = "SELECT DISTINCT c.contenido AS 'contenidoComentario', u.nombre AS 'nombreComentador', u.foto AS 'fotoComentador', c.fechaHora AS 'fechaCreacionComentario', c.id AS 'idComentario'
+            FROM ComentarioUsuarioVideojuego c
             INNER JOIN Usuarios u ON u.id = c.idUsuario
-            INNER JOIN ComentarioVideojuego cv ON cv.idComentario = c.id
-            WHERE cv.idVideojuego = {$this -> getIdVideojuego()} AND c.activo = 1";
+            WHERE c.idVideojuego = {$this -> getIdVideojuego()} AND c.activo = 1";
             //Ejecutar la consulta
             $lista = $this -> db -> query($consulta);
             //Retornar el resultado

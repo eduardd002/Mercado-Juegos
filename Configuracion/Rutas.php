@@ -61,7 +61,7 @@
     define("gestionarUsuario", "&action=gestionarUsuario");
     define("gestionarConsola", "&action=gestionarConsola");
     define("gestionarEstado", "&action=gestionarEstado");
-    define("gestionarTarjeta", "&action=gestionarTarjeta");
+    define("gestionarMedioPago", "&action=gestionarMedioPago");
     define("eliminarAdministrador", "&action=eliminar");
     define("actualizarAdministrador", "&action=actualizar");
 
@@ -79,12 +79,12 @@
     define("editarEstado", "&action=editar");
     define("actualizarEstado", "&action=actualizar");
 
-    define("tarjeta", "/?controller=TarjetaController");
-    define("crearTarjeta", "&action=crear");
-    define("guardarTarjeta", "&action=guardar");
-    define("eliminarTarjeta", "&action=eliminar");
-    define("editarTarjeta", "&action=editar");
-    define("actualizarTarjeta", "&action=actualizar");
+    define("medioPago", "/?controller=MedioPagoController");
+    define("crearMedioPago", "&action=crear");
+    define("guardarMedioPago", "&action=guardar");
+    define("eliminarMedioPago", "&action=eliminar");
+    define("editarMedioPago", "&action=editar");
+    define("actualizarMedioPago", "&action=actualizar");
 
     define("consola", "/?controller=ConsolaController");
     define("crearConsola", "&action=crear");
