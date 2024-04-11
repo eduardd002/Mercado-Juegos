@@ -20,6 +20,9 @@
     require_once 'Modelos/Estado.php';
 
     //Incluir el objeto de pago
+    require_once 'Modelos/Envio.php';
+
+    //Incluir el objeto de pago
     require_once 'Modelos/Pago.php';
 
     //Incluir el objeto de chat
@@ -146,6 +149,20 @@
         }
 
         /*
+        Funcion para obtener el ultimo pago
+        */
+
+        public function obtenerUltimoEnvio(){
+
+            //Instanciar el objeto
+            $envio = new Envio();
+            //Obtener id del ultimo videojuego registrado
+            $id = $envio -> ultimo();
+            //Retornar resultado
+            return $id;
+        }
+
+        /*
         Funcion para traer el dueño del videojuego
         */
 
@@ -166,7 +183,7 @@
         Funcion para guardar la transaccion en la base de datos
         */
 
-        public function guardarTransaccion($factura, $departamento, $municipio, $codigoPostal, $barrio, $direccion, $idPago, $idVideojuego, $unidades){
+        public function guardarTransaccion($factura, $idPago, $idEnvio, $idVideojuego, $unidades){
 
             $videojuego = Ayudas::obtenerVideojuegoEnConcreto($idVideojuego);
             $comprador = Ayudas::obtenerUsuarioEnConcreto($_SESSION['loginexitoso'] -> id);
@@ -178,8 +195,10 @@
             $transaccion -> setIdComprador($_SESSION['loginexitoso'] -> id);
             $transaccion -> setIdVendedor($this -> traerDuenioDeVideojuego($idVideojuego));
             $transaccion -> setIdPago($idPago);
+            $transaccion -> setIdEnvio($idEnvio);
             $transaccion -> setIdEstado(1);
             $transaccion -> setTotal($unidades * ($videojuego['videojuego']['precioVideojuego']));
+            $transaccion -> setFechaHora(date('Y-m-d H:i:s'));
             //Guardar en la base de datos
             $guardadoTransaccion = $transaccion -> guardar();
             //Retornar el resultado
@@ -209,15 +228,39 @@
         Funcion para guardar el pago en la base de datos
         */
 
-        public function guardarPago($numero){
+        public function guardarPago($medioPago, $numero){
 
             //Instanciar el objeto
             $pago = new Pago();
+            $pago -> setActivo(1);
+            $pago -> setIdUsuario($_SESSION['loginexitoso'] -> id);
+            $pago -> setIdMedioPago($medioPago);
             $pago -> setNumero($numero);
             //Guardar en la base de datos
             $guardadoPago = $pago -> guardar();
             //Retornar el resultado
             return $guardadoPago;
+        }
+
+        /*
+        Funcion para guardar el envio en la base de datos
+        */
+
+        public function guardarEnvio($departamento, $municipio, $codigoPostal, $barrio, $direccion){
+
+            //Instanciar el objeto
+            $envio = new Envio();
+            $envio -> setActivo(1);
+            $envio -> setIdUsuario($_SESSION['loginexitoso'] -> id);
+            $envio -> setDepartamento($departamento);
+            $envio -> setMunicipio($municipio);
+            $envio -> setCodigoPostal($codigoPostal);
+            $envio -> setBarrio($barrio);
+            $envio -> setDireccion($direccion);
+            //Guardar en la base de datos
+            $guardadoEnvio = $envio -> guardar();
+            //Retornar el resultado
+            return $guardadoEnvio;
         }
 
         /*
@@ -264,6 +307,7 @@
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
             $usuarioChat -> setIdDestinatario($destinatario);
             $usuarioChat -> setIdChat($this -> obtenerUltimoChat());
+            $usuarioChat -> setFechaHora(date('Y-m-d H:i:s'));
             //Guardar en la base de datos el primer objeto
             $guardado = $usuarioChat -> guardar();
             //Retonar el resultado
@@ -288,24 +332,23 @@
                 $barrio = isset($_POST['barrio']) ? $_POST['barrio'] : false;
                 $direccion = isset($_POST['direccion']) ? $_POST['direccion'] : false;
                 $idMedioPago = isset($_POST['idMedioPago']) ? $_POST['idMedioPago'] : false;
-                $numeroTarjeta = isset($_POST['numeroTarjeta']) ? $_POST['numeroTarjeta'] : false;
-                $titular = isset($_POST['titular']) ? $_POST['titular'] : false;
-                $codigoDeSeguridad = isset($_POST['codigoSeguridad']) ? $_POST['codigoSeguridad'] : false;
-                $fechaExpedicion = isset($_POST['fechaExpedicion']) ? $_POST['fechaExpedicion'] : false;
+                $numero = isset($_POST['numero']) ? $_POST['numero'] : false;
 
                 //Comprobar si todos los datos exsiten
                 if($departamento && $municipio && $codigoPostal && $barrio && $direccion && 
-                    $idMedioPago && $numeroTarjeta && $titular && $codigoDeSeguridad && $fechaExpedicion){
+                    $idMedioPago){
 
                     //Obtener los resultados
-                    $guardadoPago = $this -> guardarPago($idMedioPago, $numeroTarjeta, $titular, $codigoDeSeguridad, $fechaExpedicion);
+                    $guardadoPago = $this -> guardarPago($idMedioPago, $numero);
+                    $guardarEnvio = $this -> guardarEnvio($departamento, $municipio, $codigoPostal, $barrio, $direccion);
 
                     //Traer ultimo pago
                     $pago = $this -> obtenerUltimoPago();
+                    $envio = $this -> obtenerUltimoEnvio();
                     //Traer ultima factura
                     $factura = $this -> obtenerFactura();
                     //Guardar la transaccion
-                    $guardadoTransaccion = $this -> guardarTransaccion($factura, $departamento, $municipio, $codigoPostal, $barrio, $direccion, $pago, $idVideojuego, $unidades);
+                    $guardadoTransaccion = $this -> guardarTransaccion($factura, $pago, $envio, $idVideojuego, $unidades);
 
                     //Comprobar si los datos se guardaron con exito en la base de datos
                     if($guardadoTransaccion && $guardadoPago){

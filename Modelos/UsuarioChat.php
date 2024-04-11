@@ -8,6 +8,7 @@
         private $idDestinatario;
         private $idChat;
         private $mensaje;
+        private $fechaHora;
         private $db;
 
         public function __construct(){
@@ -80,18 +81,39 @@
                 return $this;
         }
 
+                /**
+         * Get the value of fechaHora
+         */ 
+        public function getFechaHora()
+        {
+                return $this->fechaHora;
+        }
+
+        /**
+         * Set the value of fechaHora
+         *
+         * @return  self
+         */ 
+        public function setFechaHora($fechaHora)
+        {
+                $this->fechaHora = $fechaHora;
+
+                return $this;
+        }
+
         /*
         Funcion para guardar el usuario chat en la base de datos
         */
 
         public function guardar(){
+
             //Construir la consulta
-            $consulta = "INSERT INTO usuariochat VALUES (NULL, {$this -> getActivo()}, {$this -> getIdRemitente()}, 
-                {$this -> getIdDestinatario()}, {$this -> getIdChat()}";
-                if($this -> getMensaje() == null){
-                    $consulta .= ", NULL";
-                }
-                $consulta .= ")";
+            $consulta = "INSERT INTO usuariochat VALUES (NULL, {$this -> getActivo()}, ";
+            if($this -> getMensaje() == null){
+                $consulta .= "NULL, ";
+            } 
+            $consulta .= "{$this -> getIdRemitente()}, 
+                {$this -> getIdDestinatario()}, {$this -> getIdChat()}, '{$this -> getFechaHora()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera

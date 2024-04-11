@@ -344,7 +344,7 @@
 
         public function obtenerUsuarioVideojuego(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT idUsuario FROM usuariovideojuego WHERE idVideojuego = {$this -> getId()}";
+            $consulta = "SELECT DISTINCT idUsuario FROM videojuegos WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Obtener resultado

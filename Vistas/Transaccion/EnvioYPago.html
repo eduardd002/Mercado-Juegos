@@ -32,28 +32,16 @@
                 <hr>
                 <img src="Recursos/Logotipos/pago.png" class="pagoImage" alt="Logo pago">
                 <div id="bloqueTextoRegistro">
-                    <label for="numeroTarjeta">Numero De Tarjeta</label>
-                    <input type="number" name="numeroTarjeta" required>
-                </div>
-                <div id="bloqueTextoRegistro">
-                    <label for="idMedioPago">Tipo De Tarjeta</label>
+                    <label for="idMedioPago">Medio de pago</label>
                     <select name="idMedioPago" id="idMedioPago">
-                        <?php while($tarjetas = $listadoTarjetas -> fetch_object()) : ?>
-                            <option value="<?=$tarjetas -> id?>"><?=$tarjetas -> nombre?></option>
+                        <?php while($medios = $listadoMediosPago -> fetch_object()) : ?>
+                            <option value="<?=$medios -> id?>"><?=$medios -> nombre?></option>
                         <?php endwhile; ?>
                     </select>
                 </div>
                 <div id="bloqueTextoRegistro">
-                    <label for="titular">Titular</label>
-                    <input type="text" name="titular" required>
-                </div>
-                <div id="bloqueTextoRegistro">
-                    <label for="codigoSeguridad">Codigo Seguridad</label>
-                    <input type="number" name="codigoSeguridad" required>
-                </div>
-                <div id="bloqueTextoRegistro">
-                    <label for="fechaExpedicion">Fecha De expedicion</label>
-                    <input type="date" name="fechaExpedicion" required>
+                    <label for="numero">Numero</label>
+                    <input type="number" name="numero" required>
                 </div>
             </div>
             <div id="botonEnvioYPago">

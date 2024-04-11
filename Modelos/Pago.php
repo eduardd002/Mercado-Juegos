@@ -3,9 +3,9 @@
     class Pago{
 
         private $id;
-        private $idMedioPago;
-        private $idUsuario;
         private $activo;
+        private $idUsuario;
+        private $idMedioPago;
         private $numero;
         private $db;
 

@@ -333,7 +333,7 @@ Crear tabla de usuario mensaje chat
 CREATE TABLE usuariochat (
     id   INTEGER auto_increment NOT NULL,
     activo          INTEGER NOT NULL,
-    mensaje TEXT NOT NULL,
+    mensaje TEXT NULL,
     idRemitente  INTEGER NOT NULL,
     idDestinatario  INTEGER NOT NULL,
     idChat  INTEGER NOT NULL,

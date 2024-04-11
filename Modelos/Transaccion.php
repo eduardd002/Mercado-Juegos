@@ -117,8 +117,7 @@
             //Construir la consulta
             $consulta = "INSERT INTO transacciones VALUES(NULL, {$this -> getNumeroFactura()}, {$this -> getIdComprador()}, 
                 {$this -> getIdVendedor()}, {$this -> getIdPago()}, {$this -> getIdEstado()}, {$this -> getIdEnvio()}, 
-                {$this -> getTotal()}, 
-                '{$this -> getFechaHora()}')";
+                {$this -> getTotal()}, '{$this -> getFechaHora()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
             //Establecer una variable bandera
@@ -198,15 +197,17 @@
         }
 
         public function detalleCompra(){
-            $consulta = "SELECT DISTINCT t.nombreVendedor AS 'nombreVendedor', t.apellidoVendedor AS 'apellidoVendedor', t.telefonoVendedor AS 'telefonoVendedor', t.correoVendedor AS 'correoVendedor', t.departamento AS 'departamentoEnvio', t.municipio AS 'municipioEnvio', t.codigoPostal AS 'codigoPostalEnvio', t.direccion AS 'direccionEnvio', t.barrio AS 'barrioEnvio', tt.nombre AS 'tipoTarjetaPago', p.numeroTarjeta AS 'numeroTarjetaPago', e.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.nombre AS 'nombreVideojuegoCompra', u.nombre AS 'usoVideojuegoCompra', c.nombre AS 'consolaVideojuegoCompra', v.precio AS 'precioVideojuegoCompra', t.numeroFactura AS 'factura', tv.unidades AS 'unidadesCompra', e.nombre AS 'estadoCompra'
+            $consulta = "SELECT DISTINCT ve.nombre AS 'nombreVendedor', ve.apellido AS 'apellidoVendedor', ve.numeroTelefono AS 'telefonoVendedor', ve.correo AS 'correoVendedor', en.departamento AS 'departamentoEnvio', en.municipio AS 'municipioEnvio', en.codigoPostal AS 'codigoPostalEnvio', en.direccion AS 'direccionEnvio', en.barrio AS 'barrioEnvio', mp.nombre AS 'tipoMedioPago', p.numero AS 'numero', e.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.nombre AS 'nombreVideojuegoCompra', u.nombre AS 'usoVideojuegoCompra', c.nombre AS 'consolaVideojuegoCompra', v.precio AS 'precioVideojuegoCompra', t.numeroFactura AS 'factura', tv.unidades AS 'unidadesCompra', e.nombre AS 'estadoCompra'
                 FROM TransaccionVideojuego tv
                 INNER JOIN Transacciones t ON t.id = tv.idTransaccion
                 INNER JOIN Videojuegos v ON v.id = tv.idVideojuego
                 INNER JOIN Consolas c ON c.id = v.idConsola
+                INNER JOIN usuarios ve ON t.idVendedor = ve.id
                 INNER JOIN Usos u ON u.id = v.idUso
                 INNER JOIN Pagos p ON p.id = t.idPago
+                INNER JOIN Envios en ON en.id = t.idEnvio
                 INNER JOIN Estados e ON e.id = t.idEstado
-                INNER JOIN Tarjetas tt ON p.idMedioPago = tt.id
+                INNER JOIN MediosPago mp ON p.idMedioPago = mp.id
                 INNER JOIN Estados te ON t.idEstado = te.id
                 WHERE t.numeroFactura = {$this -> getNumeroFactura()}";
         
@@ -232,8 +233,8 @@
                         'codigoPostalEnvio' => $fila->codigoPostalEnvio,
                         'direccionEnvio' => $fila->direccionEnvio,
                         'barrioEnvio' => $fila->barrioEnvio,
-                        'tipoTarjetaPago' => $fila->tipoTarjetaPago,
-                        'numeroTarjetaPago' => $fila->numeroTarjetaPago,
+                        'tipoMedioPago' => $fila->tipoMedioPago,
+                        'numero' => $fila->numero,
                         'tipoEstadoTransaccion' => $fila->tipoEstadoTransaccion,
                         'unidadesCompra' => $fila->unidadesCompra,
                         'totalTransaccion' => $fila->totalTransaccion,
@@ -256,12 +257,14 @@
         }   
         
         public function detalleVenta(){
-            $consulta = "SELECT DISTINCT t.nombreComprador AS 'nombreComprador', t.apellidoComprador AS 'apellidoComprador', t.telefonoComprador AS 'telefonoComprador', t.correoComprador AS 'correoComprador', t.departamento AS 'departamentoEnvio', t.municipio AS 'municipioEnvio', t.codigoPostal AS 'codigoPostalEnvio', t.direccion AS 'direccionEnvio', t.barrio AS 'barrioEnvio', tt.nombre AS 'tipoTarjetaPago', p.numeroTarjeta AS 'numeroTarjetaPago', te.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.foto AS 'imagenVideojuego', tv.unidades AS 'unidadesCompra', v.precio AS 'precioVideojuegoVenta', t.numeroFactura AS 'facturaVenta', t.id AS 'idTransaccion', te.nombre AS 'estadoNombre'
+            $consulta = "SELECT DISTINCT co.nombre AS 'nombreComprador', co.apellido AS 'apellidoComprador', co.numeroTelefono AS 'telefonoComprador', co.correo AS 'correoComprador', en.departamento AS 'departamentoEnvio', en.municipio AS 'municipioEnvio', en.codigoPostal AS 'codigoPostalEnvio', en.direccion AS 'direccionEnvio', en.barrio AS 'barrioEnvio', mp.nombre AS 'tipoMedioPago', p.numero AS 'numero', te.nombre AS 'tipoEstadoTransaccion', t.total AS 'totalTransaccion', v.foto AS 'imagenVideojuego', tv.unidades AS 'unidadesCompra', v.precio AS 'precioVideojuegoVenta', t.numeroFactura AS 'facturaVenta', t.id AS 'idTransaccion', te.nombre AS 'estadoNombre'
                 FROM TransaccionVideojuego tv
                 INNER JOIN Transacciones t ON t.id = tv.idTransaccion
                 INNER JOIN Videojuegos v ON v.id = tv.idVideojuego
                 INNER JOIN Pagos p ON p.id = t.idPago
-                INNER JOIN Tarjetas tt ON p.idMedioPago = tt.id
+                INNER JOIN Envios en ON en.id = t.idEnvio
+                INNER JOIN usuarios co ON t.idComprador = co.id
+                INNER JOIN MediosPago mp ON mp.id = t.idPago
                 INNER JOIN Estados te ON t.idEstado = te.id
                 WHERE t.numeroFactura = {$this -> getNumeroFactura()}";
         
@@ -288,8 +291,8 @@
                         'codigoPostalEnvio' => $fila->codigoPostalEnvio,
                         'direccionEnvio' => $fila->direccionEnvio,
                         'barrioEnvio' => $fila->barrioEnvio,
-                        'tipoTarjetaPago' => $fila->tipoTarjetaPago,
-                        'numeroTarjetaPago' => $fila->numeroTarjetaPago,
+                        'tipoMedioPago' => $fila->tipoMedioPago,
+                        'numero' => $fila->numero,
                         'tipoEstadoTransaccion' => $fila->tipoEstadoTransaccion,
                         'unidadesCompra' => $fila->unidadesCompra,
                         'totalTransaccion' => $fila->totalTransaccion,

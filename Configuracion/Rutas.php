@@ -12,6 +12,8 @@
     define("miPerfil", "&action=miPerfil");
     define("compras", "&action=compras");
     define("bloqueos", "&action=bloqueos");
+    define("envios", "&action=envios");
+    define("pagos", "&action=pagos");
     define("ventas", "&action=ventas");
     define("videojuegos", "&action=videojuegos");
     define("eliminarUsuario", "&action=eliminar");
