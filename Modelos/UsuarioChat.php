@@ -111,6 +111,8 @@
             $consulta = "INSERT INTO usuariochat VALUES (NULL, {$this -> getActivo()}, ";
             if($this -> getMensaje() == null){
                 $consulta .= "NULL, ";
+            }else{
+                $consulta .= "{$this -> getMensaje()}, ";
             } 
             $consulta .= "{$this -> getIdRemitente()}, 
                 {$this -> getIdDestinatario()}, {$this -> getIdChat()}, '{$this -> getFechaHora()}')";
@@ -123,6 +125,19 @@
                 //Cambiar el estado de la variable bandera
                 $resultado = true;
             }
+            //Retornar el resultado
+            return $resultado;
+        }
+
+        /*
+        Funcion para obtener todos los mensajes
+        */
+
+        public function obtenerMensajes(){
+            //Construir la consulta
+            $consulta = "SELECT DISTINCT * FROM usuariochat WHERE idDestinatario = {$this -> getIdDestinatario()} AND idRemitente = {$this -> getIdRemitente()} ORDER BY id ASC";
+            //Ejecutar la consulta
+            $resultado = $this -> db -> query($consulta);
             //Retornar el resultado
             return $resultado;
         }

@@ -35,17 +35,16 @@
                                         ($mensajes -> idDestinatario == $_SESSION['mensajito'])) || 
                                         (($mensajes -> idDestinatario == $_SESSION['loginexitoso'] -> id) && 
                                         ($mensajes -> idRemitente == $_SESSION['mensajito']))) : ?>  
-                                        <?php if($mensajes -> idRemitente == $_SESSION['loginexitoso'] -> id) : ?>
+                                        <?php if($mensajes -> idRemitente == $_SESSION['loginexitoso'] -> id && $mensajes -> mensaje != null) : ?>
                                             <div id="mensajeenviado">
-                                                <h3><?=$mensajes -> fechaEnvio?></h3>
-                                                <h3><?=$mensajes -> horaEnvio?></h3>
-                                                <p><?=Ayudas::desencriptarContenido($mensajes -> contenido)?></p>
+                                                <h3><?=$mensajes -> fechaHora?></h3>
+                                                <p><?=$mensajes -> mensaje?></p>
+                                                <!--<p><?=Ayudas::desencriptarContenido($mensajes -> mensaje)?></p>-->
                                             </div>
                                         <?php else : ?>
                                             <div id="mensajerecibido">
-                                                <h3><?=$mensajes -> fechaEnvio?></h3>
-                                                <h3><?=$mensajes -> horaEnvio?></h3>
-                                                <p><?=Ayudas::desencriptarContenido($mensajes -> contenido)?></p>
+                                                <h3><?=$mensajes -> fechaHora?></h3>
+                                                <p><?=$mensajes -> mensaje?></p>
                                             </div>
                                         <?php endif; ?>
                                     <?php endif; ?>
