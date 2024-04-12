@@ -30,25 +30,20 @@
                         <?php if(!isset($listadoMensajes)) : ?>
                             <h2>Presiona un chat para comenzar una conversacion</h2>
                         <?php else : ?>
-                                <?php while($mensajes = $listadoMensajes -> fetch_object()) : ?>
-                                    <?php if((($mensajes -> idRemitente == $_SESSION['loginexitoso'] -> id) &&
-                                        ($mensajes -> idDestinatario == $_SESSION['mensajito'])) || 
-                                        (($mensajes -> idDestinatario == $_SESSION['loginexitoso'] -> id) && 
-                                        ($mensajes -> idRemitente == $_SESSION['mensajito']))) : ?>  
-                                        <?php if($mensajes -> idRemitente == $_SESSION['loginexitoso'] -> id && $mensajes -> mensaje != null) : ?>
-                                            <div id="mensajeenviado">
-                                                <h3><?=$mensajes -> fechaHora?></h3>
-                                                <p><?=$mensajes -> mensaje?></p>
-                                                <!--<p><?=Ayudas::desencriptarContenido($mensajes -> mensaje)?></p>-->
-                                            </div>
-                                        <?php else : ?>
-                                            <div id="mensajerecibido">
-                                                <h3><?=$mensajes -> fechaHora?></h3>
-                                                <p><?=$mensajes -> mensaje?></p>
-                                            </div>
-                                        <?php endif; ?>
-                                    <?php endif; ?>
-                                <?php endwhile; ?>
+                            <?php while($mensajes = $listadoMensajes -> fetch_object()) : ?>
+                                <?php if($mensajes -> idRemitente == $_SESSION['loginexitoso'] -> id && $mensajes -> mensaje != null) : ?>
+                                    <div id="mensajeenviado">
+                                        <h3><?=$mensajes -> fechaHora?></h3>
+                                        <p><?=$mensajes -> mensaje?></p>
+                                        <!--<p><?=Ayudas::desencriptarContenido($mensajes -> mensaje)?></p>-->
+                                    </div>
+                                <?php elseif($mensajes -> idDestinatario == $_SESSION['loginexitoso'] -> id && $mensajes -> mensaje != null) : ?>
+                                    <div id="mensajerecibido">
+                                        <h3><?=$mensajes -> fechaHora?></h3>
+                                        <p><?=$mensajes -> mensaje?></p>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endwhile; ?>
                         <?php endif; ?>
                     </div>
                     <?php if(isset($listadoMensajes)) : ?>

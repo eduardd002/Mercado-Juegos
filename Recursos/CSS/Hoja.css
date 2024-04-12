@@ -2246,6 +2246,8 @@ Estilo del mensaje enviado
     display: block;
     /*Margen exterior superior*/
     margin-top: 15px;
+    /*Margen exterior inferior*/
+    margin-bottom: 15px;
     /*Margen exterior izquierdo*/
     margin-left: 25px;
     /*Margen interior*/

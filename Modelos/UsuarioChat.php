@@ -112,12 +112,13 @@
             if($this -> getMensaje() == null){
                 $consulta .= "NULL, ";
             }else{
-                $consulta .= "{$this -> getMensaje()}, ";
+                $consulta .= "'{$this -> getMensaje()}', ";
             } 
             $consulta .= "{$this -> getIdRemitente()}, 
                 {$this -> getIdDestinatario()}, {$this -> getIdChat()}, '{$this -> getFechaHora()}')";
             //Ejecutar la consulta
             $registro = $this -> db -> query($consulta);
+
             //Establecer una variable bandera
             $resultado = false;
             //Comporbar el registro fue exitoso y el total de columnas afectadas se altero
@@ -135,7 +136,8 @@
 
         public function obtenerMensajes(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM usuariochat WHERE idDestinatario = {$this -> getIdDestinatario()} AND idRemitente = {$this -> getIdRemitente()} ORDER BY id ASC";
+            $consulta = "(SELECT DISTINCT * FROM usuariochat WHERE idDestinatario = {$this -> getIdDestinatario()} AND idRemitente = {$this -> getIdRemitente()} UNION
+            SELECT DISTINCT * FROM usuariochat WHERE idDestinatario = {$this -> getIdRemitente()} AND idRemitente = {$this -> getIdDestinatario()}) ORDER BY id ASC";
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Retornar el resultado

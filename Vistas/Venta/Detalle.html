@@ -42,7 +42,7 @@
             <label for="estado">Estado</label>
             <select name="estado" id="estado">
                 <?php while($estados = $listadoEstados -> fetch_object()) : ?>
-                    <option value="<?= $estados->id ?>" <?=($detalle['venta']['estadoNombre'] == $estados->nombre) ? 'selected' : '' ?>>
+                    <option value="<?= $estados->id ?>" <?=($detalle['venta']['nombreEstado'] == $estados->nombre) ? 'selected' : '' ?>>
                         <?= $estados->nombre ?>
                     </option>
                 <?php endwhile; ?>

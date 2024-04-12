@@ -122,7 +122,7 @@
         public function eliminar(){
 
             //Construir la consulta
-            $consulta = "UPDATE comentarios SET activo = 0 WHERE id = {$this -> getId()}";
+            $consulta = "UPDATE ComentarioUsuarioVideojuego SET activo = 0 WHERE id = {$this -> getId()}";
             //Ejecutar la consulta
             $eliminado = $this -> db -> query($consulta);
             //Crear bandera
