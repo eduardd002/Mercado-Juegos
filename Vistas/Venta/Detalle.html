@@ -35,8 +35,8 @@
         <h5>Direccion: <?=$detalle['venta']['direccionEnvio']?></h5>
         <h5>Barrio: <?=$detalle['venta']['barrioEnvio']?></h5>
         <h3>Detalles del pago</h3>
-        <h5>Medio de pago: ...</h5>
-        <h5>Numero: ...</h5>
+        <h5>Medio de pago: <?=$detalle['venta']['medioPagoNombre']?></h5>
+        <h5>Numero: <?=$detalle['venta']['numeroPago']?></h5>
         <h3>Detalles del estado</h3>
         <form action="<?=rutaInicio?><?=transaccion?><?=cambiarEstado?>&id=<?=$detalle['venta']['idTransaccion']?>" method="post">
             <label for="estado">Estado</label>

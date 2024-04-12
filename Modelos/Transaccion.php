@@ -197,14 +197,16 @@
         }
 
         public function detalleCompra(){
-            $consulta = "SELECT DISTINCT ve.nombre AS 'nombreVendedor', ve.apellido AS 'apellidoVendedor', ve.numeroTelefono AS 'telefonoVendedor', ve.correo AS 'correoVendedor', en.departamento AS 'departamentoEnvio', en.municipio AS 'municipioEnvio', en.codigoPostal AS 'codigoPostalEnvio', en.direccion AS 'direccionEnvio', en.barrio AS 'barrioEnvio', p.numero AS 'numero', t.total AS 'totalTransaccion', v.nombre AS 'nombreVideojuegoCompra', u.nombre AS 'usoVideojuegoCompra', c.nombre AS 'consolaVideojuegoCompra', v.precio AS 'precioVideojuegoCompra', t.numeroFactura AS 'factura', tv.unidades AS 'unidadesCompra'
+            $consulta = "SELECT DISTINCT ve.nombre AS 'nombreVendedor', ve.apellido AS 'apellidoVendedor', ve.numeroTelefono AS 'telefonoVendedor', ve.correo AS 'correoVendedor', en.departamento AS 'departamentoEnvio', en.municipio AS 'municipioEnvio', en.codigoPostal AS 'codigoPostalEnvio', en.direccion AS 'direccionEnvio', en.barrio AS 'barrioEnvio', p.numero AS 'numero', t.total AS 'totalTransaccion', v.nombre AS 'nombreVideojuegoCompra', u.nombre AS 'usoVideojuegoCompra', c.nombre AS 'consolaVideojuegoCompra', v.precio AS 'precioVideojuegoCompra', t.numeroFactura AS 'factura', tv.unidades AS 'unidadesCompra', mp.nombre AS 'medioPagoNombre'
                 FROM TransaccionVideojuego tv
                 INNER JOIN Transacciones t ON t.id = tv.idTransaccion
+                INNER JOIN Estados te ON te.id = t.idEstado
                 INNER JOIN Videojuegos v ON v.id = tv.idVideojuego
                 INNER JOIN Consolas c ON c.id = v.idConsola
                 INNER JOIN usuarios ve ON t.idVendedor = ve.id
                 INNER JOIN Usos u ON u.id = v.idUso
                 INNER JOIN Pagos p ON p.id = t.idPago
+                INNER JOIN MediosPago mp ON mp.id = p.idMedioPago
                 INNER JOIN Envios en ON en.id = t.idEnvio
                 WHERE t.numeroFactura = {$this -> getNumeroFactura()}";
         
@@ -231,6 +233,7 @@
                         'direccionEnvio' => $fila->direccionEnvio,
                         'barrioEnvio' => $fila->barrioEnvio,
                         'numero' => $fila->numero,
+                        'medioPagoNombre'=>$fila->medioPagoNombre,
                         'unidadesCompra' => $fila->unidadesCompra,
                         'totalTransaccion' => $fila->totalTransaccion,
                         'videojuegos' => array() // Inicializar un array para almacenar los videojuegos del usuario
@@ -251,11 +254,12 @@
         }   
         
         public function detalleVenta(){
-            $consulta = "SELECT DISTINCT co.nombre AS 'nombreComprador', co.apellido AS 'apellidoComprador', co.numeroTelefono AS 'telefonoComprador', co.correo AS 'correoComprador', en.departamento AS 'departamentoEnvio', en.municipio AS 'municipioEnvio', en.codigoPostal AS 'codigoPostalEnvio', en.direccion AS 'direccionEnvio', en.barrio AS 'barrioEnvio', p.numero AS 'numero', t.total AS 'totalTransaccion', v.foto AS 'imagenVideojuego', tv.unidades AS 'unidadesCompra', v.precio AS 'precioVideojuegoVenta', t.numeroFactura AS 'facturaVenta', t.id AS 'idTransaccion'
+            $consulta = "SELECT DISTINCT co.nombre AS 'nombreComprador', co.apellido AS 'apellidoComprador', co.numeroTelefono AS 'telefonoComprador', co.correo AS 'correoComprador', en.departamento AS 'departamentoEnvio', en.municipio AS 'municipioEnvio', en.codigoPostal AS 'codigoPostalEnvio', en.direccion AS 'direccionEnvio', en.barrio AS 'barrioEnvio', p.numero AS 'numero', t.total AS 'totalTransaccion', v.foto AS 'imagenVideojuego', tv.unidades AS 'unidadesCompra', v.precio AS 'precioVideojuegoVenta', t.numeroFactura AS 'facturaVenta', t.id AS 'idTransaccion', mp.nombre AS 'medioPagoNombre', p.numero AS 'numeroPago'
                 FROM TransaccionVideojuego tv
                 INNER JOIN Transacciones t ON t.id = tv.idTransaccion
                 INNER JOIN Videojuegos v ON v.id = tv.idVideojuego
                 INNER JOIN Pagos p ON p.id = t.idPago
+                INNER JOIN MediosPago mp ON mp.id = p.idMedioPago
                 INNER JOIN Envios en ON en.id = t.idEnvio
                 INNER JOIN usuarios co ON t.idComprador = co.id
                 WHERE t.numeroFactura = {$this -> getNumeroFactura()}";
@@ -283,7 +287,8 @@
                         'codigoPostalEnvio' => $fila->codigoPostalEnvio,
                         'direccionEnvio' => $fila->direccionEnvio,
                         'barrioEnvio' => $fila->barrioEnvio,
-                        'numero' => $fila->numero,
+                        'numeroPago' => $fila->numeroPago,
+                        'medioPagoNombre'=>$fila->medioPagoNombre,
                         'unidadesCompra' => $fila->unidadesCompra,
                         'totalTransaccion' => $fila->totalTransaccion,
                         'videojuegos' => array() // Inicializar un array para almacenar los videojuegos del usuario

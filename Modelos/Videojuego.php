@@ -187,6 +187,7 @@
         */
 
         public function traerUno(){
+
             //Construir la consulta
             $consulta = "SELECT DISTINCT v.id AS 'idVideojuego', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.stock AS 'stockVideojuego', u.id AS 'idVendedor', us.nombre AS 'nombreUso', c.nombre 'categoriaNombre', v.foto AS 'imagenVideojuego', v.descripcion AS 'descripcionVideojuego', co.nombre AS 'nombreConsola'
                 FROM Videojuegos v
@@ -195,10 +196,11 @@
                 INNER JOIN Consolas co ON co.id = v.idConsola
                 INNER JOIN VideojuegoCategoria cv ON cv.idVideojuego = v.id
                 INNER JOIN Categorias c ON cv.idCategoria = c.id
-                WHERE u.id = {$this -> getId()} AND v.activo = 1";
+                WHERE v.id = {$this -> getId()} AND v.activo = 1";
+                
             // Ejecutar la consulta
             $resultados = $this->db->query($consulta);
-        
+
             // Array para almacenar la información del usuario y sus videojuegos
             $informacionUsuario = array();
         

@@ -14,10 +14,10 @@
         <h5>Direccion: <?=$detalle['compra']['direccionEnvio']?></h5>
         <h5>Barrio: <?=$detalle['compra']['barrioEnvio']?></h5>
         <h3>Detalles del pago</h3>
-        <h5>Medio de pago: ...</h5>
+        <h5>Medio de pago: <?=$detalle['compra']['medioPagoNombre']?></h5>
         <h5>Numero: <?=$detalle['compra']['numero']?></h5>
         <h3>Detalles del estado</h3>
-        <h5>...</h5>
+        <h5>.</h5>
         <a style="color: white;" href="<?=rutaInicio?><?=transaccion?><?=generarPdf?>&factura=<?=$detalle['compra']['factura']?>" class="button-generarPdf">Generar PDF</a>
         <h3>Videojuegos</h3>
         <div id="factura">
