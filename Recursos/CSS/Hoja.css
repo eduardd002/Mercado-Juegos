@@ -1249,6 +1249,27 @@ Estilo del boton para actualizar el videojuego desde el detalle
 }
 
 /*
+Estilo del boton para crear envio o pago en transaccion
+*/
+
+.button-crearPagoEnvio{
+    /*Flotar hacia la izquieda*/
+    float: left;
+    /*Anchor*/
+    width: 130px !important;
+    /*Altura*/
+    height: 20px !important;
+    /*Margen exterior derecho*/
+    margin-right: 50px;
+    /*Color de fondo*/
+    background: blue;
+    /*Margen exterior superior*/
+    margin-top: 10px;
+    /*Margen exterior inferior*/
+    margin-bottom: 50px;
+}
+
+/*
 Estilo del boton para eliminar el videojuego desde el detalle
 */
 
@@ -2803,4 +2824,48 @@ Estilo del select en detalle venta
 #detalleCompraYVenta select{
     /*Margen exterior inferior*/
     margin-bottom: 50px;
+}
+
+#enviosPagoTransaccion{
+    margin-left: 550px !important;
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
+}
+
+#enviosPagoTransaccion a{
+    text-align: center;
+    text-decoration: none;
+    color: white;
+}
+
+#enviosTransaccion{
+    margin-left: 40px;
+    margin-bottom: 30px;
+}
+
+#enviosTransaccion input{
+    margin-top: 50px;
+}
+
+#enviosTransaccion label{
+    clear: both;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#pagosTransaccion{
+    margin-left: 40px;
+    margin-bottom: 30px;
+}
+
+#pagosTransaccion input{
+    margin-top: 50px;
+}
+
+#pagosTransaccion label{
+    clear: both;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

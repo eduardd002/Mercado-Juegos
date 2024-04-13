@@ -126,23 +126,6 @@
         }
 
         /*
-        Funcion para obtener el ultimo pago registrado
-        */
-
-        public function ultimo(){
-            //Construir la consulta
-            $consulta = "SELECT DISTINCT id FROM pagos ORDER BY id DESC LIMIT 1";
-            //Ejecutar la consulta
-            $resultado = $this -> db -> query($consulta);
-            //Obtener el resultado del objeto
-            $ultimo = $resultado -> fetch_object();
-            //Devolver resultado
-            $ultimoPago = $ultimo -> id;
-            //Retornar el resultado
-            return $ultimoPago;
-        }
-
-                /*
         Funcion para obtener un uso
         */
 

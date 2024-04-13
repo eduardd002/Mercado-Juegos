@@ -1,52 +1,44 @@
 <div id="contenidoCentral">      
     <div id="loginYRegistro">
         <form action="<?=rutaInicio?><?=transaccion?><?=guardarCompra?>&idVideojuego=<?=$id?>&unidades=<?=$unidades?>" method="post">
-            <div id="seccionEnvioTransaccion">
+            <?php if(mysqli_num_rows($listadoEnvios) == 0) : ?>
+                <h1>No hay envios creados</h1>
+                <div id="enviosPagoTransaccion">
+                    <a class="button button-crearPagoEnvio" href="<?=rutaInicio?><?=envio?><?=crearEnvio?>">Crear envio</a>
+                </div>
+            <?php else : ?>
                 <h1>Datos del envio</h1>
                 <hr>
-                <img src="Recursos/Logotipos/direccion.png" class="envioImage" alt="Logo direccion">
-                <div id="bloqueTextoRegistro">
-                    <label for="departamento">Departamento</label>
-                    <input type="text" name="departamento" required>
+                <?php while($envios = $listadoEnvios -> fetch_object()) : ?>
+                    <div id="enviosTransaccion">
+                        <input type="radio" id="idEnvio" name="idEnvio" value="<?=$envios -> id?>" checked>
+                        <label for="idEnvio"><?=$envios -> departamento?></label>
+                        <label for="idEnvio"><?=$envios -> municipio?></label>
+                        <label for="idEnvio"><?=$envios -> codigoPostal?></label>
+                        <label for="idEnvio"><?=$envios -> barrio?></label>
+                        <label for="idEnvio"><?=$envios -> direccion?></label>
+                    </div>
+                <?php endwhile; ?>
+            <?php endif; ?>
+            <?php if(mysqli_num_rows($listadoPagos) == 0) : ?>
+                <h1>No hay pagos creados</h1>
+                <div id="enviosPagoTransaccion">
+                    <a class="button button-crearPagoEnvio" href="<?=rutaInicio?><?=pago?><?=crearPago?>">Crear pago</a>
                 </div>
-                <div id="bloqueTextoRegistro">
-                    <label for="municipio">Municipio</label>
-                    <input type="text" name="municipio" required>
-                </div>
-                <div id="bloqueTextoRegistro">
-                    <label for="codigoPostal">Codigo Postal</label>
-                    <input type="number" name="codigoPostal" min="600000" required>
-                </div>
-                <div id="bloqueTextoRegistro">
-                    <label for="barrio">Barrio</label>
-                    <input type="text" name="barrio" required>
-                </div>
-                <div id="bloqueTextoRegistro">
-                    <label for="direccion">Direccion</label>
-                    <textarea name="direccion" id="direccion" required></textarea>
-                </div>
-            </div>
-            
-            <div id="seccionPagoTransaccion">
+            <?php else : ?>
                 <h1>Datos del pago</h1>
                 <hr>
-                <img src="Recursos/Logotipos/pago.png" class="pagoImage" alt="Logo pago">
-                <div id="bloqueTextoRegistro">
-                    <label for="idMedioPago">Medio de pago</label>
-                    <select name="idMedioPago" id="idMedioPago">
-                        <?php while($medios = $listadoMediosPago -> fetch_object()) : ?>
-                            <option value="<?=$medios -> id?>"><?=$medios -> nombre?></option>
-                        <?php endwhile; ?>
-                    </select>
+                <?php while($pagos = $listadoPagos -> fetch_object()) : ?>
+                    <div id="pagosTransaccion">
+                        <input type="radio" id="idPago" name="idPago" value="<?=$pagos -> idPago?>" checked>
+                        <label for="idPago"><?=$pagos -> nombreMedioPago?></label>
+                        <label for="idPago"><?=$pagos -> numeroPago?></label>
+                    </div>
+                <?php endwhile; ?>
+                <div id="botonEnvioYPago">
+                    <input type="submit" class="btnRegistro" value="Confirmar Pago">
                 </div>
-                <div id="bloqueTextoRegistro">
-                    <label for="numero">Numero</label>
-                    <input type="number" name="numero" required>
-                </div>
-            </div>
-            <div id="botonEnvioYPago">
-                <input type="submit" class="btnRegistro" value="Confirmar Pago">
-            </div>
+            <?php endif; ?>
         </form>
     </div>
 </div>
