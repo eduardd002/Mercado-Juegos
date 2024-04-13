@@ -1,0 +1,55 @@
+<div id="contenidoCentral">
+
+    <?php if(isset($_SESSION['eliminarpagoacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['eliminarpagoacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('eliminarpagoacierto'); ?>
+
+    <?php if(isset($_SESSION['actualizarpagoacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['actualizarpagoacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('actualizarpagoacierto'); ?>
+
+    <?php if(isset($_SESSION['guardarpagoacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['guardarpagoacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('guardarpagoacierto'); ?>
+
+    <?php if(isset($_SESSION['eliminarpagoerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['eliminarpagoerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('eliminarpagoerror'); ?>
+
+    <?php if(mysqli_num_rows($listadoPagos) == 0) : ?>
+        <h1>No hay pagos creados</h1>
+        <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
+    <?php else : ?>
+        <h1>Mis pagos</h1>
+        <hr>
+        <div id="gestiones">
+            <table>
+                <tr>
+                    <th>Medio Pago</th>
+                    <th>Numero</th>
+                </tr>
+                <?php while($pagos = $listadoPagos -> fetch_object()) : ?>
+                    <tr>
+                        <td><?=$pagos -> nombreMedioPago?></td>
+                        <td><?=$pagos -> numeroPago?></td>
+                        <td><a href="<?=rutaInicio?><?=pago?><?=editarPago?>&id=<?=$pagos -> idPago?>" class="button button-actualizarVideojuego">Actualizar</a></td>
+                        <td><a href="<?=rutaInicio?><?=pago?><?=eliminarPago?>&id=<?=$pagos -> idPago?>" class="button button-eliminarVideojuego">Eliminar</a></td>
+                    </tr>
+                <?php endwhile;?>
+            </table>
+        </div>
+    <?php endif; ?>
+    <a href="<?=rutaInicio?><?=pago?><?=crearPago?>" class="button button-crearGestion">Crear</a>
+</div>

@@ -143,8 +143,8 @@ Crear tabla para tipo de envios
 
 CREATE TABLE envios (
     id              INTEGER auto_increment NOT NULL,
-    idUsuario      INTEGER NOT NULL,
     activo          INTEGER NOT NULL,
+    idUsuario      INTEGER NOT NULL,
     departamento      VARCHAR(250) NOT NULL,
     municipio         VARCHAR(200) NOT NULL,
     codigoPostal      VARCHAR(200) NOT NULL,

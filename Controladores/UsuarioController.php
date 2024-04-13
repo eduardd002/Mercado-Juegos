@@ -482,6 +482,40 @@
             }
         }
 
+        /*
+        Funcion para ver el listado de compras realizadas por el usuario
+        */
+
+        public function envios(){
+
+            //Instanciar el objeto
+            $usuario = new Usuario();
+            //Construir el objeto
+            $usuario -> setId($_SESSION['loginexitoso'] -> id);
+            //Listar todos los usuarios desde la base de datos
+            $listadoEnvios = $usuario -> obtenerEnvios();
+
+            //Incluir la vista
+            require_once "Vistas/Usuario/Envios.html";
+        }
+
+        /*
+        Funcion para ver el listado de compras realizadas por el usuario
+        */
+
+        public function pagos(){
+
+            //Instanciar el objeto
+            $usuario = new Usuario();
+            //Construir el objeto
+            $usuario -> setId($_SESSION['loginexitoso'] -> id);
+            //Listar todos los usuarios desde la base de datos
+            $listadoPagos = $usuario -> obtenerPagos();
+
+            //Incluir la vista
+            require_once "Vistas/Usuario/Pagos.html";
+        }
+
     }
 
 ?>

@@ -47,7 +47,6 @@
     define("verCompra", "&action=verCompra");
     define("verVenta", "&action=verVenta");
     define("direccionYPago", "&action=direccionYPago");
-    define("pago", "&action=pago");
     define("realizar", "&action=exito");
     define("cambiarEstado", "&action=cambiarEstado");
     define("generarPdf", "&action=generarPdf");
@@ -73,6 +72,20 @@
     define("eliminarUso", "&action=eliminar");
     define("editarUso", "&action=editar");
     define("actualizarUso", "&action=actualizar");
+
+    define("pago", "/?controller=PagoController");
+    define("crearPago", "&action=crear");
+    define("guardarPago", "&action=guardar");
+    define("eliminarPago", "&action=eliminar");
+    define("editarPago", "&action=editar");
+    define("actualizarPago", "&action=actualizar");
+
+    define("envio", "/?controller=EnvioController");
+    define("crearEnvio", "&action=crear");
+    define("guardarEnvio", "&action=guardar");
+    define("eliminarEnvio", "&action=eliminar");
+    define("editarEnvio", "&action=editar");
+    define("actualizarEnvio", "&action=actualizar");
 
     define("estado", "/?controller=EstadoController");
     define("crearEstado", "&action=crear");

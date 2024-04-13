@@ -1,0 +1,30 @@
+<div id="contenidoCentral">  
+
+    <?php if(isset($_SESSION['guardarpagoerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['guardarpagoerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('guardarpagoerror'); ?>
+
+    <div id="loginYRegistro">
+        <h1 class="tituloCreacionGestiones">Crear Pago</h1>
+        <hr>
+        <img src="Recursos/Logotipos/pago.png" class="imagenGestion" alt="">
+        <form action="<?=rutaInicio?><?=pago?><?=guardarPago?>" method="post">
+            <div id="bloqueTextoRegistro">
+                <label for="idMedioPago">Medio de pago</label>
+                <select name="idMedioPago" id="idMedioPago">
+                    <?php while($medios = $listadoMediosPago -> fetch_object()) : ?>
+                        <option value="<?=$medios -> id?>"><?=$medios -> nombre?></option>
+                    <?php endwhile; ?>
+                </select>
+            </div>
+            <div id="bloqueTextoRegistro">
+                <label for="numero">Numero</label>
+                <input type="number" name="numero" required>
+            </div>
+            <input type="submit" class="btnRegistro" value="Crear">
+        </form>
+    </div>
+</div>

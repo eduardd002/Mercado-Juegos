@@ -141,6 +141,60 @@
             //Retornar el resultado
             return $ultimoPago;
         }
+
+                /*
+        Funcion para obtener un uso
+        */
+
+        public function obtenerUno(){
+            //Construir la consulta
+            $consulta = "SELECT DISTINCT * FROM pagos WHERE id = {$this -> getId()} AND activo = 1";
+            //Ejecutar la consulta
+            $uso = $this -> db -> query($consulta);
+            //Obtener resultado
+            $resultado = $uso -> fetch_object();
+            //Retornar el resultado
+            return $resultado;
+        }
+
+        /*
+        Funcion para eliminar el uso
+        */
+
+        public function eliminar(){
+            //Construir la consulta
+            $consulta = "UPDATE pagos SET activo = 0 WHERE id = {$this -> getId()}";
+            //Ejecutar la consulta
+            $eliminado = $this -> db -> query($consulta);
+            //Crear bandera
+            $bandera = false;
+            //Comprobar si la consulta se realizo exitosamente
+            if($eliminado){
+                $bandera = true;
+            }
+            //Retorno el resultado
+            return $bandera;
+        }
+
+        /*
+        Funcion para actualizar el uso
+        */
+
+        public function actualizar(){
+            //Construir la consulta
+            $consulta = "UPDATE pagos SET idMedioPago = '{$this -> getIdMedioPago()}', numero = '{$this -> getNumero()}' 
+                WHERE id = {$this -> getId()}";
+            //Ejecutar la consulta
+            $actualizado = $this -> db -> query($consulta);
+            //Crear bandera
+            $bandera = false;
+            //Comprobar si la consulta se realizo exitosamente
+            if($actualizado && mysqli_affected_rows($this -> db) > 0){
+                $bandera = true;
+            }
+            //Retorno el resultado
+            return $bandera;
+        }
     }
 
 ?>
