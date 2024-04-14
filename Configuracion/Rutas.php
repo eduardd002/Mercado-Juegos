@@ -43,6 +43,7 @@
     define("guardarFavorito", "&action=guardar");
 
     define("transaccion", "/?controller=TransaccionController");
+    define("transaccionVideojuego", "&action=transaccionVideojuego");
     define("guardarCompra", "&action=guardar");
     define("verCompra", "&action=verCompra");
     define("verVenta", "&action=verVenta");

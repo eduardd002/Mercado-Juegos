@@ -79,11 +79,28 @@
             }
         }
 
+        public function transaccionVideojuego(){
+            //Comprobar si el dato está llegando
+            if(isset($_GET) && isset($_POST)){
+                //Comprobar si los datos existen
+                $id = isset($_GET['idVideojuego']) ? $_GET['idVideojuego'] : false;
+                $unidades = isset($_POST['cantidadAComprar']) ? $_POST['cantidadAComprar'] : false;
+                //Comprobar los datos existen
+                if($id && $unidades){
+                    if($_POST["accion"] == "Comprar Ahora"){
+                        $this -> direccionYPago($id, $unidades);
+                    }elseif($_POST["accion"] == "Agregar al carrito"){
+                        $this -> carrito($id, $unidades);
+                    }
+                }
+            }
+        }
+
         /*
         Funcion para ver el formulario de direccion y compra al comprar un videojuego
         */
 
-        public function direccionYPago(){
+        public function direccionYPago($idVideojuego, $unidadesComprar){
 
             //Instanciar el objeto
             $usuario = new Usuario();
@@ -97,20 +114,15 @@
             //Listar todas las categorias desde la base de datos
             $listadoEnvios = $usuario -> obtenerEnvios();
 
-            //Comprobar si el dato está llegando
-            if(isset($_GET) && isset($_POST)){
+            $id = $idVideojuego;
+            $unidades = $unidadesComprar;
 
-                //Comprobar si los datos existen
-                $id = isset($_GET['idVideojuego']) ? $_GET['idVideojuego'] : false;
-                $unidades = isset($_POST['cantidadAComprar']) ? $_POST['cantidadAComprar'] : false;
+            //Incluir la vista
+            require_once "Vistas/Transaccion/EnvioYPago.html";
+        }
 
-                //Comprobar los datos existen
-                if($id && $unidades){
-
-                    //Incluir la vista
-                    require_once "Vistas/Transaccion/EnvioYPago.html";
-                }
-            }
+        public function carrito($id, $unidades){
+            Ayudas::crearSesionYRedirigir("guardaradministradorerror", "Ha ocurrido un error al guardar el administrador", "?controller=CarritoController&action=guardar&idVideojuego=$id&unidades=$unidades");
         }
 
         /*
@@ -330,10 +342,6 @@
 
                     $envioUnico = $this -> traerEnvio($envio);
                     $pagoUnico = $this -> traerPago($pago);
-
-                    var_dump($envioUnico);
-                    var_dump($pagoUnico);
-                    die();
 
                     //Obtener los resultados
                     $guardadoPago = $this -> guardarPago($envioUnico);

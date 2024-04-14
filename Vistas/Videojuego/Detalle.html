@@ -52,11 +52,12 @@
                 <a class="button button-eliminarVideojuegoDesdeDetalle" href="<?=rutaInicio?><?=videojuego?><?=eliminarVideojuego?>&id=<?=$videojuegoEspecifico['videojuego']['idVideojuego']?>">Eliminar</a>
             </div>
         <?php else : ?>
-            <form action="<?=rutaInicio?><?=transaccion?><?=direccionYPago?>&idVideojuego=<?=$videojuegoEspecifico['videojuego']['idVideojuego']?>" method="post">
+            <form action="<?=rutaInicio?><?=transaccion?><?=transaccionVideojuego?>&idVideojuego=<?=$videojuegoEspecifico['videojuego']['idVideojuego']?>" method="post">
                 <?php if($videojuegoEspecifico['videojuego']['stockVideojuego'] > 0) : ?>
                     <label for="cantidadAComprar">Unidades a comprar</label>
                     <input type="number" name="cantidadAComprar" min="0" max="<?=$videojuegoEspecifico['videojuego']['stockVideojuego']?>" required>
-                    <input type="submit" value="Comprar Ahora">
+                    <input type="submit" name="accion" value="Comprar Ahora">
+                    <input type="submit" name="accion" value="Agregar al carrito">
                 <?php else : ?> 
                     <h3 id="stockNoDisponible">No hay unidades disponibles</h3>
                 <?php endif; ?> 

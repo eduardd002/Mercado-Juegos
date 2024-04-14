@@ -1,11 +1,11 @@
 <div id="contenidoCentral">
     
-    <?php if(0 == 0) : ?>
-        <h1>No Hay Ningun Videojuego </h1>
+    <?php if(mysqli_num_rows($listadoCarritos) == 0) : ?>
+        <h1>No Hay Ningun Videojuego Favorito</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
         <div id="carrito">
-            <h1>Carrito</h1>
+            <h1>Favoritos</h1>
             <hr>
             <table>
                 <tr>
