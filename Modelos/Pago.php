@@ -131,7 +131,10 @@
 
         public function obtenerUno(){
             //Construir la consulta
-            $consulta = "SELECT DISTINCT * FROM pagos WHERE id = {$this -> getId()} AND activo = 1";
+            $consulta = "SELECT DISTINCT p.numero AS 'numeroPago', mp.nombre AS 'nombreMedioPago', p.id AS 'idMedioPago'
+                FROM Pagos p
+                INNER JOIN MediosPago mp ON p.idMedioPago = mp.id
+                WHERE p.id = {$this -> id} AND p.activo = 1";
             //Ejecutar la consulta
             $uso = $this -> db -> query($consulta);
             //Obtener resultado

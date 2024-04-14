@@ -5,7 +5,7 @@
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
         <div id="carrito">
-            <h1>Favoritos</h1>
+            <h1>Carritos</h1>
             <hr>
             <table>
                 <tr>
@@ -14,16 +14,18 @@
                     <th>Precio</th>
                     <th>Unidades</th>
                 </tr>
-                <tr>
-                    <td><img src="Recursos/ImagenesVideojuegos/sp.jpg" alt="Logo tienda" class="imgCarrito"></td>
-                    <td>Spider Man Miles Morales</td>
-                    <td>$ 200000</td>
-                    <td>
-                        <a href="" class="buttonDisminuirCarrito">-</a>
-                        2
-                        <a href="" class="buttonAumentarCarrito">+</a>
-                    </td>
-                </tr>
+                <?php while($carritos = $listadoCarritos -> fetch_object()) : ?>
+                    <tr>
+                        <td><img src="Recursos/ImagenesVideojuegos/<?=$carritos -> imagenVideojuegoCarrito?>" alt="Logo tienda" class="imgCarrito"></td>
+                        <td><?=$carritos -> nombreVideojuegoCarrito?></td>
+                        <td>$ <?=$carritos -> precioVideojuegoCarrito?></td>
+                        <td>
+                            <a href="" class="buttonDisminuirCarrito">-</a>
+                                <?=$carritos -> unidadesCarrito?>
+                            <a href="" class="buttonAumentarCarrito">+</a>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
             </table>
             <div id="estadisticasCarrito">
                 <a href="" class="buttoneliminarCarrito">Eliminar</a>

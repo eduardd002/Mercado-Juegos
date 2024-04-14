@@ -20,7 +20,7 @@
             $carrito -> setIdUsuario($_SESSION['loginexitoso'] -> id);
             $listadoCarritos = $carrito -> listar();
             //Incluir la vista
-            require_once "Vistas/Carrito/Carritos.html";
+            require_once "Vistas/Carrito/Carrito.html";
         }
 
         /*
@@ -134,6 +134,10 @@
                 //Crear la sesion y redirigir a la ruta pertinente
                 Ayudas::crearSesionYRedirigir('guardarcarritoerror', "Ha ocurrido un error al guardar el carrito", "?controller=CarritoController&action=ver");
             }
+        }
+
+        public function eliminar(){
+
         }
     }
 

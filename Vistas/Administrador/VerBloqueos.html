@@ -15,8 +15,8 @@
                 </tr>
                 <?php while($bloqueos = $listaBloqueos -> fetch_object()) : ?>
                     <tr>
-                        <td><?=$bloqueos -> nombreBloqueador?></td>
-                        <td><?=$bloqueos -> nombreBloqueado?></td>
+                        <td><?=$bloqueos -> nombreBloqueador?> <?=$bloqueos -> apellidosBloqueador?></td>
+                        <td><?=$bloqueos -> nombreBloqueado?> <?=$bloqueos -> apellidosBloqueado?></td>
                         <td><?=$bloqueos -> motivoBloqueo?></td>
                         <td><?=$bloqueos -> fechaBloqueo?></td>
                     </tr>

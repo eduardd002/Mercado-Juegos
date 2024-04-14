@@ -20,8 +20,24 @@
         <img src="Recursos/Logotipos/casa.png" class="imagenGestion" alt="">
         <form action="<?=rutaInicio?><?=envio?><?=actualizarConsola?>&id=<?=$envioUnico -> id?>" method="post">
             <div id="bloqueTextoRegistro">
-                <label for="nombreenvact">Nombre</label>
-                <input type="text" name="nombreconsact" value="<?=$envioUnico -> nombre?>" required>
+                <label for="departamento">Departamento</label>
+                <input type="text" name="departamento" value="<?=$envioUnico -> departamento?>" required>
+            </div>
+            <div id="bloqueTextoRegistro">
+                <label for="municipio">Municipio</label>
+                <input type="text" name="municipio" value="<?=$envioUnico -> municipio?>" required>
+            </div>
+            <div id="bloqueTextoRegistro">
+                <label for="codigoPostal">Codigo Postal</label>
+                <input type="number" name="codigoPostal" min="600000" value="<?=$envioUnico -> codigoPostal?>" required>
+            </div>
+            <div id="bloqueTextoRegistro">
+                <label for="barrio">Barrio</label>
+                <input type="text" name="barrio" value="<?=$envioUnico -> barrio?>" required>
+            </div>
+            <div id="bloqueTextoRegistro">
+                <label for="direccion">Direccion</label>
+                <textarea name="direccion" id="direccion" required><?=$envioUnico -> direccion?></textarea>
             </div>
             <input type="submit" class="btnRegistro" value="Actualizar">
         </form>

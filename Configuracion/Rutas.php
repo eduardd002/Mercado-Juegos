@@ -37,6 +37,7 @@
     define("carrito", "/?controller=CarritoController");
     define("verCarrito", "&action=ver");
     define("guardarCarrito", "&action=guardar");
+    define("eliminarCarrito", "&action=eliminar");
 
     define("favorito", "/?controller=FavoritoController");
     define("verFavorito", "&action=ver");

@@ -45,10 +45,10 @@
                 $bloqueo -> setIdBloqueador($_SESSION['loginexitoso'] -> id);
                 $desbloqueo = $bloqueo -> eliminar();
 
-                //Crear la sesion y redirigir a la ruta pertinente
-                Ayudas::crearSesionYRedirigir("guardardesbloqueoacierto", "El desbloqueo ha sido guardado con exito", "?controller=UsuarioController&action=bloqueos");
-
-                $this -> bloqueos();
+                if($desbloqueo){
+                    //Crear la sesion y redirigir a la ruta pertinente
+                    Ayudas::crearSesionYRedirigir("guardardesbloqueoacierto", "El desbloqueo ha sido guardado con exito", "?controller=UsuarioController&action=bloqueos");
+                }
             }
         }
 
@@ -89,7 +89,6 @@
 
                 //Comprobar si el bloqueo se guardo con exito
                 if($bloqueoGuardado){
-
 
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir("guardarbloqueoacierto", "El bloqueo ha sido guardado con exito", "?controller=UsuarioController&action=bloqueos");

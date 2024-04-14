@@ -36,7 +36,7 @@
                 </tr>
                 <?php while($videojuegos = $listaVideojuegos -> fetch_object()) : ?>
                     <tr>
-                        <td><?=$videojuegos -> nombreVideojuego?></td>
+                        <td><a href="<?=rutaInicio?><?=videojuego?><?=detalle?>&id=<?=$videojuegos -> idVideojuego?>"><?=$videojuegos -> nombreVideojuego?></a></td>
                         <td><?=$videojuegos -> precioVideojuego?></td>
                         <td><?=$videojuegos -> nombreConsola?></td>
                         <td><?=$videojuegos -> stockVideojuego?></td>

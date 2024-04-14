@@ -122,7 +122,7 @@
                     if($eliminado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('eliminarpagoacierto', "El pago ha sido eliminado exitosamente", '');
+                        Ayudas::crearSesionYRedirigir('eliminarpagoacierto', "El pago ha sido eliminado exitosamente", '?controller=UsuarioController&action=pagos');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('eliminarpagoerror', "El pago no ha sido eliminado exitosamente", '');
@@ -166,6 +166,10 @@
 
                     //Obtener pago
                     $pagoUnico = $pago -> obtenerUno();
+                                //Instanciar el objeto
+            $medioPago = new MedioPago();
+            //Listar todas las categorias desde la base de datos
+            $listadoMediosPago = $medioPago -> listar();
 
                     //Incluir la vista
                     require_once "Vistas/Pago/Actualizar.html";
@@ -209,7 +213,7 @@
                 //Comprobar si los datos existe
                 $idPago = isset($_GET['id']) ? $_GET['id'] : false;
                 $medioPago = isset($_POST['medioPago']) ? $_POST['medioPago'] : false;
-                $numero = isset($_POST['numero']) ? $_POST['numero'] : false;
+                $numero = isset($_POST['numeroPago']) ? $_POST['numeroPago'] : false;
 
                 //Si el dato existe
                 if($idPago && $medioPago && $numero){
@@ -221,7 +225,7 @@
                     if($actualizado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizarpagoacierto', "El pago ha sido actualizado exitosamente", '');
+                        Ayudas::crearSesionYRedirigir('actualizarpagoacierto', "El pago ha sido actualizado exitosamente", '?controller=UsuarioController&action=pagos');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('actualizarpagosugerencia', "Introduce nuevos datos", '?controller=PagoController&action=editar&id='.$idPago);

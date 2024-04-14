@@ -400,13 +400,13 @@
             return $resultado;
         }
 
-                /*
+        /*
         Funcion para obtener la ultima transaccion registrada
         */
 
         public function obtenerEnvios(){
             //Construir la consulta
-            $consulta = "SELECT * FROM Envios e WHERE idUsuario = {$this -> getId()}";
+            $consulta = "SELECT * FROM Envios e WHERE idUsuario = {$this -> getId()} AND activo = 1";
             //Ejecutar la consulta
             $lista = $this -> db -> query($consulta);
             //Retornar resultado
@@ -422,7 +422,7 @@
             $consulta = "SELECT mp.nombre AS 'nombreMedioPago', p.numero AS 'numeroPago', p.id AS 'idPago'
                 FROM Pagos p
                 INNER JOIN MediosPago mp ON mp.id = p.idMedioPago
-                WHERE idUsuario = {$this -> getId()}";
+                WHERE idUsuario = {$this -> getId()} AND p.activo = 1";
             //Ejecutar la consulta
             $lista = $this -> db -> query($consulta);
             //Retornar resultado

@@ -75,7 +75,7 @@
         }
 
         public function listar(){
-            $consulta = "SELECT DISTINCT v.nombre AS 'nombreVideojuego', v.foto AS 'imagenVideojuego', v.precio AS 'precioVideojuego'
+            $consulta = "SELECT DISTINCT v.nombre AS 'nombreVideojuegoCarrito', v.foto AS 'imagenVideojuegoCarrito', v.precio AS 'precioVideojuegoCarrito', cv.unidades AS 'unidadesCarrito'
                 FROM CarritoVideojuego cv
                 INNER JOIN carritos c ON cv.idCarrito = c.id
                 INNER JOIN videojuegos v ON v.id = cv.idVideojuego

@@ -15,13 +15,21 @@
     <?php Ayudas::eliminarSesion('actualizarconsolasugerencia'); ?>
     
     <div id="loginYRegistro">
-        <h1 class="tituloCreacionGestiones">Actualizar consola</h1>
+        <h1 class="tituloCreacionGestiones">Actualizar pago</h1>
         <hr>
-        <img src="Recursos/Logotipos/casa.png" class="imagenGestion" alt="">
-        <form action="<?=rutaInicio?><?=consola?><?=actualizarConsola?>&id=<?=$consolaUnica -> id?>" method="post">
+        <img src="Recursos/Logotipos/pago.png" class="imagenGestion" alt="">
+        <form action="<?=rutaInicio?><?=pago?><?=actualizarPago?>&id=<?=$pagoUnico -> idMedioPago?>" method="post">
+            <label for="medioPago">Medio de pago</label>
+            <select name="medioPago" id="medioPago">
+                <?php while($medios = $listadoMediosPago -> fetch_object()) : ?>
+                    <option value="<?= $medios->id ?>" <?=($medios -> nombre == $pagoUnico -> nombreMedioPago) ? 'selected' : '' ?>>
+                        <?= $medios->nombre ?>
+                    </option>
+                <?php endwhile; ?>
+            </select>
             <div id="bloqueTextoRegistro">
-                <label for="nombreconsact">Nombre</label>
-                <input type="text" name="nombreconsact" value="<?=$consolaUnica -> nombre?>" required>
+                <label for="numeroPago">Numero</label>
+                <input type="text" name="numeroPago" value="<?=$pagoUnico -> numeroPago?>" required>
             </div>
             <input type="submit" class="btnRegistro" value="Actualizar">
         </form>

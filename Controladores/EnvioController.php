@@ -120,7 +120,7 @@
                     if($eliminado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('eliminarenvioacierto', "El envio ha sido eliminado exitosamente", '');
+                        Ayudas::crearSesionYRedirigir('eliminarenvioacierto', "El envio ha sido eliminado exitosamente", '?controller=UsuarioController&action=envios');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('eliminarenvioerror', "El envio no ha sido eliminado exitosamente", '');
@@ -225,7 +225,7 @@
                     if($actualizado){
 
                         //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizarenvioacierto', "El envio ha sido actualizado exitosamente", '');
+                        Ayudas::crearSesionYRedirigir('actualizarenvioacierto', "El envio ha sido actualizado exitosamente", '?controller=UsuarioController&action=envios');
                     }else{
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('actualizarenviosugerencia', "Introduce nuevos datos", '?controller=EnvioController&action=editar&id='.$idEnvio);

@@ -177,7 +177,7 @@
             }
     
             public function obtenerListaBloqueos(){
-                    $consulta = "SELECT DISTINCT ubo.nombre AS 'nombreBloqueado', ubr.nombre AS 'nombreBloqueador', b.motivo AS 'motivoBloqueo', b.fechaHora AS 'fechaBloqueo'
+                    $consulta = "SELECT DISTINCT ubo.nombre AS 'nombreBloqueado', ubo.apellido AS 'apellidosBloqueado', ubr.nombre AS 'nombreBloqueador', ubr.apellido AS 'apellidosBloqueador', b.motivo AS 'motivoBloqueo', b.fechaHora AS 'fechaBloqueo'
                     FROM Bloqueos b
                     INNER JOIN Usuarios ubr ON ubr.id = b.idBloqueador
                     INNER JOIN Usuarios ubo ON ubo.id = b.idBloqueado

@@ -242,8 +242,8 @@
             $pago = new Pago();
             $pago -> setActivo(1);
             $pago -> setIdUsuario($_SESSION['loginexitoso'] -> id);
-            $pago -> setIdMedioPago($pagoUnico -> getIdMedioPago());
-            $pago -> setNumero($pagoUnico -> getNumero());
+            $pago -> setIdMedioPago($pagoUnico -> id);
+            $pago -> setNumero($pagoUnico -> numero);
             //Guardar en la base de datos
             $guardadoPago = $pago -> guardar();
             //Retornar el resultado
@@ -260,11 +260,11 @@
             $envio = new Envio();
             $envio -> setActivo(1);
             $envio -> setIdUsuario($_SESSION['loginexitoso'] -> id);
-            $envio -> setDepartamento($envioUnico -> getDepartamento());
-            $envio -> setMunicipio($envioUnico -> getMunicipio());
-            $envio -> setCodigoPostal($envioUnico -> getCodigoPostal());
-            $envio -> setBarrio($envioUnico -> getBarrio());
-            $envio -> setDireccion($envioUnico -> getDireccion());
+            $envio -> setDepartamento($envioUnico -> departamento);
+            $envio -> setMunicipio($envioUnico -> municipio);
+            $envio -> setCodigoPostal($envioUnico -> codigoPostal);
+            $envio -> setBarrio($envioUnico -> barrio);
+            $envio -> setDireccion($envioUnico -> direccion);
             //Guardar en la base de datos
             $guardadoEnvio = $envio -> guardar();
             //Retornar el resultado
@@ -344,8 +344,8 @@
                     $pagoUnico = $this -> traerPago($pago);
 
                     //Obtener los resultados
-                    $guardadoPago = $this -> guardarPago($envioUnico);
-                    $guardarEnvio = $this -> guardarEnvio($pagoUnico);
+                    $guardadoPago = $this -> guardarPago($pagoUnico);
+                    $guardarEnvio = $this -> guardarEnvio($envioUnico);
 
                     //Traer ultima factura
                     $factura = $this -> obtenerFactura();
