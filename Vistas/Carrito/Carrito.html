@@ -1,6 +1,6 @@
 <div id="contenidoCentral">
     
-    <?php if(mysqli_num_rows($listadoCarritos) == 0) : ?>
+    <?php if(count($listadoCarritos) == 0) : ?>
         <h1>No Hay Ningun Videojuego Favorito</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
@@ -14,23 +14,23 @@
                     <th>Precio</th>
                     <th>Unidades</th>
                 </tr>
-                <?php while($carritos = $listadoCarritos -> fetch_object()) : ?>
+                <?php foreach ($listadoCarritos['carrito']['videojuegos'] as $videojuego) : ?>
                     <tr>
-                        <td><img src="Recursos/ImagenesVideojuegos/<?=$carritos -> imagenVideojuegoCarrito?>" alt="Logo tienda" class="imgCarrito"></td>
-                        <td><?=$carritos -> nombreVideojuegoCarrito?></td>
-                        <td>$ <?=$carritos -> precioVideojuegoCarrito?></td>
+                        <td><img src="Recursos/ImagenesVideojuegos/<?=$videojuego['imagenVideojuegoCarrito']?>" alt="Logo tienda" class="imgCarrito"></td>
+                        <td><?=$videojuego['nombreVideojuegoCarrito']?></td>
+                        <td>$ <?=$videojuego['precioVideojuegoCarrito']?></td>
                         <td>
                             <a href="" class="buttonDisminuirCarrito">-</a>
-                                <?=$carritos -> unidadesCarrito?>
+                                <?=$videojuego['unidadesCarrito']?>
                             <a href="" class="buttonAumentarCarrito">+</a>
                         </td>
                     </tr>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
             </table>
             <div id="estadisticasCarrito">
                 <a href="" class="buttoneliminarCarrito">Eliminar</a>
                 <a href="<?=rutaInicio?><?=transaccion?><?=direccionYPago?>">Continuar</a>
-                <h3>Total: $ 50000</h3>
+                <h3>Total: $ <?=$listadoCarritos['totalCarrito']?></h3>
             </div>
         </div>
     <?php endif; ?> 

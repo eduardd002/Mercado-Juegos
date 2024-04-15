@@ -80,9 +80,36 @@
                 INNER JOIN carritos c ON cv.idCarrito = c.id
                 INNER JOIN videojuegos v ON v.id = cv.idVideojuego
                 WHERE c.idUsuario = {$this -> getIdUsuario()}";
+
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
-            return $resultado;
+
+            // Array para almacenar la información del usuario y sus videojuegos
+            $informacionCarrito = array();
+
+            $total = 0;
+
+            while ($fila = $resultado->fetch_object()) {
+                if (!isset($informacionCarrito['carrito'])) {
+                    $informacionCarrito['carrito'] = array(
+                        'videojuegos' => array()
+                    );
+                }
+                
+                // Almacenar la información del videojuego en el array de videojuegos del usuario
+                $informacionCarrito['carrito']['videojuegos'][] = array(
+                    'nombreVideojuegoCarrito' => $fila->nombreVideojuegoCarrito,
+                    'imagenVideojuegoCarrito' => $fila->imagenVideojuegoCarrito,
+                    'precioVideojuegoCarrito' => $fila->precioVideojuegoCarrito,
+                    'unidadesCarrito' => $fila->unidadesCarrito
+                );
+
+                $precios = $fila -> precioVideojuegoCarrito;
+                $unidades = $fila -> unidadesCarrito;
+                $total += $precios * $unidades;
+                $informacionCarrito['totalCarrito'] = $total;
+            }
+            return $informacionCarrito;
         }
 
     }
