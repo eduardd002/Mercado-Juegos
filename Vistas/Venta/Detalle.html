@@ -54,8 +54,7 @@
         <?php foreach ($detalle['venta']['videojuegos'] as $videojuego) : ?>
             <div class="videojuegoCompraYVenta">
                 <h6>Precio: $ <?=$videojuego['precioVideojuegoVenta']?></h6>
-                <h6>Unidades: <?=$detalle['venta']['unidadesCompra']?></h6>
-                <h6>Total: $ <?=$detalle['venta']['totalTransaccion']?></h6>
+                <h6>Unidades: <?=$videojuego['unidadesCompra']?></h6>
                 <img src="Recursos/ImagenesVideojuegos/<?=$videojuego['imagenVideojuego']?>" alt="Videojuego">
             </div>
         <?php endforeach; ?>

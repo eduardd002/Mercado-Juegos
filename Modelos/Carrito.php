@@ -75,7 +75,7 @@
         }
 
         public function listar(){
-            $consulta = "SELECT DISTINCT v.nombre AS 'nombreVideojuegoCarrito', v.foto AS 'imagenVideojuegoCarrito', v.precio AS 'precioVideojuegoCarrito', cv.unidades AS 'unidadesCarrito'
+            $consulta = "SELECT DISTINCT v.id AS 'idVideojuegoCarrito', v.nombre AS 'nombreVideojuegoCarrito', v.foto AS 'imagenVideojuegoCarrito', v.precio AS 'precioVideojuegoCarrito', cv.unidades AS 'unidadesCarrito'
                 FROM CarritoVideojuego cv
                 INNER JOIN carritos c ON cv.idCarrito = c.id
                 INNER JOIN videojuegos v ON v.id = cv.idVideojuego
@@ -98,6 +98,7 @@
                 
                 // Almacenar la información del videojuego en el array de videojuegos del usuario
                 $informacionCarrito['carrito']['videojuegos'][] = array(
+                    'idVideojuegoCarrito' => $fila->idVideojuegoCarrito,
                     'nombreVideojuegoCarrito' => $fila->nombreVideojuegoCarrito,
                     'imagenVideojuegoCarrito' => $fila->imagenVideojuegoCarrito,
                     'precioVideojuegoCarrito' => $fila->precioVideojuegoCarrito,
@@ -107,7 +108,9 @@
                 $precios = $fila -> precioVideojuegoCarrito;
                 $unidades = $fila -> unidadesCarrito;
                 $total += $precios * $unidades;
-                $informacionCarrito['totalCarrito'] = $total;
+                $informacionCarrito['totalCarrito'] = array(
+                    'totalCarrito' => $total
+                );
             }
             return $informacionCarrito;
         }

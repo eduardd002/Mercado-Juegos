@@ -1,6 +1,10 @@
 <div id="contenidoCentral">      
     <div id="loginYRegistro">
-        <form action="<?=rutaInicio?><?=transaccion?><?=guardarCompra?>&idVideojuego=<?=$id?>&unidades=<?=$unidades?>" method="post">
+        <form action="<?=rutaInicio?><?=transaccion?><?=guardarCompra?>" method="post">
+            <?php foreach ($listadoCarritos['carrito']['videojuegos'] as $videojuego) : ?>
+                <input type="hidden" name="unidad[]" value="<?=$videojuego['unidadesCarrito']?>">
+                <input type="hidden" name="idVideojuego[]" value="<?=$videojuego['idVideojuegoCarrito']?>">
+            <?php endforeach; ?>
             <?php if(mysqli_num_rows($listadoEnvios) == 0) : ?>
                 <h1>No hay envios creados</h1>
                 <div id="enviosPagoTransaccion">

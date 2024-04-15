@@ -235,7 +235,6 @@
                         'nombreEstado' => $fila->nombreEstado,
                         'numero' => $fila->numero,
                         'medioPagoNombre'=>$fila->medioPagoNombre,
-                        'unidadesCompra' => $fila->unidadesCompra,
                         'totalTransaccion' => $fila->totalTransaccion,
                         'videojuegos' => array() // Inicializar un array para almacenar los videojuegos del usuario
                     );
@@ -244,6 +243,7 @@
                 // Almacenar la información del videojuego en el array de videojuegos del usuario
                 $informacionCompra['compra']['videojuegos'][] = array(
                     'nombreVideojuegoCompra' => $fila->nombreVideojuegoCompra,
+                    'unidadesCompra' => $fila->unidadesCompra,
                     'usoVideojuegoCompra' => $fila->usoVideojuegoCompra,
                     'consolaVideojuegoCompra' => $fila->consolaVideojuegoCompra,
                     'precioVideojuegoCompra' => $fila->precioVideojuegoCompra
@@ -292,7 +292,6 @@
                         'nombreEstado' => $fila->nombreEstado,
                         'numeroPago' => $fila->numeroPago,
                         'medioPagoNombre'=>$fila->medioPagoNombre,
-                        'unidadesCompra' => $fila->unidadesCompra,
                         'totalTransaccion' => $fila->totalTransaccion,
                         'videojuegos' => array() // Inicializar un array para almacenar los videojuegos del usuario
                     );
@@ -300,6 +299,7 @@
         
                 // Almacenar la información del videojuego en el array de videojuegos del usuario
                 $informacionVenta['venta']['videojuegos'][] = array(
+                    'unidadesCompra' => $fila->unidadesCompra,
                     'imagenVideojuego' => $fila->imagenVideojuego,
                     'precioVideojuegoVenta' => $fila->precioVideojuegoVenta
                 );

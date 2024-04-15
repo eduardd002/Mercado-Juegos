@@ -35,6 +35,8 @@
 
     require_once 'Modelos/Usuario.php';
 
+    require_once 'Modelos/Carrito.php';
+
     class TransaccionController{
 
         public function editarEstado($id, $estado){
@@ -80,17 +82,29 @@
         }
 
         public function transaccionVideojuego(){
+
             //Comprobar si el dato está llegando
             if(isset($_GET) && isset($_POST)){
                 //Comprobar si los datos existen
                 $id = isset($_GET['idVideojuego']) ? $_GET['idVideojuego'] : false;
                 $unidades = isset($_POST['cantidadAComprar']) ? $_POST['cantidadAComprar'] : false;
+                $carrito = isset($_GET['carrito']) ? $_GET['carrito'] : false;
                 //Comprobar los datos existen
                 if($id && $unidades){
                     if($_POST["accion"] == "Comprar Ahora"){
                         $this -> direccionYPago($id, $unidades);
                     }elseif($_POST["accion"] == "Agregar al carrito"){
                         $this -> carrito($id, $unidades);
+                    }
+                }elseif($carrito != false){
+                    $carrito = new Carrito();
+                    $carrito -> setIdUsuario($_SESSION['loginexitoso'] -> id);
+                    $lista = $carrito -> listar();
+                    $videojuego = $lista['carrito']['videojuegos'];
+                    for($i = 0; $i < count($videojuego); $i++){
+                        $idVideojuego = $videojuego[$i]['idVideojuegoCarrito'];
+                        $unidadesComprar = $videojuego[$i]['unidadesCarrito'];
+                        $this -> direccionYPago($idVideojuego, $unidadesComprar);
                     }
                 }
             }
@@ -100,8 +114,7 @@
         Funcion para ver el formulario de direccion y compra al comprar un videojuego
         */
 
-        public function direccionYPago($idVideojuego, $unidadesComprar){
-
+        public function direccionYPago($idVideojuegos, $unidadesComprar){
             //Instanciar el objeto
             $usuario = new Usuario();
             $usuario -> setId($_SESSION['loginexitoso'] -> id);
@@ -114,8 +127,12 @@
             //Listar todas las categorias desde la base de datos
             $listadoEnvios = $usuario -> obtenerEnvios();
 
-            $id = $idVideojuego;
-            $unidades = $unidadesComprar;
+            $idVideojuego = $idVideojuegos;
+            $unidadComprar = $unidadesComprar;
+
+            $carrito = new Carrito();
+            $carrito -> setIdUsuario($_SESSION['loginexitoso'] -> id);
+            $listadoCarritos = $carrito -> listar();
 
             //Incluir la vista
             require_once "Vistas/Transaccion/EnvioYPago.html";
@@ -174,23 +191,21 @@
         Funcion para guardar la transaccion en la base de datos
         */
 
-        public function guardarTransaccion($factura, $idPago, $idEnvio, $idVideojuego, $unidades){
-
-            $videojuego = Ayudas::obtenerVideojuegoEnConcreto($idVideojuego);
-            $comprador = Ayudas::obtenerUsuarioEnConcreto($_SESSION['loginexitoso'] -> id);
-            $vendedor = Ayudas::obtenerUsuarioEnConcreto($this -> traerDuenioDeVideojuego($idVideojuego));
-
-            //Instanciar el objeto
+        public function guardarTransaccion($factura, $idPago, $idEnvio){
+            $carrito = new Carrito();
+            $carrito -> setIdUsuario($_SESSION['loginexitoso'] -> id);
+            $lista = $carrito -> listar();
+            $videojuego = Ayudas::obtenerVideojuegoDeTransaccionEnConcreto($this -> obtenerUltimaTransaccion() + 999);
             $transaccion = new Transaccion();
             $transaccion -> setNumeroFactura($factura + 1000);
             $transaccion -> setIdComprador($_SESSION['loginexitoso'] -> id);
-            $transaccion -> setIdVendedor($this -> traerDuenioDeVideojuego($idVideojuego));
+            $transaccion -> setIdVendedor($this -> traerDuenioDeVideojuego(1));
+            $transaccion -> setIdEstado(1);
+            $total = $lista['totalCarrito']['totalCarrito'];
+            $transaccion -> setTotal($total);
             $transaccion -> setIdPago($idPago);
             $transaccion -> setIdEnvio($idEnvio);
-            $transaccion -> setIdEstado(1);
-            $transaccion -> setTotal($unidades * ($videojuego['videojuego']['precioVideojuego']));
             $transaccion -> setFechaHora(date('Y-m-d H:i:s'));
-            //Guardar en la base de datos
             $guardadoTransaccion = $transaccion -> guardar();
             //Retornar el resultado
             return $guardadoTransaccion;
@@ -237,13 +252,12 @@
         */
 
         public function guardarPago($pagoUnico){
-
             //Instanciar el objeto
             $pago = new Pago();
             $pago -> setActivo(1);
             $pago -> setIdUsuario($_SESSION['loginexitoso'] -> id);
-            $pago -> setIdMedioPago($pagoUnico -> id);
-            $pago -> setNumero($pagoUnico -> numero);
+            $pago -> setIdMedioPago($pagoUnico -> idMedioPago);
+            $pago -> setNumero($pagoUnico -> numeroPago);
             //Guardar en la base de datos
             $guardadoPago = $pago -> guardar();
             //Retornar el resultado
@@ -329,17 +343,16 @@
         public function guardar(){
 
             //Comprobar si los datos están llegando
-            if(isset($_POST) && isset($_GET)){
+            if(isset($_POST)){
                 
                 //Comprobar si cada dato existe
-                $idVideojuego = isset($_GET['idVideojuego']) ? $_GET['idVideojuego'] : false;
-                $unidades = isset($_GET['unidades']) ? $_GET['unidades'] : false;
+                $idVideojuego = isset($_POST['idVideojuego']) ? $_POST['idVideojuego'] : false;
+                $unidades = isset($_POST['unidad']) ? $_POST['unidad'] : false;
                 $pago = isset($_POST['idPago']) ? $_POST['idPago'] : false;
                 $envio = isset($_POST['idEnvio']) ? $_POST['idEnvio'] : false;
 
                 //Comprobar si todos los datos exsiten
-                if($pago && $envio){
-
+                if($pago && $envio && $idVideojuego && $unidades){
                     $envioUnico = $this -> traerEnvio($envio);
                     $pagoUnico = $this -> traerPago($pago);
 
@@ -349,43 +362,47 @@
 
                     //Traer ultima factura
                     $factura = $this -> obtenerFactura();
-                    //Guardar la transaccion
-                    $guardadoTransaccion = $this -> guardarTransaccion($factura, $pago, $envio, $idVideojuego, $unidades);
+                  
+                        //Guardar la transaccion
+                        $guardadoTransaccion = $this -> guardarTransaccion($factura, $pago, $envio);
+                    
+                        //Comprobar si los datos se guardaron con exito en la base de datos
+                        if($guardadoTransaccion && $guardadoPago && $guardarEnvio){
 
-                    //Comprobar si los datos se guardaron con exito en la base de datos
-                    if($guardadoTransaccion && $guardadoPago && $guardarEnvio){
+                            //Obtener id de la ultima transaccion
+                            $idTransaccion = $this -> obtenerUltimaTransaccion();
 
-                        //Obtener id de la ultima transaccion
-                        $idTransaccion = $this -> obtenerUltimaTransaccion();
-
-                        //Obtener el resultado
-                        $guardadoTransaccionVideojuego = $this -> guardarTransaccionVideojuego($idTransaccion, $idVideojuego, $unidades);
-
-                        //Comprobar si la transaccion videojueo se guardo con exito
-                        if($guardadoTransaccionVideojuego){
-
-                            $this -> actualizarStock($idVideojuego, $unidades);
-                            //Guardar el chat
-                            $guardadoChat = $this -> guardarChat();
-
-                            //Comprobar si el chat ha sido guardado con exito
-                            if($guardadoChat){
-
-                                //Guardar usuario chat
-                                $this -> guardarUsuarioChat($this -> traerDuenioDeVideojuego($idVideojuego));
-                                //Redirigir al menu de direccion y pago
-                                header("Location:"."http://localhost/Mercado-Juegos/?controller=TransaccionController&action=exito");
-                                
+                            //Obtener el resultado
+                            for($i = 0; $i < 3; $i++){
+                                $guardadoTransaccionVideojuego = $this -> guardarTransaccionVideojuego($idTransaccion, $idVideojuego[$i], $unidades[$i]);
                             }
+                            //Comprobar si la transaccion videojueo se guardo con exito
+                            if($guardadoTransaccionVideojuego){
+                                for($i = 0; $i < 3; $i++){
+                                    $this -> actualizarStock($idVideojuego[$i], $unidades[$i]);
+                                }
+                                //Guardar el chat
+                                $guardadoChat = $this -> guardarChat();
 
+                                //Comprobar si el chat ha sido guardado con exito
+                                if($guardadoChat){
+                                    for($i = 0; $i < 3; $i++){
+                                        //Guardar usuario chat
+                                        $this -> guardarUsuarioChat($this -> traerDuenioDeVideojuego($idVideojuego[$i]));
+                                    }
+                                    //Redirigir al menu de direccion y pago
+                                    header("Location:"."http://localhost/Mercado-Juegos/?controller=TransaccionController&action=exito");
+                                    
+                                }
+
+                            }else{
+                                //Crear la sesion y redirigir a la ruta pertinente
+                                Ayudas::crearSesionYRedirigir("comprarvideojuegoerror", "Ha ocurrido un error al comprar el videojuego", "?controller=TransaccionController&action=direccionYPago&idVideojuego=$idVideojuego");
+                            }
                         }else{
                             //Crear la sesion y redirigir a la ruta pertinente
                             Ayudas::crearSesionYRedirigir("comprarvideojuegoerror", "Ha ocurrido un error al comprar el videojuego", "?controller=TransaccionController&action=direccionYPago&idVideojuego=$idVideojuego");
                         }
-                    }else{
-                        //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir("comprarvideojuegoerror", "Ha ocurrido un error al comprar el videojuego", "?controller=TransaccionController&action=direccionYPago&idVideojuego=$idVideojuego");
-                    }
                 }else{
                     //Crear la sesion y redirigir a la ruta pertinente
                     Ayudas::crearSesionYRedirigir("comprarvideojuegoerror", "Ha ocurrido un error al comprar el videojuego", "?controller=TransaccionController&action=direccionYPago&idVideojuego=$idVideojuego");

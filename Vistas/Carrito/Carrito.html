@@ -5,7 +5,7 @@
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
         <div id="carrito">
-            <h1>Carritos</h1>
+            <h1>Carrito</h1>
             <hr>
             <table>
                 <tr>
@@ -29,8 +29,8 @@
             </table>
             <div id="estadisticasCarrito">
                 <a href="" class="buttoneliminarCarrito">Eliminar</a>
-                <a href="<?=rutaInicio?><?=transaccion?><?=direccionYPago?>">Continuar</a>
-                <h3>Total: $ <?=$listadoCarritos['totalCarrito']?></h3>
+                <a href="<?=rutaInicio?><?=transaccion?><?=transaccionVideojuego?>&carrito=true">Continuar</a>
+                <h3>Total: $ <?=$listadoCarritos['totalCarrito']['totalCarrito']?></h3>
             </div>
         </div>
     <?php endif; ?> 

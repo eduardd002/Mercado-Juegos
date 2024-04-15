@@ -18,7 +18,7 @@
         <h5>Numero: <?=$detalle['compra']['numero']?></h5>
         <h3>Detalles del estado</h3>
         <h5><?=$detalle['compra']['nombreEstado']?></h5>
-        <a style="color: white;" href="<?=rutaInicio?><?=transaccion?><?=generarPdf?>&factura=<?=$detalle['compra']['factura']?>" class="button-generarPdf">Generar PDF</a>
+        <a style="color: white;" href="<?=rutaInicio?><?=transaccion?><?=generarPdf?>&factura=<?=$detalle['compra']['factura']?>" class="button-generarPdf">Generar recibo</a>
         <h3>Videojuegos</h3>
         <div id="factura">
             <table style="width: 92%; border-collapse: collapse; margin-bottom: 40px;">
@@ -35,7 +35,7 @@
                         <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$videojuego['usoVideojuegoCompra']?></td>
                         <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$videojuego['consolaVideojuegoCompra']?></td>
                         <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">$ <?=$videojuego['precioVideojuegoCompra']?></td>
-                        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$detalle['compra']['unidadesCompra']?></td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$videojuego['unidadesCompra']?></td>
                     </tr>
                 <?php endforeach; ?>
                 <tr>

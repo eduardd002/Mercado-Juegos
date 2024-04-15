@@ -68,6 +68,17 @@
             //Retornar el resultado
             return $resultado;
         }
+
+        
+        public function obtenerVideojuegoTransaccion($factura){
+            $consulta = "SELECT tv.unidades, v.precio
+            FROM transaccionvideojuego tv
+                INNER JOIN videojuegos v ON v.id = tv.idVideojuego
+                INNER JOIN transacciones t ON t.id = tv.idTransaccion
+                WHERE t.numeroFactura = $factura";
+            $resultado = $this -> db -> query($consulta);
+            return $resultado;
+        }
     }
 
 ?>
