@@ -1,10 +1,15 @@
 <div id="contenidoCentral">      
     <div id="loginYRegistro">
-        <form action="<?=rutaInicio?><?=transaccion?><?=guardarCompra?>" method="post">
-            <?php foreach ($listadoCarritos['carrito']['videojuegos'] as $videojuego) : ?>
-                <input type="hidden" name="unidad[]" value="<?=$videojuego['unidadesCarrito']?>">
-                <input type="hidden" name="idVideojuego[]" value="<?=$videojuego['idVideojuegoCarrito']?>">
-            <?php endforeach; ?>
+        <form action="<?=rutaInicio?><?=transaccion?><?=guardarCompra?>&opcionCompra=<?=$opcionCarrito?>" method="post">
+            <?php if($opcionCarrito == 1) : ?>
+                <?php foreach ($listadoCarritos['carrito']['videojuegos'] as $videojuego) : ?>
+                    <input type="hidden" name="unidad[]" value="<?=$videojuego['unidadesCarrito']?>">
+                    <input type="hidden" name="idVideojuego[]" value="<?=$videojuego['idVideojuegoCarrito']?>">
+                <?php endforeach; ?>
+            <?php elseif($opcionCarrito == 2) : ?>    
+                <input type="hidden" name="unidad" value="<?=$unidadComprar?>">
+                <input type="hidden" name="idVideojuego" value="<?=$idVideojuego?>">
+            <?php endif ;?>      
             <?php if(mysqli_num_rows($listadoEnvios) == 0) : ?>
                 <h1>No hay envios creados</h1>
                 <div id="enviosPagoTransaccion">
@@ -41,7 +46,7 @@
                 <?php endwhile; ?>
                 <div id="botonEnvioYPago">
                     <input type="submit" class="btnRegistro" value="Confirmar Pago">
-                </div>
+                </div> 
             <?php endif; ?>
         </form>
     </div>

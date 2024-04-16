@@ -8,7 +8,7 @@
 
     //session_destroy();
 
-    //var_dump($_SESSION);
+    var_dump($_SESSION);
 
     //Incluir los archivo de autocarga de controladores
     require_once 'Autoload.php';

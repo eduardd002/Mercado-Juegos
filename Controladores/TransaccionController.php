@@ -82,7 +82,6 @@
         }
 
         public function transaccionVideojuego(){
-
             //Comprobar si el dato está llegando
             if(isset($_GET) && isset($_POST)){
                 //Comprobar si los datos existen
@@ -92,11 +91,11 @@
                 //Comprobar los datos existen
                 if($id && $unidades){
                     if($_POST["accion"] == "Comprar Ahora"){
-                        $this -> direccionYPago($id, $unidades);
+                        $this -> direccionYPago($id, $unidades, 2);
                     }elseif($_POST["accion"] == "Agregar al carrito"){
                         $this -> carrito($id, $unidades);
                     }
-                }elseif($carrito != false){
+                }elseif($carrito == 'true'){
                     $carrito = new Carrito();
                     $carrito -> setIdUsuario($_SESSION['loginexitoso'] -> id);
                     $lista = $carrito -> listar();
@@ -104,7 +103,7 @@
                     for($i = 0; $i < count($videojuego); $i++){
                         $idVideojuego = $videojuego[$i]['idVideojuegoCarrito'];
                         $unidadesComprar = $videojuego[$i]['unidadesCarrito'];
-                        $this -> direccionYPago($idVideojuego, $unidadesComprar);
+                        $this -> direccionYPago($idVideojuego, $unidadesComprar, 1);
                     }
                 }
             }
@@ -114,7 +113,7 @@
         Funcion para ver el formulario de direccion y compra al comprar un videojuego
         */
 
-        public function direccionYPago($idVideojuegos, $unidadesComprar){
+        public function direccionYPago($idVideojuegos, $unidadesComprar, $carrito){
             //Instanciar el objeto
             $usuario = new Usuario();
             $usuario -> setId($_SESSION['loginexitoso'] -> id);
@@ -129,6 +128,7 @@
 
             $idVideojuego = $idVideojuegos;
             $unidadComprar = $unidadesComprar;
+            $opcionCarrito = $carrito;
 
             $carrito = new Carrito();
             $carrito -> setIdUsuario($_SESSION['loginexitoso'] -> id);
@@ -216,7 +216,6 @@
         */
 
         public function guardarTransaccionVideojuego($id, $idVideojuego, $unidades){
-
             $videojuego = Ayudas::obtenerVideojuegoEnConcreto($idVideojuego);
 
             //Instanciar el objeto
@@ -343,14 +342,14 @@
         public function guardar(){
 
             //Comprobar si los datos están llegando
-            if(isset($_POST)){
+            if(isset($_POST) && isset($_GET)){
                 
                 //Comprobar si cada dato existe
                 $idVideojuego = isset($_POST['idVideojuego']) ? $_POST['idVideojuego'] : false;
                 $unidades = isset($_POST['unidad']) ? $_POST['unidad'] : false;
                 $pago = isset($_POST['idPago']) ? $_POST['idPago'] : false;
                 $envio = isset($_POST['idEnvio']) ? $_POST['idEnvio'] : false;
-
+                $opcionCarrito = isset($_GET['opcionCompra']) ? $_GET['opcionCompra'] : false;
                 //Comprobar si todos los datos exsiten
                 if($pago && $envio && $idVideojuego && $unidades){
                     $envioUnico = $this -> traerEnvio($envio);
@@ -373,22 +372,34 @@
                             $idTransaccion = $this -> obtenerUltimaTransaccion();
 
                             //Obtener el resultado
-                            for($i = 0; $i < 3; $i++){
-                                $guardadoTransaccionVideojuego = $this -> guardarTransaccionVideojuego($idTransaccion, $idVideojuego[$i], $unidades[$i]);
+                            if($opcionCarrito == 1){
+                                for($i = 0; $i < 3; $i++){
+                                    $guardadoTransaccionVideojuego = $this -> guardarTransaccionVideojuego($idTransaccion, $idVideojuego[$i], $unidades[$i]);
+                                }
+                            }elseif($opcionCarrito == 2){
+                                $guardadoTransaccionVideojuego = $this -> guardarTransaccionVideojuego($idTransaccion, $idVideojuego, $unidades);
                             }
                             //Comprobar si la transaccion videojueo se guardo con exito
                             if($guardadoTransaccionVideojuego){
-                                for($i = 0; $i < 3; $i++){
-                                    $this -> actualizarStock($idVideojuego[$i], $unidades[$i]);
+                                if($opcionCarrito == 1){
+                                    for($i = 0; $i < 3; $i++){
+                                        $this -> actualizarStock($idVideojuego[$i], $unidades[$i]);
+                                    }
+                                }elseif($opcionCarrito == 2){
+                                    $this -> actualizarStock($idVideojuego, $unidades);
                                 }
                                 //Guardar el chat
                                 $guardadoChat = $this -> guardarChat();
 
                                 //Comprobar si el chat ha sido guardado con exito
                                 if($guardadoChat){
-                                    for($i = 0; $i < 3; $i++){
-                                        //Guardar usuario chat
-                                        $this -> guardarUsuarioChat($this -> traerDuenioDeVideojuego($idVideojuego[$i]));
+                                    if($opcionCarrito == 1){
+                                        for($i = 0; $i < 3; $i++){
+                                            //Guardar usuario chat
+                                            $this -> guardarUsuarioChat($this -> traerDuenioDeVideojuego($idVideojuego[$i]));
+                                        }
+                                    }elseif($opcionCarrito == 2){
+                                        $this -> guardarUsuarioChat($this -> traerDuenioDeVideojuego($idVideojuego));
                                     }
                                     //Redirigir al menu de direccion y pago
                                     header("Location:"."http://localhost/Mercado-Juegos/?controller=TransaccionController&action=exito");
