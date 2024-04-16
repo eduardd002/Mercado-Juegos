@@ -190,8 +190,13 @@
             $resultado = $this -> db -> query($consulta);
             //Obtener el resultado del objeto
             $ultimo = $resultado -> fetch_object();
-            //Devolver resultado
-            $ultimaTransaccion = $ultimo -> id;
+            if($ultimo == null){
+                //Devolver resultado
+                $ultimaTransaccion = 0;
+            }else{
+                //Devolver resultado
+                $ultimaTransaccion = $ultimo -> id;
+            }
             //Retornar el resultado
             return $ultimaTransaccion;
         }

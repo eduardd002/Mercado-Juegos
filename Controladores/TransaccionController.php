@@ -191,7 +191,7 @@
         Funcion para guardar la transaccion en la base de datos
         */
 
-        public function guardarTransaccion($factura, $idPago, $idEnvio){
+        public function guardarTransaccion($idVideojuego, $opcion, $factura, $idPago, $idEnvio){
             $carrito = new Carrito();
             $carrito -> setIdUsuario($_SESSION['loginexitoso'] -> id);
             $lista = $carrito -> listar();
@@ -199,9 +199,21 @@
             $transaccion = new Transaccion();
             $transaccion -> setNumeroFactura($factura + 1000);
             $transaccion -> setIdComprador($_SESSION['loginexitoso'] -> id);
-            $transaccion -> setIdVendedor($this -> traerDuenioDeVideojuego(1));
             $transaccion -> setIdEstado(1);
-            $total = $lista['totalCarrito']['totalCarrito'];
+            if($opcion == 1){
+                foreach($idVideojuego as $videojuego){
+                    $vendedor = $this -> traerDuenioDeVideojuego($videojuego);
+                    $transaccion -> setIdVendedor($vendedor);
+                }
+                $total = $lista['totalCarrito']['totalCarrito'];
+            }elseif($opcion == 2){
+                $vendedor = $this -> traerDuenioDeVideojuego($idVideojuego);
+                $transaccion -> setIdVendedor($vendedor);
+                $vid = $videojuego -> fetch_object();
+                $unidades = $vid -> unidades;
+                $precio = $vid -> precio;
+                $total = $unidades*$precio;
+            }
             $transaccion -> setTotal($total);
             $transaccion -> setIdPago($idPago);
             $transaccion -> setIdEnvio($idEnvio);
@@ -352,28 +364,24 @@
                 $opcionCarrito = isset($_GET['opcionCompra']) ? $_GET['opcionCompra'] : false;
                 //Comprobar si todos los datos exsiten
                 if($pago && $envio && $idVideojuego && $unidades){
-                    $envioUnico = $this -> traerEnvio($envio);
-                    $pagoUnico = $this -> traerPago($pago);
-
-                    //Obtener los resultados
-                    $guardadoPago = $this -> guardarPago($pagoUnico);
-                    $guardarEnvio = $this -> guardarEnvio($envioUnico);
-
+                    $carrito = new Carrito();
+                    $carrito -> setIdUsuario($_SESSION['loginexitoso'] -> id);
+                    $lista = $carrito -> listar();
+                    $listado = count($lista['carrito']['videojuegos']);
                     //Traer ultima factura
                     $factura = $this -> obtenerFactura();
                   
                         //Guardar la transaccion
-                        $guardadoTransaccion = $this -> guardarTransaccion($factura, $pago, $envio);
+                        $guardadoTransaccion = $this -> guardarTransaccion($idVideojuego, $opcionCarrito, $factura, $pago, $envio);
                     
                         //Comprobar si los datos se guardaron con exito en la base de datos
-                        if($guardadoTransaccion && $guardadoPago && $guardarEnvio){
+                        if($guardadoTransaccion){
 
                             //Obtener id de la ultima transaccion
                             $idTransaccion = $this -> obtenerUltimaTransaccion();
-
                             //Obtener el resultado
                             if($opcionCarrito == 1){
-                                for($i = 0; $i < 3; $i++){
+                                for($i = 0; $i < $listado; $i++){
                                     $guardadoTransaccionVideojuego = $this -> guardarTransaccionVideojuego($idTransaccion, $idVideojuego[$i], $unidades[$i]);
                                 }
                             }elseif($opcionCarrito == 2){
@@ -382,7 +390,7 @@
                             //Comprobar si la transaccion videojueo se guardo con exito
                             if($guardadoTransaccionVideojuego){
                                 if($opcionCarrito == 1){
-                                    for($i = 0; $i < 3; $i++){
+                                    for($i = 0; $i < $listado; $i++){
                                         $this -> actualizarStock($idVideojuego[$i], $unidades[$i]);
                                     }
                                 }elseif($opcionCarrito == 2){
@@ -394,7 +402,7 @@
                                 //Comprobar si el chat ha sido guardado con exito
                                 if($guardadoChat){
                                     if($opcionCarrito == 1){
-                                        for($i = 0; $i < 3; $i++){
+                                        for($i = 0; $i < $listado; $i++){
                                             //Guardar usuario chat
                                             $this -> guardarUsuarioChat($this -> traerDuenioDeVideojuego($idVideojuego[$i]));
                                         }

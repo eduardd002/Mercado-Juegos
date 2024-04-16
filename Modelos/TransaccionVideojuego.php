@@ -71,9 +71,10 @@
 
         
         public function obtenerVideojuegoTransaccion($factura){
-            $consulta = "SELECT tv.unidades, v.precio
+            $consulta = "SELECT tv.unidades, v.precio, v.idUsuario AS 'idUsuario'
             FROM transaccionvideojuego tv
                 INNER JOIN videojuegos v ON v.id = tv.idVideojuego
+                INNER JOIN usuarios u ON u.id = v.idUsuario
                 INNER JOIN transacciones t ON t.id = tv.idTransaccion
                 WHERE t.numeroFactura = $factura";
             $resultado = $this -> db -> query($consulta);
