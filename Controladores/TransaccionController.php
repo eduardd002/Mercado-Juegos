@@ -191,11 +191,10 @@
         Funcion para guardar la transaccion en la base de datos
         */
 
-        public function guardarTransaccion($idVideojuego, $opcion, $factura, $idPago, $idEnvio){
+        public function guardarTransaccion($idVideojuego, $unidadesCompra, $opcion, $factura, $idPago, $idEnvio){
             $carrito = new Carrito();
             $carrito -> setIdUsuario($_SESSION['loginexitoso'] -> id);
             $lista = $carrito -> listar();
-            $videojuego = Ayudas::obtenerVideojuegoDeTransaccionEnConcreto($this -> obtenerUltimaTransaccion() + 999);
             $transaccion = new Transaccion();
             $transaccion -> setNumeroFactura($factura + 1000);
             $transaccion -> setIdComprador($_SESSION['loginexitoso'] -> id);
@@ -207,11 +206,11 @@
                 }
                 $total = $lista['totalCarrito']['totalCarrito'];
             }elseif($opcion == 2){
+                $videojuegoUnico = Ayudas::obtenerVideojuegoEnConcreto($idVideojuego);
                 $vendedor = $this -> traerDuenioDeVideojuego($idVideojuego);
                 $transaccion -> setIdVendedor($vendedor);
-                $vid = $videojuego -> fetch_object();
-                $unidades = $vid -> unidades;
-                $precio = $vid -> precio;
+                $unidades = $unidadesCompra;
+                $precio = $videojuegoUnico['videojuego']['precioVideojuego'];
                 $total = $unidades*$precio;
             }
             $transaccion -> setTotal($total);
@@ -374,7 +373,7 @@
                     $factura = $this -> obtenerFactura();
                   
                         //Guardar la transaccion
-                        $guardadoTransaccion = $this -> guardarTransaccion($idVideojuego, $opcionCarrito, $factura, $pago, $envio);
+                        $guardadoTransaccion = $this -> guardarTransaccion($idVideojuego, $unidades, $opcionCarrito, $factura, $pago, $envio);
                     
                         //Comprobar si los datos se guardaron con exito en la base de datos
                         if($guardadoTransaccion){
