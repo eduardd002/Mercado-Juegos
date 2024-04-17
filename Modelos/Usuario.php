@@ -342,7 +342,7 @@
         public function obtenerVideojuegosCreadosPorUsuario(){
             $consulta = "SELECT DISTINCT v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', c.nombre AS 'nombreConsola', v.stock AS 'stockVideojuego', v.id AS 'idVideojuego', v.foto AS 'imagenVideojuego'
             FROM Videojuegos v
-            INNER JOIN Consolas c ON c.id = v.idUso
+            INNER JOIN Consolas c ON c.id = v.idConsola
             INNER JOIN Usuarios u ON u.id = v.idUsuario
             WHERE u.id = {$this -> getId()} AND v.activo = 1";
             //Ejecutar la consulta

@@ -367,7 +367,9 @@
                     $carrito = new Carrito();
                     $carrito -> setIdUsuario($_SESSION['loginexitoso'] -> id);
                     $lista = $carrito -> listar();
-                    $listado = count($lista['carrito']['videojuegos']);
+                    if($opcionCarrito == 1){
+                        $listado = count($lista['carrito']['videojuegos']);
+                    }
                     //Traer ultima factura
                     $factura = $this -> obtenerFactura();
                   
