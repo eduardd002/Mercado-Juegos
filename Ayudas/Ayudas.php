@@ -458,16 +458,6 @@
             return $videojuegoObtenido;
         }
         
-        public static function obtenerVideojuegoDeTransaccionEnConcreto($factura){
-            /*Incluir el objeto de chat*/
-            require_once 'Modelos/TransaccionVideojuego.php';
-            /*Instanciar objeto*/
-            $transaccionVideojuego = new TransaccionVideojuego();
-            /*Obtener resultado*/
-            $videojuegoObtenido = $transaccionVideojuego -> obtenerVideojuegoTransaccion($factura);
-            /*Retornar resultado*/
-            return $videojuegoObtenido;
-        }
     }
 
 ?>

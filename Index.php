@@ -1,76 +1,86 @@
 <?php
 
-    //OB_START(); para
+    /*Iniciar el buffer de salida*/
     ob_start();
-
-    // Activar la sesión
+    /*Activar la sesión*/ 
     session_start();
-
-    //session_destroy();
-
-    //var_dump($_SESSION);
-
-    //Incluir los archivo de autocarga de controladores
+    /*Incluir los archivo de autocarga de controladores*/
     require_once 'Autoload.php';
-    //Incluir los archivo de ayudas
+    /*Incluir los archivo de ayudas*/
     require_once 'Ayudas/Ayudas.php';
-    //Incluir los archivo de configuracion de rutas
+    /*Incluir los archivo de configuracion de rutas*/
     require_once 'Configuracion/Rutas.php';
-    //Incluir la clave de encriptacion
+    /*Incluir la clave de encriptacion*/
     Require_once 'Configuracion/Clave.php';
-    //Incluir archivo de configuracion de base de datos
+    /*Incluir archivo de configuracion de base de datos*/
     require_once 'Configuracion/BaseDeDatos.php';
-    //Incluir los archivos de las vistas
+    /*Incluir el archivo de la vista de cabecera*/
     require_once 'Vistas/Layout/Cabecera.html';
     
-    //Funcion para mostrar un error
+    /*
+    Funcion para mostrar un error
+    */
+
     function showError(){
+        /*Instanciar la case*/
         $error = new ErrorController();
+        /*Llamar metodo*/
         $error -> index();
+        /*Retornar el resultado*/
         return $error;
     }
 
-    //Compruebo si me llega el controlador por la URL 
+    /*Comprobar si llega el controlador por la URL*/
     if(isset($_GET['controller'])){
+        /*Establecer nombre del controlador*/
         $nombre = $_GET['controller'];
+    /*Comprobar si no llega el controlador y no existe el metodo*/
     }elseif(!isset($_GET['controller']) && !isset($_GET['action'])){
+        /*Comprobar si existe el inicio de sesion exitoso del administrador*/
         if(isset($_SESSION['loginexitosoa'])){
+            /*Establecer nombre del controlador*/
             $nombre = "AdministradorController";
         }else{
+            /*Establecer nombre del controlador*/
             $nombre = "VideojuegoController";
         }
     }else{
+        /*Mostrar error*/
         showError();
+        /*Salir*/
         exit();
     }
-
-    //Compruebo si existe el controladorS
+    /*Comprobar si existe el controlador*/
     if(class_exists($nombre)){
-        
-        //Si existe la clase se crea el objeto
+        /*Instanciar objeto*/
         $controlador = new $nombre();
-
-        //Compruebo si me llega la acción y si el metodo existe dentro del controlador
+        /*Comprobar si llega la acción y si el metodo existe dentro del controlador*/
         if(isset($_GET['action']) && method_exists($controlador, $_GET['action'])){
-
-            //Si existe invocar o llamar a ese metodo
+            /*Invocar o llamar a ese metodo*/
             $action = $_GET['action'];
+            /*Llamar la acción*/
             $controlador -> $action();
+        /*Comprobar si no llega el controlador y no existe la accion*/
         }elseif(!isset($_GET['controller']) && !isset($_GET['action'])){
+            /*Comprobar si existe la sesion de login administrador exitoso*/
             if(isset($_SESSION['loginexitosoa'])){
+                /*Establecer metodo por defecto*/
                 $actionDefault = "Administrar";
             }else{
+                /*Establecer metodo por defecto*/
                 $actionDefault = "Inicio";
             }
+            /*Realizar accion*/
             $controlador -> $actionDefault();
         }else{
+            /*Mostrar error*/
             showError();
         }
     }else{
+        /*Mostrar error*/
         showError();
     }
-
-    //Incluir los archivos de las vistas
+    /*Incluir el archivo de la vista de pie de pagina*/
     require_once 'Vistas/Layout/PieDePagina.html';
 
 ?>

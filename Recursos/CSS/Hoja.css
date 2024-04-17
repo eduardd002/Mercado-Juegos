@@ -2826,46 +2826,98 @@ Estilo del select en detalle venta
     margin-bottom: 50px;
 }
 
+/*
+Estilo de la seccion de envios y pagos de transaccion
+*/
+
 #enviosPagoTransaccion{
+    /*Margen exterior izquierdo*/
     margin-left: 550px !important;
+    /*Margen exterior superior*/
     margin-top: 50px !important;
+    /*Margen exterior inferior*/
     margin-bottom: 50px !important;
 }
 
+/*
+Estilo de los enlaces de la seccion de envios y pagos de transaccion
+*/
+
 #enviosPagoTransaccion a{
+    /*Texto alineado al centro*/
     text-align: center;
+    /*Sin decoracion de texto*/
     text-decoration: none;
+    /*Color de letra*/
     color: white;
 }
 
+/*
+Estilo de la seccion de envios en transaccion
+*/
+
 #enviosTransaccion{
+    /*Margen exterior izquierdo*/
     margin-left: 40px;
+    /*Margen exterior inferior*/    
     margin-bottom: 30px;
 }
 
+/*
+Estilo del radio button seleccionable en la seccion de envios en transaccion
+*/
+
 #enviosTransaccion input{
+    /*Margen exterior superior*/    
     margin-top: 50px;
 }
 
+/*
+Estilo del texto en la seccion de envios en transaccion
+*/
+
 #enviosTransaccion label{
+    /*Limpiar flotados*/    
     clear: both;
+    /*Dar comportamiento de bloque*/    
     display: block;
+    /*Margen exterior superior*/
     margin-top: 10px;
+    /*Margen exterior inferior*/
     margin-bottom: 10px;
 }
 
+/*
+Estilo de la seccion de pagos en transaccion
+*/
+
 #pagosTransaccion{
+    /*Margen exterior izquierdo*/
     margin-left: 40px;
+    /*Margen exterior inferior*/
     margin-bottom: 30px;
 }
 
+/*
+Estilo del radio button seleccionable en la seccion de pagos en transaccion
+*/
+
 #pagosTransaccion input{
+    /*Margen exterior superior*/    
     margin-top: 50px;
 }
 
+/*
+Estilo del texto en la seccion de pagos en transaccion
+*/
+
 #pagosTransaccion label{
+    /*Limpiar flotados*/
     clear: both;
+    /*Dar comportamiento de bloque*/    
     display: block;
+    /*Margen exterior superior*/    
     margin-top: 10px;
+    /*Margen exterior inferior*/    
     margin-bottom: 10px;
 }
