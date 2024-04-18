@@ -229,7 +229,6 @@ Crea tabla intermedia de videojuego y categoria
 
 CREATE TABLE videojuegocategoria (
     id             INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
     idVideojuego INTEGER NOT NULL,
     idCategoria  INTEGER NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
@@ -291,7 +290,6 @@ Crear tabla de favoritos
 
 CREATE TABLE favoritos (
     id   INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
     idUsuario    INTEGER NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT favoritos_id PRIMARY KEY ( id ),
@@ -320,7 +318,6 @@ Crear tabla de chats
 
 CREATE TABLE chats (
     id   INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
     fechaCreacion DATE NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT chats_id PRIMARY KEY ( id )
@@ -332,7 +329,6 @@ Crear tabla de usuario mensaje chat
 
 CREATE TABLE usuariochat (
     id   INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
     mensaje TEXT NULL,
     idRemitente  INTEGER NOT NULL,
     idDestinatario  INTEGER NOT NULL,

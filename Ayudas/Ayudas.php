@@ -371,7 +371,7 @@
             /*Lamar las funciones que contiene la informacion del login del usuario y administrador*/
             $ingresoa = Ayudas::loginAdministrador($email, $clave);
             $ingreso = Ayudas::loginUsuario($email, $clave);
-            /*Comprobar se ejecutó con exito la consulta*/
+            /*Comprobar si el ingreso del usuario es exitoso*/
             if($ingreso && is_object($ingreso)){
                 /*Crear la sesiones con el objeto completo del usuario e informacion referente*/
                 $_SESSION['loginexitoso'] = $ingreso;
@@ -391,6 +391,7 @@
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio"); 
                         /*Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes*/
                         Ayudas::eliminarSesion('catalogofavorito');
+                        /*Comprobar si existe la sesion de catalogo favorito*/
                     }else if(isset($_SESSION['catalogofavoritot'])){
                         /*Redirigir al lugar requerido*/
                         header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=todos"); 
@@ -406,16 +407,19 @@
                     }
                     /*Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes*/
                     Ayudas::eliminarSesion('favoritopendiente');
+                /*De lo contrario*/    
                 }else{
                     /*Redirigir al inicio*/
                     header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
                 }
+            /*Comprobar si el ingreso del administrador es exitoso*/
             }else if($ingresoa && is_object($ingresoa)){
                 /*Crear la sesion con el objeto completo del administrador*/
                 $_SESSION['loginexitosoa'] = $ingresoa;
                 $_SESSION['loginexitosoinfoa'] = "Bienvenido administrador";
                 /*Redirigir al inicio*/
                 header("Location:"."http://localhost/Mercado-Juegos/?controller=AdministradorController&action=administrar");
+            /*De lo contrario*/    
             }else{
                 /*Crear la sesion de error al realizar el login*/
                 $_SESSION['error_login'] = 'Este usuario no se encuentra registrado';

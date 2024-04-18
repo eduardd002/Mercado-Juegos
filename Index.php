@@ -40,10 +40,12 @@
         if(isset($_SESSION['loginexitosoa'])){
             /*Establecer nombre del controlador*/
             $nombre = "AdministradorController";
+        /*De lo contrario*/    
         }else{
             /*Establecer nombre del controlador*/
             $nombre = "VideojuegoController";
         }
+    /*De lo contrario*/      
     }else{
         /*Mostrar error*/
         showError();
@@ -66,16 +68,19 @@
             if(isset($_SESSION['loginexitosoa'])){
                 /*Establecer metodo por defecto*/
                 $actionDefault = "Administrar";
+            /*De lo contrario*/      
             }else{
                 /*Establecer metodo por defecto*/
                 $actionDefault = "Inicio";
             }
             /*Realizar accion*/
             $controlador -> $actionDefault();
+        /*De lo contrario*/      
         }else{
             /*Mostrar error*/
             showError();
         }
+    /*De lo contrario*/          
     }else{
         /*Mostrar error*/
         showError();

@@ -360,14 +360,14 @@
             $consulta = "SELECT v.*
                 FROM videojuegos v
                 INNER JOIN usuarios u ON u.id = v.idUsuario
-                WHERE v.activo = 1 ";
+                WHERE v.activo = 1 AND u.activo = 1 ";
                 if($this -> getId() != null){
                     $consulta .= "EXCEPT
                     SELECT v.*
                     FROM bloqueos b
                     INNER JOIN usuarios u ON u.id = b.idBloqueado
                     INNER JOIN videojuegos v ON v.idUsuario = u.id
-                    AND b.idBloqueador = {$this -> getId()} AND b.activo = 1 ";
+                    AND b.idBloqueador = {$this -> getId()} AND b.activo = 1 OR v.idUsuario != b.idBloqueador ";
                 }
             $consulta .= "ORDER BY RAND() LIMIT 6";
             //Ejecutar la consulta
@@ -385,14 +385,16 @@
             $consulta = "SELECT v.*
                 FROM videojuegos v
                 INNER JOIN usuarios u ON v.idUsuario = u.id
-                WHERE v.activo = 1 ";
+                INNER JOIN videojuegocategoria vc ON vc.idVideojuego = v.id
+                INNER JOIN categorias c ON c.id = vc.idCategoria
+                WHERE v.activo = 1 AND u.activo = 1 AND c.activo = 1 ";
                 if($this -> getId() != null){
                     $consulta .= "EXCEPT
                     SELECT v.*
                     FROM bloqueos b
                     INNER JOIN usuarios u ON u.id = b.idBloqueado
                     INNER JOIN videojuegos v ON v.idUsuario = u.id
-                    AND b.idBloqueador = {$this -> getId()} AND b.activo = 1 ";
+                    AND b.idBloqueador = {$this -> getId()} AND b.activo = 1 OR v.idUsuario != b.idBloqueador";
                 }
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);

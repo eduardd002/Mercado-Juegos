@@ -1,27 +1,25 @@
 <?php
 
-    //Incluir el objeto de uso
+    /*Incluir el objeto de uso*/
     require_once 'Modelos/Uso.php';
-
-    //Incluir el objeto de consola
+    /*Incluir el objeto de consola*/
     require_once 'Modelos/Consola.php';
-
-    //Incluir el objeto de estado
+    /*Incluir el objeto de estado*/
     require_once 'Modelos/Estado.php';
-
-    //Incluir el objeto de categoria
+    /*Incluir el objeto de categoria*/
     require_once 'Modelos/Categoria.php';
-
-    //Incluir el objeto de medio de pago
+    /*Incluir el objeto de medio de pago*/
     require_once 'Modelos/MedioPago.php';
-
-    //Incluir el objeto de administrador
+    /*Incluir el objeto de administrador*/
     require_once 'Modelos/Administrador.php';
-
-    //Incluir el objeto de usuario
+    /*Incluir el objeto de usuario*/
     require_once 'Modelos/Usuario.php';
-
+    /*Incluir el objeto de usuario*/
     require_once 'Modelos/Bloqueo.php';
+
+    /*
+    Clase controlador de administrador
+    */
 
     class AdministradorController{
 
@@ -30,14 +28,16 @@
         */
 
         public function registro(){
-
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/Administrador/Registro.html";
         }
 
-        public function cambiarClave(){
+        /*
+        Funcion para cambiar la clave del administrador
+        */
 
-            //Incluir la vista
+        public function cambiarClave(){
+            /*Incluir la vista*/
             require_once "Vistas/Administrador/CambiarClave.html";
         }
 
@@ -46,24 +46,22 @@
         */
 
         public function administrar(){
-
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/Administrador/Inicio.html";
         }
 
         /*
-        Funcion para obtener el administrador
+        Funcion para obtener el perfil del administrador
         */
 
         public function perfilDeAdministrador($id){
-
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $administrador = new Administrador();
-            //Creo el objeto
+            /*Crear el objeto*/
             $administrador -> setId($id);
-            //Obtener resultado
+            /*Obtener resultado*/
             $adminUnico = $administrador -> obtenerUno();
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $adminUnico;
         }
 
@@ -72,24 +70,27 @@
         */
 
         public function miPerfil(){
-
-            //Llamar la funcion auxiliar para redirigir en caso de que no haya inicio de sesion
+            /*Llamar la funcion auxiliar para redirigir en caso de que no haya inicio de sesion*/
             Ayudas::restringirAAdministrador();
-
-            //Comprobar si el dato está llegando
+            /*Comprobar si el dato está llegando*/
             if(isset($_GET)){
-
-                //Comprobar si la sesion de inicio de sesion existe
+                /*Comprobar si la sesion de inicio de sesion existe*/
                 $id = isset($_SESSION['loginexitosoa']) ? $_SESSION['loginexitosoa'] -> id : false;
-
-                //Si el dato existe
+                /*Si la sesion de inicio de sesion existe*/
                 if($id){
-
-                    //Iniciar sesion
+                    /*Llamar funcion para obtener el perfil del administrador*/
                     $adminUnico = $this -> perfilDeAdministrador($id);
-                    //Incluir la vista
+                    /*Incluir la vista*/
                     require_once "Vistas/Administrador/miPerfil.html";
+                /*De lo contrario*/    
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir("cargarperfiladminerror", "Ha ocurrido un error al cargar el perfil del administrador", "?controller=VideojuegoController&action=inicio");
                 }
+            /*De lo contrario*/      
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
             }
         }
 
@@ -98,10 +99,9 @@
         */
 
         public function guardarAdministrador($nombre, $apellidos, $fechaNacimiento, $telefono, $email, $clave, $nombreArchivo){
-
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $administrador = new Administrador();
-            //Crear el objeto
+            /*Crear el objeto*/
             $administrador -> setActivo(1);
             $administrador -> setNombre($nombre);
             $administrador -> setApellido($apellidos);
@@ -111,14 +111,18 @@
             $administrador -> setClave($clave);
             $administrador -> setFecharegistro(date('y-m-d'));
             $administrador -> setFoto($nombreArchivo);
+            /*Intentar guardar el administrador*/
             try{
-                //Ejecutar la consulta
+                /*Guardar el administrador en la base de datos*/
                 $guardado = $administrador -> guardar();
+            /*Capturar la excepcion*/    
             }catch(mysqli_sql_exception $excepcion){
-                //Crear la sesion y redirigir a la ruta pertinente
+                /*Crear la sesion y redirigir a la ruta pertinente*/
                 Ayudas::crearSesionYRedirigir('guardaradministradorerror', "Esta direccion de correo ya existe", '?controller=AdministradorController&action=registro');
+                /*Cortar la ejecucion*/
                 die();
             }
+            /*Retornar el resultado*/
             return $guardado;
         }
 
@@ -127,64 +131,58 @@
         */
 
         public function guardar(){
-
-            //Comprobar si los datos están llegando
+            /*Comprobar si los datos están llegando*/
             if(isset($_POST)){
-
-                //Comprobar si cada dato existe
+                /*Comprobar si cada dato existe*/
                 $nombre = isset($_POST['nombreadmin']) ? $_POST['nombreadmin'] : false;
                 $apellidos = isset($_POST['apellidosadmin']) ? $_POST['apellidosadmin'] : false;
                 $fechaNacimiento = isset($_POST['fechaNacimientoadmin']) ? $_POST['fechaNacimientoadmin'] : false;
                 $telefono = isset($_POST['telefonoadmin']) ? $_POST['telefonoadmin'] : false;
                 $email = isset($_POST['emailadmin']) ? $_POST['emailadmin'] : false;
                 $clave = isset($_POST['passwordadmin']) ? $_POST['passwordadmin'] : false;
+                /*Establecer archivo de foto*/
                 $archivo = $_FILES['foto'];
+                /*Establecer nombre del archivo de la foto*/
                 $foto = $archivo['name'];
-
-                //Comprobar si todos los datos exsiten
+                /*Comprobar si todos los datos existen*/
                 if($nombre && $apellidos && $fechaNacimiento && $telefono && $clave && $email){
-
-                    //Comprobar si la contraseña es valida
+                    /*Comprobar si la contraseña es valida*/
                     $claveSegura = Ayudas::comprobarContrasenia($clave);
-                    
-                    //Comprobar si todo esta correcto para guardar el administrador
+                    /*Comprobar si la clave es valida*/
                     if($claveSegura){
-
-                        //Comprobar si la foto es valida
+                        /*Comprobar si la foto es valida y ha sido guardada*/
                         $fotoGuardada = Ayudas::guardarImagen($archivo, "ImagenesAdministradores");
-
-                        //Comprobar si la foto ha sido guardada
+                        /*Comprobar si la foto ha sido validada y guardada*/
                         if($fotoGuardada){
-
-                            //Comprobar si se ha guardado con exito
+                            /*Llamar la funcion de guardar administrador*/
                             $guardado = $this -> guardarAdministrador($nombre, $apellidos, $fechaNacimiento, $telefono, $email, $clave, $foto);
-
-                            //Comprobar si el administrador ha sido guardado
+                            /*Comprobar si el administrador ha sido guardado*/
                             if($guardado){
-
+                                /*Llamar la funcion de inicio de sesion del administrador*/
                                Ayudas::iniciarSesionAdmnistrador($email, $clave);
+                            /*De lo contrario*/  
                             }else{
-                                //Crear la sesion y redirigir a la ruta pertinente
+                                /*Crear la sesion y redirigir a la ruta pertinente*/
                                 Ayudas::crearSesionYRedirigir("guardaradministradorerror", "Ha ocurrido un error al guardar el administrador", "?controller=AdministradorController&action=registro");
                             }
+                        /*De lo contrario*/      
                         }else{
-
-                            //Crear la sesion y redirigir a la ruta pertinente
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
                             Ayudas::crearSesionYRedirigir("guardaradministradorerror", "La imagen debe ser de tipo imagen", "?controller=AdministradorController&action=registro");
                         }
+                    /*De lo contrario*/      
                     }else{
-
-                        //Crear la sesion y redirigir a la ruta pertinente
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir("guardaradministradorerror", "La clave debe contener un mayuscula, miniscula, numero, caracter especial y minimo 8 caracteres de longitud", "?controller=AdministradorController&action=registro");
-                    }       
+                    }  
+                /*De lo contrario*/       
                 }else{
-
-                    //Crear la sesion y redirigir a la ruta pertinente
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
                     Ayudas::crearSesionYRedirigir("guardaradministradorerror", "Ha ocurrido un error al guardar el administrador", "?controller=AdministradorController&action=registro");
                 }
+            /*De lo contrario*/    
             }else{
-
-                //Crear la sesion y redirigir a la ruta pertinente
+                /*Crear la sesion y redirigir a la ruta pertinente*/
                 Ayudas::crearSesionYRedirigir("guardaradministradorerror", "Ha ocurrido un error al guardar el administrador", "?controller=AdministradorController&action=registro");
             }
         }
@@ -194,14 +192,13 @@
         */
 
         public function eliminarAdministrador($idAdmin){
-
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $administrador = new Administrador();
-            //Crear objeto
+            /*Crear objeto*/
             $administrador -> setId($idAdmin);
-            //Ejecutar la consulta
+            /*Ejecutar la consulta*/
             $eliminado = $administrador -> eliminar();
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $eliminado;
         }
 
@@ -210,39 +207,47 @@
         */
 
         public function eliminar(){
-            
-            //Comprobar si los datos están llegando
+            /*Comprobar si los datos están llegando*/
             if(isset($_GET)){
-
-                //Comprobar si el dato existe
+                /*Comprobar si el dato existe*/
                 $idAdmin = isset($_GET['id']) ? $_GET['id'] : false;
-
-                //Si el dato existe
+                /*Si el dato existe*/
                 if($idAdmin){
-
+                    /*Llamar la funcion para eliminar el administrador*/
                     $eliminado = $this -> eliminarAdministrador($idAdmin);
-
-                    //Comprobar si el administrador ha sido eliminado exitosamente
+                    /*Comprobar si el administrador ha sido eliminado exitosamente*/
                     if($eliminado){
-
-                        //Crear la sesion y redirigir a la ruta pertinente
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('eliminaradministradoracierto', "El administrador ha sido eliminado exitosamente", '?controller=VideojuegoController&action=inicio');
-                        //Eliminar el inicio de sesion
+                        /*Eliminar el inicio de sesion*/
                         Ayudas::eliminarSesion('loginexitosoa');
+                    /*De lo contrario*/       
                     }else{
-                        //Crear la sesion y redirigir a la ruta pertinente
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('eliminaradministradorerror', "El administrador no ha sido eliminado exitosamente", '?controller=AdminsitradorController&action=miPerfil');
                     }
+                /*De lo contrario*/       
                 }else{
-                    //Crear la sesion y redirigir a la ruta pertinente
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
                     Ayudas::crearSesionYRedirigir('eliminaradministradorerror', "Ha ocurrido un error al eliminar el adminsitrador", '?controller=Adminsitrador&action=miPerfil');
                 }
+            /*De lo contrario*/       
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
             }
         }
 
+        /*
+        Funcion para ver los usuarios bloqueados
+        */
+
         public function verBloqueos(){
+            /*Instanciar objeto*/
             $bloqueo = new Bloqueo();
+            /*Ejecutar la consulta*/
             $listaBloqueos = $bloqueo -> obtenerListaBloqueos();
+            /*Incluir la vista*/
             require_once "Vistas/Administrador/VerBloqueos.html";
         }
 
@@ -251,11 +256,11 @@
         */
 
         public function gestionarUsuario(){
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $usuario = new Usuario();
-            //Listar todos los usuarios desde la base de datos
+            /*Listar todos los usuarios desde la base de datos*/
             $listadoUsuarios = $usuario -> listar();
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/Administrador/GestionUsuarios.html";
         }
 
@@ -264,11 +269,11 @@
         */
 
         public function gestionarCategoria(){
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $categoria = new Categoria();
-            //Listar todas las categorias desde la base de datos
+            /*Listar todas las categorias desde la base de datos*/
             $listadoCategorias = $categoria -> listar();
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/Administrador/GestionCategorias.html";
         }
 
@@ -277,11 +282,11 @@
         */
 
         public function gestionarMedioPago(){
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $medioPago = new MedioPago();
-            //Listar todas los medios de pago desde la base de datos
+            /*Listar todas los medios de pago desde la base de datos*/
             $listadoMediosPago = $medioPago -> listar();
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/Administrador/GestionMediosPago.html";
         }
 
@@ -290,11 +295,11 @@
         */
 
         public function gestionarUso(){
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $uso = new Uso();
-            //Listar todos los usos desde la base de datos
+            /*Listar todos los usos desde la base de datos*/
             $listadoUsos = $uso -> listar();
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/Administrador/GestionUsos.html";
         }
 
@@ -303,24 +308,24 @@
         */
 
         public function gestionarConsola(){
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $consola = new Consola();
-            //Listar todas las consolas desde la base de datos
+            /*Listar todas las consolas desde la base de datos*/
             $listadoConsolas = $consola -> listar();
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/Administrador/GestionConsolas.html";
         }
 
         /*
-        Funcion para crear un estado
+        Funcion para gestionar los estados
         */
 
         public function gestionarEstado(){
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $estado = new Estado();
-            //Listar todos los estados desde la base de datos
+            /*Listar todos los estados desde la base de datos*/
             $listadoEstados = $estado -> listar();
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/Administrador/GestionEstados.html";
         }
 
@@ -329,14 +334,13 @@
         */
 
         public function eliminarUsuarioDesdeAdministrador($idUsu){
-
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $usuario = new Usuario();
-            //Crear objeto
+            /*Crear objeto*/
             $usuario -> setId($idUsu);
-            //Ejecutar la consulta
+            /*Ejecutar la consulta*/
             $eliminado = $usuario -> eliminar();
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $eliminado;
         }
 
@@ -345,31 +349,32 @@
         */
 
         public function eliminarUsuario(){
-            
-            //Comprobar si los datos están llegando
+            /*Comprobar si los datos están llegando*/
             if(isset($_GET)){
-
-                //Comprobar si el dato existe
+                /*Comprobar si el dato existe*/
                 $idUsuario = isset($_GET['id']) ? $_GET['id'] : false;
-
-                //Si el dato existe
+                /*Si el dato existe*/
                 if($idUsuario){
-
-                    //Ejecutar la consulta
+                    /*Llamar la funcion de eliminar usuario*/
                     $eliminado = $this -> eliminarUsuarioDesdeAdministrador($idUsuario);
-
-                    //Comprobar si el usuario ha sido eliminado
+                    /*Comprobar si el usuario ha sido eliminado*/
                     if($eliminado){
-                        //Crear la sesion y redirigir a la ruta pertinente
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('eliminaradministradorusuarioacierto', "El usuario ha sido eliminado exitosamente", '?controller=AdministradorController&action=gestionarUsuario');
+                    /*De lo contrario*/
                     }else{
-                        //Crear la sesion y redirigir a la ruta pertinente
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('eliminaradministradorusuarioerror', "El usuario no ha sido eliminado exitosamente", '?controller=AdministradorController&action=gestionarUsuario');
                     }
+                /*De lo contrario*/      
                 }else{
-                    //Crear la sesion y redirigir a la ruta pertinente
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
                     Ayudas::crearSesionYRedirigir('eliminaradministradorusuarioerror', "Ha ocurrido un error al eliminar el usuario", '?controller=AdministradorController&action=gestionarUsuario');
                 }
+            /*De lo contrario*/    
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
             }
         }
 
@@ -378,24 +383,27 @@
         */
 
         public function actualizarAdministrador($id, $nombre, $apellidos, $email, $telefono, $foto){
-
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $administrador = new Administrador();
-            //Crear objeto
+            /*Crear objeto*/
             $administrador -> setId($id);
             $administrador -> setNombre($nombre);
             $administrador -> setApellido($apellidos);
             $administrador -> setCorreo($email);
             $administrador -> setNumerotelefono($telefono);
             $administrador -> setFoto($foto);
+            /*Intentar guardar el administrador*/
             try{
-                //Ejecutar la consulta
+                /*Ejecutar la consulta*/
                 $actualizado = $administrador -> actualizar();
+            /*Capturar la excepcion*/   
             }catch(mysqli_sql_exception $excepcion){
-                //Crear la sesion y redirigir a la ruta pertinente
+                /*Crear la sesion y redirigir a la ruta pertinente*/
                 Ayudas::crearSesionYRedirigir('actualizaradministradorerror', "Esta direccion de correo ya existe", '?controller=AdministradorController&action=miPerfil');
+                /*Cortar la ejecucion*/
                 die();
             }
+            /*Retornar el resultado*/
             return $actualizado;
         }
 
@@ -404,108 +412,142 @@
         */
 
         public function actualizar(){
-            
-            //Comprobar si los datos están llegando
+            /*Comprobar si los datos están llegando*/
             if(isset($_GET) && isset($_POST)){
-
-                //Comprobar si los datos existe
+                /*Comprobar si los datos existe*/
                 $id = isset($_GET['id']) ? $_GET['id'] : false;
                 $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
                 $apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : false;
                 $email = isset($_POST['email']) ? $_POST['email'] : false;
                 $telefono = isset($_POST['telefono']) ? $_POST['telefono'] : false;
+                /*Establecer archivo de foto*/
                 $archivo = $_FILES['foto'];
+                /*Establecer nombre del archivo de la foto*/
                 $foto = $archivo['name'];
-
-                //Si el dato existe
+                /*Si los datos existen*/
                 if($id && $nombre && $apellidos && $email && $telefono){
-
-                    //Comprobar si el formato de la foto es imagen
+                    /*Comprobar si la foto no tiene formato de imagen o no ha llegado*/
                     if(Ayudas::comprobarImagen($archivo['type']) != 3){
-
+                        /*Comprobar si la foto tiene formato de imagen*/
                         if(Ayudas::comprobarImagen($archivo['type']) == 1){
-                            //Comprobar la foto
+                            /*Comprobar si la foto ha sido validada y guardada*/
                             Ayudas::guardarImagen($archivo, "ImagenesAdministradores");
                         }
-
-                        //Llamar la funcion de actualizar
+                        /*Llamar la funcion de actualizar*/
                         $actualizado = $this -> actualizarAdministrador($id, $nombre, $apellidos, $email, $telefono, $foto);
-
+                        /*Comprobar si el administrador ha sido actualizado*/
                         if($actualizado){
-                            //Crear la sesion y redirigir a la ruta pertinente
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
                             Ayudas::crearSesionYRedirigir('actualizaradministradoracierto', "Administrador actualizado con exito", '?controller=AdministradorController&action=miPerfil');
+                        /*De lo contrario*/    
                         }else{
-                            //Crear la sesion y redirigir a la ruta pertinente
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
                             Ayudas::crearSesionYRedirigir('actualizaradministradorsugerencia', "Agrega nuevos datos", '?controller=AdministradorController&action=miPerfil');
                         }
+                    /*De lo contrario*/      
                     }else{
-                        //Crear la sesion y redirigir a la ruta pertinente
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('actualizaradministradorerror', "El formato de la foto debe ser una imagen", '?controller=AdministradorController&action=miPerfil');
                     }
+                /*De lo contrario*/       
                 }else{
-                    //Crear la sesion y redirigir a la ruta pertinente
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
                     Ayudas::crearSesionYRedirigir('actualizaradministrador', "Ha ocurrido un error al actualizar el administrador", '?controller=AdministradorController&action=miPerfil');
                 } 
+            /*De lo contrario*/    
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
             }
         }
 
+        /*
+        Funcion para comprobar si la clave actual ingresada es correcta
+        */
         
         public function comprobarClaves($actual){
-
+            /*Instanciar objeto*/
             $administrador = new Administrador();
+            /*Capturar el correo del administrador ingresado*/
             $correo = $_SESSION['loginexitosoa'] -> correo;
+            /*Obtener clave actual del administrador logueado*/
             $claveAdministrador = $administrador -> traerClave($correo);
-            $alho = password_verify($actual, $claveAdministrador -> clave);
-            if($alho){
+            /*Verificar clave actual y nueva*/
+            $claveVerificada = password_verify($actual, $claveAdministrador -> clave);
+            /*Comprobar si la clave actual y nueva coinciden*/
+            if($claveVerificada){
+                /*Retornar el resultado*/
                 return true;
             }
-
         }
 
-        public function actualizarNuevaClave($clave){
+        /*
+        Funcion para actualizar la clave
+        */
 
-            //Instanciar el objeto
+        public function actualizarNuevaClave($clave){
+            /*Instanciar el objeto*/
             $administrador = new Administrador();
-            //Crear objeto
+            /*Crear objeto*/
             $administrador -> setId($_SESSION['loginexitosoa'] -> id);
             $administrador -> setClave($clave);
-            //Ejecutar la consulta
+            /*Ejecutar la consulta*/
             $actualizado = $administrador -> actualizarClave();
+            /*Retornar el resultado*/
             return $actualizado;
         }
 
-        public function actualizarClave(){
-            
-            //Comprobar si los datos están llegando
-            if(isset($_POST)){
+        /*
+        Funcion para actualizar la clave del administrador
+        */
 
+        public function actualizarClave(){
+            /*Comprobar si los datos están llegando*/
+            if(isset($_POST)){
+                /*Comprobar si los datos existen*/
                 $actual = isset($_POST['passwordactual']) ? $_POST['passwordactual'] : false;
                 $nueva = isset($_POST['passwordnueva']) ? $_POST['passwordnueva'] : false;
-
-                //Si el dato existe
+                /*Si los datos existen*/
                 if($actual && $nueva){
-                    $seguta = Ayudas::comprobarContrasenia($nueva);
-                    if($seguta){
+                    /*Llamar la funcion para comprobar si la clave nueva es valida y segura*/
+                    $segura = Ayudas::comprobarContrasenia($nueva);
+                    /*Comprobar si la clave es valida y segura*/
+                    if($segura){
+                        /*Llamar la funcion para comprobar si las clave actual coincide*/
                         if($this -> comprobarClaves($actual)){
+                            /*Llamar la funcion para actualizar la clave*/
                             $actualizada = $this -> actualizarNuevaClave($nueva);
+                            /*Comprobar si la clave ha sido actualizada con exito*/
                             if($actualizada){
+                                /*Crear la sesion y redirigir a la ruta pertinente*/
                                 Ayudas::crearSesionYRedirigir('actualizarclaveacierto', "La clave ha sido actualizada con exito", '?controller=AdministradorController&action=cambiarClave');
+                            /*De lo contrario*/    
                             }else{
+                                /*Crear la sesion y redirigir a la ruta pertinente*/
                                 Ayudas::crearSesionYRedirigir('actualizarclaveerror', "La clave no ha sido actualizada con exito", '?controller=AdministradorController&action=cambiarClave');
                             }
+                        /*De lo contrario*/  
                         }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
                             Ayudas::crearSesionYRedirigir('actualizarclaveerror', "Clave actual incorrecta", '?controller=AdministradorController&action=cambiarClave');
                         }
+                    /*De lo contrario*/      
                     }else{
-                        //Crear la sesion y redirigir a la ruta pertinente
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('actualizarclaveerror', "Clave poco segura", '?controller=AdministradorController&action=cambiarClave');
                     }
-                    
+                /*De lo contrario*/  
                 }else{
-                    //Crear la sesion y redirigir a la ruta pertinente
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
                     Ayudas::crearSesionYRedirigir('actualizarclaveerror', "Ha ocurrido un error al actualizar la clave", '?controller=AdministradorController&action=cambiarClave');
                 }
+            /*De lo contrario*/    
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
             }
         }
+
     }
+
 ?>

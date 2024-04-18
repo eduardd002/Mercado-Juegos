@@ -45,6 +45,20 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('videojuegofavorito'); ?>
 
+    <?php if(isset($_SESSION['cargarperfiladminerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['cargarperfiladminerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('cargarperfiladminerror'); ?>
+
+    <?php if(isset($_SESSION['errorinesperado'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['errorinesperado']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('errorinesperado'); ?>
+
     <?php if(isset($_SESSION['guardarbloqueoerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['guardarbloqueoerror']; ?>
