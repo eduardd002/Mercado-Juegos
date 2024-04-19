@@ -152,10 +152,24 @@
                 if($idCategoria){
                     /*Llamar la funcion de editar categoria*/
                     $categoria = $this -> editarCategoria($idCategoria);
-                    /*Llamar la funcion para obtener una categoria en concreto*/
-                    $categoriaUnica = $categoria -> obtenerUna();
-                    /*Incluir la vista*/
-                    require_once "Vistas/Categoria/Actualizar.html";
+                    /*Comprobar si la categoria ha sido editada*/
+                    if($categoria){
+                        /*Llamar la funcion para obtener una categoria en concreto*/
+                        $categoriaUnica = $categoria -> obtenerUna();
+                        /*Comprobar si la cateogoria ha sido obtenida*/
+                        if($categoriaUnica){
+                            /*Incluir la vista*/
+                            require_once "Vistas/Categoria/Actualizar.html";
+                        /*De lo contrario*/    
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+                        }
+                    /*De lo contrario*/    
+                    }else{
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+                    }
                 /*De lo contrario*/    
                 }else{
                     /*Crear la sesion y redirigir a la ruta pertinente*/

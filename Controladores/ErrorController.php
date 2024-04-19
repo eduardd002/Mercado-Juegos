@@ -1,5 +1,9 @@
 <?php
 
+    /*
+    Clase controlador de error
+    */
+
     class ErrorController{
 
         /*
@@ -7,8 +11,7 @@
         */
 
         public function index(){
-
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/Error/Error.html";
         }
 

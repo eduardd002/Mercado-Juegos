@@ -1,13 +1,15 @@
 <?php
 
-    //Incluir el objeto de videojuego
+    /*Incluir el objeto de videojuego*/
     require_once 'Modelos/Videojuego.php';
-
-    //Incluir el objeto de favorito
+    /*Incluir el objeto de favorito*/
     require_once 'Modelos/Favorito.php';
-
-    //Incluir el objeto de videojuego favorito
+    /*Incluir el objeto de videojuego favorito*/
     require_once 'Modelos/FavoritoVideojuego.php';
+
+    /*
+    Clase controlador de favorito
+    */
 
     class FavoritoController{
 
@@ -16,13 +18,13 @@
         */
 
         public function ver(){
-
-            //Instaciar el objeto
+            /*Instanciar el objeto*/
             $favorito = new Favorito();
-            //Traer los datos de la consulta
+            /*Construir objeto*/
             $favorito -> setIdUsuario($_SESSION['loginexitoso'] -> id);
+            /*Obtener la lista de favoritos*/
             $listadoFavoritos = $favorito -> listar();
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/Favorito/Favoritos.html";
         }
 
@@ -31,29 +33,27 @@
         */
 
         public function guardarFavorito(){
-
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $favorito = new Favorito();
-            //Crear el objeto
+            /*Crear el objeto*/
             $favorito -> setActivo(1);
             $favorito -> setIdUsuario($_SESSION['loginexitoso'] -> id);
-            //Guardar en la base de datos
+            /*Guardar en la base de datos*/
             $guardado = $favorito -> guardar();
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $guardado;
         }
 
         /*
-        Funcion para obtener el ultimo videojuego guardado
+        Funcion para obtener el ultimo favorito guardado
         */
 
         public function obtenerUltimoFavorito(){
-
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $favorito = new Favorito();
-            //Obtener id del ultimo videojuego registrado
+            /*Obtener id del ultimo videojuego registrado*/
             $idFavorito = $favorito -> ultimo();
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $idFavorito;
         }
 
@@ -62,13 +62,13 @@
         */
 
         public function traer($videojuegoId){
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $videojuego = new Videojuego();
-            //Crear el objeto
+            /*Crear el objeto*/
             $videojuego -> setId($videojuegoId);
-            //Obtener id del ultimo videojuego registrado
+            /*Obtener id del ultimo videojuego registrado*/
             $videojuegoActual = $videojuego -> traerUno();
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $videojuegoActual;
         }
 
@@ -77,20 +77,44 @@
         */
 
         public function guardarFavoritoVideojuego($videojuegoId, $idFavorito){
-
+            /*Llamar la funcion que trae el videojuego*/
             $videojuego = $this -> traer($videojuegoId);
-
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $favoritoVideojuego = new FavoritoVideojuego();
-            //Crear el objeto
+            /*Crear el objeto*/
             $favoritoVideojuego -> setActivo(1);
             $favoritoVideojuego -> setIdFavorito($idFavorito);
             $favoritoVideojuego -> setIdVideojuego($videojuegoId);
             $favoritoVideojuego -> setPrecio($videojuego['videojuego']['precioVideojuego']);
-            //Guardar en la base de datos
+            /*Guardar en la base de datos*/
             $guardadoVideojuegoFavorito = $favoritoVideojuego -> guardar();
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $guardadoVideojuegoFavorito;
+        }
+
+        /*
+        Funcion para comprobar el inicio de sesion
+        */
+
+        public function comprobarLogin($videojuegoId){
+            /*Comprobar si el usuario no esta logueado*/
+            if(!Ayudas::comprobarInicioDeSesionUsuario()){
+                /*Comprobar si la solicitud de videojuego favorito es desde el catalogo de algunos videojuegos y no desde el detalle del videojuego*/
+                if(isset($_GET['cat'])){
+                    /*Crear sesion*/
+                    $_SESSION['catalogofavorito'] = true;
+                    /*Comprobar si la solicitud de videojuego favorito es desde el catalogo de todos los videojuegos y no desde el detalle del videojuego*/
+                }else if(isset($_GET['catt'])){
+                    /*Crear sesion*/
+                    $_SESSION['catalogofavoritot'] = true;
+                /*De lo contrario*/    
+                }else{
+                    /*Crear sesion*/
+                    $_SESSION['idvideojuegopendientefavorito'] = $videojuegoId;
+                }
+            }
+            /*Llamar la funcion de ayuda en caso de que el usuario no este logueado*/
+            Ayudas::restringirAUsuarioAlAgregarFavorito('?controller=UsuarioController&action=login', $videojuegoId);
         }
 
         /*
@@ -98,58 +122,48 @@
         */
 
         public function guardar(){
-
-            //Comprobar si llega el videojuego por el metodo get
-            $videojuegoId = isset($_GET['idVideojuego']) ? $_GET['idVideojuego'] : false;
-
-            //Comprobar si los datos están llegando
-            if($videojuegoId){
-
-                //Comprobar si el usuario ya esta logueado
-                if(!Ayudas::comprobarInicioDeSesionUsuario()){
-                    //Crear sesion en caso de que la solicitud de videojuego favorito sea desde el catalogo y no desde el detalle del videojuego
-                    if(isset($_GET['cat'])){
-                        $_SESSION['catalogofavorito'] = true;
-                    }else if(isset($_GET['catt'])){
-                        $_SESSION['catalogofavoritot'] = true;
+            /*Comprobar si el dato está llegando*/
+            if(isset($_GET)){
+                /*Comprobar si el dato existe*/
+                $videojuegoId = isset($_GET['idVideojuego']) ? $_GET['idVideojuego'] : false;
+                /*Si el dato existe*/
+                if($videojuegoId){
+                    /*Llamar la funcion para obtener el inicio de sesion*/
+                    $this -> comprobarLogin($videojuegoId);
+                    /*Llamar la funcion de guardar favorito*/
+                    $guardado = $this -> guardarFavorito();
+                    /*Comprobar si se guardo con exito el favorito*/
+                    if($guardado){
+                        /*Llamar la funcion que obtiene el id del ultimo favorito guardado*/
+                        $ultimoFavorito = $this -> obtenerUltimoFavorito();
+                        /*Llamar la funcion de guardar favorito videojuego*/
+                        $guardadoVideojuegoFavorito = $this -> guardarFavoritoVideojuego($videojuegoId, $ultimoFavorito);
+                        /*Comprobar si se guardo con exito el favorito videojuego*/
+                        if($guardadoVideojuegoFavorito){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarfavoritoacierto', "Videojuego agregado a la lista de favoritos con exito", "?controller=FavoritoController&action=ver");
+                        /*De lo contrario*/   
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarfavoritoerror', "Videojuego no agregado a la lista de favoritos", "?controller=FavoritoController&action=ver");
+                        }
+                    /*De lo contrario*/    
                     }else{
-                        $_SESSION['idvideojuegopendientefavorito'] = $videojuegoId;
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('guardarfavoritoerror', "Ha ocurrido un error al guardar el favorito", "?controller=FavoritoController&action=ver");
                     }
-                }
-
-                //Llamar la funcion de ayuda en caso de que el usuario no este logueado
-                Ayudas::restringirAUsuarioAlAgregarFavorito('?controller=UsuarioController&action=login', $videojuegoId);
-                
-                //Llamar la funcion de guardar favorito
-                $guardado = $this -> guardarFavorito();
-
-                //Comprobar si se guardo con exito el favorito
-                if($guardado){
-
-                    //Obtener el id del ultimo favorito guardado
-                    $ultimoFavorito = $this -> obtenerUltimoFavorito();
-                    //Llamar la funcion de guardar favorito videojuego
-                    $guardadoVideojuegoFavorito = $this -> guardarFavoritoVideojuego($videojuegoId, $ultimoFavorito);
-
-                    //Comprobar si se guardo con exito el favorito videojuego
-                    if($guardadoVideojuegoFavorito){
-
-                        //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('guardarfavoritoacierto', "Videojuego agregado a la lista de favoritos con exito", "?controller=FavoritoController&action=ver");
-
-                    }else{
-
-                        //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('guardarfavoritoerror', "Videojuego no agregado a la lista de favoritos", "?controller=FavoritoController&action=ver");
-                    }
+                /*De lo contrario*/    
                 }else{
-                    //Crear la sesion y redirigir a la ruta pertinente
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
                     Ayudas::crearSesionYRedirigir('guardarfavoritoerror', "Ha ocurrido un error al guardar el favorito", "?controller=FavoritoController&action=ver");
                 }
+            /*De lo contrario*/    
             }else{
-                //Crear la sesion y redirigir a la ruta pertinente
-                Ayudas::crearSesionYRedirigir('guardarfavoritoerror', "Ha ocurrido un error al guardar el favorito", "?controller=FavoritoController&action=ver");
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
             }
         }
+
     }
+
 ?>

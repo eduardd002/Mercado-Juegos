@@ -1,7 +1,11 @@
 <?php
 
-    //Incluir el objeto de chat
+    /*Incluir el objeto de chat*/
     require_once 'Modelos/UsuarioChat.php';
+
+    /*
+    Clase controlador de chat
+    */
 
     class ChatController{
 
@@ -10,16 +14,15 @@
         */
 
         public function chats(){
-
-            //Instanciar objeto
+            /*Instanciar objeto*/
             $usuarioChat = new UsuarioChat();
-            //Crear objeto
+            /*Crear objeto*/
             $usuarioChat -> setActivo(1);
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
             $usuarioChat -> setIdDestinatario($_SESSION['loginexitoso'] -> id);
-            //Traer lista de chats
+            /*Traer lista de chats*/
             $listadoChats = $usuarioChat -> obtenerChats();
-            //Retornar lista
+            /*Retornar lista*/
             return $listadoChats;
         }
 
@@ -28,19 +31,18 @@
         */
 
         public function guardarMensajes(){
-
-            //Instanciar mensaje
+            /*Instanciar mensaje*/
             $usuarioChat = new UsuarioChat();
-            //Contruir objeto
+            /*Contruir objeto*/
             $usuarioChat -> setActivo(1);
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
-            $usuarioChat -> setIdDestinatario($_SESSION['mensajito']);
+            $usuarioChat -> setIdDestinatario($_SESSION['mensajechat']);
             $usuarioChat -> setIdChat($this -> obtenerIdChat());
             $usuarioChat -> setMensaje($_POST['mensaje']);
             $usuarioChat -> setFechaHora(date('Y-m-d H:i:s'));
-            //Guardar mensaje en la base de datos
+            /*Guardar mensaje en la base de datos*/
             $enviado = $usuarioChat -> guardar();
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $enviado;
         }
 
@@ -49,20 +51,29 @@
         */
 
         public function enviarMensaje(){
-
-            $chat = $_SESSION['mensajito'];
-
-            //Traer la lista de mensajes enviados
+            /*Obtener chat al cual se enviara el mensaje*/
+            $chat = $_SESSION['mensajechat'];
+            /*Llamar la funcion que trae la lista de mensajes enviados*/
             $listadoMensajesEnviados = $this -> mensajes();
-            //Traer lista de chats
+            /*Llamar la funcion que trae la lista de chats*/
             $listadoChats = $this -> chats();
-            //Guardar el mensaje en la base de datos
-            $guardado = $this -> guardarMensajes();
-
-            if($guardado){
-                header("Location:"."http://localhost/Mercado-Juegos/?controller=ChatController&action=verMensajes&idContacto=$chat");
+            /*Comprobar si se ha traido con exito las listas de chats y mensajes enviados*/
+            if($listadoMensajesEnviados && $listadoChats){
+                /*Guardar el mensaje en la base de datos*/
+                $guardado = $this -> guardarMensajes();
+                /*Comprobar si el mensaje ha sido guardado*/
+                if($guardado){
+                    /*Redirigir*/
+                    header("Location:"."http://localhost/Mercado-Juegos/?controller=ChatController&action=verMensajes&idContacto=$chat");
+                /*De lo contrario*/    
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir("mensajeenviadoerror", "El mensaje no ha sido enviado con exito", '?controller=ChatController&action=verMensajes&idContacto=$chat');
+                }
+            /*De lo contrario*/    
             }else{
-                Ayudas::crearSesionYRedirigir("mensajeenviadoerror", "El mensaje no ha sido enviado con exito", '?controller=ChatController&action=verMensajes&idContacto=$chat');
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
             }
         }
 
@@ -71,11 +82,17 @@
         */
 
         public function chatear(){
-
-            //Traer la lista de chats
+            /*Traer la lista de chats*/
             $listadoChats = $this -> chats();
-            //Incluir la vista
-            require_once "Vistas/Chat/Chat.html";
+            /*Comprobar si la lista de chats ha sido traida con exito*/
+            if($listadoChats){
+                /*Incluir la vista*/
+                require_once "Vistas/Chat/Chat.html";
+            /*De lo contrario*/    
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+            }
         }
 
         /*
@@ -83,14 +100,14 @@
         */
 
         public function mensajes(){
-
-            //Instanciar mensaje
+            /*Instanciar objeto*/
             $usuarioChat = new UsuarioChat();
+            /*Crear objeto*/
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
-            $usuarioChat -> setIdDestinatario($_SESSION['mensajito']);
-            //Traer lista de mensajes
+            $usuarioChat -> setIdDestinatario($_SESSION['mensajechat']);
+            /*Traer lista de mensajes*/
             $listadoMensajes = $usuarioChat -> obtenerMensajes();
-            //Retornar lista
+            /*Retornar el resultado*/
             return $listadoMensajes;
         }
 
@@ -99,28 +116,40 @@
         */
 
         public function verMensajes(){
-
-            //Crear sesion del chat con el que se tienen mensajes
-            $_SESSION['mensajito'] = $_GET['idContacto'];
-            //Traer la lista de chats
+            /*Crear sesion del chat con el que se tienen mensajes*/
+            $_SESSION['mensajechat'] = $_GET['idContacto'];
+            /*Llamar la funcion que trae la lista de chats*/
             $listadoChats = $this -> chats();
-            //Traer la lista de mensajes enviados
+            /*Llamar la funcion que trae la lista de mensajes*/
             $listadoMensajes = $this -> mensajes();
-            //Incluir la vista
-            require_once "Vistas/Chat/Chat.html";
+            /*Comprobar si se ha traido con exito las listas de chats y mensajes enviados*/
+            if($listadoChats && $listadoMensajes){
+                /*Incluir la vista*/
+                require_once "Vistas/Chat/Chat.html";
+            /*De lo contrario*/    
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+            }
         }
+
+        /*
+        Funcion para obtener el id del chat
+        */
 
         public function obtenerIdChat(){
-            
-            //Instanciar objeto
+            /*Instanciar objeto*/
             $usuarioChat = new UsuarioChat();
-            //Crear objeto
+            /*Crear objeto*/
             $usuarioChat -> setActivo(1);
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
-            $usuarioChat -> setIdDestinatario($_SESSION['mensajito']);
+            $usuarioChat -> setIdDestinatario($_SESSION['mensajechat']);
+            /*Obtener resultado*/
             $identificador = $usuarioChat -> obtenerIdentificadorPropioDeChat();
+            /*Retornar el resultado*/
             return $identificador;
         }
+
     }
 
 ?>
