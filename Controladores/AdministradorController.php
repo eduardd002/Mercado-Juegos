@@ -433,7 +433,7 @@
                             /*Comprobar si la foto ha sido validada y guardada*/
                             Ayudas::guardarImagen($archivo, "ImagenesAdministradores");
                         }
-                        /*Llamar la funcion de actualizar*/
+                        /*Llamar la funcion que actualiza el administrador*/
                         $actualizado = $this -> actualizarAdministrador($id, $nombre, $apellidos, $email, $telefono, $foto);
                         /*Comprobar si el administrador ha sido actualizado*/
                         if($actualizado){
