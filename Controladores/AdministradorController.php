@@ -379,7 +379,7 @@
         }
 
         /*
-        Funcion para actuazliar el administrador
+        Funcion para actualizar el administrador
         */
 
         public function actualizarAdministrador($id, $nombre, $apellidos, $email, $telefono, $foto){

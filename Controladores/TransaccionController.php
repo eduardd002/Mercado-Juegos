@@ -4,7 +4,7 @@
     ob_start();
     /*Incluir archivo de ayuda para generar el PDF*/
     require_once 'Ayudas/Ayudas.php';
-    /*Incluir el objeto de transaccionvideojuego*/
+    /*Incluir el objeto de transaccion de videojuego*/
     require_once 'Modelos/TransaccionVideojuego.php';
     /*Incluir el objeto de transaccion*/
     require_once 'Modelos/Transaccion.php';
@@ -101,7 +101,7 @@
                 /*Si los datos existen*/
                 if($id && $unidades && $accion){
                     /*Llamar la funcion que redirige a la seccion de compra*/
-                    $this -> redirigirSeccionCompra($accion, $id, $unidades);
+                    $this -> redirigirSeccionCompra($id, $unidades, $accion);
                 /*Si la redireccion a carrito es verdadera*/    
                 }elseif($carrito == 'true'){
                     /*Llamar la funcion que redirige a la seccion de carrito*/
@@ -118,7 +118,7 @@
         Funcion para realizar la redireccion a la seccion de compra
         */
 
-        public function redirigirSeccionCompra($accion, $id, $unidades){
+        public function redirigirSeccionCompra($id, $unidades, $accion){
             /*Comprobar si la accion es comprar el videojuego*/
             if($accion == "Comprar Ahora"){
                 /*Llamar la funcion que envia a la seccion de direccion y pago*/
@@ -203,15 +203,8 @@
             $listadoCarritos = $this -> listarCarritos();
             $listadoPagos = $this -> listarPagos();
             $listadoEnvios = $this -> listarEnvios();
-            /*Comprobar si las listas de carrito, pagos y envios han sido traidos*/
-            if($listadoCarritos && $listadoPagos && $listadoEnvios){
-                /*Incluir la vista*/
-                require_once "Vistas/Transaccion/EnvioYPago.html";
-            /*De lo contrario*/    
-            }else{
-                /*Crear la sesion y redirigir a la ruta pertinente*/
-                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
-            }
+            /*Incluir la vista*/
+            require_once "Vistas/Transaccion/EnvioYPago.html";
         }
 
         /*
@@ -265,12 +258,14 @@
             /*Comprobar si la transaccion es del carrito*/
             if($opcion == 1){
                 /*Llamar la funcion para guardar la transaccion del carrito*/
-                $this -> guardarTransaccionCarrito($factura, $idVideojuego, $idPago, $idEnvio);
+                $transaccion = $this -> guardarTransaccionCarrito($factura, $idVideojuego, $idPago, $idEnvio);
             /*Comprobar si la transaccion es del videojuego unicamente*/    
             }elseif($opcion == 2){
                 /*Llamar la funcion para guardar la transaccion del videojuego*/
-                $this -> guardarTransaccionVideojuegoUnico($factura, $idVideojuego, $unidadesCompra, $idPago, $idEnvio);
+                $transaccion = $this -> guardarTransaccionVideojuegoUnico($factura, $idVideojuego, $unidadesCompra, $idPago, $idEnvio);
             }
+            /*Retornar el resultado*/
+            return $transaccion;
         }
 
         /*
@@ -433,7 +428,6 @@
             /*Instanciar el objeto*/
             $chat = new Chat;
             /*Crear el objeto*/
-            $chat -> setActivo(1);
             $chat -> setFechaCreacion(date('Y-m-d'));
             /*Guardar en la base de datos*/
             $guardado = $chat -> guardar();

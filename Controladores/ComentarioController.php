@@ -1,6 +1,6 @@
 <?php
 
-    /*Incluir el objeto de videojuego comentario*/
+    /*Incluir el objeto de videojuego comentario usuario videojuego*/
     require_once 'Modelos/ComentarioUsuarioVideojuego.php';
 
     /*

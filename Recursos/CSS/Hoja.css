@@ -1215,6 +1215,8 @@ Estilo del boton para realizar la compra
 .detalleVideojuego input[type='submit']{
     /*Margen exterior superior*/
     margin-top: 40px;
+    /*Margen exterior derecho*/
+    margin-right: 50px;
     /*Margen exterior inferior*/
     margin-bottom: 47px;
     /*Margen interior superior*/
@@ -1225,6 +1227,8 @@ Estilo del boton para realizar la compra
     padding-right: 13px;
     /*Margen interior inferior*/
     padding-bottom: 7px;
+    /*Flotar hacia la izquierda*/
+    float: left;
 }
 
 /*

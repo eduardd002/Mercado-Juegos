@@ -356,20 +356,30 @@
         */
 
         public function listarAlgunos(){
-            //Construir la consulta
-            $consulta = "SELECT v.*
-                FROM videojuegos v
-                INNER JOIN usuarios u ON u.id = v.idUsuario
-                WHERE v.activo = 1 AND u.activo = 1 ";
-                if($this -> getId() != null){
-                    $consulta .= "EXCEPT
+            if($this -> getId() == null){
+                $consulta = "SELECT DISTINCT v.*
+                    FROM videojuegos v
+                    INNER JOIN videojuegocategoria vc ON vc.idVideojuego = v.id
+                    INNER JOIN categorias ca ON ca.id = vc.idCategoria
+                    INNER JOIN consolas c ON c.id = v.idConsola
+                    INNER JOIN usos u ON u.id = v.idUso
+                    WHERE u.activo = 1 AND c.activo = 1 AND c.activo = 1 AND v.activo = 1";
+            }else{
+                $consulta = "SELECT DISTINCT v.*
+                    FROM videojuegos v
+                    INNER JOIN usuarios us ON us.id = v.idUsuario
+                    INNER JOIN videojuegocategoria vc ON vc.idVideojuego = v.id
+                    INNER JOIN categorias ca ON ca.id = vc.idCategoria
+                    INNER JOIN consolas c ON c.id = v.idConsola
+                    INNER JOIN usos u ON u.id = v.idUso
+                    WHERE u.activo = 1 AND c.activo = 1 AND c.activo = 1 AND v.activo = 1 AND us.activo = 1 AND {$this -> getId()} != v.idUsuario
+                    EXCEPT
                     SELECT v.*
                     FROM bloqueos b
                     INNER JOIN usuarios u ON u.id = b.idBloqueado
                     INNER JOIN videojuegos v ON v.idUsuario = u.id
-                    AND b.idBloqueador = {$this -> getId()} AND b.activo = 1 OR v.idUsuario != b.idBloqueador ";
-                }
-            $consulta .= "ORDER BY RAND() LIMIT 6";
+                    AND b.idBloqueador = {$this -> getId()} AND b.activo = 1 LIMIT 6";
+            }
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Retornar resultado
@@ -381,21 +391,30 @@
         */
 
         public function listarTodos(){
-            //Construir la consulta
-            $consulta = "SELECT v.*
-                FROM videojuegos v
-                INNER JOIN usuarios u ON v.idUsuario = u.id
-                INNER JOIN videojuegocategoria vc ON vc.idVideojuego = v.id
-                INNER JOIN categorias c ON c.id = vc.idCategoria
-                WHERE v.activo = 1 AND u.activo = 1 AND c.activo = 1 ";
-                if($this -> getId() != null){
-                    $consulta .= "EXCEPT
+            if($this -> getId() == null){
+                $consulta = "SELECT DISTINCT v.*
+                    FROM videojuegos v
+                    INNER JOIN videojuegocategoria vc ON vc.idVideojuego = v.id
+                    INNER JOIN categorias ca ON ca.id = vc.idCategoria
+                    INNER JOIN consolas c ON c.id = v.idConsola
+                    INNER JOIN usos u ON u.id = v.idUso
+                    WHERE u.activo = 1 AND c.activo = 1 AND c.activo = 1 AND v.activo = 1";
+            }else{
+                $consulta = "SELECT DISTINCT v.*
+                    FROM videojuegos v
+                    INNER JOIN usuarios us ON us.id = v.idUsuario
+                    INNER JOIN videojuegocategoria vc ON vc.idVideojuego = v.id
+                    INNER JOIN categorias ca ON ca.id = vc.idCategoria
+                    INNER JOIN consolas c ON c.id = v.idConsola
+                    INNER JOIN usos u ON u.id = v.idUso
+                    WHERE u.activo = 1 AND c.activo = 1 AND c.activo = 1 AND v.activo = 1 AND us.activo = 1 AND {$this -> getId()} != v.idUsuario
+                    EXCEPT
                     SELECT v.*
                     FROM bloqueos b
                     INNER JOIN usuarios u ON u.id = b.idBloqueado
                     INNER JOIN videojuegos v ON v.idUsuario = u.id
-                    AND b.idBloqueador = {$this -> getId()} AND b.activo = 1 OR v.idUsuario != b.idBloqueador";
-                }
+                    AND b.idBloqueador = {$this -> getId()} AND b.activo = 1";
+            }
             //Ejecutar la consulta
             $resultado = $this -> db -> query($consulta);
             //Retornar resultado

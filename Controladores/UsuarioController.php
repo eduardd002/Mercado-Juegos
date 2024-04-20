@@ -1,15 +1,17 @@
 <?php
 
-    //Incluir el objeto de usuario
-    require_once 'Modelos/Usuario.php';
-
-    //Incluir el objeto de administrador
+    /*Incluir el objeto de administrador*/
     require_once 'Modelos/Administrador.php';
-
-    //Incluir el objeto de transaccion
+    /*Incluir el objeto de usuario*/
+    require_once 'Modelos/Usuario.php';
+    /*Incluir el objeto de transaccion*/
     require_once 'Modelos/Transaccion.php';
-
+    /*Incluir el objeto de bloqueo*/
     require_once 'Modelos/Bloqueo.php';
+
+    /*
+    Clase controlador de usuario
+    */
 
     class UsuarioController{
 
@@ -18,14 +20,16 @@
         */
 
         public function login(){
-
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/Usuario/Login.html";
         }
 
-        public function cambiarClave(){
+        /*
+        Funcion para cambiar la clave del usuario
+        */
 
-            //Incluir la vista
+        public function cambiarClave(){
+            /*Incluir la vista*/
             require_once "Vistas/Usuario/CambiarClave.html";
         }
 
@@ -34,8 +38,7 @@
         */
 
         public function registro(){
-
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/Usuario/Registro.html";
         }
 
@@ -44,10 +47,9 @@
         */
 
         public function guardarUsuario($nombre, $apellidos, $fechaNacimiento, $telefono, $email, $clave, $departamento, $municipio, $nombreArchivo){
-
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $usuario = new Usuario();
-            //Crear el objeto
+            /*Crear el objeto*/
             $usuario -> setActivo(1);
             $usuario -> setNombre($nombre);
             $usuario -> setApellido($apellidos);
@@ -59,15 +61,18 @@
             $usuario -> setMunicipio($municipio);
             $usuario -> setFecharegistro(date('y-m-d'));
             $usuario -> setFoto($nombreArchivo);
+            /*Intentar guardar el usuario en la base de datos*/
             try{
-                //Ejecutar la consulta
+                /*Ejecutar la consulta*/
                 $guardado = $usuario -> guardar();
+            /*Capturar la excepcion*/    
             }catch(mysqli_sql_exception $excepcion){
-                //Crear la sesion y redirigir a la ruta pertinente
+                /*Crear la sesion y redirigir a la ruta pertinente*/
                 Ayudas::crearSesionYRedirigir('guardarusuarioerror', "Esta direccion de correo ya existe", '?controller=UsuarioController&action=registro');
+                /*Cortar la ejecucion*/
                 die();
             }
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $guardado;
         }
 
@@ -76,11 +81,9 @@
         */
 
         public function guardar(){
-
-            //Comprobar si los datos están llegando
+            /*Comprobar si los datos están llegando*/
             if(isset($_POST)){
-
-                //Comprobar si cada dato existe
+                /*Comprobar si cada dato existe*/
                 $nombre = isset($_POST['nombreusu']) ? $_POST['nombreusu'] : false;
                 $apellidos = isset($_POST['apellidosusu']) ? $_POST['apellidosusu'] : false;
                 $fechaNacimiento = isset($_POST['fechaNacimientousu']) ? $_POST['fechaNacimientousu'] : false;
@@ -89,53 +92,49 @@
                 $clave = isset($_POST['passwordusu']) ? $_POST['passwordusu'] : false;
                 $departamento = isset($_POST['departamentousu']) ? $_POST['departamentousu'] : false;
                 $municipio = isset($_POST['municipiousu']) ? $_POST['municipiousu'] : false;
+                /*Establecer archivo de foto*/
                 $archivo = $_FILES['foto'];
+                /*Establecer nombre del archivo de la foto*/
                 $foto = $archivo['name'];
-
-                //Comprobar si todos los datos exsiten
+                /*Comprobar si todos los datos exsiten*/
                 if($nombre && $apellidos && $fechaNacimiento && $telefono && $clave && $email && $departamento && $municipio){
-
-                    //Comprobar si la contraseña es valida
+                    /*Comprobar si la contraseña es valida*/
                     $claveSegura = Ayudas::comprobarContrasenia($clave);
-                    
-                    //Comprobar si todo esta correcto para guardar el usuario
+                    /*Comprobar si la clave es valida*/
                     if($claveSegura){
-
-                        //Comprobar si la foto es valida
+                        /*Comprobar si la foto es valida y ha sido guardada*/
                         $fotoGuardada = Ayudas::guardarImagen($archivo, "ImagenesUsuarios");
-
-                        //Comprobar si la foto ha sido guardada
+                        /*Comprobar si la foto ha sido validada y guardada*/
                         if($fotoGuardada){
-
-                            //Comprobar si se ha guardado con exito
+                            /*Llamar la funcion de guardar usuario*/
                             $guardado = $this -> guardarUsuario($nombre, $apellidos, $fechaNacimiento, $telefono, $email, $clave, $departamento, $municipio, $foto);
-
-                            //Comprobar si el administrador ha sido guardado
+                            /*Comprobar si el usuario ha sido guardado*/
                             if($guardado){
-                                //Iniciar la sesion
+                                /*Llamar la funcion de inicio de sesion del usuario*/
                                Ayudas::iniciarSesionUsuario($email, $clave);
+                            /*De lo contrario*/  
                             }else{
-                                //Crear la sesion y redirigir a la ruta pertinente
+                                /*Crear la sesion y redirigir a la ruta pertinente*/
                                 Ayudas::crearSesionYRedirigir("guardarusuarioerror", "Ha ocurrido un error al guardar el usuario", "?controller=UsuarioController&action=registro");
                             }
+                        /*De lo contrario*/  
                         }else{
-
-                            //Crear la sesion y redirigir a la ruta pertinente
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
                             Ayudas::crearSesionYRedirigir("guardarusuarioerror", "La imagen debe ser de tipo imagen", "?controller=UsuarioController&action=registro");
                         }
+                    /*De lo contrario*/      
                     }else{
-
-                        //Crear la sesion y redirigir a la ruta pertinente
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir("guardarusuarioerror", "La clave debe contener un mayuscula, miniscula, numero, caracter especial y minimo 8 caracteres de longitud", "?controller=UsuarioController&action=registro");
-                    }       
+                    } 
+                /*De lo contrario*/         
                 }else{
-
-                    //Crear la sesion y redirigir a la ruta pertinente
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
                     Ayudas::crearSesionYRedirigir("guardarusuarioerror", "Ha ocurrido un error al guardar el usuario", "?controller=UsuarioController&action=registro");
                 }
+            /*De lo contrario*/      
             }else{
-
-                //Crear la sesion y redirigir a la ruta pertinente
+                /*Crear la sesion y redirigir a la ruta pertinente*/
                 Ayudas::crearSesionYRedirigir("guardarusuarioerror", "Ha ocurrido un error al guardar el usuario", "?controller=UsuarioController&action=registro");
             }
         }
@@ -145,22 +144,24 @@
         */
 
         public function inicioDeSesion(){
-
-            //Comprobar si los datos están llegando
+            /*Comprobar si los datos están llegando*/
             if(isset($_POST)){
-
-                //Comprobar si cada dato existe
+                /*Comprobar si cada dato existe*/
                 $email = isset($_POST['email']) ? $_POST['email'] : false;
                 $clave = isset($_POST['password']) ? $_POST['password'] : false;
-
-                //Comprobar si todos los datos exsiten
+                /*Si los datos existen*/
                 if($email && $clave){
-                    //Iniciar la sesion
+                    /*Iniciar la sesion*/
                     Ayudas::iniciarSesion($email, $clave);
+                /*De lo contrario*/    
                 }else{
-                    //Crear la sesion y redirigir a la ruta pertinente
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
                     Ayudas::crearSesionYRedirigir("iniciarsesionerror", "Ha ocurrido un error al iniciar sesion", "?controller=UsuarioController&action=login");
                 }
+            /*De lo contrario*/       
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
             }
         }
 
@@ -169,14 +170,13 @@
         */
 
         public function eliminarUsuario($idUsuario){
-
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $usuario = new Usuario();
-            //Crear objeto
+            /*Crear objeto*/
             $usuario -> setId($idUsuario);
-            //Ejecutar la consulta
+            /*Ejecutar la consulta*/
             $eliminado = $usuario -> eliminar();
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $eliminado;
         }
 
@@ -185,40 +185,45 @@
         */
 
         public function eliminar(){
-            
-            //Comprobar si los datos están llegando
+            /*Comprobar si los datos están llegando*/
             if(isset($_GET)){
-
-                //Comprobar si el dato existe
+                /*Comprobar si el dato existe*/
                 $idUsuario = isset($_GET['id']) ? $_GET['id'] : false;
-
-                //Si el dato existe
+                /*Si el dato existe*/
                 if($idUsuario){
-
-                    //Obtener el resultado
+                    /*Llamar la funcion para eliminar el usuario*/
                     $eliminado = $this -> eliminarUsuario($idUsuario);
-
-                    //Comprobar si se ha elimininado el usuario con exito
+                    /*Comprobar si el usuario ha sido eliminado exitosamente*/
                     if($eliminado){
-
-                        //Crear la sesion y redirigir a la ruta pertinente
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir("eliminarusuarioacierto", "El usuario ha sido eliminado con exito", "?controller=VideojuegoController&action=inicio");
-                        //Eliminar la sesion de login
+                        /*Eliminar el inicio de sesion*/
                         Ayudas::eliminarSesion('loginexitoso');
+                    /*De lo contrario*/  
                     }else{
-
-                        //Crear la sesion y redirigir a la ruta pertinente
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir("eliminarusuarioerror", "El usuario no ha sido eliminado con exito", "?controller=UsuarioController&action=perfil");
                     }
-                }  
+                /*De lo contrario*/  
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir("eliminarusuarioerror", "El usuario no ha sido eliminado con exito", "?controller=UsuarioController&action=perfil");
+                }
+            /*De lo contrario*/    
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
             }
         }
 
-        public function actualizarUsuario($id, $nombre, $apellidos, $telefono, $email, $departamento, $municipio, $foto){
+        /*
+        Funcion para actualizar el usuario
+        */
 
-            //Instanciar el objeto
+        public function actualizarUsuario($id, $nombre, $apellidos, $telefono, $email, $departamento, $municipio, $foto){
+            /*Instanciar el objeto*/
             $usuario = new Usuario();
-            //Crear objeto
+            /*Crear objeto*/
             $usuario -> setId($id);
             $usuario -> setNombre($nombre);
             $usuario -> setApellido($apellidos);
@@ -227,14 +232,18 @@
             $usuario -> setDepartamento($departamento);
             $usuario -> setMunicipio($municipio);
             $usuario -> setFoto($foto);
+            /*Intentar guardar el usuario*/
             try{
-                //Ejecutar la consulta
+                /*Ejecutar la consulta*/
                 $actualizado = $usuario -> actualizar();
+            /*Capturar la excepcion*/   
             }catch(mysqli_sql_exception $excepcion){
-                //Crear la sesion y redirigir a la ruta pertinente
+                /*Crear la sesion y redirigir a la ruta pertinente*/
                 Ayudas::crearSesionYRedirigir('actualizarusuarioerror', "Esta direccion de correo ya existe", '?controller=UsuarioController&action=miPerfil');
+                /*Cortar la ejecucion*/
                 die();
             }
+            /*Retornar el resultado*/
             return $actualizado;
         }
 
@@ -243,11 +252,9 @@
         */
 
         public function actualizar(){
-            
-            //Comprobar si los datos están llegando
+            /*Comprobar si los datos están llegando*/
             if(isset($_GET) && isset($_POST)){
-
-                //Comprobar si los datos existe
+                /*Comprobar si los datos existe*/
                 $id = isset($_GET['id']) ? $_GET['id'] : false;
                 $nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
                 $apellidos = isset($_POST['apellidos']) ? $_POST['apellidos'] : false;
@@ -255,37 +262,44 @@
                 $email = isset($_POST['email']) ? $_POST['email'] : false;
                 $departamento = isset($_POST['departamento']) ? $_POST['departamento'] : false;
                 $municipio = isset($_POST['municipio']) ? $_POST['municipio'] : false;
+                /*Establecer archivo de foto*/
                 $archivo = $_FILES['foto'];
+                /*Establecer nombre del archivo de la foto*/
                 $foto = $archivo['name'];
-
-                //Si el dato existe
+                /*Si los datos existen*/
                 if($id && $nombre && $apellidos && $telefono && $email && $departamento && $municipio){
-
-                    //Comprobar si el formato de la foto es imagen
+                    /*Comprobar si la foto no tiene formato de imagen o no ha llegado*/
                     if(Ayudas::comprobarImagen($archivo['type']) != 3){
-
+                        /*Comprobar si la foto tiene formato de imagen*/
                         if(Ayudas::comprobarImagen($archivo['type']) == 1){
-                            //Comprobar la foto
+                            /*Comprobar si la foto ha sido validada y guardada*/
                             Ayudas::guardarImagen($archivo, "ImagenesUsuarios");
                         }
-                        //Llamar la funcion de actualizar
+                        /*Llamar la funcion que actualiza el usuario*/
                         $actualizado = $this -> actualizarUsuario($id, $nombre, $apellidos, $telefono, $email, $departamento, $municipio, $foto);
-
+                        /*Comprobar si el usuario ha sido actualizado*/
                         if($actualizado){
-                            //Crear la sesion y redirigir a la ruta pertinente
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
                             Ayudas::crearSesionYRedirigir('actualizarusuarioacierto', "Usuario actualizado con exito", '?controller=UsuarioController&action=miPerfil');
+                        /*De lo contrario*/
                         }else{
-                            //Crear la sesion y redirigir a la ruta pertinente
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
                             Ayudas::crearSesionYRedirigir('actualizarusuariosugerencia', "Agrega nuevos datos", '?controller=UsuarioController&action=miPerfil');
                         }
+                    /*De lo contrario*/    
                     }else{
-                        //Crear la sesion y redirigir a la ruta pertinente
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('actualizarusuarioerror', "El formato de la foto debe ser una imagen", '?controller=UsuarioController&action=miPerfil');
                     }
+                /*De lo contrario*/    
                 }else{
-                    //Crear la sesion y redirigir a la ruta pertinente
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
                     Ayudas::crearSesionYRedirigir('actualizarusuarioerror', "Ha ocurrido un error al actualizar el usuario", '?controller=UsuarioController&action=miPerfil');
                 }
+            /*De lo contrario*/    
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
             }
         }
 
@@ -294,16 +308,58 @@
         */
 
         public function cerrarSesion(){
-
-            //Lamar funciones para eliminar las sesiones
+            /*Llamar funciones para eliminar las sesiones*/
             Ayudas::eliminarSesion('loginexitosoa');
             Ayudas::eliminarSesion('loginexitoso');
-            
-            //Crear sesion de sesion creada con exito
+            /*Crear sesion de sesion creada con exito*/
             $_SESSION['logincerrado'] = "Sesion cerrada con exito";
-
-            //Redirigir al menu principal
+            /*Redirigir al menu principal*/
             header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=inicio");
+        }
+
+        /*
+        Funcion para ver los datos del perfil de usuario
+        */
+
+        public function perfilDeUsuario($idVendedor){
+            /*Instanciar el objeto*/
+            $usuario = new Usuario();
+            /*Crear el objeto*/
+            $usuario -> setId($idVendedor);
+            /*Obtener las listas de datos de usuario*/
+            $listaDatosUsuario = $usuario -> obtenerInformacionUsuario();
+            /*Retornar el resultado*/
+            return $listaDatosUsuario;
+        }
+
+        /*
+        Funcion para ver el total de videojuegos vendidos
+        */
+
+        public function totalVendidos($idVendedor){
+            /*Instanciar el objeto*/
+            $usuario = new Usuario();
+            /*Crear el objeto*/
+            $usuario -> setId($idVendedor);
+            /*Obtener las listas de videojuegos vendidos*/
+            $vendidos = $usuario -> obtenerTotalVendidos();
+            /*Retornar el resultado*/
+            return $vendidos;
+        }
+
+        /*
+        Funcion para ver el total de videojuegos publicados
+        */
+
+        public function totalPublicados($idVendedor){
+            /*Instanciar el objeto*/
+            $usuario = new Usuario();
+            /*Crear el objeto*/
+            $usuario -> setId($idVendedor);
+            /*Obtener las listas de videojuegos publicados*/
+            $publicados = $usuario -> obtenerTotalPublicados();
+            /*Retornar el resultado*/
+            return $publicados;
         }
 
         /*
@@ -311,30 +367,42 @@
         */
 
         public function perfil(){
-
-            $idVendedor = $_GET['idVendedor'];
-
-            //Instanciar el objeto
-            $usuario = new Usuario();
-            $usuario -> setId($idVendedor);
-            $listaDatosUsuario = $usuario -> obtenerInformacionUsuario();
-
-            $publicados = $usuario -> obtenerTotalPublicados();
-
-            $vendidos = $usuario -> obtenerTotalVendidos();
-            //Incluir la vista
-            require_once "Vistas/Usuario/Perfil.html";
+            /*Comprobar si los datos están llegando*/
+            if(isset($_GET)){
+                /*Comprobar si los datos existe*/
+                $idVendedor = isset($_GET['idVendedor']) ? $_GET['idVendedor'] : false;
+                /*Si el dato existe*/
+                if($idVendedor){
+                    /*Llamar la funciones que trae datos del perfil de usuario, total juegos vendidos y total juegos publicados*/
+                    $listaDatosUsuario = $this -> perfilDeUsuario($idVendedor);
+                    $publicados = $this -> totalPublicados($idVendedor);                  
+                    $vendidos = $this -> totalVendidos($idVendedor);
+                    /*Incluir la vista*/
+                    require_once "Vistas/Usuario/Perfil.html";
+                /*De lo contrario*/    
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+                }
+            /*De lo contrario*/    
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+            }
         }
 
-        public function obtenerPerfil($id){
+        /*
+        Funcion para obtener el perfil del usuario
+        */
 
-            //Instanciar el objeto
+        public function obtenerPerfil($id){
+            /*Instanciar el objeto*/
             $usuario = new Usuario();
-            //Creo el objeto
+            /*Crear el objeto*/
             $usuario -> setId($id);
-            //Obtener categoria
+            /*Obtener el resultado*/
             $usuarioUnico = $usuario -> obtenerUno();
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $usuarioUnico;
         }
 
@@ -343,24 +411,27 @@
         */
 
         public function miPerfil(){
-
-            //Llamar la funcion auxiliar para redirigir en caso de que no haya inicio de sesion
+            /*Llamar la funcion auxiliar para redirigir en caso de que no haya inicio de sesion*/
             Ayudas::restringirAUsuario('?controller=UsuarioController&action=login');
-
-            //Comprobar si el dato está llegando
+            /*Comprobar si el dato está llegando*/
             if(isset($_GET)){
-
-                //Comprobar si la sesion de inicio de sesion existe
+                /*Comprobar si la sesion de inicio de sesion existe*/
                 $id = isset($_SESSION['loginexitoso']) ? $_SESSION['loginexitoso'] -> id : false;
-
-                //Si el dato existe
+                /*Si la sesion de inicio de sesion existe*/
                 if($id){
-
+                    /*Llamar funcion para obtener el perfil del usuario*/
                     $usuarioUnico = $this -> obtenerPerfil($id);
-
-                    //Incluir la vista
+                    /*Incluir la vista*/
                     require_once "Vistas/Usuario/miPerfil.html";
+                /*De lo contrario*/    
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir("cargarperfilusuarioerror", "Ha ocurrido un error al cargar el perfil del usuario", "?controller=VideojuegoController&action=inicio");
                 }
+            /*De lo contrario*/      
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
             }
         }
 
@@ -369,15 +440,13 @@
         */
 
         public function compras(){
-
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $transaccion = new Transaccion();
-            //Construir el objeto
+            /*Construir el objeto*/
             $transaccion -> setIdComprador($_SESSION['loginexitoso'] -> id);
-            //Listar todos los usuarios desde la base de datos
+            /*Listar todas las compras desde la base de datos*/
             $listadoCompras = $transaccion -> obtenerCompras();
-
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/Usuario/Compras.html";
         }
 
@@ -386,27 +455,28 @@
         */
 
         public function ventas(){
-
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $transaccion = new Transaccion();
-            //Construir el objeto
+            /*Construir el objeto*/
             $transaccion -> setIdVendedor($_SESSION['loginexitoso'] -> id);
-            //Listar todos los usuarios desde la base de datos
+            /*Listar todas las ventas desde la base de datos*/
             $listadoVentas = $transaccion -> obtenerVentas();
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/Usuario/Ventas.html";
         }
 
+        /*
+        Funcion para ver el listado de bloqueos realizados por el usuario
+        */
+
         public function bloqueos(){
-
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $bloqueo = new Bloqueo();
-            //Construir el objeto
+            /*Construir el objeto*/
             $bloqueo -> setIdBloqueador($_SESSION['loginexitoso'] -> id);
-            //Listar todos los usuarios desde la base de datos
+            /*Listar todos las bloqueos desde la base de datos*/
             $listadoBloqueos = $bloqueo -> obtenerBloqueosPorUsuario();
-
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/Usuario/Bloqueos.html";
         }
 
@@ -415,104 +485,130 @@
         */
 
         public function videojuegos(){
-
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $usuario = new Usuario();
+            /*Construir el objeto*/
             $usuario -> setId($_SESSION['loginexitoso'] -> id);
+            /*Listar todos las bloqueos videojuegos la base de datos*/
             $listaVideojuegos = $usuario -> obtenerVideojuegosCreadosPorUsuario();
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/Usuario/Videojuegos.html";
         }
 
+        /*
+        Funcion para comprobar si la clave actual ingresada es correcta
+        */
+
         public function comprobarClaves($actual){
-
+            /*Instanciar objeto*/
             $usuario = new Usuario();
+            /*Capturar el correo del usuario ingresado*/
             $correo = $_SESSION['loginexitoso'] -> correo;
+            /*Obtener clave actual del usuario logueado*/
             $claveUsuario = $usuario -> traerClave($correo);
-            $alho = password_verify($actual, $claveUsuario -> clave);
-            if($alho){
+            /*Verificar clave actual y nueva*/
+            $claveVerificada = password_verify($actual, $claveUsuario -> clave);
+            /*Comprobar si la clave actual y nueva coinciden*/
+            if($claveVerificada){
+                /*Retornar el resultado*/
                 return true;
-            }
-
-        }
-
-        public function actualizarNuevaClave($clave){
-
-            //Instanciar el objeto
-            $usuario = new Usuario();
-            //Crear objeto
-            $usuario -> setId($_SESSION['loginexitoso'] -> id);
-            $usuario -> setClave($clave);
-            //Ejecutar la consulta
-            $actualizado = $usuario -> actualizarClave();
-            return $actualizado;
-        }
-
-        public function actualizarClave(){
-            
-            //Comprobar si los datos están llegando
-            if(isset($_POST)){
-
-                $actual = isset($_POST['passwordactual']) ? $_POST['passwordactual'] : false;
-                $nueva = isset($_POST['passwordnueva']) ? $_POST['passwordnueva'] : false;
-
-                //Si el dato existe
-                if($actual && $nueva){
-                    $seguta = Ayudas::comprobarContrasenia($nueva);
-                    if($seguta){
-                        if($this -> comprobarClaves($actual)){
-                            $actualizada = $this -> actualizarNuevaClave($nueva);
-                            if($actualizada){
-                                Ayudas::crearSesionYRedirigir('actualizarclaveacierto', "La clave ha sido actualizada con exito", '?controller=UsuarioController&action=cambiarClave');
-                            }else{
-                                Ayudas::crearSesionYRedirigir('actualizarclaveerror', "La clave no ha sido actualizada con exito", '?controller=UsuarioController&action=cambiarClave');
-                            }
-                        }else{
-                            Ayudas::crearSesionYRedirigir('actualizarclaveerror', "Clave actual incorrecta", '?controller=UsuarioController&action=cambiarClave');
-                        }
-                    }else{
-                        //Crear la sesion y redirigir a la ruta pertinente
-                        Ayudas::crearSesionYRedirigir('actualizarclaveerror', "Clave poco segura", '?controller=UsuarioController&action=cambiarClave');
-                    }
-                    
-                }else{
-                    //Crear la sesion y redirigir a la ruta pertinente
-                    Ayudas::crearSesionYRedirigir('actualizarclaveerror', "Ha ocurrido un error al actualizar la clave", '?controller=UsuarioController&action=cambiarClave');
-                }
             }
         }
 
         /*
-        Funcion para ver el listado de compras realizadas por el usuario
+        Funcion para actualizar la clave
+        */
+
+        public function actualizarNuevaClave($clave){
+            /*Instanciar el objeto*/
+            $usuario = new Usuario();
+            /*Crear objeto*/
+            $usuario -> setId($_SESSION['loginexitoso'] -> id);
+            $usuario -> setClave($clave);
+            /*Ejecutar la consulta*/
+            $actualizado = $usuario -> actualizarClave();
+            /*Retornar el resultado*/
+            return $actualizado;
+        }
+
+        /*
+        Funcion para actualizar la clave del usuario
+        */
+
+        public function actualizarClave(){
+            /*Comprobar si los datos están llegando*/
+            if(isset($_POST)){
+                /*Comprobar si los datos existen*/
+                $actual = isset($_POST['passwordactual']) ? $_POST['passwordactual'] : false;
+                $nueva = isset($_POST['passwordnueva']) ? $_POST['passwordnueva'] : false;
+                /*Si los datos existen*/
+                if($actual && $nueva){
+                    /*Llamar la funcion para comprobar si la clave nueva es valida y segura*/
+                    $segura = Ayudas::comprobarContrasenia($nueva);
+                    /*Comprobar si la clave es valida y segura*/
+                    if($segura){
+                        /*Llamar la funcion para comprobar si las clave actual coincide*/
+                        if($this -> comprobarClaves($actual)){
+                            /*Llamar la funcion para actualizar la clave*/
+                            $actualizada = $this -> actualizarNuevaClave($nueva);
+                            /*Comprobar si la clave ha sido actualizada con exito*/
+                            if($actualizada){
+                                /*Crear la sesion y redirigir a la ruta pertinente*/
+                                Ayudas::crearSesionYRedirigir('actualizarclaveacierto', "La clave ha sido actualizada con exito", '?controller=UsuarioController&action=cambiarClave');
+                            /*De lo contrario*/  
+                            }else{
+                                /*Crear la sesion y redirigir a la ruta pertinente*/
+                                Ayudas::crearSesionYRedirigir('actualizarclaveerror', "La clave no ha sido actualizada con exito", '?controller=UsuarioController&action=cambiarClave');
+                            }
+                        /*De lo contrario*/      
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('actualizarclaveerror', "Clave actual incorrecta", '?controller=UsuarioController&action=cambiarClave');
+                        }
+                    /*De lo contrario*/      
+                    }else{
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('actualizarclaveerror', "Clave poco segura", '?controller=UsuarioController&action=cambiarClave');
+                    }
+                /*De lo contrario*/      
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir('actualizarclaveerror', "Ha ocurrido un error al actualizar la clave", '?controller=UsuarioController&action=cambiarClave');
+                }
+            /*De lo contrario*/    
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+            }
+        }
+
+        /*
+        Funcion para ver el listado de envios del usuario
         */
 
         public function envios(){
-
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $usuario = new Usuario();
-            //Construir el objeto
+            /*Construir el objeto*/
             $usuario -> setId($_SESSION['loginexitoso'] -> id);
-            //Listar todos los usuarios desde la base de datos
+            /*Listar todos los envios desde la base de datos*/
             $listadoEnvios = $usuario -> obtenerEnvios();
-
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/Usuario/Envios.html";
         }
 
         /*
-        Funcion para ver el listado de compras realizadas por el usuario
+        Funcion para ver el listado de pagos del usuario
         */
 
         public function pagos(){
-
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $usuario = new Usuario();
-            //Construir el objeto
+            /*Construir el objeto*/
             $usuario -> setId($_SESSION['loginexitoso'] -> id);
-            //Listar todos los usuarios desde la base de datos
+            /*Listar todos los pagos desde la base de datos*/
             $listadoPagos = $usuario -> obtenerPagos();
-
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/Usuario/Pagos.html";
         }
 

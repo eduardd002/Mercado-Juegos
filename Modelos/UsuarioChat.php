@@ -108,7 +108,7 @@
         public function guardar(){
 
             //Construir la consulta
-            $consulta = "INSERT INTO usuariochat VALUES (NULL, {$this -> getActivo()}, ";
+            $consulta = "INSERT INTO usuariochat VALUES (NULL, ";
             if($this -> getMensaje() == null){
                 $consulta .= "NULL, ";
             }else{

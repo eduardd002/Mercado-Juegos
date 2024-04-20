@@ -1,6 +1,6 @@
 <?php
 
-    /*Incluir el objeto de chat*/
+    /*Incluir el objeto de usuario chat*/
     require_once 'Modelos/UsuarioChat.php';
 
     /*

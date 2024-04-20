@@ -52,6 +52,13 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('cargarperfiladminerror'); ?>
 
+    <?php if(isset($_SESSION['cargarperfilusuarioerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['cargarperfilusuarioerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('cargarperfilusuarioerror'); ?>
+
     <?php if(isset($_SESSION['errorinesperado'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['errorinesperado']; ?>
