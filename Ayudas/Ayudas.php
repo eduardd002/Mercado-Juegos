@@ -38,15 +38,13 @@
         Funcion para generar archivo en formato PDF
         */
 
-        public static function pdf($detalleCompra){
+        public static function pdf($detalle){
             /*Crear instancia del objeto*/
             $html2pdf = new Html2Pdf();
             /*Capturar la salida del buffer de salida*/
             ob_start();
             /*Descartar el contenido del buffer de salida*/
             ob_end_clean();
-            /*Incluir el detalle de la compra*/
-            $detalle = $detalleCompra;
             /*Incluir la vista que contiene la informacion que se quiere pasar a formato PDF*/
             require_once 'Vistas/Compra/Factura.html';
             /*Conseguir todo el codigo html que hay dentro de un archivo de PHP*/
@@ -276,8 +274,6 @@
         */
 
         public static function guardarImagen($archivo, $carpetaGuardada){
-            /*Crear la bandera*/
-            $nombreArchivo = null;
             /*Comprobar si existe el archivo o este llega*/
             if(isset($archivo)){
                 /*Extraer el tipo de archivo de la imagen*/

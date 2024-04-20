@@ -197,7 +197,7 @@ CREATE TABLE transacciones (
     idEstado          INTEGER NOT NULL,
     idEnvio           INTEGER NOT NULL,
     total             INTEGER NOT NULL,
-    fechaHora  DATE NOT NULL,
+    fechaHora  DATE TIME NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT uq_nf UNIQUE(numeroFactura),
     CONSTRAINT compras_pk PRIMARY KEY ( id ),
