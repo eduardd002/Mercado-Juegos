@@ -1,5 +1,9 @@
 <?php
 
+    /*
+    Clase modelo de carrito
+    */
+
     class Carrito{
 
         private $id;
@@ -7,34 +11,72 @@
         private $idUsuario;
         private $db;
 
+        /*
+        Funcion constructor
+        */
+
         public function __construct(){
+            /*Llamar conexion a la base de datos*/  
             $this -> db = BaseDeDatos::connect();
         }
 
+        /*
+        Funcion getter de id
+        */
+
         public function getId(){
+            /*Retornar el resultado*/
             return $this->id;
         }
 
+        /*
+        Funcion setter de id
+        */
+
         public function setId($id){
+            /*Llamar parametro*/
             $this->id = $id;
+            /*Retornar el resultado*/
             return $this;
         }
 
+        /*
+        Funcion getter de activo
+        */
+
         public function getActivo(){
+            /*Retornar el resultado*/
             return $this->activo;
         }
 
+        /*
+        Funcion setter de activo
+        */
+
         public function setActivo($activo){
+            /*Llamar parametro*/
             $this->activo = $activo;
+            /*Retornar el resultado*/
             return $this;
         }
 
+        /*
+        Funcion getter de id usuario
+        */
+
         public function getIdUsuario(){
+            /*Retornar el resultado*/
             return $this->idUsuario;
         }
 
+        /*
+        Funcion setter de id de usuario
+        */
+
         public function setIdUsuario($idUsuario){
+            /*Llamar parametro*/
             $this->idUsuario = $idUsuario;
+            /*Retornar el resultado*/
             return $this;
         }
 
@@ -43,17 +85,18 @@
         */
 
         public function guardar(){
-            //Construir consulta
+            /*Construir consulta*/
             $consulta = "INSERT INTO carritos VALUES(NULL, {$this -> getActivo()}, {$this -> getIdUsuario()})";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $guardado = $this -> db -> query($consulta);
-            //Crear bandera
+            /*Establecer una variable bandera*/
             $bandera = false;
-            //Comprobar si la consulta se realizo exitosamente
+            /*Comprobar si la consulta fue exitosa y el total de columnas afectadas se altero llamando la ejecucion de la consulta*/
             if($guardado && mysqli_affected_rows($this -> db) > 0){
+                /*Cambiar el estado de la variable bandera*/
                 $bandera = true;
             }
-            //Retorno el resultado
+            /*Retornar el resultado*/
             return $bandera;
         }
 
@@ -62,41 +105,42 @@
         */
 
         public function ultimo(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "SELECT DISTINCT id FROM carritos ORDER BY id DESC LIMIT 1";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
-            //Obtener el resultado del objeto
+            /*Obtener el resultado*/
             $ultimo = $resultado -> fetch_object();
-            //Devolver resultado
+            /*Devolver resultado*/
             $ultimoFavorito = $ultimo -> id;
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $ultimoFavorito;
         }
 
+        /*
+        Funcion para listar los videojuegos del carrito
+        */
+
         public function listar(){
+            /*Construir la consulta*/
             $consulta = "SELECT DISTINCT v.id AS 'idVideojuegoCarrito', v.nombre AS 'nombreVideojuegoCarrito', v.foto AS 'imagenVideojuegoCarrito', v.precio AS 'precioVideojuegoCarrito', cv.unidades AS 'unidadesCarrito'
                 FROM CarritoVideojuego cv
                 INNER JOIN carritos c ON cv.idCarrito = c.id
                 INNER JOIN videojuegos v ON v.id = cv.idVideojuego
                 WHERE c.idUsuario = {$this -> getIdUsuario()}";
-
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
-
-            // Array para almacenar la información del usuario y sus videojuegos
+            /*Array para almacenar la información del carrito*/
             $informacionCarrito = array();
-
+            /*Establecer una variable total*/
             $total = 0;
-
+            /*Mientras hayan videojuegos en el carrito disponibles para recorrer*/
             while ($fila = $resultado->fetch_object()) {
-                if (!isset($informacionCarrito['carrito'])) {
-                    $informacionCarrito['carrito'] = array(
-                        'videojuegos' => array()
-                    );
-                }
-                
-                // Almacenar la información del videojuego en el array de videojuegos del usuario
+                /*Crear array con informacion del carrito*/
+                $informacionCarrito['carrito'] = array(
+                    'videojuegos' => array()
+                );
+                /*Almacenar la información del videojuego en el array de carrito y videojuego*/
                 $informacionCarrito['carrito']['videojuegos'][] = array(
                     'idVideojuegoCarrito' => $fila->idVideojuegoCarrito,
                     'nombreVideojuegoCarrito' => $fila->nombreVideojuegoCarrito,
@@ -104,14 +148,16 @@
                     'precioVideojuegoCarrito' => $fila->precioVideojuegoCarrito,
                     'unidadesCarrito' => $fila->unidadesCarrito
                 );
-
+                /*Obtener precios, unidades y el total del carrito*/
                 $precios = $fila -> precioVideojuegoCarrito;
                 $unidades = $fila -> unidadesCarrito;
                 $total += $precios * $unidades;
+                /*Almacenar la información del total del carrito en el array de carrito*/
                 $informacionCarrito['totalCarrito'] = array(
                     'totalCarrito' => $total
                 );
             }
+            /*Retornar el resultado*/
             return $informacionCarrito;
         }
 

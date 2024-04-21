@@ -1,5 +1,9 @@
 <?php
 
+    /*
+    Clase modelo de administrador
+    */
+
     class Bloqueo{
 
         private $id;
@@ -10,183 +14,226 @@
         private $fechaHora;
         private $db;
 
+        /*
+        Funcion constructor
+        */
+
         public function __construct(){
+            /*Llamar conexion a la base de datos*/    
             $this -> db = BaseDeDatos::connect();
         }
 
-        public function getMotivo()
-        {
-                return $this->motivo;
+        /*
+        Funcion getter de motivo
+        */
+
+        public function getMotivo(){
+            /*Retornar el resultado*/
+            return $this->motivo;
         }
 
-        /**
-         * Set the value of motivo
-         *
-         * @return  self
-         */ 
-        public function setMotivo($motivo)
-        {
-                $this->motivo = $motivo;
+        /*
+        Funcion setter de motivo
+        */
 
-                return $this;
+        public function setMotivo($motivo){
+            /*Llamar parametro*/
+            $this->motivo = $motivo;
+            /*Retornar el resultado*/
+            return $this;
         }
 
-        
-        /**
-         * Get the value of fecha
-         */ 
-        public function getFechaHora()
-        {
-                return $this->fechaHora;
+        /*
+        Funcion getter de fecha hora
+        */
+
+        public function getFechaHora(){
+            /*Retornar el resultado*/
+            return $this->fechaHora;
         }
 
-        /**
-         * Set the value of fecha
-         *
-         * @return  self
-         */ 
-        public function setFechaHora($fechaHora)
-        {
-                $this->fechaHora = $fechaHora;
+        /*
+        Funcion setter de fecha hora
+        */
 
-                return $this;
+        public function setFechaHora($fechaHora){
+            /*Llamar parametro*/
+            $this->fechaHora = $fechaHora;
+            /*Retornar el resultado*/
+            return $this;
         }
 
+        /*
+        Funcion getter de id
+        */
 
-        /**
-         * Get the value of id
-         */ 
-        public function getId()
-        {
-                return $this->id;
+        public function getId(){
+            /*Retornar el resultado*/
+            return $this->id;
         }
 
-        /**
-         * Set the value of id
-         *
-         * @return  self
-         */ 
-        public function setId($id)
-        {
-                $this->id = $id;
+        /*
+        Funcion setter de id
+        */
 
-                return $this;
+        public function setId($id){
+            /*Llamar parametro*/
+            $this->id = $id;
+            /*Retornar el resultado*/
+            return $this;
         }
+
+        /*
+        Funcion getter de activo
+        */
 
         public function getActivo(){
-                return $this->activo;
-            }
+            /*Retornar el resultado*/
+            return $this->activo;
+        }
+
+        /*
+        Funcion setter de activo
+        */
     
-            public function setActivo($activo){
-                $this->activo = $activo;
-                return $this;
-            }
-
-        /**
-         * Get the value of idBloqueador
-         */ 
-        public function getIdBloqueador()
-        {
-                return $this->idBloqueador;
+        public function setActivo($activo){
+            /*Llamar parametro*/
+            $this->activo = $activo;
+            /*Retornar el resultado*/
+            return $this;
         }
 
-        /**
-         * Set the value of idBloqueador
-         *
-         * @return  self
-         */ 
-        public function setIdBloqueador($idBloqueador)
-        {
-                $this->idBloqueador = $idBloqueador;
+        /*
+        Funcion getter de id bloqueador
+        */
 
-                return $this;
+        public function getIdBloqueador(){
+            /*Retornar el resultado*/
+            return $this->idBloqueador;
         }
 
-        /**
-         * Get the value of idBloqueado
-         */ 
-        public function getIdBloqueado()
-        {
-                return $this->idBloqueado;
+        /*
+        Funcion setter de id bloqueador
+        */
+
+        public function setIdBloqueador($idBloqueador){
+            /*Llamar parametro*/
+            $this->idBloqueador = $idBloqueador;
+            /*Retornar el resultado*/
+            return $this;
         }
 
-        /**
-         * Set the value of idBloqueado
-         *
-         * @return  self
-         */ 
-        public function setIdBloqueado($idBloqueado)
-        {
-                $this->idBloqueado = $idBloqueado;
+        /*
+        Funcion getter de id bloqueado
+        */
 
-                return $this;
+        public function getIdBloqueado(){
+            /*Retornar el resultado*/
+            return $this->idBloqueado;
         }
+
+        /*
+        Funcion setter de id bloqueado
+        */
+
+        public function setIdBloqueado($idBloqueado){
+            /*Llamar parametro*/
+            $this->idBloqueado = $idBloqueado;
+            /*Retornar el resultado*/
+            return $this;
+        }
+
+        /*
+        Funcion para guardar el bloqueo
+        */
 
         public function guardar(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "INSERT INTO bloqueos VALUES(NULL, {$this -> getActivo()}, {$this -> getIdBloqueador()}, 
                 {$this -> getIdBloqueado()}, '{$this -> getMotivo()}', '{$this -> getFechaHora()}')";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $registro = $this -> db -> query($consulta);
-            //Establecer una variable bandera
+            /*Establecer una variable bandera*/
             $resultado = false;
-            //Comprobar el registro fue exitoso y el total de columnas afectadas se altero
+            /*Comprobar si la consulta fue exitosa*/
             if($registro){
-                //Cambiar el estado de la variable bandera
+                /*Cambiar el estado de la variable bandera*/
                 $resultado = true;
             }
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $resultado;
         }
 
+        /*
+        Funcion para obtener la lista de bloqueos por parte del usuario
+        */
+
         public function obtenerBloqueosPorUsuario(){
-                $consulta = "SELECT DISTINCT u.id AS 'idUsuarioBloqueado', u.nombre AS 'nombreBloqueado', u.apellido AS 'apellidoBloqueado', b.motivo AS 'motivoBloqueo', b.fechaHora AS 'fechaBloqueo'
+            /*Construir la consulta*/
+            $consulta = "SELECT DISTINCT u.id AS 'idUsuarioBloqueado', u.nombre AS 'nombreBloqueado', u.apellido AS 'apellidoBloqueado', b.motivo AS 'motivoBloqueo', b.fechaHora AS 'fechaBloqueo'
                 FROM Bloqueos b
                 INNER JOIN Usuarios u ON u.id = b.idBloqueado
                 WHERE b.idBloqueador = {$this -> getIdBloqueador()} AND b.activo = 1";
-                //Ejecutar la consulta
-                $lista = $this -> db -> query($consulta);
-                //Retornar el resultado
-                return $lista;
+            /*Llamar la funcion que ejecuta la consulta*/
+            $lista = $this -> db -> query($consulta);
+            /*Retornar el resultado*/
+            return $lista;
         }
 
+        /*
+        Funcion para eliminar un bloqueo
+        */
+
         public function eliminar(){
-                $consulta = "UPDATE bloqueos SET activo = 0 WHERE idBloqueador = {$this -> getIdBloqueador()} AND idBloqueado = {$this -> getIdBloqueado()}";
-                $eliminado = $this -> db -> query($consulta);
-                //Crear bandera
-                $bandera = false;
-                //Comprobar si la consulta se realizo exitosamente
-                if($eliminado){
-                        $bandera = true;
-                }
-                //Retorno el resultado
-                return $bandera;
+            /*Construir la consulta*/
+            $consulta = "UPDATE bloqueos SET activo = 0 WHERE idBloqueador = {$this -> getIdBloqueador()} AND idBloqueado = {$this -> getIdBloqueado()}";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $eliminado = $this -> db -> query($consulta);
+            /*Establecer una variable bandera*/
+            $bandera = false;
+            /*Comprobar si la consulta fue exitosa*/
+            if($eliminado){
+                /*Cambiar el estado de la variable bandera*/
+                $bandera = true;
+            }
+            /*Retornar el resultado*/
+            return $bandera;
         }
+
+        /*
+        Funcion para obtener el ultimo bloqueo registrado
+        */
     
-            public function ultimo(){
-                //Construir la consulta
-                $consulta = "SELECT DISTINCT id FROM bloqueos ORDER BY id DESC LIMIT 1";
-                //Ejecutar la consulta
-                $resultado = $this -> db -> query($consulta);
-                //Obtener el resultado del objeto
-                $ultimo = $resultado -> fetch_object();
-                //Devolver resultado
-                $ultimoBloqueo = $ultimo -> id;
-                //Retornar el resultado
-                return $ultimoBloqueo;
-            }
+        public function ultimo(){
+            /*Construir la consulta*/
+            $consulta = "SELECT DISTINCT id FROM bloqueos ORDER BY id DESC LIMIT 1";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $resultado = $this -> db -> query($consulta);
+            /*Obtener el resultado*/
+            $ultimo = $resultado -> fetch_object();
+            /*Devolver el resultado*/
+            $ultimoBloqueo = $ultimo -> id;
+            /*Retornar el resultado*/
+            return $ultimoBloqueo;
+        }
+
+        /*
+        Funcion para obtener todos los bloqueos registrados
+        */
     
-            public function obtenerListaBloqueos(){
-                    $consulta = "SELECT DISTINCT ubo.nombre AS 'nombreBloqueado', ubo.apellido AS 'apellidosBloqueado', ubr.nombre AS 'nombreBloqueador', ubr.apellido AS 'apellidosBloqueador', b.motivo AS 'motivoBloqueo', b.fechaHora AS 'fechaBloqueo'
-                    FROM Bloqueos b
-                    INNER JOIN Usuarios ubr ON ubr.id = b.idBloqueador
-                    INNER JOIN Usuarios ubo ON ubo.id = b.idBloqueado
-                    WHERE b.activo = 1";
-                    //Ejecutar la consulta
-                    $resultado = $this -> db -> query($consulta);
-                    //Retornar el resultado
-                    return $resultado;
-            }
+        public function obtenerListaBloqueos(){
+            /*Construir la consulta*/
+            $consulta = "SELECT DISTINCT ubo.nombre AS 'nombreBloqueado', ubo.apellido AS 'apellidosBloqueado', ubr.nombre AS 'nombreBloqueador', ubr.apellido AS 'apellidosBloqueador', b.motivo AS 'motivoBloqueo', b.fechaHora AS 'fechaBloqueo'
+                FROM Bloqueos b
+                INNER JOIN Usuarios ubr ON ubr.id = b.idBloqueador
+                INNER JOIN Usuarios ubo ON ubo.id = b.idBloqueado
+                WHERE b.activo = 1";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $resultado = $this -> db -> query($consulta);
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+        
     }
 
 ?>

@@ -1,5 +1,9 @@
 <?php
 
+    /*
+    Clase modelo de carrito videojuego
+    */
+
     class CarritoVideojuego{
 
         private $id;
@@ -10,97 +14,157 @@
         private $precio;
         private $db;
 
+        /*
+        Funcion constructor
+        */
+
         public function __construct(){
+            /*Llamar conexion a la base de datos*/
             $this -> db = BaseDeDatos::connect();
         }
 
+        /*
+        Funcion getter de id
+        */
+
         public function getId(){
+            /*Retornar el resultado*/
             return $this->id;
         }
 
+        /*
+        Funcion setter de id
+        */
+
         public function setId($id){
+            /*Llamar parametro*/
             $this->id = $id;
+            /*Retornar el resultado*/
             return $this;
-        }
-
-        public function getActivo(){
-            return $this->activo;
-        }
-
-        public function setActivo($activo){
-            $this->activo = $activo;
-            return $this;
-        }
-
-        public function getIdVideojuego(){
-            return $this->idVideojuego;
-        }
-
-        public function setIdVideojuego($idVideojuego){
-            $this->idVideojuego = $idVideojuego;
-            return $this;
-        }
-
-        public function getIdFavorito(){
-            return $this->idCarrito;
-        }
-
-        public function setIdCarrito($idCarrito){
-            $this->idCarrito = $idCarrito;
-            return $this;
-        }
-
-        public function getPrecio(){
-            return $this->precio;
-        }
-
-        public function setPrecio($precio){
-            $this->precio = $precio;
-            return $this;
-        }
-
-                /**
-         * Get the value of unidades
-         */ 
-        public function getUnidades()
-        {
-                return $this->unidades;
-        }
-
-        /**
-         * Set the value of unidades
-         *
-         * @return  self
-         */ 
-        public function setUnidades($unidades)
-        {
-                $this->unidades = $unidades;
-
-                return $this;
         }
 
         /*
-        Funcion para guardar la relacion entre videojuego y favorito en la base de datos
+        Funcion getter de activo
+        */
+
+        public function getActivo(){
+            /*Retornar el resultado*/
+            return $this->activo;
+        }
+
+        /*
+        Funcion setter de activo
+        */
+
+        public function setActivo($activo){
+            /*Llamar parametro*/
+            $this->activo = $activo;
+            /*Retornar el resultado*/
+            return $this;
+        }
+
+        /*
+        Funcion getter de id videojuego
+        */
+
+        public function getIdVideojuego(){
+            /*Retornar el resultado*/
+            return $this->idVideojuego;
+        }
+
+        /*
+        Funcion setter de id videojuego
+        */
+
+        public function setIdVideojuego($idVideojuego){
+            /*Llamar parametro*/
+            $this->idVideojuego = $idVideojuego;
+            /*Retornar el resultado*/
+            return $this;
+        }
+
+        /*
+        Funcion getter de id carrito
+        */
+
+        public function getIdCarrito(){
+            /*Retornar el resultado*/
+            return $this->idCarrito;
+        }
+
+        /*
+        Funcion setter de id carrito
+        */
+
+        public function setIdCarrito($idCarrito){
+            /*Llamar parametro*/
+            $this->idCarrito = $idCarrito;
+            /*Retornar el resultado*/
+            return $this;
+        }
+
+        /*
+        Funcion getter de precio
+        */
+
+        public function getPrecio(){
+            /*Retornar el resultado*/
+            return $this->precio;
+        }
+
+        /*
+        Funcion setter de precio
+        */
+
+        public function setPrecio($precio){
+            /*Llamar parametro*/
+            $this->precio = $precio;
+            /*Retornar el resultado*/
+            return $this;
+        }
+
+        /*
+        Funcion getter de unidades
+        */
+
+        public function getUnidades(){
+            /*Retornar el resultado*/
+            return $this->unidades;
+        }
+
+        /*
+        Funcion setter de unidades
+        */
+
+        public function setUnidades($unidades){
+            /*Llamar parametro*/
+            $this->unidades = $unidades;
+            /*Retornar el resultado*/
+            return $this;
+        }
+
+        /*
+        Funcion para guardar la relacion entre videojuego y carrito en la base de datos
         */
 
         public function guardar(){
-
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "INSERT INTO carritovideojuego VALUES(NULL, {$this -> getActivo()}, 
-                {$this -> getIdVideojuego()}, {$this -> getIdFavorito()}, {$this -> getUnidades()}, 
+                {$this -> getIdVideojuego()}, {$this -> getIdCarrito()}, {$this -> getUnidades()}, 
                 {$this -> getPrecio()})";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $registro = $this -> db -> query($consulta);
-            //Establecer una variable bandera
+            /*Establecer una variable bandera*/
             $resultado = false;
-            //Comporbar el registro fue exitoso y el total de columnas afectadas se altero
+            /*Comprobar si la consulta fue exitosa y el total de columnas afectadas se altero llamando la ejecucion de la consulta*/
             if($registro && mysqli_affected_rows($this -> db) > 0){
-                //Cambiar el estado de la variable bandera
+                /*Cambiar el estado de la variable bandera*/
                 $resultado = true;
             }
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $resultado;
         }
+        
     }
 
 ?>

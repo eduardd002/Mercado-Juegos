@@ -1,36 +1,55 @@
 <?php
+
+    /*
+    Clase modelo de chat
+    */
+
     class Chat{
 
         private $id;
-        private $activo;
         private $fechaCreacion;
         private $db;
 
+        /*
+        Funcion constructor
+        */
+
         public function __construct(){
+            /*Llamar conexion a la base de datos*/
             $this -> db = BaseDeDatos::connect();
         }
 
+        /*
+        Funcion getter de id
+        */
+
         public function getId(){
+            /*Retornar el resultado*/
             return $this->id;
         }
 
+        /*
+        Funcion setter de id
+        */
+
         public function setId($id){
+            /*Llamar parametro*/
             $this->id = $id;
+            /*Retornar el resultado*/
             return $this;
         }
 
-        public function getActivo(){
-            return $this->activo;
-        }
-
-        public function setActivo($activo){
-            $this->activo = $activo;
-            return $this;
-        }
+        /*
+        Funcion getter de fecha de creacion
+        */
 
         public function getFechaCreacion(){
             return $this->fechaCreacion;
         }
+
+        /*
+        Funcion setter de fecha de creacion
+        */
 
         public function setFechaCreacion($fechaCreacion){
             $this->fechaCreacion = $fechaCreacion;
@@ -42,18 +61,18 @@
         */
 
         public function guardar(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "INSERT INTO chats VALUES (NULL, '{$this -> getFechaCreacion()}')";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $registro = $this -> db -> query($consulta);
-            //Establecer una variable bandera
+            /*Establecer una variable bandera*/
             $resultado = false;
-            //Comporbar el registro fue exitoso y el total de columnas afectadas se altero
+            /*Comprobar si la consulta fue exitosa y el total de columnas afectadas se altero llamando la ejecucion de la consulta*/
             if($registro && mysqli_affected_rows($this -> db) > 0){
-                //Cambiar el estado de la variable bandera
+                /*Cambiar el estado de la variable bandera*/
                 $resultado = true;
             }
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $resultado;
         }
 
@@ -62,17 +81,18 @@
         */
 
         public function ultimo(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "SELECT DISTINCT id FROM chats ORDER BY id DESC LIMIT 1";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
-            //Obtener el resultado del objeto
+            /*Obtener el resultado*/
             $ultimo = $resultado -> fetch_object();
-            //Devolver resultado
+            /*Devolver resultado*/
             $ultimoChat = $ultimo -> id;
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $ultimoChat;
         }
+        
     }
 
 ?>
