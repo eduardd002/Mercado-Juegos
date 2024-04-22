@@ -275,7 +275,7 @@
         public function guardarTransaccionCarrito($factura, $idVideojuego, $idPago, $idEnvio){
             /*Llamar la funcion que trae la lista de los videojuegos del carrito*/
             $lista = $this -> listarCarritos();
-            /*Instanciar objeto*/
+            /*instanciar el objeto*/
             $transaccion = new Transaccion();
             /*Crear objeto*/
             $transaccion -> setNumeroFactura($factura + 1000);
@@ -306,7 +306,7 @@
         */
 
         public function guardarTransaccionVideojuegoUnico($factura, $idVideojuego, $unidadesCompra, $idPago, $idEnvio){
-            /*Instanciar objeto*/
+            /*instanciar el objeto*/
             $transaccion = new Transaccion();
             /*Crear objeto*/
             $transaccion -> setNumeroFactura($factura + 1000);

@@ -1,5 +1,9 @@
 <?php
 
+    /*
+    Clase modelo de usuario
+    */
+
     class Usuario{
 
         private $id;
@@ -16,115 +20,252 @@
         private $fecharegistro;
         private $db;
 
+        /*
+        Funcion constructor
+        */
+
         public function __construct(){
+            /*Llamar conexion a la base de datos*/
             $this -> db = BaseDeDatos::connect();
         }
 
+        /*
+        Funcion getter de id
+        */
+
         public function getId(){
+            /*Retornar el resultado*/
             return $this->id;
         }
 
+        /*
+        Funcion setter de id
+        */
+
         public function setId($id){
+            /*Llamar parametro*/
             $this->id = $id;
+            /*Retornar el resultado*/
             return $this;
         }
 
+        /*
+        Funcion getter de activo
+        */
+
         public function getActivo(){
+            /*Retornar el resultado*/
             return $this->activo;
         }
 
+        /*
+        Funcion setter de activo
+        */
+
         public function setActivo($activo){
+            /*Llamar parametro*/
             $this->activo = $activo;
+            /*Retornar el resultado*/
             return $this;
         }
 
+        /*
+        Funcion getter de nombre
+        */
+
         public function getNombre(){
+            /*Retornar el resultado*/
             return $this->nombre;
         }
 
+        /*
+        Funcion setter de nombre
+        */
+
         public function setNombre($nombre){
+            /*Llamar parametro*/
             $this->nombre = $nombre;
+            /*Retornar el resultado*/
             return $this;
         }
 
+        /*
+        Funcion getter de apellido
+        */
+
         public function getApellido(){
+            /*Retornar el resultado*/
             return $this->apellido;
         }
 
+        /*
+        Funcion setter de apellido
+        */
+
         public function setApellido($apellido){
+            /*Llamar parametro*/
             $this->apellido = $apellido;
+            /*Retornar el resultado*/
             return $this;
         }
 
+        /*
+        Funcion getter de fecha de nacimiento
+        */
+
         public function getFechanacimiento(){
+            /*Retornar el resultado*/
             return $this->fechanacimiento;
         }
 
+        /*
+        Funcion setter de fecha de nacimiento
+        */
+
         public function setFechanacimiento($fechanacimiento){
+            /*Llamar parametro*/
             $this->fechanacimiento = $fechanacimiento;
+            /*Retornar el resultado*/
             return $this;
         }
 
+        /*
+        Funcion getter de numero de telefono
+        */
+
         public function getNumerotelefono(){
+            /*Retornar el resultado*/
             return $this->numerotelefono;
         }
 
+        /*
+        Funcion setter de numero de telefono
+        */
+
         public function setNumerotelefono($numerotelefono){
+            /*Llamar parametro*/
             $this->numerotelefono = $numerotelefono;
+            /*Retornar el resultado*/
             return $this;
         }
 
+        /*
+        Funcion getter de correo
+        */
+
         public function getCorreo(){
+            /*Retornar el resultado*/
             return $this->correo;
         }
 
+        /*
+        Funcion setter de correo
+        */
+
         public function setCorreo($correo){
+            /*Llamar parametro*/
             $this->correo = $correo;
+            /*Retornar el resultado*/
             return $this;
         }
+
+        /*
+        Funcion getter de clave
+        */
 
         public function getClave(){
-                return $this->clave;
+            /*Retornar el resultado*/
+            return $this->clave;
         }
+
+        /*
+        Funcion setter de clave
+        */
 
         public function setClave($clave){
+            /*Llamar parametro*/
             $this->clave = $clave;
+            /*Retornar el resultado*/
             return $this;
         }
 
-        public function getDepartamento(){
-                return $this->departamento;
-        }
-
-        public function setDepartamento($departamento){
-            $this->departamento = $departamento;
-            return $this;
-        }
-
-        public function getMunicipio(){
-            return $this->municipio;
-        }
-
-        public function setMunicipio($municipio){
-            $this->municipio = $municipio;
-            return $this;
-        }
+        /*
+        Funcion getter de foto
+        */
 
         public function getFoto(){
+            /*Retornar el resultado*/
             return $this->foto;
         }
 
+        /*
+        Funcion setter de foto
+        */
+
         public function setFoto($foto){
+            /*Llamar parametro*/
             $this->foto = $foto;
+            /*Retornar el resultado*/
             return $this;
         }
 
+        /*
+        Funcion getter de fecha de registro
+        */
+
         public function getFecharegistro(){
+            /*Retornar el resultado*/
             return $this->fecharegistro;
         }
 
+        /*
+        Funcion setter de fecha de registro
+        */
+
         public function setFecharegistro($fecharegistro){
+            /*Llamar parametro*/
             $this->fecharegistro = $fecharegistro;
+            /*Retornar el resultado*/
+            return $this;
+        }
+
+        /*
+        Funcion getter de departamento
+        */
+
+        public function getDepartamento(){
+            /*Retornar el resultado*/
+            return $this->departamento;
+        }
+
+        /*
+        Funcion setter de departamento
+        */
+
+        public function setDepartamento($departamento){
+            /*Llamar parametro*/
+            $this->departamento = $departamento;
+            /*Retornar el resultado*/
+            return $this;
+        }
+
+        /*
+        Funcion getter de municipio
+        */
+
+        public function getMunicipio(){
+            /*Retornar el resultado*/
+            return $this->municipio;
+        }
+
+        /*
+        Funcion setter de municipio
+        */
+
+        public function setMunicipio($municipio){
+            /*Llamar parametro*/
+            $this->municipio = $municipio;
+            /*Retornar el resultado*/
             return $this;
         }
 
@@ -133,32 +274,42 @@
         */
 
         public function guardar(){
+            /*Obtener la clave*/
             $clave = $this -> getClave();
+            /*Encriptar la clave*/
             $claveSegura = password_hash($clave, PASSWORD_BCRYPT, ['cost'=>4]);
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "INSERT INTO usuarios VALUES(NULL, {$this -> getActivo()},
                 '{$this -> getNombre()}', '{$this -> getApellido()}', 
                 '{$this -> getFechaNacimiento()}', {$this -> getNumeroTelefono()}, 
                 '{$this -> getCorreo()}', '{$claveSegura}', 
                 '{$this -> getDepartamento()}', '{$this -> getMunicipio()}', 
                 '{$this -> getFoto()}', '{$this -> getFechaRegistro()}')";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $registro = $this -> db -> query($consulta);
-            //Establecer una variable bandera
+            /*Establecer una variable bandera*/
             $resultado = false;
-            //Comporbar el registro fue exitoso y el total de columnas afectadas se altero
+            /*Comprobar si la consulta fue exitosa y el total de columnas afectadas se altero llamando la ejecucion de la consulta*/
             if($registro && mysqli_affected_rows($this -> db) > 0){
-                //Cambiar el estado de la variable bandera
+                /*Cambiar el estado de la variable bandera*/
                 $resultado = true;
             }
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $resultado;
         }
 
+        /*
+        Funcion para traer la clave
+        */
+
         public function traerClave($correo){
+            /*Construir la consulta*/
             $consulta = "SELECT clave FROM usuarios WHERE correo = '$correo' AND activo = 1";
+            /*Llamar la funcion que ejecuta la consulta*/
             $clave = $this -> db -> query($consulta);
+            /*Obtener el resultado*/
             $resultado = $clave -> fetch_object();
+            /*Retornar el resultado*/
             return $resultado;
         }
 
@@ -167,25 +318,29 @@
         */
 
         public function login(){
-
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "SELECT DISTINCT * FROM usuarios WHERE correo = '{$this -> getCorreo()}' AND activo = 1";
+            /*Llamar la funcion para obtener clave propia*/
             $clave = $this -> traerClave($this -> getCorreo());
+            /*Traer clave*/
             $claveAsociada = $clave -> clave;
+            /*Establecer una variable bandera*/
             $resultado = false;
-            $alho = password_verify($this -> getClave(), $claveAsociada);
-            if($alho){
-                //Ejecutar la consulta
-            $login = $this -> db -> query($consulta);
-            //Obtener el resultado del objeto
-            $usuario = $login -> fetch_object();
-            //Comprobar si el objeto llegó
-            if($usuario){
-                //Establecer una variable bandera con el valor del objeto
-                $resultado = $usuario;
+            /*Verificar clave*/
+            $verificarClave = password_verify($this -> getClave(), $claveAsociada);
+            /*Si la clave es correcta*/
+            if($verificarClave){
+                /*Llamar la funcion que ejecuta la consulta*/
+                $login = $this -> db -> query($consulta);
+                /*Obtener el resultado*/
+                $administrador = $login -> fetch_object();
+                /*Comprobar si la consulta fue exitosa*/
+                if($administrador){
+                    /*Cambiar el estado de la variable bandera*/
+                    $resultado = $administrador;
+                }
             }
-            }
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $resultado;
         }
 
@@ -194,30 +349,31 @@
         */
 
         public function listar(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "SELECT DISTINCT * FROM usuarios WHERE activo = 1";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $lista = $this -> db -> query($consulta);
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $lista;
         }
 
         /*
-        Funcion para eliminar el usuario desde el administrador
+        Funcion para eliminar el usuario
         */
 
         public function eliminar(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "UPDATE usuarios SET activo = 0 WHERE id = {$this -> getId()}";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $eliminado = $this -> db -> query($consulta);
-            //Crear bandera
+            /*Establecer una variable bandera*/
             $bandera = false;
-            //Comprobar si la consulta se realizo exitosamente
+            /*Comprobar si la consulta fue exitosa*/
             if($eliminado){
+                /*Cambiar el estado de la variable bandera*/
                 $bandera = true;
             }
-            //Retorno el resultado
+            /*Retornar el resultado*/
             return $bandera;
         }
 
@@ -226,13 +382,13 @@
         */
 
         public function obtenerUno(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "SELECT DISTINCT * FROM usuarios WHERE id = {$this -> getId()} AND activo = 1";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $categoria = $this -> db -> query($consulta);
-            //Obtener resultado
+            /*Obtener el resultado*/
             $resultado = $categoria -> fetch_object();
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $resultado;
         }
 
@@ -241,74 +397,83 @@
         */
 
         public function actualizar(){
-
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "UPDATE usuarios SET nombre = '{$this -> getNombre()}', apellido = '{$this -> getApellido()}',
                 numeroTelefono = '{$this -> getNumeroTelefono()}', correo = '{$this -> getCorreo()}', 
                 departamento = '{$this -> getDepartamento()}', 
                 municipio = '{$this -> getMunicipio()}' ";
+            /*Comprobar si se desea actualizar la foto*/   
             if($this -> getFoto() != null){
+                /*Construir la consulta*/
                 $consulta .= ",foto = '{$this -> getFoto()}'";
             }
+            /*Construir la consulta*/            
             $consulta .= "WHERE id = {$this -> getId()}";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $actualizado = $this -> db -> query($consulta);
-            //Crear bandera
+            /*Establecer una variable bandera*/
             $bandera = false;
-            //Comprobar si la consulta se realizo exitosamente
+            /*Comprobar si la consulta fue exitosa y el total de columnas afectadas se altero llamando la ejecucion de la consulta*/
             if($actualizado && mysqli_affected_rows($this -> db) > 0){
+                /*Cambiar el estado de la variable bandera*/
                 $bandera = true;
             }
-            //Retorno el resultado
+            /*Retornar el resultado*/
             return $bandera;
         }
+
+        /*
+        Funcion para actualizar la clave
+        */
 
         public function actualizarClave(){
+            /*Obtener la clave*/
             $clave = $this -> getClave();
+            /*Encriptar la clave*/
             $claveSegura = password_hash($clave, PASSWORD_BCRYPT, ['cost'=>4]);
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "UPDATE usuarios SET clave = '{$claveSegura}' 
                 WHERE id = {$this -> getId()}";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $actualizado = $this -> db -> query($consulta);
-            //Crear bandera
+            /*Establecer una variable bandera*/
             $bandera = false;
-            //Comprobar si la consulta se realizo exitosamente
+            /*Comprobar si la consulta fue exitosa y el total de columnas afectadas se altero llamando la ejecucion de la consulta*/
             if($actualizado && mysqli_affected_rows($this -> db) > 0){
+                /*Cambiar el estado de la variable bandera*/
                 $bandera = true;
             }
-            //Retorno el resultado
+            /*Retornar el resultado*/
             return $bandera;
         }
 
+        /*
+        Funcion para listar los usuarios con su informacion
+        */
+
         public function obtenerInformacionUsuario(){
+            /*Construir la consulta*/
             $consulta = "SELECT u.id AS 'idUsuario', u.nombre AS 'nombreUsuario', u.fechaRegistro AS 'fechaUsuario', u.departamento AS 'departamentoUsuario', u.municipio AS 'municipioUsuario', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.foto AS 'fotoVideojuego', v.id AS 'idVideojuego'
                 FROM Videojuegos v
                 INNER JOIN Usuarios u ON u.id = v.idUsuario
                 WHERE v.idUsuario = {$this->getId()} AND v.activo = 1";
-        
-            // Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $resultados = $this->db->query($consulta);
-        
-            // Array para almacenar la información del usuario y sus videojuegos
+            /*Array para almacenar la información del usuario*/
             $informacionUsuario = array();
-        
-            // Recorrer los resultados de la consulta
+            /*Mientras hayan usuarios disponibles para recorrer*/
             while ($fila = $resultados->fetch_object()) {
-                // Verificar si ya se ha almacenado la información del usuario
-                if (!isset($informacionUsuario['usuario'])) {
-                    // Si no se ha almacenado, almacenar la información del usuario
-                    $informacionUsuario['usuario'] = array(
-                        'idUsuario' => $fila->idUsuario,
-                        'nombreUsuario' => $fila->nombreUsuario,
-                        'fechaUsuario' => $fila->fechaUsuario,
-                        'departamentoUsuario' => $fila->departamentoUsuario,
-                        'municipioUsuario' => $fila->municipioUsuario,
-                        'videojuegos' => array() // Inicializar un array para almacenar los videojuegos del usuario
-                    );
-                }
-        
-                // Almacenar la información del videojuego en el array de videojuegos del usuario
+                /*Crear array con informacion del usuario*/
+                $informacionUsuario['usuario'] = array(
+                    'idUsuario' => $fila->idUsuario,
+                    'nombreUsuario' => $fila->nombreUsuario,
+                    'fechaUsuario' => $fila->fechaUsuario,
+                    'departamentoUsuario' => $fila->departamentoUsuario,
+                    'municipioUsuario' => $fila->municipioUsuario,
+                    /*Inicializar un array para almacenar los videojuegos del usuario*/
+                    'videojuegos' => array() 
+                );
+                /*Almacenar la información del usuario en el array de usuario y videojuego*/
                 $informacionUsuario['usuario']['videojuegos'][] = array(
                     'idVideojuego' => $fila->idVideojuego,
                     'nombreVideojuego' => $fila->nombreVideojuego,
@@ -316,38 +481,54 @@
                     'fotoVideojuego' => $fila->fotoVideojuego
                 );
             }
-        
-            // Retornar la información del usuario y sus videojuegos
+            /*Retornar el resultado*/
             return $informacionUsuario;
         } 
 
+        /*
+        Funcion para obtener el total de videojuego publicados por parte del usuario
+        */
+
         public function obtenerTotalPublicados(){
+            /*Construir la consulta*/
             $consulta = "SELECT COUNT(idUsuario) AS 'videojuegosPublicados' FROM videojuegos WHERE idUsuario = {$this -> getId()}";
-            // Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $total = $this->db->query($consulta);
+            /*Obtener el resultado*/
             $resultado = $total -> fetch_object();
-            // Retornar la información del usuario y sus videojuegos
+            /*Retornar el resultado*/
             return $resultado;
         }
+
+        /*
+        Funcion para obtener el total de videojuego vendidos por parte del usuario
+        */
 
         public function obtenerTotalVendidos(){
+            /*Construir la consulta*/
             $consulta = "SELECT COUNT(idVendedor) AS 'videojuegosVendidos' FROM Transacciones WHERE idVendedor = {$this -> getId()}";
-            // Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $total = $this->db->query($consulta);
+            /*Obtener el resultado*/
             $resultado = $total -> fetch_object();
-            // Retornar la información del usuario y sus videojuegos
+            /*Retornar el resultado*/
             return $resultado;
         }
 
+        /*
+        Funcion para obtener los videojuegos creado por un usuario en concreto
+        */
+
         public function obtenerVideojuegosCreadosPorUsuario(){
+            /*Construir la consulta*/
             $consulta = "SELECT DISTINCT v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', c.nombre AS 'nombreConsola', v.stock AS 'stockVideojuego', v.id AS 'idVideojuego', v.foto AS 'imagenVideojuego'
-            FROM Videojuegos v
-            INNER JOIN Consolas c ON c.id = v.idConsola
-            INNER JOIN Usuarios u ON u.id = v.idUsuario
-            WHERE u.id = {$this -> getId()} AND v.activo = 1";
-            //Ejecutar la consulta
+                FROM Videojuegos v
+                INNER JOIN Consolas c ON c.id = v.idConsola
+                INNER JOIN Usuarios u ON u.id = v.idUsuario
+                WHERE u.id = {$this -> getId()} AND v.activo = 1";
+            /*Llamar la funcion que ejecuta la consulta*/
             $lista = $this -> db -> query($consulta);
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $lista;
         }
 
@@ -356,7 +537,9 @@
         */
 
         public function listarAlgunos(){
+            /*Comprobar si el id del usuario que llega es vacio*/
             if($this -> getId() == null){
+                /*Construir la consulta*/
                 $consulta = "SELECT DISTINCT v.*
                     FROM videojuegos v
                     INNER JOIN videojuegocategoria vc ON vc.idVideojuego = v.id
@@ -364,7 +547,9 @@
                     INNER JOIN consolas c ON c.id = v.idConsola
                     INNER JOIN usos u ON u.id = v.idUso
                     WHERE u.activo = 1 AND c.activo = 1 AND c.activo = 1 AND v.activo = 1";
+            /*De lo contrario*/        
             }else{
+                /*Construir la consulta*/
                 $consulta = "SELECT DISTINCT v.*
                     FROM videojuegos v
                     INNER JOIN usuarios us ON us.id = v.idUsuario
@@ -380,9 +565,9 @@
                     INNER JOIN videojuegos v ON v.idUsuario = u.id
                     AND b.idBloqueador = {$this -> getId()} AND b.activo = 1 LIMIT 6";
             }
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
-            //Retornar resultado
+            /*Retornar el resultado*/
             return $resultado;
         }
 
@@ -391,7 +576,9 @@
         */
 
         public function listarTodos(){
+            /*Comprobar si el id del usuario que llega es vacio*/
             if($this -> getId() == null){
+                /*Construir la consulta*/
                 $consulta = "SELECT DISTINCT v.*
                     FROM videojuegos v
                     INNER JOIN videojuegocategoria vc ON vc.idVideojuego = v.id
@@ -399,7 +586,9 @@
                     INNER JOIN consolas c ON c.id = v.idConsola
                     INNER JOIN usos u ON u.id = v.idUso
                     WHERE u.activo = 1 AND c.activo = 1 AND c.activo = 1 AND v.activo = 1";
+            /*De lo contrario*/ 
             }else{
+                /*Construir la consulta*/
                 $consulta = "SELECT DISTINCT v.*
                     FROM videojuegos v
                     INNER JOIN usuarios us ON us.id = v.idUsuario
@@ -415,38 +604,38 @@
                     INNER JOIN videojuegos v ON v.idUsuario = u.id
                     AND b.idBloqueador = {$this -> getId()} AND b.activo = 1";
             }
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
-            //Retornar resultado
+            /*Retornar el resultado*/
             return $resultado;
         }
 
         /*
-        Funcion para obtener la ultima transaccion registrada
+        Funcion para obtener el ultimo envio registrado
         */
 
         public function obtenerEnvios(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "SELECT * FROM Envios e WHERE idUsuario = {$this -> getId()} AND activo = 1";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $lista = $this -> db -> query($consulta);
-            //Retornar resultado
+            /*Retornar el resultado*/
             return $lista;
         }
 
         /*
-        Funcion para obtener la ultima transaccion registrada
+        Funcion para obtener el ultimo pago registrado
         */
 
         public function obtenerPagos(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "SELECT mp.nombre AS 'nombreMedioPago', p.numero AS 'numeroPago', p.id AS 'idPago'
                 FROM Pagos p
                 INNER JOIN MediosPago mp ON mp.id = p.idMedioPago
                 WHERE idUsuario = {$this -> getId()} AND p.activo = 1";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $lista = $this -> db -> query($consulta);
-            //Retornar resultado
+            /*Retornar el resultado*/
             return $lista;
         }
 

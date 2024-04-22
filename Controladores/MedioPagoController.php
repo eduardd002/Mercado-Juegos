@@ -10,7 +10,6 @@
         */
 
         public function crear(){
-
             //Incluir la vista
             require_once "Vistas/MedioPago/Crear.html";
         }
@@ -20,7 +19,6 @@
         */
 
         public function guardarMedioPago($nombre){
-
             //Instanciar el objeto
             $medioPago = new MedioPago();
             //Crear el objeto
@@ -42,21 +40,16 @@
         */
 
         public function guardar(){
-
             //Comprobar si los datos están llegando
             if(isset($_POST)){
-
                 //Comprobar si cada dato existe
                 $nombre = isset($_POST['nombretar']) ? $_POST['nombretar'] : false;
-
                 //Comprobar si todos los datos exsiten
                 if($nombre){
-                    
                     //Obtener el resultado
                     $guardado = $this -> guardarMedioPago($nombre);
                     //Comprobar se ejecutó con exito la consulta
                     if($guardado){
-
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('guardarmediopagoacierto', "El medio de pago ha sido creado con exito", '?controller=AdministradorController&action=gestionarMedioPago');
                     }else{
@@ -78,7 +71,6 @@
         */
 
         public function eliminarMedioPago($idMedioPago){
-
             //Instanciar el objeto
             $medioPago = new MedioPago();
             //Crear objeto
@@ -94,22 +86,16 @@
         */
 
         public function eliminar(){
-            
             //Comprobar si los datos están llegando
             if(isset($_GET)){
-
                 //Comprobar si el dato existe
                 $idMedioPago = isset($_GET['id']) ? $_GET['id'] : false;
-
                 //Si el dato existe
                 if($idMedioPago){
-
                     //Obtener el resultado
                     $eliminado = $this -> eliminarMedioPago($idMedioPago);
-
                     //Comprobar si el medio de pago ha sido eliminada con exito
                     if($eliminado){
-
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('eliminarmediopagoacierto', "el medio de pago ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarMedioPago');
                     }else{
@@ -128,7 +114,6 @@
         */
 
         public function editarMedioPago($idMedioPago){
-
             //Instanciar el objeto
             $medioPago = new MedioPago();
             //Creo el objeto y retornar el resultado
@@ -140,25 +125,18 @@
         */
 
         public function editar(){
-
             //Comprobar si los datos están llegando
             if(isset($_GET)){
-
                 //Comprobar si el dato existe
                 $idMedioPago = isset($_GET['id']) ? $_GET['id'] : false;
-
                 //Si el dato existe
                 if($idMedioPago){
-
                     //Obtener el resultado
                     $medioPago = $this -> editarMedioPago($idMedioPago);
-
                     //Obtener medio de pago
                     $medioPagoUnico = $medioPago -> obtenerUna();
-
                     //Incluir la vista
                     require_once "Vistas/MedioPago/Actualizar.html";
-
                 }
             }
         }
@@ -168,7 +146,6 @@
         */
 
         public function actualizarMedioPago($idMedioPago, $nombre){
-
             //Instanciar el objeto
             $medioPago = new MedioPago();
             //Crear objeto
@@ -190,23 +167,17 @@
         */
 
         public function actualizar(){
-            
             //Comprobar si los datos están llegando
             if(isset($_GET) && isset($_POST)){
-
                 //Comprobar si los datos existe
                 $idMedioPago = isset($_GET['id']) ? $_GET['id'] : false;
                 $nombre = isset($_POST['nombretaract']) ? $_POST['nombretaract'] : false;
-
                 //Si el dato existe
                 if($idMedioPago){
-
                     //Obtener el resultado
                     $actualizado = $this -> actualizarMedioPago($idMedioPago, $nombre);
-
                     //Comprobar si el medio de pago ha sido actualizada
                     if($actualizado){
-
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('actualizarmediopagoacierto', "el medio de pago ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarMedioPago');
                     }else{
@@ -219,6 +190,7 @@
                 }  
             }
         }
+        
     }
 
 ?>

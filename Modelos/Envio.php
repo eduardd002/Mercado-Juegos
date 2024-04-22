@@ -1,5 +1,9 @@
 <?php
 
+    /*
+    Clase modelo de envio
+    */
+
     class Envio{
 
         private $id;
@@ -12,247 +16,252 @@
         private $direccion;
         private $db;
 
+        /*
+        Funcion constructor
+        */
+
         public function __construct(){
+            /*Llamar conexion a la base de datos*/
             $this -> db = BaseDeDatos::connect();
         }
 
-        
+        /*
+        Funcion getter de id
+        */
 
-
-        /**
-         * Get the value of id
-         */ 
-        public function getId()
-        {
-                return $this->id;
+        public function getId(){
+            /*Retornar el resultado*/
+            return $this->id;
         }
 
-        /**
-         * Set the value of id
-         *
-         * @return  self
-         */ 
-        public function setId($id)
-        {
-                $this->id = $id;
+        /*
+        Funcion setter de id
+        */
 
-                return $this;
+        public function setId($id){
+            /*Llamar parametro*/
+            $this->id = $id;
+            /*Retornar el resultado*/
+            return $this;
         }
 
-        /**
-         * Get the value of departamento
-         */ 
-        public function getDepartamento()
-        {
-                return $this->departamento;
+        /*
+        Funcion getter de activo
+        */
+
+        public function getActivo(){
+            /*Retornar el resultado*/
+            return $this->activo;
         }
 
-        /**
-         * Set the value of departamento
-         *
-         * @return  self
-         */ 
-        public function setDepartamento($departamento)
-        {
-                $this->departamento = $departamento;
+        /*
+        Funcion setter de activo
+        */
 
-                return $this;
+        public function setActivo($activo){
+            /*Llamar parametro*/
+            $this->activo = $activo;
+            /*Retornar el resultado*/
+            return $this;
         }
 
-        /**
-         * Get the value of municipio
-         */ 
-        public function getMunicipio()
-        {
-                return $this->municipio;
+        /*
+        Funcion getter de departamento
+        */
+
+        public function getDepartamento(){
+            /*Retornar el resultado*/
+            return $this->departamento;
         }
 
-        /**
-         * Set the value of municipio
-         *
-         * @return  self
-         */ 
-        public function setMunicipio($municipio)
-        {
-                $this->municipio = $municipio;
+        /*
+        Funcion setter de departamento
+        */
 
-                return $this;
+        public function setDepartamento($departamento){
+            /*Llamar parametro*/
+            $this->departamento = $departamento;
+            /*Retornar el resultado*/
+            return $this;
         }
 
-        /**
-         * Get the value of codigoPostal
-         */ 
-        public function getCodigoPostal()
-        {
-                return $this->codigoPostal;
+        /*
+        Funcion getter de municipio
+        */
+
+        public function getMunicipio(){
+            /*Retornar el resultado*/
+            return $this->municipio;
         }
 
-        /**
-         * Set the value of codigoPostal
-         *
-         * @return  self
-         */ 
-        public function setCodigoPostal($codigoPostal)
-        {
-                $this->codigoPostal = $codigoPostal;
+        /*
+        Funcion setter de municipio
+        */
 
-                return $this;
+        public function setMunicipio($municipio){
+            /*Llamar parametro*/
+            $this->municipio = $municipio;
+            /*Retornar el resultado*/
+            return $this;
         }
 
-        /**
-         * Get the value of barrio
-         */ 
-        public function getBarrio()
-        {
-                return $this->barrio;
+        /*
+        Funcion getter de codigo postal
+        */
+
+        public function getCodigoPostal(){
+            /*Retornar el resultado*/
+            return $this->codigoPostal;
         }
 
-        /**
-         * Set the value of barrio
-         *
-         * @return  self
-         */ 
-        public function setBarrio($barrio)
-        {
-                $this->barrio = $barrio;
+        /*
+        Funcion setter de codigo postal
+        */
 
-                return $this;
+        public function setCodigoPostal($codigoPostal){
+            /*Llamar parametro*/
+            $this->codigoPostal = $codigoPostal;
+            /*Retornar el resultado*/
+            return $this;
         }
 
-        /**
-         * Get the value of direccion
-         */ 
-        public function getDireccion()
-        {
-                return $this->direccion;
+        /*
+        Funcion getter de barrio
+        */
+
+        public function getBarrio(){
+            /*Retornar el resultado*/
+            return $this->barrio;
         }
 
-        /**
-         * Set the value of direccion
-         *
-         * @return  self
-         */ 
-        public function setDireccion($direccion)
-        {
-                $this->direccion = $direccion;
+        /*
+        Funcion setter de barrio
+        */
 
-                return $this;
+        public function setBarrio($barrio){
+            /*Llamar parametro*/
+            $this->barrio = $barrio;
+            /*Retornar el resultado*/
+            return $this;
         }
 
-                /**
-         * Get the value of activo
-         */ 
-        public function getActivo()
-        {
-                return $this->activo;
+        /*
+        Funcion getter de direccion
+        */
+
+        public function getDireccion(){
+            /*Retornar el resultado*/
+            return $this->direccion;
         }
 
-        /**
-         * Set the value of activo
-         *
-         * @return  self
-         */ 
-        public function setActivo($activo)
-        {
-                $this->activo = $activo;
+        /*
+        Funcion setter de direccion
+        */
 
-                return $this;
+        public function setDireccion($direccion){
+            /*Llamar parametro*/
+            $this->direccion = $direccion;
+            /*Retornar el resultado*/
+            return $this;
         }
 
-                /**
-         * Get the value of idUsuario
-         */ 
-        public function getIdUsuario()
-        {
-                return $this->idUsuario;
+        /*
+        Funcion getter de id usuario
+        */
+
+        public function getIdUsuario(){
+            /*Retornar el resultado*/
+            return $this->idUsuario;
         }
 
-        /**
-         * Set the value of idUsuario
-         *
-         * @return  self
-         */ 
-        public function setIdUsuario($idUsuario)
-        {
-                $this->idUsuario = $idUsuario;
+        /*
+        Funcion setter de id usuario
+        */
 
-                return $this;
+        public function setIdUsuario($idUsuario){
+            /*Llamar parametro*/
+            $this->idUsuario = $idUsuario;
+            /*Retornar el resultado*/
+            return $this;
         }
 
-                /*
+        /*
         Funcion para realizar el registro de la transaccion en la base de datos
         */
 
         public function guardar(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "INSERT INTO envios VALUES(NULL, {$this -> getActivo()}, {$this -> getIdUsuario()}, '{$this -> getDepartamento()}', '{$this -> getMunicipio()}', '{$this -> getCodigoPostal()}', '{$this -> getBarrio()}', 
                 '{$this -> getDireccion()}')";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $registro = $this -> db -> query($consulta);
-            //Establecer una variable bandera
+            /*Establecer una variable bandera*/
             $resultado = false;
-            //Comprobar el registro fue exitoso y el total de columnas afectadas se altero
+            /*Comprobar si la consulta fue exitosa*/
             if($registro){
-                //Cambiar el estado de la variable bandera
+                /*Cambiar el estado de la variable bandera*/
                 $resultado = true;
             }
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $resultado;
         }
 
         /*
-        Funcion para eliminar el uso
+        Funcion para eliminar el envio
         */
 
         public function eliminar(){
-                //Construir la consulta
-                $consulta = "UPDATE envios SET activo = 0 WHERE id = {$this -> getId()}";
-                //Ejecutar la consulta
-                $eliminado = $this -> db -> query($consulta);
-                //Crear bandera
-                $bandera = false;
-                //Comprobar si la consulta se realizo exitosamente
-                if($eliminado){
-                    $bandera = true;
-                }
-                //Retorno el resultado
-                return $bandera;
+            /*Construir la consulta*/
+            $consulta = "UPDATE envios SET activo = 0 WHERE id = {$this -> getId()}";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $eliminado = $this -> db -> query($consulta);
+            /*Establecer una variable bandera*/
+            $bandera = false;
+            /*Comprobar si la consulta fue exitosa*/
+            if($eliminado){
+                /*Cambiar el estado de la variable bandera*/
+                $bandera = true;
             }
+            /*Retornar el resultado*/
+            return $bandera;
+        }
     
-            /*
-            Funcion para actualizar el uso
-            */
+        /*
+        Funcion para actualizar el envio
+        */
     
-            public function actualizar(){
-                //Construir la consulta
-                $consulta = "UPDATE envios SET departamento = '{$this -> getDepartamento()}', municipio = '{$this -> getMunicipio()}', codigoPostal = '{$this -> getCodigoPostal()}', barrio = '{$this -> getBarrio()}', direccion = '{$this -> getDireccion()}' 
-                    WHERE id = {$this -> getId()}";
-                //Ejecutar la consulta
-                $actualizado = $this -> db -> query($consulta);
-                //Crear bandera
-                $bandera = false;
-                //Comprobar si la consulta se realizo exitosamente
-                if($actualizado && mysqli_affected_rows($this -> db) > 0){
-                    $bandera = true;
-                }
-                //Retorno el resultado
-                return $bandera;
+        public function actualizar(){
+            /*Construir la consulta*/
+            $consulta = "UPDATE envios SET departamento = '{$this -> getDepartamento()}', municipio = '{$this -> getMunicipio()}', codigoPostal = '{$this -> getCodigoPostal()}', barrio = '{$this -> getBarrio()}', direccion = '{$this -> getDireccion()}' 
+                WHERE id = {$this -> getId()}";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $actualizado = $this -> db -> query($consulta);
+            /*Establecer una variable bandera*/
+            $bandera = false;
+            /*Comprobar si la consulta fue exitosa y el total de columnas afectadas se altero llamando la ejecucion de la consulta*/
+            if($actualizado && mysqli_affected_rows($this -> db) > 0){
+                /*Cambiar el estado de la variable bandera*/
+                $bandera = true;
             }
+            /*Retornar el resultado*/
+            return $bandera;
+        }
 
         /*
-        Funcion para obtener un uso
+        Funcion para obtener un envio
         */
 
         public function obtenerUno(){
-                //Construir la consulta
-                $consulta = "SELECT DISTINCT * FROM envios WHERE id = {$this -> getId()} AND activo = 1";
-                //Ejecutar la consulta
-                $uso = $this -> db -> query($consulta);
-                //Obtener resultado
-                $resultado = $uso -> fetch_object();
-                //Retornar el resultado
-                return $resultado;
-            }
+            /*Construir la consulta*/
+            $consulta = "SELECT DISTINCT * FROM envios WHERE id = {$this -> getId()} AND activo = 1";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $uso = $this -> db -> query($consulta);
+            /*Obtener el resultado*/
+            $resultado = $uso -> fetch_object();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
     }
 
 ?>

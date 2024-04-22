@@ -500,7 +500,7 @@
         */
 
         public function comprobarClaves($actual){
-            /*Instanciar objeto*/
+            /*instanciar el objeto*/
             $usuario = new Usuario();
             /*Capturar el correo del usuario ingresado*/
             $correo = $_SESSION['loginexitoso'] -> correo;

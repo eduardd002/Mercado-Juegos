@@ -243,7 +243,7 @@
         */
 
         public function verBloqueos(){
-            /*Instanciar objeto*/
+            /*instanciar el objeto*/
             $bloqueo = new Bloqueo();
             /*Ejecutar la consulta*/
             $listaBloqueos = $bloqueo -> obtenerListaBloqueos();
@@ -466,7 +466,7 @@
         */
         
         public function comprobarClaves($actual){
-            /*Instanciar objeto*/
+            /*instanciar el objeto*/
             $administrador = new Administrador();
             /*Capturar el correo del administrador ingresado*/
             $correo = $_SESSION['loginexitosoa'] -> correo;

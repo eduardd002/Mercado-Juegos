@@ -1,5 +1,9 @@
 <?php
 
+    /*
+    Clase modelo de pago
+    */
+
     class Pago{
 
         private $id;
@@ -9,137 +13,151 @@
         private $numero;
         private $db;
 
+        /*
+        Funcion constructor
+        */
+
         public function __construct(){
+            /*Llamar conexion a la base de datos*/
             $this -> db = BaseDeDatos::connect();
         }
 
+        /*
+        Funcion getter de id
+        */
+
         public function getId(){
+            /*Retornar el resultado*/
             return $this->id;
         }
 
+        /*
+        Funcion setter de id
+        */
+
         public function setId($id){
+            /*Llamar parametro*/
             $this->id = $id;
+            /*Retornar el resultado*/
             return $this;
         }
 
-        
-        /**
-         * Get the value of idMedioPago
-         */ 
-        public function getIdMedioPago()
-        {
-                return $this->idMedioPago;
+        /*
+        Funcion getter de activo
+        */
+
+        public function getActivo(){
+            /*Retornar el resultado*/
+            return $this->activo;
         }
 
-        
-        /**
-         * Get the value of numero
-         */ 
-        public function getNumero()
-        {
-                return $this->numero;
+        /*
+        Funcion setter de activo
+        */
+
+        public function setActivo($activo){
+            /*Llamar parametro*/
+            $this->activo = $activo;
+            /*Retornar el resultado*/
+            return $this;
         }
 
-        /**
-         * Set the value of numero
-         *
-         * @return  self
-         */ 
-        public function setNumero($numero)
-        {
-                $this->numero = $numero;
+        /*
+        Funcion getter de id medio pago
+        */
 
-                return $this;
+        public function getIdMedioPago(){
+            /*Retornar el resultado*/
+            return $this->idMedioPago;
         }
 
-        /**
-         * Set the value of idMedioPago
-         *
-         * @return  self
-         */ 
-        public function setIdMedioPago($idMedioPago)
-        {
-                $this->idMedioPago = $idMedioPago;
+        /*
+        Funcion setter de id medio pago
+        */
 
-                return $this;
+        public function setIdMedioPago($idMedioPago){
+            /*Llamar parametro*/
+            $this->idMedioPago = $idMedioPago;
+            /*Retornar el resultado*/
+            return $this;
         }
 
-        /**
-         * Get the value of idUsuario
-         */ 
-        public function getIdUsuario()
-        {
-                return $this->idUsuario;
+        /*
+        Funcion getter de numero
+        */
+
+        public function getNumero(){
+            /*Retornar el resultado*/
+            return $this->numero;
         }
 
-        /**
-         * Set the value of idUsuario
-         *
-         * @return  self
-         */ 
-        public function setIdUsuario($idUsuario)
-        {
-                $this->idUsuario = $idUsuario;
+        /*
+        Funcion setter de numero
+        */
 
-                return $this;
+        public function setNumero($numero){
+            /*Llamar parametro*/
+            $this->numero = $numero;
+            /*Retornar el resultado*/
+            return $this;
         }
 
-        /**
-         * Get the value of activo
-         */ 
-        public function getActivo()
-        {
-                return $this->activo;
+        /*
+        Funcion getter de id usuario
+        */
+
+        public function getIdUsuario(){
+            /*Retornar el resultado*/
+            return $this->idUsuario;
         }
 
-        /**
-         * Set the value of activo
-         *
-         * @return  self
-         */ 
-        public function setActivo($activo)
-        {
-                $this->activo = $activo;
+        /*
+        Funcion setter de id usuario
+        */
 
-                return $this;
+        public function setIdUsuario($idUsuario){
+            /*Llamar parametro*/
+            $this->idUsuario = $idUsuario;
+            /*Retornar el resultado*/
+            return $this;
         }
 
-                /*
+        /*
         Funcion para realizar el registro de la transaccion en la base de datos
         */
 
         public function guardar(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "INSERT INTO pagos VALUES(NULL, {$this -> getActivo()}, {$this -> getIdUsuario()}, {$this -> getIdMedioPago()}, 
                 '{$this -> getNUmero()}')";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $registro = $this -> db -> query($consulta);
-            //Establecer una variable bandera
+            /*Establecer una variable bandera*/
             $resultado = false;
-            //Comprobar el registro fue exitoso y el total de columnas afectadas se altero
+            /*Comprobar si la consulta fue exitosa*/
             if($registro){
-                //Cambiar el estado de la variable bandera
+                /*Cambiar el estado de la variable bandera*/
                 $resultado = true;
             }
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $resultado;
         }
 
         /*
-        Funcion para obtener un uso
+        Funcion para obtener un pago
         */
 
         public function obtenerUno(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "SELECT DISTINCT p.numero AS 'numeroPago', mp.nombre AS 'nombreMedioPago', p.id AS 'idMedioPago'
                 FROM Pagos p
                 INNER JOIN MediosPago mp ON p.idMedioPago = mp.id
                 WHERE p.id = {$this -> id} AND p.activo = 1";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $uso = $this -> db -> query($consulta);
-            //Obtener resultado
+            /*Obtener el resultado*/
             $resultado = $uso -> fetch_object();
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $resultado;
         }
 
@@ -148,17 +166,18 @@
         */
 
         public function eliminar(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "UPDATE pagos SET activo = 0 WHERE id = {$this -> getId()}";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $eliminado = $this -> db -> query($consulta);
-            //Crear bandera
+            /*Establecer una variable bandera*/
             $bandera = false;
-            //Comprobar si la consulta se realizo exitosamente
+            /*Comprobar si la consulta fue exitosa*/
             if($eliminado){
+                /*Cambiar el estado de la variable bandera*/
                 $bandera = true;
             }
-            //Retorno el resultado
+            /*Retornar el resultado*/
             return $bandera;
         }
 
@@ -167,20 +186,22 @@
         */
 
         public function actualizar(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "UPDATE pagos SET idMedioPago = '{$this -> getIdMedioPago()}', numero = '{$this -> getNumero()}' 
                 WHERE id = {$this -> getId()}";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $actualizado = $this -> db -> query($consulta);
-            //Crear bandera
+            /*Establecer una variable bandera*/
             $bandera = false;
-            //Comprobar si la consulta se realizo exitosamente
+            /*Comprobar si la consulta fue exitosa y el total de columnas afectadas se altero llamando la ejecucion de la consulta*/
             if($actualizado && mysqli_affected_rows($this -> db) > 0){
+                /*Cambiar el estado de la variable bandera*/
                 $bandera = true;
             }
-            //Retorno el resultado
+            /*Retornar el resultado*/
             return $bandera;
         }
+
     }
 
 ?>

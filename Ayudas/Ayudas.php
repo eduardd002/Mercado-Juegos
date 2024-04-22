@@ -431,7 +431,7 @@
         public static function obtenerUsuarioEnConcreto($id){
             /*Incluir el objeto de chat*/
             require_once 'Modelos/Usuario.php';
-            /*Instanciar objeto*/
+            /*instanciar el objeto*/
             $usuario = new Usuario();
             /*Construir objeto*/
             $usuario -> setId($id);
@@ -448,7 +448,7 @@
         public static function obtenerVideojuegoEnConcreto($id){
             /*Incluir el objeto de chat*/
             require_once 'Modelos/Videojuego.php';
-            /*Instanciar objeto*/
+            /*instanciar el objeto*/
             $videojuego = new Videojuego();
             /*Construir objeto*/
             $videojuego -> setId($id);

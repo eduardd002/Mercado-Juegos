@@ -11,7 +11,6 @@
         */
 
         public function crear(){
-
             //Incluir la vista
             require_once "Vistas/Estado/Crear.html";
         }
@@ -22,7 +21,6 @@
         */
 
         public function guardarEstado($nombre){
-
             //Instanciar el objeto
             $estado = new Estado();
             //Crear el objeto
@@ -45,21 +43,16 @@
         */
 
         public function guardar(){
-
             //Comprobar si los datos están llegando
             if(isset($_POST)){
-
                 //Comprobar si cada dato existe
                 $nombre = isset($_POST['nombreest']) ? $_POST['nombreest'] : false;
-
                 //Comprobar si todos los datos exsiten
                 if($nombre){
-                    
                     //Obtener el resultado
                     $guardado = $this -> guardarEstado($nombre);
                     //Comprobar se ejecutó con exito la consulta
                     if($guardado){
-
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('guardarestadoacierto', "El estado ha sido creado con exito", '?controller=AdministradorController&action=gestionarEstado');
                     }else{
@@ -81,7 +74,6 @@
         */
 
         public function eliminarEstado($idEstado){
-
             //Instanciar el objeto
             $estado = new Estado();
             //Crear objeto
@@ -100,19 +92,14 @@
             
             //Comprobar si los datos están llegando
             if(isset($_GET)){
-
                 //Comprobar si el dato existe
                 $idEstado = isset($_GET['id']) ? $_GET['id'] : false;
-
                 //Si el dato existe
                 if($idEstado){
-
                     //Obtener el resultado
                     $eliminado = $this -> eliminarEstado($idEstado);
-
                     //Comprobar si el estado ha sido eliminado con exito
                     if($eliminado){
-
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('eliminarestadoacierto', "El estado ha sido eliminado exitosamente", '?controller=AdministradorController&action=gestionarEstado');
                     }else{
@@ -131,7 +118,6 @@
         */
 
         public function editarEstado($idEstado){
-
             //Instanciar el objeto
             $estado = new Estado();
             //Creo el objeto y retornar el resultado
@@ -143,22 +129,16 @@
         */
 
         public function editar(){
-
             //Comprobar si los datos están llegando
             if(isset($_GET)){
-
                 //Comprobar si el dato existe
                 $idEstado = isset($_GET['id']) ? $_GET['id'] : false;
-
                 //Si el dato existe
                 if($idEstado){
-
                     //Obtener el resultado
                     $estado = $this -> editarEstado($idEstado);
-
                     //Obtener estado
                     $estadoUnico = $estado -> obtenerUno();
-
                     //Incluir la vista
                     require_once "Vistas/Estado/Actualizar.html";
 
@@ -171,7 +151,6 @@
         */
 
         public function actualizarEstado($idEstado, $nombre){
-
             //Instanciar el objeto
             $estado = new Estado();
             //Crear objeto
@@ -193,23 +172,17 @@
         */
 
         public function actualizar(){
-            
             //Comprobar si los datos están llegando
             if(isset($_GET) && isset($_POST)){
-
                 //Comprobar si los datos existe
                 $idEstado = isset($_GET['id']) ? $_GET['id'] : false;
                 $nombre = isset($_POST['nombreestact']) ? $_POST['nombreestact'] : false;
-
                 //Si el dato existe
                 if($idEstado){
-
                     //Obtener el resultado
                     $actualizado = $this -> actualizarEstado($idEstado, $nombre);
-
                     //Comprobar si el estado ha sido actualizado
                     if($actualizado){
-
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('actualizarestadoacierto', "El estado ha sido actualizado exitosamente", '?controller=AdministradorController&action=gestionarEstado');
                     }else{
@@ -222,6 +195,7 @@
                 }  
             }
         }
+
     }
 
 ?>

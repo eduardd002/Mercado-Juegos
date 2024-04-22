@@ -138,6 +138,7 @@
             while ($fila = $resultado->fetch_object()) {
                 /*Crear array con informacion del carrito*/
                 $informacionCarrito['carrito'] = array(
+                    /*Inicializar un array para almacenar los videojuegos del carrito*/
                     'videojuegos' => array()
                 );
                 /*Almacenar la información del videojuego en el array de carrito y videojuego*/

@@ -54,7 +54,7 @@
     }
     /*Comprobar si existe el controlador*/
     if(class_exists($nombre)){
-        /*Instanciar objeto*/
+        /*instanciar el objeto*/
         $controlador = new $nombre();
         /*Comprobar si llega la acción y si el metodo existe dentro del controlador*/
         if(isset($_GET['action']) && method_exists($controlador, $_GET['action'])){

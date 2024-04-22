@@ -117,7 +117,7 @@
         Funcion para obtener una uso
         */
 
-        public function obtenerUna(){
+        public function obtenerUno(){
             /*Construir la consulta*/
             $consulta = "SELECT DISTINCT * FROM usos WHERE id = {$this -> getId()} AND activo = 1";
             /*Llamar la funcion que ejecuta la consulta*/

@@ -1,5 +1,9 @@
 <?php
 
+    /*
+    Clase modelo de comentario usuario videojuego
+    */
+
     class ComentarioUsuarioVideojuego{
 
         private $id;
@@ -10,130 +14,191 @@
         private $fechaHora;
         private $db;
 
+        /*
+        Funcion constructor
+        */
+
         public function __construct(){
+            /*Llamar conexion a la base de datos*/
             $this -> db = BaseDeDatos::connect();
         }
 
+        /*
+        Funcion getter de id
+        */
+
         public function getId(){
+            /*Retornar el resultado*/
             return $this->id;
         }
 
+        /*
+        Funcion setter de id
+        */
+
         public function setId($id){
+            /*Llamar parametro*/
             $this->id = $id;
+            /*Retornar el resultado*/
             return $this;
         }
 
+        /*
+        Funcion getter de activo
+        */
+
         public function getActivo(){
+            /*Retornar el resultado*/
             return $this->activo;
         }
 
+        /*
+        Funcion setter de activo
+        */
+    
         public function setActivo($activo){
+            /*Llamar parametro*/
             $this->activo = $activo;
+            /*Retornar el resultado*/
             return $this;
         }
 
-        
-        /**
-         * Get the value of idUsuario
-         */ 
-        public function getIdUsuario()
-        {
-                return $this->idUsuario;
+        /*
+        Funcion getter de id usuario
+        */
+
+        public function getIdUsuario(){
+            /*Retornar el resultado*/
+            return $this->idUsuario;
         }
 
-        /**
-         * Set the value of idUsuario
-         *
-         * @return  self
-         */ 
-        public function setIdUsuario($idUsuario)
-        {
-                $this->idUsuario = $idUsuario;
+        /*
+        Funcion setter de id usuario
+        */
 
-                return $this;
+        public function setIdUsuario($idUsuario){
+            /*Llamar parametro*/
+            $this->idUsuario = $idUsuario;
+            /*Retornar el resultado*/
+            return $this;
         }
+
+        /*
+        Funcion getter de id videojuego
+        */
 
         public function getIdVideojuego(){
+            /*Retornar el resultado*/
             return $this->idVideojuego;
         }
 
+        /*
+        Funcion setter de id videojuego
+        */
+
         public function setIdVideojuego($idVideojuego){
+            /*Llamar parametro*/
             $this->idVideojuego = $idVideojuego;
+            /*Retornar el resultado*/
             return $this;
         }
 
-        public function getFechaHora()
-        {
-                return $this->fechaHora;
+        /*
+        Funcion getter de fecha hora
+        */
+
+        public function getFechaHora(){
+            /*Retornar el resultado*/
+            return $this->fechaHora;
         }
 
-        /**
-         * Set the value of fecha
-         *
-         * @return  self
-         */ 
-        public function setFechaHora($fechaHora)
-        {
-                $this->fechaHora = $fechaHora;
+        /*
+        Funcion setter de fecha hora
+        */
 
-                return $this;
+        public function setFechaHora($fechaHora){
+            /*Llamar parametro*/
+            $this->fechaHora = $fechaHora;
+            /*Retornar el resultado*/
+            return $this;
         }
+
+        /*
+        Funcion getter de contenido
+        */
 
         public function getContenido(){
+            /*Retornar el resultado*/
             return $this->contenido;
-       }
+        }
+
+        /*
+        Funcion setter de contenido
+        */
 
        public function setContenido($contenido){
+            /*Llamar parametro*/
             $this->contenido = $contenido;
+            /*Retornar el resultado*/
             return $this;
-       }
+        }
 
         /*
         Funcion para guardar la relacion entre videojuego y comentario en la base de datos
         */
 
         public function guardar(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "INSERT INTO comentariousuariovideojuego VALUES(NULL, {$this -> getActivo()}, {$this -> getIdUsuario()}, {$this -> getIdVideojuego()}, '{$this -> getContenido()}', '{$this -> getFechaHora()}')";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $registro = $this -> db -> query($consulta);
-            //Establecer una variable bandera
+            /*Establecer una variable bandera*/
             $resultado = false;
-            //Comprobar el registro fue exitoso y el total de columnas afectadas se altero
+            /*Comprobar si la consulta fue exitosa*/
             if($registro){
-                //Cambiar el estado de la variable bandera
+                /*Cambiar el estado de la variable bandera*/
                 $resultado = true;
             }
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $resultado;
         }
 
+        /*
+        Funcion para obtener los comentarios de cada videojuego
+        */
+
         public function obtenerComentariosDeVideojuego(){
+            /*Construir la consulta*/
             $consulta = "SELECT DISTINCT c.contenido AS 'contenidoComentario', u.nombre AS 'nombreComentador', u.foto AS 'fotoComentador', c.fechaHora AS 'fechaCreacionComentario', c.id AS 'idComentario'
-            FROM ComentarioUsuarioVideojuego c
-            INNER JOIN Usuarios u ON u.id = c.idUsuario
-            WHERE c.idVideojuego = {$this -> getIdVideojuego()} AND c.activo = 1";
-            //Ejecutar la consulta
+                FROM ComentarioUsuarioVideojuego c
+                INNER JOIN Usuarios u ON u.id = c.idUsuario
+                WHERE c.idVideojuego = {$this -> getIdVideojuego()} AND c.activo = 1";
+            /*Llamar la funcion que ejecuta la consulta*/
             $lista = $this -> db -> query($consulta);
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $lista;
         }
 
-        public function eliminar(){
+        /*
+        Funcion para eliminar un comentario
+        */
 
-            //Construir la consulta
+        public function eliminar(){
+            /*Construir la consulta*/
             $consulta = "UPDATE ComentarioUsuarioVideojuego SET activo = 0 WHERE id = {$this -> getId()}";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $eliminado = $this -> db -> query($consulta);
-            //Crear bandera
+            /*Establecer una variable bandera*/
             $bandera = false;
-            //Comprobar si la consulta se realizo exitosamente
+            /*Comprobar si la consulta fue exitosa*/
             if($eliminado){
+                /*Cambiar el estado de la variable bandera*/
                 $bandera = true;
             }
-            //Retorno el resultado
+            /*Retornar el resultado*/
             return $bandera;
         }
+        
     }
 
 ?>

@@ -1,5 +1,9 @@
 <?php
 
+    /*
+    Clase modelo de transaccion
+    */
+
     class Transaccion{
 
         private $id;
@@ -13,100 +17,194 @@
         private $fechaHora;
         private $db;
 
+        /*
+        Funcion constructor
+        */
+
         public function __construct(){
+            /*Llamar conexion a la base de datos*/  
             $this -> db = BaseDeDatos::connect();
-        }        
+        }
+
+        /*
+        Funcion getter de id
+        */
 
         public function getId(){
+            /*Retornar el resultado*/
             return $this->id;
         }
 
+        /*
+        Funcion setter de id
+        */
+
         public function setId($id){
+            /*Llamar parametro*/
             $this->id = $id;
+            /*Retornar el resultado*/
             return $this;
         }
 
+        /*
+        Funcion getter de numero factura
+        */
+
         public function getNumeroFactura(){
+            /*Retornar el resultado*/
             return $this->numeroFactura;
         }
 
+        /*
+        Funcion setter de numero factura
+        */
+
         public function setNumeroFactura($numeroFactura){
+            /*Llamar parametro*/
             $this->numeroFactura = $numeroFactura;
+            /*Retornar el resultado*/
             return $this;
         }
 
+        /*
+        Funcion getter de id comprador
+        */
+
         public function getIdComprador(){
+            /*Retornar el resultado*/
             return $this->idComprador;
         }
 
+        /*
+        Funcion setter de id comprador
+        */
+
         public function setIdComprador($idComprador){
+            /*Llamar parametro*/
             $this->idComprador = $idComprador;
+            /*Retornar el resultado*/
             return $this;
         }
 
+        /*
+        Funcion getter de id vendedor
+        */
+
         public function getIdVendedor(){
+            /*Retornar el resultado*/
             return $this->idVendedor;
         }
 
+        /*
+        Funcion setter de id vendedor
+        */
+
         public function setIdVendedor($idVendedor){
+            /*Llamar parametro*/
             $this->idVendedor = $idVendedor;
+            /*Retornar el resultado*/
             return $this;
         }
 
+        /*
+        Funcion getter de id pago
+        */
+
         public function getIdPago(){
+            /*Retornar el resultado*/
             return $this->idPago;
         }
 
+        /*
+        Funcion setter de id pago
+        */
+
         public function setIdPago($idPago){
+            /*Llamar parametro*/
             $this->idPago = $idPago;
+            /*Retornar el resultado*/
             return $this;
         }
 
+        /*
+        Funcion getter de id estado
+        */
+
         public function getIdEstado(){
+            /*Retornar el resultado*/
             return $this->idEstado;
         }
 
+        /*
+        Funcion setter de id estado
+        */
+
         public function setIdEstado($idEstado){
+            /*Llamar parametro*/
             $this->idEstado = $idEstado;
+            /*Retornar el resultado*/
             return $this;
         }
 
+        /*
+        Funcion getter de total
+        */
+
         public function getTotal(){
+            /*Retornar el resultado*/
             return $this->total;
         }
 
+        /*
+        Funcion setter de total
+        */
+
+
         public function setTotal($total){
+            /*Llamar parametro*/
             $this->total = $total;
+            /*Retornar el resultado*/
             return $this;
         }
 
+        /*
+        Funcion getter de fecha hora
+        */
+
         public function getFechaHora(){
+            /*Retornar el resultado*/
             return $this->fechaHora;
         }
 
+        /*
+        Funcion setter de fecha hora
+        */
+
         public function setFechaHora($fechaHora){
+            /*Llamar parametro*/
             $this->fechaHora = $fechaHora;
+            /*Retornar el resultado*/
             return $this;
         }
 
-                /**
-         * Get the value of idEnvio
-         */ 
-        public function getIdEnvio()
-        {
-                return $this->idEnvio;
+        /*
+        Funcion getter de id envio
+        */
+
+        public function getIdEnvio(){
+            /*Retornar el resultado*/
+            return $this->idEnvio;
         }
 
-        /**
-         * Set the value of idEnvio
-         *
-         * @return  self
-         */ 
-        public function setIdEnvio($idEnvio)
-        {
-                $this->idEnvio = $idEnvio;
+        /*
+        Funcion setter de id envio
+        */
 
-                return $this;
+        public function setIdEnvio($idEnvio){
+            /*Llamar parametro*/
+            $this->idEnvio = $idEnvio;
+            /*Retornar el resultado*/
+            return $this;
         }
 
         /*
@@ -114,20 +212,20 @@
         */
 
         public function guardar(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "INSERT INTO transacciones VALUES(NULL, {$this -> getNumeroFactura()}, {$this -> getIdComprador()}, 
                 {$this -> getIdVendedor()}, {$this -> getIdPago()}, {$this -> getIdEstado()}, {$this -> getIdEnvio()}, 
                 {$this -> getTotal()}, '{$this -> getFechaHora()}')";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $registro = $this -> db -> query($consulta);
-            //Establecer una variable bandera
+            /*Establecer una variable bandera*/
             $resultado = false;
-            //Comprobar el registro fue exitoso y el total de columnas afectadas se altero
+            /*Comprobar si la consulta fue exitosa*/
             if($registro){
-                //Cambiar el estado de la variable bandera
+                /*Cambiar el estado de la variable bandera*/
                 $resultado = true;
             }
-            //Retornar el resultado
+            /*Retornar el resultado*/
             return $resultado;
         }
 
@@ -136,11 +234,11 @@
         */
 
         public function obtenerVentas(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "SELECT DISTINCT * FROM transacciones WHERE idVendedor = {$this -> getIdVendedor()}";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $lista = $this -> db -> query($consulta);
-            //Retornar resultado
+            /*Retornar el resultado*/
             return $lista;
         }
 
@@ -149,11 +247,11 @@
         */
 
         public function obtenerCompras(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "SELECT DISTINCT * FROM transacciones WHERE idComprador = {$this -> getIdComprador()}";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $lista = $this -> db -> query($consulta);
-            //Retornar resultado
+            /*Retornar el resultado*/
             return $lista;
         }
 
@@ -162,46 +260,24 @@
         */
 
         public function traerUltimoIdTransaccion(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "SELECT DISTINCT id FROM transacciones ORDER BY id DESC LIMIT 1";
-            //Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
-            //Obtener ultimo id
+            /*Obtener el resultado*/
             $ultimo = $resultado -> fetch_object();
-            //Comprobar si existe un id, si es asi asignarle el valor, de lo contrario asignar un 0
-            if($ultimo == null){
-                $id = 0;
-            }else{
-                //Obtener ultimo resultado
-                $id = $ultimo -> id;
-            }
-            //Retornar resultado
+            /*Devolver resultado*/
+            $id = $ultimo -> id;
+            /*Retornar el resultado*/
             return $id;
         }
 
         /*
-        Funcion para obtener la ultima transaccion registrada
+        Funcion para obtener el detalle de la compra
         */
 
-        public function ultima(){
-            //Construir la consulta
-            $consulta = "SELECT DISTINCT id FROM transacciones ORDER BY id DESC LIMIT 1";
-            //Ejecutar la consulta
-            $resultado = $this -> db -> query($consulta);
-            //Obtener el resultado del objeto
-            $ultimo = $resultado -> fetch_object();
-            if($ultimo == null){
-                //Devolver resultado
-                $ultimaTransaccion = 0;
-            }else{
-                //Devolver resultado
-                $ultimaTransaccion = $ultimo -> id;
-            }
-            //Retornar el resultado
-            return $ultimaTransaccion;
-        }
-
         public function detalleCompra(){
+            /*Construir la consulta*/
             $consulta = "SELECT DISTINCT ve.nombre AS 'nombreVendedor', ve.apellido AS 'apellidoVendedor', ve.numeroTelefono AS 'telefonoVendedor', ve.correo AS 'correoVendedor', en.departamento AS 'departamentoEnvio', en.municipio AS 'municipioEnvio', en.codigoPostal AS 'codigoPostalEnvio', en.direccion AS 'direccionEnvio', en.barrio AS 'barrioEnvio', p.numero AS 'numero', t.total AS 'totalTransaccion', v.nombre AS 'nombreVideojuegoCompra', u.nombre AS 'usoVideojuegoCompra', c.nombre AS 'consolaVideojuegoCompra', v.precio AS 'precioVideojuegoCompra', t.numeroFactura AS 'factura', tv.unidades AS 'unidadesCompra', mp.nombre AS 'medioPagoNombre', te.nombre AS 'nombreEstado'
                 FROM TransaccionVideojuego tv
                 INNER JOIN Transacciones t ON t.id = tv.idTransaccion
@@ -214,38 +290,32 @@
                 INNER JOIN MediosPago mp ON mp.id = p.idMedioPago
                 INNER JOIN Envios en ON en.id = t.idEnvio
                 WHERE t.numeroFactura = {$this -> getNumeroFactura()}";
-        
-            // Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $resultados = $this->db->query($consulta);
-        
-            // Array para almacenar la información del usuario y sus videojuegos
+            /*Array para almacenar la información de la compra*/
             $informacionCompra = array();
-        
-            // Recorrer los resultados de la consulta
+            /*Mientras hayan compras disponibles para recorrer*/
             while ($fila = $resultados->fetch_object()) {
-                // Verificar si ya se ha almacenado la información del usuario
-                if (!isset($informacionCompra['compra'])) {
-                    // Si no se ha almacenado, almacenar la información del usuario
-                    $informacionCompra['compra'] = array(
-                        'factura' => $fila->factura,
-                        'nombreVendedor' => $fila->nombreVendedor,
-                        'apellidoVendedor' => $fila->apellidoVendedor,
-                        'telefonoVendedor' => $fila->telefonoVendedor,
-                        'correoVendedor' => $fila->correoVendedor,
-                        'departamentoEnvio' => $fila->departamentoEnvio,
-                        'municipioEnvio' => $fila->municipioEnvio,
-                        'codigoPostalEnvio' => $fila->codigoPostalEnvio,
-                        'direccionEnvio' => $fila->direccionEnvio,
-                        'barrioEnvio' => $fila->barrioEnvio,
-                        'nombreEstado' => $fila->nombreEstado,
-                        'numero' => $fila->numero,
-                        'medioPagoNombre'=>$fila->medioPagoNombre,
-                        'totalTransaccion' => $fila->totalTransaccion,
-                        'videojuegos' => array() // Inicializar un array para almacenar los videojuegos del usuario
-                    );
-                }
-        
-                // Almacenar la información del videojuego en el array de videojuegos del usuario
+                /*Crear array con informacion de la compra*/
+                $informacionCompra['compra'] = array(
+                    'factura' => $fila->factura,
+                    'nombreVendedor' => $fila->nombreVendedor,
+                    'apellidoVendedor' => $fila->apellidoVendedor,
+                    'telefonoVendedor' => $fila->telefonoVendedor,
+                    'correoVendedor' => $fila->correoVendedor,
+                    'departamentoEnvio' => $fila->departamentoEnvio,
+                    'municipioEnvio' => $fila->municipioEnvio,
+                    'codigoPostalEnvio' => $fila->codigoPostalEnvio,
+                    'direccionEnvio' => $fila->direccionEnvio,
+                    'barrioEnvio' => $fila->barrioEnvio,
+                    'nombreEstado' => $fila->nombreEstado,
+                    'numero' => $fila->numero,
+                    'medioPagoNombre'=>$fila->medioPagoNombre,
+                    'totalTransaccion' => $fila->totalTransaccion,
+                    /*Inicializar un array para almacenar los videojuegos de la compra*/
+                    'videojuegos' => array()
+                );
+                /*Almacenar la información del videojuego en el array de compra y videojuego*/
                 $informacionCompra['compra']['videojuegos'][] = array(
                     'nombreVideojuegoCompra' => $fila->nombreVideojuegoCompra,
                     'unidadesCompra' => $fila->unidadesCompra,
@@ -254,12 +324,16 @@
                     'precioVideojuegoCompra' => $fila->precioVideojuegoCompra
                 );
             }
-        
-            // Retornar la información del usuario y sus videojuegos
+            /*Retornar el resultado*/
             return $informacionCompra;
-        }   
+        }  
         
+        /*
+        Funcion para obtener el detalle de la venta
+        */
+
         public function detalleVenta(){
+            /*Construir la consulta*/
             $consulta = "SELECT DISTINCT co.nombre AS 'nombreComprador', co.apellido AS 'apellidoComprador', co.numeroTelefono AS 'telefonoComprador', co.correo AS 'correoComprador', en.departamento AS 'departamentoEnvio', en.municipio AS 'municipioEnvio', en.codigoPostal AS 'codigoPostalEnvio', en.direccion AS 'direccionEnvio', en.barrio AS 'barrioEnvio', p.numero AS 'numero', t.total AS 'totalTransaccion', v.foto AS 'imagenVideojuego', tv.unidades AS 'unidadesCompra', v.precio AS 'precioVideojuegoVenta', t.numeroFactura AS 'facturaVenta', t.id AS 'idTransaccion', mp.nombre AS 'medioPagoNombre', p.numero AS 'numeroPago', te.nombre AS 'nombreEstado'
                 FROM TransaccionVideojuego tv
                 INNER JOIN Transacciones t ON t.id = tv.idTransaccion
@@ -270,65 +344,64 @@
                 INNER JOIN Envios en ON en.id = t.idEnvio
                 INNER JOIN usuarios co ON t.idComprador = co.id
                 WHERE t.numeroFactura = {$this -> getNumeroFactura()}";
-        
-            // Ejecutar la consulta
+            /*Llamar la funcion que ejecuta la consulta*/
             $resultados = $this->db->query($consulta);
-        
-            // Array para almacenar la información del usuario y sus videojuegos
+            /*Array para almacenar la información de la compra*/
             $informacionVenta = array();
-        
-            // Recorrer los resultados de la consulta
+            /*Mientras hayan compras disponibles para recorrer*/
             while ($fila = $resultados->fetch_object()) {
-                // Verificar si ya se ha almacenado la información del usuario
-                if (!isset($informacionVenta['venta'])) {
-                    // Si no se ha almacenado, almacenar la información del usuario
-                    $informacionVenta['venta'] = array(
-                        'facturaVenta' => $fila->facturaVenta,
-                        'idTransaccion' => $fila->idTransaccion,
-                        'nombreComprador' => $fila->nombreComprador,
-                        'apellidoComprador' => $fila->apellidoComprador,
-                        'telefonoComprador' => $fila->telefonoComprador,
-                        'correoComprador' => $fila->correoComprador,
-                        'departamentoEnvio' => $fila->departamentoEnvio,
-                        'municipioEnvio' => $fila->municipioEnvio,
-                        'codigoPostalEnvio' => $fila->codigoPostalEnvio,
-                        'direccionEnvio' => $fila->direccionEnvio,
-                        'barrioEnvio' => $fila->barrioEnvio,
-                        'nombreEstado' => $fila->nombreEstado,
-                        'numeroPago' => $fila->numeroPago,
-                        'medioPagoNombre'=>$fila->medioPagoNombre,
-                        'totalTransaccion' => $fila->totalTransaccion,
-                        'videojuegos' => array() // Inicializar un array para almacenar los videojuegos del usuario
-                    );
-                }
-        
-                // Almacenar la información del videojuego en el array de videojuegos del usuario
+                /*Crear array con informacion de la compra*/
+                $informacionVenta['venta'] = array(
+                    'facturaVenta' => $fila->facturaVenta,
+                    'idTransaccion' => $fila->idTransaccion,
+                    'nombreComprador' => $fila->nombreComprador,
+                    'apellidoComprador' => $fila->apellidoComprador,
+                    'telefonoComprador' => $fila->telefonoComprador,
+                    'correoComprador' => $fila->correoComprador,
+                    'departamentoEnvio' => $fila->departamentoEnvio,
+                    'municipioEnvio' => $fila->municipioEnvio,
+                    'codigoPostalEnvio' => $fila->codigoPostalEnvio,
+                    'direccionEnvio' => $fila->direccionEnvio,
+                    'barrioEnvio' => $fila->barrioEnvio,
+                    'nombreEstado' => $fila->nombreEstado,
+                    'numeroPago' => $fila->numeroPago,
+                    'medioPagoNombre'=>$fila->medioPagoNombre,
+                    'totalTransaccion' => $fila->totalTransaccion,
+                    /*Inicializar un array para almacenar los videojuegos de la venta*/
+                    'videojuegos' => array()
+                );
+                /*Almacenar la información del videojuego en el array de venta y videojuego*/
                 $informacionVenta['venta']['videojuegos'][] = array(
                     'unidadesCompra' => $fila->unidadesCompra,
                     'imagenVideojuego' => $fila->imagenVideojuego,
                     'precioVideojuegoVenta' => $fila->precioVideojuegoVenta
                 );
             }
-        
-            // Retornar la información del usuario y sus videojuegos
+            /*Retornar el resultado*/
             return $informacionVenta;
         }   
 
+        /*
+        Funcion para cambiar el estado de la venta
+        */
+
         public function cambiarEstado(){
-            //Construir la consulta
+            /*Construir la consulta*/
             $consulta = "UPDATE transacciones SET idEstado = {$this -> getIdEstado()} 
-            WHERE id = {$this -> getId()}";
-            //Ejecutar la consulta
+                WHERE id = {$this -> getId()}";
+            /*Llamar la funcion que ejecuta la consulta*/
             $actualizado = $this -> db -> query($consulta);
-            //Crear bandera
+            /*Establecer una variable bandera*/
             $bandera = false;
-            //Comprobar si la consulta se realizo exitosamente
+            /*Comprobar si la consulta fue exitosa y el total de columnas afectadas se altero llamando la ejecucion de la consulta*/
             if($actualizado && mysqli_affected_rows($this -> db) > 0){
+                /*Cambiar el estado de la variable bandera*/
                 $bandera = true;
             }
-            //Retorno el resultado
+            /*Retornar el resultado*/
             return $bandera;
         }
+        
     }
 
 ?>

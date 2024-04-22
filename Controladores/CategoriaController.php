@@ -130,11 +130,11 @@
         Funcion para editar una categoria en la base de datos
         */
 
-        public function editarCategoria($idCategoria){
+        public function editarCategoria($id){
             /*Instanciar el objeto*/
             $categoria = new Categoria();
             /*Crear el objeto*/
-            $idCategoria = $categoria -> setId($idCategoria);
+            $idCategoria = $categoria -> setId($id);
             /*Retornar el resultado*/
             return $idCategoria;
         }

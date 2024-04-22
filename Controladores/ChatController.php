@@ -14,7 +14,7 @@
         */
 
         public function chats(){
-            /*Instanciar objeto*/
+            /*instanciar el objeto*/
             $usuarioChat = new UsuarioChat();
             /*Crear objeto*/
             $usuarioChat -> setActivo(1);
@@ -100,7 +100,7 @@
         */
 
         public function mensajes(){
-            /*Instanciar objeto*/
+            /*instanciar el objeto*/
             $usuarioChat = new UsuarioChat();
             /*Crear objeto*/
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
@@ -138,7 +138,7 @@
         */
 
         public function obtenerIdChat(){
-            /*Instanciar objeto*/
+            /*instanciar el objeto*/
             $usuarioChat = new UsuarioChat();
             /*Crear objeto*/
             $usuarioChat -> setActivo(1);

@@ -10,7 +10,6 @@
         */
 
         public function crear(){
-
             //Incluir la vista
             require_once "Vistas/Consola/Crear.html";
         }
@@ -20,7 +19,6 @@
         */
 
         public function guardarConsola($nombre){
-
             //Instanciar el objeto
             $consola = new Consola();
             //Crear el objeto
@@ -42,21 +40,16 @@
         */
 
         public function guardar(){
-
             //Comprobar si los datos están llegando
             if(isset($_POST)){
-
                 //Comprobar si cada dato existe
                 $nombre = isset($_POST['nombrecon']) ? $_POST['nombrecon'] : false;
-
                 //Comprobar si todos los datos exsiten
                 if($nombre){
-                    
                     //Obtener el resultado
                     $guardado = $this -> guardarConsola($nombre);
                     //Comprobar se ejecutó con exito la consulta
                     if($guardado){
-
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('guardarconsolaacierto', "La consola ha sido creada con exito", '?controller=AdministradorController&action=gestionarConsola');
                     }else{
@@ -78,7 +71,6 @@
         */
 
         public function eliminarConsola($idConsola){
-
             //Instanciar el objeto
             $consola = new Consola();
             //Crear objeto
@@ -94,22 +86,16 @@
         */
 
         public function eliminar(){
-            
             //Comprobar si los datos están llegando
             if(isset($_GET)){
-
                 //Comprobar si el dato existe
                 $idConsola = isset($_GET['id']) ? $_GET['id'] : false;
-
                 //Si el dato existe
                 if($idConsola){
-
                     //Obtener el resultado
                     $eliminado = $this -> eliminarConsola($idConsola);
-
                     //Comprobar si la consola ha sido eliminada con exito
                     if($eliminado){
-
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('eliminarconsolaacierto', "La consola ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarConsola');
                     }else{
@@ -128,7 +114,6 @@
         */
 
         public function editarConsola($idConsola){
-
             //Instanciar el objeto
             $consola = new Consola();
             //Creo el objeto y retornar el resultado
@@ -140,25 +125,18 @@
         */
 
         public function editar(){
-
             //Comprobar si los datos están llegando
             if(isset($_GET)){
-
                 //Comprobar si el dato existe
                 $idConsola = isset($_GET['id']) ? $_GET['id'] : false;
-
                 //Si el dato existe
                 if($idConsola){
-
                     //Obtener el resultado
                     $consola = $this -> editarConsola($idConsola);
-
                     //Obtener consola
                     $consolaUnica = $consola -> obtenerUna();
-
                     //Incluir la vista
                     require_once "Vistas/Consola/Actualizar.html";
-
                 }
             }
         }
@@ -168,7 +146,6 @@
         */
 
         public function actualizarConsola($idConsola, $nombre){
-
             //Instanciar el objeto
             $consola = new Consola();
             //Crear objeto
@@ -190,23 +167,17 @@
         */
 
         public function actualizar(){
-            
             //Comprobar si los datos están llegando
             if(isset($_GET) && isset($_POST)){
-
                 //Comprobar si los datos existe
                 $idConsola = isset($_GET['id']) ? $_GET['id'] : false;
                 $nombre = isset($_POST['nombreconsact']) ? $_POST['nombreconsact'] : false;
-
                 //Si el dato existe
                 if($idConsola){
-
                     //Obtener el resultado
                     $actualizado = $this -> actualizarConsola($idConsola, $nombre);
-
                     //Comprobar si la consola ha sido actualizada
                     if($actualizado){
-
                         //Crear la sesion y redirigir a la ruta pertinente
                         Ayudas::crearSesionYRedirigir('actualizarconsolaacierto', "La consola ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarConsola');
                     }else{
@@ -219,6 +190,7 @@
                 }  
             }
         }
+        
     }
 
 ?>

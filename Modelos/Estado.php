@@ -117,7 +117,7 @@
         Funcion para obtener una estado
         */
 
-        public function obtenerUna(){
+        public function obtenerUno(){
             /*Construir la consulta*/
             $consulta = "SELECT DISTINCT * FROM estados WHERE id = {$this -> getId()} AND activo = 1";
             /*Llamar la funcion que ejecuta la consulta*/
