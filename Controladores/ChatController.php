@@ -16,8 +16,7 @@
         public function chats(){
             /*instanciar el objeto*/
             $usuarioChat = new UsuarioChat();
-            /*Crear objeto*/
-            $usuarioChat -> setActivo(1);
+            /*Crear el objeto*/
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
             $usuarioChat -> setIdDestinatario($_SESSION['loginexitoso'] -> id);
             /*Traer lista de chats*/
@@ -34,7 +33,6 @@
             /*Instanciar mensaje*/
             $usuarioChat = new UsuarioChat();
             /*Contruir objeto*/
-            $usuarioChat -> setActivo(1);
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
             $usuarioChat -> setIdDestinatario($_SESSION['mensajechat']);
             $usuarioChat -> setIdChat($this -> obtenerIdChat());
@@ -102,7 +100,7 @@
         public function mensajes(){
             /*instanciar el objeto*/
             $usuarioChat = new UsuarioChat();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
             $usuarioChat -> setIdDestinatario($_SESSION['mensajechat']);
             /*Traer lista de mensajes*/
@@ -140,8 +138,7 @@
         public function obtenerIdChat(){
             /*instanciar el objeto*/
             $usuarioChat = new UsuarioChat();
-            /*Crear objeto*/
-            $usuarioChat -> setActivo(1);
+            /*Crear el objeto*/
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
             $usuarioChat -> setIdDestinatario($_SESSION['mensajechat']);
             /*Obtener resultado*/

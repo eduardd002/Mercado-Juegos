@@ -93,7 +93,7 @@
         public function eliminarEnvio($idEnvio){
             /*Instanciar el objeto*/
             $envio = new Envio();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $envio -> setId($idEnvio);
             /*Ejecutar la consulta*/
             $eliminado = $envio -> eliminar();
@@ -198,7 +198,7 @@
         public function actualizarEnvio($idEnvio, $departamento, $municipio, $codigoPostal, $barrio, $direccion){
             /*Instanciar el objeto*/
             $envio = new Envio();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $envio -> setId($idEnvio);
             $envio -> setDepartamento($departamento);
             $envio -> setMunicipio($municipio);

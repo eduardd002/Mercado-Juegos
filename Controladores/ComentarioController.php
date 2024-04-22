@@ -72,7 +72,7 @@
         public function eliminarComentario($idComentario){
             /*Instanciar el objeto*/
             $comentarioUsuarioVideojuego = new ComentarioUsuarioVideojuego();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $comentarioUsuarioVideojuego -> setId($idComentario);
             /*Ejecutar la consulta*/
             $eliminado = $comentarioUsuarioVideojuego -> eliminar();

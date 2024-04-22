@@ -405,7 +405,7 @@
         public function actualizarVideojuego($id, $precio, $stock){
             /*Instanciar el objeto*/
             $videojuego = new Videojuego();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $videojuego -> setId($id);
             $videojuego -> setPrecio($precio);
             $videojuego -> setStock($stock);
@@ -458,7 +458,7 @@
         public function eliminarVideojuego($idVideojuego){
             /*Instanciar el objeto*/
             $videojuego = new Videojuego();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $videojuego -> setId($idVideojuego);
             /*Ejecutar la consulta*/
             $eliminado = $videojuego -> eliminar();

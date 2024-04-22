@@ -84,7 +84,7 @@
         public function eliminarCategoria($idCategoria){
             /*Instanciar el objeto*/
             $categoria = new Categoria();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $categoria -> setId($idCategoria);
             /*Ejecutar la consulta*/
             $eliminado = $categoria -> eliminar();
@@ -189,10 +189,10 @@
         public function actualizarCategoria($idCategoria, $nombre){
             /*Instanciar el objeto*/
             $categoria = new Categoria();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $categoria -> setId($idCategoria);
             $categoria -> setNombre($nombre);
-            /*Intentar actualizar la categoria*/
+            /*Intentar actualizar la categoria en la base de datos*/
             try{
                 /*Ejecutar la consulta*/
                 $actualizado = $categoria -> actualizar();

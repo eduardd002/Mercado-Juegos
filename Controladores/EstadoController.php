@@ -26,7 +26,7 @@
             //Crear el objeto
             $estado -> setActivo(1);
             $estado -> setNombre($nombre);
-            //Ejecutar la consulta
+            /*Intentar guardar el estado en la base de datos*/
             try{
                 //Ejecutar la consulta
                 $guardado = $estado -> guardar();
@@ -156,6 +156,7 @@
             //Crear objeto
             $estado -> setId($idEstado);
             $estado -> setNombre($nombre);
+            /*Intentar actualizar el estado en la base de datos*/
             try{
                 //Ejecutar la consulta
                 $actualizado = $estado -> actualizar();

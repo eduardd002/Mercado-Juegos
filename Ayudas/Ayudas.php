@@ -125,7 +125,7 @@
                 require_once 'Modelos/Usuario.php';
                 /*Instanciar el objeto*/
                 $usuario = new Usuario();
-                /*Crear objeto*/
+                /*Crear el objeto*/
                 $usuario -> setId($_SESSION['loginexitoso'] -> id);
                 /*Listar todos los usuarios desde la base de datos*/
                 $datos = $usuario -> obtenerUno();
@@ -145,7 +145,7 @@
                 require_once 'Modelos/Administrador.php';
                 /*Instanciar el objeto*/
                 $administrador = new Administrador();
-                /*Crear objeto*/
+                /*Crear el objeto*/
                 $administrador -> setId($_SESSION['loginexitosoa'] -> id);
                 /*Listar todos los usuarios desde la base de datos*/
                 $datos = $administrador -> obtenerUno();

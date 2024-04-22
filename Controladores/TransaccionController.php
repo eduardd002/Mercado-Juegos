@@ -40,7 +40,7 @@
         public function editarEstado($id, $estado){
             /*Instanciar el objeto*/
             $transaccion = new Transaccion();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $transaccion -> setId($id);
             $transaccion -> setIdEstado($estado);
             /*Ejecutar la consulta*/
@@ -228,7 +228,7 @@
             /*Instanciar el objeto*/
             $transaccion = new Transaccion();
             /*Obtener id del ultimo videojuego registrado*/
-            $id = $transaccion -> ultima();
+            $id = $transaccion -> traerUltimoIdTransaccion();
             /*Retornar resultado*/
             return $id;
         }
@@ -277,7 +277,7 @@
             $lista = $this -> listarCarritos();
             /*instanciar el objeto*/
             $transaccion = new Transaccion();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $transaccion -> setNumeroFactura($factura + 1000);
             $transaccion -> setIdComprador($_SESSION['loginexitoso'] -> id);
             $transaccion -> setIdEstado(1);
@@ -285,12 +285,12 @@
             foreach($idVideojuego as $videojuego){
                 /*Llamar la funcion que trae el dueño del videojuego*/
                 $vendedor = $this -> traerDuenioDeVideojuego($videojuego);
-                /*Crear objeto*/
+                /*Crear el objeto*/
                 $transaccion -> setIdVendedor($vendedor);
             }
             /*Obtener total de la transaccion*/
             $total = $lista['totalCarrito']['totalCarrito'];
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $transaccion -> setTotal($total);
             $transaccion -> setIdPago($idPago);
             $transaccion -> setIdEnvio($idEnvio);
@@ -308,7 +308,7 @@
         public function guardarTransaccionVideojuegoUnico($factura, $idVideojuego, $unidadesCompra, $idPago, $idEnvio){
             /*instanciar el objeto*/
             $transaccion = new Transaccion();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $transaccion -> setNumeroFactura($factura + 1000);
             $transaccion -> setIdComprador($_SESSION['loginexitoso'] -> id);
             $transaccion -> setIdEstado(1);
@@ -316,13 +316,13 @@
             $videojuegoUnico = Ayudas::obtenerVideojuegoEnConcreto($idVideojuego);
             /*Llamar la funcion que obtiene un videojuego en concreto*/
             $vendedor = $this -> traerDuenioDeVideojuego($idVideojuego);
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $transaccion -> setIdVendedor($vendedor);
             /*Obtener el precio del videojuego*/
             $precio = $videojuegoUnico['videojuego']['precioVideojuego'];
             /*Obtener el total de la transaccion*/
             $total = $unidadesCompra * $precio;
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $transaccion -> setTotal($total);
             $transaccion -> setIdPago($idPago);
             $transaccion -> setIdEnvio($idEnvio);
@@ -456,7 +456,6 @@
             /*Instanciar el objeto*/
             $usuarioChat = new UsuarioChat;
             /*Crear el objeto*/
-            $usuarioChat -> setActivo(1);
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
             $usuarioChat -> setIdDestinatario($destinatario);
             $usuarioChat -> setIdChat($this -> obtenerUltimoChat());

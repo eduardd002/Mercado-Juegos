@@ -172,7 +172,7 @@
         public function eliminarUsuario($idUsuario){
             /*Instanciar el objeto*/
             $usuario = new Usuario();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $usuario -> setId($idUsuario);
             /*Ejecutar la consulta*/
             $eliminado = $usuario -> eliminar();
@@ -223,7 +223,7 @@
         public function actualizarUsuario($id, $nombre, $apellidos, $telefono, $email, $departamento, $municipio, $foto){
             /*Instanciar el objeto*/
             $usuario = new Usuario();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $usuario -> setId($id);
             $usuario -> setNombre($nombre);
             $usuario -> setApellido($apellidos);
@@ -522,7 +522,7 @@
         public function actualizarNuevaClave($clave){
             /*Instanciar el objeto*/
             $usuario = new Usuario();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $usuario -> setId($_SESSION['loginexitoso'] -> id);
             $usuario -> setClave($clave);
             /*Ejecutar la consulta*/

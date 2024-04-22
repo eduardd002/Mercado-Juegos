@@ -209,7 +209,7 @@
         public function actualizarPago($idPago, $medioPago, $numero){
             /*Instanciar el objeto*/
             $pago = new Pago();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $pago -> setId($idPago);
             $pago -> setIdMedioPago($medioPago);
             $pago -> setNumero($numero);

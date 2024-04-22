@@ -194,7 +194,7 @@
         public function eliminarAdministrador($idAdmin){
             /*Instanciar el objeto*/
             $administrador = new Administrador();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $administrador -> setId($idAdmin);
             /*Ejecutar la consulta*/
             $eliminado = $administrador -> eliminar();
@@ -336,7 +336,7 @@
         public function eliminarUsuarioDesdeAdministrador($idUsu){
             /*Instanciar el objeto*/
             $usuario = new Usuario();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $usuario -> setId($idUsu);
             /*Ejecutar la consulta*/
             $eliminado = $usuario -> eliminar();
@@ -385,7 +385,7 @@
         public function actualizarAdministrador($id, $nombre, $apellidos, $email, $telefono, $foto){
             /*Instanciar el objeto*/
             $administrador = new Administrador();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $administrador -> setId($id);
             $administrador -> setNombre($nombre);
             $administrador -> setApellido($apellidos);
@@ -488,7 +488,7 @@
         public function actualizarNuevaClave($clave){
             /*Instanciar el objeto*/
             $administrador = new Administrador();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $administrador -> setId($_SESSION['loginexitosoa'] -> id);
             $administrador -> setClave($clave);
             /*Ejecutar la consulta*/

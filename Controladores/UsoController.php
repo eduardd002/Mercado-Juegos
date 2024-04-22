@@ -84,7 +84,7 @@
         public function eliminarUso($idUso){
             /*Instanciar el objeto*/
             $uso = new Uso();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $uso -> setId($idUso);
             /*Ejecutar la consulta*/
             $eliminado = $uso -> eliminar();
@@ -189,7 +189,7 @@
         public function actualizarUso($idUso, $nombre){
             /*Instanciar el objeto*/
             $uso = new Uso();
-            /*Crear objeto*/
+            /*Crear el objeto*/
             $uso -> setId($idUso);
             $uso -> setNombre($nombre);
             /*Intentar actualizar el uso*/
