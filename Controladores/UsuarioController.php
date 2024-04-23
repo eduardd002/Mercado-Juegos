@@ -185,7 +185,7 @@
         */
 
         public function eliminar(){
-            /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_GET)){
                 /*Comprobar si el dato existe*/
                 $idUsuario = isset($_GET['id']) ? $_GET['id'] : false;
@@ -367,9 +367,9 @@
         */
 
         public function perfil(){
-            /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_GET)){
-                /*Comprobar si los datos existe*/
+                /*Comprobar si el dato existe*/
                 $idVendedor = isset($_GET['idVendedor']) ? $_GET['idVendedor'] : false;
                 /*Si el dato existe*/
                 if($idVendedor){

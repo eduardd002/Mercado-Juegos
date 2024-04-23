@@ -59,7 +59,7 @@
             $videojuego -> setId($id);
             /*Traer videojuego en concreto*/
             $videojuegoEspecifico = $videojuego -> traerUno();
-            /*Retornar resultado*/
+            /*Retornar el resultado*/
             return $videojuegoEspecifico;
         }
 
@@ -265,7 +265,7 @@
             $videojuego = new Videojuego();
             /*Obtener id del ultimo videojuego registrado*/
             $id = $videojuego -> ultimo();
-            /*Retornar resultado*/
+            /*Retornar el resultado*/
             return $id;
         }
 
@@ -367,7 +367,7 @@
         */
 
         public function editar(){
-            /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_GET)){
                 /*Comprobar si el dato existe*/
                 $idVideojuego = isset($_GET['id']) ? $_GET['id'] : false;
@@ -471,7 +471,7 @@
         */
 
         public function eliminar(){
-            /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_GET)){
                 /*Comprobar si el dato existe*/
                 $idVideojuego = isset($_GET['id']) ? $_GET['id'] : false;
@@ -549,9 +549,9 @@
         */
 
         public function filtro(){
-            /*Comprobar si el dato está llegando*/
+            /*Comprobar si los datos estan llegando*/
             if(isset($_POST)){
-                /*Comprobar si el dato existe*/
+                /*Comprobar si los datos existen*/
                 $consola = isset($_POST['consolavid']) ? $_POST['consolavid'] : false;
                 $uso = isset($_POST['usovid']) ? $_POST['usovid'] : false;
                 $categoria = isset($_POST['categoriavid']) ? $_POST['categoriavid'] : false;

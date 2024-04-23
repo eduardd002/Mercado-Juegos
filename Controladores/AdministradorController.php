@@ -207,7 +207,7 @@
         */
 
         public function eliminar(){
-            /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_GET)){
                 /*Comprobar si el dato existe*/
                 $idAdmin = isset($_GET['id']) ? $_GET['id'] : false;
@@ -349,7 +349,7 @@
         */
 
         public function eliminarUsuario(){
-            /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_GET)){
                 /*Comprobar si el dato existe*/
                 $idUsuario = isset($_GET['id']) ? $_GET['id'] : false;

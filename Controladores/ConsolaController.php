@@ -48,7 +48,7 @@
         */
 
         public function guardar(){
-            /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_POST)){
                 /*Comprobar si el dato existe*/
                 $nombre = isset($_POST['nombrecon']) ? $_POST['nombrecon'] : false;
@@ -97,7 +97,7 @@
         */
 
         public function eliminar(){
-            /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_GET)){
                 /*Comprobar si el dato existe*/
                 $idConsola = isset($_GET['id']) ? $_GET['id'] : false;
@@ -144,7 +144,7 @@
         */
 
         public function editar(){
-            /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_GET)){
                 /*Comprobar si el dato existe*/
                 $idConsola = isset($_GET['id']) ? $_GET['id'] : false;
@@ -217,7 +217,7 @@
                 /*Comprobar si los datos existen*/
                 $idConsola = isset($_GET['id']) ? $_GET['id'] : false;
                 $nombre = isset($_POST['nombreconsact']) ? $_POST['nombreconsact'] : false;
-                /*Si el dato existe*/
+                /*Si los datos existen*/
                 if($idConsola){
                     /*Llamar la funcion de actualizar consola*/
                     $actualizado = $this -> actualizarConsola($idConsola, $nombre);

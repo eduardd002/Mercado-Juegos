@@ -48,7 +48,7 @@
         */
 
         public function guardar(){
-            /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_POST)){
                 /*Comprobar si el dato existe*/
                 $nombre = isset($_POST['nombreuso']) ? $_POST['nombreuso'] : false;
@@ -88,7 +88,7 @@
             $uso -> setId($idUso);
             /*Ejecutar la consulta*/
             $eliminado = $uso -> eliminar();
-            /*Retornar resultado*/
+            /*Retornar el resultado*/
             return $eliminado;
         }
 
@@ -97,7 +97,7 @@
         */
 
         public function eliminar(){
-           /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_GET)){
                 /*Comprobar si el dato existe*/
                 $idUso = isset($_GET['id']) ? $_GET['id'] : false;
@@ -144,7 +144,7 @@
         */
 
         public function editar(){
-            /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_GET)){
                 /*Comprobar si el dato existe*/
                 $idUso = isset($_GET['id']) ? $_GET['id'] : false;
@@ -217,7 +217,7 @@
                 /*Comprobar si los datos existen*/
                 $idUso = isset($_GET['id']) ? $_GET['id'] : false;
                 $nombre = isset($_POST['nombreusoact']) ? $_POST['nombreusoact'] : false;
-                /*Si el dato existe*/
+                /*Si los datos existen*/
                 if($idUso){
                     /*Llamar la funcion de actualizar uso*/
                     $actualizado = $this -> actualizarUso($idUso, $nombre);

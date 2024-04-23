@@ -97,7 +97,7 @@
             $envio -> setId($idEnvio);
             /*Ejecutar la consulta*/
             $eliminado = $envio -> eliminar();
-            /*Retornar resultado*/
+            /*Retornar el resultado*/
             return $eliminado;
         }
 
@@ -106,7 +106,7 @@
         */
 
         public function eliminar(){
-            /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_GET)){
                 /*Comprobar si el dato existe*/
                 $idEnvio = isset($_GET['id']) ? $_GET['id'] : false;
@@ -153,7 +153,7 @@
         */
 
         public function editar(){
-            /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_GET)){
                 /*Comprobar si el dato existe*/
                 $idEnvio = isset($_GET['id']) ? $_GET['id'] : false;

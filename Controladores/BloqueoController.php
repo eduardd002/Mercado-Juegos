@@ -29,7 +29,7 @@
         */
 
         public function bloquear(){
-            /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_GET)){
                 /*Obtener dato*/
                 $idUsuarioABloquear = $_GET['aBloquear'];
@@ -72,7 +72,7 @@
         */
 
         public function desbloquear(){
-            /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_GET)){
                 /*Obtener dato*/
                 $idUsuarioADesbloquear = $_GET['usuarioBloqueo'];

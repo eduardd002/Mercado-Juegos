@@ -48,7 +48,7 @@
         */
 
         public function guardar(){
-            /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_POST)){
                 /*Comprobar si el dato existe*/
                 $nombre = isset($_POST['nombrecat']) ? $_POST['nombrecat'] : false;
@@ -88,7 +88,7 @@
             $categoria -> setId($idCategoria);
             /*Ejecutar la consulta*/
             $eliminado = $categoria -> eliminar();
-            /*Retornar resultado*/
+            /*Retornar el resultado*/
             return $eliminado;
         }
 
@@ -97,7 +97,7 @@
         */
 
         public function eliminar(){
-            /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_GET)){
                 /*Comprobar si el dato existe*/
                 $idCategoria = isset($_GET['id']) ? $_GET['id'] : false;
@@ -144,7 +144,7 @@
         */
 
         public function editar(){
-            /*Comprobar si los datos están llegando*/
+            /*Comprobar si el dato esta llegando*/
             if(isset($_GET)){
                 /*Comprobar si el dato existe*/
                 $idCategoria = isset($_GET['id']) ? $_GET['id'] : false;
@@ -217,7 +217,7 @@
                 /*Comprobar si los datos existen*/
                 $idCategoria = isset($_GET['id']) ? $_GET['id'] : false;
                 $nombre = isset($_POST['nombrecatact']) ? $_POST['nombrecatact'] : false;
-                /*Si el dato existe*/
+                /*Si los datos existen*/
                 if($idCategoria){
                     /*Llamar la funcion de actualizar categoria*/
                     $actualizado = $this -> actualizarCategoria($idCategoria, $nombre);

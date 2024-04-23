@@ -437,7 +437,7 @@
             $usuario -> setId($id);
             /*Obtener resultado*/
             $usuarioObtenido = $usuario -> obtenerUno();
-            /*Retornar resultado*/
+            /*Retornar el resultado*/
             return $usuarioObtenido;
         }
 
@@ -454,7 +454,7 @@
             $videojuego -> setId($id);
             /*Obtener resultado*/
             $videojuegoObtenido = $videojuego -> traerUno();
-            /*Retornar resultado*/
+            /*Retornar el resultado*/
             return $videojuegoObtenido;
         }
         

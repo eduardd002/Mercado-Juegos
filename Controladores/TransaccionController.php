@@ -229,7 +229,7 @@
             $transaccion = new Transaccion();
             /*Obtener id del ultimo videojuego registrado*/
             $id = $transaccion -> traerUltimoIdTransaccion();
-            /*Retornar resultado*/
+            /*Retornar el resultado*/
             return $id;
         }
 
@@ -361,7 +361,7 @@
             $pago -> setId($id);
             /*Obtener resultado*/
             $pagoUnico = $pago -> obtenerUno();
-            /*Retornar resultado*/
+            /*Retornar el resultado*/
             return $pagoUnico;
         }
 
@@ -376,7 +376,7 @@
             $envio -> setId($id);
             /*Obtener resultado*/
             $envioUnico = $envio -> obtenerUno();
-            /*Retornar resultado*/
+            /*Retornar el resultado*/
             return $envioUnico;
         }
 

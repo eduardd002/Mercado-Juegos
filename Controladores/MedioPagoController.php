@@ -1,7 +1,11 @@
 <?php
 
-    //Incluir el objeto de medio de pago
+    /*Incluir el objeto de medio de pago*/
     require_once 'Modelos/MedioPago.php';
+
+    /*
+    Clase controlador de medio de pago
+    */
 
     class MedioPagoController{
 
@@ -10,7 +14,7 @@
         */
 
         public function crear(){
-            //Incluir la vista
+            /*Incluir la vista*/
             require_once "Vistas/MedioPago/Crear.html";
         }
 
@@ -19,19 +23,23 @@
         */
 
         public function guardarMedioPago($nombre){
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $medioPago = new MedioPago();
-            //Crear el objeto
+            /*Crear el objeto*/
             $medioPago -> setActivo(1);
             $medioPago -> setNombre($nombre);
+            /*Intentar guardar el medio de pago en la base de datos*/
             try{
-                //Ejecutar la consulta
+                /*Ejecutar la consulta*/
                 $guardado = $medioPago -> guardar();
+            /*Capturar la excepcion*/ 
             }catch(mysqli_sql_exception $excepcion){
-                //Crear la sesion y redirigir a la ruta pertinente
+                /*Crear la sesion y redirigir a la ruta pertinente*/
                 Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "Este nombre de medio de pago ya existe", '?controller=MedioPagoController&action=crear');
+                /*Cortar la ejecucion*/
                 die();
             }
+            /*Retornar el resultado*/
             return $guardado;
         }
 
@@ -40,28 +48,31 @@
         */
 
         public function guardar(){
-            //Comprobar si los datos están llegando
+            /*Comprobar si el dato esta llegando*/
             if(isset($_POST)){
-                //Comprobar si cada dato existe
+                /*Comprobar si el dato existe*/
                 $nombre = isset($_POST['nombretar']) ? $_POST['nombretar'] : false;
-                //Comprobar si todos los datos exsiten
+                /*Si el dato existe*/
                 if($nombre){
-                    //Obtener el resultado
+                    /*Llamar la funcion de guardar medio de pago*/
                     $guardado = $this -> guardarMedioPago($nombre);
-                    //Comprobar se ejecutó con exito la consulta
+                    /*Comprobar se ejecutó con exito la consulta*/
                     if($guardado){
-                        //Crear la sesion y redirigir a la ruta pertinente
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('guardarmediopagoacierto', "El medio de pago ha sido creado con exito", '?controller=AdministradorController&action=gestionarMedioPago');
+                    /*De lo contrario*/
                     }else{
-                        //Crear la sesion y redirigir a la ruta pertinente
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "El medio de pago no ha sido creado con exito", '?controller=CategoriaController&action=crear');
                     }
+                /*De lo contrario*/
                 }else{
-                    //Crear la sesion y redirigir a la ruta pertinente
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
                     Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "Ha ocurrido un error al guardar el medio de pago", '?controller=CategoriaController&action=crear');
                 }
+            /*De lo contrario*/
             }else{
-                //Crear la sesion y redirigir a la ruta pertinente
+                /*Crear la sesion y redirigir a la ruta pertinente*/
                 Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "Ha ocurrido un error al guardar el medio de pago", '?controller=CategoriaController&action=crear');
             }
         }
@@ -71,13 +82,13 @@
         */
 
         public function eliminarMedioPago($idMedioPago){
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $medioPago = new MedioPago();
-            //Crear objeto
+            /*Crear el objeto*/
             $medioPago -> setId($idMedioPago);
-            //Ejecutar la consulta
+            /*Ejecutar la consulta*/
             $eliminado = $medioPago -> eliminar();
-            //Retornar resultado
+            /*Retornar el resultado*/
             return $eliminado;
         }
 
@@ -86,26 +97,32 @@
         */
 
         public function eliminar(){
-            //Comprobar si los datos están llegando
+            /*Comprobar si el dato esta llegando*/
             if(isset($_GET)){
-                //Comprobar si el dato existe
+                /*Comprobar si el dato existe*/
                 $idMedioPago = isset($_GET['id']) ? $_GET['id'] : false;
-                //Si el dato existe
+                /*Si el dato existe*/
                 if($idMedioPago){
-                    //Obtener el resultado
+                    /*Llamar la funcion que elimina el medio de pago*/
                     $eliminado = $this -> eliminarMedioPago($idMedioPago);
-                    //Comprobar si el medio de pago ha sido eliminada con exito
+                    /*Comprobar si el medio de pago ha sido eliminado con exito*/
                     if($eliminado){
-                        //Crear la sesion y redirigir a la ruta pertinente
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('eliminarmediopagoacierto', "el medio de pago ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarMedioPago');
+                    /*De lo contrario*/
                     }else{
-                        //Crear la sesion y redirigir a la ruta pertinente
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('eliminarmediopagoerror', "el medio de pago no ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarMedioPago');
                     }
+                /*De lo contrario*/
                 }else{
-                    //Crear la sesion y redirigir a la ruta pertinente
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
                     Ayudas::crearSesionYRedirigir('eliminarmediopagoerror', "Ha ocurrido un error al eliminar el medio de pago", '?controller=AdministradorController&action=gestionarMedioPago'); 
                 } 
+            /*De lo contrario*/    
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
             }
         }
 
@@ -113,11 +130,13 @@
         Funcion para editar un medio de pago en la base de datos
         */
 
-        public function editarMedioPago($idMedioPago){
-            //Instanciar el objeto
+        public function editarMedioPago($id){
+            /*Instanciar el objeto*/
             $medioPago = new MedioPago();
-            //Creo el objeto y retornar el resultado
-            return $medioPago -> setId($idMedioPago);
+            /*Crear el objeto*/
+            $idMedioPago = $medioPago -> setId($id);
+            /*Retornar el resultado*/
+            return $idMedioPago;
         }
 
         /*
@@ -125,19 +144,41 @@
         */
 
         public function editar(){
-            //Comprobar si los datos están llegando
+            /*Comprobar si el dato esta llegando*/
             if(isset($_GET)){
-                //Comprobar si el dato existe
+                /*Comprobar si el dato existe*/
                 $idMedioPago = isset($_GET['id']) ? $_GET['id'] : false;
-                //Si el dato existe
+                /*Si el dato existe*/
                 if($idMedioPago){
-                    //Obtener el resultado
+                    /*Llamar la funcion de editar medio de pago*/
                     $medioPago = $this -> editarMedioPago($idMedioPago);
-                    //Obtener medio de pago
-                    $medioPagoUnico = $medioPago -> obtenerUna();
-                    //Incluir la vista
-                    require_once "Vistas/MedioPago/Actualizar.html";
+                    /*Comprobar si el medio de pago ha sido editado*/
+                    if($medioPago){
+                        /*Llamar la funcion para obtener un medio de pago en concreto*/
+                        $medioPagoUnico = $medioPago -> obtenerUna();
+                        /*Comprobar si el medio de pago ha sido obtenido*/
+                        if($medioPago){
+                            /*Incluir la vista*/
+                            require_once "Vistas/MedioPago/Actualizar.html";
+                        /*De lo contrario*/    
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+                        }
+                    /*De lo contrario*/    
+                    }else{
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+                    }
+                /*De lo contrario*/    
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
                 }
+            /*De lo contrario*/    
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
             }
         }
 
@@ -146,19 +187,23 @@
         */
 
         public function actualizarMedioPago($idMedioPago, $nombre){
-            //Instanciar el objeto
+            /*Instanciar el objeto*/
             $medioPago = new MedioPago();
-            //Crear objeto
+            /*Crear el objeto*/
             $medioPago -> setId($idMedioPago);
             $medioPago -> setNombre($nombre);
+            /*Intentar actualizar el medio de pago en la base de datos*/
             try{
-                //Ejecutar la consulta
+                /*Ejecutar la consulta*/
                 $actualizado = $medioPago -> actualizar();
+            /*Capturar la excepcion*/
             }catch(mysqli_sql_exception $excepcion){
-                //Crear la sesion y redirigir a la ruta pertinente
+                /*Crear la sesion y redirigir a la ruta pertinente*/
                 Ayudas::crearSesionYRedirigir('actualizarmediopagoerror', "Este nombre de medio de pago ya existe", '?controller=MedioPagoController&action=editar&id='.$idMedioPago);
+                /*Cortar la ejecucion*/                
                 die();
             }
+            /*Retornar el resultado*/
             return $actualizado;
         }
 
@@ -167,30 +212,36 @@
         */
 
         public function actualizar(){
-            //Comprobar si los datos están llegando
+            /*Comprobar si los datos están llegando*/
             if(isset($_GET) && isset($_POST)){
-                //Comprobar si los datos existe
+                /*Comprobar si los datos existen*/
                 $idMedioPago = isset($_GET['id']) ? $_GET['id'] : false;
                 $nombre = isset($_POST['nombretaract']) ? $_POST['nombretaract'] : false;
-                //Si el dato existe
+                /*Si los datos existen*/           
                 if($idMedioPago){
-                    //Obtener el resultado
+                    /*Llamar la funcion de actualizar el medio de pago*/
                     $actualizado = $this -> actualizarMedioPago($idMedioPago, $nombre);
-                    //Comprobar si el medio de pago ha sido actualizada
+                    /*Comprobar si el medio de pago ha sido actualizado*/
                     if($actualizado){
-                        //Crear la sesion y redirigir a la ruta pertinente
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('actualizarmediopagoacierto', "el medio de pago ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarMedioPago');
+                    /*De lo contrario*/
                     }else{
-                        //Crear la sesion y redirigir a la ruta pertinente
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('actualizarmediopagosugerencia', "Introduce nuevos datos", '?controller=MedioPagoController&action=editar&id='.$idMedioPago);
                     }
+                /*De lo contrario*/
                 }else{
-                    //Crear la sesion y redirigir a la ruta pertinente
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
                     Ayudas::crearSesionYRedirigir('actualizarmediopagoerror', "Ha ocurrido un error al actualizar el medio de pago", '?controller=MedioPagoController&action=editar&id='.$idMedioPago);
                 }  
+            /*De lo contrario*/    
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
             }
         }
-        
+
     }
 
 ?>
