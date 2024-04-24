@@ -29,6 +29,56 @@
         }
 
         /*
+        Funcion para eliminar un videojuego
+        */
+
+        public function eliminarVideojuego($idUsuario, $idVideojuego){
+            /*Instanciar el objeto*/
+            $carrito = new Carrito();
+            /*Crear el objeto*/
+            $carrito -> setIdUsuario($idUsuario);
+            /*Ejecutar la consulta*/
+            $eliminado = $carrito -> eliminarVideojuego($idVideojuego);
+            /*Retornar el resultado*/
+            return $eliminado;
+        }
+
+        /*
+        Funcion para eliminar un usuario desde el administrador
+        */
+
+        public function eliminarVideojuegoCarrito(){
+            /*Comprobar si los datos estan llegando*/
+            if(isset($_GET)){
+                /*Comprobar si los datos existen*/
+                $idVideojuego = isset($_GET['idVideojuego']) ? $_GET['idVideojuego'] : false;
+                $idUsuario = $_SESSION['loginexitoso'] -> id;
+                /*Si los datos existen*/
+                if($idVideojuego && $idUsuario){
+                    /*Llamar la funcion que elimina el videojuego*/
+                    $eliminado = $this -> eliminarVideojuego($idUsuario, $idVideojuego);
+                    /*Comprobar si el videojuego ha sido eliminado*/
+                    if($eliminado){
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('eliminarvideojuegoacierto', "El videojuego ha sido eliminado exitosamente", '?controller=CarritoController&action=ver');
+                    /*De lo contrario*/    
+                    }else{
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('eliminarvideojuegoerror', "El videojuego no ha sido eliminado exitosamente", '?controller=CarritoController&action=ver');
+                    }
+                /*De lo contrario*/     
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir('eliminarvideojuegoerror', "Ha ocurrido un error al eliminar el videojuego", '?controller=CarritoController&action=ver');
+                }
+            /*De lo contrario*/       
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+            }
+        }
+
+        /*
         Funcion para guardar el carrito en la base de datos
         */
 

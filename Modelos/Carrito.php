@@ -118,6 +118,28 @@
         }
 
         /*
+        Funcion para eliminar un videojuego del carrito
+        */
+
+        public function eliminarVideojuego($idVideojuego){
+            /*Construir la consulta*/
+            $consulta = "UPDATE carritovideojuego
+                SET activo = 0 WHERE idCarrito IN (SELECT id FROM carritos WHERE idUsuario = {$this -> getIdUsuario()})
+                AND idVideojuego = $idVideojuego";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $eliminado = $this -> db -> query($consulta);
+            /*Establecer una variable bandera*/
+            $bandera = false;
+            /*Comprobar si la consulta fue exitosa*/
+            if($eliminado){
+                /*Cambiar el estado de la variable bandera*/                
+                $bandera = true;
+            }
+            /*Retornar el resultado*/
+            return $bandera;
+        }
+
+        /*
         Funcion para listar los videojuegos del carrito
         */
 
@@ -127,7 +149,7 @@
                 FROM CarritoVideojuego cv
                 INNER JOIN carritos c ON cv.idCarrito = c.id
                 INNER JOIN videojuegos v ON v.id = cv.idVideojuego
-                WHERE c.idUsuario = {$this -> getIdUsuario()}";
+                WHERE c.idUsuario = {$this -> getIdUsuario()} AND cv.activo = 1";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
             /*Array para almacenar la información del carrito*/
@@ -136,11 +158,14 @@
             $total = 0;
             /*Mientras hayan videojuegos en el carrito disponibles para recorrer*/
             while ($fila = $resultado->fetch_object()) {
-                /*Crear array con informacion del carrito*/
-                $informacionCarrito['carrito'] = array(
-                    /*Inicializar un array para almacenar los videojuegos del carrito*/
-                    'videojuegos' => array()
-                );
+                /*Comprobar si no existe la informacion del carrito*/
+                if (!isset($informacionCarrito['carrito'])) {
+                    /*Crear array con informacion del carrito*/
+                        $informacionCarrito['carrito'] = array(
+                        /*Inicializar un array para almacenar los videojuegos del carrito*/
+                        'videojuegos' => array()
+                    );
+                }
                 /*Almacenar la información del videojuego en el array de carrito y videojuego*/
                 $informacionCarrito['carrito']['videojuegos'][] = array(
                     'idVideojuegoCarrito' => $fila->idVideojuegoCarrito,

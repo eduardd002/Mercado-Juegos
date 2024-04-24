@@ -1,7 +1,14 @@
 <div id="contenidoCentral">
-    
+
+    <?php if(isset($_SESSION['eliminarvideojuegoacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['eliminarvideojuegoacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('eliminarvideojuegoacierto'); ?>
+
     <?php if(count($listadoCarritos) == 0) : ?>
-        <h1>No Hay Ningun Videojuego Favorito</h1>
+        <h1>No Hay Ningun Videojuego Agregado Al Carrito</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
         <div id="carrito">
@@ -24,6 +31,7 @@
                                 <?=$videojuego['unidadesCarrito']?>
                             <a href="" class="buttonAumentarCarrito">+</a>
                         </td>
+                        <td><a href="<?=rutaInicio?><?=carrito?><?=eliminarVideojuegoCarrito?>&idVideojuego=<?=$videojuego['idVideojuegoCarrito']?>" class="button button-eliminarVideojuego">Eliminar</a></td>
                     </tr>
                 <?php endforeach; ?>
             </table>

@@ -7,7 +7,6 @@
     class Favorito{
 
         private $id;
-        private $activo;
         private $idUsuario;
         private $db;
 
@@ -41,26 +40,6 @@
         }
 
         /*
-        Funcion getter de activo
-        */
-
-        public function getActivo(){
-            /*Retornar el resultado*/
-            return $this->activo;
-        }
-
-        /*
-        Funcion setter de activo
-        */
-
-        public function setActivo($activo){
-            /*Llamar parametro*/
-            $this->activo = $activo;
-            /*Retornar el resultado*/
-            return $this;
-        }
-
-        /*
         Funcion getter de id usuario
         */
 
@@ -86,7 +65,7 @@
 
         public function guardar(){
             /*Construir consulta*/
-            $consulta = "INSERT INTO favoritos VALUES(NULL, {$this -> getActivo()}, {$this -> getIdUsuario()})";
+            $consulta = "INSERT INTO favoritos VALUES(NULL, {$this -> getIdUsuario()})";
             /*Llamar la funcion que ejecuta la consulta*/
             $guardado = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/
@@ -94,6 +73,28 @@
             /*Comprobar si la consulta fue exitosa y el total de columnas afectadas se altero llamando la ejecucion de la consulta*/
             if($guardado && mysqli_affected_rows($this -> db) > 0){
                 /*Cambiar el estado de la variable bandera*/
+                $bandera = true;
+            }
+            /*Retornar el resultado*/
+            return $bandera;
+        }
+
+        /*
+        Funcion para eliminar un videojuego del carrito
+        */
+
+        public function eliminarVideojuego($idVideojuego){
+            /*Construir la consulta*/
+            $consulta = "UPDATE videojuegofavorito
+                SET activo = 0 WHERE idFavorito IN (SELECT id FROM favoritos WHERE idUsuario = {$this -> getIdUsuario()})
+                AND idVideojuego = $idVideojuego";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $eliminado = $this -> db -> query($consulta);
+            /*Establecer una variable bandera*/
+            $bandera = false;
+            /*Comprobar si la consulta fue exitosa*/
+            if($eliminado){
+                /*Cambiar el estado de la variable bandera*/                
                 $bandera = true;
             }
             /*Retornar el resultado*/
@@ -123,11 +124,11 @@
 
         public function listar(){
             /*Construir la consulta*/
-            $consulta = "SELECT DISTINCT v.nombre AS 'nombreVideojuego', v.foto AS 'imagenVideojuego', v.precio AS 'precioVideojuego'
+            $consulta = "SELECT DISTINCT v.id AS 'idVideojuego', v.nombre AS 'nombreVideojuego', v.foto AS 'imagenVideojuego', v.precio AS 'precioVideojuego'
                 FROM videojuegofavorito vf
                 INNER JOIN favoritos f ON vf.idFavorito = f.id
                 INNER JOIN videojuegos v ON v.id = vf.idVideojuego
-                WHERE f.idUsuario = {$this -> getIdUsuario()}";
+                WHERE f.idUsuario = {$this -> getIdUsuario()} AND vf.activo = 1";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
             /*Retornar el resultado*/

@@ -49,6 +49,7 @@
     define("carrito", "/?controller=CarritoController");
     define("verCarrito", "&action=ver");
     define("guardarCarrito", "&action=guardar");
+    define("eliminarVideojuegoCarrito", "&action=eliminarVideojuegoCarrito");
     define("eliminarCarrito", "&action=eliminar");
 
     /*Ruta para favorito*/
@@ -56,6 +57,7 @@
     define("favorito", "/?controller=FavoritoController");
     define("verFavorito", "&action=ver");
     define("guardarFavorito", "&action=guardar");
+    define("eliminarFavorito", "&action=eliminarFavorito");
 
     /*Ruta para transaccion*/
 

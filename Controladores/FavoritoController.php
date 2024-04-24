@@ -36,12 +36,61 @@
             /*Instanciar el objeto*/
             $favorito = new Favorito();
             /*Crear el objeto*/
-            $favorito -> setActivo(1);
             $favorito -> setIdUsuario($_SESSION['loginexitoso'] -> id);
             /*Guardar en la base de datos*/
             $guardado = $favorito -> guardar();
             /*Retornar el resultado*/
             return $guardado;
+        }
+
+        /*
+        Funcion para eliminar un videojuego
+        */
+
+        public function eliminarVideojuego($idUsuario, $idVideojuego){
+            /*Instanciar el objeto*/
+            $favorito = new Favorito();
+            /*Crear el objeto*/
+            $favorito -> setIdUsuario($idUsuario);
+            /*Ejecutar la consulta*/
+            $eliminado = $favorito -> eliminarVideojuego($idVideojuego);
+            /*Retornar el resultado*/
+            return $eliminado;
+        }
+
+        /*
+        Funcion para eliminar un usuario desde el administrador
+        */
+
+        public function eliminarFavorito(){
+            /*Comprobar si los datos estan llegando*/
+            if(isset($_GET)){
+                /*Comprobar si los datos existen*/
+                $idVideojuego = isset($_GET['idVideojuego']) ? $_GET['idVideojuego'] : false;
+                $idUsuario = $_SESSION['loginexitoso'] -> id;
+                /*Si los datos existen*/
+                if($idVideojuego && $idUsuario){
+                    /*Llamar la funcion que elimina el videojuego*/
+                    $eliminado = $this -> eliminarVideojuego($idUsuario, $idVideojuego);
+                    /*Comprobar si el videojuego ha sido eliminado*/
+                    if($eliminado){
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('eliminarvideojuegoacierto', "El videojuego ha sido eliminado exitosamente", '?controller=FavoritoController&action=ver');
+                    /*De lo contrario*/    
+                    }else{
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('eliminarvideojuegoerror', "El videojuego no ha sido eliminado exitosamente", '?controller=FavoritoController&action=ver');
+                    }
+                /*De lo contrario*/     
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir('eliminarvideojuegoerror', "Ha ocurrido un error al eliminar el videojuego", '?controller=FavoritoController&action=ver');
+                }
+            /*De lo contrario*/       
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+            }
         }
 
         /*
