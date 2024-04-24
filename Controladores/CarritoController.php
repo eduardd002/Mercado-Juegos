@@ -34,17 +34,17 @@
 
         public function eliminarVideojuego($idUsuario, $idVideojuego){
             /*Instanciar el objeto*/
-            $carrito = new Carrito();
+            $carritoVideojuego = new CarritoVideojuego();
             /*Crear el objeto*/
-            $carrito -> setIdUsuario($idUsuario);
+            $carritoVideojuego -> setIdVideojuego($idVideojuego);
             /*Ejecutar la consulta*/
-            $eliminado = $carrito -> eliminarVideojuego($idVideojuego);
+            $eliminado = $carritoVideojuego -> eliminarVideojuego($idUsuario);
             /*Retornar el resultado*/
             return $eliminado;
         }
 
         /*
-        Funcion para eliminar un usuario desde el administrador
+        Funcion para eliminar un videojuego del carrito
         */
 
         public function eliminarVideojuegoCarrito(){
@@ -70,6 +70,55 @@
                 }else{
                     /*Crear la sesion y redirigir a la ruta pertinente*/
                     Ayudas::crearSesionYRedirigir('eliminarvideojuegoerror', "Ha ocurrido un error al eliminar el videojuego", '?controller=CarritoController&action=ver');
+                }
+            /*De lo contrario*/       
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+            }
+        }
+
+        /*
+        Funcion para eliminar el carrito
+        */
+
+        public function eliminarCarritoCompleto($idUsuario){
+            /*Instanciar el objeto*/
+            $carrito = new Carrito();
+            /*Crear el objeto*/
+            $carrito -> setIdUsuario($idUsuario);
+            /*Ejecutar la consulta*/
+            $eliminado = $carrito -> eliminarCarrito();
+            /*Retornar el resultado*/
+            return $eliminado;
+        }
+
+        /*
+        Funcion para eliminar el carrito completo
+        */
+
+        public function eliminarCarrito(){
+            /*Comprobar si el dato esta llegando*/
+            if(isset($_GET)){
+                /*Comprobar si el dato existe*/
+                $idUsuario = $_SESSION['loginexitoso'] -> id;
+                /*Si el dato existe*/
+                if($idUsuario){
+                    /*Llamar la funcion que elimina el videojuego*/
+                    $eliminado = $this -> eliminarCarritoCompleto($idUsuario);
+                    /*Comprobar si el videojuego ha sido eliminado*/
+                    if($eliminado){
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('eliminarcarritoacierto', "El carrito ha sido eliminado exitosamente", '?controller=VideojuegoController&action=inicio');
+                    /*De lo contrario*/    
+                    }else{
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('eliminarcarritoerror', "El carrito no ha sido eliminado exitosamente", '?controller=CarritoController&action=ver');
+                    }
+                /*De lo contrario*/     
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir('eliminarcarritoerror', "Ha ocurrido un error al eliminar el carrito", '?controller=CarritoController&action=ver');
                 }
             /*De lo contrario*/       
             }else{
@@ -187,9 +236,6 @@
                 /*Crear la sesion y redirigir a la ruta pertinente*/
                 Ayudas::crearSesionYRedirigir('guardarcarritoerror', "Ha ocurrido un error al guardar el carrito", "?controller=CarritoController&action=ver");
             }
-        }
-
-        public function eliminar(){
         }
 
     }

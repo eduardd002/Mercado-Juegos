@@ -505,10 +505,27 @@
         }
 
         /*
+        Funcion para eliminar el carrito
+        */
+
+        public function eliminarCarritoCompleto($idUsuario){
+            /*Instanciar el objeto*/
+            $carrito = new Carrito();
+            /*Crear el objeto*/
+            $carrito -> setIdUsuario($idUsuario);
+            /*Ejecutar la consulta*/
+            $eliminado = $carrito -> eliminarCarrito();
+            /*Retornar el resultado*/
+            return $eliminado;
+        }
+
+        /*
         Funcion para realizar la transaccion del carrito
         */
 
         public function realizarTransaccionCarrito($idVideojuego, $unidades, $opcionCarrito, $factura, $pago, $envio){
+            /*Obtener el id del usuario logueado*/
+            $idUsuario = $_SESSION['loginexitoso'] -> id;
             /*Llamar la funcion que lista los videojuegos del carrito*/
             $lista = $this -> listarCarritos();
             /*Obtener la cantidad de videojuegos que hay en el carrito*/
@@ -527,6 +544,8 @@
                     if($guardadoTransaccionVideojuego){
                         /*Llamar la funcion que actualiza el stock del videojuego*/
                         $this -> actualizarStock($idVideojuego[$i], $unidades[$i]);
+                        /*Llamar funcion que elimina el carrito*/
+                        $this -> eliminarCarritoCompleto($idUsuario);
                         /*Llamar la funcion para guardar el chat*/
                         $guardadoChat = $this -> guardarChat();
                         /*Comprobar si el chat ha sido guardado con exito*/

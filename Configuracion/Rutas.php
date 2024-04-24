@@ -50,7 +50,7 @@
     define("verCarrito", "&action=ver");
     define("guardarCarrito", "&action=guardar");
     define("eliminarVideojuegoCarrito", "&action=eliminarVideojuegoCarrito");
-    define("eliminarCarrito", "&action=eliminar");
+    define("eliminarCarrito", "&action=eliminarCarrito");
 
     /*Ruta para favorito*/
 

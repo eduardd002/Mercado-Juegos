@@ -135,6 +135,28 @@
             return $resultado;
         }
 
+        /*
+        Funcion para eliminar un videojuego del carrito
+        */
+
+        public function eliminarVideojuego($idUsuario){
+            /*Construir la consulta*/
+            $consulta = "UPDATE videojuegofavorito
+                SET activo = 0 WHERE idFavorito IN (SELECT id FROM favoritos WHERE idUsuario = $idUsuario)
+                AND idVideojuego = {$this -> getIdVideojuego()}";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $eliminado = $this -> db -> query($consulta);
+            /*Establecer una variable bandera*/
+            $bandera = false;
+            /*Comprobar si la consulta fue exitosa*/
+            if($eliminado){
+                /*Cambiar el estado de la variable bandera*/                
+                $bandera = true;
+            }
+            /*Retornar el resultado*/
+            return $bandera;
+        }
+
     }
 
 ?>

@@ -49,11 +49,11 @@
 
         public function eliminarVideojuego($idUsuario, $idVideojuego){
             /*Instanciar el objeto*/
-            $favorito = new Favorito();
+            $favoritoVideojuego = new FavoritoVideojuego();
             /*Crear el objeto*/
-            $favorito -> setIdUsuario($idUsuario);
+            $favoritoVideojuego -> setIdVideojuego($idVideojuego);
             /*Ejecutar la consulta*/
-            $eliminado = $favorito -> eliminarVideojuego($idVideojuego);
+            $eliminado = $favoritoVideojuego -> eliminarVideojuego($idUsuario);
             /*Retornar el resultado*/
             return $eliminado;
         }

@@ -87,6 +87,13 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('verCompraError'); ?>
 
+    <?php if(isset($_SESSION['eliminarcarritoacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['eliminarcarritoacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('eliminarcarritoacierto'); ?>
+
     <?php if(mysqli_num_rows($listadoTodos) == 0) : ?>
         <h1>No Hay Ningun Videojuego</h1>
         <hr>  

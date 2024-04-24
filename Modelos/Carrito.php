@@ -118,14 +118,13 @@
         }
 
         /*
-        Funcion para eliminar un videojuego del carrito
+        Funcion para eliminar el carrito
         */
 
-        public function eliminarVideojuego($idVideojuego){
+        public function eliminarCarrito(){
             /*Construir la consulta*/
-            $consulta = "UPDATE carritovideojuego
-                SET activo = 0 WHERE idCarrito IN (SELECT id FROM carritos WHERE idUsuario = {$this -> getIdUsuario()})
-                AND idVideojuego = $idVideojuego";
+            $consulta = "UPDATE carritos
+                SET activo = 0 WHERE idUsuario = {$this -> getIdUsuario()}";
             /*Llamar la funcion que ejecuta la consulta*/
             $eliminado = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/
@@ -149,7 +148,7 @@
                 FROM CarritoVideojuego cv
                 INNER JOIN carritos c ON cv.idCarrito = c.id
                 INNER JOIN videojuegos v ON v.id = cv.idVideojuego
-                WHERE c.idUsuario = {$this -> getIdUsuario()} AND cv.activo = 1";
+                WHERE c.idUsuario = {$this -> getIdUsuario()} AND cv.activo = 1 AND c.activo = 1";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
             /*Array para almacenar la información del carrito*/
