@@ -44,6 +44,21 @@
         }
 
         /*
+        Funcion para comprobar si el uso ya ha sido creado previamente
+        */
+
+        public function comprobarUnicoUso($nombre){
+            /*Instanciar el objeto*/
+            $uso = new Uso();
+            /*Crear el objeto*/
+            $uso -> setNombre($nombre);
+            /*Ejecutar la consulta*/
+            $resultado = $uso -> comprobarUsoUnico();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para guardar un uso
         */
 
@@ -54,16 +69,31 @@
                 $nombre = isset($_POST['nombreuso']) ? $_POST['nombreuso'] : false;
                 /*Si el dato existe*/
                 if($nombre){
-                    /*Llamar la funcion de guardar uso*/
-                    $guardado = $this -> guardarUso($nombre);
-                    /*Crear la sesion y redirigir a la ruta pertinente*/
-                    if($guardado){
+                    /*Llamar funcion que comprueba si el uso ya ha sido registrado*/
+                    $unico = $this -> comprobarUnicoUso($nombre);
+                    /*Comprobar si el nombre del uso no existe*/
+                    if($unico == null){
+                        /*Llamar la funcion de guardar uso*/
+                        $guardado = $this -> guardarUso($nombre);
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('guardarusoacierto', "El uso ha sido creado con exito", '?controller=AdministradorController&action=gestionarUso');
+                        if($guardado){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarusoacierto', "El uso ha sido creado con exito", '?controller=AdministradorController&action=gestionarUso');
+                        /*De lo contrario*/    
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarusoerror', "El uso no ha sido creado con exito", '?controller=UsoController&action=crear');
+                        }
+                    /*Comprobar si el uso existe y esta activo*/    
+                    }elseif($unico == 1){
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('guardarusoerror', "Este uso ya se encuentra registrado", '?controller=UsoController&action=crear');
+                    /*Comprobar si el uso existe y no esta activo*/    
+                    }elseif($unico == 2){
                     /*De lo contrario*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('guardarusoerror', "El uso no ha sido creado con exito", '?controller=UsoController&action=crear');
+                        Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
                     }
                 /*De lo contrario*/    
                 }else{

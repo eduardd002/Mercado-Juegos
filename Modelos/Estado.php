@@ -169,6 +169,21 @@
             return $bandera;
         }
 
+        /*
+        Funcion para comprobar si ya se ha creado el estado con anterioridad
+        */
+
+        public function comprobarEstadoUnico(){
+            /*Construir la consulta*/
+            $consulta = "SELECT activo FROM estados WHERE nombre = '{$this -> getNombre()}'";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $estado = $this -> db -> query($consulta);
+            /*Obtener el resultado*/
+            $resultado = $estado -> fetch_object();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
     }
 
 ?>

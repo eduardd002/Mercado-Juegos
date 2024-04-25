@@ -44,6 +44,21 @@
         }
 
         /*
+        Funcion para comprobar si el estado ya ha sido creado previamente
+        */
+
+        public function comprobarUnicoEstado($nombre){
+            /*Instanciar el objeto*/
+            $estado = new Estado();
+            /*Crear el objeto*/
+            $estado -> setNombre($nombre);
+            /*Ejecutar la consulta*/
+            $resultado = $estado -> comprobarEstadoUnico();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para guardar un estado
         */
 
@@ -54,16 +69,31 @@
                 $nombre = isset($_POST['nombreest']) ? $_POST['nombreest'] : false;
                 /*Si el dato existe*/
                 if($nombre){
-                    /*Llamar la funcion de guardar estado*/
-                    $guardado = $this -> guardarEstado($nombre);
-                    /*Comprobar se ejecutó con exito la consulta*/
-                    if($guardado){
+                    /*Llamar funcion que comprueba si el estado ya ha sido registrado*/
+                    $unico = $this -> comprobarUnicoEstado($nombre);
+                    /*Comprobar si el nombre del estado no existe*/
+                    if($unico == null){
+                        /*Llamar la funcion de guardar estado*/
+                        $guardado = $this -> guardarEstado($nombre);
+                        /*Comprobar se ejecutó con exito la consulta*/
+                        if($guardado){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarestadoacierto', "El estado ha sido creado con exito", '?controller=AdministradorController&action=gestionarEstado');
+                        /*De lo contrario*/  
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarestadoerror', "El estado no ha sido creado con exito", '?controller=EstadoController&action=crear');
+                        }
+                    /*Comprobar si el estado existe y esta activo*/    
+                    }elseif($unico == 1){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('guardarestadoacierto', "El estado ha sido creado con exito", '?controller=AdministradorController&action=gestionarEstado');
-                    /*De lo contrario*/  
+                        Ayudas::crearSesionYRedirigir('guardarestadoerror', "Este estado ya se encuentra registrado", '?controller=EstadoController&action=crear');
+                    /*Comprobar si el estado existe y no esta activo*/    
+                    }elseif($unico == 2){
+                    /*De lo contrario*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('guardarestadoerror', "La consola no ha sido creado con exito", '?controller=EstadoController&action=crear');
+                        Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
                     }
                 /*De lo contrario*/  
                 }else{

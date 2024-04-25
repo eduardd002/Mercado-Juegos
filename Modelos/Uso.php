@@ -169,6 +169,21 @@
             return $bandera;
         }
 
+        /*
+        Funcion para comprobar si ya se ha creado el uso con anterioridad
+        */
+
+        public function comprobarUsoUnico(){
+            /*Construir la consulta*/
+            $consulta = "SELECT activo FROM usos WHERE nombre = '{$this -> getNombre()}'";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $uso = $this -> db -> query($consulta);
+            /*Obtener el resultado*/
+            $resultado = $uso -> fetch_object();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
     }
 
 ?>

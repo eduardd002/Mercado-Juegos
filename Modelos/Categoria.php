@@ -169,6 +169,21 @@
             return $bandera;
         }
 
+        /*
+        Funcion para comprobar si ya se ha creado la categoria con anterioridad
+        */
+
+        public function comprobarCategoriaUnica(){
+            /*Construir la consulta*/
+            $consulta = "SELECT activo FROM categorias WHERE nombre = '{$this -> getNombre()}'";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $categoria = $this -> db -> query($consulta);
+            /*Obtener el resultado*/
+            $resultado = $categoria -> fetch_object();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
     }
 
 ?>

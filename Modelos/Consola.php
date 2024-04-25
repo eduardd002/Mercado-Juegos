@@ -169,6 +169,21 @@
             return $bandera;
         }
 
+        /*
+        Funcion para comprobar si ya se ha creado la consola con anterioridad
+        */
+
+        public function comprobarConsolaUnica(){
+            /*Construir la consulta*/
+            $consulta = "SELECT activo FROM consolas WHERE nombre = '{$this -> getNombre()}'";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $consola = $this -> db -> query($consulta);
+            /*Obtener el resultado*/
+            $resultado = $consola -> fetch_object();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
     }
 
 ?>

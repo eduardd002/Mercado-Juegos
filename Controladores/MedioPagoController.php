@@ -44,6 +44,21 @@
         }
 
         /*
+        Funcion para comprobar si el medio de pago ya ha sido creado previamente
+        */
+
+        public function comprobarUnicoMedioPago($nombre){
+            /*Instanciar el objeto*/
+            $medioPago = new MedioPago();
+            /*Crear el objeto*/
+            $medioPago -> setNombre($nombre);
+            /*Ejecutar la consulta*/
+            $resultado = $medioPago -> comprobarMedioPagoUnico();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para guardar un medio de pago
         */
 
@@ -54,16 +69,31 @@
                 $nombre = isset($_POST['nombretar']) ? $_POST['nombretar'] : false;
                 /*Si el dato existe*/
                 if($nombre){
-                    /*Llamar la funcion de guardar medio de pago*/
-                    $guardado = $this -> guardarMedioPago($nombre);
-                    /*Comprobar se ejecutó con exito la consulta*/
-                    if($guardado){
+                    /*Llamar funcion que comprueba si el medio de pago ya ha sido registrado*/
+                    $unico = $this -> comprobarUnicoMedioPago($nombre);
+                    /*Comprobar si el nombre de la consola no existe*/
+                    if($unico == null){
+                        /*Llamar la funcion de guardar medio de pago*/
+                        $guardado = $this -> guardarMedioPago($nombre);
+                        /*Comprobar se ejecutó con exito la consulta*/
+                        if($guardado){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarmediopagoacierto', "El medio de pago ha sido creado con exito", '?controller=AdministradorController&action=gestionarMedioPago');
+                        /*De lo contrario*/
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "El medio de pago no ha sido creado con exito", '?controller=CategoriaController&action=crear');
+                        }
+                    /*Comprobar si el medio de pago existe y esta activo*/    
+                    }elseif($unico == 1){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('guardarmediopagoacierto', "El medio de pago ha sido creado con exito", '?controller=AdministradorController&action=gestionarMedioPago');
-                    /*De lo contrario*/
+                        Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "Este medio de pago ya se encuentra registrado", '?controller=MedioPagoController&action=crear');
+                    /*Comprobar si el medio de pago existe y no esta activo*/    
+                    }elseif($unico == 2){
+                    /*De lo contrario*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "El medio de pago no ha sido creado con exito", '?controller=CategoriaController&action=crear');
+                        Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
                     }
                 /*De lo contrario*/
                 }else{

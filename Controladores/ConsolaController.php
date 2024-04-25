@@ -44,6 +44,21 @@
         }
 
         /*
+        Funcion para comprobar si la consola ya ha sido creada previamente
+        */
+
+        public function comprobarUnicaConsola($nombre){
+            /*Instanciar el objeto*/
+            $consola = new Consola();
+            /*Crear el objeto*/
+            $consola -> setNombre($nombre);
+            /*Ejecutar la consulta*/
+            $resultado = $consola -> comprobarConsolaUnica();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para guardar una consola
         */
 
@@ -54,16 +69,31 @@
                 $nombre = isset($_POST['nombrecon']) ? $_POST['nombrecon'] : false;
                 /*Si el dato existe*/
                 if($nombre){
-                    /*Llamar la funcion de guardar consola*/
-                    $guardado = $this -> guardarConsola($nombre);
-                    /*Comprobar se ejecutó con exito la consulta*/
-                    if($guardado){
+                    /*Llamar funcion que comprueba si la consola ya ha sido registrada*/
+                    $unico = $this -> comprobarUnicaConsola($nombre);
+                    /*Comprobar si el nombre de la consola no existe*/
+                    if($unico == null){
+                        /*Llamar la funcion de guardar consola*/
+                        $guardado = $this -> guardarConsola($nombre);
+                        /*Comprobar se ejecutó con exito la consulta*/
+                        if($guardado){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarconsolaacierto', "La consola ha sido creada con exito", '?controller=AdministradorController&action=gestionarConsola');
+                        /*De lo contrario*/
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarconsolaerror', "La consola no ha sido creada con exito", '?controller=AdministradorController&action=crearConsola');
+                        } 
+                    /*Comprobar si la consola existe y esta activa*/    
+                    }elseif($unico == 1){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('guardarconsolaacierto', "La consola ha sido creada con exito", '?controller=AdministradorController&action=gestionarConsola');
-                    /*De lo contrario*/
+                        Ayudas::crearSesionYRedirigir('guardarconsolaerror', "Esta consola ya se encuentra registrada", '?controller=ConsolaController&action=crear');
+                    /*Comprobar si la consola existe y no esta activa*/    
+                    }elseif($unico == 2){
+                    /*De lo contrario*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('guardarconsolaerror', "La consola no ha sido creada con exito", '?controller=AdministradorController&action=crearConsola');
+                        Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
                     }
                 /*De lo contrario*/
                 }else{

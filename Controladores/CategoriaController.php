@@ -44,6 +44,21 @@
         }
 
         /*
+        Funcion para comprobar si la categoria ya ha sido creada previamente
+        */
+
+        public function comprobarUnicaCategoria($nombre){
+            /*Instanciar el objeto*/
+            $categoria = new Categoria();
+            /*Crear el objeto*/
+            $categoria -> setNombre($nombre);
+            /*Ejecutar la consulta*/
+            $resultado = $categoria -> comprobarCategoriaUnica();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para guardar una categoria
         */
 
@@ -54,16 +69,31 @@
                 $nombre = isset($_POST['nombrecat']) ? $_POST['nombrecat'] : false;
                 /*Si el dato existe*/
                 if($nombre){
-                    /*Llamar la funcion de guardar categoria*/
-                    $guardado = $this -> guardarCategoria($nombre);
-                    /*Comprobar se ejecutó con exito la consulta*/
-                    if($guardado){
+                    /*Llamar funcion que comprueba si la categoria ya ha sido registrada*/
+                    $unico = $this -> comprobarUnicaCategoria($nombre);
+                    /*Comprobar si el nombre de la categoria no existe*/
+                    if($unico == null){
+                        /*Llamar la funcion de guardar categoria*/
+                        $guardado = $this -> guardarCategoria($nombre);
+                        /*Comprobar se ejecutó con exito la consulta*/
+                        if($guardado){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarcategoriaacierto', "La categoria ha sido creada con exito", '?controller=AdministradorController&action=gestionarCategoria');
+                        /*De lo contrario*/    
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarcategoriaerror', "La categoria no ha sido creada con exito", '?controller=CategoriaController&action=crear');
+                        }
+                    /*Comprobar si la categoria existe y esta activa*/    
+                    }elseif($unico == 1){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('guardarcategoriaacierto', "La categoria ha sido creada con exito", '?controller=AdministradorController&action=gestionarCategoria');
+                        Ayudas::crearSesionYRedirigir('guardarcategoriaerror', "Esta categoria ya se encuentra registrada", '?controller=CategoriaController&action=crear');
+                    /*Comprobar si la categoria existe y no esta activa*/ 
+                    }elseif($unico == 2){
                     /*De lo contrario*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('guardarcategoriaerror', "La categoria no ha sido creada con exito", '?controller=CategoriaController&action=crear');
+                        Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
                     }
                 /*De lo contrario*/     
                 }else{

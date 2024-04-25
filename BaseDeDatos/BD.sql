@@ -38,7 +38,6 @@ CREATE TABLE usuarios (
     foto            VARCHAR(250),
     fechaRegistro   DATE NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT uq_correo UNIQUE(correo),
     CONSTRAINT usuarios_pk PRIMARY KEY ( id )
 );
 
@@ -58,7 +57,6 @@ CREATE TABLE administradores (
     foto            VARCHAR(250),
     fechaRegistro   DATE NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT uq_correo UNIQUE(correo),
     CONSTRAINT administradores_pk PRIMARY KEY ( id )
 );
 
@@ -71,7 +69,6 @@ CREATE TABLE categorias (
     activo          INTEGER NOT NULL,
     nombre VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT uq_nombre UNIQUE(nombre),
     CONSTRAINT categorias_pk PRIMARY KEY ( id )
 );
 
@@ -84,7 +81,6 @@ CREATE TABLE consolas (
     activo          INTEGER NOT NULL,
     nombre VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT uq_nombre UNIQUE(nombre),
     CONSTRAINT consolas_pk PRIMARY KEY ( id )
 );
 
@@ -97,7 +93,6 @@ CREATE TABLE usos (
     activo          INTEGER NOT NULL,
     nombre VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT uq_nombre UNIQUE(nombre),
     CONSTRAINT usos_pk PRIMARY KEY ( id )
 );
 
@@ -133,7 +128,6 @@ CREATE TABLE mediospago (
     activo          INTEGER NOT NULL,
     nombre VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT uq_nombre UNIQUE(nombre),
     CONSTRAINT mediospago_pk PRIMARY KEY ( id )
 );
 
@@ -180,7 +174,6 @@ CREATE TABLE estados (
     activo          INTEGER NOT NULL,
     nombre VARCHAR(250) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT uq_nombre UNIQUE(nombre),
     CONSTRAINT estados_pk PRIMARY KEY ( id )
 );
 

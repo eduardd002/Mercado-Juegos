@@ -169,6 +169,21 @@
             return $bandera;
         }
 
+        /*
+        Funcion para comprobar si ya se ha creado el medio de pago con anterioridad
+        */
+
+        public function comprobarMedioPagoUnico(){
+            /*Construir la consulta*/
+            $consulta = "SELECT activo FROM mediospago WHERE nombre = '{$this -> getNombre()}'";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $mediopago = $this -> db -> query($consulta);
+            /*Obtener el resultado*/
+            $resultado = $mediopago -> fetch_object();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
     }
 
 ?>
