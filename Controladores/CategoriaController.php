@@ -142,6 +142,7 @@
             $categoria = new Categoria();
             /*Crear el objeto*/
             $categoria -> setId($idCategoria);
+            $categoria -> setActivo(FALSE);
             /*Ejecutar la consulta*/
             $eliminado = $categoria -> eliminar();
             /*Retornar el resultado*/

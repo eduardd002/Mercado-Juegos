@@ -174,6 +174,7 @@
             $usuario = new Usuario();
             /*Crear el objeto*/
             $usuario -> setId($idUsuario);
+            $usuario -> setActivo(FALSE);
             /*Ejecutar la consulta*/
             $eliminado = $usuario -> eliminar();
             /*Retornar el resultado*/

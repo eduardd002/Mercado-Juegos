@@ -59,6 +59,7 @@
             /*Instanciar el objeto*/
             $bloqueo = new Bloqueo();
             /*Construir el objeto*/
+            $bloqueo -> setActivo(FALSE);
             $bloqueo -> setIdBloqueado($idUsuarioADesbloquear);
             $bloqueo -> setIdBloqueador($_SESSION['loginexitoso'] -> id);
             /*Eliminar el bloqueo del usuario*/

@@ -142,6 +142,7 @@
             $consola = new Consola();
             /*Crear el objeto*/
             $consola -> setId($idConsola);
+            $consola -> setActivo(FALSE);
             /*Ejecutar la consulta*/
             $eliminado = $consola -> eliminar();
             /*Retornar el resultado*/

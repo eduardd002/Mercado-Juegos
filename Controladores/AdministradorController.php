@@ -196,6 +196,7 @@
             $administrador = new Administrador();
             /*Crear el objeto*/
             $administrador -> setId($idAdmin);
+            $administrador -> setActivo(FALSE);
             /*Ejecutar la consulta*/
             $eliminado = $administrador -> eliminar();
             /*Retornar el resultado*/
@@ -338,6 +339,7 @@
             $usuario = new Usuario();
             /*Crear el objeto*/
             $usuario -> setId($idUsu);
+            $usuario -> setActivo(FALSE);
             /*Ejecutar la consulta*/
             $eliminado = $usuario -> eliminar();
             /*Retornar el resultado*/

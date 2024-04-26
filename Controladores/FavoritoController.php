@@ -52,6 +52,7 @@
             $favoritoVideojuego = new FavoritoVideojuego();
             /*Crear el objeto*/
             $favoritoVideojuego -> setIdVideojuego($idVideojuego);
+            $favoritoVideojuego -> setActivo(FALSE);
             /*Ejecutar la consulta*/
             $eliminado = $favoritoVideojuego -> eliminarVideojuego($idUsuario);
             /*Retornar el resultado*/

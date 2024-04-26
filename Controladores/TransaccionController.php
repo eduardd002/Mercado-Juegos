@@ -513,6 +513,7 @@
             $carrito = new Carrito();
             /*Crear el objeto*/
             $carrito -> setIdUsuario($idUsuario);
+            $carrito -> setActivo(FALSE);
             /*Ejecutar la consulta*/
             $eliminado = $carrito -> eliminarCarrito();
             /*Retornar el resultado*/

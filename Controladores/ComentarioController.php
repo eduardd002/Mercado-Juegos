@@ -74,6 +74,7 @@
             $comentarioUsuarioVideojuego = new ComentarioUsuarioVideojuego();
             /*Crear el objeto*/
             $comentarioUsuarioVideojuego -> setId($idComentario);
+            $comentarioUsuarioVideojuego -> setActivo(FALSE);
             /*Ejecutar la consulta*/
             $eliminado = $comentarioUsuarioVideojuego -> eliminar();
             /*Retornar el resultado*/

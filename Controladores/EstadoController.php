@@ -142,6 +142,7 @@
             $estado = new Estado();
             /*Crear el objeto*/
             $estado -> setId($idEstado);
+            $estado -> setActivo(FALSE);
             /*Ejecutar la consulta*/
             $eliminado = $estado -> eliminar();
             /*Retornar el resultado*/

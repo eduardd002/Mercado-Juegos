@@ -37,6 +37,7 @@
             $carritoVideojuego = new CarritoVideojuego();
             /*Crear el objeto*/
             $carritoVideojuego -> setIdVideojuego($idVideojuego);
+            $carritoVideojuego -> setActivo(FALSE);
             /*Ejecutar la consulta*/
             $eliminado = $carritoVideojuego -> eliminarVideojuego($idUsuario);
             /*Retornar el resultado*/
@@ -87,6 +88,7 @@
             $carrito = new Carrito();
             /*Crear el objeto*/
             $carrito -> setIdUsuario($idUsuario);
+            $carrito -> setActivo(FALSE);
             /*Ejecutar la consulta*/
             $eliminado = $carrito -> eliminarCarrito();
             /*Retornar el resultado*/

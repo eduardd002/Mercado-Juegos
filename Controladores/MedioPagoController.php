@@ -142,6 +142,7 @@
             $medioPago = new MedioPago();
             /*Crear el objeto*/
             $medioPago -> setId($idMedioPago);
+            $medioPago -> setActivo(FALSE);
             /*Ejecutar la consulta*/
             $eliminado = $medioPago -> eliminar();
             /*Retornar el resultado*/

@@ -460,6 +460,7 @@
             $videojuego = new Videojuego();
             /*Crear el objeto*/
             $videojuego -> setId($idVideojuego);
+            $videojuego -> setActivo(FALSE);
             /*Ejecutar la consulta*/
             $eliminado = $videojuego -> eliminar();
             /*Retornar el resultado*/

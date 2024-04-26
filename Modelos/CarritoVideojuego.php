@@ -172,7 +172,7 @@
         public function eliminarVideojuego($idUsuario){
             /*Construir la consulta*/
             $consulta = "UPDATE carritovideojuego
-                SET activo = FALSE WHERE idCarrito IN (SELECT id FROM carritos WHERE idUsuario = $idUsuario)
+                SET activo = {$this -> getActivo()} WHERE idCarrito IN (SELECT id FROM carritos WHERE idUsuario = $idUsuario)
                 AND idVideojuego = {$this -> getIdVideojuego()}";
             /*Llamar la funcion que ejecuta la consulta*/
             $eliminado = $this -> db -> query($consulta);

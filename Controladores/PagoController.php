@@ -95,6 +95,7 @@
             $pago = new Pago();
             /*Crear el objeto*/
             $pago -> setId($idPago);
+            $pago -> setActivo(FALSE);
             /*Ejecutar la consulta*/
             $eliminado = $pago -> eliminar();
             /*Retornar el resultado*/

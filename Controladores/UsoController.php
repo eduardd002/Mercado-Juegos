@@ -142,6 +142,7 @@
             $uso = new Uso();
             /*Crear el objeto*/
             $uso -> setId($idUso);
+            $uso -> setActivo(FALSE);
             /*Ejecutar la consulta*/
             $eliminado = $uso -> eliminar();
             /*Retornar el resultado*/

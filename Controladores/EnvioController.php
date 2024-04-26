@@ -95,6 +95,7 @@
             $envio = new Envio();
             /*Crear el objeto*/
             $envio -> setId($idEnvio);
+            $envio -> setActivo(FALSE);
             /*Ejecutar la consulta*/
             $eliminado = $envio -> eliminar();
             /*Retornar el resultado*/
