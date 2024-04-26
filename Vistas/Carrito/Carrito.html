@@ -14,6 +14,20 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarvideojuegoerror'); ?>
 
+    <?php if(isset($_SESSION['aumentarcantidaderror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['aumentarcantidaderror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('aumentarcantidaderror'); ?>
+
+    <?php if(isset($_SESSION['disminuircantidaderror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['disminuircantidaderror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('disminuircantidaderror'); ?>
+
     <?php if(count($listadoCarritos) == 0) : ?>
         <h1>No Hay Ningun Videojuego Agregado Al Carrito</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
@@ -34,9 +48,9 @@
                         <td><?=$videojuego['nombreVideojuegoCarrito']?></td>
                         <td>$ <?=$videojuego['precioVideojuegoCarrito']?></td>
                         <td>
-                            <a href="" class="buttonDisminuirCarrito">-</a>
+                            <a href="<?=rutaInicio?><?=carrito?><?=disminuirUnidades?>&idVideojuego=<?=$videojuego['idVideojuegoCarrito']?>" class="buttonDisminuirCarrito">-</a>
                                 <?=$videojuego['unidadesCarrito']?>
-                            <a href="" class="buttonAumentarCarrito">+</a>
+                            <a href="<?=rutaInicio?><?=carrito?><?=aumentarUnidades?>&idVideojuego=<?=$videojuego['idVideojuegoCarrito']?>" class="buttonAumentarCarrito">+</a>
                         </td>
                         <td><a href="<?=rutaInicio?><?=carrito?><?=eliminarVideojuegoCarrito?>&idVideojuego=<?=$videojuego['idVideojuegoCarrito']?>" class="button button-eliminarVideojuego">Eliminar</a></td>
                     </tr>

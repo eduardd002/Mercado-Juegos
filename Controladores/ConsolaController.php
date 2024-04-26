@@ -59,6 +59,21 @@
         }
 
         /*
+        Funcion para recuperar la consola eliminada
+        */
+
+        public function recuperarConsola($nombre){
+            /*Instanciar el objeto*/
+            $consola = new Consola();
+            /*Crear el objeto*/
+            $consola -> setNombre($nombre);
+            /*Ejecutar la consulta*/
+            $resultado = $consola -> recuperarConsola();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para guardar una consola
         */
 
@@ -88,8 +103,19 @@
                     }elseif($unico == 1){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('guardarconsolaerror', "Esta consola ya se encuentra registrada", '?controller=ConsolaController&action=crear');
-                    /*Comprobar si la consola existe y no esta activa*/    
+                    /*Comprobar si la consola existe y no esta activa*/ 
                     }elseif($unico == 2){
+                        /*Llamar funcion para recuperar la consola eliminada*/
+                        $recuperada = $this -> recuperarConsola($nombre);
+                        /*Comprobar si la consola ha sido recuperada*/
+                        if($recuperada){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarconsolaacierto', "La consola ha sido recuperada", '?controller=AdministradorController&action=gestionarConsola');
+                        /*De lo contrario*/
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarconsolaerror', "La consola no ha sido recuperada con exito", '?controller=ConsolaController&action=crear');
+                        }
                     /*De lo contrario*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/

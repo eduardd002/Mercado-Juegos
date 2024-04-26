@@ -59,6 +59,21 @@
         }
 
         /*
+        Funcion para recuperar el uso eliminado
+        */
+
+        public function recuperarUso($nombre){
+            /*Instanciar el objeto*/
+            $uso = new Uso();
+            /*Crear el objeto*/
+            $uso -> setNombre($nombre);
+            /*Ejecutar la consulta*/
+            $resultado = $uso -> recuperarUso();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para guardar un uso
         */
 
@@ -88,8 +103,19 @@
                     }elseif($unico == 1){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('guardarusoerror', "Este uso ya se encuentra registrado", '?controller=UsoController&action=crear');
-                    /*Comprobar si el uso existe y no esta activo*/    
+                    /*Comprobar si el uso existe y no esta activo*/ 
                     }elseif($unico == 2){
+                        /*Llamar funcion para recuperar el uso eliminado*/
+                        $recuperado = $this -> recuperarUso($nombre);
+                        /*Comprobar si el uso ha sido recuperado*/
+                        if($recuperado){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarusoacierto', "El uso ha sido recuperado", '?controller=AdministradorController&action=gestionarUso');
+                        /*De lo contrario*/
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarusoerror', "El uso no ha sido recuperado con exito", '?controller=UsoController&action=crear');
+                        }
                     /*De lo contrario*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/

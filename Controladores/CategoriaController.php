@@ -59,6 +59,21 @@
         }
 
         /*
+        Funcion para recuperar la categoria eliminada
+        */
+
+        public function recuperarCategoria($nombre){
+            /*Instanciar el objeto*/
+            $categoria = new Categoria();
+            /*Crear el objeto*/
+            $categoria -> setNombre($nombre);
+            /*Ejecutar la consulta*/
+            $resultado = $categoria -> recuperarCategoria();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para guardar una categoria
         */
 
@@ -90,6 +105,17 @@
                         Ayudas::crearSesionYRedirigir('guardarcategoriaerror', "Esta categoria ya se encuentra registrada", '?controller=CategoriaController&action=crear');
                     /*Comprobar si la categoria existe y no esta activa*/ 
                     }elseif($unico == 2){
+                        /*Llamar funcion para recuperar la categoria eliminada*/
+                        $recuperada = $this -> recuperarCategoria($nombre);
+                        /*Comprobar si la categoria ha sido recuperada*/
+                        if($recuperada){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarcategoriaacierto', "La categoria ha sido recuperada", '?controller=AdministradorController&action=gestionarCategoria');
+                        /*De lo contrario*/
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarcategoriaerror', "La categoria no ha sido recuperada con exito", '?controller=CategoriaController&action=crear');
+                        }
                     /*De lo contrario*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/

@@ -59,6 +59,21 @@
         }
 
         /*
+        Funcion para recuperar el medio de pago eliminado
+        */
+
+        public function recuperarMedioPago($nombre){
+            /*Instanciar el objeto*/
+            $medioPago = new MedioPago();
+            /*Crear el objeto*/
+            $medioPago -> setNombre($nombre);
+            /*Ejecutar la consulta*/
+            $resultado = $medioPago -> recuperarMedioPago();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para guardar un medio de pago
         */
 
@@ -82,14 +97,25 @@
                         /*De lo contrario*/
                         }else{
                             /*Crear la sesion y redirigir a la ruta pertinente*/
-                            Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "El medio de pago no ha sido creado con exito", '?controller=CategoriaController&action=crear');
+                            Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "El medio de pago no ha sido creado con exito", '?controller=MedioPagoController&action=crear');
                         }
                     /*Comprobar si el medio de pago existe y esta activo*/    
                     }elseif($unico == 1){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "Este medio de pago ya se encuentra registrado", '?controller=MedioPagoController&action=crear');
-                    /*Comprobar si el medio de pago existe y no esta activo*/    
+                    /*Comprobar si el medio de pago existe y no esta activo*/ 
                     }elseif($unico == 2){
+                        /*Llamar funcion para recuperar el medio de pago eliminado*/
+                        $recuperado = $this -> recuperarMedioPago($nombre);
+                        /*Comprobar si el medio de pago ha sido recuperado*/
+                        if($recuperado){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarmediopagoacierto', "El medio de pago ha sido recuperado", '?controller=AdministradorController&action=gestionarMedioPago');
+                        /*De lo contrario*/
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "El medio de pago no ha sido recuperado con exito", '?controller=MedioPagoController&action=crear');
+                        }
                     /*De lo contrario*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
@@ -98,12 +124,12 @@
                 /*De lo contrario*/
                 }else{
                     /*Crear la sesion y redirigir a la ruta pertinente*/
-                    Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "Ha ocurrido un error al guardar el medio de pago", '?controller=CategoriaController&action=crear');
+                    Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "Ha ocurrido un error al guardar el medio de pago", '?controller=MedioPagoController&action=crear');
                 }
             /*De lo contrario*/
             }else{
                 /*Crear la sesion y redirigir a la ruta pertinente*/
-                Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "Ha ocurrido un error al guardar el medio de pago", '?controller=CategoriaController&action=crear');
+                Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "Ha ocurrido un error al guardar el medio de pago", '?controller=MedioPagoController&action=crear');
             }
         }
 

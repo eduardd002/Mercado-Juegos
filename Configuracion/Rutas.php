@@ -51,6 +51,8 @@
     define("guardarCarrito", "&action=guardar");
     define("eliminarVideojuegoCarrito", "&action=eliminarVideojuegoCarrito");
     define("eliminarCarrito", "&action=eliminarCarrito");
+    define("aumentarUnidades", "&action=aumentarUnidades");
+    define("disminuirUnidades", "&action=disminuirUnidades");
 
     /*Ruta para favorito*/
 

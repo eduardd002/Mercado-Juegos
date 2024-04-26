@@ -186,6 +186,50 @@
             /*Retornar el resultado*/
             return $bandera;
         }
+
+        /*
+        Funcion para disminuir unidades del carrito
+        */
+
+        public function disminuirUnidades($idUsuario){
+            /*Construir la consulta*/
+            $consulta = "UPDATE carritovideojuego
+                SET unidades = unidades - 1 WHERE idCarrito IN (SELECT id FROM carritos WHERE idUsuario = $idUsuario)
+                AND idVideojuego = {$this -> getIdVideojuego()}";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $eliminado = $this -> db -> query($consulta);
+            /*Establecer una variable bandera*/
+            $bandera = false;
+            /*Comprobar si la consulta fue exitosa*/
+            if($eliminado){
+                /*Cambiar el estado de la variable bandera*/                
+                $bandera = true;
+            }
+            /*Retornar el resultado*/
+            return $bandera;
+        }
+
+        /*
+        Funcion para aumentar unidades del carrito
+        */
+
+        public function aumentarUnidades($idUsuario){
+            /*Construir la consulta*/
+            $consulta = "UPDATE carritovideojuego
+                SET unidades = unidades + 1 WHERE idCarrito IN (SELECT id FROM carritos WHERE idUsuario = $idUsuario)
+                AND idVideojuego = {$this -> getIdVideojuego()}";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $eliminado = $this -> db -> query($consulta);
+            /*Establecer una variable bandera*/
+            $bandera = false;
+            /*Comprobar si la consulta fue exitosa*/
+            if($eliminado){
+                /*Cambiar el estado de la variable bandera*/                
+                $bandera = true;
+            }
+            /*Retornar el resultado*/
+            return $bandera;
+        }
         
     }
 

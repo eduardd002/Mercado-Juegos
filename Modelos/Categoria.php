@@ -184,6 +184,26 @@
             return $resultado;
         }
 
+        /*
+        Funcion para recuperar la categoria eliminada
+        */
+
+        public function recuperarCategoria(){
+            /*Construir la consulta*/
+            $consulta = "UPDATE categorias SET activo = 1 WHERE nombre = {$this -> getNombre()}";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $recuperado = $this -> db -> query($consulta);
+            /*Establecer una variable bandera*/
+            $bandera = false;
+            /*Comprobar si la consulta fue exitosa y el total de columnas afectadas se altero llamando la ejecucion de la consulta*/
+            if($recuperado && mysqli_affected_rows($this -> db) > 0){
+                /*Cambiar el estado de la variable bandera*/
+                $bandera = true;
+            }
+            /*Retornar el resultado*/
+            return $bandera;
+        }
+
     }
 
 ?>

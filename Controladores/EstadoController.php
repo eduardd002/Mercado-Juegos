@@ -59,6 +59,21 @@
         }
 
         /*
+        Funcion para recuperar el estado eliminado
+        */
+
+        public function recuperarEstado($nombre){
+            /*Instanciar el objeto*/
+            $estado = new Estado();
+            /*Crear el objeto*/
+            $estado -> setNombre($nombre);
+            /*Ejecutar la consulta*/
+            $resultado = $estado -> recuperarEstado();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para guardar un estado
         */
 
@@ -88,8 +103,19 @@
                     }elseif($unico == 1){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('guardarestadoerror', "Este estado ya se encuentra registrado", '?controller=EstadoController&action=crear');
-                    /*Comprobar si el estado existe y no esta activo*/    
+                    /*Comprobar si el estado existe y no esta activo*/ 
                     }elseif($unico == 2){
+                        /*Llamar funcion para recuperar el estado eliminado*/
+                        $recuperado = $this -> recuperarEstado($nombre);
+                        /*Comprobar si el estado ha sido recuperado*/
+                        if($recuperado){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarestadoacierto', "El estado ha sido recuperado", '?controller=AdministradorController&action=gestionarEstado');
+                        /*De lo contrario*/
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarestadoerror', "El estado no ha sido recuperado con exito", '?controller=EstadoController&action=crear');
+                        }
                     /*De lo contrario*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/

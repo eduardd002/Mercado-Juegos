@@ -128,6 +128,106 @@
         }
 
         /*
+        Funcion para disminuir unidades de carrito
+        */
+
+        public function disminuirUnidadesCarrito($idUsuario, $idVideojuego){
+            /*Instanciar el objeto*/
+            $carritoVideojuego = new CarritoVideojuego();
+            /*Crear el objeto*/
+            $carritoVideojuego -> setIdVideojuego($idVideojuego);
+            /*Ejecutar la consulta*/
+            $disminuido = $carritoVideojuego -> disminuirUnidades($idUsuario);
+            /*Retornar el resultado*/
+            return $disminuido;
+        }
+
+        /*
+        Funcion para disminuir unidades del carrito de compras
+        */
+
+        public function disminuirUnidades(){
+            /*Comprobar si los datos estan llegando*/
+            if(isset($_GET)){
+                /*Comprobar si los datos existen*/
+                $idVideojuego = isset($_GET['idVideojuego']) ? $_GET['idVideojuego'] : false;
+                $idUsuario = $_SESSION['loginexitoso'] -> id;
+                /*Si los datos existen*/
+                if($idVideojuego && $idUsuario){
+                    /*Llamar la funcion que disminuye las unidades del carrito*/
+                    $disminuido = $this -> disminuirUnidades($idUsuario, $idVideojuego);
+                    /*Comprobar si las unidades han sido disminuidas*/
+                    if($disminuido){
+                        /*Redirigir*/
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=CarritoController&action=ver");
+                    /*De lo contrario*/    
+                    }else{
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('disminuircantidaderror', "Las cantidades no han sido disminuidas con exito", '?controller=CarritoController&action=ver');
+                    }
+                /*De lo contrario*/     
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir('disminuircantidaderror', "Ha ocurrido un error al disminuir las cantidades", '?controller=CarritoController&action=ver');
+                }
+            /*De lo contrario*/       
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+            }
+        }
+
+        /*
+        Funcion para aumentar unidades de carrito
+        */
+
+        public function aumentarUnidadesCarrito($idUsuario, $idVideojuego){
+            /*Instanciar el objeto*/
+            $carritoVideojuego = new CarritoVideojuego();
+            /*Crear el objeto*/
+            $carritoVideojuego -> setIdVideojuego($idVideojuego);
+            /*Ejecutar la consulta*/
+            $aumentado = $carritoVideojuego -> aumentarUnidades($idUsuario);
+            /*Retornar el resultado*/
+            return $aumentado;
+        }
+
+        /*
+        Funcion para aumentar unidades del carrito de compras
+        */
+
+        public function aumentarUnidades(){
+            /*Comprobar si los datos estan llegando*/
+            if(isset($_GET)){
+                /*Comprobar si los datos existen*/
+                $idVideojuego = isset($_GET['idVideojuego']) ? $_GET['idVideojuego'] : false;
+                $idUsuario = $_SESSION['loginexitoso'] -> id;
+                /*Si los datos existen*/
+                if($idVideojuego && $idUsuario){
+                    /*Llamar la funcion que aumenta las unidades del carrito*/
+                    $aumentado = $this -> aumentarUnidades($idUsuario, $idVideojuego);
+                    /*Comprobar si las unidades han sido aumentadas*/
+                    if($aumentado){
+                        /*Redirigir*/
+                        header("Location:"."http://localhost/Mercado-Juegos/?controller=CarritoController&action=ver");
+                    /*De lo contrario*/    
+                    }else{
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('aumentarcantidaderror', "Las cantidades no han sido aumentadas con exito", '?controller=CarritoController&action=ver');
+                    }
+                /*De lo contrario*/     
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir('aumentarcantidaderror', "Ha ocurrido un error al aumentar las cantidades", '?controller=CarritoController&action=ver');
+                }
+            /*De lo contrario*/       
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+            }
+        }
+
+        /*
         Funcion para guardar el carrito en la base de datos
         */
 
