@@ -26,7 +26,7 @@
             /*Instanciar el objeto*/
             $medioPago = new MedioPago();
             /*Crear el objeto*/
-            $medioPago -> setActivo(1);
+            $medioPago -> setactivo(TRUE);
             $medioPago -> setNombre($nombre);
             /*Intentar guardar el medio de pago en la base de datos*/
             try{
@@ -100,11 +100,11 @@
                             Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "El medio de pago no ha sido creado con exito", '?controller=MedioPagoController&action=crear');
                         }
                     /*Comprobar si el medio de pago existe y esta activo*/    
-                    }elseif($unico == 1){
+                    }elseif($unico -> activo == 1){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('guardarmediopagoerror', "Este medio de pago ya se encuentra registrado", '?controller=MedioPagoController&action=crear');
                     /*Comprobar si el medio de pago existe y no esta activo*/ 
-                    }elseif($unico == 2){
+                    }elseif($unico -> activo == 0){
                         /*Llamar funcion para recuperar el medio de pago eliminado*/
                         $recuperado = $this -> recuperarMedioPago($nombre);
                         /*Comprobar si el medio de pago ha sido recuperado*/

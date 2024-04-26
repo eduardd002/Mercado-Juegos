@@ -26,7 +26,7 @@
             /*Instanciar el objeto*/
             $envio = new Envio();
             /*Crear el objeto*/
-            $envio -> setActivo(1);
+            $envio -> setactivo(TRUE);
             $envio -> setIdUsuario($_SESSION['loginexitoso'] -> id);
             $envio -> setDepartamento($departamento);
             $envio -> setMunicipio($municipio);

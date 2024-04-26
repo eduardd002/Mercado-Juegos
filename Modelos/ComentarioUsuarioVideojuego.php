@@ -185,7 +185,7 @@
 
         public function eliminar(){
             /*Construir la consulta*/
-            $consulta = "UPDATE ComentarioUsuarioVideojuego SET activo = 0 WHERE id = {$this -> getId()}";
+            $consulta = "UPDATE ComentarioUsuarioVideojuego SET activo = FALSE WHERE id = {$this -> getId()}";
             /*Llamar la funcion que ejecuta la consulta*/
             $eliminado = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/

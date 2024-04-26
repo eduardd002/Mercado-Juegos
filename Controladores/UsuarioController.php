@@ -50,7 +50,7 @@
             /*Instanciar el objeto*/
             $usuario = new Usuario();
             /*Crear el objeto*/
-            $usuario -> setActivo(1);
+            $usuario -> setactivo(TRUE);
             $usuario -> setNombre($nombre);
             $usuario -> setApellido($apellidos);
             $usuario -> setFechanacimiento($fechaNacimiento);

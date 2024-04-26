@@ -17,7 +17,7 @@
             /*Instanciar el objeto*/
             $comentarioUsuarioVideojuego = new ComentarioUsuarioVideojuego();
             /*Crear el objeto*/
-            $comentarioUsuarioVideojuego -> setActivo(1);
+            $comentarioUsuarioVideojuego -> setactivo(TRUE);
             $comentarioUsuarioVideojuego -> setIdUsuario($_SESSION['loginexitoso'] -> id);
             $comentarioUsuarioVideojuego -> setContenido($contenido);
             $comentarioUsuarioVideojuego -> setIdVideojuego($videojuego);

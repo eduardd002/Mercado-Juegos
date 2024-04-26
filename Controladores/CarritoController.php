@@ -235,7 +235,7 @@
             /*Instanciar el objeto*/
             $carrito = new Carrito();
             /*Crear el objeto*/
-            $carrito -> setActivo(1);
+            $carrito -> setactivo(TRUE);
             $carrito -> setIdUsuario($_SESSION['loginexitoso'] -> id);
             /*Guardar en la base de datos*/
             $guardado = $carrito -> guardar();
@@ -281,7 +281,7 @@
             /*Instanciar el objeto*/
             $carritoVideojuego = new CarritoVideojuego();
             /*Crear el objeto*/
-            $carritoVideojuego -> setActivo(1);
+            $carritoVideojuego -> setactivo(TRUE);
             $carritoVideojuego -> setIdCarrito($idCarrito);
             $carritoVideojuego -> setIdVideojuego($videojuegoId);
             $carritoVideojuego -> setUnidades($unidades);

@@ -134,7 +134,7 @@
 
         public function eliminar(){
             /*Construir la consulta*/
-            $consulta = "UPDATE categorias SET activo = 0 WHERE id = {$this -> getId()}";
+            $consulta = "UPDATE categorias SET activo = FALSE WHERE id = {$this -> getId()}";
             /*Llamar la funcion que ejecuta la consulta*/
             $eliminado = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/
@@ -190,7 +190,7 @@
 
         public function recuperarCategoria(){
             /*Construir la consulta*/
-            $consulta = "UPDATE categorias SET activo = 1 WHERE nombre = {$this -> getNombre()}";
+            $consulta = "UPDATE categorias SET activo = 1 WHERE nombre = '{$this -> getNombre()}'";
             /*Llamar la funcion que ejecuta la consulta*/
             $recuperado = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/

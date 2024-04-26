@@ -26,7 +26,7 @@
             /*Instanciar el objeto*/
             $uso = new Uso();
             /*Crear el objeto*/
-            $uso -> setActivo(1);
+            $uso -> setactivo(TRUE);
             $uso -> setNombre($nombre);
             /*Intentar guardar el uso en la base de datos*/
             try{
@@ -100,11 +100,11 @@
                             Ayudas::crearSesionYRedirigir('guardarusoerror', "El uso no ha sido creado con exito", '?controller=UsoController&action=crear');
                         }
                     /*Comprobar si el uso existe y esta activo*/    
-                    }elseif($unico == 1){
+                    }elseif($unico -> activo == 1){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('guardarusoerror', "Este uso ya se encuentra registrado", '?controller=UsoController&action=crear');
                     /*Comprobar si el uso existe y no esta activo*/ 
-                    }elseif($unico == 2){
+                    }elseif($unico -> activo == 0){
                         /*Llamar funcion para recuperar el uso eliminado*/
                         $recuperado = $this -> recuperarUso($nombre);
                         /*Comprobar si el uso ha sido recuperado*/

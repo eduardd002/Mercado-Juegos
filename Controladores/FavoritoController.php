@@ -131,7 +131,7 @@
             /*Instanciar el objeto*/
             $favoritoVideojuego = new FavoritoVideojuego();
             /*Crear el objeto*/
-            $favoritoVideojuego -> setActivo(1);
+            $favoritoVideojuego -> setactivo(TRUE);
             $favoritoVideojuego -> setIdFavorito($idFavorito);
             $favoritoVideojuego -> setIdVideojuego($videojuegoId);
             $favoritoVideojuego -> setPrecio($videojuego['videojuego']['precioVideojuego']);

@@ -102,7 +102,7 @@
             /*Instanciar el objeto*/
             $administrador = new Administrador();
             /*Crear el objeto*/
-            $administrador -> setActivo(1);
+            $administrador -> setActivo(TRUE);
             $administrador -> setNombre($nombre);
             $administrador -> setApellido($apellidos);
             $administrador -> setFechanacimiento($fechaNacimiento);

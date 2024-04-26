@@ -26,7 +26,7 @@
             /*Instanciar el objeto*/
             $consola = new Consola();
             /*Crear el objeto*/
-            $consola -> setActivo(1);
+            $consola -> setactivo(TRUE);
             $consola -> setNombre($nombre);
             /*Intentar guardar la consola en la base de datos*/
             try{
@@ -100,11 +100,11 @@
                             Ayudas::crearSesionYRedirigir('guardarconsolaerror', "La consola no ha sido creada con exito", '?controller=AdministradorController&action=crearConsola');
                         } 
                     /*Comprobar si la consola existe y esta activa*/    
-                    }elseif($unico == 1){
+                    }elseif($unico -> activo == 1){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('guardarconsolaerror', "Esta consola ya se encuentra registrada", '?controller=ConsolaController&action=crear');
                     /*Comprobar si la consola existe y no esta activa*/ 
-                    }elseif($unico == 2){
+                    }elseif($unico -> activo == 0){
                         /*Llamar funcion para recuperar la consola eliminada*/
                         $recuperada = $this -> recuperarConsola($nombre);
                         /*Comprobar si la consola ha sido recuperada*/

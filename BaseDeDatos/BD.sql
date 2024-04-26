@@ -26,7 +26,7 @@ Crear tabla usuarios
 
 CREATE TABLE usuarios (
     id              INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
+    activo          BOOLEAN NOT NULL,
     nombre          VARCHAR(200) NOT NULL,
     apellido        VARCHAR(250) NOT NULL,
     fechaNacimiento DATE NOT NULL,
@@ -47,7 +47,7 @@ Crear tabla administradores
 
 CREATE TABLE administradores (
     id              INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
+    activo          BOOLEAN NOT NULL,
     nombre          VARCHAR(200) NOT NULL,
     apellido        VARCHAR(250) NOT NULL,
     fechaNacimiento DATE NOT NULL,
@@ -78,7 +78,7 @@ Crea tabla de tipo de consolas de videojuego
 
 CREATE TABLE consolas (
     id     INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
+    activo          BOOLEAN NOT NULL,
     nombre VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT consolas_pk PRIMARY KEY ( id )
@@ -90,7 +90,7 @@ Crea tabla de tipo de usos de videojuego
 
 CREATE TABLE usos (
     id     INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
+    activo          BOOLEAN NOT NULL,
     nombre VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT usos_pk PRIMARY KEY ( id )
@@ -102,7 +102,7 @@ Crear tabla videoujuegos
 
 CREATE TABLE videojuegos (
     id              INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
+    activo          BOOLEAN NOT NULL,
     idUsuario       INTEGER NOT NULL,
     idConsola       INTEGER NOT NULL,
     idUso           INTEGER NOT NULL,
@@ -125,7 +125,7 @@ Crear tabla para tipo de medios de pago
 
 CREATE TABLE mediospago (
     id              INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
+    activo          BOOLEAN NOT NULL,
     nombre VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT mediospago_pk PRIMARY KEY ( id )
@@ -137,7 +137,7 @@ Crear tabla para tipo de envios
 
 CREATE TABLE envios (
     id              INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
+    activo          BOOLEAN NOT NULL,
     idUsuario      INTEGER NOT NULL,
     departamento      VARCHAR(250) NOT NULL,
     municipio         VARCHAR(200) NOT NULL,
@@ -155,7 +155,7 @@ Crear tabla de pagos
 
 CREATE TABLE pagos (
     id              INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
+    activo          BOOLEAN NOT NULL,
     idUsuario      INTEGER NOT NULL,
     idMedioPago       INTEGER NOT NULL,
     numero   VARCHAR(200) NOT NULL,
@@ -171,7 +171,7 @@ Crear tabla para tipo de estados de la transacción
 
 CREATE TABLE estados (
     id              INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
+    activo          BOOLEAN NOT NULL,
     nombre VARCHAR(250) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT estados_pk PRIMARY KEY ( id )
@@ -236,7 +236,7 @@ Crea tabla de comentariovideojuego
 
 CREATE TABLE comentariousuariovideojuego (
     id     INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
+    activo          BOOLEAN NOT NULL,
     idUsuario INTEGER NOT NULL,
     idVideojuego INTEGER NOT NULL,
     contenido TEXT NOT NULL,
@@ -253,7 +253,7 @@ Crear tabla de carritos
 
 CREATE TABLE carritos (
     id   INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
+    activo          BOOLEAN NOT NULL,
     idUsuario    INTEGER NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT carritos_id PRIMARY KEY ( id ),
@@ -266,7 +266,7 @@ Crear tabla de carritovideojuego
 
 CREATE TABLE carritovideojuego (
     id   INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
+    activo          BOOLEAN NOT NULL,
     idVideojuego INTEGER NOT NULL,
     idCarrito INTEGER NOT NULL,
     unidades   INTEGER NOT NULL,
@@ -295,7 +295,7 @@ Crear tabla de favoritovideojuego
 
 CREATE TABLE videojuegofavorito (
     id   INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
+    activo          BOOLEAN NOT NULL,
     idVideojuego INTEGER NOT NULL,
     idFavorito INTEGER NOT NULL,
     precio    INTEGER NOT NULL,
@@ -340,7 +340,7 @@ Crear tabla de usuariosbloqueados
 
 CREATE TABLE bloqueos (
     id   INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
+    activo          BOOLEAN NOT NULL,
     idBloqueador  INTEGER NOT NULL,
     idBloqueado  INTEGER NOT NULL,
     motivo TEXT NOT NULL,

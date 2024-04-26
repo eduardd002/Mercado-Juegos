@@ -32,7 +32,7 @@
             /*Instanciar el objeto*/
             $pago = new Pago();
             /*Crear el objeto*/
-            $pago -> setActivo(1);
+            $pago -> setactivo(TRUE);
             $pago -> setIdUsuario($_SESSION['loginexitoso'] -> id);
             $pago -> setIdMedioPago($medioPago);
             $pago -> setNumero($numero);

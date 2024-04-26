@@ -389,7 +389,7 @@
             /*Instanciar el objeto*/
             $pago = new Pago();
             /*Crear el objeto*/
-            $pago -> setActivo(1);
+            $pago -> setactivo(TRUE);
             $pago -> setIdUsuario($_SESSION['loginexitoso'] -> id);
             $pago -> setIdMedioPago($pagoUnico -> idMedioPago);
             $pago -> setNumero($pagoUnico -> numeroPago);
@@ -407,7 +407,7 @@
             /*Instanciar el objeto*/
             $envio = new Envio();
             /*Crear el objeto*/
-            $envio -> setActivo(1);
+            $envio -> setactivo(TRUE);
             $envio -> setIdUsuario($_SESSION['loginexitoso'] -> id);
             $envio -> setDepartamento($envioUnico -> departamento);
             $envio -> setMunicipio($envioUnico -> municipio);

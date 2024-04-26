@@ -186,7 +186,7 @@
 
         public function eliminar(){
             /*Construir la consulta*/
-            $consulta = "UPDATE bloqueos SET activo = 0 WHERE idBloqueador = {$this -> getIdBloqueador()} AND idBloqueado = {$this -> getIdBloqueado()}";
+            $consulta = "UPDATE bloqueos SET activo = FALSE WHERE idBloqueador = {$this -> getIdBloqueador()} AND idBloqueado = {$this -> getIdBloqueado()}";
             /*Llamar la funcion que ejecuta la consulta*/
             $eliminado = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/

@@ -109,7 +109,7 @@
             /*Instanciar el objeto*/
             $bloqueo = new Bloqueo();
             /*Crear el objeto*/
-            $bloqueo -> setActivo(1);
+            $bloqueo -> setactivo(TRUE);
             $bloqueo -> setIdBloqueador($_SESSION['loginexitoso'] -> id);
             $bloqueo -> setIdBloqueado($idUsuarioABloquear);
             $bloqueo -> setMotivo($motivo);
