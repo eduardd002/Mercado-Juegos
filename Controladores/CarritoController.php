@@ -155,7 +155,7 @@
                 /*Si los datos existen*/
                 if($idVideojuego && $idUsuario){
                     /*Llamar la funcion que disminuye las unidades del carrito*/
-                    $disminuido = $this -> disminuirUnidades($idUsuario, $idVideojuego);
+                    $disminuido = $this -> disminuirUnidadesCarrito($idUsuario, $idVideojuego);
                     /*Comprobar si las unidades han sido disminuidas*/
                     if($disminuido){
                         /*Redirigir*/
@@ -205,7 +205,7 @@
                 /*Si los datos existen*/
                 if($idVideojuego && $idUsuario){
                     /*Llamar la funcion que aumenta las unidades del carrito*/
-                    $aumentado = $this -> aumentarUnidades($idUsuario, $idVideojuego);
+                    $aumentado = $this -> aumentarUnidadesCarrito($idUsuario, $idVideojuego);
                     /*Comprobar si las unidades han sido aumentadas*/
                     if($aumentado){
                         /*Redirigir*/

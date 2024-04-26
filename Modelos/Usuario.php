@@ -463,16 +463,19 @@
             $informacionUsuario = array();
             /*Mientras hayan usuarios disponibles para recorrer*/
             while ($fila = $resultados->fetch_object()) {
-                /*Crear array con informacion del usuario*/
-                $informacionUsuario['usuario'] = array(
-                    'idUsuario' => $fila->idUsuario,
-                    'nombreUsuario' => $fila->nombreUsuario,
-                    'fechaUsuario' => $fila->fechaUsuario,
-                    'departamentoUsuario' => $fila->departamentoUsuario,
-                    'municipioUsuario' => $fila->municipioUsuario,
-                    /*Inicializar un array para almacenar los videojuegos del usuario*/
-                    'videojuegos' => array() 
-                );
+                /*Comprobar si no existe la informacion del usuario*/
+                if(!isset($informacionCompra['usuario'])){
+                    /*Crear array con informacion del usuario*/
+                    $informacionUsuario['usuario'] = array(
+                        'idUsuario' => $fila->idUsuario,
+                        'nombreUsuario' => $fila->nombreUsuario,
+                        'fechaUsuario' => $fila->fechaUsuario,
+                        'departamentoUsuario' => $fila->departamentoUsuario,
+                        'municipioUsuario' => $fila->municipioUsuario,
+                        /*Inicializar un array para almacenar los videojuegos del usuario*/
+                        'videojuegos' => array() 
+                    );
+                }
                 /*Almacenar la información del usuario en el array de usuario y videojuego*/
                 $informacionUsuario['usuario']['videojuegos'][] = array(
                     'idVideojuego' => $fila->idVideojuego,

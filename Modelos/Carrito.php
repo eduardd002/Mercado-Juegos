@@ -144,7 +144,7 @@
 
         public function listar(){
             /*Construir la consulta*/
-            $consulta = "SELECT DISTINCT v.id AS 'idVideojuegoCarrito', v.nombre AS 'nombreVideojuegoCarrito', v.foto AS 'imagenVideojuegoCarrito', v.precio AS 'precioVideojuegoCarrito', cv.unidades AS 'unidadesCarrito'
+            $consulta = "SELECT DISTINCT v.id AS 'idVideojuegoCarrito', v.nombre AS 'nombreVideojuegoCarrito', v.foto AS 'imagenVideojuegoCarrito', v.precio AS 'precioVideojuegoCarrito', cv.unidades AS 'unidadesCarrito', v.stock AS 'stockVideojuego'
                 FROM CarritoVideojuego cv
                 INNER JOIN carritos c ON cv.idCarrito = c.id
                 INNER JOIN videojuegos v ON v.id = cv.idVideojuego
@@ -171,6 +171,7 @@
                     'nombreVideojuegoCarrito' => $fila->nombreVideojuegoCarrito,
                     'imagenVideojuegoCarrito' => $fila->imagenVideojuegoCarrito,
                     'precioVideojuegoCarrito' => $fila->precioVideojuegoCarrito,
+                    'stockVideojuego' => $fila->stockVideojuego,
                     'unidadesCarrito' => $fila->unidadesCarrito
                 );
                 /*Obtener precios, unidades y el total del carrito*/

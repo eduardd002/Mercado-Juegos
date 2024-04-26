@@ -326,20 +326,23 @@
             $informacionUsuario = array();
             /*Mientras hayan videojuegos disponibles para recorrer*/
             while ($fila = $resultados->fetch_object()) {
-                /*Crear array con informacion del videojuego*/
-                $informacionUsuario['videojuego'] = array(
-                    'idVideojuego' => $fila->idVideojuego,
-                    'nombreVideojuego' => $fila->nombreVideojuego,
-                    'precioVideojuego' => $fila->precioVideojuego,
-                    'nombreConsola' => $fila->nombreConsola,
-                    'descripcionVideojuego' => $fila->descripcionVideojuego,
-                    'imagenVideojuego' => $fila->imagenVideojuego,
-                    'stockVideojuego' => $fila->stockVideojuego,
-                    'idVendedor' => $fila->idVendedor,
-                    'nombreUso' => $fila->nombreUso,
-                    /*Inicializar un array para almacenar los videojuegos*/
-                    'categorias' => array()
-                );
+                /*Comprobar si no existe la informacion del videojuego*/
+                if(!isset($informacionCompra['compra'])){
+                    /*Crear array con informacion del videojuego*/
+                    $informacionUsuario['videojuego'] = array(
+                        'idVideojuego' => $fila->idVideojuego,
+                        'nombreVideojuego' => $fila->nombreVideojuego,
+                        'precioVideojuego' => $fila->precioVideojuego,
+                        'nombreConsola' => $fila->nombreConsola,
+                        'descripcionVideojuego' => $fila->descripcionVideojuego,
+                        'imagenVideojuego' => $fila->imagenVideojuego,
+                        'stockVideojuego' => $fila->stockVideojuego,
+                        'idVendedor' => $fila->idVendedor,
+                        'nombreUso' => $fila->nombreUso,
+                        /*Inicializar un array para almacenar los videojuegos*/
+                        'categorias' => array()
+                    );
+                }
                 /*Almacenar la información de la categoria en el array de videojuego y categoria*/
                 $informacionUsuario['videojuego']['categorias'][] = array(
                     'categoriaNombre' => $fila->categoriaNombre,

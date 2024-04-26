@@ -6,6 +6,13 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('loginexitosoinfoa'); ?>
 
+    <?php if(isset($_SESSION['errorinesperado'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['errorinesperado']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('errorinesperado'); ?>
+
     <div id="administradorpanel">
         <img src="Recursos/Logotipos/administrar.png" alt="Logo administrar">
         <ul>

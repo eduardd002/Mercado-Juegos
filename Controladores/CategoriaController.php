@@ -87,6 +87,8 @@
                     /*Llamar funcion que comprueba si la categoria ya ha sido registrada*/
                     $unico = $this -> comprobarUnicaCategoria($nombre);
                     /*Comprobar si el nombre de la categoria no existe*/
+                    var_dump($unico);
+                    die();  
                     if($unico == null){
                         /*Llamar la funcion de guardar categoria*/
                         $guardado = $this -> guardarCategoria($nombre);
@@ -98,13 +100,13 @@
                         }else{
                             /*Crear la sesion y redirigir a la ruta pertinente*/
                             Ayudas::crearSesionYRedirigir('guardarcategoriaerror', "La categoria no ha sido creada con exito", '?controller=CategoriaController&action=crear');
-                        }
+                        }  
                     /*Comprobar si la categoria existe y esta activa*/    
                     }elseif($unico == 1){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('guardarcategoriaerror', "Esta categoria ya se encuentra registrada", '?controller=CategoriaController&action=crear');
                     /*Comprobar si la categoria existe y no esta activa*/ 
-                    }elseif($unico == 2){
+                    }elseif($unico == 0){
                         /*Llamar funcion para recuperar la categoria eliminada*/
                         $recuperada = $this -> recuperarCategoria($nombre);
                         /*Comprobar si la categoria ha sido recuperada*/

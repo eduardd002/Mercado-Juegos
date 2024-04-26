@@ -48,11 +48,17 @@
                         <td><?=$videojuego['nombreVideojuegoCarrito']?></td>
                         <td>$ <?=$videojuego['precioVideojuegoCarrito']?></td>
                         <td>
-                            <a href="<?=rutaInicio?><?=carrito?><?=disminuirUnidades?>&idVideojuego=<?=$videojuego['idVideojuegoCarrito']?>" class="buttonDisminuirCarrito">-</a>
+                            <?php if($videojuego['unidadesCarrito'] > 0) : ?>
+                                <a href="<?=rutaInicio?><?=carrito?><?=disminuirUnidades?>&idVideojuego=<?=$videojuego['idVideojuegoCarrito']?>" class="buttonDisminuirCarrito">-</a>
+                            <?php endif; ?>    
                                 <?=$videojuego['unidadesCarrito']?>
-                            <a href="<?=rutaInicio?><?=carrito?><?=aumentarUnidades?>&idVideojuego=<?=$videojuego['idVideojuegoCarrito']?>" class="buttonAumentarCarrito">+</a>
+                            <?php if($videojuego['unidadesCarrito'] < $videojuego['stockVideojuego']) : ?>    
+                                <a href="<?=rutaInicio?><?=carrito?><?=aumentarUnidades?>&idVideojuego=<?=$videojuego['idVideojuegoCarrito']?>" class="buttonAumentarCarrito">+</a>
+                            <?php endif; ?>   
                         </td>
-                        <td><a href="<?=rutaInicio?><?=carrito?><?=eliminarVideojuegoCarrito?>&idVideojuego=<?=$videojuego['idVideojuegoCarrito']?>" class="button button-eliminarVideojuego">Eliminar</a></td>
+                        <td>
+                            <a href="<?=rutaInicio?><?=carrito?><?=eliminarVideojuegoCarrito?>&idVideojuego=<?=$videojuego['idVideojuegoCarrito']?>" class="button button-eliminarVideojuego">Eliminar</a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </table>

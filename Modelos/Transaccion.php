@@ -296,25 +296,28 @@
             $informacionCompra = array();
             /*Mientras hayan compras disponibles para recorrer*/
             while ($fila = $resultados->fetch_object()) {
-                /*Crear array con informacion de la compra*/
-                $informacionCompra['compra'] = array(
-                    'factura' => $fila->factura,
-                    'nombreVendedor' => $fila->nombreVendedor,
-                    'apellidoVendedor' => $fila->apellidoVendedor,
-                    'telefonoVendedor' => $fila->telefonoVendedor,
-                    'correoVendedor' => $fila->correoVendedor,
-                    'departamentoEnvio' => $fila->departamentoEnvio,
-                    'municipioEnvio' => $fila->municipioEnvio,
-                    'codigoPostalEnvio' => $fila->codigoPostalEnvio,
-                    'direccionEnvio' => $fila->direccionEnvio,
-                    'barrioEnvio' => $fila->barrioEnvio,
-                    'nombreEstado' => $fila->nombreEstado,
-                    'numero' => $fila->numero,
-                    'medioPagoNombre'=>$fila->medioPagoNombre,
-                    'totalTransaccion' => $fila->totalTransaccion,
-                    /*Inicializar un array para almacenar los videojuegos de la compra*/
-                    'videojuegos' => array()
-                );
+                /*Comprobar si no existe la informacion de la compra*/
+                if(!isset($informacionCompra['compra'])){
+                    /*Crear array con informacion de la compra*/
+                    $informacionCompra['compra'] = array(
+                        'factura' => $fila->factura,
+                        'nombreVendedor' => $fila->nombreVendedor,
+                        'apellidoVendedor' => $fila->apellidoVendedor,
+                        'telefonoVendedor' => $fila->telefonoVendedor,
+                        'correoVendedor' => $fila->correoVendedor,
+                        'departamentoEnvio' => $fila->departamentoEnvio,
+                        'municipioEnvio' => $fila->municipioEnvio,
+                        'codigoPostalEnvio' => $fila->codigoPostalEnvio,
+                        'direccionEnvio' => $fila->direccionEnvio,
+                        'barrioEnvio' => $fila->barrioEnvio,
+                        'nombreEstado' => $fila->nombreEstado,
+                        'numero' => $fila->numero,
+                        'medioPagoNombre'=>$fila->medioPagoNombre,
+                        'totalTransaccion' => $fila->totalTransaccion,
+                        /*Inicializar un array para almacenar los videojuegos de la compra*/
+                        'videojuegos' => array()
+                    );
+                }
                 /*Almacenar la información del videojuego en el array de compra y videojuego*/
                 $informacionCompra['compra']['videojuegos'][] = array(
                     'nombreVideojuegoCompra' => $fila->nombreVideojuegoCompra,
@@ -350,26 +353,29 @@
             $informacionVenta = array();
             /*Mientras hayan compras disponibles para recorrer*/
             while ($fila = $resultados->fetch_object()) {
-                /*Crear array con informacion de la compra*/
-                $informacionVenta['venta'] = array(
-                    'facturaVenta' => $fila->facturaVenta,
-                    'idTransaccion' => $fila->idTransaccion,
-                    'nombreComprador' => $fila->nombreComprador,
-                    'apellidoComprador' => $fila->apellidoComprador,
-                    'telefonoComprador' => $fila->telefonoComprador,
-                    'correoComprador' => $fila->correoComprador,
-                    'departamentoEnvio' => $fila->departamentoEnvio,
-                    'municipioEnvio' => $fila->municipioEnvio,
-                    'codigoPostalEnvio' => $fila->codigoPostalEnvio,
-                    'direccionEnvio' => $fila->direccionEnvio,
-                    'barrioEnvio' => $fila->barrioEnvio,
-                    'nombreEstado' => $fila->nombreEstado,
-                    'numeroPago' => $fila->numeroPago,
-                    'medioPagoNombre'=>$fila->medioPagoNombre,
-                    'totalTransaccion' => $fila->totalTransaccion,
-                    /*Inicializar un array para almacenar los videojuegos de la venta*/
-                    'videojuegos' => array()
-                );
+                /*Comprobar si no existe la informacion de la venta*/
+                if(!isset($informacionCompra['venta'])){
+                    /*Crear array con informacion de la compra*/
+                    $informacionVenta['venta'] = array(
+                        'facturaVenta' => $fila->facturaVenta,
+                        'idTransaccion' => $fila->idTransaccion,
+                        'nombreComprador' => $fila->nombreComprador,
+                        'apellidoComprador' => $fila->apellidoComprador,
+                        'telefonoComprador' => $fila->telefonoComprador,
+                        'correoComprador' => $fila->correoComprador,
+                        'departamentoEnvio' => $fila->departamentoEnvio,
+                        'municipioEnvio' => $fila->municipioEnvio,
+                        'codigoPostalEnvio' => $fila->codigoPostalEnvio,
+                        'direccionEnvio' => $fila->direccionEnvio,
+                        'barrioEnvio' => $fila->barrioEnvio,
+                        'nombreEstado' => $fila->nombreEstado,
+                        'numeroPago' => $fila->numeroPago,
+                        'medioPagoNombre'=>$fila->medioPagoNombre,
+                        'totalTransaccion' => $fila->totalTransaccion,
+                        /*Inicializar un array para almacenar los videojuegos de la venta*/
+                        'videojuegos' => array()
+                    );
+                }
                 /*Almacenar la información del videojuego en el array de venta y videojuego*/
                 $informacionVenta['venta']['videojuegos'][] = array(
                     'unidadesCompra' => $fila->unidadesCompra,

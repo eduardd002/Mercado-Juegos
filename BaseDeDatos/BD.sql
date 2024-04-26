@@ -66,7 +66,7 @@ Crea tabla de categorias
 
 CREATE TABLE categorias (
     id     INTEGER auto_increment NOT NULL,
-    activo          INTEGER NOT NULL,
+    activo          BOOLEAN NOT NULL,
     nombre VARCHAR(200) NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT categorias_pk PRIMARY KEY ( id )
