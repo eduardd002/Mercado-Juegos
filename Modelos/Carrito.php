@@ -124,7 +124,7 @@
         public function eliminarCarrito(){
             /*Construir la consulta*/
             $consulta = "UPDATE carritos
-                SET activo = {$this -> getActivo()} WHERE idUsuario = {$this -> getIdUsuario()}";
+                SET activo = '{$this -> getActivo()}' WHERE idUsuario = {$this -> getIdUsuario()}";
             /*Llamar la funcion que ejecuta la consulta*/
             $eliminado = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/
