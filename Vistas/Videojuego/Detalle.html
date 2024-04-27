@@ -1,5 +1,5 @@
 <div id="contenidoCentral">      
-    <?php if(isset($_SESSION['loginexitosoinfo']) && $_SESSION['loginexitosoinfo'] == 'Bienvenido Usuario') : ?>
+    <?php if(isset($_SESSION['loginexitosoinfo'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['loginexitosoinfo']; ?>
         </div>

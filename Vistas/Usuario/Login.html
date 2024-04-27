@@ -1,25 +1,39 @@
 <div id="contenidoCentral">      
-    <?php if(isset($_SESSION['comentariopendiente']) && $_SESSION['comentariopendiente'] == 'Por favor inicia sesion antes de comentar') : ?>
+    <?php if(isset($_SESSION['comentariopendiente'])) : ?>
         <div class="alerta alerta-sugerencia">
             <?=$_SESSION['comentariopendiente']; ?>
         </div>
     <?php endif; ?>
 
-    <?php if(isset($_SESSION['favoritopendiente']) && $_SESSION['favoritopendiente'] == 'Por favor inicia sesion antes de agregar a favoritos') : ?>
+    <?php if(isset($_SESSION['favoritopendiente'])) : ?>
         <div class="alerta alerta-sugerencia">
             <?=$_SESSION['favoritopendiente']; ?>
         </div>
     <?php endif; ?>
 
-    <?php if(isset($_SESSION['iniciodesesion']) && $_SESSION['iniciodesesion'] == 'Debes iniciar sesion primero') : ?>
+    <?php if(isset($_SESSION['iniciodesesion'])) : ?>
         <div class="alerta alerta-sugerencia">
             <?=$_SESSION['iniciodesesion']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('iniciodesesion'); ?>
 
+    <?php if(isset($_SESSION['guardarusuarioacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['guardarusuarioacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('guardarusuarioacierto'); ?>
+
+    <?php if(isset($_SESSION['guardaradministradoracierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['guardaradministradoracierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('guardaradministradoracierto'); ?>
+
     <div id="loginYRegistro">
-        <?php if(isset($_SESSION['error_login']) && $_SESSION['error_login'] == 'Este usuario no se encuentra registrado') : ?>
+        <?php if(isset($_SESSION['error_login'])) : ?>
             <div class="alerta alerta-error">
                 <?=$_SESSION['error_login']; ?>
             </div>

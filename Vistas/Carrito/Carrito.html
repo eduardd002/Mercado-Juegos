@@ -48,7 +48,7 @@
                         <td><?=$videojuego['nombreVideojuegoCarrito']?></td>
                         <td>$ <?=$videojuego['precioVideojuegoCarrito']?></td>
                         <td>
-                            <?php if($videojuego['unidadesCarrito'] > 0) : ?>
+                            <?php if($videojuego['unidadesCarrito'] > 1) : ?>
                                 <a href="<?=rutaInicio?><?=carrito?><?=disminuirUnidades?>&idVideojuego=<?=$videojuego['idVideojuegoCarrito']?>" class="buttonDisminuirCarrito">-</a>
                             <?php endif; ?>    
                                 <?=$videojuego['unidadesCarrito']?>

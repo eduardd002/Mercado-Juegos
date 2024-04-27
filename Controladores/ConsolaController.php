@@ -100,11 +100,11 @@
                             Ayudas::crearSesionYRedirigir('guardarconsolaerror', "La consola no ha sido creada con exito", '?controller=AdministradorController&action=crearConsola');
                         } 
                     /*Comprobar si la consola existe y esta activa*/    
-                    }elseif($unico -> activo == 1){
+                    }elseif($unico -> activo == TRUE){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('guardarconsolaerror', "Esta consola ya se encuentra registrada", '?controller=ConsolaController&action=crear');
                     /*Comprobar si la consola existe y no esta activa*/ 
-                    }elseif($unico -> activo == 0){
+                    }elseif($unico -> activo == FALSE){
                         /*Llamar funcion para recuperar la consola eliminada*/
                         $recuperada = $this -> recuperarConsola($nombre);
                         /*Comprobar si la consola ha sido recuperada*/

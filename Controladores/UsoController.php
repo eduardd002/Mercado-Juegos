@@ -100,11 +100,11 @@
                             Ayudas::crearSesionYRedirigir('guardarusoerror', "El uso no ha sido creado con exito", '?controller=UsoController&action=crear');
                         }
                     /*Comprobar si el uso existe y esta activo*/    
-                    }elseif($unico -> activo == 1){
+                    }elseif($unico -> activo == TRUE){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('guardarusoerror', "Este uso ya se encuentra registrado", '?controller=UsoController&action=crear');
                     /*Comprobar si el uso existe y no esta activo*/ 
-                    }elseif($unico -> activo == 0){
+                    }elseif($unico -> activo == FALSE){
                         /*Llamar funcion para recuperar el uso eliminado*/
                         $recuperado = $this -> recuperarUso($nombre);
                         /*Comprobar si el uso ha sido recuperado*/

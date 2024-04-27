@@ -14,7 +14,7 @@
     require_once 'Modelos/Administrador.php';
     /*Incluir el objeto de usuario*/
     require_once 'Modelos/Usuario.php';
-    /*Incluir el objeto de usuario*/
+    /*Incluir el objeto de bloqueo*/
     require_once 'Modelos/Bloqueo.php';
 
     /*
@@ -127,6 +127,36 @@
         }
 
         /*
+        Funcion para comprobar si el administrador ya ha sido creado previamente
+        */
+
+        public function comprobarUnicoAdministrador($correo){
+            /*Instanciar el objeto*/
+            $administrador = new Administrador();
+            /*Crear el objeto*/
+            $administrador -> setCorreo($correo);
+            /*Ejecutar la consulta*/
+            $resultado = $administrador -> comprobarAdministradorUnico();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
+        Funcion para recuperar el administrador eliminado
+        */
+
+        public function recuperarAdministrador($correo){
+            /*Instanciar el objeto*/
+            $administrador = new Administrador();
+            /*Crear el objeto*/
+            $administrador -> setCorreo($correo);
+            /*Ejecutar la consulta*/
+            $resultado = $administrador -> recuperarAdministrador();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para guardar el administrador en la base de datos
         */
 
@@ -146,35 +176,57 @@
                 $foto = $archivo['name'];
                 /*Comprobar si todos los datos existen*/
                 if($nombre && $apellidos && $fechaNacimiento && $telefono && $clave && $email){
-                    /*Comprobar si la contraseña es valida*/
-                    $claveSegura = Ayudas::comprobarContrasenia($clave);
-                    /*Comprobar si la clave es valida*/
-                    if($claveSegura){
-                        /*Comprobar si la foto es valida y ha sido guardada*/
-                        $fotoGuardada = Ayudas::guardarImagen($archivo, "ImagenesAdministradores");
-                        /*Comprobar si la foto ha sido validada y guardada*/
-                        if($fotoGuardada){
-                            /*Llamar la funcion de guardar administrador*/
-                            $guardado = $this -> guardarAdministrador($nombre, $apellidos, $fechaNacimiento, $telefono, $email, $clave, $foto);
-                            /*Comprobar si el administrador ha sido guardado*/
-                            if($guardado){
-                                /*Llamar la funcion de inicio de sesion del administrador*/
-                               Ayudas::iniciarSesionAdmnistrador($email, $clave);
-                            /*De lo contrario*/  
+                    /*Llamar funcion que comprueba si el adminustrador ya ha sido registrado*/
+                    $unico = $this -> comprobarUnicoAdministrador($email);
+                    /*Comprobar si el correo del administrador no se encuentra asociado a otro administrador*/
+                    if($unico == null){
+                        /*Comprobar si la contraseña es valida*/
+                        $claveSegura = Ayudas::comprobarContrasenia($clave);
+                        /*Comprobar si la clave es valida*/
+                        if($claveSegura){
+                            /*Comprobar si la foto es valida y ha sido guardada*/
+                            $fotoGuardada = Ayudas::guardarImagen($archivo, "ImagenesAdministradores");
+                            /*Comprobar si la foto ha sido validada y guardada*/
+                            if($fotoGuardada){
+                                /*Llamar la funcion de guardar administrador*/
+                                $guardado = $this -> guardarAdministrador($nombre, $apellidos, $fechaNacimiento, $telefono, $email, $clave, $foto);
+                                /*Comprobar si el administrador ha sido guardado*/
+                                if($guardado){
+                                    /*Llamar la funcion de inicio de sesion del administrador*/
+                                Ayudas::iniciarSesionAdmnistrador($email, $clave);
+                                /*De lo contrario*/  
+                                }else{
+                                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                                    Ayudas::crearSesionYRedirigir("guardaradministradorerror", "Ha ocurrido un error al guardar el administrador", "?controller=AdministradorController&action=registro");
+                                }
+                            /*De lo contrario*/      
                             }else{
                                 /*Crear la sesion y redirigir a la ruta pertinente*/
-                                Ayudas::crearSesionYRedirigir("guardaradministradorerror", "Ha ocurrido un error al guardar el administrador", "?controller=AdministradorController&action=registro");
+                                Ayudas::crearSesionYRedirigir("guardaradministradorerror", "La imagen debe ser de tipo imagen", "?controller=AdministradorController&action=registro");
                             }
                         /*De lo contrario*/      
                         }else{
                             /*Crear la sesion y redirigir a la ruta pertinente*/
-                            Ayudas::crearSesionYRedirigir("guardaradministradorerror", "La imagen debe ser de tipo imagen", "?controller=AdministradorController&action=registro");
+                            Ayudas::crearSesionYRedirigir("guardaradministradorerror", "La clave debe contener un mayuscula, miniscula, numero, caracter especial y minimo 8 caracteres de longitud", "?controller=AdministradorController&action=registro");
                         }
-                    /*De lo contrario*/      
-                    }else{
+                    /*Comprobar si el administrador existe y esta activo*/    
+                    }elseif($unico -> activo == TRUE){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir("guardaradministradorerror", "La clave debe contener un mayuscula, miniscula, numero, caracter especial y minimo 8 caracteres de longitud", "?controller=AdministradorController&action=registro");
-                    }  
+                        Ayudas::crearSesionYRedirigir('guardaradministradorerror', "Este administrador ya se encuentra registrado", '?controller=AdministradorController&action=registro');
+                    /*Comprobar si el administrador existe y no esta activo*/ 
+                    }elseif($unico -> activo == FALSE){
+                        /*Llamar funcion para recuperar el administrador eliminado*/
+                        $recuperada = $this -> recuperarAdministrador($email);
+                        /*Comprobar si la categoria ha sido recuperada*/
+                        if($recuperada){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardaradministradoracierto', "El administrador ha sido recuperado", '?controller=UsuarioController&action=login');
+                        /*De lo contrario*/
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardaradministradorerror', "El administrador no ha sido recuperado con exito", '?controller=AdministradorController&action=registro');
+                        }
+                    }
                 /*De lo contrario*/       
                 }else{
                     /*Crear la sesion y redirigir a la ruta pertinente*/

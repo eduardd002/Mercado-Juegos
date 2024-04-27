@@ -126,8 +126,8 @@
             $registro = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/
             $resultado = false;
-            /*Comprobar si la consulta fue exitosa y el total de columnas afectadas se altero llamando la ejecucion de la consulta*/
-            if($registro && mysqli_affected_rows($this -> db) > 0){
+            /*Comprobar si la consulta fue exitosa*/
+            if($registro){
                 /*Cambiar el estado de la variable bandera*/
                 $resultado = true;
             }

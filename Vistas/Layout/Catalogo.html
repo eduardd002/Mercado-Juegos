@@ -10,14 +10,14 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('loginexitosoinfo'); ?>
 
-    <?php if(isset($_SESSION['logincerrado']) && $_SESSION['logincerrado'] == 'Sesion cerrada con exito') : ?>
+    <?php if(isset($_SESSION['logincerrado'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['logincerrado']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('logincerrado'); ?>
 
-    <?php if(isset($_SESSION['caducidad']) && $_SESSION['caducidad'] == 'La sesion ha expirado') : ?>
+    <?php if(isset($_SESSION['caducidad'])) : ?>
         <div class="alerta alerta-sugerencia">
             <?=$_SESSION['caducidad']; ?>
         </div>
@@ -38,7 +38,7 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminaradministradoracierto'); ?>
 
-    <?php if(isset($_SESSION['videojuegofavorito']) && $_SESSION['videojuegofavorito'] == 'El ideojuego no ha sido agregado a la lista de favoritos') : ?>
+    <?php if(isset($_SESSION['videojuegofavorito'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['videojuegofavorito']; ?>
         </div>

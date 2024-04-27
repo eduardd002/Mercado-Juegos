@@ -100,11 +100,11 @@
                             Ayudas::crearSesionYRedirigir('guardarestadoerror', "El estado no ha sido creado con exito", '?controller=EstadoController&action=crear');
                         }
                     /*Comprobar si el estado existe y esta activo*/    
-                    }elseif($unico -> activo == 1){
+                    }elseif($unico -> activo == TRUE){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('guardarestadoerror', "Este estado ya se encuentra registrado", '?controller=EstadoController&action=crear');
                     /*Comprobar si el estado existe y no esta activo*/ 
-                    }elseif($unico -> activo == 0){
+                    }elseif($unico -> activo == FALSE){
                         /*Llamar funcion para recuperar el estado eliminado*/
                         $recuperado = $this -> recuperarEstado($nombre);
                         /*Comprobar si el estado ha sido recuperado*/

@@ -77,6 +77,36 @@
         }
 
         /*
+        Funcion para comprobar si el usuario ya ha sido creado previamente
+        */
+
+        public function comprobarUnicoUsuario($correo){
+            /*Instanciar el objeto*/
+            $usuario = new Usuario();
+            /*Crear el objeto*/
+            $usuario -> setCorreo($correo);
+            /*Ejecutar la consulta*/
+            $resultado = $usuario -> comprobarUsuarioUnico();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
+        Funcion para recuperar el usuario eliminado
+        */
+
+        public function recuperarUsuario($correo){
+            /*Instanciar el objeto*/
+            $usuario = new Usuario();
+            /*Crear el objeto*/
+            $usuario -> setCorreo($correo);
+            /*Ejecutar la consulta*/
+            $resultado = $usuario -> recuperarUsuario();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para guardar el usuario en la base de datos
         */
 
@@ -98,35 +128,57 @@
                 $foto = $archivo['name'];
                 /*Comprobar si todos los datos exsiten*/
                 if($nombre && $apellidos && $fechaNacimiento && $telefono && $clave && $email && $departamento && $municipio){
-                    /*Comprobar si la contraseña es valida*/
-                    $claveSegura = Ayudas::comprobarContrasenia($clave);
-                    /*Comprobar si la clave es valida*/
-                    if($claveSegura){
-                        /*Comprobar si la foto es valida y ha sido guardada*/
-                        $fotoGuardada = Ayudas::guardarImagen($archivo, "ImagenesUsuarios");
-                        /*Comprobar si la foto ha sido validada y guardada*/
-                        if($fotoGuardada){
-                            /*Llamar la funcion de guardar usuario*/
-                            $guardado = $this -> guardarUsuario($nombre, $apellidos, $fechaNacimiento, $telefono, $email, $clave, $departamento, $municipio, $foto);
-                            /*Comprobar si el usuario ha sido guardado*/
-                            if($guardado){
-                                /*Llamar la funcion de inicio de sesion del usuario*/
-                               Ayudas::iniciarSesionUsuario($email, $clave);
+                    /*Llamar funcion que comprueba si el usuario ya ha sido registrado*/
+                    $unico = $this -> comprobarUnicoUsuario($email);
+                    /*Comprobar si el correo del usuario no se encuentra asociado a otro usuario*/
+                    if($unico == null){
+                        /*Comprobar si la contraseña es valida*/
+                        $claveSegura = Ayudas::comprobarContrasenia($clave);
+                        /*Comprobar si la clave es valida*/
+                        if($claveSegura){
+                            /*Comprobar si la foto es valida y ha sido guardada*/
+                            $fotoGuardada = Ayudas::guardarImagen($archivo, "ImagenesUsuarios");
+                            /*Comprobar si la foto ha sido validada y guardada*/
+                            if($fotoGuardada){
+                                /*Llamar la funcion de guardar usuario*/
+                                $guardado = $this -> guardarUsuario($nombre, $apellidos, $fechaNacimiento, $telefono, $email, $clave, $departamento, $municipio, $foto);
+                                /*Comprobar si el usuario ha sido guardado*/
+                                if($guardado){
+                                    /*Llamar la funcion de inicio de sesion del usuario*/
+                                Ayudas::iniciarSesionUsuario($email, $clave);
+                                /*De lo contrario*/  
+                                }else{
+                                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                                    Ayudas::crearSesionYRedirigir("guardarusuarioerror", "Ha ocurrido un error al guardar el usuario", "?controller=UsuarioController&action=registro");
+                                }
                             /*De lo contrario*/  
                             }else{
                                 /*Crear la sesion y redirigir a la ruta pertinente*/
-                                Ayudas::crearSesionYRedirigir("guardarusuarioerror", "Ha ocurrido un error al guardar el usuario", "?controller=UsuarioController&action=registro");
+                                Ayudas::crearSesionYRedirigir("guardarusuarioerror", "La imagen debe ser de tipo imagen", "?controller=UsuarioController&action=registro");
                             }
-                        /*De lo contrario*/  
+                        /*De lo contrario*/      
                         }else{
                             /*Crear la sesion y redirigir a la ruta pertinente*/
-                            Ayudas::crearSesionYRedirigir("guardarusuarioerror", "La imagen debe ser de tipo imagen", "?controller=UsuarioController&action=registro");
-                        }
-                    /*De lo contrario*/      
-                    }else{
+                            Ayudas::crearSesionYRedirigir("guardarusuarioerror", "La clave debe contener un mayuscula, miniscula, numero, caracter especial y minimo 8 caracteres de longitud", "?controller=UsuarioController&action=registro");
+                        } 
+                    /*Comprobar si el usuario existe y esta activo*/    
+                    }elseif($unico -> activo == TRUE){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir("guardarusuarioerror", "La clave debe contener un mayuscula, miniscula, numero, caracter especial y minimo 8 caracteres de longitud", "?controller=UsuarioController&action=registro");
-                    } 
+                        Ayudas::crearSesionYRedirigir('guardarusuarioerror', "Este usuario ya se encuentra registrado", '?controller=UsuarioController&action=registro');
+                    /*Comprobar si el usuario existe y no esta activo*/ 
+                    }elseif($unico -> activo == FALSE){
+                        /*Llamar funcion para recuperar el usuario eliminado*/
+                        $recuperada = $this -> recuperarUsuario($email);
+                        /*Comprobar si la categoria ha sido recuperada*/
+                        if($recuperada){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarusuarioacierto', "El usuario ha sido recuperado", '?controller=UsuarioController&action=login');
+                        /*De lo contrario*/
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarusuarioerror', "El usuario no ha sido recuperado con exito", '?controller=UsuarioController&action=registro');
+                        }
+                    }
                 /*De lo contrario*/         
                 }else{
                     /*Crear la sesion y redirigir a la ruta pertinente*/

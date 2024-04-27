@@ -399,8 +399,8 @@
             $actualizado = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/
             $bandera = false;
-            /*Comprobar si la consulta fue exitosa y el total de columnas afectadas se altero llamando la ejecucion de la consulta*/
-            if($actualizado && mysqli_affected_rows($this -> db) > 0){
+            /*Comprobar si la consulta fue exitosa*/
+            if($actualizado){
                 /*Cambiar el estado de la variable bandera*/
                 $bandera = true;
             }

@@ -100,11 +100,11 @@
                             Ayudas::crearSesionYRedirigir('guardarcategoriaerror', "La categoria no ha sido creada con exito", '?controller=CategoriaController&action=crear');
                         }  
                     /*Comprobar si la categoria existe y esta activa*/    
-                    }elseif($unico -> activo == 1){
+                    }elseif($unico -> activo == TRUE){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('guardarcategoriaerror', "Esta categoria ya se encuentra registrada", '?controller=CategoriaController&action=crear');
                     /*Comprobar si la categoria existe y no esta activa*/ 
-                    }elseif($unico -> activo == 0){
+                    }elseif($unico -> activo == FALSE){
                         /*Llamar funcion para recuperar la categoria eliminada*/
                         $recuperada = $this -> recuperarCategoria($nombre);
                         /*Comprobar si la categoria ha sido recuperada*/
