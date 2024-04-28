@@ -37,7 +37,7 @@ CREATE TABLE usuarios (
     municipio       VARCHAR(100) NOT NULL,
     foto            VARCHAR(250),
     fechaRegistro   DATE NOT NULL,
-    fechaLimiteRecuperarCuenta   DATE NULL,
+    fechaLimiteRecuperarCuenta   DATE NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT usuarios_pk PRIMARY KEY ( id )
 );

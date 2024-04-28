@@ -32,6 +32,23 @@
         }
 
         /*
+        Funcion para obtener el nombre del uso
+        */
+
+        public function obtenerNombre($id){
+            /*Instanciar el objeto*/
+            $uso = new Estado();
+            /*Crear el objeto*/
+            $uso -> setId($id);
+            /*Ejecutar la consulta*/
+            $usoUnico = $uso -> obtenerUno();
+            /*Obtener el resultado*/
+            $resultado = $usoUnico -> nombre;
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para guardar un uso en la base de datos
         */
 
@@ -51,14 +68,18 @@
         Funcion para comprobar si el uso ya ha sido creado previamente
         */
 
-        public function comprobarUnicoUso($id = null, $nombre = null){
+        public function comprobarUnicoUso($id, $nombre){
+            /*Comprobar si el id es nulo*/
+            if($id != null){
+                /*Llamar la funcion que obtiene el nombre del uso en concreto*/
+                $nombreActual = $this -> obtenerNombre($id);
+            }
             /*Instanciar el objeto*/
             $uso = new Uso();
             /*Crear el objeto*/
-            $uso -> setId($id);
             $uso -> setNombre($nombre);
             /*Ejecutar la consulta*/
-            $resultado = $uso -> comprobarUsoUnico();
+            $resultado = $uso -> comprobarUsoUnico($nombreActual);
             /*Retornar el resultado*/
             return $resultado;
         }
@@ -90,7 +111,7 @@
                 /*Si el dato existe*/
                 if($nombre){
                     /*Llamar funcion que comprueba si el uso ya ha sido registrado*/
-                    $unico = $this -> comprobarUnicoUso($nombre);
+                    $unico = $this -> comprobarUnicoUso(null, $nombre);
                     /*Comprobar si el nombre del uso no existe*/
                     if($unico == null){
                         /*Llamar la funcion de guardar uso*/
@@ -273,7 +294,7 @@
                 /*Si los datos existen*/
                 if($idUso){
                     /*Llamar funcion que comprueba si el uso ya ha sido registrado*/
-                    $unico = $this -> comprobarUnicoUso($idUso);
+                    $unico = $this -> comprobarUnicoUso($idUso, $nombre);
                     /*Comprobar si el nombre del uso no existe*/
                     if($unico == null){
                         /*Llamar la funcion de actualizar uso*/
@@ -287,7 +308,7 @@
                             /*Crear la sesion y redirigir a la ruta pertinente*/
                             Ayudas::crearSesionYRedirigir('actualizarusosugerencia', "Introduce nuevos datos", '?controller=UsoController&action=editar&id='.$idUso);
                         }
-                    /*Comprobar si el uso existe*/    
+                    /*De lo contrario*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('actualizarusoerror', "Este nombre ya se encuentra asociado a un uso", '?controller=UsoController&action=editar&id='.$idUso); 

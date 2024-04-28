@@ -59,7 +59,7 @@
             $administrador = new Administrador();
             /*Crear el objeto*/
             $administrador -> setId($id);
-            /*Obtener resultado*/
+            /*Obtener el resultado*/
             $adminUnico = $administrador -> obtenerUno();
             /*Retornar el resultado*/
             return $adminUnico;
@@ -127,7 +127,7 @@
             /*Crear el objeto*/
             $administrador -> setCorreo($correo);
             /*Ejecutar la consulta*/
-            $resultado = $administrador -> comprobarAdministradorUnico();
+            $resultado = $administrador -> comprobarAdministradorUnico($_SESSION['loginexitosoa'] -> correo);
             /*Retornar el resultado*/
             return $resultado;
         }
@@ -462,29 +462,38 @@
                 $foto = $archivo['name'];
                 /*Si los datos existen*/
                 if($id && $nombre && $apellidos && $email && $telefono){
-                    /*Comprobar si la foto no tiene formato de imagen o no ha llegado*/
-                    if(Ayudas::comprobarImagen($archivo['type']) != 3){
-                        /*Comprobar si la foto tiene formato de imagen*/
-                        if(Ayudas::comprobarImagen($archivo['type']) == 1){
-                            /*Comprobar si la foto ha sido validada y guardada*/
-                            Ayudas::guardarImagen($archivo, "ImagenesAdministradores");
-                        }
-                        /*Llamar la funcion que actualiza el administrador*/
-                        $actualizado = $this -> actualizarAdministrador($id, $nombre, $apellidos, $email, $telefono, $foto);
-                        /*Comprobar si el administrador ha sido actualizado*/
-                        if($actualizado){
-                            /*Crear la sesion y redirigir a la ruta pertinente*/
-                            Ayudas::crearSesionYRedirigir('actualizaradministradoracierto', "Administrador actualizado con exito", '?controller=AdministradorController&action=miPerfil');
-                        /*De lo contrario*/    
+                    /*Llamar funcion que comprueba si el administrador ya ha sido registrado*/
+                    $unico = $this -> comprobarUnicoAdministrador($email);
+                    /*Comprobar si el correo del administrador no existe*/
+                    if($unico == null){
+                        /*Comprobar si la foto no tiene formato de imagen o no ha llegado*/
+                        if(Ayudas::comprobarImagen($archivo['type']) != 3){
+                            /*Comprobar si la foto tiene formato de imagen*/
+                            if(Ayudas::comprobarImagen($archivo['type']) == 1){
+                                /*Comprobar si la foto ha sido validada y guardada*/
+                                Ayudas::guardarImagen($archivo, "ImagenesAdministradores");
+                            }
+                            /*Llamar la funcion que actualiza el administrador*/
+                            $actualizado = $this -> actualizarAdministrador($id, $nombre, $apellidos, $email, $telefono, $foto);
+                            /*Comprobar si el administrador ha sido actualizado*/
+                            if($actualizado){
+                                /*Crear la sesion y redirigir a la ruta pertinente*/
+                                Ayudas::crearSesionYRedirigir('actualizaradministradoracierto', "Administrador actualizado con exito", '?controller=AdministradorController&action=miPerfil');
+                            /*De lo contrario*/    
+                            }else{
+                                /*Crear la sesion y redirigir a la ruta pertinente*/
+                                Ayudas::crearSesionYRedirigir('actualizaradministradorsugerencia', "Agrega nuevos datos", '?controller=AdministradorController&action=miPerfil');
+                            }
+                        /*De lo contrario*/      
                         }else{
                             /*Crear la sesion y redirigir a la ruta pertinente*/
-                            Ayudas::crearSesionYRedirigir('actualizaradministradorsugerencia', "Agrega nuevos datos", '?controller=AdministradorController&action=miPerfil');
+                            Ayudas::crearSesionYRedirigir('actualizaradministradorerror', "El formato de la foto debe ser una imagen", '?controller=AdministradorController&action=miPerfil');
                         }
-                    /*De lo contrario*/      
+                    /*De lo contrario*/       
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('actualizaradministradorerror', "El formato de la foto debe ser una imagen", '?controller=AdministradorController&action=miPerfil');
-                    }
+                        Ayudas::crearSesionYRedirigir('actualizaradministradorerror', "Este correo ya se encuentra asociado a un administrador", '?controller=AdministradorController&action=miPerfil');
+                    } 
                 /*De lo contrario*/       
                 }else{
                     /*Crear la sesion y redirigir a la ruta pertinente*/

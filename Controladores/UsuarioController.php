@@ -43,6 +43,23 @@
         }
 
         /*
+        Funcion para obtener el dueño del correo
+        */
+
+        public function obtenerDuenio($email){
+            /*Instanciar el objeto*/
+            $usuario = new Usuario();
+            /*Crear el objeto*/
+            $usuario -> setCorreo($email);
+            /*Ejecutar la consulta*/
+            $usuario = $usuario -> obtenerIdPorCorreo();
+            /*Obtener el resultado*/
+            $id = $usuario -> id;
+            /*Retornar el resultado*/
+            return $id;
+        }
+
+        /*
         Funcion para guardar el usuario
         */
 
@@ -61,6 +78,7 @@
             $usuario -> setMunicipio($municipio);
             $usuario -> setFecharegistro(date('y-m-d'));
             $usuario -> setFoto($nombreArchivo);
+            $usuario -> setFechaLimiteRecuperarCuenta(date("Y-m-d", 0));
             /*Ejecutar la consulta*/
             $guardado = $usuario -> guardar();
             /*Retornar el resultado*/
@@ -69,32 +87,17 @@
 
         /*
         Funcion para comprobar si el usuario ya ha sido creado previamente
-        */
+        */ 
 
-        public function comprobarUnicoUsuario($correo){
-            /*Instanciar el objeto*/
-            $usuario = new Usuario();
-            /*Crear el objeto*/
-            $usuario -> setCorreo($correo);
-            /*Ejecutar la consulta*/
-            $resultado = $usuario -> comprobarUsuarioUnico();
-            /*Retornar el resultado*/
-            return $resultado;
-        }
-
-        /*
-        Funcion para recuperar el usuario eliminado
-        */
-
-        public function recuperarUsuario($correo){
-            /*Instanciar el objeto*/
-            $usuario = new Usuario();
-            /*Crear el objeto*/
-            $usuario -> setCorreo($correo);
-            /*Ejecutar la consulta*/
-            $resultado = $usuario -> recuperarUsuario();
-            /*Retornar el resultado*/
-            return $resultado;
+        public function comprobarUnicoUsuario($correo){ 
+            /*Instanciar el objeto*/ 
+            $usuario = new Usuario(); 
+            /*Crear el objeto*/ 
+            $usuario -> setCorreo($correo); 
+            /*Ejecutar la consulta*/ 
+            $resultado = $usuario -> comprobarUsuarioUnico($_SESSION['loginexitoso'] -> correo); 
+            /*Retornar el resultado*/ 
+            return $resultado; 
         }
 
         /*
@@ -152,24 +155,11 @@
                             /*Crear la sesion y redirigir a la ruta pertinente*/
                             Ayudas::crearSesionYRedirigir("guardarusuarioerror", "La clave debe contener un mayuscula, miniscula, numero, caracter especial y minimo 8 caracteres de longitud", "?controller=UsuarioController&action=registro");
                         } 
-                    /*Comprobar si el usuario existe y esta activo*/    
-                    }elseif($unico -> activo == TRUE){
+                    /*De lo contrario*/       
+                    }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('guardarusuarioerror', "Este usuario ya se encuentra registrado", '?controller=UsuarioController&action=registro');
-                    /*Comprobar si el usuario existe y no esta activo*/ 
-                    }elseif($unico -> activo == FALSE){
-                        /*Llamar funcion para recuperar el usuario eliminado*/
-                        $recuperada = $this -> recuperarUsuario($email);
-                        /*Comprobar si la categoria ha sido recuperada*/
-                        if($recuperada){
-                            /*Crear la sesion y redirigir a la ruta pertinente*/
-                            Ayudas::crearSesionYRedirigir('guardarusuarioacierto', "El usuario ha sido recuperado", '?controller=UsuarioController&action=login');
-                        /*De lo contrario*/
-                        }else{
-                            /*Crear la sesion y redirigir a la ruta pertinente*/
-                            Ayudas::crearSesionYRedirigir('guardarusuarioerror', "El usuario no ha sido recuperado con exito", '?controller=UsuarioController&action=registro');
-                        }
-                    }
+                        Ayudas::crearSesionYRedirigir('actualizarusuarioerror', "Este correo ya se encuentra asociado a un usuario", '?controller=UsuarioController&action=miPerfil');
+                    } 
                 /*De lo contrario*/         
                 }else{
                     /*Crear la sesion y redirigir a la ruta pertinente*/
@@ -218,6 +208,7 @@
             /*Crear el objeto*/
             $usuario -> setId($idUsuario);
             $usuario -> setActivo(FALSE);
+            $usuario -> setFechaLimiteRecuperarCuenta(Ayudas::sumarTresMeses());
             /*Ejecutar la consulta*/
             $eliminado = $usuario -> eliminar();
             /*Retornar el resultado*/
@@ -303,29 +294,38 @@
                 $foto = $archivo['name'];
                 /*Si los datos existen*/
                 if($id && $nombre && $apellidos && $telefono && $email && $departamento && $municipio){
-                    /*Comprobar si la foto no tiene formato de imagen o no ha llegado*/
-                    if(Ayudas::comprobarImagen($archivo['type']) != 3){
-                        /*Comprobar si la foto tiene formato de imagen*/
-                        if(Ayudas::comprobarImagen($archivo['type']) == 1){
-                            /*Comprobar si la foto ha sido validada y guardada*/
-                            Ayudas::guardarImagen($archivo, "ImagenesUsuarios");
-                        }
-                        /*Llamar la funcion que actualiza el usuario*/
-                        $actualizado = $this -> actualizarUsuario($id, $nombre, $apellidos, $telefono, $email, $departamento, $municipio, $foto);
-                        /*Comprobar si el usuario ha sido actualizado*/
-                        if($actualizado){
-                            /*Crear la sesion y redirigir a la ruta pertinente*/
-                            Ayudas::crearSesionYRedirigir('actualizarusuarioacierto', "Usuario actualizado con exito", '?controller=UsuarioController&action=miPerfil');
-                        /*De lo contrario*/
+                    /*Llamar funcion que comprueba si el usuario ya ha sido registrado*/
+                    $unico = $this -> comprobarUnicoUsuario($email);
+                    /*Comprobar si el correo del usuario no existe*/
+                    if($unico == null){
+                        /*Comprobar si la foto no tiene formato de imagen o no ha llegado*/
+                        if(Ayudas::comprobarImagen($archivo['type']) != 3){
+                            /*Comprobar si la foto tiene formato de imagen*/
+                            if(Ayudas::comprobarImagen($archivo['type']) == 1){
+                                /*Comprobar si la foto ha sido validada y guardada*/
+                                Ayudas::guardarImagen($archivo, "ImagenesUsuarios");
+                            }
+                            /*Llamar la funcion que actualiza el usuario*/
+                            $actualizado = $this -> actualizarUsuario($id, $nombre, $apellidos, $telefono, $email, $departamento, $municipio, $foto);
+                            /*Comprobar si el usuario ha sido actualizado*/
+                            if($actualizado){
+                                /*Crear la sesion y redirigir a la ruta pertinente*/
+                                Ayudas::crearSesionYRedirigir('actualizarusuarioacierto', "Usuario actualizado con exito", '?controller=UsuarioController&action=miPerfil');
+                            /*De lo contrario*/
+                            }else{
+                                /*Crear la sesion y redirigir a la ruta pertinente*/
+                                Ayudas::crearSesionYRedirigir('actualizarusuariosugerencia', "Agrega nuevos datos", '?controller=UsuarioController&action=miPerfil');
+                            }
+                        /*De lo contrario*/    
                         }else{
                             /*Crear la sesion y redirigir a la ruta pertinente*/
-                            Ayudas::crearSesionYRedirigir('actualizarusuariosugerencia', "Agrega nuevos datos", '?controller=UsuarioController&action=miPerfil');
+                            Ayudas::crearSesionYRedirigir('actualizarusuarioerror', "El formato de la foto debe ser una imagen", '?controller=UsuarioController&action=miPerfil');
                         }
-                    /*De lo contrario*/    
+                    /*De lo contrario*/       
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('actualizarusuarioerror', "El formato de la foto debe ser una imagen", '?controller=UsuarioController&action=miPerfil');
-                    }
+                        Ayudas::crearSesionYRedirigir('actualizarusuarioerror', "Este correo ya se encuentra asociado a un usuario", '?controller=UsuarioController&action=miPerfil');
+                    } 
                 /*De lo contrario*/    
                 }else{
                     /*Crear la sesion y redirigir a la ruta pertinente*/

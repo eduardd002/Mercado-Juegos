@@ -186,16 +186,9 @@
         Funcion para comprobar si ya se ha creado el uso con anterioridad
         */
 
-        public function comprobarUsoUnico(){
-            /*Comprobar si se quiere comprobar si es unica atravez del id*/
-            if($this -> getId() != null){
-                /*Construir la consulta*/
-                $consulta = "SELECT activo FROM usos WHERE id = {$this -> getId()}";
-            /*Comprobar si se quiere comprobar si es unica atravez del nombre*/
-            }elseif($this -> getNombre() != null){
-                /*Construir la consulta*/
-                $consulta = "SELECT activo FROM usos WHERE nombre = '{$this -> getNombre()}'";
-            }
+        public function comprobarUsoUnico($nombre){
+            /*Construir la consulta*/
+            $consulta = "SELECT activo FROM usos WHERE nombre = '{$this -> getNombre()}' AND nombre != '{$nombre}'";
             /*Llamar la funcion que ejecuta la consulta*/
             $uso = $this -> db -> query($consulta);
             /*Obtener el resultado*/

@@ -32,6 +32,23 @@
         }
 
         /*
+        Funcion para obtener el nombre de la consola
+        */
+
+        public function obtenerNombre($id){
+            /*Instanciar el objeto*/
+            $consola = new Consola();
+            /*Crear el objeto*/
+            $consola -> setId($id);
+            /*Ejecutar la consulta*/
+            $consolaUnica = $consola -> obtenerUna();
+            /*Obtener el resultado*/
+            $resultado = $consolaUnica -> nombre;
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para guardar una consola en la base de datos
         */
 
@@ -51,14 +68,18 @@
         Funcion para comprobar si la consola ya ha sido creada previamente
         */
 
-        public function comprobarUnicaConsola($id = null, $nombre = null){
+        public function comprobarUnicaConsola($id, $nombre){
+            /*Comprobar si el id es nulo*/
+            if($id != null){
+                /*Llamar la funcion que obtiene el nombre de la consola en concreto*/
+                $nombreActual = $this -> obtenerNombre($id);
+            }
             /*Instanciar el objeto*/
             $consola = new Consola();
             /*Crear el objeto*/
-            $consola -> setId($id);
             $consola -> setNombre($nombre);
             /*Ejecutar la consulta*/
-            $resultado = $consola -> comprobarConsolaUnica();
+            $resultado = $consola -> comprobarConsolaUnica($nombreActual);
             /*Retornar el resultado*/
             return $resultado;
         }
@@ -90,7 +111,7 @@
                 /*Si el dato existe*/
                 if($nombre){
                     /*Llamar funcion que comprueba si la consola ya ha sido registrada*/
-                    $unico = $this -> comprobarUnicaConsola($nombre);
+                    $unico = $this -> comprobarUnicaConsola(null, $nombre);
                     /*Comprobar si el nombre de la consola no existe*/
                     if($unico == null){
                         /*Llamar la funcion de guardar consola*/
@@ -273,7 +294,7 @@
                 /*Si los datos existen*/
                 if($idConsola){
                     /*Llamar funcion que comprueba si la consola ya ha sido registrada*/
-                    $unico = $this -> comprobarUnicaConsola($idConsola);
+                    $unico = $this -> comprobarUnicaConsola($idConsola, $nombre);
                     /*Comprobar si el nombre de la consola no existe*/
                     if($unico == null){
                         /*Llamar la funcion de actualizar consola*/
@@ -287,7 +308,7 @@
                             /*Crear la sesion y redirigir a la ruta pertinente*/
                             Ayudas::crearSesionYRedirigir('actualizarconsolasugerencia', "Introduce nuevos datos", '?controller=ConsolaController&action=editar&id='.$idConsola);
                         }
-                    /*Comprobar si la consola existe*/    
+                    /*De lo contrario*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('actualizarconsolaerror', "Este nombre ya se encuentra asociado a una consola", '?controller=ConsolaController&action=editar&id='.$idConsola);

@@ -186,16 +186,9 @@
         Funcion para comprobar si ya se ha creado la categoria con anterioridad
         */
 
-        public function comprobarCategoriaUnica(){
-            /*Comprobar si se quiere comprobar si es unica atravez del id*/
-            if($this -> getId() != null){
-                /*Construir la consulta*/
-                $consulta = "SELECT activo FROM categorias WHERE id = {$this -> getId()}";
-            /*Comprobar si se quiere comprobar si es unica atravez del nombre*/
-            }elseif($this -> getNombre() != null){
-                /*Construir la consulta*/
-                $consulta = "SELECT activo FROM categorias WHERE nombre = '{$this -> getNombre()}'";
-            }
+        public function comprobarCategoriaUnica($nombre){
+            /*Construir la consulta*/
+            $consulta = "SELECT activo FROM categorias WHERE nombre = '{$this -> getNombre()}' AND nombre != '{$nombre}'";
             /*Llamar la funcion que ejecuta la consulta*/
             $categoria = $this -> db -> query($consulta);
             /*Obtener el resultado*/

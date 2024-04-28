@@ -32,6 +32,23 @@
         }
 
         /*
+        Funcion para obtener el nombre del estado
+        */
+
+        public function obtenerNombre($id){
+            /*Instanciar el objeto*/
+            $estado = new Estado();
+            /*Crear el objeto*/
+            $estado -> setId($id);
+            /*Ejecutar la consulta*/
+            $estadoUnico = $estado -> obtenerUno();
+            /*Obtener el resultado*/
+            $resultado = $estadoUnico -> nombre;
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para guardar un estado en la base de datos
         */
 
@@ -51,14 +68,18 @@
         Funcion para comprobar si el estado ya ha sido creado previamente
         */
 
-        public function comprobarUnicoEstado($id = null, $nombre = null){
+        public function comprobarUnicoEstado($id, $nombre){
+            /*Comprobar si el id es nulo*/
+            if($id != null){
+                /*Llamar la funcion que obtiene el nombre del estado en concreto*/
+                $nombreActual = $this -> obtenerNombre($id);
+            }
             /*Instanciar el objeto*/
             $estado = new Estado();
             /*Crear el objeto*/
-            $estado -> setId($id);
             $estado -> setNombre($nombre);
             /*Ejecutar la consulta*/
-            $resultado = $estado -> comprobarEstadoUnico();
+            $resultado = $estado -> comprobarEstadoUnico($nombreActual);
             /*Retornar el resultado*/
             return $resultado;
         }
@@ -90,7 +111,7 @@
                 /*Si el dato existe*/
                 if($nombre){
                     /*Llamar funcion que comprueba si el estado ya ha sido registrado*/
-                    $unico = $this -> comprobarUnicoEstado($nombre);
+                    $unico = $this -> comprobarUnicoEstado(null, $nombre);
                     /*Comprobar si el nombre del estado no existe*/
                     if($unico == null){
                         /*Llamar la funcion de guardar estado*/
@@ -273,7 +294,7 @@
                 /*Si los datos existen*/
                 if($idEstado){
                     /*Llamar funcion que comprueba si el estado ya ha sido registrado*/
-                    $unico = $this -> comprobarUnicoEstado($idEstado);
+                    $unico = $this -> comprobarUnicoEstado($idEstado, $nombre);
                     /*Comprobar si el nombre del estado no existe*/
                     if($unico == null){
                         /*Llamar la funcion de actualizar el estado*/
@@ -287,7 +308,7 @@
                             /*Crear la sesion y redirigir a la ruta pertinente*/
                             Ayudas::crearSesionYRedirigir('actualizarestadosugerencia', "Introduce nuevos datos", '?controller=EstadoController&action=editar&id='.$idEstado);
                         }
-                    /*Comprobar si el estado existe*/    
+                    /*De lo contrario*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('actualizarestadoerror', "Este nombre ya se encuentra asociado a un estado", '?controller=EstadoController&action=editar&id='.$idEstado);

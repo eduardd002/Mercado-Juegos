@@ -359,7 +359,7 @@
             $pago = new Pago();
             /*Crear el objeto*/
             $pago -> setId($id);
-            /*Obtener resultado*/
+            /*Obtener el resultado*/
             $pagoUnico = $pago -> obtenerUno();
             /*Retornar el resultado*/
             return $pagoUnico;
@@ -374,7 +374,7 @@
             $envio = new Envio();
             /*Crear el objeto*/
             $envio -> setId($id);
-            /*Obtener resultado*/
+            /*Obtener el resultado*/
             $envioUnico = $envio -> obtenerUno();
             /*Retornar el resultado*/
             return $envioUnico;

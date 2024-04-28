@@ -32,6 +32,23 @@
         }
 
         /*
+        Funcion para obtener el nombre del medio de pago
+        */
+
+        public function obtenerNombre($id){
+            /*Instanciar el objeto*/
+            $medioPago = new Estado();
+            /*Crear el objeto*/
+            $medioPago -> setId($id);
+            /*Ejecutar la consulta*/
+            $medioPagoUnico = $medioPago -> obtenerUno();
+            /*Obtener el resultado*/
+            $resultado = $medioPagoUnico -> nombre;
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para guardar un medio de pago en la base de datos
         */
 
@@ -51,14 +68,18 @@
         Funcion para comprobar si el medio de pago ya ha sido creado previamente
         */
 
-        public function comprobarUnicoMedioPago($id = null, $nombre = null){
+        public function comprobarUnicoMedioPago($id, $nombre){
+            /*Comprobar si el id es nulo*/
+            if($id != null){
+                /*Llamar la funcion que obtiene el nombre del medio de pago en concreto*/
+                $nombreActual = $this -> obtenerNombre($id);
+            }
             /*Instanciar el objeto*/
             $medioPago = new MedioPago();
             /*Crear el objeto*/
-            $medioPago -> setId($id);
             $medioPago -> setNombre($nombre);
             /*Ejecutar la consulta*/
-            $resultado = $medioPago -> comprobarMedioPagoUnico();
+            $resultado = $medioPago -> comprobarMedioPagoUnico($nombreActual);
             /*Retornar el resultado*/
             return $resultado;
         }
@@ -90,7 +111,7 @@
                 /*Si el dato existe*/
                 if($nombre){
                     /*Llamar funcion que comprueba si el medio de pago ya ha sido registrado*/
-                    $unico = $this -> comprobarUnicoMedioPago($nombre);
+                    $unico = $this -> comprobarUnicoMedioPago(null, $nombre);
                     /*Comprobar si el nombre de la consola no existe*/
                     if($unico == null){
                         /*Llamar la funcion de guardar medio de pago*/
@@ -273,7 +294,7 @@
                 /*Si los datos existen*/           
                 if($idMedioPago){
                     /*Llamar funcion que comprueba si el medio de pago ya ha sido registrado*/
-                    $unico = $this -> comprobarUnicoMedioPago($idMedioPago);
+                    $unico = $this -> comprobarUnicoMedioPago($idMedioPago, $nombre);
                     /*Comprobar si el nombre del medio de pago no existe*/
                     if($unico == null){
                         /*Llamar la funcion de actualizar el medio de pago*/
@@ -287,7 +308,7 @@
                             /*Crear la sesion y redirigir a la ruta pertinente*/
                             Ayudas::crearSesionYRedirigir('actualizarmediopagosugerencia', "Introduce nuevos datos", '?controller=MedioPagoController&action=editar&id='.$idMedioPago);
                         } 
-                    /*Comprobar si el medio de pago existe*/    
+                    /*De lo contrario*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('actualizarmediopagoerror', "Este nombre ya se encuentra asociado a un medio de pago", '?controller=MedioPagoController&action=editar&id='.$idMedioPago);

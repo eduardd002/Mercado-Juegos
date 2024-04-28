@@ -231,9 +231,16 @@
         Funcion para comprobar si ya se ha creado el administrador con anterioridad
         */
 
-        public function comprobarAdministradorUnico(){
-            /*Construir la consulta*/
-            $consulta = "SELECT activo FROM administradores WHERE correo = '{$this -> getCorreo()}'";
+        public function comprobarAdministradorUnico($correoActual){
+            /*Comprobar si se quiere comprobar si es unico atravez del id*/
+            if($this -> getId() != null){
+                /*Construir la consulta*/
+                $consulta = "SELECT activo FROM administradores WHERE id = {$this -> getId()}";
+            /*Comprobar si se quiere comprobar si es unico atravez del correo*/
+            }elseif($this -> getCorreo() != null){
+                /*Construir la consulta*/
+                $consulta = "SELECT activo FROM administradores WHERE correo = '{$this -> getCorreo()}' AND correo != '{$correoActual}'";
+            }
             /*Llamar la funcion que ejecuta la consulta*/
             $administrador = $this -> db -> query($consulta);
             /*Obtener el resultado*/
@@ -247,8 +254,15 @@
         */
 
         public function recuperarAdministrador(){
-            /*Construir la consulta*/
-            $consulta = "UPDATE administradores SET activo = 1 WHERE correo = '{$this -> getCorreo()}'";
+            /*Comprobar si se quiere recuperar atravez del id*/
+            if($this -> getId() != null){
+                /*Construir la consulta*/
+                $consulta = "UPDATE administradores SET activo = 1 WHERE id = {$this -> getId()}";
+            /*Comprobar si se quiere recuperar atravez del correo*/
+            }elseif($this -> getCorreo() != null){
+                /*Construir la consulta*/
+                $consulta = "UPDATE administradores SET activo = 1 WHERE correo = '{$this -> getCorreo()}'";
+            }
             /*Llamar la funcion que ejecuta la consulta*/
             $recuperado = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/

@@ -89,7 +89,7 @@
         */
 
         public static function mostrarUsos(){
-            /*Incluir el objeto de categoria*/
+            /*Incluir el objeto de uso*/
             require_once 'Modelos/Uso.php';
             /*Instanciar el objeto*/
             $uso = new Uso();
@@ -104,7 +104,7 @@
         */
 
         public static function mostrarConsolas(){
-            /*Incluir el objeto de categoria*/
+            /*Incluir el objeto de consola*/
             require_once 'Modelos/Consola.php';
             /*Instanciar el objeto*/
             $consola = new Consola();
@@ -121,7 +121,7 @@
         public static function mostrarDatosUsuario(){
             /*Comprobar si hay un inicio de sesion de usuario*/
             if(isset($_SESSION['loginexitoso'])){
-                /*Incluir el objeto de categoria*/
+                /*Incluir el objeto de usuario*/
                 require_once 'Modelos/Usuario.php';
                 /*Instanciar el objeto*/
                 $usuario = new Usuario();
@@ -141,7 +141,7 @@
         public static function mostrarDatosAdministrador(){
             /*Comprobar si hay un inicio de sesion de administrador*/
             if(isset($_SESSION['loginexitosoa'])){
-                /*Incluir el objeto de categoria*/
+                /*Incluir el objeto de administrador*/
                 require_once 'Modelos/Administrador.php';
                 /*Instanciar el objeto*/
                 $administrador = new Administrador();
@@ -360,13 +360,84 @@
         }
 
         /*
+        Funcion para sumarle 3 meses a la fecha de hoy
+        */
+
+        public static function sumarTresMeses() {
+            /*Obtener la fecha de hoy*/
+            $fecha_actual = date('Y-m-d');
+            /*Convertir la fecha actual a un objeto DateTime*/ 
+            $fecha = new DateTime($fecha_actual);
+            /*Sumar 3 meses a la fecha actual*/ 
+            $fecha->modify('+3 months');
+            /*Obtener la fecha con el formato año mes dia*/ 
+            $fecha_sumada = $fecha->format('Y-m-d');
+            /*Retornar el resultado*/
+            return $fecha_sumada;
+        }
+
+        /*
+        Funcion para recuperar el usuario eliminado
+        */ 
+        
+        public static function recuperarUsuario($correo){ 
+            /*Incluir el objeto de usuario*/
+            require_once 'Modelos/Usuario.php';
+            /*Instanciar el objeto*/ 
+            $usuario = new Usuario(); 
+            /*Crear el objeto*/ 
+            $usuario -> setCorreo($correo); 
+            /*Ejecutar la consulta*/ 
+            $resultado = $usuario -> recuperarUsuario(); 
+            /*Retornar el resultado*/ 
+            return $resultado; 
+        }
+
+        /*
+        Funcion para obtener el usuario atravez del correo
+        */
+
+        public static function obtenerUsuarioPorCorreo($email){
+            /*Incluir el objeto de usuario*/
+            require_once 'Modelos/Usuario.php';
+            /*Instanciar el objeto*/ 
+            $usuario = new Usuario();
+            /*Crear el objeto*/ 
+            $usuario -> setCorreo($email);
+            /*Ejecutar la consulta*/
+            $usuarioEspecifico = $usuario -> obtenerIdPorCorreo();
+            /*Comprobar si el correo esta asociado a un usuario registrado*/
+            if($usuarioEspecifico != null){
+                /*Obtener el resultado*/
+                $resultado = $usuarioEspecifico -> id;
+            }else{
+                /*Obtener el resultado*/
+                $resultado = 0;
+            }
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para iniciar sesion
         */
 
         public static function iniciarSesion($email, $clave){
+            /*Llamar funcion que obtiene el usuario atravez del correo*/
+            $usuarioPorCorreo = (Ayudas::obtenerUsuarioPorCorreo($email));
+            /*Llamar la funcion que valida si la fecha de 3 meses necesaria para recuperar la cuenta ya ha pasado*/
+            $fechaSuperada = Ayudas::fechaSuperada($usuarioPorCorreo);
             /*Lamar las funciones que contiene la informacion del login del usuario y administrador*/
             $ingresoa = Ayudas::loginAdministrador($email, $clave);
-            $ingreso = Ayudas::loginUsuario($email, $clave);
+            /*Comprobar si el usuario no existe o la fecha ha sido superada*/
+            if($fechaSuperada == null || $fechaSuperada){
+                /*Llamar la funcion que obtiene el login del usuario*/
+                $ingreso = Ayudas::loginUsuario($email, $clave);
+            /*Comprobar si la fecha de 3 meses necesaria para recuperar la cuenta no ha sido superada*/
+            }else if($fechaSuperada == false){
+                /*Llamar la funcion que recupera la cuenta*/
+                Ayudas::recuperarUsuario($email);
+            }
             /*Comprobar si el ingreso del usuario es exitoso*/
             if($ingreso && is_object($ingreso)){
                 /*Crear la sesiones con el objeto completo del usuario e informacion referente*/
@@ -429,13 +500,13 @@
         */
 
         public static function obtenerUsuarioEnConcreto($id){
-            /*Incluir el objeto de chat*/
+            /*Incluir el objeto de usuario*/
             require_once 'Modelos/Usuario.php';
             /*instanciar el objeto*/
             $usuario = new Usuario();
             /*Construir objeto*/
             $usuario -> setId($id);
-            /*Obtener resultado*/
+            /*Obtener el resultado*/
             $usuarioObtenido = $usuario -> obtenerUno();
             /*Retornar el resultado*/
             return $usuarioObtenido;
@@ -446,16 +517,56 @@
         */
 
         public static function obtenerVideojuegoEnConcreto($id){
-            /*Incluir el objeto de chat*/
+            /*Incluir el objeto de videojuego*/
             require_once 'Modelos/Videojuego.php';
             /*instanciar el objeto*/
             $videojuego = new Videojuego();
             /*Construir objeto*/
             $videojuego -> setId($id);
-            /*Obtener resultado*/
+            /*Obtener el resultado*/
             $videojuegoObtenido = $videojuego -> traerUno();
             /*Retornar el resultado*/
             return $videojuegoObtenido;
+        }
+
+        /*
+        Funcion para obtener la fecha limite que tiene el usuario para recuperar la cuenta
+        */
+
+        public static function obtenerFechaLimite($id){
+            /*Incluir el objeto de usuario*/
+            require_once 'Modelos/Usuario.php';
+            /*Instanciar el objeto*/
+            $usuario = new Usuario();
+            /*Crear el objeto*/
+            $usuario -> setId($id);
+            /*Ejecutar la consulta*/
+            $fecha = $usuario -> fechaLimite();
+            /*Obtener el resultado*/
+            $resultado = $fecha -> fechaLimiteRecuperarCuenta;
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
+        Funcion para comparar si se ha pasado de la fecha limite
+        */
+
+        public static function fechaSuperada($idUsuario){
+            /*Comprobar si el usuario existe*/
+            if($idUsuario > 0){
+                /*Llamar la funcion que captura la fecha limite del usuario*/
+                $fechaUsuario = Ayudas::obtenerFechaLimite($idUsuario);
+                /*Comparar si se ha pasado la fecha*/
+                if($fechaUsuario < date("Y-m-d")){
+                    /*Retornar el resultado*/
+                    return true;
+                /*De lo contrario*/    
+                }else{
+                    /*Retornar el resultado*/
+                    return false;
+                }
+            }
         }
         
     }

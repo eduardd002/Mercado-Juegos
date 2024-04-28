@@ -186,16 +186,9 @@
         Funcion para comprobar si ya se ha creado el estado con anterioridad
         */
 
-        public function comprobarEstadoUnico(){
-            /*Comprobar si se quiere comprobar si es unica atravez del id*/
-            if($this -> getId() != null){
-                /*Construir la consulta*/
-                $consulta = "SELECT activo FROM categorias WHERE id = {$this -> getId()}";
-            /*Comprobar si se quiere comprobar si es unica atravez del nombre*/
-            }elseif($this -> getNombre() != null){
-                /*Construir la consulta*/
-                $consulta = "SELECT activo FROM categorias WHERE nombre = '{$this -> getNombre()}'";
-            }
+        public function comprobarEstadoUnico($nombre){
+            /*Construir la consulta*/
+            $consulta = "SELECT activo FROM categorias WHERE nombre = '{$this -> getNombre()}' AND nombre != '{$nombre}'";
             /*Llamar la funcion que ejecuta la consulta*/
             $estado = $this -> db -> query($consulta);
             /*Obtener el resultado*/

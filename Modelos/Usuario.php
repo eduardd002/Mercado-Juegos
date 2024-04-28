@@ -18,6 +18,7 @@
         private $municipio;
         private $foto;
         private $fecharegistro;
+        private $fechaLimiteRecuperarCuenta;
         private $db;
 
         /*
@@ -213,7 +214,7 @@
         Funcion getter de fecha de registro
         */
 
-        public function getFecharegistro(){
+        public function getFechaRegistro(){
             /*Retornar el resultado*/
             return $this->fecharegistro;
         }
@@ -222,9 +223,29 @@
         Funcion setter de fecha de registro
         */
 
-        public function setFecharegistro($fecharegistro){
+        public function setFechaRegistro($fecharegistro){
             /*Llamar parametro*/
             $this->fecharegistro = $fecharegistro;
+            /*Retornar el resultado*/
+            return $this;
+        }
+
+        /*
+        Funcion getter de fecha limite
+        */
+
+        public function getFechaLimiteRecuperarCuenta(){
+            /*Retornar el resultado*/
+            return $this->fechaLimiteRecuperarCuenta;
+        }
+
+        /*
+        Funcion setter de fecha limite
+        */
+
+        public function setFechaLimiteRecuperarCuenta($fechaLimiteRecuperarCuenta){
+            /*Llamar parametro*/
+            $this->fechaLimiteRecuperarCuenta = $fechaLimiteRecuperarCuenta;
             /*Retornar el resultado*/
             return $this;
         }
@@ -273,9 +294,16 @@
         Funcion para comprobar si ya se ha creado el usuario con anterioridad
         */
 
-        public function comprobarUsuarioUnico(){
-            /*Construir la consulta*/
-            $consulta = "SELECT activo FROM usuarios WHERE correo = '{$this -> getCorreo()}'";
+        public function comprobarUsuarioUnico($correoActual){
+            /*Comprobar si se quiere comprobar si es unico atravez del id*/
+            if($this -> getId() != null){
+                /*Construir la consulta*/
+                $consulta = "SELECT activo FROM usuarios WHERE id = {$this -> getId()}";
+            /*Comprobar si se quiere comprobar si es unico atravez del correo*/
+            }elseif($this -> getCorreo() != null){
+                /*Construir la consulta*/
+                $consulta = "SELECT activo FROM usuarios WHERE correo = '{$this -> getCorreo()}' AND correo != '{$correoActual}'";
+            }
             /*Llamar la funcion que ejecuta la consulta*/
             $usuario = $this -> db -> query($consulta);
             /*Obtener el resultado*/
@@ -289,8 +317,15 @@
         */
 
         public function recuperarUsuario(){
-            /*Construir la consulta*/
-            $consulta = "UPDATE usuarios SET activo = 1 WHERE correo = '{$this -> getCorreo()}'";
+            /*Comprobar si se quiere recuperar atravez del id*/
+            if($this -> getId() != null){
+                /*Construir la consulta*/
+                $consulta = "UPDATE usuarios SET activo = 1 WHERE id = {$this -> getId()}";
+            /*Comprobar si se quiere recuperar atravez del correo*/
+            }elseif($this -> getCorreo() != null){
+                /*Construir la consulta*/
+                $consulta = "UPDATE usuarios SET activo = 1 WHERE correo = '{$this -> getCorreo()}'";
+            }
             /*Llamar la funcion que ejecuta la consulta*/
             $recuperado = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/
@@ -302,6 +337,21 @@
             }
             /*Retornar el resultado*/
             return $bandera;
+        }
+
+        /*
+        Funcion para obtener la fecha limite que tiene el usuario para recuperar su cuenta
+        */
+
+        public function fechaLimite(){
+            /*Construir la consulta*/
+            $consulta = "SELECT fechaLimiteRecuperarCuenta FROM usuarios WHERE id = {$this -> getId()}";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $usuario = $this -> db -> query($consulta);
+            /*Obtener el resultado*/
+            $resultado = $usuario -> fetch_object();
+            /*Retornar el resultado*/
+            return $resultado;
         }
 
         /*
@@ -319,7 +369,7 @@
                 '{$this -> getFechaNacimiento()}', {$this -> getNumeroTelefono()}, 
                 '{$this -> getCorreo()}', '{$claveSegura}', 
                 '{$this -> getDepartamento()}', '{$this -> getMunicipio()}', 
-                '{$this -> getFoto()}', '{$this -> getFechaRegistro()}')";
+                '{$this -> getFoto()}', '{$this -> getFechaRegistro()}', '{$this -> getFechaLimiteRecuperarCuenta()}')";
             /*Llamar la funcion que ejecuta la consulta*/
             $registro = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/
@@ -398,7 +448,7 @@
 
         public function eliminar(){
             /*Construir la consulta*/
-            $consulta = "UPDATE usuarios SET activo = '{$this -> getActivo()}' WHERE id = {$this -> getId()}";
+            $consulta = "UPDATE usuarios SET activo = '{$this -> getActivo()}', fechaLimiteRecuperarCuenta = '{$this -> getFechaLimiteRecuperarCuenta()}' WHERE id = {$this -> getId()}";
             /*Llamar la funcion que ejecuta la consulta*/
             $eliminado = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/
@@ -419,6 +469,21 @@
         public function obtenerUno(){
             /*Construir la consulta*/
             $consulta = "SELECT DISTINCT * FROM usuarios WHERE id = {$this -> getId()} AND activo = 1";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $categoria = $this -> db -> query($consulta);
+            /*Obtener el resultado*/
+            $resultado = $categoria -> fetch_object();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
+        Funcion para obtener un usuario atravez del correo
+        */
+
+        public function obtenerIdPorCorreo(){
+            /*Construir la consulta*/
+            $consulta = "SELECT DISTINCT id FROM usuarios WHERE correo = '{$this -> getCorreo()}'";
             /*Llamar la funcion que ejecuta la consulta*/
             $categoria = $this -> db -> query($consulta);
             /*Obtener el resultado*/

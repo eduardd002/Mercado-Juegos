@@ -186,16 +186,9 @@
         Funcion para comprobar si ya se ha creado el medio de pago con anterioridad
         */
 
-        public function comprobarMedioPagoUnico(){
-            /*Comprobar si se quiere comprobar si es unica atravez del id*/
-            if($this -> getId() != null){
-                /*Construir la consulta*/
-                $consulta = "SELECT activo FROM mediospago WHERE id = {$this -> getId()}";
-            /*Comprobar si se quiere comprobar si es unica atravez del nombre*/
-            }elseif($this -> getNombre() != null){
-                /*Construir la consulta*/
-                $consulta = "SELECT activo FROM mediospago WHERE nombre = '{$this -> getNombre()}'";
-            }
+        public function comprobarMedioPagoUnico($nombre){
+            /*Construir la consulta*/
+            $consulta = "SELECT activo FROM mediospago WHERE nombre = '{$this -> getNombre()}' AND nombre != '{$nombre}'";
             /*Llamar la funcion que ejecuta la consulta*/
             $mediopago = $this -> db -> query($consulta);
             /*Obtener el resultado*/

@@ -141,7 +141,7 @@
             /*Crear el objeto*/
             $usuarioChat -> setIdRemitente($_SESSION['loginexitoso'] -> id);
             $usuarioChat -> setIdDestinatario($_SESSION['mensajechat']);
-            /*Obtener resultado*/
+            /*Obtener el resultado*/
             $identificador = $usuarioChat -> obtenerIdentificadorPropioDeChat();
             /*Retornar el resultado*/
             return $identificador;

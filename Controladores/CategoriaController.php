@@ -32,6 +32,23 @@
         }
 
         /*
+        Funcion para obtener el nombre de la categoria
+        */
+
+        public function obtenerNombre($id){
+            /*Instanciar el objeto*/
+            $categoria = new Categoria();
+            /*Crear el objeto*/
+            $categoria -> setId($id);
+            /*Ejecutar la consulta*/
+            $categoriaUnica = $categoria -> obtenerUna();
+            /*Obtener el resultado*/
+            $resultado = $categoriaUnica -> nombre;
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para guardar una categoria en la base de datos
         */
 
@@ -51,14 +68,18 @@
         Funcion para comprobar si la categoria ya ha sido creada previamente
         */
 
-        public function comprobarUnicaCategoria($id = null, $nombre = null){
+        public function comprobarUnicaCategoria($id, $nombre){
+            /*Comprobar si el id es nulo*/
+            if($id != null){
+                /*Llamar la funcion que obtiene el nombre de la cateogoria en concreto*/
+                $nombreActual = $this -> obtenerNombre($id);
+            }
             /*Instanciar el objeto*/
             $categoria = new Categoria();
             /*Crear el objeto*/
-            $categoria -> setId($id);
             $categoria -> setNombre($nombre);
             /*Ejecutar la consulta*/
-            $resultado = $categoria -> comprobarCategoriaUnica();
+            $resultado = $categoria -> comprobarCategoriaUnica($nombreActual);
             /*Retornar el resultado*/
             return $resultado;
         }
@@ -90,7 +111,7 @@
                 /*Si el dato existe*/
                 if($nombre){
                     /*Llamar funcion que comprueba si la categoria ya ha sido registrada*/
-                    $unico = $this -> comprobarUnicaCategoria($nombre);
+                    $unico = $this -> comprobarUnicaCategoria(null, $nombre);
                     /*Comprobar si el nombre de la categoria no existe*/
                     if($unico == null){
                         /*Llamar la funcion de guardar categoria*/
@@ -273,7 +294,7 @@
                 /*Si los datos existen*/
                 if($idCategoria){
                     /*Llamar funcion que comprueba si la categoria ya ha sido registrada*/
-                    $unico = $this -> comprobarUnicaCategoria($idCategoria);
+                    $unico = $this -> comprobarUnicaCategoria($idCategoria, $nombre);
                     /*Comprobar si el nombre de la consola no existe*/
                     if($unico == null){
                         /*Llamar la funcion de actualizar categoria*/
@@ -287,7 +308,7 @@
                             /*Crear la sesion y redirigir a la ruta pertinente*/
                             Ayudas::crearSesionYRedirigir('actualizarcategoriasugerencia', "Introduce nuevos datos", '?controller=CategoriaController&action=editar&id='.$idCategoria);
                         }      
-                    /*Comprobar si la categoria existe*/    
+                    /*De lo contrario*/     
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
                         Ayudas::crearSesionYRedirigir('actualizarcategoriaerror', "Este nombre ya se encuentra asociado a una categoria", '?controller=CategoriaController&action=editar&id='.$idCategoria);
