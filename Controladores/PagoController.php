@@ -36,17 +36,8 @@
             $pago -> setIdUsuario($_SESSION['loginexitoso'] -> id);
             $pago -> setIdMedioPago($medioPago);
             $pago -> setNumero($numero);
-            /*Intentar guardar el pago*/
-            try{
-                /*Ejecutar la consulta*/
-                $guardado = $pago -> guardar();
-            /*Capturar la excepcion*/        
-            }catch(mysqli_sql_exception $excepcion){
-                /*Crear la sesion y redirigir a la ruta pertinente*/
-                Ayudas::crearSesionYRedirigir('guardarpagoerror', "Este pago ya existe", '?controller=PagoController&action=crear');
-                /*Cortar la ejecucion*/
-                die();
-            }
+            /*Ejecutar la consulta*/
+            $guardado = $pago -> guardar();
             /*Retornar el resultado*/
             return $guardado;
         }
@@ -214,17 +205,8 @@
             $pago -> setId($idPago);
             $pago -> setIdMedioPago($medioPago);
             $pago -> setNumero($numero);
-            /*Intentar actualizar el pago*/
-            try{
-                /*Ejecutar la consulta*/
-                $actualizado = $pago -> actualizar();
-            /*Capturar la excepcion*/    
-            }catch(mysqli_sql_exception $excepcion){
-                /*Crear la sesion y redirigir a la ruta pertinente*/
-                Ayudas::crearSesionYRedirigir('actualizarpagoerror', "Este pago ya existe", '?controller=PagoController&action=editar&id='.$idPago);
-                /*Cortar la ejecucion*/
-                die();
-            }
+            /*Ejecutar la consulta*/
+            $actualizado = $pago -> actualizar();
             /*Retornar el resultado*/
             return $actualizado;
         }

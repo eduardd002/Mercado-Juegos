@@ -19,6 +19,19 @@
         }
 
         /*
+        Funcion para ver las consolas eliminadas
+        */
+
+        public function verConsolasEliminadas(){
+            /*Instanciar el objeto*/
+            $consola = new Consola();
+            /*Listar todas las consolas desde la base de datos*/
+            $listadoConsolas = $consola -> listarInactivas();
+            /*Incluir la vista*/
+            require_once "Vistas/Consola/Inactivas.html";
+        }
+
+        /*
         Funcion para guardar una consola en la base de datos
         */
 
@@ -28,17 +41,8 @@
             /*Crear el objeto*/
             $consola -> setactivo(TRUE);
             $consola -> setNombre($nombre);
-            /*Intentar guardar la consola en la base de datos*/
-            try{
-                /*Ejecutar la consulta*/
-                $guardado = $consola -> guardar();
-            /*Capturar la excepcion*/  
-            }catch(mysqli_sql_exception $excepcion){
-                /*Crear la sesion y redirigir a la ruta pertinente*/
-                Ayudas::crearSesionYRedirigir('guardarconsolaerror', "Este nombre de consola ya existe", '?controller=ConsolaController&action=crear');
-                /*Cortar la ejecucion*/
-                die();
-            }
+            /*Ejecutar la consulta*/
+            $guardado = $consola -> guardar();
             /*Retornar el resultado*/
             return $guardado;
         }
@@ -47,10 +51,11 @@
         Funcion para comprobar si la consola ya ha sido creada previamente
         */
 
-        public function comprobarUnicaConsola($nombre){
+        public function comprobarUnicaConsola($id = null, $nombre = null){
             /*Instanciar el objeto*/
             $consola = new Consola();
             /*Crear el objeto*/
+            $consola -> setId($id);
             $consola -> setNombre($nombre);
             /*Ejecutar la consulta*/
             $resultado = $consola -> comprobarConsolaUnica();
@@ -249,17 +254,8 @@
             /*Crear el objeto*/
             $consola -> setId($idConsola);
             $consola -> setNombre($nombre);
-            /*Intentar actualizar la consola en la base de datos*/
-            try{
-                /*Ejecutar la consulta*/
-                $actualizado = $consola -> actualizar();
-            /*Capturar la excepcion*/ 
-            }catch(mysqli_sql_exception $excepcion){
-                /*Crear la sesion y redirigir a la ruta pertinente*/
-                Ayudas::crearSesionYRedirigir('actualizarconsolaerror', "Este nombre de consola ya existe", '?controller=ConsolaController&action=editar&id='.$idConsola);
-                /*Cortar la ejecucion*/
-                die();
-            }
+            /*Ejecutar la consulta*/
+            $actualizado = $consola -> actualizar();
             /*Retornar el resultado*/
             return $actualizado;
         }
@@ -276,22 +272,81 @@
                 $nombre = isset($_POST['nombreconsact']) ? $_POST['nombreconsact'] : false;
                 /*Si los datos existen*/
                 if($idConsola){
-                    /*Llamar la funcion de actualizar consola*/
-                    $actualizado = $this -> actualizarConsola($idConsola, $nombre);
-                    /*Comprobar si la consola ha sido actualizada*/
-                    if($actualizado){
-                        /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('actualizarconsolaacierto', "La consola ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarConsola');
-                    /*De lo contrario*/   
+                    /*Llamar funcion que comprueba si la consola ya ha sido registrada*/
+                    $unico = $this -> comprobarUnicaConsola($idConsola);
+                    /*Comprobar si el nombre de la consola no existe*/
+                    if($unico == null){
+                        /*Llamar la funcion de actualizar consola*/
+                        $actualizado = $this -> actualizarConsola($idConsola, $nombre);
+                        /*Comprobar si la consola ha sido actualizada*/
+                        if($actualizado){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('actualizarconsolaacierto', "La consola ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarConsola');
+                        /*De lo contrario*/   
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('actualizarconsolasugerencia', "Introduce nuevos datos", '?controller=ConsolaController&action=editar&id='.$idConsola);
+                        }
+                    /*Comprobar si la consola existe*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('actualizarconsolasugerencia', "Introduce nuevos datos", '?controller=ConsolaController&action=editar&id='.$idConsola);
-                    }
+                        Ayudas::crearSesionYRedirigir('actualizarconsolaerror', "Este nombre ya se encuentra asociado a una consola", '?controller=ConsolaController&action=editar&id='.$idConsola);
+                    } 
                 /*De lo contrario*/       
                 }else{
                     /*Crear la sesion y redirigir a la ruta pertinente*/
                     Ayudas::crearSesionYRedirigir('actualizarconsolaerror', "Ha ocurrido un error al actualizar la consola", '?controller=ConsolaController&action=editar&id='.$idConsola);
                 }  
+            /*De lo contrario*/    
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+            }
+        }
+
+        /*
+        Funcion para recuperar una consola en la base de datos
+        */
+
+        public function restaurarConsola($idConsola){
+            /*Instanciar el objeto*/
+            $consola = new Consola();
+            /*Crear el objeto*/
+            $consola -> setId($idConsola);
+            $consola -> setActivo(TRUE);
+            /*Ejecutar la consulta*/
+            $eliminado = $consola -> recuperarConsola();
+            /*Retornar el resultado*/
+            return $eliminado;
+        }
+
+        /*
+        Funcion para eliminar una consola
+        */
+
+        public function restaurar(){
+            /*Comprobar si el dato esta llegando*/
+            if(isset($_GET)){
+                /*Comprobar si el dato existe*/
+                $idConsola = isset($_GET['id']) ? $_GET['id'] : false;
+                /*Si el dato existe*/
+                if($idConsola){
+                    /*Llamar la funcion que elimina la consola*/
+                    $eliminado = $this -> restaurarConsola($idConsola);
+                    /*Comprobar si la consola ha sido eliminada con exito*/
+                    if($eliminado){
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('restaurarconsolaacierto', "La consola ha sido restaurada exitosamente", '?controller=AdministradorController&action=gestionarConsola');
+                    /*De lo contrario*/   
+                    }else{
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('restaurarconsolaerror', "La consola no ha sido restaurada exitosamente", '?controller=ConsolaController&action=verConsolasEliminadas');
+                    }
+                /*De lo contrario*/   
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir('restaurarconsolaerror', "Ha ocurrido un error al restaurar la consola", '?controller=ConsolaController&action=verConsolasEliminadas');
+                }
             /*De lo contrario*/    
             }else{
                 /*Crear la sesion y redirigir a la ruta pertinente*/

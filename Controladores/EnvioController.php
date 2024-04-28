@@ -33,17 +33,8 @@
             $envio -> setCodigoPostal($codigoPostal);
             $envio -> setBarrio($barrio);
             $envio -> setDireccion($direccion);
-            /*Intentar guardar el envio*/
-            try{
-                /*Ejecutar la consulta*/
-                $guardado = $envio -> guardar();
-            /*Capturar la excepcion*/    
-            }catch(mysqli_sql_exception $excepcion){
-                /*Crear la sesion y redirigir a la ruta pertinente*/
-                Ayudas::crearSesionYRedirigir('guardarenvioerror', "Este envio ya existe", '?controller=EnvioController&action=crear');
-                /*Cortar la ejecucion*/
-                die();
-            }
+            /*Ejecutar la consulta*/
+            $guardado = $envio -> guardar();
             /*Retornar el resultado*/
             return $guardado;
         }
@@ -206,17 +197,8 @@
             $envio -> setCodigoPostal($codigoPostal);
             $envio -> setBarrio($barrio);
             $envio -> setDireccion($direccion);
-            /*Intentar actualizar el envio*/
-            try{
-                /*Ejecutar la consulta*/
-                $actualizado = $envio -> actualizar();
-            /*Captura la excepcion*/    
-            }catch(mysqli_sql_exception $excepcion){
-                /*Crear la sesion y redirigir a la ruta pertinente*/
-                Ayudas::crearSesionYRedirigir('actualizarenvioerror', "Este envio ya existe", '?controller=EnvioController&action=editar&id='.$idEnvio);
-                /*Cortar la ejecucion*/
-                die();
-            }
+            /*Ejecutar la consulta*/
+            $actualizado = $envio -> actualizar();
             /*Retornar el resultado*/
             return $actualizado;
         }

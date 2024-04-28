@@ -101,12 +101,25 @@
         }
 
         /*
-        Funcion para listar todas las mediospagos
+        Funcion para listar todos los medios de pago activos
         */
 
         public function listar(){
             /*Construir la consulta*/
             $consulta = "SELECT DISTINCT * FROM mediospago WHERE activo = 1";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $lista = $this -> db -> query($consulta);
+            /*Retornar el resultado*/
+            return $lista;
+        }
+
+        /*
+        Funcion para listar todos los medios de pago inactivos
+        */
+
+        public function listarInactivos(){
+            /*Construir la consulta*/
+            $consulta = "SELECT DISTINCT * FROM mediospago WHERE activo = 0";
             /*Llamar la funcion que ejecuta la consulta*/
             $lista = $this -> db -> query($consulta);
             /*Retornar el resultado*/
@@ -174,8 +187,15 @@
         */
 
         public function comprobarMedioPagoUnico(){
-            /*Construir la consulta*/
-            $consulta = "SELECT activo FROM mediospago WHERE nombre = '{$this -> getNombre()}'";
+            /*Comprobar si se quiere comprobar si es unica atravez del id*/
+            if($this -> getId() != null){
+                /*Construir la consulta*/
+                $consulta = "SELECT activo FROM mediospago WHERE id = {$this -> getId()}";
+            /*Comprobar si se quiere comprobar si es unica atravez del nombre*/
+            }elseif($this -> getNombre() != null){
+                /*Construir la consulta*/
+                $consulta = "SELECT activo FROM mediospago WHERE nombre = '{$this -> getNombre()}'";
+            }
             /*Llamar la funcion que ejecuta la consulta*/
             $mediopago = $this -> db -> query($consulta);
             /*Obtener el resultado*/
@@ -189,8 +209,15 @@
         */
 
         public function recuperarMedioPago(){
-            /*Construir la consulta*/
-            $consulta = "UPDATE mediospago SET activo = 1 WHERE nombre = '{$this -> getNombre()}'";
+            /*Comprobar si se quiere recuperar atravez del id*/
+            if($this -> getId() != null){
+                /*Construir la consulta*/
+                $consulta = "UPDATE mediospago SET activo = 1 WHERE id = {$this -> getId()}";
+            /*Comprobar si se quiere recuperar atravez del nombre*/
+            }elseif($this -> getNombre() != null){
+                /*Construir la consulta*/
+                $consulta = "UPDATE mediospago SET activo = 1 WHERE nombre = '{$this -> getNombre()}'";
+            }
             /*Llamar la funcion que ejecuta la consulta*/
             $recuperado = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/

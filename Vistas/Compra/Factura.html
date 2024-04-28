@@ -1,24 +1,24 @@
 <div id="contenidoCentral">      
     <div id="detalleCompraYVenta">
         <img src="Recursos/Logotipos/Logo.png" alt="logo compra exitosa" style="width: 50px; height: 50px; float: right; margin-top: 20px; margin-right: 20px;">
-        <h1 style="text-align: center;">Factura De Compra N° <?=$detalle['compra']['factura']?></h1>
+        <h1 style="text-align: center;">Factura De Compra N° <?=$detalleCompra['compra']['factura']?></h1>
         <h3>Detalles del vendedor</h3>
-        <h5>Nombre: <?=$detalle['compra']['nombreVendedor']?></h5>
-        <h5>Apellido: <?=$detalle['compra']['apellidoVendedor']?></h5>
-        <h5>Telefono: <?=$detalle['compra']['telefonoVendedor']?></h5>
-        <h5>Correo: <?=$detalle['compra']['correoVendedor']?></h5>
+        <h5>Nombre: <?=$detalleCompra['compra']['nombreVendedor']?></h5>
+        <h5>Apellido: <?=$detalleCompra['compra']['apellidoVendedor']?></h5>
+        <h5>Telefono: <?=$detalleCompra['compra']['telefonoVendedor']?></h5>
+        <h5>Correo: <?=$detalleCompra['compra']['correoVendedor']?></h5>
         <h3>Detalles del envio</h3>
-        <h5>Departamento: <?=$detalle['compra']['departamentoEnvio']?></h5>
-        <h5>Municipio: <?=$detalle['compra']['municipioEnvio']?></h5>
-        <h5>Codigo postal: <?=$detalle['compra']['codigoPostalEnvio']?></h5>
-        <h5>Direccion: <?=$detalle['compra']['direccionEnvio']?></h5>
-        <h5>Barrio: <?=$detalle['compra']['barrioEnvio']?></h5>
+        <h5>Departamento: <?=$detalleCompra['compra']['departamentoEnvio']?></h5>
+        <h5>Municipio: <?=$detalleCompra['compra']['municipioEnvio']?></h5>
+        <h5>Codigo postal: <?=$detalleCompra['compra']['codigoPostalEnvio']?></h5>
+        <h5>Direccion: <?=$detalleCompra['compra']['direccionEnvio']?></h5>
+        <h5>Barrio: <?=$detalleCompra['compra']['barrioEnvio']?></h5>
         <h3>Detalles del pago</h3>
-        <h5>Medio de pago: <?=$detalle['compra']['medioPagoNombre']?></h5>
-        <h5>Numero: <?=$detalle['compra']['numero']?></h5>
+        <h5>Medio de pago: <?=$detalleCompra['compra']['medioPagoNombre']?></h5>
+        <h5>Numero: <?=$detalleCompra['compra']['numero']?></h5>
         <h3>Detalles del estado</h3>
-        <h5><?=$detalle['compra']['nombreEstado']?></h5>
-        <a style="color: white;" href="<?=rutaInicio?><?=transaccion?><?=generarPdf?>&factura=<?=$detalle['compra']['factura']?>" class="button-generarPdf">Generar recibo</a>
+        <h5><?=$detalleCompra['compra']['nombreEstado']?></h5>
+        <a style="color: white;" href="<?=rutaInicio?><?=transaccion?><?=generarPdf?>&factura=<?=$detalleCompra['compra']['factura']?>" class="button-generarPdf">Generar recibo</a>
         <h3>Videojuegos</h3>
         <div id="factura">
             <table style="width: 92%; border-collapse: collapse; margin-bottom: 40px;">
@@ -29,7 +29,7 @@
                     <th style="background-color: #f2f2f2; border: 1px solid #ddd; padding: 8px; text-align: left;">Precio</th>
                     <th style="background-color: #f2f2f2; border: 1px solid #ddd; padding: 8px; text-align: left;">Unidades</th>
                 </tr>
-                <?php foreach ($detalle['compra']['videojuegos'] as $videojuego) : ?>
+                <?php foreach ($detalleCompra['compra']['videojuegos'] as $videojuego) : ?>
                     <tr>
                         <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$videojuego['nombreVideojuegoCompra']?></td>
                         <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$videojuego['usoVideojuegoCompra']?></td>
@@ -43,7 +43,7 @@
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"></td>
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"></td>
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: left; font-weight: bold; color: green; font-size: 15px;">Total</td>
-                    <td style="border: 1px solid #ddd; padding: 8px; text-align: left; font-weight: bold; color: green; font-size: 15px;">$ <?=$detalle['compra']['totalTransaccion']?></td>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: left; font-weight: bold; color: green; font-size: 15px;">$ <?=$detalleCompra['compra']['totalTransaccion']?></td>
                 </tr>
             </table>
         </div>

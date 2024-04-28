@@ -1,0 +1,32 @@
+<div id="contenidoCentral">
+
+    <?php if(isset($_SESSION['restaurarmediopagoerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['restaurarmediopagoerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('restaurarmediopagoerror'); ?>
+
+    <?php if(mysqli_num_rows($listadoMediospago) == 0) : ?>
+        <h1>No hay Medios De Pago Eliminados</h1>
+        <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
+    <?php else : ?>
+        <h1>Medios de pago eliminados</h1>
+        <hr>
+        <div id="gestiones">
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                </tr>
+                <?php while($mediospago = $listadoMediospago -> fetch_object()) : ?>
+                    <tr>
+                        <td><?=$mediospago -> id?></td>
+                        <td><?=$mediospago -> nombre?></td>
+                        <td><a href="<?=rutaInicio?><?=mediopago?><?=restaurarMedioPago?>&id=<?=$mediospago -> id?>" class="button button-eliminarVideojuego">Recuperar</a></td>
+                    </tr>
+                <?php endwhile;?>
+            </table>
+        </div>
+    <?php endif; ?>
+</div>

@@ -19,6 +19,19 @@
         }
 
         /*
+        Funcion para ver las categorias eliminadas
+        */
+
+        public function verCategoriasEliminadas(){
+            /*Instanciar el objeto*/
+            $categoria = new Categoria();
+            /*Listar todas las consolas desde la base de datos*/
+            $listadoCategorias = $categoria -> listarInactivas();
+            /*Incluir la vista*/
+            require_once "Vistas/Categoria/Inactivas.html";
+        }
+
+        /*
         Funcion para guardar una categoria en la base de datos
         */
 
@@ -28,17 +41,8 @@
             /*Crear el objeto*/
             $categoria -> setactivo(TRUE);
             $categoria -> setNombre($nombre);
-            /*Intentar guardar la categoria en la base de datos*/
-            try{
-                /*Ejecutar la consulta*/
-                $guardado = $categoria -> guardar();
-            /*Capturar la excepcion*/    
-            }catch(mysqli_sql_exception $excepcion){
-                /*Crear la sesion y redirigir a la ruta pertinente*/
-                Ayudas::crearSesionYRedirigir('guardarcategoriaerror', "Este nombre de categoria ya existe", '?controller=CategoriaController&action=crear');
-                /*Cortar la ejecucion*/
-                die();
-            }
+            /*Ejecutar la consulta*/
+            $guardado = $categoria -> guardar();
             /*Retornar el resultado*/
             return $guardado;
         }
@@ -47,10 +51,11 @@
         Funcion para comprobar si la categoria ya ha sido creada previamente
         */
 
-        public function comprobarUnicaCategoria($nombre){
+        public function comprobarUnicaCategoria($id = null, $nombre = null){
             /*Instanciar el objeto*/
             $categoria = new Categoria();
             /*Crear el objeto*/
+            $categoria -> setId($id);
             $categoria -> setNombre($nombre);
             /*Ejecutar la consulta*/
             $resultado = $categoria -> comprobarCategoriaUnica();
@@ -249,17 +254,8 @@
             /*Crear el objeto*/
             $categoria -> setId($idCategoria);
             $categoria -> setNombre($nombre);
-            /*Intentar actualizar la categoria en la base de datos*/
-            try{
-                /*Ejecutar la consulta*/
-                $actualizado = $categoria -> actualizar();
-            /*Capturar la excepcion*/    
-            }catch(mysqli_sql_exception $excepcion){
-                /*Crear la sesion y redirigir a la ruta pertinente*/
-                Ayudas::crearSesionYRedirigir('actualizarcategoriaerror', "Este nombre de categoria ya existe", '?controller=CategoriaController&action=editar&id='.$idCategoria);
-                /*Cortar la ejecucion*/
-                die();
-            }
+            /*Ejecutar la consulta*/
+            $actualizado = $categoria -> actualizar();
             /*Retornar el resultado*/
             return $actualizado;
         }
@@ -276,22 +272,81 @@
                 $nombre = isset($_POST['nombrecatact']) ? $_POST['nombrecatact'] : false;
                 /*Si los datos existen*/
                 if($idCategoria){
-                    /*Llamar la funcion de actualizar categoria*/
-                    $actualizado = $this -> actualizarCategoria($idCategoria, $nombre);
-                    /*Comprobar si la categoria ha sido actualizada*/
-                    if($actualizado){
-                        /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('actualizarcategoriaacierto', "La categoria ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarCategoria');
-                    /*De lo contrario*/ 
+                    /*Llamar funcion que comprueba si la categoria ya ha sido registrada*/
+                    $unico = $this -> comprobarUnicaCategoria($idCategoria);
+                    /*Comprobar si el nombre de la consola no existe*/
+                    if($unico == null){
+                        /*Llamar la funcion de actualizar categoria*/
+                        $actualizado = $this -> actualizarCategoria($idCategoria, $nombre);
+                        /*Comprobar si la categoria ha sido actualizada*/
+                        if($actualizado){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('actualizarcategoriaacierto', "La categoria ha sido actualizada exitosamente", '?controller=AdministradorController&action=gestionarCategoria');
+                        /*De lo contrario*/ 
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('actualizarcategoriasugerencia', "Introduce nuevos datos", '?controller=CategoriaController&action=editar&id='.$idCategoria);
+                        }      
+                    /*Comprobar si la categoria existe*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('actualizarcategoriasugerencia', "Introduce nuevos datos", '?controller=CategoriaController&action=editar&id='.$idCategoria);
-                    }
+                        Ayudas::crearSesionYRedirigir('actualizarcategoriaerror', "Este nombre ya se encuentra asociado a una categoria", '?controller=CategoriaController&action=editar&id='.$idCategoria);
+                    } 
                 /*De lo contrario*/     
                 }else{
                     /*Crear la sesion y redirigir a la ruta pertinente*/
                     Ayudas::crearSesionYRedirigir('actualizarcategoriaerror', "Ha ocurrido un error al actualizar la cateogoria", '?controller=CategoriaController&action=editar&id='.$idCategoria);
                 }  
+            /*De lo contrario*/    
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+            }
+        }
+
+        /*
+        Funcion para recuperar una categoria en la base de datos
+        */
+
+        public function restaurarCategoria($idCategoria){
+            /*Instanciar el objeto*/
+            $categoria = new Categoria();
+            /*Crear el objeto*/
+            $categoria -> setId($idCategoria);
+            $categoria -> setActivo(TRUE);
+            /*Ejecutar la consulta*/
+            $eliminado = $categoria -> recuperarCategoria();
+            /*Retornar el resultado*/
+            return $eliminado;
+        }
+
+        /*
+        Funcion para eliminar una categoria
+        */
+
+        public function restaurar(){
+            /*Comprobar si el dato esta llegando*/
+            if(isset($_GET)){
+                /*Comprobar si el dato existe*/
+                $idCategoria = isset($_GET['id']) ? $_GET['id'] : false;
+                /*Si el dato existe*/
+                if($idCategoria){
+                    /*Llamar la funcion que elimina la categoria*/
+                    $eliminado = $this -> restaurarCategoria($idCategoria);
+                    /*Comprobar si la categoria ha sido eliminada con exito*/
+                    if($eliminado){
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('restaurarcategoriaacierto', "La categoria ha sido restaurada exitosamente", '?controller=AdministradorController&action=gestionarCategoria');
+                    /*De lo contrario*/   
+                    }else{
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('restaurarcategoriaerror', "La categoria no ha sido restaurada exitosamente", '?controller=CategoriaController&action=verCategoriasEliminadas');
+                    }
+                /*De lo contrario*/   
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir('restaurarcategoriaerror', "Ha ocurrido un error al restaurar la categoria", '?controller=CategoriaController&action=verCategoriasEliminadas');
+                }
             /*De lo contrario*/    
             }else{
                 /*Crear la sesion y redirigir a la ruta pertinente*/

@@ -61,17 +61,8 @@
             $usuario -> setMunicipio($municipio);
             $usuario -> setFecharegistro(date('y-m-d'));
             $usuario -> setFoto($nombreArchivo);
-            /*Intentar guardar el usuario en la base de datos*/
-            try{
-                /*Ejecutar la consulta*/
-                $guardado = $usuario -> guardar();
-            /*Capturar la excepcion*/    
-            }catch(mysqli_sql_exception $excepcion){
-                /*Crear la sesion y redirigir a la ruta pertinente*/
-                Ayudas::crearSesionYRedirigir('guardarusuarioerror', "Esta direccion de correo ya existe", '?controller=UsuarioController&action=registro');
-                /*Cortar la ejecucion*/
-                die();
-            }
+            /*Ejecutar la consulta*/
+            $guardado = $usuario -> guardar();
             /*Retornar el resultado*/
             return $guardado;
         }
@@ -285,17 +276,8 @@
             $usuario -> setDepartamento($departamento);
             $usuario -> setMunicipio($municipio);
             $usuario -> setFoto($foto);
-            /*Intentar guardar el usuario*/
-            try{
-                /*Ejecutar la consulta*/
-                $actualizado = $usuario -> actualizar();
-            /*Capturar la excepcion*/   
-            }catch(mysqli_sql_exception $excepcion){
-                /*Crear la sesion y redirigir a la ruta pertinente*/
-                Ayudas::crearSesionYRedirigir('actualizarusuarioerror', "Esta direccion de correo ya existe", '?controller=UsuarioController&action=miPerfil');
-                /*Cortar la ejecucion*/
-                die();
-            }
+            /*Ejecutar la consulta*/
+            $actualizado = $usuario -> actualizar();
             /*Retornar el resultado*/
             return $actualizado;
         }

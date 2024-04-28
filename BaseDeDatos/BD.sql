@@ -37,6 +37,7 @@ CREATE TABLE usuarios (
     municipio       VARCHAR(100) NOT NULL,
     foto            VARCHAR(250),
     fechaRegistro   DATE NOT NULL,
+    fechaLimiteRecuperarCuenta   DATE NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT usuarios_pk PRIMARY KEY ( id )
 );
@@ -192,7 +193,6 @@ CREATE TABLE transacciones (
     total             INTEGER NOT NULL,
     fechaHora  DATETIME NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT uq_nf UNIQUE(numeroFactura),
     CONSTRAINT compras_pk PRIMARY KEY ( id ),
     CONSTRAINT transacciones_comprador_fk FOREIGN KEY ( idComprador ) REFERENCES usuarios ( id ),
     CONSTRAINT transacciones_vendedor_fk FOREIGN KEY ( idVendedor ) REFERENCES usuarios ( id ),

@@ -111,17 +111,8 @@
             $administrador -> setClave($clave);
             $administrador -> setFecharegistro(date('y-m-d'));
             $administrador -> setFoto($nombreArchivo);
-            /*Intentar guardar el administrador*/
-            try{
-                /*Guardar el administrador en la base de datos*/
-                $guardado = $administrador -> guardar();
-            /*Capturar la excepcion*/    
-            }catch(mysqli_sql_exception $excepcion){
-                /*Crear la sesion y redirigir a la ruta pertinente*/
-                Ayudas::crearSesionYRedirigir('guardaradministradorerror', "Esta direccion de correo ya existe", '?controller=AdministradorController&action=registro');
-                /*Cortar la ejecucion*/
-                die();
-            }
+            /*Guardar el administrador en la base de datos*/
+            $guardado = $administrador -> guardar();
             /*Retornar el resultado*/
             return $guardado;
         }
@@ -446,17 +437,8 @@
             $administrador -> setCorreo($email);
             $administrador -> setNumerotelefono($telefono);
             $administrador -> setFoto($foto);
-            /*Intentar guardar el administrador*/
-            try{
-                /*Ejecutar la consulta*/
-                $actualizado = $administrador -> actualizar();
-            /*Capturar la excepcion*/   
-            }catch(mysqli_sql_exception $excepcion){
-                /*Crear la sesion y redirigir a la ruta pertinente*/
-                Ayudas::crearSesionYRedirigir('actualizaradministradorerror', "Esta direccion de correo ya existe", '?controller=AdministradorController&action=miPerfil');
-                /*Cortar la ejecucion*/
-                die();
-            }
+            /*Ejecutar la consulta*/
+            $actualizado = $administrador -> actualizar();
             /*Retornar el resultado*/
             return $actualizado;
         }

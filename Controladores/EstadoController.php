@@ -19,6 +19,19 @@
         }
 
         /*
+        Funcion para ver los estados eliminados
+        */
+
+        public function verEstadosEliminados(){
+            /*Instanciar el objeto*/
+            $estado = new Estado();
+            /*Listar todas las consolas desde la base de datos*/
+            $listadoEstados = $estado -> listarInactivos();
+            /*Incluir la vista*/
+            require_once "Vistas/Estado/Inactivos.html";
+        }
+
+        /*
         Funcion para guardar un estado en la base de datos
         */
 
@@ -28,17 +41,8 @@
             /*Crear el objeto*/
             $estado -> setactivo(TRUE);
             $estado -> setNombre($nombre);
-            /*Intentar guardar el estado en la base de datos*/
-            try{
-                /*Ejecutar la consulta*/
-                $guardado = $estado -> guardar();
-            /*Capturar la excepcion*/ 
-            }catch(mysqli_sql_exception $excepcion){
-                /*Crear la sesion y redirigir a la ruta pertinente*/
-                Ayudas::crearSesionYRedirigir('guardarestadoerror', "Este nombre de estado ya existe", '?controller=EstadoController&action=crear');
-                /*Cortar la ejecucion*/
-                die();
-            }
+            /*Ejecutar la consulta*/
+            $guardado = $estado -> guardar();
             /*Retornar el resultado*/
             return $guardado;
         }
@@ -47,10 +51,11 @@
         Funcion para comprobar si el estado ya ha sido creado previamente
         */
 
-        public function comprobarUnicoEstado($nombre){
+        public function comprobarUnicoEstado($id = null, $nombre = null){
             /*Instanciar el objeto*/
             $estado = new Estado();
             /*Crear el objeto*/
+            $estado -> setId($id);
             $estado -> setNombre($nombre);
             /*Ejecutar la consulta*/
             $resultado = $estado -> comprobarEstadoUnico();
@@ -249,17 +254,8 @@
             /*Crear el objeto*/
             $estado -> setId($idEstado);
             $estado -> setNombre($nombre);
-            /*Intentar actualizar el estado en la base de datos*/
-            try{
-                /*Ejecutar la consulta*/
-                $actualizado = $estado -> actualizar();
-            /*Capturar la excepcion*/  
-            }catch(mysqli_sql_exception $excepcion){
-                /*Crear la sesion y redirigir a la ruta pertinente*/
-                Ayudas::crearSesionYRedirigir('actualizarestadoerror', "Este nombre de estado ya existe", '?controller=EstadoController&action=editar&id='.$idEstado);
-                /*Cortar la ejecucion*/                
-                die();
-            }
+            /*Ejecutar la consulta*/
+            $actualizado = $estado -> actualizar();
             /*Retornar el resultado*/
             return $actualizado;
         }
@@ -276,22 +272,81 @@
                 $nombre = isset($_POST['nombreestact']) ? $_POST['nombreestact'] : false;
                 /*Si los datos existen*/
                 if($idEstado){
-                    /*Llamar la funcion de actualizar el estado*/
-                    $actualizado = $this -> actualizarEstado($idEstado, $nombre);
-                    /*Comprobar si el estado ha sido actualizado*/
-                    if($actualizado){
-                        /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('actualizarestadoacierto', "El estado ha sido actualizado exitosamente", '?controller=AdministradorController&action=gestionarEstado');
-                    /*De lo contrario*/
+                    /*Llamar funcion que comprueba si el estado ya ha sido registrado*/
+                    $unico = $this -> comprobarUnicoEstado($idEstado);
+                    /*Comprobar si el nombre del estado no existe*/
+                    if($unico == null){
+                        /*Llamar la funcion de actualizar el estado*/
+                        $actualizado = $this -> actualizarEstado($idEstado, $nombre);
+                        /*Comprobar si el estado ha sido actualizado*/
+                        if($actualizado){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('actualizarestadoacierto', "El estado ha sido actualizado exitosamente", '?controller=AdministradorController&action=gestionarEstado');
+                        /*De lo contrario*/
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('actualizarestadosugerencia', "Introduce nuevos datos", '?controller=EstadoController&action=editar&id='.$idEstado);
+                        }
+                    /*Comprobar si el estado existe*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('actualizarestadosugerencia', "Introduce nuevos datos", '?controller=EstadoController&action=editar&id='.$idEstado);
-                    }
+                        Ayudas::crearSesionYRedirigir('actualizarestadoerror', "Este nombre ya se encuentra asociado a un estado", '?controller=EstadoController&action=editar&id='.$idEstado);
+                    } 
                 /*De lo contrario*/
                 }else{
                     /*Crear la sesion y redirigir a la ruta pertinente*/
                     Ayudas::crearSesionYRedirigir('actualizarestadoerror', "Ha ocurrido un error al actualizar el estado", '?controller=EstadoController&action=editar&id='.$idEstado);
                 }  
+            /*De lo contrario*/    
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+            }
+        }
+
+        /*
+        Funcion para recuperar un estado en la base de datos
+        */
+
+        public function restaurarEstado($idEstado){
+            /*Instanciar el objeto*/
+            $estado = new Estado();
+            /*Crear el objeto*/
+            $estado -> setId($idEstado);
+            $estado -> setActivo(TRUE);
+            /*Ejecutar la consulta*/
+            $eliminado = $estado -> recuperarEstado();
+            /*Retornar el resultado*/
+            return $eliminado;
+        }
+
+        /*
+        Funcion para eliminar un estado
+        */
+
+        public function restaurar(){
+            /*Comprobar si el dato esta llegando*/
+            if(isset($_GET)){
+                /*Comprobar si el dato existe*/
+                $idEstado = isset($_GET['id']) ? $_GET['id'] : false;
+                /*Si el dato existe*/
+                if($idEstado){
+                    /*Llamar la funcion que elimina el estado*/
+                    $eliminado = $this -> restaurarEstado($idEstado);
+                    /*Comprobar si el estado ha sido eliminado con exito*/
+                    if($eliminado){
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('restaurarestadoacierto', "La estado ha sido restaurado exitosamente", '?controller=AdministradorController&action=gestionarEstado');
+                    /*De lo contrario*/   
+                    }else{
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('restaurarestadoerror', "La estado no ha sido restaurado exitosamente", '?controller=EstadoController&action=verEstadosEliminados');
+                    }
+                /*De lo contrario*/   
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir('restaurarestadoerror', "Ha ocurrido un error al restaurar el estado", '?controller=EstadoController&action=verEstadosEliminados');
+                }
             /*De lo contrario*/    
             }else{
                 /*Crear la sesion y redirigir a la ruta pertinente*/

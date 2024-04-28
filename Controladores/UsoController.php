@@ -19,6 +19,19 @@
         }
 
         /*
+        Funcion para ver los usos eliminados
+        */
+
+        public function verUsosEliminados(){
+            /*Instanciar el objeto*/
+            $uso = new Uso();
+            /*Listar todas las consolas desde la base de datos*/
+            $listadoMediosPago = $uso -> listarInactivos();
+            /*Incluir la vista*/
+            require_once "Vistas/Uso/Inactivos.html";
+        }
+
+        /*
         Funcion para guardar un uso en la base de datos
         */
 
@@ -28,17 +41,8 @@
             /*Crear el objeto*/
             $uso -> setactivo(TRUE);
             $uso -> setNombre($nombre);
-            /*Intentar guardar el uso en la base de datos*/
-            try{
-                /*Ejecutar la consulta*/
-                $guardado = $uso -> guardar();
-            /*Capturar la excepcion*/                    
-            }catch(mysqli_sql_exception $excepcion){
-                /*Crear la sesion y redirigir a la ruta pertinente*/
-                Ayudas::crearSesionYRedirigir('guardarusoerror', "Este nombre de uso ya existe", '?controller=UsoController&action=crear');
-                /*Cortar la ejecucion*/
-                die();
-            }
+            /*Ejecutar la consulta*/
+            $guardado = $uso -> guardar();
             /*Retornar el resultado*/
             return $guardado;
         }
@@ -47,10 +51,11 @@
         Funcion para comprobar si el uso ya ha sido creado previamente
         */
 
-        public function comprobarUnicoUso($nombre){
+        public function comprobarUnicoUso($id = null, $nombre = null){
             /*Instanciar el objeto*/
             $uso = new Uso();
             /*Crear el objeto*/
+            $uso -> setId($id);
             $uso -> setNombre($nombre);
             /*Ejecutar la consulta*/
             $resultado = $uso -> comprobarUsoUnico();
@@ -249,17 +254,8 @@
             /*Crear el objeto*/
             $uso -> setId($idUso);
             $uso -> setNombre($nombre);
-            /*Intentar actualizar el uso*/
-            try{
-                /*Ejecutar la consulta*/
-                $actualizado = $uso -> actualizar();
-            /*Capturar la excepcion*/  
-            }catch(mysqli_sql_exception $excepcion){
-                /*Crear la sesion y redirigir a la ruta pertinente*/
-                Ayudas::crearSesionYRedirigir('actualizarusoerror', "Este nombre de uso ya existe", '?controller=UsoController&action=editar&id='.$idUso);
-                /*Cortar la ejecucion*/
-                die();
-            }
+            /*Ejecutar la consulta*/
+            $actualizado = $uso -> actualizar();
             /*Retornar el resultado*/
             return $actualizado;
         }
@@ -276,16 +272,25 @@
                 $nombre = isset($_POST['nombreusoact']) ? $_POST['nombreusoact'] : false;
                 /*Si los datos existen*/
                 if($idUso){
-                    /*Llamar la funcion de actualizar uso*/
-                    $actualizado = $this -> actualizarUso($idUso, $nombre);
-                    /*Comprobar si la uso ha sido actualizada*/
-                    if($actualizado){
-                        /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('actualizarusoacierto', "El uso ha sido actualizado exitosamente", '?controller=AdministradorController&action=gestionarUso');
-                    /*De lo contrario*/ 
+                    /*Llamar funcion que comprueba si el uso ya ha sido registrado*/
+                    $unico = $this -> comprobarUnicoUso($idUso);
+                    /*Comprobar si el nombre del uso no existe*/
+                    if($unico == null){
+                        /*Llamar la funcion de actualizar uso*/
+                        $actualizado = $this -> actualizarUso($idUso, $nombre);
+                        /*Comprobar si el uso ha sido actualizado*/
+                        if($actualizado){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('actualizarusoacierto', "El uso ha sido actualizado exitosamente", '?controller=AdministradorController&action=gestionarUso');
+                        /*De lo contrario*/ 
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('actualizarusosugerencia', "Introduce nuevos datos", '?controller=UsoController&action=editar&id='.$idUso);
+                        }
+                    /*Comprobar si el uso existe*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('actualizarusosugerencia', "Introduce nuevos datos", '?controller=UsoController&action=editar&id='.$idUso);
+                        Ayudas::crearSesionYRedirigir('actualizarusoerror', "Este nombre ya se encuentra asociado a un uso", '?controller=UsoController&action=editar&id='.$idUso); 
                     }
                 /*De lo contrario*/ 
                 }else{
@@ -293,6 +298,56 @@
                     Ayudas::crearSesionYRedirigir('actualizarusoerror', "Ha ocurrido un error al actualizar el uso", '?controller=UsoController&action=editar&id='.$idUso);
                 }  
                 /*De lo contrario*/    
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+            }
+        }
+
+        /*
+        Funcion para recuperar un uso en la base de datos
+        */
+
+        public function restaurarUso($idUso){
+            /*Instanciar el objeto*/
+            $uso = new Uso();
+            /*Crear el objeto*/
+            $uso -> setId($idUso);
+            $uso -> setActivo(TRUE);
+            /*Ejecutar la consulta*/
+            $eliminado = $uso -> recuperarUso();
+            /*Retornar el resultado*/
+            return $eliminado;
+        }
+
+        /*
+        Funcion para eliminar un uso
+        */
+
+        public function restaurar(){
+            /*Comprobar si el dato esta llegando*/
+            if(isset($_GET)){
+                /*Comprobar si el dato existe*/
+                $idUso = isset($_GET['id']) ? $_GET['id'] : false;
+                /*Si el dato existe*/
+                if($idUso){
+                    /*Llamar la funcion que elimina el uso*/
+                    $eliminado = $this -> restaurarUso($idUso);
+                    /*Comprobar si el uso ha sido eliminado con exito*/
+                    if($eliminado){
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('restaurarusoacierto', "La uso ha sido restaurado exitosamente", '?controller=AdministradorController&action=gestionarUso');
+                    /*De lo contrario*/   
+                    }else{
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir('restaurarusoerror', "La uso no ha sido restaurado exitosamente", '?controller=UsoController&action=verUsosEliminados');
+                    }
+                /*De lo contrario*/   
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir('restaurarusoerror', "Ha ocurrido un error al restaurar el uso", '?controller=UsoController&action=verUsosEliminados');
+                }
+            /*De lo contrario*/    
             }else{
                 /*Crear la sesion y redirigir a la ruta pertinente*/
                 Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");

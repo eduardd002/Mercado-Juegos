@@ -7,6 +7,13 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarcategoriaacierto'); ?>
 
+    <?php if(isset($_SESSION['restaurarcategoriaacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['restaurarcategoriaacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('restaurarcategoriaacierto'); ?>
+
     <?php if(isset($_SESSION['actualizarcategoriaacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['actualizarcategoriaacierto']; ?>
@@ -41,6 +48,9 @@
     <?php else : ?>
         <h1>Gestion de categorias</h1>
         <hr>
+        <br>
+        <br>
+        <a href="<?=rutaInicio?><?=categoria?><?=verCategoriasEliminadas?>">Ver categorias eliminadas</a>
         <div id="gestiones">
             <table>
                 <tr>

@@ -385,7 +385,7 @@
 
         public function listar(){
             /*Construir la consulta*/
-            $consulta = "SELECT DISTINCT * FROM usuarios WHERE activo = 1";
+            $consulta = "SELECT DISTINCT * FROM usuarios";
             /*Llamar la funcion que ejecuta la consulta*/
             $lista = $this -> db -> query($consulta);
             /*Retornar el resultado*/
@@ -544,7 +544,7 @@
 
         public function obtenerTotalVendidos(){
             /*Construir la consulta*/
-            $consulta = "SELECT COUNT(idVendedor) AS 'videojuegosVendidos' FROM Transacciones WHERE idVendedor = {$this -> getId()}";
+            $consulta = "SELECT SUM(unidades) AS 'videojuegosVendidos' FROM transaccionvideojuego WHERE idtransaccion IN (SELECT id FROM transacciones WHERE idVendedor = {$this -> getId()})";
             /*Llamar la funcion que ejecuta la consulta*/
             $total = $this->db->query($consulta);
             /*Obtener el resultado*/

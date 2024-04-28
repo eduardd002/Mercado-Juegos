@@ -98,6 +98,8 @@
     define("eliminarUso", "&action=eliminar");
     define("editarUso", "&action=editar");
     define("actualizarUso", "&action=actualizar");
+    define("verUsosEliminados", "&action=verUsosEliminados");
+    define("restaurarUso", "&action=restaurar");
 
     /*Ruta para pago*/
 
@@ -125,6 +127,8 @@
     define("eliminarEstado", "&action=eliminar");
     define("editarEstado", "&action=editar");
     define("actualizarEstado", "&action=actualizar");
+    define("verEstadosEliminados", "&action=verEstadosEliminados");
+    define("restaurarEstado", "&action=restaurar");
 
     /*Ruta para medio de pago*/
 
@@ -134,6 +138,8 @@
     define("eliminarMedioPago", "&action=eliminar");
     define("editarMedioPago", "&action=editar");
     define("actualizarMedioPago", "&action=actualizar");
+    define("verMediosPagoEliminados", "&action=verMediosPagoEliminados");
+    define("restaurarMedioPago", "&action=restaurar");
 
     /*Ruta para consola*/
 
@@ -143,6 +149,8 @@
     define("eliminarConsola", "&action=eliminar");
     define("editarConsola", "&action=editar");
     define("actualizarConsola", "&action=actualizar");
+    define("verConsolasEliminadas", "&action=verConsolasEliminadas");
+    define("restaurarConsola", "&action=restaurar");
 
     /*Ruta para categoria*/
 
@@ -152,6 +160,8 @@
     define("eliminarCateogoria", "&action=eliminar");
     define("editarCategoria", "&action=editar");
     define("actualizarCategoria", "&action=actualizar");
+    define("verCategoriasEliminadas", "&action=verCategoriasEliminadas");
+    define("restaurarCategoria", "&action=restaurar");
 
     /*Ruta para chat*/
 
