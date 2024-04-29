@@ -491,11 +491,11 @@
 
         public function ventas(){
             /*Instanciar el objeto*/
-            $transaccion = new Transaccion();
+            $transaccionVideojuego = new TransaccionVideojuego();
             /*Construir el objeto*/
-            $transaccion -> setIdVendedor($_SESSION['loginexitoso'] -> id);
+            $transaccionVideojuego -> setIdVendedor($_SESSION['loginexitoso'] -> id);
             /*Listar todas las ventas desde la base de datos*/
-            $listadoVentas = $transaccion -> obtenerVentas();
+            $listadoVentas = $transaccionVideojuego -> obtenerVentas();
             /*Incluir la vista*/
             require_once "Vistas/Usuario/Ventas.html";
         }

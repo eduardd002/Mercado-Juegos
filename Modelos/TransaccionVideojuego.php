@@ -9,6 +9,7 @@
         private $id;
         private $idTransaccion;
         private $idVideojuego;
+        private $idVendedor;
         private $unidades;
         private $db;
 
@@ -82,6 +83,26 @@
         }
 
         /*
+        Funcion getter de id vendedor
+        */
+
+        public function getIdVendedor(){
+            /*Retornar el resultado*/
+            return $this->idVendedor;
+        }
+
+        /*
+        Funcion setter de id vendedor
+        */
+
+        public function setIdVendedor($idVendedor){
+            /*Llamar parametro*/
+            $this->idVendedor = $idVendedor;
+            /*Retornar el resultado*/
+            return $this;
+        }
+
+        /*
         Funcion getter de unidades
         */
 
@@ -108,7 +129,7 @@
         public function guardar(){
             /*Construir consulta*/
             $consulta = "INSERT INTO transaccionvideojuego VALUES(NULL, {$this -> getIdTransaccion()}, 
-                {$this -> getIdVideojuego()}, {$this -> getUnidades()})";
+                {$this -> getIdVideojuego()}, {$this -> getIdVendedor()}, {$this -> getUnidades()})";
             /*Llamar la funcion que ejecuta la consulta*/
             $registro = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/
@@ -138,6 +159,19 @@
             $resultado = $this -> db -> query($consulta);
             /*Retornar el resultado*/
             return $resultado;
+        }
+
+        /*
+        Funcion para obtener todas las ventas realizadas por un usuario
+        */
+
+        public function obtenerVentas(){
+            /*Construir la consulta*/
+            $consulta = "SELECT DISTINCT * FROM transacciones WHERE idVendedor = {$this -> getIdVendedor()}";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $lista = $this -> db -> query($consulta);
+            /*Retornar el resultado*/
+            return $lista;
         }
         
     }

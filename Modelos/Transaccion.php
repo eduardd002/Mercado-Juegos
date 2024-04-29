@@ -9,7 +9,6 @@
         private $id;
         private $numeroFactura;
         private $idComprador;
-        private $idVendedor;
         private $idPago;
         private $idEstado;
         private $total;
@@ -82,26 +81,6 @@
         public function setIdComprador($idComprador){
             /*Llamar parametro*/
             $this->idComprador = $idComprador;
-            /*Retornar el resultado*/
-            return $this;
-        }
-
-        /*
-        Funcion getter de id vendedor
-        */
-
-        public function getIdVendedor(){
-            /*Retornar el resultado*/
-            return $this->idVendedor;
-        }
-
-        /*
-        Funcion setter de id vendedor
-        */
-
-        public function setIdVendedor($idVendedor){
-            /*Llamar parametro*/
-            $this->idVendedor = $idVendedor;
             /*Retornar el resultado*/
             return $this;
         }
@@ -214,7 +193,7 @@
         public function guardar(){
             /*Construir la consulta*/
             $consulta = "INSERT INTO transacciones VALUES(NULL, {$this -> getNumeroFactura()}, {$this -> getIdComprador()}, 
-                {$this -> getIdVendedor()}, {$this -> getIdPago()}, {$this -> getIdEstado()}, {$this -> getIdEnvio()}, 
+                {$this -> getIdPago()}, {$this -> getIdEstado()}, {$this -> getIdEnvio()}, 
                 {$this -> getTotal()}, '{$this -> getFechaHora()}')";
             /*Llamar la funcion que ejecuta la consulta*/
             $registro = $this -> db -> query($consulta);
@@ -227,19 +206,6 @@
             }
             /*Retornar el resultado*/
             return $resultado;
-        }
-
-        /*
-        Funcion para obtener todas las ventas realizadas por un usuario
-        */
-
-        public function obtenerVentas(){
-            /*Construir la consulta*/
-            $consulta = "SELECT DISTINCT * FROM transacciones WHERE idVendedor = {$this -> getIdVendedor()}";
-            /*Llamar la funcion que ejecuta la consulta*/
-            $lista = $this -> db -> query($consulta);
-            /*Retornar el resultado*/
-            return $lista;
         }
 
         /*
@@ -284,7 +250,7 @@
                 INNER JOIN Estados te ON te.id = t.idEstado
                 INNER JOIN Videojuegos v ON v.id = tv.idVideojuego
                 INNER JOIN Consolas c ON c.id = v.idConsola
-                INNER JOIN usuarios ve ON t.idVendedor = ve.id
+                INNER JOIN usuarios ve ON tv.idVendedor = ve.id
                 INNER JOIN Usos u ON u.id = v.idUso
                 INNER JOIN Pagos p ON p.id = t.idPago
                 INNER JOIN MediosPago mp ON mp.id = p.idMedioPago

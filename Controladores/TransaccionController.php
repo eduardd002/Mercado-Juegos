@@ -258,7 +258,7 @@
             /*Comprobar si la transaccion es del carrito*/
             if($opcion == 1){
                 /*Llamar la funcion para guardar la transaccion del carrito*/
-                $transaccion = $this -> guardarTransaccionCarrito($factura, $idVideojuego, $idPago, $idEnvio);
+                $transaccion = $this -> guardarTransaccionCarrito($factura, $idPago, $idEnvio);
             /*Comprobar si la transaccion es del videojuego unicamente*/    
             }elseif($opcion == 2){
                 /*Llamar la funcion para guardar la transaccion del videojuego*/
@@ -272,7 +272,7 @@
         Funcion para guardar la transaccion del videojuego
         */
 
-        public function guardarTransaccionCarrito($factura, $idVideojuego, $idPago, $idEnvio){
+        public function guardarTransaccionCarrito($factura, $idPago, $idEnvio){
             /*Llamar la funcion que trae la lista de los videojuegos del carrito*/
             $lista = $this -> listarCarritos();
             /*instanciar el objeto*/
@@ -281,13 +281,6 @@
             $transaccion -> setNumeroFactura($factura + 1000);
             $transaccion -> setIdComprador($_SESSION['loginexitoso'] -> id);
             $transaccion -> setIdEstado(1);
-            /*Recorrer la lista de videojuegos del carrito*/
-            foreach($idVideojuego as $videojuego){
-                /*Llamar la funcion que trae el dueño del videojuego*/
-                $vendedor = $this -> traerDuenioDeVideojuego($videojuego);
-                /*Crear el objeto*/
-                $transaccion -> setIdVendedor($vendedor);
-            }
             /*Obtener total de la transaccion*/
             $total = $lista['totalCarrito']['totalCarrito'];
             /*Crear el objeto*/
@@ -314,10 +307,6 @@
             $transaccion -> setIdEstado(1);
             /*Llamar la funcion que obtiene un videojuego en concreto*/
             $videojuegoUnico = Ayudas::obtenerVideojuegoEnConcreto($idVideojuego);
-            /*Llamar la funcion que obtiene un videojuego en concreto*/
-            $vendedor = $this -> traerDuenioDeVideojuego($idVideojuego);
-            /*Crear el objeto*/
-            $transaccion -> setIdVendedor($vendedor);
             /*Obtener el precio del videojuego*/
             $precio = $videojuegoUnico['videojuego']['precioVideojuego'];
             /*Obtener el total de la transaccion*/
@@ -343,6 +332,7 @@
             /*Crear el objeto*/
             $transaccionVideojuego -> setIdTransaccion($id);
             $transaccionVideojuego -> setIdVideojuego($idVideojuego);
+            $transaccionVideojuego -> setIdVendedor(1);
             $transaccionVideojuego -> setUnidades($unidades);
             /*Guardar en la base de datos*/
             $guardadoTransaccionVideojuego = $transaccionVideojuego -> guardar();
