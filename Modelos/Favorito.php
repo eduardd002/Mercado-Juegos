@@ -112,6 +112,21 @@
             /*Retornar el resultado*/
             return $resultado;
         }
+
+        /*
+        Funcion para comprobar si un videojuego ya ha sido agregado aL carito
+        */
+
+        public function comprobarFavorito($idVideojuego){ 
+            /*Construir la consulta*/
+            $consulta = "SELECT * FROM favoritos WHERE id IN (SELECT idfavorito FROM videojuegofavorito WHERE idusuario = {$this -> getIdUsuario()} AND idVideojuego = {$idVideojuego} AND activo = 1)";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $usuario = $this -> db -> query($consulta);
+            /*Obtener el resultado*/
+            $resultado = $usuario -> fetch_object();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
         
     }
 

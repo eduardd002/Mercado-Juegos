@@ -187,6 +187,21 @@
             return $informacionCarrito;
         }
 
+        /*
+        Funcion para comprobar si un videojuego ya ha sido agregado a favoritos
+        */
+
+        public function comprobarCarrito($idVideojuego){ 
+            /*Construir la consulta*/
+            $consulta = "SELECT * FROM carritos WHERE id IN (SELECT idCarrito FROM carritovideojuego WHERE idusuario = {$this -> getIdUsuario()} AND idVideojuego = {$idVideojuego} AND activo = 1)";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $usuario = $this -> db -> query($consulta);
+            /*Obtener el resultado*/
+            $resultado = $usuario -> fetch_object();
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
     }
 
 ?>

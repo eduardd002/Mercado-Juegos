@@ -1,4 +1,19 @@
-<div id="contenidoCentral">      
+<div id="contenidoCentral">    
+    
+    <?php if(isset($_SESSION['guardarfavoritoerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['guardarfavoritoerror']; ?>
+        </div>
+    <?php endif; ?> 
+    <?php Ayudas::eliminarSesion('guardarfavoritoerror'); ?>
+
+    <?php if(isset($_SESSION['guardarcarritoerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['guardarcarritoerror']; ?>
+        </div>
+    <?php endif; ?> 
+    <?php Ayudas::eliminarSesion('guardarcarritoerror'); ?>
+
     <?php if(isset($_SESSION['loginexitosoinfo'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['loginexitosoinfo']; ?>

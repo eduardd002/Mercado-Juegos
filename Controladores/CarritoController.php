@@ -45,6 +45,21 @@
         }
 
         /*
+        Funcion para comprobar si el carrito ya ha sido creado previamente
+        */ 
+
+        public function comprobarUnicoCarrito($idVideojuego){ 
+            /*Instanciar el objeto*/ 
+            $carrito = new Carrito(); 
+            /*Crear el objeto*/ 
+            $carrito -> setIdUsuario($_SESSION['loginexitoso'] -> id); 
+            /*Ejecutar la consulta*/ 
+            $resultado = $carrito -> comprobarCarrito($idVideojuego); 
+            /*Retornar el resultado*/ 
+            return $resultado; 
+        }
+
+        /*
         Funcion para eliminar un videojuego del carrito
         */
 
@@ -306,28 +321,37 @@
                 $unidades = isset($_GET['unidades']) ? $_GET['unidades'] : false;
                 /*Si los datos existen*/
                 if($videojuegoId && $unidades){
-                    /*Llamar la funcion que guarda el carrito*/
-                    $guardado = $this -> guardarCarrito();
-                    /*Comprobar si se guardo con exito el carrito*/
-                    if($guardado){
-                        /*Llamar la funcion que obtiene el id del ultimo carrito guardado*/
-                        $ultimoCarrito = $this -> obtenerUltimoCarrito();
-                        /*Llamar la funcion de guardar carrito videojuego*/
-                        $guardadoVideojuegoCarrito = $this -> guardarCarritoVideojuego($videojuegoId, $ultimoCarrito, $unidades);
-                        /*Comprobar si se guardo con exito el carrito videojuego*/
-                        if($guardadoVideojuegoCarrito){
-                            /*Crear la sesion y redirigir a la ruta pertinente*/
-                            Ayudas::crearSesionYRedirigir('guardarcarritoacierto', "Videojuego agregado a la lista de carritos con exito", "?controller=CarritoController&action=ver");
+                    /*Llamar la funcion que comprueba si un videojuego ya ha sido agregado al carrito*/
+                    $unico = $this -> comprobarUnicoCarrito($videojuegoId);
+                    /*Comprobar si el videojuego no ha sido agregado al carrito*/
+                    if($unico == null){
+                        /*Llamar la funcion que guarda el carrito*/
+                        $guardado = $this -> guardarCarrito();
+                        /*Comprobar si se guardo con exito el carrito*/
+                        if($guardado){
+                            /*Llamar la funcion que obtiene el id del ultimo carrito guardado*/
+                            $ultimoCarrito = $this -> obtenerUltimoCarrito();
+                            /*Llamar la funcion de guardar carrito videojuego*/
+                            $guardadoVideojuegoCarrito = $this -> guardarCarritoVideojuego($videojuegoId, $ultimoCarrito, $unidades);
+                            /*Comprobar si se guardo con exito el carrito videojuego*/
+                            if($guardadoVideojuegoCarrito){
+                                /*Crear la sesion y redirigir a la ruta pertinente*/
+                                Ayudas::crearSesionYRedirigir('guardarcarritoacierto', "Videojuego agregado a la lista de carritos con exito", "?controller=CarritoController&action=ver");
+                            /*De lo contrario*/ 
+                            }else{
+                                /*Crear la sesion y redirigir a la ruta pertinente*/
+                                Ayudas::crearSesionYRedirigir('guardarcarritoerror', "Videojuego no agregado a la lista de carritos", "?controller=CarritoController&action=ver");
+                            }
                         /*De lo contrario*/ 
                         }else{
                             /*Crear la sesion y redirigir a la ruta pertinente*/
                             Ayudas::crearSesionYRedirigir('guardarcarritoerror', "Videojuego no agregado a la lista de carritos", "?controller=CarritoController&action=ver");
                         }
-                    /*De lo contrario*/ 
+                    /*De lo contrario*/       
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('guardarcarritoerror', "Videojuego no agregado a la lista de carritos", "?controller=CarritoController&action=ver");
-                    }
+                        Ayudas::crearSesionYRedirigir('guardarcarritoerror', "Este videojuego ya ha sido agregado al carrito", '?controller=VideojuegoController&action=detalle&id='.$videojuegoId);
+                    } 
                 /*De lo contrario*/     
                 }else{
                     /*Crear la sesion y redirigir a la ruta pertinente*/
