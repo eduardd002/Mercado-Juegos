@@ -167,7 +167,7 @@
 
         public function obtenerVentas(){
             /*Construir la consulta*/
-            $consulta = "SELECT DISTINCT * FROM transacciones WHERE idVendedor = {$this -> getIdVendedor()}";
+            $consulta = "SELECT DISTINCT * FROM transacciones where id in (select idtransaccion FROM transaccionvideojuego WHERE idVendedor = {$this -> getIdVendedor()})";
             /*Llamar la funcion que ejecuta la consulta*/
             $lista = $this -> db -> query($consulta);
             /*Retornar el resultado*/

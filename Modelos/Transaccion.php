@@ -242,116 +242,115 @@
         Funcion para obtener el detalle de la compra
         */
 
-        public function detalleCompra(){
+        public function detalleTransaccion(){
             /*Construir la consulta*/
-            $consulta = "SELECT DISTINCT ve.nombre AS 'nombreVendedor', ve.apellido AS 'apellidoVendedor', ve.numeroTelefono AS 'telefonoVendedor', ve.correo AS 'correoVendedor', en.departamento AS 'departamentoEnvio', en.municipio AS 'municipioEnvio', en.codigoPostal AS 'codigoPostalEnvio', en.direccion AS 'direccionEnvio', en.barrio AS 'barrioEnvio', p.numero AS 'numero', t.total AS 'totalTransaccion', v.nombre AS 'nombreVideojuegoCompra', u.nombre AS 'usoVideojuegoCompra', c.nombre AS 'consolaVideojuegoCompra', v.precio AS 'precioVideojuegoCompra', t.numeroFactura AS 'factura', tv.unidades AS 'unidadesCompra', mp.nombre AS 'medioPagoNombre', te.nombre AS 'nombreEstado'
+            $consulta = "SELECT DISTINCT en.departamento AS 'departamentoEnvio', en.municipio AS 'municipioEnvio', en.codigoPostal AS 'codigoPostalEnvio', en.direccion AS 'direccionEnvio', en.barrio AS 'barrioEnvio', p.numero AS 'numero', t.total AS 'totalTransaccion', t.numeroFactura AS 'factura', mp.nombre AS 'medioPagoNombre', te.nombre AS 'nombreEstado'
                 FROM TransaccionVideojuego tv
                 INNER JOIN Transacciones t ON t.id = tv.idTransaccion
                 INNER JOIN Estados te ON te.id = t.idEstado
-                INNER JOIN Videojuegos v ON v.id = tv.idVideojuego
-                INNER JOIN Consolas c ON c.id = v.idConsola
-                INNER JOIN usuarios ve ON tv.idVendedor = ve.id
-                INNER JOIN Usos u ON u.id = v.idUso
                 INNER JOIN Pagos p ON p.id = t.idPago
                 INNER JOIN MediosPago mp ON mp.id = p.idMedioPago
                 INNER JOIN Envios en ON en.id = t.idEnvio
                 WHERE t.numeroFactura = {$this -> getNumeroFactura()}";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultados = $this->db->query($consulta);
-            /*Array para almacenar la información de la compra*/
-            $informacionCompra = array();
-            /*Mientras hayan compras disponibles para recorrer*/
-            while ($fila = $resultados->fetch_object()) {
-                /*Comprobar si no existe la informacion de la compra*/
-                if(!isset($informacionCompra['compra'])){
-                    /*Crear array con informacion de la compra*/
-                    $informacionCompra['compra'] = array(
-                        'factura' => $fila->factura,
-                        'nombreVendedor' => $fila->nombreVendedor,
-                        'apellidoVendedor' => $fila->apellidoVendedor,
-                        'telefonoVendedor' => $fila->telefonoVendedor,
-                        'correoVendedor' => $fila->correoVendedor,
-                        'departamentoEnvio' => $fila->departamentoEnvio,
-                        'municipioEnvio' => $fila->municipioEnvio,
-                        'codigoPostalEnvio' => $fila->codigoPostalEnvio,
-                        'direccionEnvio' => $fila->direccionEnvio,
-                        'barrioEnvio' => $fila->barrioEnvio,
-                        'nombreEstado' => $fila->nombreEstado,
-                        'numero' => $fila->numero,
-                        'medioPagoNombre'=>$fila->medioPagoNombre,
-                        'totalTransaccion' => $fila->totalTransaccion,
-                        /*Inicializar un array para almacenar los videojuegos de la compra*/
-                        'videojuegos' => array()
-                    );
-                }
-                /*Almacenar la información del videojuego en el array de compra y videojuego*/
-                $informacionCompra['compra']['videojuegos'][] = array(
-                    'nombreVideojuegoCompra' => $fila->nombreVideojuegoCompra,
-                    'unidadesCompra' => $fila->unidadesCompra,
-                    'usoVideojuegoCompra' => $fila->usoVideojuegoCompra,
-                    'consolaVideojuegoCompra' => $fila->consolaVideojuegoCompra,
-                    'precioVideojuegoCompra' => $fila->precioVideojuegoCompra
-                );
-            }
+            /*Obtener el detalle*/
+            $detalle = $resultados -> fetch_object();
             /*Retornar el resultado*/
-            return $informacionCompra;
+            return $detalle;
         }  
-        
+
         /*
-        Funcion para obtener el detalle de la venta
+        Funcion para obtener el precio total de la venta
         */
 
-        public function detalleVenta(){
+        public function totalVenta($idVendedor){
             /*Construir la consulta*/
-            $consulta = "SELECT DISTINCT co.nombre AS 'nombreComprador', co.apellido AS 'apellidoComprador', co.numeroTelefono AS 'telefonoComprador', co.correo AS 'correoComprador', en.departamento AS 'departamentoEnvio', en.municipio AS 'municipioEnvio', en.codigoPostal AS 'codigoPostalEnvio', en.direccion AS 'direccionEnvio', en.barrio AS 'barrioEnvio', p.numero AS 'numero', t.total AS 'totalTransaccion', v.foto AS 'imagenVideojuego', tv.unidades AS 'unidadesCompra', v.precio AS 'precioVideojuegoVenta', t.numeroFactura AS 'facturaVenta', t.id AS 'idTransaccion', mp.nombre AS 'medioPagoNombre', p.numero AS 'numeroPago', te.nombre AS 'nombreEstado'
+            $consulta = "SELECT DISTINCT tv.unidades AS 'unidadesCompra', v.precio AS 'precioVideojuegoVenta'
                 FROM TransaccionVideojuego tv
-                INNER JOIN Transacciones t ON t.id = tv.idTransaccion
-                INNER JOIN Estados te ON te.id = t.idEstado
-                INNER JOIN Videojuegos v ON v.id = tv.idVideojuego
-                INNER JOIN Pagos p ON p.id = t.idPago
-                INNER JOIN MediosPago mp ON mp.id = p.idMedioPago
-                INNER JOIN Envios en ON en.id = t.idEnvio
-                INNER JOIN usuarios co ON t.idComprador = co.id
+                INNER JOIN transacciones t ON t.id = tv.idTransaccion
+                INNER JOIN videojuegos v ON v.id = tv.idVideojuego
+                WHERE t.numeroFactura = {$this -> getNumeroFactura()} AND tv.idVendedor = {$idVendedor}";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $resultados = $this->db->query($consulta);
+            /*Retornar los resultados*/
+            return $resultados;
+        } 
+
+        /*
+        Funcion para obtener los vendedores de la compra
+        */
+        
+        public function detalleCompraVendedores(){
+            /*Construir la consulta*/
+            $consulta = "SELECT DISTINCT ve.nombre AS 'nombreVendedor', ve.apellido AS 'apellidoVendedor', ve.numeroTelefono AS 'telefonoVendedor', ve.correo AS 'correoVendedor', v.foto 'imagenVideojuego'
+                FROM TransaccionVideojuego tv
+                INNER JOIN transacciones t ON t.id = tv.idTransaccion
+                INNER JOIN usuarios ve ON ve.id = tv.idVendedor
+                INNER JOIN videojuegos v ON v.id = tv.idVideojuego
                 WHERE t.numeroFactura = {$this -> getNumeroFactura()}";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultados = $this->db->query($consulta);
-            /*Array para almacenar la información de la compra*/
-            $informacionVenta = array();
-            /*Mientras hayan compras disponibles para recorrer*/
-            while ($fila = $resultados->fetch_object()) {
-                /*Comprobar si no existe la informacion de la venta*/
-                if(!isset($informacionCompra['venta'])){
-                    /*Crear array con informacion de la compra*/
-                    $informacionVenta['venta'] = array(
-                        'facturaVenta' => $fila->facturaVenta,
-                        'idTransaccion' => $fila->idTransaccion,
-                        'nombreComprador' => $fila->nombreComprador,
-                        'apellidoComprador' => $fila->apellidoComprador,
-                        'telefonoComprador' => $fila->telefonoComprador,
-                        'correoComprador' => $fila->correoComprador,
-                        'departamentoEnvio' => $fila->departamentoEnvio,
-                        'municipioEnvio' => $fila->municipioEnvio,
-                        'codigoPostalEnvio' => $fila->codigoPostalEnvio,
-                        'direccionEnvio' => $fila->direccionEnvio,
-                        'barrioEnvio' => $fila->barrioEnvio,
-                        'nombreEstado' => $fila->nombreEstado,
-                        'numeroPago' => $fila->numeroPago,
-                        'medioPagoNombre'=>$fila->medioPagoNombre,
-                        'totalTransaccion' => $fila->totalTransaccion,
-                        /*Inicializar un array para almacenar los videojuegos de la venta*/
-                        'videojuegos' => array()
-                    );
-                }
-                /*Almacenar la información del videojuego en el array de venta y videojuego*/
-                $informacionVenta['venta']['videojuegos'][] = array(
-                    'unidadesCompra' => $fila->unidadesCompra,
-                    'imagenVideojuego' => $fila->imagenVideojuego,
-                    'precioVideojuegoVenta' => $fila->precioVideojuegoVenta
-                );
-            }
-            /*Retornar el resultado*/
-            return $informacionVenta;
+            /*Retornar los resultados*/
+            return $resultados;
+        } 
+        
+        /*
+        Funcion para obtener los videojuegos de la compra
+        */
+        
+        public function detalleCompraVideojuegos(){
+            /*Construir la consulta*/
+            $consulta = "SELECT DISTINCT v.nombre AS 'nombreVideojuegoCompra', tv.unidades AS 'unidadesCompra', v.precio AS 'precioVideojuegoVenta', u.nombre AS 'usoVideojuegoCompra', c.nombre 'consolaVideojuegoCompra'
+                FROM TransaccionVideojuego tv
+                INNER JOIN transacciones t ON t.id = tv.idTransaccion
+                INNER JOIN videojuegos v ON v.id = tv.idVideojuego
+                INNER JOIN usos u ON u.id = v.idUso
+                INNER JOIN consolas c ON c.id = v.idConsola
+                WHERE t.numeroFactura = {$this -> getNumeroFactura()}";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $resultados = $this->db->query($consulta);
+            /*Retornar los resultados*/
+            return $resultados;
         }   
+
+        /*
+        Funcion para obtener los videojuegos de la compra del vendedor respectivo
+        */
+        
+        public function detalleTransaccionVideojuegosPropios($idVendedor){
+            /*Construir la consulta*/
+            $consulta = "SELECT DISTINCT v.nombre AS 'nombreVideojuegoCompra', tv.unidades AS 'unidadesCompra', v.precio AS 'precioVideojuegoVenta', u.nombre AS 'usoVideojuegoCompra', c.nombre 'consolaVideojuegoCompra', v.foto AS 'imagenVideojuego'
+                FROM TransaccionVideojuego tv
+                INNER JOIN transacciones t ON t.id = tv.idTransaccion
+                INNER JOIN videojuegos v ON v.id = tv.idVideojuego
+                INNER JOIN usos u ON u.id = v.idUso
+                INNER JOIN consolas c ON c.id = v.idConsola
+                WHERE t.numeroFactura = {$this -> getNumeroFactura()} AND tv.idVendedor = {$idVendedor}";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $resultados = $this->db->query($consulta);
+            /*Retornar los resultados*/
+            return $resultados;
+        }   
+
+        /*
+        Funcion para obtener los vendedores de la compra
+        */
+        
+        public function detalleVentaComprador(){
+            /*Construir la consulta*/
+            $consulta = "SELECT DISTINCT co.nombre AS 'compradorNombre', co.apellido AS 'compradorApellido', co.numeroTelefono AS 'compradorTelefono', co.correo AS 'compradorCorreo'
+                FROM TransaccionVideojuego tv
+                INNER JOIN transacciones t ON t.id = tv.idTransaccion
+                INNER JOIN usuarios co ON co.id = t.idComprador
+                WHERE t.numeroFactura = {$this -> getNumeroFactura()}";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $resultados = $this->db->query($consulta);
+            /*Obtener el detalle*/
+            $detalle = $resultados -> fetch_object();
+            /*Retornar el resultado*/
+            return $detalle;
+        } 
 
         /*
         Funcion para cambiar el estado de la venta

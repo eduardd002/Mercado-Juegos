@@ -158,7 +158,7 @@
             /*Mientras hayan videojuegos en el carrito disponibles para recorrer*/
             while ($fila = $resultado->fetch_object()) {
                 /*Comprobar si no existe la informacion del carrito*/
-                if (!isset($informacionCarrito['carrito'])) {
+                if(!isset($informacionCarrito['carrito'])) {
                     /*Crear array con informacion del carrito*/
                         $informacionCarrito['carrito'] = array(
                         /*Inicializar un array para almacenar los videojuegos del carrito*/

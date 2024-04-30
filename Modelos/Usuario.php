@@ -564,7 +564,7 @@
             /*Mientras hayan usuarios disponibles para recorrer*/
             while ($fila = $resultados->fetch_object()) {
                 /*Comprobar si no existe la informacion del usuario*/
-                if(!isset($informacionCompra['usuario'])){
+                if(!isset($informacionUsuario['usuario'])){
                     /*Crear array con informacion del usuario*/
                     $informacionUsuario['usuario'] = array(
                         'idUsuario' => $fila->idUsuario,
