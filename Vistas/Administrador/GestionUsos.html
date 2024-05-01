@@ -7,6 +7,20 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarusoacierto'); ?>
 
+    <?php if(isset($_SESSION['restaurarusoerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['restaurarusoerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('restaurarusoerror'); ?>
+
+    <?php if(isset($_SESSION['restaurarusoacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['restaurarusoacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('restaurarusoacierto'); ?>
+
     <?php if(isset($_SESSION['eliminarusoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['eliminarusoacierto']; ?>
@@ -27,16 +41,12 @@
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarusoerror'); ?>
-
+    <a href="<?=rutaInicio?><?=uso?><?=verUsosEliminados?>">Ver usos eliminados</a>
     <?php if(mysqli_num_rows($listadoUsos) == 0) : ?>
         <h1>No hay usos creados</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
         <h1>Gestion de usos</h1>
-        <hr>
-        <br>
-        <br>
-        <a href="<?=rutaInicio?><?=uso?><?=verUsosEliminados?>">Ver usos eliminados</a>
         <div id="gestiones">
             <table>
                 <tr>

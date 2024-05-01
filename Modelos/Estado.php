@@ -188,7 +188,7 @@
 
         public function comprobarEstadoUnico($nombre){
             /*Construir la consulta*/
-            $consulta = "SELECT activo FROM categorias WHERE nombre = '{$this -> getNombre()}' AND nombre != '{$nombre}'";
+            $consulta = "SELECT activo FROM estados WHERE nombre = '{$this -> getNombre()}' AND nombre != '{$nombre}'";
             /*Llamar la funcion que ejecuta la consulta*/
             $estado = $this -> db -> query($consulta);
             /*Obtener el resultado*/

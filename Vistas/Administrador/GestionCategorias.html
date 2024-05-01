@@ -7,6 +7,13 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarcategoriaacierto'); ?>
 
+    <?php if(isset($_SESSION['restaurarcategoriaerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['restaurarcategoriaerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('restaurarcategoriaerror'); ?>
+
     <?php if(isset($_SESSION['restaurarcategoriaacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['restaurarcategoriaacierto']; ?>
@@ -41,16 +48,12 @@
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarcategoriaerror'); ?>
-
+    <a href="<?=rutaInicio?><?=categoria?><?=verCategoriasEliminadas?>">Ver categorias eliminadas</a>
     <?php if(mysqli_num_rows($listadoCategorias) == 0) : ?>
         <h1>No hay categorias creadas</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
         <h1>Gestion de categorias</h1>
-        <hr>
-        <br>
-        <br>
-        <a href="<?=rutaInicio?><?=categoria?><?=verCategoriasEliminadas?>">Ver categorias eliminadas</a>
         <div id="gestiones">
             <table>
                 <tr>

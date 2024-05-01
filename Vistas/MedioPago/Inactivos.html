@@ -7,7 +7,7 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('restaurarmediopagoerror'); ?>
 
-    <?php if(mysqli_num_rows($listadoMediospago) == 0) : ?>
+    <?php if(mysqli_num_rows($listadoMediosPago) == 0) : ?>
         <h1>No hay Medios De Pago Eliminados</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
@@ -19,11 +19,11 @@
                     <th>Id</th>
                     <th>Nombre</th>
                 </tr>
-                <?php while($mediospago = $listadoMediospago -> fetch_object()) : ?>
+                <?php while($mediospago = $listadoMediosPago -> fetch_object()) : ?>
                     <tr>
                         <td><?=$mediospago -> id?></td>
                         <td><?=$mediospago -> nombre?></td>
-                        <td><a href="<?=rutaInicio?><?=mediopago?><?=restaurarMedioPago?>&id=<?=$mediospago -> id?>" class="button button-eliminarVideojuego">Recuperar</a></td>
+                        <td><a href="<?=rutaInicio?><?=medioPago?><?=restaurarMedioPago?>&id=<?=$mediospago -> id?>" class="button button-eliminarVideojuego">Recuperar</a></td>
                     </tr>
                 <?php endwhile;?>
             </table>

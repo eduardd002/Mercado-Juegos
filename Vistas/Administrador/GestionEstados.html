@@ -7,6 +7,20 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarestadoacierto'); ?>
 
+    <?php if(isset($_SESSION['restaurarestadoerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['restaurarestadoerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('restaurarestadoerror'); ?>
+
+    <?php if(isset($_SESSION['restaurarestadoacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['restaurarestadoacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('restaurarestadoacierto'); ?>
+
     <?php if(isset($_SESSION['actualizarestadoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['actualizarestadoacierto']; ?>
@@ -27,16 +41,12 @@
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarestadoerror'); ?>
-
+    <a href="<?=rutaInicio?><?=estado?><?=verEstadosEliminados?>">Ver estados eliminados</a>
     <?php if(mysqli_num_rows($listadoEstados) == 0) : ?>
         <h1>No hay estados creados</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
         <h1>Gestion de estados</h1>
-        <hr>
-        <br>
-        <br>
-        <a href="<?=rutaInicio?><?=estado?><?=verEstadosEliminados?>">Ver estados eliminados</a>
         <div id="gestiones">
             <table>
                 <tr>

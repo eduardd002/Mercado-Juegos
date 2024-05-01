@@ -10,6 +10,8 @@
     /*Utilzar la libreria para importar los archivos en formato PDF*/
     use Spipu\Html2Pdf\Html2Pdf;
 
+use function PHPSTORM_META\type;
+
     class Ayudas{
 
         /*
@@ -387,6 +389,7 @@
             $usuario = new Usuario(); 
             /*Crear el objeto*/ 
             $usuario -> setCorreo($correo); 
+            $usuario -> setFechaLimiteRecuperarCuenta(date("Y-m-d", 0));
             /*Ejecutar la consulta*/ 
             $resultado = $usuario -> recuperarUsuario(); 
             /*Retornar el resultado*/ 
@@ -397,13 +400,14 @@
         Funcion para obtener el usuario atravez del correo
         */
 
-        public static function obtenerUsuarioPorCorreo($email){
+        public static function obtenerUsuarioPorCorreo($email, $clave){
             /*Incluir el objeto de usuario*/
             require_once 'Modelos/Usuario.php';
             /*Instanciar el objeto*/ 
             $usuario = new Usuario();
             /*Crear el objeto*/ 
             $usuario -> setCorreo($email);
+            $usuario -> setClave($clave);
             /*Ejecutar la consulta*/
             $usuarioEspecifico = $usuario -> obtenerIdPorCorreo();
             /*Comprobar si el correo esta asociado a un usuario registrado*/
@@ -457,19 +461,21 @@
 
         public static function iniciarSesion($email, $clave){
             /*Llamar funcion que obtiene el usuario atravez del correo*/
-            $usuarioPorCorreo = (Ayudas::obtenerUsuarioPorCorreo($email));
+            $usuarioPorCorreo = (Ayudas::obtenerUsuarioPorCorreo($email, $clave));
             /*Llamar la funcion que valida si la fecha de 3 meses necesaria para recuperar la cuenta ya ha pasado*/
-            $fechaSuperada = Ayudas::fechaSuperada($usuarioPorCorreo);
+            $fechaSuperadaLimite = Ayudas::fechaSuperada($usuarioPorCorreo);
             /*Lamar las funciones que contiene la informacion del login del usuario y administrador*/
             $ingresoa = Ayudas::loginAdministrador($email, $clave);
             /*Comprobar si el usuario no existe o la fecha ha sido superada*/
-            if($fechaSuperada == null || $fechaSuperada){
+            if($fechaSuperadaLimite === null || $fechaSuperadaLimite){
                 /*Llamar la funcion que obtiene el login del usuario*/
                 $ingreso = Ayudas::loginUsuario($email, $clave);
             /*Comprobar si la fecha de 3 meses necesaria para recuperar la cuenta no ha sido superada*/
-            }else if($fechaSuperada == false){
+            }else if($fechaSuperadaLimite == false){
                 /*Llamar la funcion que recupera la cuenta*/
                 Ayudas::recuperarUsuario($email);
+                /*Llamar la funcion que obtiene el login del usuario*/
+                $ingreso = Ayudas::loginUsuario($email, $clave);
             }
             /*Comprobar si el ingreso del usuario es exitoso*/
             if($ingreso && is_object($ingreso)){
@@ -591,7 +597,7 @@
                 /*Llamar la funcion que captura la fecha limite del usuario*/
                 $fechaUsuario = Ayudas::obtenerFechaLimite($idUsuario);
                 /*Comparar si se ha pasado la fecha*/
-                if($fechaUsuario < date("Y-m-d")){
+                if(date("Y-m-d") > $fechaUsuario){
                     /*Retornar el resultado*/
                     return true;
                 /*De lo contrario*/    

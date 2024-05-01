@@ -14,6 +14,20 @@
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarconsolaacierto'); ?>
 
+    <?php if(isset($_SESSION['restaurarconsolaerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['restaurarconsolaerror']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('restaurarconsolaerror'); ?>
+
+    <?php if(isset($_SESSION['restaurarconsolaacierto'])) : ?>
+        <div class="alerta alerta-acierto">
+            <?=$_SESSION['restaurarconsolaacierto']; ?>
+        </div>
+    <?php endif; ?>
+    <?php Ayudas::eliminarSesion('restaurarconsolaacierto'); ?>
+
     <?php if(isset($_SESSION['guardarconsolaacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['guardarconsolaacierto']; ?>
@@ -27,16 +41,12 @@
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarconsolaerror'); ?>
-
+    <a href="<?=rutaInicio?><?=consola?><?=verConsolasEliminadas?>">Ver consolas eliminadas</a>
     <?php if(mysqli_num_rows($listadoConsolas) == 0) : ?>
         <h1>No hay consolas creadas</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
         <h1>Gestion de consolas</h1>
-        <hr>
-        <br>
-        <br>
-        <a href="<?=rutaInicio?><?=consola?><?=verConsolasEliminadas?>">Ver consolas eliminadas</a>
         <div id="gestiones">
             <table>
                 <tr>

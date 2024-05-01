@@ -37,7 +37,7 @@
 
         public function obtenerNombre($id){
             /*Instanciar el objeto*/
-            $medioPago = new Estado();
+            $medioPago = new MedioPago();
             /*Crear el objeto*/
             $medioPago -> setId($id);
             /*Ejecutar la consulta*/
@@ -191,11 +191,11 @@
                     /*Comprobar si el medio de pago ha sido eliminado con exito*/
                     if($eliminado){
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('eliminarmediopagoacierto', "el medio de pago ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarMedioPago');
+                        Ayudas::crearSesionYRedirigir('eliminarmediopagoacierto', "El medio de pago ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarMedioPago');
                     /*De lo contrario*/
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('eliminarmediopagoerror', "el medio de pago no ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarMedioPago');
+                        Ayudas::crearSesionYRedirigir('eliminarmediopagoerror', "El medio de pago no ha sido eliminada exitosamente", '?controller=AdministradorController&action=gestionarMedioPago');
                     }
                 /*De lo contrario*/
                 }else{
@@ -238,7 +238,7 @@
                     /*Comprobar si el medio de pago ha sido editado*/
                     if($medioPago){
                         /*Llamar la funcion para obtener un medio de pago en concreto*/
-                        $medioPagoUnico = $medioPago -> obtenerUna();
+                        $medioPagoUnico = $medioPago -> obtenerUno();
                         /*Comprobar si el medio de pago ha sido obtenido*/
                         if($medioPago){
                             /*Incluir la vista*/

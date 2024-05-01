@@ -317,15 +317,8 @@
         */
 
         public function recuperarUsuario(){
-            /*Comprobar si se quiere recuperar atravez del id*/
-            if($this -> getId() != null){
-                /*Construir la consulta*/
-                $consulta = "UPDATE usuarios SET activo = 1 WHERE id = {$this -> getId()}";
-            /*Comprobar si se quiere recuperar atravez del correo*/
-            }elseif($this -> getCorreo() != null){
-                /*Construir la consulta*/
-                $consulta = "UPDATE usuarios SET activo = 1 WHERE correo = '{$this -> getCorreo()}'";
-            }
+            /*Construir la consulta*/
+            $consulta = "UPDATE usuarios SET activo = 1, fechaLimiteRecuperarCuenta = '{$this -> getFechaLimiteRecuperarCuenta()}' WHERE correo = '{$this -> getCorreo()}'";
             /*Llamar la funcion que ejecuta la consulta*/
             $recuperado = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/
@@ -389,7 +382,7 @@
 
         public function traerClave($correo){
             /*Construir la consulta*/
-            $consulta = "SELECT clave FROM usuarios WHERE correo = '$correo' AND activo = 1";
+            $consulta = "SELECT clave FROM usuarios WHERE correo = '$correo'";
             /*Llamar la funcion que ejecuta la consulta*/
             $clave = $this -> db -> query($consulta);
             /*Obtener el resultado*/
@@ -468,7 +461,7 @@
 
         public function obtenerUno(){
             /*Construir la consulta*/
-            $consulta = "SELECT DISTINCT * FROM usuarios WHERE id = {$this -> getId()} AND activo = 1";
+            $consulta = "SELECT DISTINCT * FROM usuarios WHERE id = {$this -> getId()}";
             /*Llamar la funcion que ejecuta la consulta*/
             $categoria = $this -> db -> query($consulta);
             /*Obtener el resultado*/
@@ -483,13 +476,36 @@
 
         public function obtenerIdPorCorreo(){
             /*Construir la consulta*/
-            $consulta = "SELECT DISTINCT id FROM usuarios WHERE correo = '{$this -> getCorreo()}'";
-            /*Llamar la funcion que ejecuta la consulta*/
-            $categoria = $this -> db -> query($consulta);
-            /*Obtener el resultado*/
-            $resultado = $categoria -> fetch_object();
-            /*Retornar el resultado*/
-            return $resultado;
+            $consulta = "SELECT DISTINCT id, clave FROM usuarios WHERE correo = '{$this -> getCorreo()}'";
+            /*Llamar la funcion para obtener clave propia*/
+            $clave = $this -> traerClave($this -> getCorreo());
+            /*Comprobar si el correo pertenece a un usuario registrado*/
+            if($clave != null){
+                /*Traer clave*/
+                $claveAsociada = $clave -> clave;
+                /*Establecer una variable bandera*/
+                $resultado = false;
+                /*Verificar clave*/
+                $verificarClave = password_verify($this -> getClave(), $claveAsociada);
+                /*Si la clave es correcta*/
+                if($verificarClave){
+                    /*Llamar la funcion que ejecuta la consulta*/
+                    $login = $this -> db -> query($consulta);
+                    /*Obtener el resultado*/
+                    $administrador = $login -> fetch_object();
+                    /*Comprobar si la consulta fue exitosa*/
+                    if($administrador){
+                        /*Cambiar el estado de la variable bandera*/
+                        $resultado = $administrador;
+                    }
+                }
+                /*Retornar el resultado*/
+                return $resultado;
+            /*De lo contrario*/
+            }else{
+                /*Retornar el resultado*/
+                return null;
+            }
         }
 
         /*

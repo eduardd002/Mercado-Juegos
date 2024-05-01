@@ -130,7 +130,7 @@
         Funcion para obtener una mediospago
         */
 
-        public function obtenerUna(){
+        public function obtenerUno(){
             /*Construir la consulta*/
             $consulta = "SELECT DISTINCT * FROM mediospago WHERE id = {$this -> getId()} AND activo = 1";
             /*Llamar la funcion que ejecuta la consulta*/

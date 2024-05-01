@@ -26,7 +26,7 @@
             /*Instanciar el objeto*/
             $uso = new Uso();
             /*Listar todas las consolas desde la base de datos*/
-            $listadoMediosPago = $uso -> listarInactivos();
+            $listadoUsos = $uso -> listarInactivos();
             /*Incluir la vista*/
             require_once "Vistas/Uso/Inactivos.html";
         }
@@ -37,7 +37,7 @@
 
         public function obtenerNombre($id){
             /*Instanciar el objeto*/
-            $uso = new Estado();
+            $uso = new Uso();
             /*Crear el objeto*/
             $uso -> setId($id);
             /*Ejecutar la consulta*/
