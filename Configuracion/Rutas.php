@@ -82,6 +82,7 @@
     define("gestionarUso", "&action=gestionarUso");
     define("eliminarUsuarioAdministrador", "&action=eliminarUsuario");
     define("verBloqueos", "&action=verBloqueos");
+    define("verAdministradores", "&action=verAdministradores");
     define("gestionarCategoria", "&action=gestionarCategoria");
     define("gestionarUsuario", "&action=gestionarUsuario");
     define("gestionarConsola", "&action=gestionarConsola");

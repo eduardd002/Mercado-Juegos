@@ -28,7 +28,7 @@
                     <h4>Fecha de registro: <?=$usuarios -> fechaRegistro?></h4>
                     <?php if($usuarios -> activo == '0') : ?>
                         <h4>Estado de la cuenta: Inactiva</h4>
-                        <?php if($usuarios -> fechaLimiteRecuperarCuenta == '0000-00-00') : ?>
+                        <?php if($usuarios -> fechaLimiteRecuperarCuenta == '1969-12-31') : ?>
                             <h4>La cuenta de este usuario esta inactiva permanentemente</h4>
                         <?php else : ?>
                             <h4>Fecha limite para recuperar la cuenta: <?=$usuarios -> fechaLimiteRecuperarCuenta?></h4>

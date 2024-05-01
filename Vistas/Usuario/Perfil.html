@@ -17,9 +17,11 @@
         <?php else : ?>
             <h3>Videojuegos vendidos: (<?=$vendidos -> videojuegosVendidos?>)</h3>
         <?php endif;?>
-        <div id="bloquearUsuario">
-            <a class="button button-eliminarBloqueo" href="<?=rutaInicio?><?=bloqueo?><?=bloquear?>&aBloquear=<?=$listaDatosUsuario['usuario']['idUsuario']?>">Bloquear</a>
-        </div>
+        <?php if(isset($_SESSION['loginexitoso'])) : ?>
+            <div id="bloquearUsuario">
+                <a class="button button-eliminarBloqueo" href="<?=rutaInicio?><?=bloqueo?><?=bloquear?>&aBloquear=<?=$listaDatosUsuario['usuario']['idUsuario']?>">Bloquear</a>
+            </div>
+        <?php endif;?>    
     </div>
     <div id="catalogo">
         <?php foreach ($listaDatosUsuario['usuario']['videojuegos'] as $videojuego) : ?>

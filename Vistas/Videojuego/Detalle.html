@@ -87,9 +87,7 @@
         <div class="descripcionVideojuego">
             <h3 id="descripcionVideojuegoTitulo">Descripcion</h3>
             <p id="descripcionVideojuegoTexto"><?=$videojuegoEspecifico['videojuego']['descripcionVideojuego']?></p>
-            <?php if(isset($_SESSION['loginexitoso']) && $videojuegoEspecifico['videojuego']['idVendedor'] != $_SESSION['loginexitoso'] -> id) : ?>
-                <h3 id="vendedorVideojuego">Vendido por: <a href="<?=rutaInicio?><?=usuario?><?=perfil?>&idVendedor=<?=$datosVendedor -> idVendedor?>"><?=$datosVendedor -> nombreVendedor?></a></h3>
-            <?php endif; ?>
+            <h3 id="vendedorVideojuego">Vendido por: <a href="<?=rutaInicio?><?=usuario?><?=perfil?>&idVendedor=<?=$datosVendedor -> idVendedor?>"><?=$datosVendedor -> nombreVendedor?></a></h3>
         </div>
         <?php while($comentarios = $listaComentarios -> fetch_object()) : ?>
             <div id="comentario">
@@ -98,7 +96,9 @@
                     <h3><?=$comentarios -> nombreComentador?></h3>
                     <h4><?=Ayudas::desencriptarContenido($comentarios -> contenidoComentario)?></h4>
                     <h5><?=$comentarios -> fechaCreacionComentario?></h5>
-                    <a href="<?=rutaInicio?><?=comentario?><?=eliminarComentario?>&idComentario=<?=$comentarios -> idComentario?>&idVideojuego=<?=$videojuegoEspecifico['videojuego']['idVideojuego']?>">Eliminar</a>
+                    <?php if(isset($_SESSION['loginexitoso']) && $videojuegoEspecifico['videojuego']['idVendedor'] == $_SESSION['loginexitoso'] -> id || $_SESSION['loginexitoso'] -> id == $comentarios -> usuarioComentador) : ?>
+                        <a href="<?=rutaInicio?><?=comentario?><?=eliminarComentario?>&idComentario=<?=$comentarios -> idComentario?>&idVideojuego=<?=$videojuegoEspecifico['videojuego']['idVideojuego']?>">Eliminar</a>
+                    <?php endif; ?>
                 </div>
             </div>
         <?php endwhile; ?>

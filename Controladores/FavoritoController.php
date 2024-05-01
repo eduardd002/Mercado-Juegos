@@ -147,14 +147,17 @@
         */ 
 
         public function comprobarUnicoFavorito($idVideojuego){ 
-            /*Instanciar el objeto*/ 
-            $favorito = new Favorito(); 
-            /*Crear el objeto*/ 
-            $favorito -> setIdUsuario($_SESSION['loginexitoso'] -> id); 
-            /*Ejecutar la consulta*/ 
-            $resultado = $favorito -> comprobarFavorito($idVideojuego); 
-            /*Retornar el resultado*/ 
-            return $resultado; 
+            /*Comprobar si el usuario esta logueado*/
+            if(isset($_SESSION['loginexitoso'])){
+                /*Instanciar el objeto*/ 
+                $favorito = new Favorito(); 
+                /*Crear el objeto*/ 
+                $favorito -> setIdUsuario($_SESSION['loginexitoso'] -> id); 
+                /*Ejecutar la consulta*/ 
+                $resultado = $favorito -> comprobarFavorito($idVideojuego); 
+                /*Retornar el resultado*/ 
+                return $resultado; 
+            }
         }
 
         /*

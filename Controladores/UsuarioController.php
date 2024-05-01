@@ -141,44 +141,53 @@
                 $foto = $archivo['name'];
                 /*Comprobar si todos los datos exsiten*/
                 if($nombre && $apellidos && $fechaNacimiento && $telefono && $clave && $email && $departamento && $municipio){
-                    /*Llamar funcion que comprueba si el usuario ya ha sido registrado*/
-                    $unico = $this -> comprobarUnicoUsuario($email);
-                    /*Comprobar si el correo del usuario no se encuentra asociado a otro usuario*/
-                    if($unico == null){
-                        /*Comprobar si la contraseña es valida*/
-                        $claveSegura = Ayudas::comprobarContrasenia($clave);
-                        /*Comprobar si la clave es valida*/
-                        if($claveSegura){
-                            /*Comprobar si la foto es valida y ha sido guardada*/
-                            $fotoGuardada = Ayudas::guardarImagen($archivo, "ImagenesUsuarios");
-                            /*Comprobar si la foto ha sido validada y guardada*/
-                            if($fotoGuardada){
-                                /*Llamar la funcion de guardar usuario*/
-                                $guardado = $this -> guardarUsuario($nombre, $apellidos, $fechaNacimiento, $telefono, $email, $clave, $departamento, $municipio, $foto);
-                                /*Comprobar si el usuario ha sido guardado*/
-                                if($guardado){
-                                    /*Llamar la funcion de inicio de sesion del usuario*/
-                                Ayudas::iniciarSesionUsuario($email, $clave);
+                    /*Llamar la funcion que comprueba si la persona es mayor de 15 años*/
+                    $mayor15Anios = Ayudas::comprobarMayor15($fechaNacimiento);
+                    /*Comprobar si el administrador es mayor de edad*/
+                    if($mayor15Anios){
+                        /*Llamar funcion que comprueba si el usuario ya ha sido registrado*/
+                        $unico = $this -> comprobarUnicoUsuario($email);
+                        /*Comprobar si el correo del usuario no se encuentra asociado a otro usuario*/
+                        if($unico == null){
+                            /*Comprobar si la contraseña es valida*/
+                            $claveSegura = Ayudas::comprobarContrasenia($clave);
+                            /*Comprobar si la clave es valida*/
+                            if($claveSegura){
+                                /*Comprobar si la foto es valida y ha sido guardada*/
+                                $fotoGuardada = Ayudas::guardarImagen($archivo, "ImagenesUsuarios");
+                                /*Comprobar si la foto ha sido validada y guardada*/
+                                if($fotoGuardada){
+                                    /*Llamar la funcion de guardar usuario*/
+                                    $guardado = $this -> guardarUsuario($nombre, $apellidos, $fechaNacimiento, $telefono, $email, $clave, $departamento, $municipio, $foto);
+                                    /*Comprobar si el usuario ha sido guardado*/
+                                    if($guardado){
+                                        /*Llamar la funcion de inicio de sesion del usuario*/
+                                    Ayudas::iniciarSesionUsuario($email, $clave);
+                                    /*De lo contrario*/  
+                                    }else{
+                                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                                        Ayudas::crearSesionYRedirigir("guardarusuarioerror", "Ha ocurrido un error al guardar el usuario", "?controller=UsuarioController&action=registro");
+                                    }
                                 /*De lo contrario*/  
                                 }else{
                                     /*Crear la sesion y redirigir a la ruta pertinente*/
-                                    Ayudas::crearSesionYRedirigir("guardarusuarioerror", "Ha ocurrido un error al guardar el usuario", "?controller=UsuarioController&action=registro");
+                                    Ayudas::crearSesionYRedirigir("guardarusuarioerror", "La imagen debe ser de tipo imagen", "?controller=UsuarioController&action=registro");
                                 }
-                            /*De lo contrario*/  
+                            /*De lo contrario*/      
                             }else{
                                 /*Crear la sesion y redirigir a la ruta pertinente*/
-                                Ayudas::crearSesionYRedirigir("guardarusuarioerror", "La imagen debe ser de tipo imagen", "?controller=UsuarioController&action=registro");
-                            }
-                        /*De lo contrario*/      
+                                Ayudas::crearSesionYRedirigir("guardarusuarioerror", "La clave debe contener un mayuscula, miniscula, numero, caracter especial y minimo 8 caracteres de longitud", "?controller=UsuarioController&action=registro");
+                            } 
+                        /*De lo contrario*/       
                         }else{
                             /*Crear la sesion y redirigir a la ruta pertinente*/
-                            Ayudas::crearSesionYRedirigir("guardarusuarioerror", "La clave debe contener un mayuscula, miniscula, numero, caracter especial y minimo 8 caracteres de longitud", "?controller=UsuarioController&action=registro");
+                            Ayudas::crearSesionYRedirigir('guardarusuarioerror', "Este correo ya se encuentra asociado a un usuario", '?controller=UsuarioController&action=registro');
                         } 
-                    /*De lo contrario*/       
+                    /*De lo contrario*/         
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('guardarusuarioerror', "Este correo ya se encuentra asociado a un usuario", '?controller=UsuarioController&action=registro');
-                    } 
+                        Ayudas::crearSesionYRedirigir("guardarusuarioerror", "Debe ser mayor de 15 años para poderse registrar", "?controller=UsuarioController&action=registro");
+                    }
                 /*De lo contrario*/         
                 }else{
                     /*Crear la sesion y redirigir a la ruta pertinente*/

@@ -49,14 +49,17 @@
         */ 
 
         public function comprobarUnicoCarrito($idVideojuego){ 
-            /*Instanciar el objeto*/ 
-            $carrito = new Carrito(); 
-            /*Crear el objeto*/ 
-            $carrito -> setIdUsuario($_SESSION['loginexitoso'] -> id); 
-            /*Ejecutar la consulta*/ 
-            $resultado = $carrito -> comprobarCarrito($idVideojuego); 
-            /*Retornar el resultado*/ 
-            return $resultado; 
+            /*Comprobar si el usuario esta logueado*/
+            if(isset($_SESSION['loginexitoso'])){
+                /*Instanciar el objeto*/ 
+                $carrito = new Carrito(); 
+                /*Crear el objeto*/ 
+                $carrito -> setIdUsuario($_SESSION['loginexitoso'] -> id); 
+                /*Ejecutar la consulta*/ 
+                $resultado = $carrito -> comprobarCarrito($idVideojuego); 
+                /*Retornar el resultado*/ 
+                return $resultado; 
+            }
         }
 
         /*
@@ -289,6 +292,19 @@
         }
 
         /*
+        Funcion para comprobar el inicio de sesion
+        */
+
+        public function comprobarLogin($videojuegoId){
+            /*Comprobar si el usuario no esta logueado*/
+            if(!Ayudas::comprobarInicioDeSesionUsuario()){
+                $_SESSION['idvideojuegopendientecarrito'] = $videojuegoId;
+            }
+            /*Llamar la funcion de ayuda en caso de que el usuario no este logueado*/
+            Ayudas::restringirAUsuarioAlAgregarCarrito('?controller=UsuarioController&action=login', $videojuegoId);
+        }
+
+        /*
         Funcion para guardar el carrito videojuego en la base de datos
         */
 
@@ -325,6 +341,8 @@
                     $unico = $this -> comprobarUnicoCarrito($videojuegoId);
                     /*Comprobar si el videojuego no ha sido agregado al carrito*/
                     if($unico == null){
+                        /*Llamar la funcion para obtener el inicio de sesion*/
+                        $this -> comprobarLogin($videojuegoId);
                         /*Llamar la funcion que guarda el carrito*/
                         $guardado = $this -> guardarCarrito();
                         /*Comprobar si se guardo con exito el carrito*/

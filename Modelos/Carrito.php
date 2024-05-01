@@ -193,7 +193,7 @@
 
         public function comprobarCarrito($idVideojuego){ 
             /*Construir la consulta*/
-            $consulta = "SELECT * FROM carritos WHERE id IN (SELECT idCarrito FROM carritovideojuego WHERE idusuario = {$this -> getIdUsuario()} AND idVideojuego = {$idVideojuego} AND activo = 1)";
+            $consulta = "SELECT * FROM carritos WHERE activo = 1 AND id IN (SELECT idCarrito FROM carritovideojuego WHERE idusuario = {$this -> getIdUsuario()} AND idVideojuego = {$idVideojuego} AND activo = 1)";
             /*Llamar la funcion que ejecuta la consulta*/
             $usuario = $this -> db -> query($consulta);
             /*Obtener el resultado*/

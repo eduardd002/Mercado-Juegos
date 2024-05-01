@@ -171,7 +171,7 @@
 
         public function obtenerComentariosDeVideojuego(){
             /*Construir la consulta*/
-            $consulta = "SELECT DISTINCT c.contenido AS 'contenidoComentario', u.nombre AS 'nombreComentador', u.foto AS 'fotoComentador', c.fechaHora AS 'fechaCreacionComentario', c.id AS 'idComentario'
+            $consulta = "SELECT DISTINCT c.contenido AS 'contenidoComentario', u.nombre AS 'nombreComentador', u.foto AS 'fotoComentador', c.fechaHora AS 'fechaCreacionComentario', c.id AS 'idComentario', u.id AS 'usuarioComentador'
                 FROM ComentarioUsuarioVideojuego c
                 INNER JOIN Usuarios u ON u.id = c.idUsuario
                 WHERE c.idVideojuego = {$this -> getIdVideojuego()} AND c.activo = 1";

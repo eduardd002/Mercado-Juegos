@@ -11,6 +11,12 @@
         </div>
     <?php endif; ?>
 
+    <?php if(isset($_SESSION['carritopendiente'])) : ?>
+        <div class="alerta alerta-sugerencia">
+            <?=$_SESSION['carritopendiente']; ?>
+        </div>
+    <?php endif; ?>
+
     <?php if(isset($_SESSION['iniciodesesion'])) : ?>
         <div class="alerta alerta-sugerencia">
             <?=$_SESSION['iniciodesesion']; ?>

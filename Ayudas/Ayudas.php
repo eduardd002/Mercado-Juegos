@@ -24,6 +24,47 @@
         }
 
         /*
+        Funcion para obtener la edad
+        */
+
+        public static function obtenerEdad($fechaNacimiento){
+            /*Obtener la fecha de hoy*/
+            $fechaHoy = date('Y-m-d');
+            /*Declarar variable bandera*/
+            $edad = date('Y', strtotime($fechaHoy)) - date('Y', strtotime($fechaNacimiento));
+            /*Retornar el resultado*/
+            return $edad;
+        }
+
+        /*
+        Comprobar si el administrador es mayor de edad
+        */
+
+        public static function comprobarMayorEdad($fechaNacimiento){
+            /*Llamar funcion que obtiene la edad de una persona*/
+            $edad = Ayudas::obtenerEdad($fechaNacimiento);
+            /*Comparar si es mayor de 18 años*/
+            if($edad >= 18){
+                /*Retornar el resultado*/
+                return true;
+            }
+        }
+
+        /*
+        Comprobar si el usuario es mayor de 15 años
+        */
+
+        public static function comprobarMayor15($fechaNacimiento){
+            /*Llamar funcion que obtiene la edad de una persona*/
+            $edad = Ayudas::obtenerEdad($fechaNacimiento);
+            /*Comparar si es mayor de 18 años*/
+            if($edad >= 15){
+                /*Retornar el resultado*/
+                return true;
+            }
+        }
+
+        /*
         Funcion para desencriptar datos
         */
 
@@ -222,6 +263,21 @@
                 header("Location:"."http://localhost/Mercado-Juegos/".$seccion);
                 /*Crear sesion con contenido informativo al usuario*/
                 $_SESSION['favoritopendiente'] = "Por favor inicia sesion antes de agregar a favoritos";
+            }
+        }
+
+        /*
+        Funcion para redirigir a inicio cuando no se este logueado y se quieran agregar un
+        videojuego al carrito
+        */
+
+        public static function restringirAUsuarioAlAgregarCarrito($seccion){
+            /*Verificar que el inicio de sesion de usuario no exista*/
+            if(!isset($_SESSION['loginexitoso'])){
+                /*Redirigir*/
+                header("Location:"."http://localhost/Mercado-Juegos/".$seccion);
+                /*Crear sesion con contenido informativo al usuario*/
+                $_SESSION['carritopendiente'] = "Por favor inicia sesion antes de agregar al carrito";
             }
         }
 
@@ -511,6 +567,12 @@
                     }
                     /*Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes*/
                     Ayudas::eliminarSesion('favoritopendiente');
+                /*Comprobar si se quiere agregar un videojuego al carrito sin estar previemente logueado*/
+                }else if(isset($_SESSION['carritopendiente'])){ 
+                    /*Redirigir al lugar requerido*/
+                    header("Location:"."http://localhost/Mercado-Juegos/?controller=VideojuegoController&action=detalle&id=".$_SESSION['idvideojuegopendientecarrito']);
+                    /*Eliminar las sesiones una vez se haya informado y hecho los procesos correspondientes*/
+                    Ayudas::eliminarSesion('carritopendiente'); 
                 /*De lo contrario*/    
                 }else{
                     /*Redirigir al inicio*/

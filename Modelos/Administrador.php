@@ -250,6 +250,19 @@
         }
 
         /*
+        Funcion para listar todos los administradores
+        */
+
+        public function listar(){
+            /*Construir la consulta*/
+            $consulta = "SELECT DISTINCT * FROM administradores";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $lista = $this -> db -> query($consulta);
+            /*Retornar el resultado*/
+            return $lista;
+        }
+
+        /*
         Funcion para recuperar el administrador eliminado
         */
 
