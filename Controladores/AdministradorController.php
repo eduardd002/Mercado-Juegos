@@ -383,6 +383,7 @@
             /*Crear el objeto*/
             $usuario -> setId($idUsu);
             $usuario -> setActivo(FALSE);
+            $usuario -> setFechaLimiteRecuperarCuenta(date("Y-m-d", 0));
             /*Ejecutar la consulta*/
             $eliminado = $usuario -> eliminar();
             /*Retornar el resultado*/

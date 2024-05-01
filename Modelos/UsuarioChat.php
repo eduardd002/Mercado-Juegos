@@ -156,8 +156,10 @@
                 $consulta .= "NULL, ";
             /*De lo contrario*/    
             }else{
+                /*Llamar la funcion para encriptar el contenido del mensaje*/
+                $mensajeEncriptado = Ayudas::encriptarContenido($this -> getMensaje());
                 /*Construir la consulta*/
-                $consulta .= "'{$this -> getMensaje()}', ";
+                $consulta .= "'{$mensajeEncriptado}', ";
             } 
             /*Construir la consulta*/
             $consulta .= "{$this -> getIdRemitente()}, 
@@ -219,7 +221,7 @@
             /*Obtener el resultado*/            
             $idenficador = $resultado -> fetch_object();
             /*Devolver resultado*/
-            $ultimoChat = $idenficador -> id;
+            $ultimoChat = $idenficador -> idChat;
             /*Retornar el resultado*/
             return $ultimoChat;
         }

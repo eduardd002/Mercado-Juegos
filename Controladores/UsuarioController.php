@@ -91,18 +91,13 @@
         Funcion para comprobar si el usuario ya ha sido creado previamente
         */ 
 
-        public function comprobarUnicoUsuario($id, $correo){ 
-            /*Comprobar si el id es nulo*/
-            if($id != null){
-                /*Llamar la funcion que obtiene el nombre del medio de pago en concreto*/
-                $correoActual = $this -> obtenerCorreo($id);
-            }
+        public function comprobarUnicoUsuario($correo){ 
             /*Instanciar el objeto*/
             $usuario = new Usuario();
             /*Crear el objeto*/
             $usuario -> setCorreo($correo);
             /*Ejecutar la consulta*/
-            $resultado = $usuario -> comprobarUsuarioUnico($correoActual);
+            $resultado = $usuario -> comprobarUsuarioUnico($_SESSION['loginexitoso'] -> correo);
             /*Retornar el resultado*/
             return $resultado;
         }
@@ -147,7 +142,7 @@
                 /*Comprobar si todos los datos exsiten*/
                 if($nombre && $apellidos && $fechaNacimiento && $telefono && $clave && $email && $departamento && $municipio){
                     /*Llamar funcion que comprueba si el usuario ya ha sido registrado*/
-                    $unico = $this -> comprobarUnicoUsuario(null, $email);
+                    $unico = $this -> comprobarUnicoUsuario($email);
                     /*Comprobar si el correo del usuario no se encuentra asociado a otro usuario*/
                     if($unico == null){
                         /*Comprobar si la contraseña es valida*/
@@ -319,7 +314,7 @@
                 /*Si los datos existen*/
                 if($id && $nombre && $apellidos && $telefono && $email && $departamento && $municipio){
                     /*Llamar funcion que comprueba si el usuario ya ha sido registrado*/
-                    $unico = $this -> comprobarUnicoUsuario($id, $email);
+                    $unico = $this -> comprobarUnicoUsuario($email);
                     /*Comprobar si el correo del usuario no existe*/
                     if($unico == null){
                         /*Comprobar si la foto no tiene formato de imagen o no ha llegado*/

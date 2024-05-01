@@ -10,8 +10,6 @@
     /*Utilzar la libreria para importar los archivos en formato PDF*/
     use Spipu\Html2Pdf\Html2Pdf;
 
-use function PHPSTORM_META\type;
-
     class Ayudas{
 
         /*

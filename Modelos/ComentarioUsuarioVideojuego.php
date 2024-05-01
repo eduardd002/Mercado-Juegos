@@ -148,8 +148,10 @@
         */
 
         public function guardar(){
+            /*Llamar la funcion para encriptar el contenido del comentario*/
+            $contenidoEncriptado = Ayudas::encriptarContenido($this -> getContenido());
             /*Construir la consulta*/
-            $consulta = "INSERT INTO comentariousuariovideojuego VALUES(NULL, {$this -> getActivo()}, {$this -> getIdUsuario()}, {$this -> getIdVideojuego()}, '{$this -> getContenido()}', '{$this -> getFechaHora()}')";
+            $consulta = "INSERT INTO comentariousuariovideojuego VALUES(NULL, {$this -> getActivo()}, {$this -> getIdUsuario()}, {$this -> getIdVideojuego()}, '{$contenidoEncriptado}', '{$this -> getFechaHora()}')";
             /*Llamar la funcion que ejecuta la consulta*/
             $registro = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/

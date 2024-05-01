@@ -665,7 +665,7 @@
                     INNER JOIN categorias ca ON ca.id = vc.idCategoria
                     INNER JOIN consolas c ON c.id = v.idConsola
                     INNER JOIN usos u ON u.id = v.idUso
-                    WHERE u.activo = 1 AND c.activo = 1 AND c.activo = 1 AND v.activo = 1";
+                    WHERE u.activo = 1 AND c.activo = 1 AND c.activo = 1 AND v.activo = 1 ";
             /*De lo contrario*/        
             }else{
                 /*Construir la consulta*/
@@ -682,8 +682,10 @@
                     FROM bloqueos b
                     INNER JOIN usuarios u ON u.id = b.idBloqueado
                     INNER JOIN videojuegos v ON v.idUsuario = u.id
-                    AND b.idBloqueador = {$this -> getId()} AND b.activo = 1 LIMIT 6";
+                    AND b.idBloqueador = {$this -> getId()} AND b.activo = 1 ";
             }
+            /*Construir la consulta*/
+            $consulta .= "ORDER BY RAND() LIMIT 6";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
             /*Retornar el resultado*/

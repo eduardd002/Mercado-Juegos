@@ -34,13 +34,11 @@
                                 <?php if($mensajes -> idRemitente == $_SESSION['loginexitoso'] -> id && $mensajes -> mensaje != null) : ?>
                                     <div id="mensajeenviado">
                                         <h3><?=$mensajes -> fechaHora?></h3>
-                                        <p><?=$mensajes -> mensaje?></p>
                                         <p><?=Ayudas::desencriptarContenido($mensajes -> mensaje)?></p>
                                     </div>
                                 <?php elseif($mensajes -> idDestinatario == $_SESSION['loginexitoso'] -> id && $mensajes -> mensaje != null) : ?>
                                     <div id="mensajerecibido">
                                         <h3><?=$mensajes -> fechaHora?></h3>
-                                        <p><?=$mensajes -> mensaje?></p>
                                         <p><?=Ayudas::desencriptarContenido($mensajes -> mensaje)?></p>
                                     </div>
                                 <?php endif; ?>

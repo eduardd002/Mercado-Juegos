@@ -254,7 +254,7 @@
 
         public function buscar(){
             /*Construir la consulta*/
-            $consulta = "SELECT DISTINCT * FROM videojuegos WHERE nombre LIKE '%{$this -> getNombre()}%' AND activo = 1";
+            $consulta = "SELECT DISTINCT * FROM videojuegos WHERE nombre LIKE '%{$this -> getNombre()}%' AND activo = 1 ORDER BY nombre DESC";
             /*Llamar la funcion que ejecuta la consulta*/
             $lista = $this -> db -> query($consulta);
             /*Retornar el resultado*/
@@ -419,7 +419,7 @@
                 FROM videojuegocategoria cv
                 INNER JOIN videojuegos v ON v.id = cv.idVideojuego
                 INNER JOIN categorias c ON c.id = cv.idCategoria 
-                WHERE v.activo = 1";
+                WHERE v.activo = 1 ORDER BY";
             /*Crear array para almacenar las condiciones de filtro*/
             $condiciones = [];
             /*Comprobar si la consola llega como opcion a filtrar*/
