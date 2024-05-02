@@ -79,21 +79,6 @@
         }
 
         /*
-        Funcion para obtener los comentarios referentes a una publicacion
-        */
-
-        public function obtenerComentariosDeVideojuego($id){
-            /*Instanciar el objeto*/
-            $comentarioUsuarioVideojuego = new ComentarioUsuarioVideojuego();
-            /*Construir el objeto*/
-            $comentarioUsuarioVideojuego -> setIdVideojuego($id);
-            /*Traer el resultado*/
-            $listaComentarios = $comentarioUsuarioVideojuego -> obtenerComentariosDeVideojuego();
-            /*Retornar el resultado*/
-            return $listaComentarios;
-        }
-
-        /*
         Funcion para ver el detalle del videojuego
         */
 
@@ -110,8 +95,6 @@
                     if($videojuegoEspecifico){
                         /*Llamar funcion que trae el usuario vendedor*/
                         $datosVendedor = $this -> obtenerUsuarioVendedor($id);
-                        /*Llamar funcion que trae comentarios del videojuego*/
-                        $listaComentarios = $this -> obtenerComentariosDeVideojuego($id);
                         /*Incluir la vista*/
                         require_once 'Vistas/Videojuego/Detalle.html';
                     /*De lo contrario*/    

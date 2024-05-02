@@ -312,24 +312,26 @@
 
         public function traerUno(){
             /*Construir la consulta*/
-            $consulta = "SELECT DISTINCT v.id AS 'idVideojuego', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.stock AS 'stockVideojuego', u.id AS 'idVendedor', us.nombre AS 'nombreUso', c.nombre 'categoriaNombre', v.foto AS 'imagenVideojuego', v.descripcion AS 'descripcionVideojuego', co.nombre AS 'nombreConsola'
+            $consulta = "SELECT DISTINCT v.id AS 'idVideojuego', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.stock AS 'stockVideojuego', u.id AS 'idVendedor', us.nombre AS 'nombreUso', c.nombre 'categoriaNombre', v.foto AS 'imagenVideojuego', v.descripcion AS 'descripcionVideojuego', co.nombre AS 'nombreConsola', cmv.contenido AS 'comentarioContenido', cmv.id AS 'comentarioId', cmv.fechaHora AS 'comentarioFecha', com.id AS 'comentarioUsuario', com.foto AS 'comentarioFoto', com.nombre AS 'nombreComentador'
                 FROM Videojuegos v
                 INNER JOIN Usuarios u ON u.id = v.idUsuario 
                 INNER JOIN Usos us ON us.id = v.idUso
                 INNER JOIN Consolas co ON co.id = v.idConsola
                 INNER JOIN VideojuegoCategoria cv ON cv.idVideojuego = v.id
                 INNER JOIN Categorias c ON cv.idCategoria = c.id
-                WHERE v.id = {$this -> getId()} AND v.activo = 1";
+                INNER JOIN ComentarioUsuarioVideojuego cmv ON cmv.idVideojuego = v.id
+                INNER JOIN Usuarios com ON com.id = cmv.idUsuario
+                WHERE v.id = {$this -> getId()} AND v.activo = 1 AND cmv.activo = 1";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultados = $this->db->query($consulta);
             /*Array para almacenar la información del videojuego*/
-            $informacionUsuario = array();
+            $informacionVideojuego = array();
             /*Mientras hayan videojuegos disponibles para recorrer*/
             while ($fila = $resultados->fetch_object()) {
                 /*Comprobar si no existe la informacion del videojuego*/
-                if(!isset($informacionCompra['compra'])){
+                if(!isset($informacionVideojuego['videojuego'])){
                     /*Crear array con informacion del videojuego*/
-                    $informacionUsuario['videojuego'] = array(
+                    $informacionVideojuego['videojuego'] = array(
                         'idVideojuego' => $fila->idVideojuego,
                         'nombreVideojuego' => $fila->nombreVideojuego,
                         'precioVideojuego' => $fila->precioVideojuego,
@@ -343,13 +345,22 @@
                         'categorias' => array()
                     );
                 }
+                /*Almacenar la información del comentario en el array de videojuego y comentario*/
+                $informacionVideojuego['videojuego']['comentarios'][] = array(
+                    'comentarioId' => $fila->comentarioId,
+                    'comentarioContenido' => $fila->comentarioContenido,
+                    'comentarioFoto' => $fila->comentarioFoto,
+                    'comentarioFecha' => $fila->comentarioFecha,
+                    'comentarioUsuario' => $fila->comentarioUsuario,
+                    'nombreComentador' => $fila->nombreComentador,
+                );
                 /*Almacenar la información de la categoria en el array de videojuego y categoria*/
-                $informacionUsuario['videojuego']['categorias'][] = array(
+                $informacionVideojuego['videojuego']['categorias'][] = array(
                     'categoriaNombre' => $fila->categoriaNombre,
                 );
             }
             /*Retornar el resultado*/
-            return $informacionUsuario;     
+            return $informacionVideojuego;     
         }
 
         /*

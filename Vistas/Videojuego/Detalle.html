@@ -89,19 +89,19 @@
             <p id="descripcionVideojuegoTexto"><?=$videojuegoEspecifico['videojuego']['descripcionVideojuego']?></p>
             <h3 id="vendedorVideojuego">Vendido por: <a href="<?=rutaInicio?><?=usuario?><?=perfil?>&idVendedor=<?=$datosVendedor -> idVendedor?>"><?=$datosVendedor -> nombreVendedor?></a></h3>
         </div>
-        <?php while($comentarios = $listaComentarios -> fetch_object()) : ?>
+        <?php foreach ($videojuegoEspecifico['videojuego']['comentarios'] as $comentarios) : ?>
             <div id="comentario">
                 <div id="comentario">
-                    <img src="Recursos/ImagenesUsuarios/<?=$comentarios -> fotoComentador?>" alt="Logo videojuego">
-                    <h3><?=$comentarios -> nombreComentador?></h3>
-                    <h4><?=Ayudas::desencriptarContenido($comentarios -> contenidoComentario)?></h4>
-                    <h5><?=$comentarios -> fechaCreacionComentario?></h5>
-                    <?php if(isset($_SESSION['loginexitoso']) && $videojuegoEspecifico['videojuego']['idVendedor'] == $_SESSION['loginexitoso'] -> id || $_SESSION['loginexitoso'] -> id == $comentarios -> usuarioComentador) : ?>
-                        <a href="<?=rutaInicio?><?=comentario?><?=eliminarComentario?>&idComentario=<?=$comentarios -> idComentario?>&idVideojuego=<?=$videojuegoEspecifico['videojuego']['idVideojuego']?>">Eliminar</a>
+                    <img src="Recursos/ImagenesUsuarios/<?=$comentarios['comentarioFoto']?>" alt="Logo videojuego">
+                    <h3><?=$comentarios['nombreComentador']?></h3>
+                    <h4><?=Ayudas::desencriptarContenido($comentarios['comentarioContenido'])?></h4>
+                    <h5><?=$comentarios['comentarioFecha']?></h5>
+                    <?php if(isset($_SESSION['loginexitoso']) && $videojuegoEspecifico['videojuego']['idVendedor'] == $_SESSION['loginexitoso'] -> id || $_SESSION['loginexitoso'] -> id == $comentarios['comentarioUsuario']) : ?>
+                        <a href="<?=rutaInicio?><?=comentario?><?=eliminarComentario?>&idComentario=<?=$comentarios['comentarioUsuario']?>&idVideojuego=<?=$videojuegoEspecifico['videojuego']['idVideojuego']?>">Eliminar</a>
                     <?php endif; ?>
                 </div>
             </div>
-        <?php endwhile; ?>
+        <?php endforeach; ?>
         <div id="bloquecomentario">
             <form action="<?=rutaInicio?><?=comentario?><?=guardarComentario?>&id=<?=$videojuegoEspecifico['videojuego']['idVideojuego']?>" method="post">
                 <h2>¿Quieres agregar un comentario?</h2>
