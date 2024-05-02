@@ -1,37 +1,32 @@
 <div id="contenidoCentral">      
     <div id="detalleCompraYVenta">
         <img src="Recursos/Logotipos/Logo.png" alt="logo compra exitosa" style="width: 50px; height: 50px; float: right; margin-top: 20px; margin-right: 20px;">
-        <h1 style="text-align: center;">Factura De Compra N° <?=$detalleTransaccion -> factura?></h1>
-        <?php if($detalleVendedores -> num_rows > 1) : ?>
-            <h3>Detalles de los vendedores</h3>
-        <?php else : ?>
-            <h3>Detalles del vendedor</h3>
-        <?php endif; ?>
-        <?php while($vendedores = $detalleVendedores -> fetch_object()) : ?>
-            <h5>Nombre: <?=$vendedores -> nombreVendedor?></h5>
-            <h5>Apellido: <?=$vendedores -> apellidoVendedor?></h5>
-            <h5>Telefono: <?=$vendedores -> telefonoVendedor?></h5>
-            <h5>Correo: <?=$vendedores -> correoVendedor?></h5>
+        <h1 style="text-align: center;">Factura De Compra N° <?=$detalleCompra['compra']['factura']?></h1>
+        <h3>Detalles del vendedor(es)</h3>
+        <?php foreach ($detalleCompra['compra']['vendedores'] as $vendedores) : ?>
+            <h5>Nombre: <?=$vendedores['nombreVendedor']?></h5>
+            <h5>Apellido: <?=$vendedores['apellidoVendedor']?></h5>
+            <h5>Telefono: <?=$vendedores['telefonoVendedor']?></h5>
+            <h5>Correo: <?=$vendedores['correoVendedor']?></h5>
             <br>
-            <h5>Videojuego:</h5>
-            <br>
-            <img style="width: 150px; height: 150px" src="Recursos/ImagenesVideojuegos/<?=$vendedores -> imagenVideojuego?>" alt="Videojuego">
+            <h5>Videojuego</h5>
+            <img style="width: 150px; height: 150px" src="Recursos/ImagenesVideojuegos/<?=$vendedores['imagenVideojuego']?>" alt="Videojuego">
             <br>
             <br>
             <br>
-        <?php endwhile; ?>
+        <?php endforeach; ?>
         <h3>Detalles del envio</h3>
-        <h5>Departamento: <?=$detalleTransaccion -> departamentoEnvio?></h5>
-        <h5>Municipio: <?=$detalleTransaccion -> municipioEnvio?></h5>
-        <h5>Codigo postal: <?=$detalleTransaccion -> codigoPostalEnvio?></h5>
-        <h5>Direccion: <?=$detalleTransaccion -> direccionEnvio?></h5>
-        <h5>Barrio: <?=$detalleTransaccion -> barrioEnvio?></h5>
+        <h5>Departamento: <?=$detalleCompra['compra']['departamentoEnvio']?></h5>
+        <h5>Municipio: <?=$detalleCompra['compra']['municipioEnvio']?></h5>
+        <h5>Codigo postal: <?=$detalleCompra['compra']['codigoPostalEnvio']?></h5>
+        <h5>Direccion: <?=$detalleCompra['compra']['direccionEnvio']?></h5>
+        <h5>Barrio: <?=$detalleCompra['compra']['barrioEnvio']?></h5>
         <h3>Detalles del pago</h3>
-        <h5>Medio de pago: <?=$detalleTransaccion -> medioPagoNombre?></h5>
-        <h5>Numero: <?=$detalleTransaccion -> numero?></h5>
+        <h5>Medio de pago: <?=$detalleCompra['compra']['medioPagoNombre']?></h5>
+        <h5>Numero: <?=$detalleCompra['compra']['numero']?></h5>
         <h3>Detalles del estado</h3>
-        <h5><?=$detalleTransaccion -> nombreEstado?></h5>
-        <a style="color: white;" href="<?=rutaInicio?><?=transaccion?><?=generarPdf?>&factura=<?=$detalleTransaccion -> factura?>" class="button-generarPdf">Generar recibo</a>
+        <h5><?=$detalleCompra['compra']['nombreEstado']?></h5>
+        <a style="color: white;" href="<?=rutaInicio?><?=transaccion?><?=generarPdf?>&factura=<?=$detalleCompra['compra']['factura']?>" class="button-generarPdf">Generar recibo</a>
         <h3>Videojuegos</h3>
         <div id="factura">
             <table style="width: 92%; border-collapse: collapse; margin-bottom: 40px;">
@@ -42,21 +37,21 @@
                     <th style="background-color: #f2f2f2; border: 1px solid #ddd; padding: 8px; text-align: left;">Precio</th>
                     <th style="background-color: #f2f2f2; border: 1px solid #ddd; padding: 8px; text-align: left;">Unidades</th>
                 </tr>
-                <?php while ($videojuegos = $detalleVideojuegos -> fetch_object()) : ?>
+                <?php foreach ($detalleCompra['compra']['videojuegos'] as $videojuego) : ?>
                     <tr>
-                        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$videojuegos -> nombreVideojuegoCompra?></td>
-                        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$videojuegos -> usoVideojuegoCompra?></td>
-                        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$videojuegos -> consolaVideojuegoCompra?></td>
-                        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">$ <?=$videojuegos -> precioVideojuegoVenta?></td>
-                        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$videojuegos -> unidadesCompra?></td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$videojuego['nombreVideojuegoCompra']?></td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$videojuego['usoVideojuegoCompra']?></td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$videojuego['consolaVideojuegoCompra']?></td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">$ <?=$videojuego['precioVideojuegoCompra']?></td>
+                        <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><?=$videojuego['unidadesCompra']?></td>
                     </tr>
-                <?php endwhile; ?>
+                <?php endforeach; ?>
                 <tr>
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"></td>
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"></td>
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"></td>
                     <td style="border: 1px solid #ddd; padding: 8px; text-align: left; font-weight: bold; color: green; font-size: 15px;">Total</td>
-                    <td style="border: 1px solid #ddd; padding: 8px; text-align: left; font-weight: bold; color: green; font-size: 15px;">$ <?=$detalleTransaccion -> totalTransaccion?></td>
+                    <td style="border: 1px solid #ddd; padding: 8px; text-align: left; font-weight: bold; color: green; font-size: 15px;">$ <?=$detalleCompra['compra']['totalTransaccion']?></td>
                 </tr>
             </table>
         </div>

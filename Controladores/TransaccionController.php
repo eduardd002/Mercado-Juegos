@@ -667,61 +667,16 @@
         }
 
         /*
-        Funcion para traer el detalle de la transaccion
+        Funcion para traer el detalle de la compra
         */
 
-        public function traerDetalleTransaccion($factura){
+        public function traerDetalleCompra($factura){
             /*Instanciar el objeto*/
             $transaccion = new Transaccion();
             /*Crear el objeto*/
             $transaccion -> setNumeroFactura($factura);
             /*Obtener detalle de la compra*/
-            $detalle = $transaccion -> detalleTransaccion();
-            /*Retornar el resultado*/
-            return $detalle;
-        }
-
-        /*
-        Funcion para traer los vendedores de la compra
-        */
-
-        public function traerVendedoresCompra($factura){
-            /*Instanciar el objeto*/
-            $transaccion = new Transaccion();
-            /*Crear el objeto*/
-            $transaccion -> setNumeroFactura($factura);
-            /*Obtener detalle de la compra*/
-            $detalle = $transaccion -> detalleCompraVendedores();
-            /*Retornar el resultado*/
-            return $detalle;
-        }
-
-        /*
-        Funcion para traer los videojuegos de la compra en concreto de cada vendedor
-        */
-
-        public function traerVideojuegosCompraVendedor($factura, $idVendedor){
-            /*Instanciar el objeto*/
-            $transaccion = new Transaccion();
-            /*Crear el objeto*/
-            $transaccion -> setNumeroFactura($factura);
-            /*Obtener detalle de la compra*/
-            $detalle = $transaccion -> detalleTransaccionVideojuegosPropios($idVendedor);
-            /*Retornar el resultado*/
-            return $detalle;
-        }
-
-        /*
-        Funcion para traer los videojuegos de la compra
-        */
-
-        public function traerVideojuegosCompra($factura){
-            /*Instanciar el objeto*/
-            $transaccion = new Transaccion();
-            /*Crear el objeto*/
-            $transaccion -> setNumeroFactura($factura);
-            /*Obtener detalle de la compra*/
-            $detalle = $transaccion -> detalleCompraVideojuegos();
+            $detalle = $transaccion -> detalleCompra();
             /*Retornar el resultado*/
             return $detalle;
         }
@@ -737,14 +692,10 @@
                 $factura = isset($_GET['factura']) ? $_GET['factura'] : false;
                 /*Si el dato existe*/
                 if($factura){
-                    /*Llamar la funcion que obtiene el detalle de la transaccion*/
-                    $detalleTransaccion = $this -> traerDetalleTransaccion($factura);
-                    /*Llamar la funcion que obtiene los videojuegos de la compra*/
-                    $detalleVideojuegos = $this -> traerVideojuegosCompra($factura);
-                    /*Llamar la funcion que obtiene los vendedores de la compra*/
-                    $detalleVendedores = $this -> traerVendedoresCompra($factura);
-                    /*Comprobar si todos los detalles han llegado*/
-                    if($detalleTransaccion && $detalleVideojuegos && $detalleVendedores){
+                    /*Llamar la funcion que obtiene el detlle de la compra*/
+                    $detalleCompra = $this -> traerDetalleCompra($factura);
+                    /*Comprobar si el detalle ha llegado*/
+                    if($detalleCompra){
                         /*Incluir la vista*/
                         require_once "Vistas/Compra/Factura.html";
                     /*De lo contrario*/  
@@ -763,7 +714,7 @@
                 Ayudas::crearSesionYRedirigir("verCompraError", "Ha ocurrido un error al ver el detalle de la compra", "?controller=VideojuegoController&action=inicio");
             }
             /*Retornar el resultado*/
-            return $detalleTransaccion;
+            return $detalleCompra;
         }
 
         /*
