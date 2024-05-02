@@ -50,14 +50,13 @@
             <input type="submit" value="Cambiar Estado">
         </form>
         <h3>Videojuegos</h3>
+        <h4>Precio Total: $ <?=$detalle['totalVenta']['totalVenta']?></h4>
         <?php foreach ($detalle['venta']['videojuegos'] as $videojuego) : ?>
             <div class="videojuegoCompraYVenta">
                 <h6>Precio: $ <?=$videojuego['precioVideojuegoVenta']?></h6>
                 <h6>Unidades: <?=$videojuego['unidadesCompra']?></h6>
-                <?php $totalVenta += $videojuego['precioVideojuegoVenta'] * $videojuego['unidadesCompra']?>
                 <img src="Recursos/ImagenesVideojuegos/<?=$videojuego['imagenVideojuego']?>" alt="Videojuego">
             </div>
         <?php endforeach; ?>
-        <h4>Precio Total: $ <?=$totalVenta?></h4>
     </div>
 </div>

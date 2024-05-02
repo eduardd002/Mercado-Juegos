@@ -1654,10 +1654,6 @@ Estilo del campo de total en mis compras y ventas
 */
 
 #detalleCompraYVenta h4{
-    /*Limpiar flotados*/
-    clear: both;
-    /*Dar comportamiento de bloque*/
-    display: block;
     /*Tamaño de letra*/
     font-size: 23px;
     /*Color de letra*/
@@ -1695,7 +1691,7 @@ Estilo de mis compras y ventas
     /*Flotar hacia la izquierda*/
     float: left;
     /*Margen exterior inferior*/
-    margin-bottom: 50px;
+    margin-bottom: 35px;
     /*Margen exterior derecho*/
     margin-right: 30px;
     /*Texto alineado al centro*/

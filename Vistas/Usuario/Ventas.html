@@ -17,13 +17,12 @@
                 <tr>
                     <th>Factura</th>
                     <th>Fecha y hora de realizacion</th>
-                    <th>Coste total</th>
                 </tr>
                 <?php while($lista = $listadoVentas -> fetch_object()) : ?>
                     <tr>
-                        <td><a href="<?=rutaInicio?><?=transaccion?><?=verVenta?>&factura=<?=$lista -> numeroFactura?>"><?=$lista -> numeroFactura?></a></td>
+                        <td><?=$lista -> numeroFactura?></td>
                         <td><?=$lista -> fechaHora?></td>
-                        <td>$ 0000</td>
+                        <td><a href="<?=rutaInicio?><?=transaccion?><?=verVenta?>&factura=<?=$lista -> numeroFactura?>">Ver detalle</a></td>
                     </tr>
                 <?php endwhile; ?>
             </table>

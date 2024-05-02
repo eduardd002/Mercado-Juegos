@@ -336,6 +336,8 @@
             $resultados = $this->db->query($consulta);
             /*Array para almacenar la información de la compra*/
             $informacionVenta = array();
+            /*Establecer una variable total*/
+            $total = 0;
             /*Mientras hayan compras disponibles para recorrer*/
             while ($fila = $resultados->fetch_object()) {
                 /*Comprobar si no existe la informacion de la venta*/
@@ -365,6 +367,14 @@
                     'unidadesCompra' => $fila->unidadesCompra,
                     'imagenVideojuego' => $fila->imagenVideojuego,
                     'precioVideojuegoVenta' => $fila->precioVideojuegoVenta
+                );
+                /*Obtener precios, unidades y el total del carrito*/
+                $precios = $fila -> precioVideojuegoVenta;
+                $unidades = $fila -> unidadesCompra;
+                $total += $precios * $unidades;
+                /*Almacenar la información del total del carrito en el array de carrito*/
+                $informacionVenta['totalVenta'] = array(
+                    'totalVenta' => $total
                 );
             }
             /*Retornar el resultado*/
