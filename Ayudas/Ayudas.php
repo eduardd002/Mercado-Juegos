@@ -477,23 +477,6 @@
         }
 
         /*
-        Funcion para traer el precio total de la venta
-        */
-
-        public static function precioTotalVenta($factura, $idVendedor){
-            /*Incluir el objeto de transaccion*/
-            require_once 'Modelos/Transaccion.php';
-            /*Instanciar el objeto*/
-            $transaccion = new Transaccion();
-            /*Crear el objeto*/
-            $transaccion -> setNumeroFactura($factura);
-            /*Obtener detalle de la compra*/
-            $detalle = $transaccion -> totalVenta($idVendedor);
-            /*Retornar el resultado*/
-            return $detalle;
-        }
-
-        /*
         Funcion para obtener el total de la venta
         */
 

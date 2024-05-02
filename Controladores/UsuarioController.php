@@ -522,10 +522,6 @@
             $transaccionVideojuego = new TransaccionVideojuego();
             /*Construir el objeto*/
             $transaccionVideojuego -> setIdVendedor($_SESSION['loginexitoso'] -> id);
-            /*Llamar la funcion que obtiene el total de la venta*/
-            $totalVenta = Ayudas::precioTotalVenta(1000, $_SESSION['loginexitoso'] -> id);
-            /*Llamar la funcion que trae el total de la venta*/
-            $precioTotal = Ayudas::totalVenta($totalVenta);
             /*Listar todas las ventas desde la base de datos*/
             $listadoVentas = $transaccionVideojuego -> obtenerVentas();
             /*Incluir la vista*/

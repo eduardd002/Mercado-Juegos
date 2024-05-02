@@ -23,9 +23,7 @@
                     <tr>
                         <td><a href="<?=rutaInicio?><?=transaccion?><?=verVenta?>&factura=<?=$lista -> numeroFactura?>"><?=$lista -> numeroFactura?></a></td>
                         <td><?=$lista -> fechaHora?></td>
-                        <?php $totalVenta = Ayudas::precioTotalVenta($lista -> numeroFactura, $_SESSION['loginexitoso'] -> id)?>
-                        <?php $precioTotal = Ayudas::totalVenta($totalVenta)?>
-                        <td>$ <?=$precioTotal?></td>
+                        <td>$ 0000</td>
                     </tr>
                 <?php endwhile; ?>
             </table>

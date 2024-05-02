@@ -727,21 +727,6 @@
         }
 
         /*
-        Funcion para traer los videojuegos de la compra
-        */
-
-        public function traerCompradorVenta($factura){
-            /*Instanciar el objeto*/
-            $transaccion = new Transaccion();
-            /*Crear el objeto*/
-            $transaccion -> setNumeroFactura($factura);
-            /*Obtener detalle de la compra*/
-            $detalle = $transaccion -> detalleVentaComprador();
-            /*Retornar el resultado*/
-            return $detalle;
-        }
-
-        /*
         Funcion para ver el detalle de la compra realizada
         */
 
@@ -806,6 +791,21 @@
         }
 
         /*
+        Funcion para traer el detalle de la venta
+        */
+
+        public function traerDetalleVenta($factura){
+            /*Instanciar el objeto*/
+            $transaccion = new Transaccion();
+            /*Crear el objeto*/
+            $transaccion -> setNumeroFactura($factura);
+            /*Obtener detalle de la compra*/
+            $detalle = $transaccion -> detalleVenta($_SESSION['loginexitoso'] -> id);
+            /*Retornar el resultado*/
+            return $detalle;
+        }
+
+        /*
         Funcion para ver el detalle de la venta realizada
         */
 
@@ -816,29 +816,16 @@
                 $factura = isset($_GET['factura']) ? $_GET['factura'] : false;
                 /*Si el dato existe*/
                 if($factura){
-                    /*Llamar la funcion que obtiene el detalle de la transaccion*/
-                    $detalleTransaccion = $this -> traerDetalleTransaccion($factura);
-                    /*Llamar la funcion que obtiene los videojuegos propios de cada vendedor en la transaccion*/
-                    $detalleVideojuegosVendedor = $this -> traerVideojuegosCompraVendedor($factura, $_SESSION['loginexitoso'] -> id);
-                    /*Llamar la funcion que obtiene el comprador de la venta*/
-                    $detalleCompradorVenta = $this -> traerCompradorVenta($factura);
-                    /*Llamar la funcion que obtiene el total de la venta*/
-                    $totalVenta = Ayudas::precioTotalVenta($factura, $_SESSION['loginexitoso'] -> id);
-                    /*Comprobar si todos los detalles han llegado*/
-                    if($detalleTransaccion && $detalleVideojuegosVendedor && $detalleCompradorVenta && $totalVenta){
+                    /*Llamar la funcion que trae el detalle de la venta*/
+                    $detalle = $this -> traerDetalleVenta($factura);
+                    /*Si se ha traido el detalle de la venta*/
+                    if($detalle){
                         /*Llamar funcion que trae los estados*/
                         $listadoEstados = $this -> traerEstados();
-                        /*Comprobar si se ha obtenido la lista de estados exitosamente*/
-                        if($listadoEstados){
-                            /*Llamar la funcion que trae el total de la venta*/
-                            $precioTotal = Ayudas::totalVenta($totalVenta);
-                            /*Incluir la vista*/
-                            require_once "Vistas/Venta/Detalle.html";
-                        /*De lo contrario*/    
-                        }else{
-                            /*Crear la sesion y redirigir a la ruta pertinente*/
-                            Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
-                        }
+                        /*Establecer bandera del precio de la venta*/
+                        $totalVenta = 0;
+                        /*Incluir la vista*/
+                        require_once "Vistas/Venta/Detalle.html";
                     /*De lo contrario*/    
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
