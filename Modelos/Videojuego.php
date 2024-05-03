@@ -249,19 +249,6 @@
         }
 
         /*
-        Funcion para obtener el videojuego buscado, si existe
-        */
-
-        public function buscar(){
-            /*Construir la consulta*/
-            $consulta = "SELECT DISTINCT * FROM videojuegos WHERE nombre LIKE '%{$this -> getNombre()}%' AND activo = 1 ORDER BY nombre DESC";
-            /*Llamar la funcion que ejecuta la consulta*/
-            $lista = $this -> db -> query($consulta);
-            /*Retornar el resultado*/
-            return $lista;
-        }
-
-        /*
         Funcion para realizar el registro del videojuego en la base de datos
         */
 
@@ -407,55 +394,6 @@
             }
             /*Retornar el resultado*/
             return $bandera;
-        }
-
-        /*
-        Funcion para agregar un filtro de busqueda a los videojuegos
-        */
-
-        public function filtro($minimo, $maximo, $idCategoria){
-            /*Construir la consulta*/
-            $consulta = "SELECT DISTINCT v.* 
-                FROM videojuegocategoria cv
-                INNER JOIN videojuegos v ON v.id = cv.idVideojuego
-                INNER JOIN categorias c ON c.id = cv.idCategoria 
-                WHERE v.activo = 1";
-            /*Crear array para almacenar las condiciones de filtro*/
-            $condiciones = [];
-            /*Comprobar si la consola llega como opcion a filtrar*/
-            if($this->getIdConsola() != 'null'){
-                /*Agregar al array de filtro la condicion*/
-                $condiciones[] = "v.idConsola = {$this->getIdConsola()}";
-            }
-            /*Comprobar si el uso llega como opcion a filtrar*/
-            if($this->getIdUso() != 'null'){
-                /*Agregar al array de filtro la condicion*/
-                $condiciones[] = "v.idUso = {$this->getIdUso()}";
-            }
-            /*Comprobar si el precio minimo llega como opcion a filtrar*/
-            if($minimo != ''){
-                /*Agregar al array de filtro la condicion*/
-                $condiciones[] = "v.precio >= {$minimo}";
-            }
-            /*Comprobar si el precio maximo llega como opcion a filtrar*/
-            if($maximo != ''){
-                /*Agregar al array de filtro la condicion*/
-                $condiciones[] = "v.precio <= {$maximo}";
-            }
-            /*Comprobar si la cateogoria llega como opcion a filtrar*/
-            if($idCategoria != 'null'){
-                /*Agregar al array de filtro la condicion*/
-                $condiciones[] = "cv.idCategoria = {$idCategoria}";
-            }
-            /*Comprobar si el array de condiciones llega con datos*/
-            if (!empty($condiciones)) {
-                /*Agregar las condiciones del filtro*/
-                $consulta .= " AND " . implode(" AND ", $condiciones);
-            }
-            /*Llamar la funcion que ejecuta la consulta*/
-            $resultado = $this->db->query($consulta);
-            /*Retornar el resultado*/
-            return $resultado;
         }
 
         /*

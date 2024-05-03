@@ -228,11 +228,16 @@
 
         public function buscarVideojuego($nombre){
             /*Instanciar el objeto*/
-            $videojuego = new Videojuego();
+            $usuario = new Usuario();
+            /*Comprobar si existe la sesion de usuario*/
+            if(isset($_SESSION['loginexitoso'])){
+                /*Constuir el objeto*/
+                $usuario -> setId($_SESSION['loginexitoso'] -> id);
+            }
             /*Crear el objeto*/
-            $videojuego -> setNombre($nombre);
+            $usuario -> setNombre($nombre);
             /*Obtener videojuegos de la base de datos*/
-            $listaVideojuegos = $videojuego -> buscar();
+            $listaVideojuegos = $usuario -> buscar($nombre);
             /*Retornar el resultado*/
             return $listaVideojuegos;
         }
@@ -569,13 +574,16 @@
         Funcion para filtrar los videojuegos
         */
 
-        public function aplicarFiltro($consola, $uso, $minimo, $maximo, $categoria){
+        public function aplicarFiltro($categoria, $consola, $uso, $minimo, $maximo){
             /*Instaciar el objeto*/
-            $videojuego = new Videojuego();
-            $videojuego -> setIdConsola($consola);
-            $videojuego -> setIdUso($uso);
+            $usuario = new Usuario();
+            /*Comprobar si existe la sesion de usuario*/
+            if(isset($_SESSION['loginexitoso'])){
+                /*Constuir el objeto*/
+                $usuario -> setId($_SESSION['loginexitoso'] -> id);
+            }
             /*Traer los datos de la consulta*/
-            $listadoFiltro = $videojuego -> filtro($minimo, $maximo, $categoria);
+            $listadoFiltro = $usuario -> filtro($categoria, $consola, $uso, $minimo, $maximo);
             /*Retornar el resultado*/
             return $listadoFiltro;
         }
@@ -596,7 +604,7 @@
                 /*Si los datos existen*/
                 if($consola && $uso && $categoria){
                     /*Llamar funcion que aplica el filtro a los videojuegos*/
-                    $listadoFiltro = $this -> aplicarFiltro($consola, $uso, $minimo, $maximo, $categoria);
+                    $listadoFiltro = $this -> aplicarFiltro($categoria, $consola, $uso, $minimo, $maximo);
                     /*Comprobar si ha llegado la lista del filtro*/
                     if($listadoFiltro){
                         /*Incluir la vista*/

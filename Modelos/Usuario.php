@@ -662,11 +662,12 @@
                 /*Construir la consulta*/
                 $consulta = "SELECT DISTINCT v.*
                     FROM videojuegos v
+                    INNER JOIN usuarios us ON us.id = v.idUsuario
                     INNER JOIN videojuegocategoria vc ON vc.idVideojuego = v.id
                     INNER JOIN categorias ca ON ca.id = vc.idCategoria
                     INNER JOIN consolas c ON c.id = v.idConsola
                     INNER JOIN usos u ON u.id = v.idUso
-                    WHERE u.activo = 1 AND c.activo = 1 AND c.activo = 1 AND v.activo = 1 ";
+                    WHERE u.activo = 1 AND c.activo = 1 AND c.activo = 1 AND v.activo = 1 AND us.activo = 1 ";
             /*De lo contrario*/        
             }else{
                 /*Construir la consulta*/
@@ -689,6 +690,109 @@
             $consulta .= "ORDER BY RAND() LIMIT 6";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
+        Funcion para obtener el videojuego buscado, si existe
+        */
+
+        public function buscar($nombreVideojuego){
+            /*Comprobar si el id del usuario que llega es vacio*/
+            if($this -> getId() == null){
+                /*Construir la consulta*/
+                $consulta = "SELECT DISTINCT v.* 
+                    FROM videojuegos v
+                    INNER JOIN usuarios us ON us.id = v.idUsuario
+                    WHERE v.nombre LIKE '%{$nombreVideojuego}%' AND v.activo = 1 AND us.activo = 1 
+                    ORDER BY v.nombre DESC";
+            /*De lo contrario*/  
+            }else{
+                /*Construir la consulta*/
+                $consulta = "SELECT DISTINCT v.* 
+                    FROM videojuegos v
+                    INNER JOIN usuarios us ON us.id = v.idUsuario
+                    WHERE v.nombre LIKE '%{$nombreVideojuego}%' AND v.activo = 1 AND us.activo = 1 AND us.activo = 1 AND {$this -> getId()} != v.idUsuario
+                    EXCEPT
+                    SELECT v.*
+                    FROM bloqueos b
+                    INNER JOIN usuarios u ON u.id = b.idBloqueado
+                    INNER JOIN videojuegos v ON v.idUsuario = u.id 
+                    AND b.idBloqueador = {$this -> getId()} AND b.activo = 1 
+                    ORDER BY nombre DESC";
+            }
+            /*Llamar la funcion que ejecuta la consulta*/
+            $lista = $this -> db -> query($consulta);
+            /*Retornar el resultado*/
+            return $lista;
+        }
+
+        /*
+        Funcion para agregar un filtro de busqueda a los videojuegos
+        */
+
+        public function filtro($idCategoria, $idConsola, $idUso, $minimo, $maximo){
+            /*Comprobar si el id del usuario que llega es vacio*/
+            if($this -> getId() == null){
+                /*Construir la consulta*/
+                $consulta = "SELECT DISTINCT v.* 
+                FROM videojuegocategoria cv
+                INNER JOIN videojuegos v ON v.id = cv.idVideojuego
+                INNER JOIN usuarios us ON us.id = v.idUsuario
+                INNER JOIN categorias c ON c.id = cv.idCategoria 
+                WHERE v.activo = 1 AND us.activo = 1";
+            /*De lo contrario*/  
+            }else{
+                /*Construir la consulta*/
+                $consulta = "SELECT DISTINCT v.* 
+                FROM videojuegocategoria cv
+                INNER JOIN videojuegos v ON v.id = cv.idVideojuego
+                INNER JOIN usuarios us ON us.id = v.idUsuario
+                INNER JOIN categorias c ON c.id = cv.idCategoria 
+                WHERE v.activo = 1 AND us.activo = 1  AND us.activo = 1 AND {$this -> getId()} != v.idUsuario 
+                EXCEPT
+                SELECT v.*
+                FROM bloqueos b
+                INNER JOIN usuarios u ON u.id = b.idBloqueado
+                INNER JOIN videojuegos v ON v.idUsuario = u.id 
+                AND b.idBloqueador = {$this -> getId()} AND b.activo = 1 
+                ORDER BY nombre DESC";
+            }
+            /*Crear array para almacenar las condiciones de filtro*/
+            $condiciones = [];
+            /*Comprobar si la consola llega como opcion a filtrar*/
+            if($idConsola != 'null'){
+                /*Agregar al array de filtro la condicion*/
+                $condiciones[] = "v.idConsola = {$idConsola}";
+            }
+            /*Comprobar si el uso llega como opcion a filtrar*/
+            if($idUso != 'null'){
+                /*Agregar al array de filtro la condicion*/
+                $condiciones[] = "v.idUso = {$idUso}";
+            }
+            /*Comprobar si el precio minimo llega como opcion a filtrar*/
+            if($minimo != ''){
+                /*Agregar al array de filtro la condicion*/
+                $condiciones[] = "v.precio >= {$minimo}";
+            }
+            /*Comprobar si el precio maximo llega como opcion a filtrar*/
+            if($maximo != ''){
+                /*Agregar al array de filtro la condicion*/
+                $condiciones[] = "v.precio <= {$maximo}";
+            }
+            /*Comprobar si la cateogoria llega como opcion a filtrar*/
+            if($idCategoria != 'null'){
+                /*Agregar al array de filtro la condicion*/
+                $condiciones[] = "cv.idCategoria = {$idCategoria}";
+            }
+            /*Comprobar si el array de condiciones llega con datos*/
+            if (!empty($condiciones)) {
+                /*Agregar las condiciones del filtro*/
+                $consulta .= " AND " . implode(" AND ", $condiciones);
+            }
+            /*Llamar la funcion que ejecuta la consulta*/
+            $resultado = $this->db->query($consulta);
             /*Retornar el resultado*/
             return $resultado;
         }
