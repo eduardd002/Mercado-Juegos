@@ -1678,7 +1678,7 @@ Estilo del texto de el medio de pago del videojuego en detalle venta
 }
 
 /*
-Estilo de mis compras y ventas
+Estilo de mis ventas
 */
 
 .videojuegoCompraYVenta{
@@ -2924,4 +2924,44 @@ Estilo del texto en la seccion de pagos en transaccion
     margin-top: 10px;
     /*Margen exterior inferior*/    
     margin-bottom: 10px;
+}
+
+/*
+Estilo de destacados
+*/
+
+.destacados{
+    /*Color de fondo*/
+    background: white;
+    /*Anchor*/
+    width: 16%;
+    /*Borde*/
+    border: 1px solid #ccc;
+    /*Flotar hacia la izquierda*/
+    float: left;
+    /*Margen exterior inferior*/
+    margin-bottom: 35px;
+    /*Margen exterior derecho*/
+    margin-right: 30px;
+    /*Texto alineado al centro*/
+    text-align: center;
+}
+
+/*
+Estilo de la imagen de los elementos de destacados
+*/
+
+.destacados img{
+    /*Flotar a la izquierda*/
+    float: left;
+    /*Altura*/
+    height: 145px;
+    /*Anchor*/
+    width: 135px;
+    /*Margen exterior inferior*/
+    margin-bottom: 5px;
+    /*Margen exterior superior*/
+    margin-top: 5px;
+    /*Margen exterior izquierdo*/
+    margin-left: 17px;
 }

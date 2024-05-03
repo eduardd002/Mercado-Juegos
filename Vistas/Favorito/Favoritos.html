@@ -5,14 +5,12 @@
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardarfavoritoacierto'); ?>
-
     <?php if(isset($_SESSION['eliminarvideojuegoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['eliminarvideojuegoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarvideojuegoacierto'); ?>
-
     <?php if(mysqli_num_rows($listadoFavoritos) == 0) : ?>
         <h1>No Hay Ningun Videojuego Favorito</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">

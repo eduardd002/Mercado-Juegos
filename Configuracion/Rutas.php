@@ -28,6 +28,9 @@
     define("actualizarUsuario", "&action=actualizar");
     define("cambiarClave", "&action=cambiarClave");
     define("actualizarClave", "&action=actualizarClave");
+    define("verCompradoresDestacados", "&action=verCompradoresDestacados");
+    define("verVendedoresDestacados", "&action=verVendedoresDestacados");
+    define("verNuevosUsuarios", "&action=verNuevosUsuarios");
 
     /*Ruta para videojuego*/
 
@@ -43,6 +46,9 @@
     define("todos", "&action=todos");
     define("algunos", "&action=inicio");
     define("filtro", "&action=filtro");
+    define("verVideojuegosDestacados", "&action=verVideojuegosDestacados");
+    define("verLoQueMasEstaGustando", "&action=verLoQueMasEstaGustando");
+    define("verNuevosVideojuegos", "&action=verNuevosVideojuegos");
 
     /*Ruta para carrito*/
 
@@ -82,6 +88,7 @@
     define("gestionarUso", "&action=gestionarUso");
     define("eliminarUsuarioAdministrador", "&action=eliminarUsuario");
     define("verBloqueos", "&action=verBloqueos");
+    define("verDestacados", "&action=verDestacados");
     define("verAdministradores", "&action=verAdministradores");
     define("gestionarCategoria", "&action=gestionarCategoria");
     define("gestionarUsuario", "&action=gestionarUsuario");

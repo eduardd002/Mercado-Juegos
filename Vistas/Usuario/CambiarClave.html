@@ -5,14 +5,12 @@
         </div>
     <?php endif; ?> 
     <?php Ayudas::eliminarSesion('actualizarclaveacierto'); ?>
-
     <?php if(isset($_SESSION['actualizarclaveerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['actualizarclaveerror']; ?>
         </div>
     <?php endif; ?> 
     <?php Ayudas::eliminarSesion('actualizarclaveerror'); ?>
-
     <div id="loginYRegistro">
         <h1>Cambio De Contraseña</h1>
         <hr>

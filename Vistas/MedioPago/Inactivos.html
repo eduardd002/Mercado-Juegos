@@ -1,12 +1,10 @@
 <div id="contenidoCentral">
-
     <?php if(isset($_SESSION['restaurarmediopagoerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['restaurarmediopagoerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('restaurarmediopagoerror'); ?>
-
     <?php if(mysqli_num_rows($listadoMediosPago) == 0) : ?>
         <h1>No hay Medios De Pago Eliminados</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">

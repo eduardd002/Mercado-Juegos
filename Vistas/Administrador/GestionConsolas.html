@@ -1,40 +1,34 @@
 <div id="contenidoCentral">
-
     <?php if(isset($_SESSION['eliminarconsolaacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['eliminarconsolaacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarconsolaacierto'); ?>
-
     <?php if(isset($_SESSION['actualizarconsolaacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['actualizarconsolaacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarconsolaacierto'); ?>
-
     <?php if(isset($_SESSION['restaurarconsolaerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['restaurarconsolaerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('restaurarconsolaerror'); ?>
-
     <?php if(isset($_SESSION['restaurarconsolaacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['restaurarconsolaacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('restaurarconsolaacierto'); ?>
-
     <?php if(isset($_SESSION['guardarconsolaacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['guardarconsolaacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardarconsolaacierto'); ?>
-
     <?php if(isset($_SESSION['eliminarconsolaerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['eliminarconsolaerror']; ?>

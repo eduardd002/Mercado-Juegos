@@ -1,13 +1,11 @@
 <div id="contenidoCentral">      
     <div id="loginYRegistro">
-
         <?php if(isset($_SESSION['guardarvideojuegoerror'])) : ?>
             <div class="alerta alerta-error">
                 <?=$_SESSION['guardarvideojuegoerror']; ?>
             </div>
         <?php endif; ?>
         <?php Ayudas::eliminarSesion('guardarvideojuegoerror'); ?>
-        
         <h1>Crear videojuego</h1>
         <hr>
         <form action="<?=rutaInicio?><?=videojuego?><?=guardar?>" method="post" enctype="multipart/form-data">

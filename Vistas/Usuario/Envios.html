@@ -1,33 +1,28 @@
 <div id="contenidoCentral">
-
     <?php if(isset($_SESSION['eliminarenvioacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['eliminarenvioacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarenvioacierto'); ?>
-
     <?php if(isset($_SESSION['actualizarenvioacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['actualizarenvioacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarenvioacierto'); ?>
-
     <?php if(isset($_SESSION['guardarenvioacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['guardarenvioacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardarenvioacierto'); ?>
-
     <?php if(isset($_SESSION['eliminarenvioerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['eliminarenvioerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarenvioerror'); ?>
-
     <?php if(mysqli_num_rows($listadoEnvios) == 0) : ?>
         <h1>No hay envios creados</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">

@@ -1,12 +1,10 @@
 <div id="contenidoCentral">  
-
     <?php if(isset($_SESSION['guardarcategoriaerror'])) : ?>
-    <div class="alerta alerta-error">
-        <?=$_SESSION['guardarcategoriaerror']; ?>
-    </div>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['guardarcategoriaerror']; ?>
+        </div>
     <?php endif; ?> 
     <?php Ayudas::eliminarSesion('guardarcategoriaerror'); ?>
-
     <div id="loginYRegistro">
         <h1 class="tituloCreacionGestiones">Crear categoria</h1>
         <hr>

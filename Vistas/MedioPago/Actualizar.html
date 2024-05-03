@@ -1,19 +1,16 @@
 <div id="contenidoCentral">   
-    
     <?php if(isset($_SESSION['actualizarmediopagoerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['actualizarmediopagoerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarmediopagoerror'); ?>
-
     <?php if(isset($_SESSION['actualizarmediopagosugerencia'])) : ?>
         <div class="alerta alerta-sugerencia">
             <?=$_SESSION['actualizarmediopagosugerencia']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarmediopagosugerencia'); ?>
-
     <div id="loginYRegistro">
         <h1 class="tituloCreacionGestiones">Actualizar medio de pago</h1>
         <hr>

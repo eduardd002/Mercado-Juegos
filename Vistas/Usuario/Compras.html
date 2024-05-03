@@ -5,7 +5,6 @@
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('verCompraError'); ?>
-
     <?php if(mysqli_num_rows($listadoCompras) == 0) : ?>
         <h1>No Hay Ninguna Compra</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">

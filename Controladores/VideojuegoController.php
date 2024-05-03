@@ -49,6 +49,45 @@
         }
 
         /*
+        Funcion para ver los nuevos videojuegos
+        */
+
+        public function verNuevosVideojuegos(){
+            /*Instanciar el objeto*/
+            $videojuego = new Videojuego();
+            /*Listar todos los videojuegos nuevos*/
+            $listadoDestacados = $videojuego -> videojuegosNuevos();
+            /*Incluir la vista*/
+            require_once "Vistas/Videojuego/Nuevos.html";
+        }
+
+        /*
+        Funcion para ver los videojuegos que mas estan gustando
+        */
+
+        public function verLoQueMasEstaGustando(){
+            /*Instanciar el objeto*/
+            $videojuego = new Videojuego();
+            /*Listar todos los videojuegos que mas estan gustando*/
+            $listadoDestacados = $videojuego -> videojuegosQueEstanGustando();
+            /*Incluir la vista*/
+            require_once "Vistas/Videojuego/LoQueMasEstaGustando.html";
+        }
+
+        /*
+        Funcion para ver los videojuegos destacados
+        */
+
+        public function verVideojuegosDestacados(){
+            /*Instanciar el objeto*/
+            $videojuego = new Videojuego();
+            /*Listar todos los videojuegos destacados*/
+            $listadoDestacados = $videojuego -> videojuegosDestacados();
+            /*Incluir la vista*/
+            require_once "Vistas/Videojuego/Destacados.html";
+        }
+
+        /*
         Funcion para traer un videojuego en concreto
         */
 

@@ -1,12 +1,10 @@
 <div id="contenidoCentral">
-
     <?php if(isset($_SESSION['restaurarconsolaerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['restaurarconsolaerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('restaurarconsolaerror'); ?>
-
     <?php if(mysqli_num_rows($listadoConsolas) == 0) : ?>
         <h1>No hay consolas eliminadas</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">

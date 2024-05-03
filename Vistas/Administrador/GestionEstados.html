@@ -1,40 +1,34 @@
 <div id="contenidoCentral">
-
     <?php if(isset($_SESSION['eliminarestadoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['eliminarestadoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarestadoacierto'); ?>
-
     <?php if(isset($_SESSION['restaurarestadoerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['restaurarestadoerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('restaurarestadoerror'); ?>
-
     <?php if(isset($_SESSION['restaurarestadoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['restaurarestadoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('restaurarestadoacierto'); ?>
-
     <?php if(isset($_SESSION['actualizarestadoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['actualizarestadoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarestadoacierto'); ?>
-
     <?php if(isset($_SESSION['guardarestadoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['guardarestadoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardarestadoacierto'); ?>
-
     <?php if(isset($_SESSION['eliminarestadoerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['eliminarestadoerror']; ?>

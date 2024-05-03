@@ -1,12 +1,10 @@
 <div id="contenidoCentral">
-
     <?php if(isset($_SESSION['restaurarusoerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['restaurarusoerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('restaurarusoerror'); ?>
-
     <?php if(mysqli_num_rows($listadoUsos) == 0) : ?>
         <h1>No hay usos eliminados</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">

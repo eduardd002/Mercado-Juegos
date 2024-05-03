@@ -1,26 +1,22 @@
 <div id="contenidoCentral">   
-    
     <?php if(isset($_SESSION['actualizarestadoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['actualizarestadoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarestadoacierto'); ?>
-
     <?php if(isset($_SESSION['actualizarestadosugerencia'])) : ?>
     <div class="alerta alerta-sugerencia">
         <?=$_SESSION['actualizarestadosugerencia']; ?>
     </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarestadosugerencia'); ?>
-
     <?php if(isset($_SESSION['actualizarestadoerror'])) : ?>
     <div class="alerta alerta-error">
         <?=$_SESSION['actualizarestadoerror']; ?>
     </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarestadoerror'); ?>
-
     <div id="detalleCompraYVenta">
         <h1>Detalle de la venta</h1>
         <h3>Detalles del comprador</h3>

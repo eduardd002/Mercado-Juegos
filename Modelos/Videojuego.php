@@ -499,6 +499,51 @@
             return $usuario;
         }
 
+        /*
+        Funcion para obtener los ultimos videojuegos
+        */
+
+        public function videojuegosNuevos(){
+            /*Construir la consulta*/
+            $consulta = "";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $resultado = $this -> db -> query($consulta);
+            /*Obtener el resultado*/
+            $ultimos = $resultado -> fetch_object();
+            /*Retornar el resultado*/
+            return $ultimos;
+        }
+
+        /*
+        Funcion para obtener los videojuegos destacados
+        */
+
+        public function videojuegosDestacados(){
+            /*Construir la consulta*/
+            $consulta = "";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $resultado = $this -> db -> query($consulta);
+            /*Obtener el resultado*/
+            $destacados = $resultado -> fetch_object();
+            /*Retornar el resultado*/
+            return $destacados;
+        }
+
+        /*
+        Funcion para obtener los videojuegos que mas estan gustando
+        */
+
+        public function videojuegosQueEstanGustando(){
+            /*Construir la consulta*/
+            $consulta = "";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $resultado = $this -> db -> query($consulta);
+            /*Obtener el resultado*/
+            $gustados = $resultado -> fetch_object();
+            /*Retornar el resultado*/
+            return $gustados;
+        }
+
     }
 
 ?>

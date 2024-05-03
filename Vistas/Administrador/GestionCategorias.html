@@ -1,47 +1,40 @@
 <div id="contenidoCentral">
-
     <?php if(isset($_SESSION['eliminarcategoriaacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['eliminarcategoriaacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarcategoriaacierto'); ?>
-
     <?php if(isset($_SESSION['restaurarcategoriaerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['restaurarcategoriaerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('restaurarcategoriaerror'); ?>
-
     <?php if(isset($_SESSION['restaurarcategoriaacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['restaurarcategoriaacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('restaurarcategoriaacierto'); ?>
-
     <?php if(isset($_SESSION['actualizarcategoriaacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['actualizarcategoriaacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarcategoriaacierto'); ?>
-
     <?php if(isset($_SESSION['guardarcategoriaacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['guardarcategoriaacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardarcategoriaacierto'); ?>
-
     <?php if(isset($_SESSION['eliminarcategoriaerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['eliminarcategoriaerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarcategoriaerror'); ?>
-
     <?php if(isset($_SESSION['actualizarcategoriaerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['actualizarcategoriaerror']; ?>

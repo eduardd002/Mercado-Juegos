@@ -5,7 +5,6 @@
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('verVentaError'); ?>
-
     <?php if(mysqli_num_rows($listadoVentas) == 0) : ?>
         <h1>No Hay Ninguna Venta</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">

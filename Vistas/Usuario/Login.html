@@ -4,40 +4,34 @@
             <?=$_SESSION['comentariopendiente']; ?>
         </div>
     <?php endif; ?>
-
     <?php if(isset($_SESSION['favoritopendiente'])) : ?>
         <div class="alerta alerta-sugerencia">
             <?=$_SESSION['favoritopendiente']; ?>
         </div>
     <?php endif; ?>
-
     <?php if(isset($_SESSION['carritopendiente'])) : ?>
         <div class="alerta alerta-sugerencia">
             <?=$_SESSION['carritopendiente']; ?>
         </div>
     <?php endif; ?>
-
     <?php if(isset($_SESSION['iniciodesesion'])) : ?>
         <div class="alerta alerta-sugerencia">
             <?=$_SESSION['iniciodesesion']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('iniciodesesion'); ?>
-
     <?php if(isset($_SESSION['guardarusuarioacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['guardarusuarioacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardarusuarioacierto'); ?>
-
     <?php if(isset($_SESSION['guardaradministradoracierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['guardaradministradoracierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardaradministradoracierto'); ?>
-
     <div id="loginYRegistro">
         <?php if(isset($_SESSION['error_login'])) : ?>
             <div class="alerta alerta-error">

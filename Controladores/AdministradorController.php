@@ -33,6 +33,15 @@
         }
 
         /*
+        Funcion para ver los destacados
+        */
+
+        public function verDestacados(){
+            /*Incluir la vista*/
+            require_once "Vistas/Administrador/Destacados.html";
+        }
+
+        /*
         Funcion para cambiar la clave del administrador
         */
 

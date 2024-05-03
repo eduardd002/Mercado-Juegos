@@ -1,40 +1,34 @@
 <div id="contenidoCentral"> 
-
     <?php if(isset($_SESSION['actualizarusoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['actualizarusoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarusoacierto'); ?>
-
     <?php if(isset($_SESSION['restaurarusoerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['restaurarusoerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('restaurarusoerror'); ?>
-
     <?php if(isset($_SESSION['restaurarusoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['restaurarusoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('restaurarusoacierto'); ?>
-
     <?php if(isset($_SESSION['eliminarusoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['eliminarusoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarusoacierto'); ?>
-
     <?php if(isset($_SESSION['guardarusoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['guardarusoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardarusoacierto'); ?>
-
     <?php if(isset($_SESSION['eliminarusoerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['eliminarusoerror']; ?>

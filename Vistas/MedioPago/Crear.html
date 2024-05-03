@@ -1,12 +1,10 @@
 <div id="contenidoCentral">    
-    
     <?php if(isset($_SESSION['guardarmediopagoerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['guardarmediopagoerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardarmediopagoerror'); ?>
-
     <div id="loginYRegistro">
         <h1 class="tituloCreacionGestiones">Crear medio de pago</h1>
         <hr>

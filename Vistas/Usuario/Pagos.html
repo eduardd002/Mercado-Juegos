@@ -1,33 +1,28 @@
 <div id="contenidoCentral">
-
     <?php if(isset($_SESSION['eliminarpagoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['eliminarpagoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarpagoacierto'); ?>
-
     <?php if(isset($_SESSION['actualizarpagoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['actualizarpagoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarpagoacierto'); ?>
-
     <?php if(isset($_SESSION['guardarpagoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['guardarpagoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardarpagoacierto'); ?>
-
     <?php if(isset($_SESSION['eliminarpagoerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['eliminarpagoerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarpagoerror'); ?>
-
     <?php if(mysqli_num_rows($listadoPagos) == 0) : ?>
         <h1>No hay pagos creados</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">

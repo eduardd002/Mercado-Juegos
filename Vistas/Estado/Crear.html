@@ -1,12 +1,10 @@
 <div id="contenidoCentral">    
-
     <?php if(isset($_SESSION['guardarestadoerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['guardarestadoerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardarestadoerror'); ?>
-
     <div id="loginYRegistro">
         <h1 class="tituloCreacionGestiones">Crear estado</h1>
         <hr>

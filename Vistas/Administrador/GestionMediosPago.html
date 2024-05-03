@@ -1,40 +1,34 @@
 <div id="contenidoCentral">   
-
     <?php if(isset($_SESSION['guardarmediopagoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['guardarmediopagoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardarmediopagoacierto'); ?>
-
     <?php if(isset($_SESSION['restaurarmediopagoerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['restaurarmediopagoerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('restaurarmediopagoerror'); ?>
-
     <?php if(isset($_SESSION['restaurarmediopagoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['restaurarmediopagoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('restaurarmediopagoacierto'); ?>
-
     <?php if(isset($_SESSION['eliminarmediopagoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['eliminarmediopagoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminarmediopagoacierto'); ?>
-
     <?php if(isset($_SESSION['actualizarmediopagoacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['actualizarmediopagoacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarmediopagoacierto'); ?>
-
     <?php if(isset($_SESSION['eliminarmediopagoerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['eliminarmediopagoerror']; ?>

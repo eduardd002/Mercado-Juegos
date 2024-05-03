@@ -1,12 +1,10 @@
 <div id="contenidoCentral">
-
     <?php if(isset($_SESSION['restaurarcategoriaerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['restaurarcategoriaerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('restaurarcategoriaerror'); ?>
-
     <?php if(mysqli_num_rows($listadoCategorias) == 0) : ?>
         <h1>No hay categorias eliminadas</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">

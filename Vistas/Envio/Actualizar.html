@@ -1,19 +1,16 @@
 <div id="contenidoCentral">    
-    
     <?php if(isset($_SESSION['actualizarenvioerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['actualizarenvioerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarenvioerror'); ?>
-
     <?php if(isset($_SESSION['actualizarenviosugerencia'])) : ?>
         <div class="alerta alerta-sugerencia">
             <?=$_SESSION['actualizarenviosugerencia']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('actualizarenviosugerencia'); ?>
-    
     <div id="loginYRegistro">
         <h1 class="tituloCreacionGestiones">Actualizar envio</h1>
         <hr>

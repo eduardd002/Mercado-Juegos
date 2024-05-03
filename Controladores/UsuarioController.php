@@ -27,6 +27,45 @@
         }
 
         /*
+        Funcion para ver los nuevos usuarios
+        */
+
+        public function verNuevosUsuarios(){
+            /*Instanciar el objeto*/
+            $usuario = new Usuario();
+            /*Listar todos los usuarios nuevos*/
+            $listadoNuevos = $usuario -> usuariosNuevos();
+            /*Incluir la vista*/
+            require_once "Vistas/Usuario/Nuevos.html";
+        }
+
+        /*
+        Funcion para ver los vendedores destacados
+        */
+
+        public function verVendedoresDestacados(){
+            /*Instanciar el objeto*/
+            $usuario = new Usuario();
+            /*Listar todos los vendedores destacados*/
+            $listadoDestacados = $usuario -> vendedoresDestacados();
+            /*Incluir la vista*/
+            require_once "Vistas/Usuario/VendedoresDestacados.html";
+        }
+
+        /*
+        Funcion para ver los compradores destacados
+        */
+
+        public function verCompradoresDestacados(){
+            /*Instanciar el objeto*/
+            $usuario = new Usuario();
+            /*Listar todos los compradores destacados*/
+            $listadoDestacados = $usuario -> compradoresDestacados();
+            /*Incluir la vista*/
+            require_once "Vistas/Usuario/CompradoresDestacados.html";
+        }
+
+        /*
         Funcion para cambiar la clave del usuario
         */
 

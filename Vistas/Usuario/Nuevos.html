@@ -1,0 +1,17 @@
+<div id="contenidoCentral">
+    <?php if(mysqli_num_rows($listadoNuevos) == 0) : ?>
+        <h1>No Hay Usuarios Nuevos</h1>
+        <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
+    <?php else : ?>
+        <h1>Usuarios Nuevos (Maximo Hace 15 Dias)</h1>
+        <?php while($nuevos = $listadoNuevos -> fetch_object()) : ?>
+            <div class="destacados">
+                <h6><?=$nuevos -> nombreUsuario?></h6>
+                <h6><?=$nuevos -> apellidoUsuario?></h6>
+                <h6><?=$nuevos -> fechaRegistroUsuario?></h6>
+                <h6><?=$nuevos -> edadUsuario?></h6>
+                <img src="Recursos/ImagenesUsuarios/<?=$nuevos -> fotoUsuario?>" alt="Comprador">
+            </div>
+        <?php endwhile; ?>
+    <?php endif; ?>
+</div>

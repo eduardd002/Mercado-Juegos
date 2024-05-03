@@ -1,0 +1,18 @@
+<div id="contenidoCentral">
+    <?php if(mysqli_num_rows($listadoDestacados) == 0) : ?>
+        <h1>No Hay Compradores Destacados</h1>
+        <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
+    <?php else : ?>
+        <h1>Compradores mas destacados (Los 5 Que Mas Videojuegos Hayan Comprado)</h1>
+        <?php while($destacados = $listadoDestacados -> fetch_object()) : ?>
+            <div class="destacados">
+                <h6><?=$destacados -> nombreComprador?></h6>
+                <h6><?=$destacados -> apellidoComprador?></h6>
+                <h6><?=$destacados -> fechaRegistroComprador?></h6>
+                <h6><?=$destacados -> edadComprador?></h6>
+                <h6>Videojuegos comprados: <?=$destacados -> videojuegosCompradosComprador?></h6>
+                <img src="Recursos/ImagenesUsuarios/<?=$destacados -> fotoComprador?>" alt="Comprador">
+            </div>
+        <?php endwhile; ?>
+    <?php endif; ?>
+</div>

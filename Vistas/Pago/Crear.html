@@ -1,12 +1,10 @@
 <div id="contenidoCentral">  
-
     <?php if(isset($_SESSION['guardarpagoerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['guardarpagoerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('guardarpagoerror'); ?>
-
     <div id="loginYRegistro">
         <h1 class="tituloCreacionGestiones">Crear Pago</h1>
         <hr>

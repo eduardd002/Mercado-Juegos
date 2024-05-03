@@ -1,19 +1,16 @@
 <div id="contenidoCentral">
-
     <?php if(isset($_SESSION['eliminaradministradorusuarioacierto'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['eliminaradministradorusuarioacierto']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminaradministradorusuarioacierto'); ?>
-
-   <?php if(isset($_SESSION['eliminaradministradorusuarioerror'])) : ?>
+    <?php if(isset($_SESSION['eliminaradministradorusuarioerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['eliminaradministradorusuarioerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('eliminaradministradorusuarioerror'); ?>
-
     <?php if(mysqli_num_rows($listadoUsuarios) == 0) : ?>
         <h1>No hay usuarios registrados</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">

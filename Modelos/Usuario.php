@@ -760,6 +760,51 @@
             return $lista;
         }
 
+        /*
+        Funcion para obtener los compradores mas destacados
+        */
+
+        public function compradoresDestacados(){
+            /*Construir la consulta*/
+            $consulta = "";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $resultado = $this -> db -> query($consulta);
+            /*Obtener el resultado*/
+            $destacados = $resultado -> fetch_object();
+            /*Retornar el resultado*/
+            return $destacados;
+        }
+
+        /*
+        Funcion para obtener los vendedores mas destacados
+        */
+
+        public function vendedoresDestacados(){
+            /*Construir la consulta*/
+            $consulta = "";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $resultado = $this -> db -> query($consulta);
+            /*Obtener el resultado*/
+            $destacados = $resultado -> fetch_object();
+            /*Retornar el resultado*/
+            return $destacados;
+        }
+
+        /*
+        Funcion para obtener los usuarios nuevos
+        */
+
+        public function usuariosNuevos(){
+            /*Construir la consulta*/
+            $consulta = "";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $resultado = $this -> db -> query($consulta);
+            /*Obtener el resultado*/
+            $nuevos = $resultado -> fetch_object();
+            /*Retornar el resultado*/
+            return $nuevos;
+        }
+
     }
 
 ?>

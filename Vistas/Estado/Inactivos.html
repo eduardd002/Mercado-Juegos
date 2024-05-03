@@ -1,12 +1,10 @@
 <div id="contenidoCentral">
-
     <?php if(isset($_SESSION['restaurarestadoerror'])) : ?>
         <div class="alerta alerta-error">
             <?=$_SESSION['restaurarestadoerror']; ?>
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('restaurarestadoerror'); ?>
-
     <?php if(mysqli_num_rows($listadoEstados) == 0) : ?>
         <h1>No hay estados eliminados</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
