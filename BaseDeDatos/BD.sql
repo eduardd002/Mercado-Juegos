@@ -187,7 +187,6 @@ CREATE TABLE transacciones (
     numeroFactura     INTEGER NOT NULL,
     idComprador       INTEGER NOT NULL,
     idPago            INTEGER NOT NULL,
-    idEstado          INTEGER NOT NULL,
     idEnvio           INTEGER NOT NULL,
     total             INTEGER NOT NULL,
     fechaHora  DATETIME NOT NULL,
@@ -195,8 +194,7 @@ CREATE TABLE transacciones (
     CONSTRAINT compras_pk PRIMARY KEY ( id ),
     CONSTRAINT transacciones_comprador_fk FOREIGN KEY ( idComprador ) REFERENCES usuarios ( id ),
     CONSTRAINT transacciones_pago_fk FOREIGN KEY ( idPago ) REFERENCES pagos ( id ),
-    CONSTRAINT transacciones_envio_fk FOREIGN KEY ( idEnvio ) REFERENCES envios ( id ),
-    CONSTRAINT transacciones_estado_fk FOREIGN KEY ( idEstado ) REFERENCES estados ( id )
+    CONSTRAINT transacciones_envio_fk FOREIGN KEY ( idEnvio ) REFERENCES envios ( id )
 );
 
 /*
@@ -208,12 +206,14 @@ CREATE TABLE transaccionvideojuego (
     idTransaccion       INTEGER NOT NULL,
     idVideojuego        INTEGER NOT NULL,
     idVendedor        INTEGER NOT NULL,
+    idEstado          INTEGER NOT NULL,
     unidades            INTEGER NOT NULL,
     CONSTRAINT uq_id UNIQUE(id),
     CONSTRAINT transaccionvideojuego_pk PRIMARY KEY ( id ),
     CONSTRAINT transaccionvideojuego_transaccion_fk FOREIGN KEY ( idTransaccion ) REFERENCES transacciones ( id ),
     CONSTRAINT transaccionvideojuego_videojuego_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id ),
-    CONSTRAINT transacciones_vendedor_fk FOREIGN KEY ( idVendedor ) REFERENCES usuarios ( id )
+    CONSTRAINT transacciones_vendedor_fk FOREIGN KEY ( idVendedor ) REFERENCES usuarios ( id ),
+    CONSTRAINT transacciones_estado_fk FOREIGN KEY ( idEstado ) REFERENCES estados ( id )
 );
 
 /*

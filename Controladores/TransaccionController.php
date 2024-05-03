@@ -39,12 +39,12 @@
 
         public function editarEstado($id, $estado){
             /*Instanciar el objeto*/
-            $transaccion = new Transaccion();
+            $transaccionVideojuego = new TransaccionVideojuego();
             /*Crear el objeto*/
-            $transaccion -> setId($id);
-            $transaccion -> setIdEstado($estado);
+            $transaccionVideojuego -> setId($id);
+            $transaccionVideojuego -> setIdEstado($estado);
             /*Ejecutar la consulta*/
-            $actualizado = $transaccion -> cambiarEstado();
+            $actualizado = $transaccionVideojuego -> cambiarEstado();
             /*Retornar el resultado*/
             return $actualizado;
         }
@@ -280,7 +280,6 @@
             /*Crear el objeto*/
             $transaccion -> setNumeroFactura($factura + 1000);
             $transaccion -> setIdComprador($_SESSION['loginexitoso'] -> id);
-            $transaccion -> setIdEstado(1);
             /*Obtener total de la transaccion*/
             $total = $lista['totalCarrito']['totalCarrito'];
             /*Crear el objeto*/
@@ -304,7 +303,6 @@
             /*Crear el objeto*/
             $transaccion -> setNumeroFactura($factura + 1000);
             $transaccion -> setIdComprador($_SESSION['loginexitoso'] -> id);
-            $transaccion -> setIdEstado(1);
             /*Llamar la funcion que obtiene un videojuego en concreto*/
             $videojuegoUnico = Ayudas::obtenerVideojuegoEnConcreto($idVideojuego);
             /*Obtener el precio del videojuego*/
@@ -336,7 +334,7 @@
             $vendedor = $this -> traerDuenioDeVideojuego($idVideojuego);
             /*Crear el objeto*/
             $transaccionVideojuego -> setIdVendedor($vendedor);
-            /*Crear el objeto*/
+            $transaccionVideojuego -> setIdEstado(1);
             $transaccionVideojuego -> setUnidades($unidades);
             /*Guardar en la base de datos*/
             $guardadoTransaccionVideojuego = $transaccionVideojuego -> guardar();
@@ -355,6 +353,7 @@
             $transaccionVideojuego -> setIdTransaccion($id);
             $transaccionVideojuego -> setIdVideojuego($idVideojuego);
             $transaccionVideojuego -> setIdVendedor($idVendedor);
+            $transaccionVideojuego -> setIdEstado(1);
             $transaccionVideojuego -> setUnidades($unidades);
             /*Guardar en la base de datos*/
             $guardadoTransaccionVideojuego = $transaccionVideojuego -> guardar();

@@ -10,7 +10,6 @@
         private $numeroFactura;
         private $idComprador;
         private $idPago;
-        private $idEstado;
         private $total;
         private $idEnvio;
         private $fechaHora;
@@ -106,26 +105,6 @@
         }
 
         /*
-        Funcion getter de id estado
-        */
-
-        public function getIdEstado(){
-            /*Retornar el resultado*/
-            return $this->idEstado;
-        }
-
-        /*
-        Funcion setter de id estado
-        */
-
-        public function setIdEstado($idEstado){
-            /*Llamar parametro*/
-            $this->idEstado = $idEstado;
-            /*Retornar el resultado*/
-            return $this;
-        }
-
-        /*
         Funcion getter de total
         */
 
@@ -193,7 +172,7 @@
         public function guardar(){
             /*Construir la consulta*/
             $consulta = "INSERT INTO transacciones VALUES(NULL, {$this -> getNumeroFactura()}, {$this -> getIdComprador()}, 
-                {$this -> getIdPago()}, {$this -> getIdEstado()}, {$this -> getIdEnvio()}, 
+                {$this -> getIdPago()}, {$this -> getIdEnvio()}, 
                 {$this -> getTotal()}, '{$this -> getFechaHora()}')";
             /*Llamar la funcion que ejecuta la consulta*/
             $registro = $this -> db -> query($consulta);
@@ -364,27 +343,6 @@
             }
             /*Retornar el resultado*/
             return $informacionVenta;
-        }
-
-        /*
-        Funcion para cambiar el estado de la venta
-        */
-
-        public function cambiarEstado(){
-            /*Construir la consulta*/
-            $consulta = "UPDATE transacciones SET idEstado = {$this -> getIdEstado()} 
-                WHERE id = {$this -> getId()}";
-            /*Llamar la funcion que ejecuta la consulta*/
-            $actualizado = $this -> db -> query($consulta);
-            /*Establecer una variable bandera*/
-            $bandera = false;
-            /*Comprobar si la consulta fue exitosa*/
-            if($actualizado){
-                /*Cambiar el estado de la variable bandera*/
-                $bandera = true;
-            }
-            /*Retornar el resultado*/
-            return $bandera;
         }
         
     }

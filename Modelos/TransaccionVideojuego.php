@@ -10,6 +10,7 @@
         private $idTransaccion;
         private $idVideojuego;
         private $idVendedor;
+        private $idEstado;
         private $unidades;
         private $db;
 
@@ -103,6 +104,26 @@
         }
 
         /*
+        Funcion getter de id estado
+        */
+
+        public function getIdEstado(){
+            /*Retornar el resultado*/
+            return $this->idEstado;
+        }
+
+        /*
+        Funcion setter de id estado
+        */
+
+        public function setIdEstado($idEstado){
+            /*Llamar parametro*/
+            $this->idEstado = $idEstado;
+            /*Retornar el resultado*/
+            return $this;
+        }
+
+        /*
         Funcion getter de unidades
         */
 
@@ -172,6 +193,27 @@
             $lista = $this -> db -> query($consulta);
             /*Retornar el resultado*/
             return $lista;
+        }
+
+        /*
+        Funcion para cambiar el estado de la venta
+        */
+
+        public function cambiarEstado(){
+            /*Construir la consulta*/
+            $consulta = "UPDATE transaccionvideojuego SET idEstado = {$this -> getIdEstado()} 
+                WHERE id = {$this -> getId()}";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $actualizado = $this -> db -> query($consulta);
+            /*Establecer una variable bandera*/
+            $bandera = false;
+            /*Comprobar si la consulta fue exitosa*/
+            if($actualizado){
+                /*Cambiar el estado de la variable bandera*/
+                $bandera = true;
+            }
+            /*Retornar el resultado*/
+            return $bandera;
         }
         
     }
