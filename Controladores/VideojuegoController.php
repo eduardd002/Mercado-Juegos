@@ -49,6 +49,21 @@
         }
 
         /*
+        Funcion para obtener los comentarios referentes a una publicacion
+        */
+
+        public function obtenerComentariosDeVideojuego($id){
+            /*Instanciar el objeto*/
+            $comentarioUsuarioVideojuego = new ComentarioUsuarioVideojuego();
+            /*Construir el objeto*/
+            $comentarioUsuarioVideojuego -> setIdVideojuego($id);
+            /*Traer el resultado*/
+            $listaComentarios = $comentarioUsuarioVideojuego -> obtenerComentariosDeVideojuego();
+            /*Retornar el resultado*/
+            return $listaComentarios;
+        }
+
+        /*
         Funcion para ver los nuevos videojuegos
         */
 
@@ -134,6 +149,8 @@
                     if($videojuegoEspecifico){
                         /*Llamar funcion que trae el usuario vendedor*/
                         $datosVendedor = $this -> obtenerUsuarioVendedor($id);
+                        /*Llamar funcion que trae comentarios del videojuego*/
+                        $listaComentarios = $this -> obtenerComentariosDeVideojuego($id);
                         /*Incluir la vista*/
                         require_once 'Vistas/Videojuego/Detalle.html';
                     /*De lo contrario*/    
@@ -528,23 +545,19 @@
         */
 
         public function todos(){
-            /*Comprobar si la sesion de login de usuario es exitoso*/
+            /*Instaciar el objeto*/
+            $usuario = new Usuario();
+            /*Comprobar si existe la sesion del usuario logueado*/
             if(isset($_SESSION['loginexitoso'])){
-                /*Instaciar el objeto*/
-                $usuario = new Usuario();
                 /*Construir objeto*/
                 $usuario -> setId($_SESSION['loginexitoso'] -> id);
-                /*Traer todos los videojuegos creados*/
-                $listadoTodos = $usuario -> listarTodos();
-                /*Comprobar si se ha traido la lista de videojuegos*/
-                if($listadoTodos){
-                    /*Incluir la vista*/
-                    require_once 'Vistas/Videojuego/Todos.html';
-                /*De lo contrario*/       
-                }else{
-                    /*Crear la sesion y redirigir a la ruta pertinente*/
-                    Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
-                }
+            }
+            /*Traer todos los videojuegos creados*/
+            $listadoTodos = $usuario -> listarTodos();
+            /*Comprobar si se ha traido la lista de videojuegos*/
+            if($listadoTodos){
+                /*Incluir la vista*/
+                require_once 'Vistas/Videojuego/Todos.html';
             /*De lo contrario*/       
             }else{
                 /*Crear la sesion y redirigir a la ruta pertinente*/

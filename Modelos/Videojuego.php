@@ -312,16 +312,14 @@
 
         public function traerUno(){
             /*Construir la consulta*/
-            $consulta = "SELECT DISTINCT v.id AS 'idVideojuego', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.stock AS 'stockVideojuego', u.id AS 'idVendedor', us.nombre AS 'nombreUso', c.nombre 'categoriaNombre', v.foto AS 'imagenVideojuego', v.descripcion AS 'descripcionVideojuego', co.nombre AS 'nombreConsola', cmv.contenido AS 'comentarioContenido', cmv.id AS 'comentarioId', cmv.fechaHora AS 'comentarioFecha', com.id AS 'comentarioUsuario', com.foto AS 'comentarioFoto', com.nombre AS 'nombreComentador'
+            $consulta = "SELECT DISTINCT v.id AS 'idVideojuego', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.stock AS 'stockVideojuego', u.id AS 'idVendedor', us.nombre AS 'nombreUso', c.nombre 'categoriaNombre', v.foto AS 'imagenVideojuego', v.descripcion AS 'descripcionVideojuego', co.nombre AS 'nombreConsola'
                 FROM Videojuegos v
                 INNER JOIN Usuarios u ON u.id = v.idUsuario 
                 INNER JOIN Usos us ON us.id = v.idUso
                 INNER JOIN Consolas co ON co.id = v.idConsola
                 INNER JOIN VideojuegoCategoria cv ON cv.idVideojuego = v.id
                 INNER JOIN Categorias c ON cv.idCategoria = c.id
-                INNER JOIN ComentarioUsuarioVideojuego cmv ON cmv.idVideojuego = v.id
-                INNER JOIN Usuarios com ON com.id = cmv.idUsuario
-                WHERE v.id = {$this -> getId()} AND v.activo = 1 AND cmv.activo = 1";
+                WHERE v.id = {$this -> getId()} AND v.activo = 1";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultados = $this->db->query($consulta);
             /*Array para almacenar la información del videojuego*/
@@ -345,15 +343,6 @@
                         'categorias' => array()
                     );
                 }
-                /*Almacenar la información del comentario en el array de videojuego y comentario*/
-                $informacionVideojuego['videojuego']['comentarios'][] = array(
-                    'comentarioId' => $fila->comentarioId,
-                    'comentarioContenido' => $fila->comentarioContenido,
-                    'comentarioFoto' => $fila->comentarioFoto,
-                    'comentarioFecha' => $fila->comentarioFecha,
-                    'comentarioUsuario' => $fila->comentarioUsuario,
-                    'nombreComentador' => $fila->nombreComentador,
-                );
                 /*Almacenar la información de la categoria en el array de videojuego y categoria*/
                 $informacionVideojuego['videojuego']['categorias'][] = array(
                     'categoriaNombre' => $fila->categoriaNombre,
@@ -430,7 +419,7 @@
                 FROM videojuegocategoria cv
                 INNER JOIN videojuegos v ON v.id = cv.idVideojuego
                 INNER JOIN categorias c ON c.id = cv.idCategoria 
-                WHERE v.activo = 1 ORDER BY";
+                WHERE v.activo = 1";
             /*Crear array para almacenar las condiciones de filtro*/
             $condiciones = [];
             /*Comprobar si la consola llega como opcion a filtrar*/
@@ -475,7 +464,7 @@
 
         public function obtenerUsuarioVendedor(){
             /*Construir la consulta*/
-            $consulta = "SELECT DISTINCT id AS 'idVendedor', nombre AS 'nombreVendedor' FROM usuarios WHERE id IN (SELECT idUsuario FROM videojuegos WHERE id = {$this -> getId()})";
+            $consulta = "SELECT DISTINCT id AS 'idVendedor', nombre AS 'nombreVendedor', apellido AS 'apellidoVendedor' FROM usuarios WHERE id IN (SELECT idUsuario FROM videojuegos WHERE id = {$this -> getId()})";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
             /*Obtener el resultado*/

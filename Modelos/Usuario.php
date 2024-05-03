@@ -569,7 +569,7 @@
 
         public function obtenerInformacionUsuario(){
             /*Construir la consulta*/
-            $consulta = "SELECT u.id AS 'idUsuario', u.nombre AS 'nombreUsuario', u.fechaRegistro AS 'fechaUsuario', u.departamento AS 'departamentoUsuario', u.municipio AS 'municipioUsuario', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.foto AS 'fotoVideojuego', v.id AS 'idVideojuego'
+            $consulta = "SELECT u.id AS 'idUsuario', u.nombre AS 'nombreUsuario', u.apellido AS 'apellidoUsuario', u.fechaRegistro AS 'fechaUsuario', u.departamento AS 'departamentoUsuario', u.municipio AS 'municipioUsuario', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.foto AS 'fotoVideojuego', v.id AS 'idVideojuego'
                 FROM Videojuegos v
                 INNER JOIN Usuarios u ON u.id = v.idUsuario
                 WHERE v.idUsuario = {$this->getId()} AND v.activo = 1";
@@ -585,6 +585,7 @@
                     $informacionUsuario['usuario'] = array(
                         'idUsuario' => $fila->idUsuario,
                         'nombreUsuario' => $fila->nombreUsuario,
+                        'apellidoUsuario' => $fila->apellidoUsuario,
                         'fechaUsuario' => $fila->fechaUsuario,
                         'departamentoUsuario' => $fila->departamentoUsuario,
                         'municipioUsuario' => $fila->municipioUsuario,
@@ -702,11 +703,12 @@
                 /*Construir la consulta*/
                 $consulta = "SELECT DISTINCT v.*
                     FROM videojuegos v
+                    INNER JOIN usuarios us ON us.id = v.idUsuario
                     INNER JOIN videojuegocategoria vc ON vc.idVideojuego = v.id
                     INNER JOIN categorias ca ON ca.id = vc.idCategoria
                     INNER JOIN consolas c ON c.id = v.idConsola
                     INNER JOIN usos u ON u.id = v.idUso
-                    WHERE u.activo = 1 AND c.activo = 1 AND c.activo = 1 AND v.activo = 1";
+                    WHERE u.activo = 1 AND c.activo = 1 AND c.activo = 1 AND v.activo = 1 AND us.activo = 1";
             /*De lo contrario*/ 
             }else{
                 /*Construir la consulta*/
