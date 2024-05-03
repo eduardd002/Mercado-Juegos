@@ -171,7 +171,7 @@
                 if(isset($_GET['cat'])){
                     /*Crear sesion*/
                     $_SESSION['catalogofavorito'] = true;
-                    /*Comprobar si la solicitud de videojuego favorito es desde el catalogo de todos los videojuegos y no desde el detalle del videojuego*/
+                /*Comprobar si la solicitud de videojuego favorito es desde el catalogo de todos los videojuegos y no desde el detalle del videojuego*/
                 }else if(isset($_GET['catt'])){
                     /*Crear sesion*/
                     $_SESSION['catalogofavoritot'] = true;

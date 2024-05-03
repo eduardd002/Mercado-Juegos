@@ -150,7 +150,7 @@
         public function guardar(){
             /*Construir consulta*/
             $consulta = "INSERT INTO transaccionvideojuego VALUES(NULL, {$this -> getIdTransaccion()}, 
-                {$this -> getIdVideojuego()}, {$this -> getIdVendedor()}, {$this -> getUnidades()})";
+                {$this -> getIdVideojuego()}, {$this -> getIdVendedor()}, {$this -> getIdEstado()}, {$this -> getUnidades()})";
             /*Llamar la funcion que ejecuta la consulta*/
             $registro = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/

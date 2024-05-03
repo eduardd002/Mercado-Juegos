@@ -226,7 +226,7 @@
             $consulta = "SELECT DISTINCT ve.nombre AS 'nombreVendedor', ve.apellido AS 'apellidoVendedor', ve.numeroTelefono AS 'telefonoVendedor', ve.correo AS 'correoVendedor', en.departamento AS 'departamentoEnvio', en.municipio AS 'municipioEnvio', en.codigoPostal AS 'codigoPostalEnvio', en.direccion AS 'direccionEnvio', en.barrio AS 'barrioEnvio', p.numero AS 'numero', t.total AS 'totalTransaccion', v.nombre AS 'nombreVideojuegoCompra', u.nombre AS 'usoVideojuegoCompra', c.nombre AS 'consolaVideojuegoCompra', v.precio AS 'precioVideojuegoCompra', t.numeroFactura AS 'factura', tv.unidades AS 'unidadesCompra', mp.nombre AS 'medioPagoNombre', te.nombre AS 'nombreEstado', v.foto AS 'imagenVideojuego'
                 FROM TransaccionVideojuego tv
                 INNER JOIN Transacciones t ON t.id = tv.idTransaccion
-                INNER JOIN Estados te ON te.id = t.idEstado
+                INNER JOIN Estados te ON te.id = tv.idEstado
                 INNER JOIN Videojuegos v ON v.id = tv.idVideojuego
                 INNER JOIN Consolas c ON c.id = v.idConsola
                 INNER JOIN usuarios ve ON tv.idVendedor = ve.id
@@ -251,7 +251,6 @@
                         'codigoPostalEnvio' => $fila->codigoPostalEnvio,
                         'direccionEnvio' => $fila->direccionEnvio,
                         'barrioEnvio' => $fila->barrioEnvio,
-                        'nombreEstado' => $fila->nombreEstado,
                         'numero' => $fila->numero,
                         'medioPagoNombre'=>$fila->medioPagoNombre,
                         'totalTransaccion' => $fila->totalTransaccion,
@@ -273,6 +272,7 @@
                     'apellidoVendedor' => $fila->apellidoVendedor,
                     'telefonoVendedor' => $fila->telefonoVendedor,
                     'correoVendedor' => $fila->correoVendedor,
+                    'nombreEstado' => $fila->nombreEstado,
                     'imagenVideojuego' => $fila->imagenVideojuego,
                 );
             }
@@ -289,7 +289,7 @@
             $consulta = "SELECT DISTINCT co.nombre AS 'nombreComprador', co.apellido AS 'apellidoComprador', co.numeroTelefono AS 'telefonoComprador', co.correo AS 'correoComprador', en.departamento AS 'departamentoEnvio', en.municipio AS 'municipioEnvio', en.codigoPostal AS 'codigoPostalEnvio', en.direccion AS 'direccionEnvio', en.barrio AS 'barrioEnvio', p.numero AS 'numero', t.total AS 'totalTransaccion', v.foto AS 'imagenVideojuego', tv.unidades AS 'unidadesCompra', v.precio AS 'precioVideojuegoVenta', t.numeroFactura AS 'facturaVenta', t.id AS 'idTransaccion', mp.nombre AS 'medioPagoNombre', p.numero AS 'numeroPago', te.nombre AS 'nombreEstado'
                 FROM TransaccionVideojuego tv
                 INNER JOIN Transacciones t ON t.id = tv.idTransaccion
-                INNER JOIN Estados te ON te.id = t.idEstado
+                INNER JOIN Estados te ON te.id = tv.idEstado
                 INNER JOIN Videojuegos v ON v.id = tv.idVideojuego
                 INNER JOIN Pagos p ON p.id = t.idPago
                 INNER JOIN MediosPago mp ON mp.id = p.idMedioPago

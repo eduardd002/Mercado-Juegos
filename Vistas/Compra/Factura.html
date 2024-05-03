@@ -1,17 +1,17 @@
 <div id="contenidoCentral">      
     <div id="detalleCompraYVenta">
-        <img src="Recursos/Logotipos/Logo.png" alt="logo compra exitosa" style="width: 50px; height: 50px; float: right; margin-top: 20px; margin-right: 20px;">
+        <img src="Recursos/Logotipos/Logo.png" alt="logo compra exitosa" style="width: 50px; height: 50px; float: right; margin-top: 20px; margin-right: 80px;">
         <h1 style="text-align: center;">Factura De Compra N° <?=$detalleCompra['compra']['factura']?></h1>
-        <h3>Detalles del vendedor(es)</h3>
         <?php foreach ($detalleCompra['compra']['vendedores'] as $vendedores) : ?>
+            <h3>Detalles del vendedor</h3>
             <h5>Nombre: <?=$vendedores['nombreVendedor']?></h5>
             <h5>Apellido: <?=$vendedores['apellidoVendedor']?></h5>
             <h5>Telefono: <?=$vendedores['telefonoVendedor']?></h5>
             <h5>Correo: <?=$vendedores['correoVendedor']?></h5>
-            <br>
-            <h5>Videojuego</h5>
+            <h3>Detalle del estado</h3>
+            <h5><?=$vendedores['nombreEstado']?></h5>
+            <h3>Videojuego</h3>
             <img style="width: 150px; height: 150px" src="Recursos/ImagenesVideojuegos/<?=$vendedores['imagenVideojuego']?>" alt="Videojuego">
-            <br>
             <br>
             <br>
         <?php endforeach; ?>
@@ -25,7 +25,6 @@
         <h5>Medio de pago: <?=$detalleCompra['compra']['medioPagoNombre']?></h5>
         <h5>Numero: <?=$detalleCompra['compra']['numero']?></h5>
         <h3>Detalles del estado</h3>
-        <h5><?=$detalleCompra['compra']['nombreEstado']?></h5>
         <a style="color: white;" href="<?=rutaInicio?><?=transaccion?><?=generarPdf?>&factura=<?=$detalleCompra['compra']['factura']?>" class="button-generarPdf">Generar recibo</a>
         <h3>Videojuegos</h3>
         <div id="factura">
