@@ -4,14 +4,20 @@
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
         <h1>Videojuegos Nuevos (Maximo Hace 7 Dias)</h1>
-        <?php while($nuevos = $listadoNuevos -> fetch_object()) : ?>
-            <div class="destacados">
-                <h6><?=$nuevos -> nombreVideojuego?></h6>
-                <h6><?=$nuevos -> nombreConsola?></h6>
-                <h6><?=$nuevos -> nombreUso?></h6>
-                <h6><?=$nuevos -> precioVideojuego?></h6>
-                <img src="Recursos/ImagenesVideojuegos/<?=$nuevos -> fotoVideojuego?>" alt="Videojuego">
-            </div>
-        <?php endwhile; ?>
+        <hr>
+        <br>
+        <br>
+        <br>
+        <div id="gestionDeDestacados">
+            <?php while($nuevos = $listadoNuevos -> fetch_object()) : ?>
+                <div class="destacados">
+                    <img src="Recursos/ImagenesVideojuegos/<?=$nuevos -> fotoVideojuego?>" alt="Videojuego">
+                    <h5><?=$nuevos -> nombreVideojuego?></h5>
+                    <!--<h5><?=$nuevos -> nombreConsola?></h5>-->
+                    <!--<h5><?=$nuevos -> nombreUso?></h5>-->
+                    <h5><?=$nuevos -> precioVideojuego?></h5>
+                </div>
+            <?php endwhile; ?>
+        </div>
     <?php endif; ?>
 </div>

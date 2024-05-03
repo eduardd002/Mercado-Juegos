@@ -4,15 +4,21 @@
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
         <h1>Videojuegos Mas Destacados (Los 3 Que Mas Se Hayan Vendido)</h1>
-        <?php while($destacados = $listadoDestacados -> fetch_object()) : ?>
-            <div class="destacados">
-                <h6><?=$destacados -> nombreVideojuego?></h6>
-                <h6><?=$destacados -> nombreConsola?></h6>
-                <h6><?=$destacados -> nombreUso?></h6>
-                <h6><?=$destacados -> precioVideojuego?></h6>
-                <h6>Veces que se ha comprado: <?=$destacados -> vecesComprado?></h6>
-                <img src="Recursos/ImagenesVideojuegos/<?=$destacados -> fotoVideojuego?>" alt="Videojuego">
-            </div>
-        <?php endwhile; ?>
+        <hr>
+        <br>
+        <br>
+        <br>
+        <div id="gestionDeDestacados">
+            <?php while($destacados = $listadoDestacados -> fetch_object()) : ?>
+                <div class="destacados">
+                    <img src="Recursos/ImagenesVideojuegos/<?=$destacados -> fotoVideojuego?>" alt="Videojuego">
+                    <h5><?=$destacados -> nombreVideojuego?></h5>
+                    <!--<h5><?=$destacados -> nombreConsola?></h5>-->
+                    <!--<h5><?=$destacados -> nombreUso?></h5>-->
+                    <h5><?=$destacados -> precioVideojuego?></h5>
+                    <!--<h5>Veces que se ha comprado: <?=$destacados -> vecesComprado?></h5>-->
+                </div>
+            <?php endwhile; ?>
+        </div>
     <?php endif; ?>
 </div>

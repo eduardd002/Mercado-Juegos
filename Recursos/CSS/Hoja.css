@@ -2934,7 +2934,7 @@ Estilo de destacados
     /*Color de fondo*/
     background: white;
     /*Anchor*/
-    width: 16%;
+    width: 19%;
     /*Borde*/
     border: 1px solid #ccc;
     /*Flotar hacia la izquierda*/
@@ -2942,7 +2942,7 @@ Estilo de destacados
     /*Margen exterior inferior*/
     margin-bottom: 35px;
     /*Margen exterior derecho*/
-    margin-right: 30px;
+    margin-right: 60px;
     /*Texto alineado al centro*/
     text-align: center;
 }
@@ -2955,13 +2955,35 @@ Estilo de la imagen de los elementos de destacados
     /*Flotar a la izquierda*/
     float: left;
     /*Altura*/
-    height: 145px;
+    height: 210px;
     /*Anchor*/
-    width: 135px;
+    width: 185px;
     /*Margen exterior inferior*/
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     /*Margen exterior superior*/
     margin-top: 5px;
     /*Margen exterior izquierdo*/
     margin-left: 17px;
+}
+
+/*
+Estilo de la informacion de los destacados
+*/
+
+.destacados h5{
+    /*Margen exterior inferior*/
+    margin-bottom: 10px;
+    /*Margen exterior superior*/
+    margin-top: 10px;
+}
+
+/*
+Estilo de los elementos de las gestiones de destacados
+*/
+
+#gestionDeDestacados{
+    /*Margen exterior superior*/
+    margin-top: 15px;
+    /*Margen exterior izquierdo*/
+    margin-left: 90px;
 }

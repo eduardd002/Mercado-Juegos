@@ -4,15 +4,21 @@
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
         <h1>Vendedores mas destacados (Los 10 Que Mas Videojuegos Hayan Vendido)</h1>
-        <?php while($destacados = $listadoDestacados -> fetch_object()) : ?>
-            <div class="destacados">
-                <h6><?=$destacados -> nombreVendedor?></h6>
-                <h6><?=$destacados -> apellidoVendedor?></h6>
-                <h6><?=$destacados -> fechaRegistroVendedor?></h6>
-                <h6><?=$destacados -> edadVendedor?></h6>
-                <h6>Videojuegos comprados: <?=$destacados -> videojuegosVendidosVendedor?></h6>
-                <img src="Recursos/ImagenesUsuarios/<?=$destacados -> fotoVendedor?>" alt="Vendedor">
-            </div>
-        <?php endwhile; ?>
+        <hr>
+        <br>
+        <br>
+        <br>
+        <div id="gestionDeDestacados">
+            <?php while($destacados = $listadoDestacados -> fetch_object()) : ?>
+                <div class="destacados">
+                    <img src="Recursos/ImagenesUsuarios/<?=$destacados -> fotoVendedor?>" alt="Vendedor">
+                    <h5><?=$destacados -> nombreVendedor?></h5>
+                    <h5><?=$destacados -> apellidoVendedor?></h5>
+                    <h5><?=$destacados -> fechaRegistroVendedor?></h5>
+                    <!--<h5><?=$destacados -> edadVendedor?></h5>-->
+                    <!--<h5>Videojuegos comprados: <?=$destacados -> videojuegosVendidosVendedor?></h5>-->
+                </div>
+            <?php endwhile; ?>
+        </div>
     <?php endif; ?>
 </div>

@@ -766,13 +766,15 @@
 
         public function compradoresDestacados(){
             /*Construir la consulta*/
-            $consulta = "";
+            $consulta = "SELECT nombre AS 'nombreComprador', 
+                apellido AS 'apellidoComprador', 
+                fechaRegistro AS 'fechaRegistroComprador',
+                foto AS 'fotoComprador' 
+                FROM usuarios";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
-            /*Obtener el resultado*/
-            $destacados = $resultado -> fetch_object();
             /*Retornar el resultado*/
-            return $destacados;
+            return $resultado;
         }
 
         /*
@@ -781,13 +783,15 @@
 
         public function vendedoresDestacados(){
             /*Construir la consulta*/
-            $consulta = "";
+            $consulta = "SELECT nombre AS 'nombreVendedor', 
+                apellido AS 'apellidoVendedor', 
+                fechaRegistro AS 'fechaRegistroVendedor', 
+                foto AS 'fotoVendedor'
+                FROM usuarios";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
-            /*Obtener el resultado*/
-            $destacados = $resultado -> fetch_object();
             /*Retornar el resultado*/
-            return $destacados;
+            return $resultado;
         }
 
         /*
@@ -795,14 +799,15 @@
         */
 
         public function usuariosNuevos(){
-            /*Construir la consulta*/
-            $consulta = "";
+            $consulta = "SELECT nombre AS 'nombreUsuario', 
+                apellido AS 'apellidoUsuario',  
+                fechaRegistro AS 'fechaRegistroUsuario', 
+                foto AS 'fotoUsuario'
+                FROM usuarios";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
-            /*Obtener el resultado*/
-            $nuevos = $resultado -> fetch_object();
             /*Retornar el resultado*/
-            return $nuevos;
+            return $resultado;
         }
 
     }

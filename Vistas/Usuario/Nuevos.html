@@ -4,14 +4,20 @@
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
         <h1>Usuarios Nuevos (Maximo Hace 15 Dias)</h1>
-        <?php while($nuevos = $listadoNuevos -> fetch_object()) : ?>
-            <div class="destacados">
-                <h6><?=$nuevos -> nombreUsuario?></h6>
-                <h6><?=$nuevos -> apellidoUsuario?></h6>
-                <h6><?=$nuevos -> fechaRegistroUsuario?></h6>
-                <h6><?=$nuevos -> edadUsuario?></h6>
-                <img src="Recursos/ImagenesUsuarios/<?=$nuevos -> fotoUsuario?>" alt="Comprador">
-            </div>
-        <?php endwhile; ?>
+        <hr>
+        <br>
+        <br>
+        <br>
+        <div id="gestionDeDestacados">
+            <?php while($nuevos = $listadoNuevos -> fetch_object()) : ?>
+                <div class="destacados">
+                    <img src="Recursos/ImagenesUsuarios/<?=$nuevos -> fotoUsuario?>" alt="Comprador">
+                    <h5><?=$nuevos -> nombreUsuario?></h5>
+                    <h5><?=$nuevos -> apellidoUsuario?></h5>
+                    <h5><?=$nuevos -> fechaRegistroUsuario?></h5>
+                    <!--<h5><?=$nuevos -> edadUsuario?></h5>-->
+                </div>
+            <?php endwhile; ?>
+        </div>
     <?php endif; ?>
 </div>

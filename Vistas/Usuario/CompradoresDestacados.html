@@ -4,15 +4,21 @@
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
         <h1>Compradores mas destacados (Los 5 Que Mas Videojuegos Hayan Comprado)</h1>
-        <?php while($destacados = $listadoDestacados -> fetch_object()) : ?>
-            <div class="destacados">
-                <h6><?=$destacados -> nombreComprador?></h6>
-                <h6><?=$destacados -> apellidoComprador?></h6>
-                <h6><?=$destacados -> fechaRegistroComprador?></h6>
-                <h6><?=$destacados -> edadComprador?></h6>
-                <h6>Videojuegos comprados: <?=$destacados -> videojuegosCompradosComprador?></h6>
-                <img src="Recursos/ImagenesUsuarios/<?=$destacados -> fotoComprador?>" alt="Comprador">
-            </div>
-        <?php endwhile; ?>
+        <hr>
+        <br>
+        <br>
+        <br>
+        <div id="gestionDeDestacados">
+            <?php while($destacados = $listadoDestacados -> fetch_object()) : ?>
+                <div class="destacados">
+                    <img src="Recursos/ImagenesUsuarios/<?=$destacados -> fotoComprador?>" alt="Comprador">
+                    <h5><?=$destacados -> nombreComprador?></h5>
+                    <h5><?=$destacados -> apellidoComprador?></h5>
+                    <h5><?=$destacados -> fechaRegistroComprador?></h5>
+                    <!--<h6><?=$destacados -> edadComprador?></h6>-->
+                    <!--<h6>Videojuegos comprados: <?=$destacados -> videojuegosCompradosComprador?></h6>-->
+                </div>
+            <?php endwhile; ?>
+        </div>
     <?php endif; ?>
 </div>

@@ -505,13 +505,14 @@
 
         public function videojuegosNuevos(){
             /*Construir la consulta*/
-            $consulta = "";
+            $consulta = "SELECT nombre AS 'nombreVideojuego', 
+                precio AS 'precioVideojuego',  
+                foto AS 'fotoVideojuego'
+                FROM videojuegos";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
-            /*Obtener el resultado*/
-            $ultimos = $resultado -> fetch_object();
             /*Retornar el resultado*/
-            return $ultimos;
+            return $resultado;
         }
 
         /*
@@ -520,13 +521,14 @@
 
         public function videojuegosDestacados(){
             /*Construir la consulta*/
-            $consulta = "";
+            $consulta = "SELECT nombre AS 'nombreVideojuego', 
+                precio AS 'precioVideojuego',  
+                foto AS 'fotoVideojuego'
+                FROM videojuegos";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
-            /*Obtener el resultado*/
-            $destacados = $resultado -> fetch_object();
             /*Retornar el resultado*/
-            return $destacados;
+            return $resultado;
         }
 
         /*
@@ -535,13 +537,14 @@
 
         public function videojuegosQueEstanGustando(){
             /*Construir la consulta*/
-            $consulta = "";
+            $consulta = "SELECT nombre AS 'nombreVideojuego', 
+                precio AS 'precioVideojuego',  
+                foto AS 'fotoVideojuego'
+                FROM videojuegos";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
-            /*Obtener el resultado*/
-            $gustados = $resultado -> fetch_object();
             /*Retornar el resultado*/
-            return $gustados;
+            return $resultado;
         }
 
     }

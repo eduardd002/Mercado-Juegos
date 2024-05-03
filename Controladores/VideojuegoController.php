@@ -56,7 +56,7 @@
             /*Instanciar el objeto*/
             $videojuego = new Videojuego();
             /*Listar todos los videojuegos nuevos*/
-            $listadoDestacados = $videojuego -> videojuegosNuevos();
+            $listadoNuevos = $videojuego -> videojuegosNuevos();
             /*Incluir la vista*/
             require_once "Vistas/Videojuego/Nuevos.html";
         }
