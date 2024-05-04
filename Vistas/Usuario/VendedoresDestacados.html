@@ -15,8 +15,9 @@
                     <h5><?=$destacados -> nombreVendedor?></h5>
                     <h5><?=$destacados -> apellidoVendedor?></h5>
                     <h5><?=$destacados -> fechaRegistroVendedor?></h5>
-                    <!--<h5><?=$destacados -> edadVendedor?></h5>-->
-                    <!--<h5>Videojuegos comprados: <?=$destacados -> videojuegosVendidosVendedor?></h5>-->
+                    <h5>Años: <?=Ayudas::obtenerEdad($destacados -> fechaNacimiento)?></h5>
+                    <h5>Videojuegos vendidos: <?=$destacados -> videojuegos?></h5>
+                    <h5>Cantidades vendidas: <?=$destacados -> cantidad?></h5>
                 </div>
             <?php endwhile; ?>
         </div>

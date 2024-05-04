@@ -299,7 +299,7 @@
 
         public function traerUno(){
             /*Construir la consulta*/
-            $consulta = "SELECT DISTINCT v.id AS 'idVideojuego', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.stock AS 'stockVideojuego', u.id AS 'idVendedor', us.nombre AS 'nombreUso', c.nombre 'categoriaNombre', v.foto AS 'imagenVideojuego', v.descripcion AS 'descripcionVideojuego', co.nombre AS 'nombreConsola'
+            $consulta = "SELECT DISTINCT v.id AS 'idVideojuego', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.stock AS 'stockVideojuego', u.id AS 'idVendedor', us.nombre AS 'nombreUso', c.nombre 'categoriaNombre', v.foto AS 'imagenVideojuego', v.descripcion AS 'descripcionVideojuego', co.nombre AS 'nombreConsola', v.fechaCreacion AS 'fechaCreacionVideojuego' 
                 FROM Videojuegos v
                 INNER JOIN Usuarios u ON u.id = v.idUsuario 
                 INNER JOIN Usos us ON us.id = v.idUso
@@ -326,6 +326,7 @@
                         'stockVideojuego' => $fila->stockVideojuego,
                         'idVendedor' => $fila->idVendedor,
                         'nombreUso' => $fila->nombreUso,
+                        'fechaCreacionVideojuego' => $fila->fechaCreacionVideojuego,
                         /*Inicializar un array para almacenar los videojuegos*/
                         'categorias' => array()
                     );
@@ -432,10 +433,12 @@
 
         public function videojuegosNuevos(){
             /*Construir la consulta*/
-            $consulta = "SELECT nombre AS 'nombreVideojuego', 
-                precio AS 'precioVideojuego',  
-                foto AS 'fotoVideojuego'
-                FROM videojuegos";
+            $consulta = "SELECT v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.foto AS 'fotoVideojuego', v.fechaCreacion AS 'fechaPublicacion', u.nombre AS 'nombreUso', c.nombre AS 'nombreConsola'  
+                FROM videojuegos v
+                INNER JOIN usos u ON u.id = v.idUso
+                INNER JOIN consolas c ON c.id = v.idConsola 
+                WHERE DATEDIFF(CURDATE(), fechaCreacion) <= 7 
+                ORDER BY fechaCreacion DESC";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
             /*Retornar el resultado*/
@@ -448,10 +451,14 @@
 
         public function videojuegosDestacados(){
             /*Construir la consulta*/
-            $consulta = "SELECT nombre AS 'nombreVideojuego', 
-                precio AS 'precioVideojuego',  
-                foto AS 'fotoVideojuego'
-                FROM videojuegos";
+            $consulta = "SELECT count(idVideojuego) AS 'vecesComprado', sum(unidades) AS 'unidadesCompradas', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.foto AS 'fotoVideojuego', u.nombre AS 'nombreUso', c.nombre AS 'nombreConsola' 
+                FROM transaccionvideojuego tv
+                INNER JOIN videojuegos v ON v.id = tv.idVideojuego
+                INNER JOIN usos u ON u.id = v.idUso
+                INNER JOIN consolas c ON c.id = v.idConsola 
+                GROUP BY idVideojuego
+                ORDER BY vecesComprado DESC
+                LIMIT 10";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
             /*Retornar el resultado*/
@@ -464,10 +471,15 @@
 
         public function videojuegosQueEstanGustando(){
             /*Construir la consulta*/
-            $consulta = "SELECT nombre AS 'nombreVideojuego', 
-                precio AS 'precioVideojuego',  
-                foto AS 'fotoVideojuego'
-                FROM videojuegos";
+            $consulta = "SELECT count(idVideojuego) AS 'vecesAgregado', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.foto AS 'fotoVideojuego', u.nombre AS 'nombreUso', c.nombre AS 'nombreConsola' 
+                FROM videojuegofavorito vf
+                INNER JOIN videojuegos v ON v.id = vf.idVideojuego
+                INNER JOIN usos u ON u.id = v.idUso
+                INNER JOIN consolas c ON c.id = v.idConsola 
+                WHERE vf.activo = 1
+                GROUP BY idvideojuego
+                ORDER BY vecesAgregado DESC
+                LIMIT 15";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
             /*Retornar el resultado*/

@@ -13,9 +13,10 @@
                 <div class="destacados">
                     <img src="Recursos/ImagenesVideojuegos/<?=$nuevos -> fotoVideojuego?>" alt="Videojuego">
                     <h5><?=$nuevos -> nombreVideojuego?></h5>
-                    <!--<h5><?=$nuevos -> nombreConsola?></h5>-->
-                    <!--<h5><?=$nuevos -> nombreUso?></h5>-->
-                    <h5><?=$nuevos -> precioVideojuego?></h5>
+                    <h5>Consola: <?=$nuevos -> nombreConsola?></h5>
+                    <h5><?=$nuevos -> nombreUso?></h5>
+                    <h5>Precio: <?=$nuevos -> precioVideojuego?></h5>
+                    <h5>Fecha de publicacion: <?=$nuevos -> fechaPublicacion?></h5>
                 </div>
             <?php endwhile; ?>
         </div>

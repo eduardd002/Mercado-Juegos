@@ -13,10 +13,11 @@
                 <div class="destacados">
                     <img src="Recursos/ImagenesVideojuegos/<?=$destacados -> fotoVideojuego?>" alt="Videojuego">
                     <h5><?=$destacados -> nombreVideojuego?></h5>
-                    <!--<h5><?=$destacados -> nombreConsola?></h5>-->
-                    <!--<h5><?=$destacados -> nombreUso?></h5>-->
+                    <h5><?=$destacados -> nombreConsola?></h5>
+                    <h5><?=$destacados -> nombreUso?></h5>
                     <h5><?=$destacados -> precioVideojuego?></h5>
-                    <!--<h5>Veces que se ha comprado: <?=$destacados -> vecesComprado?></h5>-->
+                    <h5>Veces que se ha comprado: <?=$destacados -> vecesComprado?></h5>
+                    <h5>Total cantidades compradas: <?=$destacados -> unidadesCompradas?></h5>
                 </div>
             <?php endwhile; ?>
         </div>

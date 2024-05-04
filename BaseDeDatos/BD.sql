@@ -133,6 +133,32 @@ CREATE TABLE mediospago (
 );
 
 /*
+Crear tabla para tipo de estados de la transacción
+*/
+
+CREATE TABLE estados (
+    id              INTEGER auto_increment NOT NULL,
+    activo          BOOLEAN NOT NULL,
+    nombre VARCHAR(250) NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT estados_pk PRIMARY KEY ( id )
+);
+
+/*
+Crea tabla intermedia de videojuego y categoria
+*/
+
+CREATE TABLE videojuegocategoria (
+    id             INTEGER auto_increment NOT NULL,
+    idVideojuego INTEGER NOT NULL,
+    idCategoria  INTEGER NOT NULL,
+    CONSTRAINT uq_id UNIQUE(id),
+    CONSTRAINT videojuegocategoria_pk PRIMARY KEY ( id ),
+    CONSTRAINT videojuegocategoria_categoria_fk FOREIGN KEY ( idCategoria ) REFERENCES categorias ( id ),
+    CONSTRAINT videojuegocategoria_videojuego_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
+);
+
+/*
 Crear tabla para tipo de envios
 */
 
@@ -164,18 +190,6 @@ CREATE TABLE pagos (
     CONSTRAINT pagos_pk PRIMARY KEY ( id ),
     CONSTRAINT pagos_medioPago_fk FOREIGN KEY ( idMedioPago ) REFERENCES mediospago ( id ),
     CONSTRAINT pagos_usuario_fk FOREIGN KEY ( idUsuario ) REFERENCES usuarios ( id )
-);
-
-/*
-Crear tabla para tipo de estados de la transacción
-*/
-
-CREATE TABLE estados (
-    id              INTEGER auto_increment NOT NULL,
-    activo          BOOLEAN NOT NULL,
-    nombre VARCHAR(250) NOT NULL,
-    CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT estados_pk PRIMARY KEY ( id )
 );
 
 /*
@@ -214,20 +228,6 @@ CREATE TABLE transaccionvideojuego (
     CONSTRAINT transaccionvideojuego_videojuego_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id ),
     CONSTRAINT transacciones_vendedor_fk FOREIGN KEY ( idVendedor ) REFERENCES usuarios ( id ),
     CONSTRAINT transacciones_estado_fk FOREIGN KEY ( idEstado ) REFERENCES estados ( id )
-);
-
-/*
-Crea tabla intermedia de videojuego y categoria
-*/
-
-CREATE TABLE videojuegocategoria (
-    id             INTEGER auto_increment NOT NULL,
-    idVideojuego INTEGER NOT NULL,
-    idCategoria  INTEGER NOT NULL,
-    CONSTRAINT uq_id UNIQUE(id),
-    CONSTRAINT videojuegocategoria_pk PRIMARY KEY ( id ),
-    CONSTRAINT videojuegocategoria_categoria_fk FOREIGN KEY ( idCategoria ) REFERENCES categorias ( id ),
-    CONSTRAINT videojuegocategoria_videojuego_fk FOREIGN KEY ( idVideojuego ) REFERENCES videojuegos ( id )
 );
 
 /*

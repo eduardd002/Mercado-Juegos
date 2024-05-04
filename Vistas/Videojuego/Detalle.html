@@ -80,6 +80,8 @@
             <h3 id="descripcionVideojuegoTitulo">Descripcion</h3>
             <p id="descripcionVideojuegoTexto"><?=$videojuegoEspecifico['videojuego']['descripcionVideojuego']?></p>
             <h3 id="vendedorVideojuego">Vendido por: <a href="<?=rutaInicio?><?=usuario?><?=perfil?>&idVendedor=<?=$datosVendedor -> idVendedor?>"><?=$datosVendedor -> nombreVendedor?> <?=$datosVendedor -> apellidoVendedor?></a></h3>
+            <h3>Fecha de publicacion:</h3>
+            <p><?=$videojuegoEspecifico['videojuego']['fechaCreacionVideojuego']?></p>
         </div>
         <?php while($comentarios = $listaComentarios -> fetch_object()) : ?>
             <div id="comentario">

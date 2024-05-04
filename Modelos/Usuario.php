@@ -872,11 +872,12 @@
 
         public function compradoresDestacados(){
             /*Construir la consulta*/
-            $consulta = "SELECT nombre AS 'nombreComprador', 
-                apellido AS 'apellidoComprador', 
-                fechaRegistro AS 'fechaRegistroComprador',
-                foto AS 'fotoComprador' 
-                FROM usuarios";
+            $consulta = "SELECT count(idComprador) 'comprador', nombre AS 'nombreComprador', apellido AS 'apellidoComprador', fechaRegistro AS 'fechaRegistroComprador', foto AS 'fotoComprador', fechaNacimiento AS 'fechaNacimiento'
+                FROM transacciones t
+                INNER JOIN usuarios u ON u.id = t.idComprador
+                GROUP BY idComprador
+                ORDER BY comprador DESC
+                LIMIT 5";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
             /*Retornar el resultado*/
@@ -889,11 +890,13 @@
 
         public function vendedoresDestacados(){
             /*Construir la consulta*/
-            $consulta = "SELECT nombre AS 'nombreVendedor', 
-                apellido AS 'apellidoVendedor', 
-                fechaRegistro AS 'fechaRegistroVendedor', 
-                foto AS 'fotoVendedor'
-                FROM usuarios";
+            $consulta = "SELECT count(idVendedor) AS 'vendedor', count(idVideojuego) AS 'videojuegos', sum(unidades) AS 'cantidad', nombre AS 'nombreVendedor', apellido AS 'apellidoVendedor', fechaRegistro AS 'fechaRegistroVendedor', foto AS 'fotoVendedor', fechaNacimiento AS 'fechaNacimiento'
+                FROM transaccionvideojuego tv
+                INNER JOIN usuarios u ON tv.idVendedor = u.id
+                WHERE u.activo = 1
+                GROUP BY idVendedor
+                ORDER BY vendedor DESC
+                LIMIT 5";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
             /*Retornar el resultado*/
@@ -905,11 +908,14 @@
         */
 
         public function usuariosNuevos(){
-            $consulta = "SELECT nombre AS 'nombreUsuario', 
-                apellido AS 'apellidoUsuario',  
-                fechaRegistro AS 'fechaRegistroUsuario', 
-                foto AS 'fotoUsuario'
-                FROM usuarios";
+            /*Construir la consulta*/
+            $consulta = "SELECT count(idVendedor) AS 'vendedor', count(idVideojuego) AS 'videojuegos', sum(unidades) AS 'cantidad', nombre AS 'nombreVendedor', apellido AS 'apellidoVendedor', fechaRegistro AS 'fechaRegistroVendedor', foto AS 'fotoVendedor', fechaNacimiento AS 'fechaNacimiento'
+                FROM transaccionvideojuego tv
+                INNER JOIN usuarios u ON tv.idVendedor = u.id
+                WHERE u.activo = 1
+                GROUP BY idVendedor
+                ORDER BY vendedor DESC
+                LIMIT 5";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
             /*Retornar el resultado*/
