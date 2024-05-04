@@ -17,7 +17,7 @@
                     <h5><?=$destacados -> fechaRegistroComprador?></h5>
                     <h5><?=Ayudas::obtenerEdad($destacados -> fechaNacimiento)?></h5>
                     <h5>Videojuegos comprados: <?=$destacados -> comprador?></h5>
-                    <h5>Cantidades compradas: 5</h5>
+                    <h5>Cantidades compradas: <?=$destacados -> unidades?></h5>
                 </div>
             <?php endwhile; ?>
         </div>

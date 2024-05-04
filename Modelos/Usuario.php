@@ -872,11 +872,12 @@
 
         public function compradoresDestacados(){
             /*Construir la consulta*/
-            $consulta = "SELECT count(idComprador) 'comprador', nombre AS 'nombreComprador', apellido AS 'apellidoComprador', fechaRegistro AS 'fechaRegistroComprador', foto AS 'fotoComprador', fechaNacimiento AS 'fechaNacimiento'
+            $consulta = "SELECT count(idComprador) 'comprador', sum(tv.unidades) AS 'unidades', nombre AS 'nombreComprador', apellido AS 'apellidoComprador', fechaRegistro AS 'fechaRegistroComprador', foto AS 'fotoComprador', fechaNacimiento AS 'fechaNacimiento'
                 FROM transacciones t
                 INNER JOIN usuarios u ON u.id = t.idComprador
+                INNER JOIN transaccionvideojuego tv ON t.id = tv.idTransaccion
                 GROUP BY idComprador
-                ORDER BY comprador DESC
+                ORDER BY comprador DESC, unidades DESC
                 LIMIT 5";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
@@ -895,7 +896,7 @@
                 INNER JOIN usuarios u ON tv.idVendedor = u.id
                 WHERE u.activo = 1
                 GROUP BY idVendedor
-                ORDER BY vendedor DESC
+                ORDER BY vendedor DESC, cantidad DESC
                 LIMIT 5";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
