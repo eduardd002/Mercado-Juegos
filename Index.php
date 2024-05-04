@@ -17,8 +17,6 @@
     /*Incluir el archivo de la vista de cabecera*/
     require_once 'Vistas/Layout/Cabecera.html';
     
-    //session_destroy();
-
     /*
     Funcion para mostrar un error
     */

@@ -1,10 +1,11 @@
-<?php if(isset($_SESSION['loginexitosoinfo'])) : ?>
-    <div class="alerta alerta-acierto">
-        <?=$_SESSION['loginexitosoinfo']; ?>
-    </div>
-<?php endif; ?>
-<?php Ayudas::eliminarSesion('loginexitosoinfo'); ?>
 <div id="contenidoCentral">
+    <?php if(isset($_SESSION['guardarfavoritoerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['guardarfavoritoerror']; ?>
+        </div>
+    <?php endif; ?> 
+    <?php Ayudas::eliminarSesion('catalogofavoritot'); ?>
+    <?php Ayudas::eliminarSesion('guardarfavoritoerror'); ?>
     <?php if(mysqli_num_rows($listadoTodos) > 0) : ?>
         <h1>Todos los Videojuegos</h1>
     <?php else : ?>

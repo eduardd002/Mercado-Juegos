@@ -165,18 +165,18 @@
         */
 
         public function comprobarLogin($videojuegoId){
-            /*Comprobar si el usuario no esta logueado*/
-            if(!Ayudas::comprobarInicioDeSesionUsuario()){
-                /*Comprobar si la solicitud de videojuego favorito es desde el catalogo de algunos videojuegos y no desde el detalle del videojuego*/
-                if(isset($_GET['cat'])){
-                    /*Crear sesion*/
-                    $_SESSION['catalogofavorito'] = true;
-                /*Comprobar si la solicitud de videojuego favorito es desde el catalogo de todos los videojuegos y no desde el detalle del videojuego*/
-                }else if(isset($_GET['catt'])){
-                    /*Crear sesion*/
-                    $_SESSION['catalogofavoritot'] = true;
-                /*De lo contrario*/    
-                }else{
+            /*Comprobar si la solicitud de videojuego favorito es desde el catalogo de algunos videojuegos y no desde el detalle del videojuego*/
+            if(isset($_GET['cat'])){
+                /*Crear sesion*/
+                $_SESSION['catalogofavorito'] = true;
+            /*Comprobar si la solicitud de videojuego favorito es desde el catalogo de todos los videojuegos y no desde el detalle del videojuego*/
+            }else if(isset($_GET['catt'])){
+                /*Crear sesion*/
+                $_SESSION['catalogofavoritot'] = true;
+            /*De lo contrario*/    
+            }else{
+                /*Comprobar si no hay inicio de sesion de usuario*/
+                if(!Ayudas::comprobarInicioDeSesionUsuario()){
                     /*Crear sesion*/
                     $_SESSION['idvideojuegopendientefavorito'] = $videojuegoId;
                 }
@@ -196,12 +196,12 @@
                 $videojuegoId = isset($_GET['idVideojuego']) ? $_GET['idVideojuego'] : false;
                 /*Si el dato existe*/
                 if($videojuegoId){
+                    /*Llamar la funcion para obtener el inicio de sesion*/
+                    $this -> comprobarLogin($videojuegoId);
                     /*Llamar la funcion que comprueba si un videojuego ya ha sido agregado a la lista de favoritos*/
                     $unico = $this -> comprobarUnicoFavorito($videojuegoId);
                     /*Comprobar si el videojuego no ha sido agregado a la lista de favoritos*/
                     if($unico == null){
-                        /*Llamar la funcion para obtener el inicio de sesion*/
-                        $this -> comprobarLogin($videojuegoId);
                         /*Llamar la funcion de guardar favorito*/
                         $guardado = $this -> guardarFavorito();
                         /*Comprobar si se guardo con exito el favorito*/
@@ -226,8 +226,19 @@
                         }
                     /*De lo contrario*/       
                     }else{
-                        /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir('guardarfavoritoerror', "Este videojuego ya ha sido agregado a la lista de favoritos", '?controller=VideojuegoController&action=detalle&id='.$videojuegoId);
+                        /*Comprobar si la solicitud de videojuego favorito es desde el catalogo de algunos*/
+                        if(isset($_SESSION['catalogofavorito'])){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarfavoritoerror', "Este videojuego ya ha sido agregado a la lista de favoritos", "?controller=VideojuegoController&action=inicio");
+                        /*Comprobar si la solicitud de videojuego favorito es desde el catalogo de todos*/
+                        }else if(isset($_SESSION['catalogofavoritot'])){
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarfavoritoerror', "Este videojuego ya ha sido agregado a la lista de favoritos", "?controller=VideojuegoController&action=todos");
+                        /*De lo contario*/
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir('guardarfavoritoerror', "Este videojuego ya ha sido agregado a la lista de favoritos", '?controller=VideojuegoController&action=detalle&id='.$videojuegoId);
+                        }
                     } 
                 /*De lo contrario*/    
                 }else{

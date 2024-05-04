@@ -8,6 +8,13 @@
         </div>
     <?php endif; ?>
     <?php Ayudas::eliminarSesion('loginexitosoinfo'); ?>
+    <?php if(isset($_SESSION['guardarfavoritoerror'])) : ?>
+        <div class="alerta alerta-error">
+            <?=$_SESSION['guardarfavoritoerror']; ?>
+        </div>
+    <?php endif; ?> 
+    <?php Ayudas::eliminarSesion('catalogofavorito'); ?>
+    <?php Ayudas::eliminarSesion('guardarfavoritoerror'); ?>
     <?php if(isset($_SESSION['logincerrado'])) : ?>
         <div class="alerta alerta-acierto">
             <?=$_SESSION['logincerrado']; ?>
