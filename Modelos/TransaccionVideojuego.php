@@ -202,13 +202,13 @@
         public function cambiarEstado(){
             /*Construir la consulta*/
             $consulta = "UPDATE transaccionvideojuego SET idEstado = {$this -> getIdEstado()} 
-                WHERE id = {$this -> getId()}";
+                WHERE idTransaccion = {$this -> getIdTransaccion()} AND idVendedor = {$this -> getIdVendedor()}";
             /*Llamar la funcion que ejecuta la consulta*/
             $actualizado = $this -> db -> query($consulta);
             /*Establecer una variable bandera*/
             $bandera = false;
             /*Comprobar si la consulta fue exitosa*/
-            if($actualizado){
+            if($actualizado && mysqli_affected_rows($this -> db) > 0){
                 /*Cambiar el estado de la variable bandera*/
                 $bandera = true;
             }

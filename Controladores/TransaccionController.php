@@ -41,8 +41,9 @@
             /*Instanciar el objeto*/
             $transaccionVideojuego = new TransaccionVideojuego();
             /*Crear el objeto*/
-            $transaccionVideojuego -> setId($id);
+            $transaccionVideojuego -> setIdTransaccion($id);
             $transaccionVideojuego -> setIdEstado($estado);
+            $transaccionVideojuego -> setIdVendedor($_SESSION['loginexitoso'] -> id);
             /*Ejecutar la consulta*/
             $actualizado = $transaccionVideojuego -> cambiarEstado();
             /*Retornar el resultado*/

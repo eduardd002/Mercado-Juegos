@@ -90,8 +90,10 @@
                     <h3><?=$comentarios -> nombreComentador?></h3>
                     <h4><?=Ayudas::desencriptarContenido($comentarios -> contenidoComentario)?></h4>
                     <h5><?=$comentarios -> fechaCreacionComentario?></h5>
-                    <?php if(isset($_SESSION['loginexitoso']) && $videojuegoEspecifico['videojuego']['idVendedor'] == $_SESSION['loginexitoso'] -> id || $_SESSION['loginexitoso'] -> id == $comentarios -> usuarioComentador) : ?>
-                        <a href="<?=rutaInicio?><?=comentario?><?=eliminarComentario?>&idComentario=<?=$comentarios -> idComentario?>&idVideojuego=<?=$videojuegoEspecifico['videojuego']['idVideojuego']?>">Eliminar</a>
+                    <?php if(isset($_SESSION['loginexitoso'])) : ?>
+                        <?php if( $videojuegoEspecifico['videojuego']['idVendedor'] == $_SESSION['loginexitoso'] -> id || $_SESSION['loginexitoso'] -> id == $comentarios -> usuarioComentador) : ?>
+                            <a href="<?=rutaInicio?><?=comentario?><?=eliminarComentario?>&idComentario=<?=$comentarios -> idComentario?>&idVideojuego=<?=$videojuegoEspecifico['videojuego']['idVideojuego']?>">Eliminar</a>
+                        <?php endif; ?>
                     <?php endif; ?>
                 </div>
             </div>

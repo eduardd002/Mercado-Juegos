@@ -14,8 +14,8 @@
                     <img src="Recursos/ImagenesUsuarios/<?=$destacados -> fotoComprador?>" alt="Comprador">
                     <h5><?=$destacados -> nombreComprador?></h5>
                     <h5><?=$destacados -> apellidoComprador?></h5>
-                    <h5><?=$destacados -> fechaRegistroComprador?></h5>
-                    <h5><?=Ayudas::obtenerEdad($destacados -> fechaNacimiento)?></h5>
+                    <h5>Fecha de registro: <?=$destacados -> fechaRegistroComprador?></h5>
+                    <h5>Edad: <?=Ayudas::obtenerEdad($destacados -> fechaNacimiento)?></h5>
                     <h5>Videojuegos comprados: <?=$destacados -> comprador?></h5>
                     <h5>Cantidades compradas: <?=$destacados -> unidades?></h5>
                 </div>

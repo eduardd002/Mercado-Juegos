@@ -446,13 +446,14 @@
         Funcion para acutalizar el videojuego
         */
             
-        public function actualizarVideojuego($id, $precio, $stock){
+        public function actualizarVideojuego($id, $precio, $stock, $descripcion){
             /*Instanciar el objeto*/
             $videojuego = new Videojuego();
             /*Crear el objeto*/
             $videojuego -> setId($id);
             $videojuego -> setPrecio($precio);
             $videojuego -> setStock($stock);
+            $videojuego -> setDescripcion($descripcion);
             /*Ejecutar la consulta*/
             $actualizado = $videojuego -> actualizar();
             /*Retornar el resultado*/
@@ -470,10 +471,11 @@
                 $id = isset($_GET['id']) ? $_GET['id'] : false;
                 $precio = isset($_POST['precio']) ? $_POST['precio'] : false;
                 $stock = isset($_POST['stock']) ? $_POST['stock'] : false;
+                $descripcion = isset($_POST['descripcionvid']) ? $_POST['descripcionvid'] : false;
                 /*Si los datos existen*/
-                if($id && $precio && $stock){
+                if($id && $precio && $stock && $descripcion){
                     /*Llamar la funcion de actualizar videojuego*/
-                    $actualizado = $this -> actualizarVideojuego($id, $precio, $stock);
+                    $actualizado = $this -> actualizarVideojuego($id, $precio, $stock, $descripcion);
                     /*Comprobar si el videojuego ha sido actualizado*/
                     if($actualizado){
                         /*Crear la sesion y redirigir a la ruta pertinente*/

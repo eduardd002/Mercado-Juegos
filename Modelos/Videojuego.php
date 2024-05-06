@@ -278,7 +278,7 @@
 
         public function actualizar(){
             /*Construir la consulta*/
-            $consulta = "UPDATE videojuegos SET precio = {$this -> getPrecio()}, stock = {$this -> getStock()} 
+            $consulta = "UPDATE videojuegos SET precio = {$this -> getPrecio()}, stock = {$this -> getStock()}, descripcion = '{$this -> getDescripcion()}'  
                 WHERE id = {$this -> getId()}";
             /*Llamar la funcion que ejecuta la consulta*/
             $actualizado = $this -> db -> query($consulta);
@@ -306,7 +306,7 @@
                 INNER JOIN Consolas co ON co.id = v.idConsola
                 INNER JOIN VideojuegoCategoria cv ON cv.idVideojuego = v.id
                 INNER JOIN Categorias c ON cv.idCategoria = c.id
-                WHERE v.id = {$this -> getId()} AND v.activo = 1";
+                WHERE v.id = {$this -> getId()} AND v.activo = 1 AND c.activo = 1";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultados = $this->db->query($consulta);
             /*Array para almacenar la información del videojuego*/
@@ -437,7 +437,7 @@
                 FROM videojuegos v
                 INNER JOIN usos u ON u.id = v.idUso
                 INNER JOIN consolas c ON c.id = v.idConsola 
-                WHERE DATEDIFF(CURDATE(), fechaCreacion) <= 7 
+                WHERE DATEDIFF(CURDATE(), fechaCreacion) <= 7 AND v.activo = 1
                 ORDER BY fechaCreacion DESC";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
@@ -456,6 +456,7 @@
                 INNER JOIN videojuegos v ON v.id = tv.idVideojuego
                 INNER JOIN usos u ON u.id = v.idUso
                 INNER JOIN consolas c ON c.id = v.idConsola 
+                WHERE v.activo = 1
                 GROUP BY idVideojuego
                 ORDER BY vecesComprado DESC
                 LIMIT 10";

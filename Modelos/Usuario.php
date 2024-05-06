@@ -667,7 +667,7 @@
                     INNER JOIN categorias ca ON ca.id = vc.idCategoria
                     INNER JOIN consolas c ON c.id = v.idConsola
                     INNER JOIN usos u ON u.id = v.idUso
-                    WHERE u.activo = 1 AND c.activo = 1 AND c.activo = 1 AND v.activo = 1 AND us.activo = 1 ";
+                    WHERE u.activo = 1 AND c.activo = 1 AND v.activo = 1 AND us.activo = 1 AND ca.activo = 1 ";
             /*De lo contrario*/        
             }else{
                 /*Construir la consulta*/
@@ -678,7 +678,7 @@
                     INNER JOIN categorias ca ON ca.id = vc.idCategoria
                     INNER JOIN consolas c ON c.id = v.idConsola
                     INNER JOIN usos u ON u.id = v.idUso
-                    WHERE u.activo = 1 AND c.activo = 1 AND c.activo = 1 AND v.activo = 1 AND us.activo = 1 AND {$this -> getId()} != v.idUsuario
+                    WHERE u.activo = 1 AND c.activo = 1 AND c.activo = 1 AND v.activo = 1 AND us.activo = 1 AND ca.activo = 1 AND {$this -> getId()} != v.idUsuario
                     EXCEPT
                     SELECT v.*
                     FROM bloqueos b
@@ -750,14 +750,7 @@
                 INNER JOIN videojuegos v ON v.id = cv.idVideojuego
                 INNER JOIN usuarios us ON us.id = v.idUsuario
                 INNER JOIN categorias c ON c.id = cv.idCategoria 
-                WHERE v.activo = 1 AND us.activo = 1  AND us.activo = 1 AND {$this -> getId()} != v.idUsuario 
-                EXCEPT
-                SELECT v.*
-                FROM bloqueos b
-                INNER JOIN usuarios u ON u.id = b.idBloqueado
-                INNER JOIN videojuegos v ON v.idUsuario = u.id 
-                AND b.idBloqueador = {$this -> getId()} AND b.activo = 1 
-                ORDER BY nombre DESC";
+                WHERE v.activo = 1 AND us.activo = 1 AND c.activo = 1 AND {$this -> getId()} != v.idUsuario";
             }
             /*Crear array para almacenar las condiciones de filtro*/
             $condiciones = [];
@@ -791,6 +784,15 @@
                 /*Agregar las condiciones del filtro*/
                 $consulta .= " AND " . implode(" AND ", $condiciones);
             }
+            /*Comprobar si el usuario ha sido logueado*/
+            if($this -> getId() != null){
+                $consulta .= " EXCEPT
+                    SELECT v.*
+                    FROM bloqueos b
+                    INNER JOIN usuarios u ON u.id = b.idBloqueado
+                    INNER JOIN videojuegos v ON v.idUsuario = u.id 
+                    AND b.idBloqueador = {$this -> getId()} AND b.activo = 1";
+            }
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this->db->query($consulta);
             /*Retornar el resultado*/
@@ -812,7 +814,7 @@
                     INNER JOIN categorias ca ON ca.id = vc.idCategoria
                     INNER JOIN consolas c ON c.id = v.idConsola
                     INNER JOIN usos u ON u.id = v.idUso
-                    WHERE u.activo = 1 AND c.activo = 1 AND c.activo = 1 AND v.activo = 1 AND us.activo = 1";
+                    WHERE u.activo = 1 AND c.activo = 1 AND v.activo = 1 AND us.activo = 1 AND ca.activo = 1 ";
             /*De lo contrario*/ 
             }else{
                 /*Construir la consulta*/
@@ -823,7 +825,7 @@
                     INNER JOIN categorias ca ON ca.id = vc.idCategoria
                     INNER JOIN consolas c ON c.id = v.idConsola
                     INNER JOIN usos u ON u.id = v.idUso
-                    WHERE u.activo = 1 AND c.activo = 1 AND c.activo = 1 AND v.activo = 1 AND us.activo = 1 AND {$this -> getId()} != v.idUsuario
+                    WHERE u.activo = 1 AND c.activo = 1 AND v.activo = 1 AND us.activo = 1 AND ca.activo = 1 AND {$this -> getId()} != v.idUsuario
                     EXCEPT
                     SELECT v.*
                     FROM bloqueos b
@@ -876,6 +878,7 @@
                 FROM transacciones t
                 INNER JOIN usuarios u ON u.id = t.idComprador
                 INNER JOIN transaccionvideojuego tv ON t.id = tv.idTransaccion
+                WHERE u.activo = 1
                 GROUP BY idComprador
                 ORDER BY comprador DESC, unidades DESC
                 LIMIT 5";
@@ -910,12 +913,12 @@
 
         public function usuariosNuevos(){
             /*Construir la consulta*/
-            $consulta = "SELECT count(idVendedor) AS 'vendedor', count(idVideojuego) AS 'videojuegos', sum(unidades) AS 'cantidad', nombre AS 'nombreVendedor', apellido AS 'apellidoVendedor', fechaRegistro AS 'fechaRegistroVendedor', foto AS 'fotoVendedor', fechaNacimiento AS 'fechaNacimiento'
-                FROM transaccionvideojuego tv
-                INNER JOIN usuarios u ON tv.idVendedor = u.id
+            $consulta = "SELECT count(id) AS 'usuario', nombre AS 'nombreUsuario', apellido AS 'apellidoUsuario', fechaRegistro AS 'fechaRegistroUsuario', foto AS 'fotoUsuario', fechaNacimiento AS 'fechaNacimiento'
+                FROM usuarios u
                 WHERE u.activo = 1
-                GROUP BY idVendedor
-                ORDER BY vendedor DESC
+                AND DATEDIFF(CURDATE(), fechaRegistro) <= 7 
+                GROUP BY id
+                ORDER BY usuario DESC
                 LIMIT 5";
             /*Llamar la funcion que ejecuta la consulta*/
             $resultado = $this -> db -> query($consulta);
