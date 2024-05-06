@@ -705,7 +705,11 @@
                 $consulta = "SELECT DISTINCT v.* 
                     FROM videojuegos v
                     INNER JOIN usuarios us ON us.id = v.idUsuario
-                    WHERE v.nombre LIKE '%{$nombreVideojuego}%' AND v.activo = 1 AND us.activo = 1 
+                    INNER JOIN videojuegocategoria vc ON vc.idVideojuego = v.id
+                    INNER JOIN categorias ca ON ca.id = vc.idCategoria
+                    INNER JOIN consolas c ON c.id = v.idConsola
+                    INNER JOIN usos u ON u.id = v.idUso
+                    WHERE v.nombre LIKE '%{$nombreVideojuego}%' AND v.activo = 1 AND us.activo = 1 AND ca.activo = 1 AND c.activo = 1 AND u.activo = 1 
                     ORDER BY v.nombre DESC";
             /*De lo contrario*/  
             }else{
@@ -713,7 +717,11 @@
                 $consulta = "SELECT DISTINCT v.* 
                     FROM videojuegos v
                     INNER JOIN usuarios us ON us.id = v.idUsuario
-                    WHERE v.nombre LIKE '%{$nombreVideojuego}%' AND v.activo = 1 AND us.activo = 1 AND us.activo = 1 AND {$this -> getId()} != v.idUsuario
+                    INNER JOIN videojuegocategoria vc ON vc.idVideojuego = v.id
+                    INNER JOIN categorias ca ON ca.id = vc.idCategoria
+                    INNER JOIN consolas c ON c.id = v.idConsola
+                    INNER JOIN usos u ON u.id = v.idUso
+                    WHERE v.nombre LIKE '%{$nombreVideojuego}%' AND v.activo = 1 AND us.activo = 1 AND us.activo = 1 AND ca.activo = 1 AND c.activo = 1 AND u.activo = 1 AND {$this -> getId()} != v.idUsuario
                     EXCEPT
                     SELECT v.*
                     FROM bloqueos b
@@ -741,7 +749,9 @@
                 INNER JOIN videojuegos v ON v.id = cv.idVideojuego
                 INNER JOIN usuarios us ON us.id = v.idUsuario
                 INNER JOIN categorias c ON c.id = cv.idCategoria 
-                WHERE v.activo = 1 AND us.activo = 1";
+                INNER JOIN consolas co ON co.id = v.idConsola
+                INNER JOIN usos u ON u.id = v.idUso
+                WHERE v.activo = 1 AND us.activo = 1 AND c.activo = 1";
             /*De lo contrario*/  
             }else{
                 /*Construir la consulta*/
@@ -750,7 +760,9 @@
                 INNER JOIN videojuegos v ON v.id = cv.idVideojuego
                 INNER JOIN usuarios us ON us.id = v.idUsuario
                 INNER JOIN categorias c ON c.id = cv.idCategoria 
-                WHERE v.activo = 1 AND us.activo = 1 AND c.activo = 1 AND {$this -> getId()} != v.idUsuario";
+                INNER JOIN consolas co ON co.id = v.idConsola
+                INNER JOIN usos u ON u.id = v.idUso
+                WHERE v.activo = 1 AND us.activo = 1 AND c.activo = 1 AND co.activo = 1 AND u.activo = 1 AND {$this -> getId()} != v.idUsuario";
             }
             /*Crear array para almacenar las condiciones de filtro*/
             $condiciones = [];
