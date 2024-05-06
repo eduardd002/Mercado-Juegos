@@ -524,9 +524,9 @@ Estilo de la imagen del videojuego que se presenta en el catalogo, al inicio
 
 .videojuego img{
     /*Altura*/
-    height: 170px;
+    height: 250px;
     /*Anchor*/
-    width: 155px;
+    width: 230px;
     /*Margen exterior inferior*/
     margin-bottom: 10px;
     /*Margen exterior superior*/
@@ -536,7 +536,7 @@ Estilo de la imagen del videojuego que se presenta en el catalogo, al inicio
     /*Dar comportamiento de bloque*/
     display: block;
     /*Margen exterior izquierdo*/
-    margin-left: 75px;
+    margin-left: 36px;
 }
 
 /*
