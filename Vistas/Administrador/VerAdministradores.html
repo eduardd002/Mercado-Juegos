@@ -3,14 +3,16 @@
         <h1>No hay usuarios registrados</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
+        <h1>Administradores</h1>
+        <hr>
+        <br>
+        <br>
         <div id="busquedaGestiones">
             <form action="<?=rutaInicio?><?=administrador?><?=buscarAdministrador?>">
                 <input type="text" name="administradorb" required>
                 <input type="submit" value="Buscar">
             </form>
         </div>
-        <h1>Administradores</h1>
-        <hr>
         <div id="gestiones">
             <?php while($administradores = $listadoAdministradores -> fetch_object()) : ?>
                 <div class="gestionUsuariosLista">

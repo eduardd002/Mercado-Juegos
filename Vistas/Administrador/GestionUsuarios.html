@@ -15,14 +15,16 @@
         <h1>No hay usuarios registrados</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
+        <h1>Gestion de usuarios</h1>
+        <hr>
+        <br>
+        <br>
         <div id="busquedaGestiones">
             <form action="<?=rutaInicio?><?=usuario?><?=buscarUsuario?>">
                 <input type="text" name="usuariob" required>
                 <input type="submit" value="Buscar">
             </form>
         </div>
-        <h1>Gestion de usuarios</h1>
-        <hr>
         <div id="gestiones">
             <?php while($usuarios = $listadoUsuarios -> fetch_object()) : ?>
                 <div class="gestionUsuariosLista">

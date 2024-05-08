@@ -466,10 +466,6 @@ Estilo del titulo de contenido central
 */
 
 #contenidoCentral h1{
-    /*Limpiar flotados*/
-    clear: both;
-    /*Dar comportamiento de bloque*/
-    display: block;
     /*Tamaña de la fuente del texto*/
     font-size: 35px;
     /*Texto normal*/
