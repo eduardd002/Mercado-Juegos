@@ -466,6 +466,10 @@ Estilo del titulo de contenido central
 */
 
 #contenidoCentral h1{
+    /*Limpiar flotados*/
+    clear: both;
+    /*Dar comportamiento de bloque*/
+    display: block;
     /*Tamaña de la fuente del texto*/
     font-size: 35px;
     /*Texto normal*/
@@ -2986,4 +2990,41 @@ Estilo de los elementos de las gestiones de destacados
     margin-top: 15px;
     /*Margen exterior izquierdo*/
     margin-left: 90px;
+}
+
+/*
+Estilo del buscador de gestiones
+*/
+
+#busquedaGestiones{
+    /*Flotar hacia la derecha*/
+    float: right;
+    /*Margen exterior derecho*/
+    margin-right: 40px;
+}
+
+/*
+Estilo del campo de texto en busqueda gestiones
+*/
+
+#busquedaGestiones input[type="text"]{
+    /*Margen exterior derecho*/
+    margin-right: 10px;
+    /*Altura*/
+    height: 22px;
+    /*Anchor*/
+    width: 200px;
+}
+
+/*
+Estilo del boton de buscar en gestiones
+*/
+
+#busquedaGestiones input[type="submit"]{
+    /*Flotar hacia la derecha*/
+    float: right;
+    /*Altura*/
+    height: 25px;
+    /*Anchor*/
+    width: 80px;
 }

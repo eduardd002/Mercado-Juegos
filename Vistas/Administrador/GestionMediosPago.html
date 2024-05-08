@@ -41,6 +41,12 @@
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
         <h1>Gestion de medios de pago</h1>
+        <div id="busquedaGestiones">
+            <form action="<?=rutaInicio?><?=medioPago?><?=buscarMedioPago?>">
+                <input type="text" name="mediopagob" required>
+                <input type="submit" value="Buscar">
+            </form>
+        </div>
         <div id="gestiones">
             <table>
                 <tr>

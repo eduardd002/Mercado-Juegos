@@ -31,6 +31,7 @@
     define("verCompradoresDestacados", "&action=verCompradoresDestacados");
     define("verVendedoresDestacados", "&action=verVendedoresDestacados");
     define("verNuevosUsuarios", "&action=verNuevosUsuarios");
+    define("buscarUsuario", "&action=buscar");
 
     /*Ruta para videojuego*/
 
@@ -97,6 +98,7 @@
     define("gestionarMedioPago", "&action=gestionarMedioPago");
     define("eliminarAdministrador", "&action=eliminar");
     define("actualizarAdministrador", "&action=actualizar");
+    define("buscarAdministrador", "&action=buscar");
 
     /*Ruta para uso*/
 
@@ -108,6 +110,7 @@
     define("actualizarUso", "&action=actualizar");
     define("verUsosEliminados", "&action=verUsosEliminados");
     define("restaurarUso", "&action=restaurar");
+    define("buscarUso", "&action=buscar");
 
     /*Ruta para pago*/
 
@@ -137,6 +140,7 @@
     define("actualizarEstado", "&action=actualizar");
     define("verEstadosEliminados", "&action=verEstadosEliminados");
     define("restaurarEstado", "&action=restaurar");
+    define("buscarEstado", "&action=buscar");
 
     /*Ruta para medio de pago*/
 
@@ -148,6 +152,7 @@
     define("actualizarMedioPago", "&action=actualizar");
     define("verMediosPagoEliminados", "&action=verMediosPagoEliminados");
     define("restaurarMedioPago", "&action=restaurar");
+    define("buscarMedioPago", "&action=buscar");
 
     /*Ruta para consola*/
 
@@ -159,6 +164,7 @@
     define("actualizarConsola", "&action=actualizar");
     define("verConsolasEliminadas", "&action=verConsolasEliminadas");
     define("restaurarConsola", "&action=restaurar");
+    define("buscarConsola", "&action=buscar");
 
     /*Ruta para categoria*/
 
@@ -170,6 +176,7 @@
     define("actualizarCategoria", "&action=actualizar");
     define("verCategoriasEliminadas", "&action=verCategoriasEliminadas");
     define("restaurarCategoria", "&action=restaurar");
+    define("buscarCategoria", "&action=buscar");
 
     /*Ruta para chat*/
 

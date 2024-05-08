@@ -127,6 +127,21 @@
         }
 
         /*
+        Funcion para obtener el uso buscado, si existe
+        */
+
+        public function buscar(){
+            /*Construir la consulta*/
+            $consulta = "SELECT DISTINCT * 
+                FROM usos
+                WHERE nombre LIKE '%{$this -> getNombre()}%' AND activo = 1";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $lista = $this -> db -> query($consulta);
+            /*Retornar el resultado*/
+            return $lista;
+        }
+
+        /*
         Funcion para obtener una uso
         */
 

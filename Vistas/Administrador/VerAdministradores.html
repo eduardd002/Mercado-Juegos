@@ -3,6 +3,12 @@
         <h1>No hay usuarios registrados</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
+        <div id="busquedaGestiones">
+            <form action="<?=rutaInicio?><?=administrador?><?=buscarAdministrador?>">
+                <input type="text" name="administradorb" required>
+                <input type="submit" value="Buscar">
+            </form>
+        </div>
         <h1>Administradores</h1>
         <hr>
         <div id="gestiones">

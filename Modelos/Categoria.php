@@ -114,6 +114,21 @@
         }
 
         /*
+        Funcion para obtener la categoria buscada, si existe
+        */
+
+        public function buscar(){
+            /*Construir la consulta*/
+            $consulta = "SELECT DISTINCT * 
+                FROM categorias
+                WHERE nombre LIKE '%{$this -> getNombre()}%' AND activo = 1";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $lista = $this -> db -> query($consulta);
+            /*Retornar el resultado*/
+            return $lista;
+        }
+
+        /*
         Funcion para listar todas las categorias inactivas
         */
 

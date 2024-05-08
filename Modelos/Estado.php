@@ -183,6 +183,21 @@
         }
 
         /*
+        Funcion para obtener el estado buscado, si existe
+        */
+
+        public function buscar(){
+            /*Construir la consulta*/
+            $consulta = "SELECT DISTINCT * 
+                FROM estados
+                WHERE nombre LIKE '%{$this -> getNombre()}%' AND activo = 1";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $lista = $this -> db -> query($consulta);
+            /*Retornar el resultado*/
+            return $lista;
+        }
+
+        /*
         Funcion para comprobar si ya se ha creado el estado con anterioridad
         */
 

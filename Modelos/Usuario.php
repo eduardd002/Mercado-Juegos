@@ -852,6 +852,21 @@
         }
 
         /*
+        Funcion para obtener el usuario buscado, si existe
+        */
+
+        public function buscarUsuario(){
+            /*Construir la consulta*/
+            $consulta = "SELECT DISTINCT * 
+                FROM usuarios
+                WHERE nombre LIKE '%{$this -> getNombre()}%' AND activo = 1";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $lista = $this -> db -> query($consulta);
+            /*Retornar el resultado*/
+            return $lista;
+        }
+
+        /*
         Funcion para obtener el ultimo envio registrado
         */
 

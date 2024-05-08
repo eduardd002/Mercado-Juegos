@@ -160,6 +160,55 @@
         }
 
         /*
+        Funcion para buscar un medio de pago
+        */
+
+        public function buscarMedioPago($nombre){
+            /*Instanciar el objeto*/
+            $medioPago = new MedioPago();
+            /*Crear el objeto*/
+            $medioPago -> setNombre($nombre);
+            /*Obtener medios de pago de la base de datos*/
+            $listadoEstados = $medioPago -> buscar();
+            /*Retornar el resultado*/
+            return $listadoEstados;
+        }
+
+        /*
+        Funcion para buscar un medio de pago en concreto
+        */
+
+        public function buscar(){
+            /*Comprobar si el dato está llegando*/
+            if(isset($_POST)){
+                /*Comprobar si el dato existe*/
+                $nombre = isset($_POST['mediopagob']) ? $_POST['mediopagob'] : false;
+                /*Si el dato existe*/
+                if($nombre){
+                    /*Llamar la funcion que busca un medio de pago*/
+                    $listadoMediosPago = $this -> buscarMedioPago($nombre);
+                    /*Comprobar si hay medios de pago encontrados*/
+                    if(mysqli_num_rows($listadoMediosPago) > 0){
+                        /*Incluir la vista*/
+                        require_once 'Vistas/MedioPago/Buscar.html';
+                    /*De lo contrario*/    
+                    }else{
+                        /*Incluir la vista*/
+                        require_once 'Vistas/MedioPago/NoEncontrado.html';
+                    }
+                /*De lo contrario*/       
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=AdministradorController&action=gestionarMedioPago");
+                }
+            /*De lo contrario*/       
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=AdministradorController&action=gestionarMedioPago");
+            }
+        }
+
+        /*
         Funcion para eliminar un medio de pago en la base de datos
         */
 

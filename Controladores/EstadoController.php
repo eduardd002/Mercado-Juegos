@@ -326,6 +326,55 @@
         }
 
         /*
+        Funcion para buscar un estado
+        */
+
+        public function buscarEstado($nombre){
+            /*Instanciar el objeto*/
+            $estado = new Estado();
+            /*Crear el objeto*/
+            $estado -> setNombre($nombre);
+            /*Obtener estados de la base de datos*/
+            $listadoEstados = $estado -> buscar();
+            /*Retornar el resultado*/
+            return $listadoEstados;
+        }
+
+        /*
+        Funcion para buscar un estado en concreto
+        */
+
+        public function buscar(){
+            /*Comprobar si el dato está llegando*/
+            if(isset($_POST)){
+                /*Comprobar si el dato existe*/
+                $nombre = isset($_POST['estadob']) ? $_POST['estadob'] : false;
+                /*Si el dato existe*/
+                if($nombre){
+                    /*Llamar la funcion que busca un estado*/
+                    $listadoEstados = $this -> buscarEstado($nombre);
+                    /*Comprobar si hay estados encontrados*/
+                    if(mysqli_num_rows($listadoEstados) > 0){
+                        /*Incluir la vista*/
+                        require_once 'Vistas/Estado/Buscar.html';
+                    /*De lo contrario*/    
+                    }else{
+                        /*Incluir la vista*/
+                        require_once 'Vistas/Estado/NoEncontrado.html';
+                    }
+                /*De lo contrario*/       
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=AdministradorController&action=gestionarEstado");
+                }
+            /*De lo contrario*/       
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=AdministradorController&action=gestionarEstado");
+            }
+        }
+
+        /*
         Funcion para recuperar un estado en la base de datos
         */
 

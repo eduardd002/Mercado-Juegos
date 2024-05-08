@@ -114,6 +114,21 @@
         }
 
         /*
+        Funcion para obtener la consola buscada, si existe
+        */
+
+        public function buscar(){
+            /*Construir la consulta*/
+            $consulta = "SELECT DISTINCT * 
+                FROM consolas
+                WHERE nombre LIKE '%{$this -> getNombre()}%' AND activo = 1";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $lista = $this -> db -> query($consulta);
+            /*Retornar el resultado*/
+            return $lista;
+        }
+
+        /*
         Funcion para listar todas las consolas inactivas
         */
 

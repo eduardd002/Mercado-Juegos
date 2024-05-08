@@ -406,6 +406,55 @@
         }
 
         /*
+        Funcion para buscar un usuario
+        */
+
+        public function buscarUsuario($nombre){
+            /*Instanciar el objeto*/
+            $usuario = new Usuario();
+            /*Crear el objeto*/
+            $usuario -> setNombre($nombre);
+            /*Obtener usuarios de la base de datos*/
+            $listadoEstados = $usuario -> buscarUsuario();
+            /*Retornar el resultado*/
+            return $listadoEstados;
+        }
+
+        /*
+        Funcion para buscar un usuario en concreto
+        */
+
+        public function buscar(){
+            /*Comprobar si el dato está llegando*/
+            if(isset($_POST)){
+                /*Comprobar si el dato existe*/
+                $nombre = isset($_POST['usuariob']) ? $_POST['usuariob'] : false;
+                /*Si el dato existe*/
+                if($nombre){
+                    /*Llamar la funcion que busca un usuario*/
+                    $listadoUsuarios = $this -> buscarUsuario($nombre);
+                    /*Comprobar si hay usuarios encontrados*/
+                    if(mysqli_num_rows($listadoUsuarios) > 0){
+                        /*Incluir la vista*/
+                        require_once 'Vistas/Usuario/Buscar.html';
+                    /*De lo contrario*/    
+                    }else{
+                        /*Incluir la vista*/
+                        require_once 'Vistas/Usuario/NoEncontrado.html';
+                    }
+                /*De lo contrario*/       
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=AdministradorController&action=gestionarUsuario");
+                }
+            /*De lo contrario*/       
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=AdministradorController&action=gestionarUsuario");
+            }
+        }
+
+        /*
         Funcion para cerrar la sesión
         */
 

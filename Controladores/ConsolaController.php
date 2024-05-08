@@ -326,6 +326,55 @@
         }
 
         /*
+        Funcion para buscar una consola
+        */
+
+        public function buscarConsola($nombre){
+            /*Instanciar el objeto*/
+            $consola = new Consola();
+            /*Crear el objeto*/
+            $consola -> setNombre($nombre);
+            /*Obtener consolas de la base de datos*/
+            $listadoConsolas = $consola -> buscar();
+            /*Retornar el resultado*/
+            return $listadoConsolas;
+        }
+
+        /*
+        Funcion para buscar una consola en concreto
+        */
+
+        public function buscar(){
+            /*Comprobar si el dato está llegando*/
+            if(isset($_POST)){
+                /*Comprobar si el dato existe*/
+                $nombre = isset($_POST['consolab']) ? $_POST['consolab'] : false;
+                /*Si el dato existe*/
+                if($nombre){
+                    /*Llamar la funcion que busca una consola*/
+                    $listadoConsolas = $this -> buscarConsola($nombre);
+                    /*Comprobar si hay consolas encontradas*/
+                    if(mysqli_num_rows($listadoConsolas) > 0){
+                        /*Incluir la vista*/
+                        require_once 'Vistas/Consola/Buscar.html';
+                    /*De lo contrario*/    
+                    }else{
+                        /*Incluir la vista*/
+                        require_once 'Vistas/Consola/NoEncontrada.html';
+                    }
+                /*De lo contrario*/       
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=AdministradorController&action=gestionarConsola");
+                }
+            /*De lo contrario*/       
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=AdministradorController&action=gestionarConsola");
+            }
+        }
+
+        /*
         Funcion para recuperar una consola en la base de datos
         */
 

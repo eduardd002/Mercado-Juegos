@@ -40,6 +40,12 @@
         <h1>No hay consolas creadas</h1>
         <img class="noEncontradoLista" src="Recursos/Logotipos/encontrar.png" alt="">
     <?php else : ?>
+        <div id="busquedaGestiones">
+            <form action="<?=rutaInicio?><?=consola?><?=buscarConsola?>">
+                <input type="text" name="consolab" required>
+                <input type="submit" value="Buscar">
+            </form>
+        </div>
         <h1>Gestion de consolas</h1>
         <div id="gestiones">
             <table>
