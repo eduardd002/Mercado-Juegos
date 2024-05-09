@@ -3024,3 +3024,49 @@ Estilo del boton de buscar en gestiones
     /*Anchor*/
     width: 80px;
 }
+
+/*
+Estilo del boton de actualizar en busqueda de gestiones
+*/
+
+.button-actualizarGestionBusqueda{
+    /*Margen exterior izquierdo*/
+    margin-left: 490px;
+    /*Anchor*/
+    width: 100px;
+    /*Margen exterior superior*/
+    margin-top: 10px;
+    /*Sin decoracion de texto*/
+    text-decoration: none;
+    /*Margen exterior inferior*/
+    margin-bottom: 10px;
+    /*Color del letra*/
+    color: white !important;
+    /*Color de fondo*/
+    background: orange;
+    /*Borde*/
+    border: 1px solid rgb(101, 85, 4);
+}
+
+/*
+Estilo del boton de actualizar en busqueda de gestiones
+*/
+
+.button-eliminarGestionBusqueda{
+    /*Margen exterior izquierdo*/
+    margin-left: 490px;
+    /*Anchor*/
+    width: 100px;
+    /*Margen exterior superior*/
+    margin-top: 10px;
+    /*Sin decoracion de texto*/
+    text-decoration: none;
+    /*Margen exterior inferior*/
+    margin-bottom: 10px;
+    /*Color del letra*/
+    color: white !important;
+    /*Color de fondo*/
+    background: red;
+    /*Borde*/
+    border: 1px solid rgb(101, 85, 4);
+}

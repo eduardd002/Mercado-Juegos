@@ -1,0 +1,14 @@
+<div id="contenidoCentral">      
+    <div id="busqueda">
+        <h1>Medios de pago que contienen "<?=$nombre?>"</h1>
+        <hr>
+        <?php while($listadoMediosPagoBuscados = $listadoMediosPago -> fetch_object()) : ?>
+            <div class="videojuegoBusqueda">
+                <img src="Recursos/Logotipos/Administrar.png">
+                <h2><?=$listadoMediosPagoBuscados -> nombre?></h2>
+                <a href="<?=rutaInicio?><?=medioPago?><?=editarMedioPago?>&id=<?=$listadoMediosPagoBuscados -> id?>" class="button button-actualizarGestionBusqueda">Actualizar</a>
+                <a href="<?=rutaInicio?><?=medioPago?><?=eliminarMedioPago?>&id=<?=$listadoMediosPagoBuscados -> id?>" class="button button-eliminarGestionBusqueda">Eliminar</a>
+            </div>
+        <?php endwhile;?>
+    </div>
+</div>
