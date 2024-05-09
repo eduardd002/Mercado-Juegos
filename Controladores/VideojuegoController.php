@@ -64,6 +64,19 @@
         }
 
         /*
+        Funcion para ver los videojuegos comentados
+        */
+
+        public function verVideojuegosComentados(){
+            /*Instanciar el objeto*/
+            $videojuego = new Videojuego();
+            /*Listar todos los videojuegos comentados*/
+            $listadoComentados = $videojuego -> videojuegosComentados();
+            /*Incluir la vista*/
+            require_once "Vistas/Videojuego/Comentados.html";
+        }
+
+        /*
         Funcion para ver los nuevos videojuegos
         */
 

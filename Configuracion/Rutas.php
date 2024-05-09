@@ -32,6 +32,7 @@
     define("verVendedoresDestacados", "&action=verVendedoresDestacados");
     define("verNuevosUsuarios", "&action=verNuevosUsuarios");
     define("buscarUsuario", "&action=buscar");
+    define("verUsuariosMasComentadores", "&action=verUsuariosComentadores");
 
     /*Ruta para videojuego*/
 
@@ -50,6 +51,7 @@
     define("verVideojuegosDestacados", "&action=verVideojuegosDestacados");
     define("verLoQueMasEstaGustando", "&action=verLoQueMasEstaGustando");
     define("verNuevosVideojuegos", "&action=verNuevosVideojuegos");
+    define("verVideojuegosMasComentados", "&action=verVideojuegosComentados");
 
     /*Ruta para carrito*/
 

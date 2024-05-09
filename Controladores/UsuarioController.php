@@ -40,6 +40,19 @@
         }
 
         /*
+        Funcion para ver los usuarios comentadores
+        */
+
+        public function verUsuariosComentadores(){
+            /*Instanciar el objeto*/
+            $usuario = new Usuario();
+            /*Listar todos los usuarios comentadores*/
+            $listadoComentadores = $usuario -> usuariosComentadores();
+            /*Incluir la vista*/
+            require_once "Vistas/Usuario/Comentadores.html";
+        }
+
+        /*
         Funcion para ver los vendedores destacados
         */
 

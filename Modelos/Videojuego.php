@@ -487,6 +487,28 @@
             return $resultado;
         }
 
+        /*
+        Funcion para obtener los videojuegos que mas estan gustando
+        */
+
+        public function videojuegosComentados(){
+            /*Construir la consulta*/
+            $consulta = "SELECT count(idVideojuego) AS 'vecesComentado', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.foto AS 'fotoVideojuego', u.nombre AS 'nombreUso', c.nombre AS 'nombreConsola' 
+                FROM comentariousuariovideojuego cuf
+                INNER JOIN videojuegos v ON v.id = cuf.idVideojuego
+                INNER JOIN usos u ON u.id = v.idUso
+                INNER JOIN consolas c ON c.id = v.idConsola 
+                WHERE v.activo = 1
+                AND cuf.activo = 1
+                GROUP BY idvideojuego
+                ORDER BY vecesComentado DESC
+                LIMIT 15";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $resultado = $this -> db -> query($consulta);
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
     }
 
 ?>

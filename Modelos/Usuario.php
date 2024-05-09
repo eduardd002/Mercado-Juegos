@@ -953,6 +953,26 @@
             return $resultado;
         }
 
+        /*
+        Funcion para obtener los compradores mas destacados
+        */
+
+        public function usuariosComentadores(){
+            /*Construir la consulta*/
+            $consulta = "SELECT count(idUsuario) 'comentador', nombre AS 'nombreComprador', apellido AS 'apellidoComprador', fechaRegistro AS 'fechaRegistroComprador', foto AS 'fotoComprador', fechaNacimiento AS 'fechaNacimiento'
+                FROM comentariousuariovideojuego cuf
+                INNER JOIN usuarios u ON u.id = cuf.idUsuario
+                WHERE u.activo = 1
+                AND cuf.activo = 1
+                GROUP BY idUsuario
+                ORDER BY comentador DESC
+                LIMIT 5";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $resultado = $this -> db -> query($consulta);
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
     }
 
 ?>
