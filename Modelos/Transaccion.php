@@ -204,6 +204,22 @@
         Funcion para obtener el ultimo id de la transaccion
         */
 
+        public function  videojuegosPorFecha($fechaInicial, $fechaFinal){
+            /*Construir la consulta*/
+            $consulta = "SELECT DISTINCT * FROM videojuegos WHERE id IN 
+                (SELECT DISTINCT idVideojuego FROM transaccionvideojuego 
+                WHERE id IN (SELECT DISTINCT id FROM transacciones WHERE fechaHora >= '$fechaInicial' 
+                AND fechaHora <= '$fechaFinal'))";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $resultado = $this -> db -> query($consulta);
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
+        Funcion para obtener el ultimo id de la transaccion
+        */
+
         public function traerUltimoIdTransaccion(){
             /*Construir la consulta*/
             $consulta = "SELECT DISTINCT id FROM transacciones ORDER BY id DESC LIMIT 1";

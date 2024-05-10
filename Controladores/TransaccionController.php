@@ -209,6 +209,63 @@
         }
 
         /*
+        Funcion para ver los videojuegos comprados en un rango de tiempo detarminado
+        */
+
+        public function verPorRangoFechas(){
+            /*Incluir la vista*/
+            require_once "Vistas/Videojuego/Fecha.html";
+        }
+
+        /*
+        Funcion para ver videojuegos comprados por un rango especifico
+        */
+
+        public function verPorRango($fechaInicial, $fechaFinal){
+            /*Instanciar el objeto*/
+            $transaccion = new Transaccion();
+            /*Obtener la lista de videojuegos*/
+            $listadoVideojuegos = $transaccion -> videojuegosPorFecha($fechaInicial, $fechaFinal);
+            /*Retornar el resultado*/
+            return $listadoVideojuegos;
+        }
+
+        /*
+        Funcion para ver los videojuegos comprados en un rango de tiempo
+        */
+
+        public function verPorFechas(){
+            /*Comprobar si los datos están llegando*/
+            if(isset($_POST)){
+                /*Comprobar si los datos existen*/
+                $fechaInicial = isset($_POST['fechaInicial']) ? $_POST['fechaInicial'] : false;
+                $fechaFinal = isset($_POST['fechaFinal']) ? $_POST['fechaFinal'] : false;
+                /*Si los datos existen*/
+                if($fechaInicial && $fechaFinal){
+                    /*Llamar la funcion que trae la lista de videojuegos*/
+                    $listadoVideojuegos = $this -> verPorRango($fechaInicial, $fechaFinal);
+                    /*Comprobar si la lista ha sido obtenida con exito*/
+                    if($listadoVideojuegos){
+                        /*Incluir la vista*/
+                        require_once "Vistas/Videojuego/PorFechas.html";
+                    /*De lo contrario*/      
+                    }else{
+                        /*Crear la sesion y redirigir a la ruta pertinente*/
+                        Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+                    }
+                /*De lo contrario*/      
+                }else{
+                    /*Crear la sesion y redirigir a la ruta pertinente*/
+                    Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+                }
+            /*De lo contrario*/    
+            }else{
+                /*Crear la sesion y redirigir a la ruta pertinente*/
+                Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+            }
+        }
+
+        /*
         Funcion para obtener la factura
         */
 

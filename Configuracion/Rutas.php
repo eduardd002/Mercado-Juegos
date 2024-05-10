@@ -81,6 +81,8 @@
     define("realizar", "&action=exito");
     define("cambiarEstado", "&action=cambiarEstado");
     define("generarPdf", "&action=generarPdf");
+    define("verComprasPorRangoTiempo", "&action=verPorRangoFechas");
+    define("verComprasTiempo", "&action=verPorFechas");
 
     /*Ruta para administrador*/
 
