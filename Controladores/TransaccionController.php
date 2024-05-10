@@ -242,16 +242,23 @@
                 $fechaFinal = isset($_POST['fechaFinal']) ? $_POST['fechaFinal'] : false;
                 /*Si los datos existen*/
                 if($fechaInicial && $fechaFinal){
-                    /*Llamar la funcion que trae la lista de videojuegos*/
-                    $listadoVideojuegos = $this -> verPorRango($fechaInicial, $fechaFinal);
-                    /*Comprobar si la lista ha sido obtenida con exito*/
-                    if($listadoVideojuegos){
-                        /*Incluir la vista*/
-                        require_once "Vistas/Videojuego/PorFechas.html";
+                    /*Comprobar si las fechas son coherentes*/
+                    if($fechaInicial <= $fechaFinal){
+                        /*Llamar la funcion que trae la lista de videojuegos*/
+                        $listadoVideojuegos = $this -> verPorRango($fechaInicial, $fechaFinal);
+                        /*Comprobar si la lista ha sido obtenida con exito*/
+                        if($listadoVideojuegos){
+                            /*Incluir la vista*/
+                            require_once "Vistas/Videojuego/PorFechas.html";
+                        /*De lo contrario*/      
+                        }else{
+                            /*Crear la sesion y redirigir a la ruta pertinente*/
+                            Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+                        }
                     /*De lo contrario*/      
                     }else{
                         /*Crear la sesion y redirigir a la ruta pertinente*/
-                        Ayudas::crearSesionYRedirigir("errorinesperado", "Ha ocurrido un error inesperado", "?controller=VideojuegoController&action=inicio");
+                        Ayudas::crearSesionYRedirigir("errorfechas", "Las fechas no son coherentes", "?controller=TransaccionController&action=verPorRangoFechas");
                     }
                 /*De lo contrario*/      
                 }else{

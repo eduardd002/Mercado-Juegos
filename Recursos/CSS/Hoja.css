@@ -3070,3 +3070,14 @@ Estilo del boton de actualizar en busqueda de gestiones
     /*Borde*/
     border: 1px solid rgb(101, 85, 4);
 }
+
+/*
+Estilo del boton de buscar videojuegos comprados por fechas
+*/
+
+.btnRegistro-btnFechas{
+    /*Margen exterior izquierdo*/
+    margin-left: 550px;
+    /*Anchor*/
+    width: 110px !important;
+}
