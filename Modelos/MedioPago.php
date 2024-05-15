@@ -200,7 +200,7 @@
         /*
         Funcion para obtener el medio de pago buscado, si existe
         */
-
+ 
         public function buscar(){
             /*Construir la consulta*/
             $consulta = "SELECT DISTINCT * 
