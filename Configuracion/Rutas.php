@@ -52,6 +52,7 @@
     define("verLoQueMasEstaGustando", "&action=verLoQueMasEstaGustando");
     define("verNuevosVideojuegos", "&action=verNuevosVideojuegos");
     define("verVideojuegosMasComentados", "&action=verVideojuegosComentados");
+    define("verVideojuegosMayorVendedor", "&action=verVideojuegosMayorVendedor");
 
     /*Ruta para carrito*/
 

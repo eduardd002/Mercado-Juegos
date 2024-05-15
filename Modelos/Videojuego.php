@@ -467,6 +467,28 @@
         }
 
         /*
+        Funcion para ver los videojuegos del vendedor con la mayor cantidad de ventas
+        */
+
+        public function mayorVendidos(){
+            /*Construir la consulta*/
+            $consulta = "SELECT u.id AS 'idUsuario', u.nombre AS 'nombreUsuario', u.apellido AS 'apellidoUsuario', u.fechaRegistro AS 'fechaUsuario', u.departamento AS 'departamentoUsuario', u.municipio AS 'municipioUsuario', v.nombre AS 'nombreVideojuego', v.precio AS 'precioVideojuego', v.foto AS 'fotoVideojuego', v.id AS 'idVideojuego'
+                FROM Videojuegos v
+                INNER JOIN Usuarios u ON u.id = v.idUsuario
+                WHERE v.idUsuario = (SELECT idVendedor
+                FROM transaccionvideojuego tv
+                INNER JOIN usuarios u ON tv.idVendedor = u.id
+                WHERE u.activo = 1
+                GROUP BY idVendedor
+                ORDER BY count(idVendedor) DESC, sum(unidades) DESC
+                LIMIT 1)";
+            /*Llamar la funcion que ejecuta la consulta*/
+            $resultado = $this -> db -> query($consulta);
+            /*Retornar el resultado*/
+            return $resultado;
+        }
+
+        /*
         Funcion para obtener los videojuegos que mas estan gustando
         */
 

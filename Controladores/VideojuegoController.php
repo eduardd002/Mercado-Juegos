@@ -116,6 +116,19 @@
         }
 
         /*
+        Funcion para ver los videojuegos del vendedor con la mayor cantidad de ventas
+        */
+
+        public function verVideojuegosMayorVendedor(){
+            /*Instanciar el objeto*/
+            $videojuego = new Videojuego();
+            /*Listar todos los videojuegos destacados*/
+            $listadoVendidos = $videojuego -> mayorVendidos();
+            /*Incluir la vista*/
+            require_once "Vistas/Videojuego/MayorVendidos.html";
+        }
+
+        /*
         Funcion para traer un videojuego en concreto
         */
 
